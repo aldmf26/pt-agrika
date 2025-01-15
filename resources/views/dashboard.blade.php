@@ -1,3 +1,3 @@
 <x-app-layout :title="$title">
-    dashboard
+    @livewire('menu.menu')
 </x-app-layout>
