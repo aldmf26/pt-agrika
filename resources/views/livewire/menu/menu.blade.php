@@ -1,3 +1,10 @@
+<?php
+use Livewire\Volt\Component;
+
+new #[Layout('layouts.guest')] class extends Component
+{
+   
+}; ?>
 <div>
-    {{-- Because she competes with no one, no one can compete with her. --}}
+    ini menu
 </div>
