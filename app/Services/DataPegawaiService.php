@@ -21,26 +21,29 @@ class DataPegawaiService
         $response = Http::get($url);
         if ($response->successful()) {
             $dataPegawai = $response->json();
-            dd($dataPegawai['pegawai']);
-            foreach ($dataPegawai as $pegawai) {
+            $sumberData = $dataPegawai['sumber_data'];
+            DataPegawai::where('sumber_data', $sumberData)->delete();
+            foreach ($dataPegawai['pegawai'] as $pegawai) {
                 // Simpan atau perbarui data pegawai di database lokal
-                DataPegawai::updateOrCreate(
-                    ['id_pegawai' => $pegawai['id_pegawai'], 'sumber_data' => $url], // Identifikasi data unik
+                $keterangan = $sumberData == 'sarang' ? ($pegawai['kelas_cbt'] ?? null) : ($pegawai['keterangan'] ?? null);
+                DataPegawai::create(
                     [
-                        'nik' => $pegawai['nik'] ?? '',
-                        'nama' => $pegawai['nama'],
-                        'email' => $pegawai['email'],
-                        'nomor_telepon' => $pegawai['nomor_telepon'],
-                        'tgl_lahir' => $pegawai['tgl_lahir'],
-                        'tgl_masuk' => $pegawai['tgl_masuk'],
-                        'divisi_id' => $pegawai['divisi_id'],
-                        'posisi' => $pegawai['posisi'],
-                        'status' => $pegawai['status'],
-                        'gaji' => $pegawai['gaji'],
-                        'pendidikan' => $pegawai['pendidikan'],
-                        'sumber_data' => $pegawai['sumber_data'],
+                        'nik' => $pegawai['nik'] ?? null,
+                        'nama' => $pegawai['nama'] ?? null,
+                        'email' => $pegawai['email'] ?? null,
+                        'no_telepon' => $pegawai['no_telepon'] ?? null,
+                        'tgl_lahir' => $pegawai['tgl_lahir'] ?? null,
+                        'tgl_masuk' => $pegawai['tgl_masuk'] ?? null,
+                        'divisi_id' => $pegawai['divisi_id'] ?? null,
+                        'posisi' => $pegawai['posisi'] ?? null,
+                        'jenis_kelamin' => $pegawai['jenis_kelamin'] ?? '',
+                        'status' => $pegawai['status'] ?? 'kontrak',
+                        'gaji' => $pegawai['gaji'] ?? 0,
+                        'pendidikan' => $pegawai['pendidikan'] ?? 'SMA',
+                        'sumber_data' => $sumberData,
                         'karyawan_id_dari_api' => $pegawai['id_pegawai'],
-                        'keterangan' => $pegawai['sumber_data'] == 'sarang' ? $pegawai['kelas_cbt'] : $pegawai['keterangan'],
+                        'keterangan' => $keterangan,
+                        'admin' => 'download'
                     ]
                 );
             }

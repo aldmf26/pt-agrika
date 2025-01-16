@@ -1,48 +1,52 @@
 <div>
+
+
+    @if ($errors->any())
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
+
     <div class="d-flex justify-content-end">
         <button class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Data</button>
     </div>
-    <div class="d-flex justify-content-between mt-2">
-        <div>
-            <select wire:model.live="paginate" id="" class="form-control">
-                <option value="10">10</option>
-                <option value="25">25</option>
-                <option value="50">50</option>
-                <option value="100">100</option>
-            </select>
-        </div>
-        <div>
-            <input type="text" wire:model.live="search" class="form-control mb-2" placeholder="Cari produk..." />
-        </div>
-    </div>
 
-    <table class="table table-striped border-dark">
-        <thead>
-            <tr>
-                <th class="">No</th>
-                <th class="">Divisi / Dept</th>
-                <th class="">Nama</th>
-                <th class="">Jenis Kelamin/ <br>Tgl lahir</th>
-                <th class="">Status</th>
-                <th class="">Tgl Masuk</th>
-                <th class="">Posisi</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>Cabut</td>
-                <td>Muhammad Fahrizaldi</td>
-                <td>Pria / 26-06-1999</td>
-                <td>Kontrak</td>
-                <td>{{ tanggal('2025-01-01') }}</td>
-                <td>Kontrak</td>
-            </tr>
+    <x-wire-table :datas="$datas">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="">No</th>
+                    <th class="">Divisi / Dept</th>
+                    <th class="">Nik</th>
+                    <th class="">Nama</th>
+                    <th class="">Jenis Kelamin/ <br>Tgl lahir</th>
+                    <th class="">Status</th>
+                    <th class="">Tgl Masuk</th>
+                    <th class="">Posisi</th>
+                </tr>
+            </thead>
+            @foreach ($datas as $i => $d)
+                <tbody>
+                    <tr>
+                        <td>{{ $i + 1 }}</td>
+                        <td>{{ $d->divisi->divisi ?? '' }}</td>
+                        <td>{{ $d->nik }}</td>
+                        <td>{{ $d->nama }}</td>
+                        <td>{{ $d->jenis_kelamin }} / {{ $d->tgl_lahir }}</td>
+                        <td>{{ $d->status }}</td>
+                        <td>
+                            {{ $d->tgl_masuk == null ? '-' : tanggal($d->tgl_masuk) }}
+                            @if ($d->tgl_masuk != null)
+                                ({{ $lamaKerja = (int) \Carbon\Carbon::parse($d->tgl_masuk)->diffInYears(now()) }} tahun {{ $lamaKerja2 = (int) \Carbon\Carbon::parse($d->tgl_masuk)->diffInMonths(now()) % 12 }} bulan)
+                            @endif
+                        </td>
+                        <td>{{ $d->posisi }}</td>
+                    </tr>
 
-        </tbody>
-
-    </table>
-    {{-- <div class="mt-3 ">
-        {{ $produk->links('vendor.pagination.bootstrap-5') }}
-    </div> --}}
+                </tbody>
+            @endforeach
+        </table>
+    </x-wire-table>
 </div>

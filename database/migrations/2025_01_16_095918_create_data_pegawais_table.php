@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('data_pegawais', function (Blueprint $table) {
             $table->id();
-            $table->string('nik', 50)->unique(); // Kode unik karyawan
+            $table->string('nik', 50)->nullable(); // Kode unik karyawan
             $table->string('nama', 100);            // Nama depan
-            $table->string('email', 150)->unique()->nullable(); // Email (opsional)
+            $table->string('email', 150)->nullable(); // Email (opsional)
             $table->string('no_telepon', 15)->nullable();    // Nomor telepon
             $table->date('tgl_lahir')->nullable();          // Tanggal lahir
-            $table->date('tgl_masuk');                 // Tanggal mulai bergabung
+            $table->date('tgl_masuk')->nullable();                 // Tanggal mulai bergabung
             $table->unsignedBigInteger('divisi_id')->nullable(); // Referensi departemen
             $table->string('posisi', 100)->nullable();         // Jabatan
             $table->enum('status', ['kontrak', 'borongan', 'tetap'])->default('kontrak'); // Status kerja
@@ -27,12 +27,12 @@ return new class extends Migration
             $table->string('sumber_data', 100)->nullable();      // Pendidikan terakhir
             $table->integer('karyawan_id_dari_api')->nullable();      // Pendidikan terakhir
             $table->string('keterangan', 200)->nullable();      // Pendidikan terakhir
-            $table->string('admin', 200);      // Pendidikan terakhir
+            $table->string('admin', 200)->nullable();      // Pendidikan terakhir
             $table->timestamps();
         });
 
         // Tabel departemen
-        Schema::create('departemen', function (Blueprint $table) {
+        Schema::create('divisis', function (Blueprint $table) {
             $table->id();
             $table->string('divisi', 100); // Nama departemen
             $table->text('urutan')->nullable();  // Deskripsi departemen
