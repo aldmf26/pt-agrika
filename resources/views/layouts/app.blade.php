@@ -20,7 +20,23 @@
             <div class="content-wrapper container">
 
                 <div class="page-heading" style="margin-top: -30px">
-                    <h4>{{ $title }}</h4>
+                    @if (count(request()->segments()) != 1)
+                        <nav aria-label="breadcrumb " style="margin-top: -25px; font-size: 15px;">
+                            <ol class="breadcrumb">
+                                @foreach (request()->segments() as $i => $d)
+                                    @php
+                                        $urlSegments = array_slice(request()->segments(), 0, $i + 1);
+                                        $url = implode('/', $urlSegments);
+                                    @endphp
+                                    <li class="breadcrumb-item"><a
+                                            href="/{{ $url }}">{{ ucwords(str_replace('_', ' ', $d)) }}</a>
+                                    </li>
+                                @endforeach
+                            </ol>
+                        </nav>
+                    @endif
+
+                    <h4>{{ strtolower(ucwords($title)) }}</h4>
                 </div>
                 <div class="page-content" style="margin-top: -30px">
                     {{ $slot }}

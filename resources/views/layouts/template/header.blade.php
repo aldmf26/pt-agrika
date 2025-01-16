@@ -88,7 +88,7 @@
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
                                                         <li class="subsubmenu-item">
-                                                            <a href="{{ $subsubmenu->link }}"
+                                                            <a href="{{ route($subsubmenu->link) }}"
                                                                 class="subsubmenu-link">{{ $subsubmenu->title }}</a>
                                                         </li>
                                                     @endforeach
