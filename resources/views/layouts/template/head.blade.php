@@ -149,5 +149,8 @@
         line-height: 1.5;
         border-radius: .2rem;
     }
+    table {
+        font-size: 12px;
+    }
 </style>
 @yield('styles')

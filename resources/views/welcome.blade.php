@@ -70,7 +70,7 @@
             <!-- MENU LINKS -->
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-nav-first">
-                    <li><a href="#home" class="smoothScroll">Home</a></li>
+                    <li><a href="#home" class="smoothScroll">Dashboard</a></li>
                     <li><a href="#about" class="smoothScroll">Profile</a></li>
                     <li><a href="#team" class="smoothScroll">Visi & Misi</a></li>
                     <li><a href="#menu" class="smoothScroll">Galery</a></li>

@@ -1,21 +1,14 @@
 @props(['title'])
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title }} - AgrikaPOS</title>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
     @include('layouts.template.head')
-
-    <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 </head>
 
 <body>
@@ -27,7 +20,26 @@
             <div class="content-wrapper container">
 
                 <div class="page-heading" style="margin-top: -30px">
-                    <h4>{{ $title }}</h4>
+                    <<<<<<< HEAD <h4>{{ $title }}</h4>
+                        =======
+                        @if (count(request()->segments()) != 1)
+                            <nav aria-label="breadcrumb " style="margin-top: -25px; font-size: 15px;">
+                                <ol class="breadcrumb">
+                                    @foreach (request()->segments() as $i => $d)
+                                        @php
+                                            $urlSegments = array_slice(request()->segments(), 0, $i + 1);
+                                            $url = implode('/', $urlSegments);
+                                        @endphp
+                                        <li class="breadcrumb-item"><a
+                                                href="/{{ $url }}">{{ ucwords(str_replace('_', ' ', $d)) }}</a>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                            </nav>
+                        @endif
+
+                        <h4>{{ strtolower(ucwords($title)) }}</h4>
+                        >>>>>>> 95ce8b1b65a0f07d4d1c6977c8b5cb8bfc95fc70
                 </div>
                 <div class="page-content" style="margin-top: -30px">
                     {{ $slot }}
