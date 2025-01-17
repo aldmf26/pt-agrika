@@ -10,7 +10,7 @@ class Hrga4DataPegawai extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Hrga 1.1 data pegawai'
+            'title' => 'Hrga 1.4 data pegawai'
         ];
         return view('hrga.hrga1.hrga1_data_pegawai.index',$data);
     }

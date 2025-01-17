@@ -32,7 +32,14 @@ Route::controller(Hrga1Visitor::class)
     });
 
 Route::controller(Hrga4DataPegawai::class)
-    ->prefix('hrga/hrga1/hrga1-data-pegawai')
+    ->prefix('hrga/1/1-permohonan-karyawan-baru')
+    ->name('hrga1.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
+Route::controller(Hrga4DataPegawai::class)
+    ->prefix('hrga/1/4-data-pegawai')
     ->name('hrga1.4.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
