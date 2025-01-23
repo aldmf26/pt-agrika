@@ -18,7 +18,7 @@
                         </div>
                         <div class="text">
                             <h6 class="mb-0 text-gray-600">{{ Auth::user()->name }}</h6>
-                            <p class="mb-0 text-sm text-success">{{ 'Presiden' }}</p>
+                            <p class="mb-0 text-sm text-success">{{ ucwords(auth()->user()->roles[0]->name) }}</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
