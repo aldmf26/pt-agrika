@@ -8,7 +8,7 @@ class ItemKalibrasiModel extends Model
 {
     protected $table = 'itemkalibrasi';
 
-    public function item_kalibrasi()
+    public function lokasi()
     {
         return $this->belongsTo(LokasiModel::class, 'lokasi_id', 'id');
     }

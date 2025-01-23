@@ -13,6 +13,12 @@
             "targets": "_all"
         }]
     });
+    $(document).ready(function() {
+        $('.select2').select2({
+            dropdownParent: $('#tambah'), // Ganti dengan ID modal kamu
+            width: '100%'
+        });
+    });
 </script>
 
 <script>

@@ -11,8 +11,7 @@ class hrga9_1KalibrasiModel extends Model
     protected $fillable = [
         'item_kalibrasi_id',
         'frekuensi',
-        'minimum',
-        'maksimum',
+        'rentang',
         'resolusi',
         'bulan',
         'tahun',
