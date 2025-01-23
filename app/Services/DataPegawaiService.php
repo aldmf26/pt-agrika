@@ -13,12 +13,15 @@ class DataPegawaiService
      * @param string $sumber ('web1' atau 'web2')
      * @return void
      */
-    public function download(string $url): void
+    public function download(): void
     {
         // Tentukan URL berdasarkan link data
 
         // Lakukan request GET ke URL
+        $url = "https://sarang.ptagafood.com/api/data-pegawai";
+
         $response = Http::get($url);
+        
         if ($response->successful()) {
             $dataPegawai = $response->json();
             $sumberData = $dataPegawai['sumber_data'];
@@ -43,7 +46,8 @@ class DataPegawaiService
                         'sumber_data' => $sumberData,
                         'karyawan_id_dari_api' => $pegawai['id_pegawai'],
                         'keterangan' => $keterangan,
-                        'admin' => 'download'
+                        'admin' => 'download',
+                        'deleted_at' => $pegawai['deleted_at']
                     ]
                 );
             }

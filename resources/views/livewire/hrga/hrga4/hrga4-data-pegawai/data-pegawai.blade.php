@@ -1,6 +1,4 @@
 <div>
-
-
     @if ($errors->any())
         <ul>
             @foreach ($errors->all() as $error)
@@ -8,9 +6,9 @@
             @endforeach
         </ul>
     @endif
-
-    <div class="d-flex justify-content-end">
+    <div class="d-flex gap-1 justify-content-end">
         <button class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Data</button>
+        <button wire:click="print" class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print {{ !empty($cekPegawai) ? '(' . count($cekPegawai) . ')' : 'Semua' }}</button>
     </div>
 
     <x-wire-table :datas="$datas">
@@ -18,13 +16,15 @@
             <thead>
                 <tr>
                     <th class="">No</th>
-                    <th class="">Divisi / Dept</th>
-                    <th class="">Nik</th>
-                    <th class="">Nama</th>
+                    <th class="pointer" wire:click='sortBy("divisi_id")'>Divisi / Dept <i  class="fas fa-sort float-end"></i></th>
+                    <th class="pointer" wire:click='sortBy("nik")'>Nik <i  class="fas fa-sort float-end"></i></th>
+                    <th class="pointer" wire:click='sortBy("nama")'>Nama <i  class="fas fa-sort float-end"></i></th>
                     <th class="">Jenis Kelamin/ <br>Tgl lahir</th>
                     <th class="">Status</th>
-                    <th class="">Tgl Masuk</th>
-                    <th class="">Posisi</th>
+                    <th class="pointer" wire:click='sortBy("tgl_masuk")'>Tgl Masuk <i  class="fas fa-sort float-end"></i></th>
+                    <th class="">Berhenti</th>
+                    <th class="pointer" wire:click='sortBy("posisi")'>Posisi <i  class="fas fa-sort float-end"></i></th>
+                    <th class="text-center">Aksi <br> <input type="checkbox" wire:model.live="selectAll"></th>
                 </tr>
             </thead>
             @foreach ($datas as $i => $d)
@@ -42,7 +42,11 @@
                                 ({{ $lamaKerja = (int) \Carbon\Carbon::parse($d->tgl_masuk)->diffInYears(now()) }} tahun {{ $lamaKerja2 = (int) \Carbon\Carbon::parse($d->tgl_masuk)->diffInMonths(now()) % 12 }} bulan)
                             @endif
                         </td>
+                        <td>{{$d->deleted_at == null ? '-' : tanggal($d->deleted_at) }}</td>
                         <td>{{ $d->posisi }}</td>
+                        <td align="center">
+                            <input class="pointer form-check-input" type="checkbox" value="{{ $d->id }}" wire:model.live="cekPegawai">
+                        </td>
                     </tr>
 
                 </tbody>

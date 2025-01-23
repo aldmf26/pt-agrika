@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('keterangan', 200)->nullable();      // Pendidikan terakhir
             $table->string('admin', 200)->nullable();      // Pendidikan terakhir
             $table->timestamps();
+            $table->date('deleted_at');
         });
 
         // Tabel departemen

@@ -12,6 +12,16 @@ class Hrga4DataPegawai extends Controller
         $data = [
             'title' => 'Hrga 1.4 data pegawai'
         ];
-        return view('hrga.hrga1.hrga1_data_pegawai.index',$data);
+        return view('hrga.hrga1.hrga4_data_pegawai.index',$data);
+    }
+
+    public function print(Request $r)
+    {
+        $data = [
+            'title' => 'DATA PEGAWAI',
+            'dok' => 'FRM.HRGA.01.04',
+            'datas' => session('dataToPrint')
+        ];
+        return view('hrga.hrga1.hrga4_data_pegawai.print',$data);
     }
 }
