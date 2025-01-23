@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('hrga9_1kalibrasi', function (Blueprint $table) {
+        Schema::create('jadwal_kalibrasi', function (Blueprint $table) {
             $table->id();
             $table->integer('item_kalibrasi_id')->index();
             $table->string('frekuensi');
             $table->string('rentang');
             $table->string('resolusi');
-            $table->double('bulan');
-            $table->double('tahun');
+            $table->date('tanggal');
+            $table->string('standar_nilai');
+            $table->string('aktual_nilai');
             $table->string('status');
+            $table->date('tanggal_selanjutnya');
             $table->timestamps();
         });
     }

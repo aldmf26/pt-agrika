@@ -144,13 +144,44 @@
         border-color: var(--bs-primary) !important;
         color: black !important;
     }
+
     .btn-xs {
         padding: .125rem .25rem;
         line-height: 1.5;
         border-radius: .2rem;
     }
+
     table {
         font-size: 12px;
+    }
+
+    .select2-container--default .select2-selection--single {
+        height: calc(1.5em + .75rem + 2px);
+        /* Sesuai tinggi .form-control */
+        padding: .375rem .75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .select2-container {
+        width: 100% !important;
+        /* Lebar penuh seperti form-control */
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 26px;
+        position: absolute;
+        top: 6px;
+        right: 1px;
+        width: 20px;
     }
 </style>
 @yield('styles')
