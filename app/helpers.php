@@ -51,3 +51,11 @@ if (!function_exists('tanggal')) {
         return $strTanggal;
     }
 }
+
+if (!function_exists('jam')) {
+    function jam($jam)
+    {
+        $jam = Carbon\Carbon::parse($jam)->format('h:i A');
+        return $jam;
+    }
+}

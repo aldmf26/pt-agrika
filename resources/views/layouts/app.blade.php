@@ -41,6 +41,7 @@
 
                 </div>
                 <div class="page-content" style="margin-top: -30px">
+                    <x-alert />
                     {{ $slot }}
                 </div>
             </div>
@@ -62,6 +63,7 @@
     </div>
 
     @include('layouts.template.scripts')
+    @include('layouts.template.signatureJS')
 </body>
 
 </html>

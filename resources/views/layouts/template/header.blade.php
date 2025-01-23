@@ -27,12 +27,12 @@
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        {{-- <li>
+                        <li>
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button class="dropdown-item" type="submit">Logout</button>
                             </form>
-                        </li> --}}
+                        </li>
                     </ul>
                 </div>
 
@@ -83,13 +83,13 @@
                                 <ul class="submenu-group">
                                     @foreach ($menu->children as $submenu)
                                         <li class="submenu-item has-sub">
-                                            <a href="#" class="submenu-link">{{ $submenu->title }}</a>
+                                            <a href="#" class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}</a>
                                             @if ($submenu->children->isNotEmpty())
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
                                                         <li class="subsubmenu-item">
                                                             <a href="{{ route($subsubmenu->link) }}"
-                                                                class="subsubmenu-link">{{ $subsubmenu->title }}</a>
+                                                                class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -101,6 +101,26 @@
                         @endif
                     </li>
                 @endforeach
+
+                <li
+                    class="menu-item {{ in_array($getRouteName, ['user.index', 'role.index']) ? 'active' : '' }} has-sub">
+                    <a href="#" class='menu-link'>
+                        <span><i class="bi bi-people"></i> Administrator</span>
+                    </a>
+                    <div class="submenu ">
+                        <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
+                        <div class="submenu-group-wrapper">
+                            <ul class="submenu-group">
+                                <li class="submenu-item">
+                                    <a href="{{ route('user.index') }}" class='submenu-link'>Daftar
+                                        User</a>
+                                    <a href="{{ route('role.index') }}" class='submenu-link'>Role &
+                                        Permission</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </nav>

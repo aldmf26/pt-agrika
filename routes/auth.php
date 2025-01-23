@@ -9,6 +9,8 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\RolePermissionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -56,4 +58,24 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+Route::group(['middleware' => ['role:presiden']], function () {
+    Route::controller(UserController::class)
+        ->prefix('user')
+        ->name('user.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/absen', 'absen')->name('absen');
+            Route::post('/update', 'update')->name('update');
+        });
+    Route::controller(RolePermissionController::class)
+        ->prefix('role')
+        ->name('role.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
+        });
 });

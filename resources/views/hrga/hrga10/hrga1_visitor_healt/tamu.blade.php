@@ -137,36 +137,19 @@
                 @endforeach
 
             </div>
-            <style>
-                .kbw-signature {
-                    width: 100%;
-                    height: 100px;
-                }
-
-                #sig canvas {
-
-                    width: 100% !important;
-                    height: auto;
-                }
-
-                #sig2 canvas {
-                    width: 100% !important;
-                    height: auto;
-                }
-            </style>
 
             <div class="mt-3 text-sm grid gap-4 grid-cols-2 items-center">
                 <div>
                     <label for="">Visitor/ <x-label_ind text="Pengunjung" /></label>
-                    <div id="sig"></div>
-                    <button id="clear" class="btn">Clear</button>
+                    <div id="sig" data-signature="#sig" data-clear="#clear" data-sync="#signature64"></div>
+                    <button type="button" id="clear" class="btn btn-danger">Clear</button>
                     <textarea id="signature64" name="visitor_signature" style="display: none"></textarea>
                 </div>
-
+                
                 <div>
                     <label for="">Recipient/ <x-label_ind text="Penerima" /></label>
-                    <div id="sig2"></div>
-                    <button id="clear2" class="btn">Clear</button>
+                    <div id="sig2" data-signature="#sig2" data-clear="#clear2" data-sync="#signature642"></div>
+                    <button type="button" id="clear2" class="btn btn-danger">Clear</button>
                     <textarea id="signature642" name="recipient_signature" style="display: none"></textarea>
                 </div>
             </div>
@@ -199,34 +182,6 @@
     </form>
 
 
-
-    <script>
-        $(document).ready(function() {
-            // Initialize Signature Pads
-            var sig = $('#sig').signature({
-                syncField: '#signature64',
-                syncFormat: 'PNG'
-            });
-            var sig2 = $('#sig2').signature({
-                syncField: '#signature642',
-                syncFormat: 'PNG'
-            });
-
-            // Clear Button for Visitor Signature
-            $('#clear').click(function(e) {
-                e.preventDefault();
-                sig.signature('clear'); // Clear canvas
-                $('#signature64').val(''); // Clear textarea
-            });
-
-            // Clear Button for Recipient Signature
-            $('#clear2').click(function(e) {
-                e.preventDefault();
-                sig2.signature('clear'); // Clear canvas
-                $('#signature642').val(''); // Clear textarea
-            });
-        });
-    </script>
 
 
 </x-guest-layout>

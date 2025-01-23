@@ -13,6 +13,12 @@
 
     <title>{{ $title }}</title>
     <style>
+        @media print {
+            body {
+                border: 1px solid black;
+                border-radius: 10px;
+            }
+        }
         body {
             font-family: 'Cambria';
         }
