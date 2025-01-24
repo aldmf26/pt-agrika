@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('program_perawatan_sarana_prasarana', function (Blueprint $table) {
+        Schema::create('item_perawatan', function (Blueprint $table) {
             $table->id();
-            $table->integer('item_id')->index();
-            $table->string('frekuensi_perawatan');
-            $table->string('penanggung_jawab');
-            $table->date('tanggal_mulai');
+            $table->string('nama_item');
+            $table->string('merek')->nullable();
+            $table->integer('lokasi_id');
+            $table->string('no_identifikasi')->nullable();
+            $table->enum('jenis_item', ['gabung', 'pisah'])->default('gabung');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('program_perawatan_sarana_prasarana');
+        Schema::dropIfExists('item_perawatan');
     }
 };
