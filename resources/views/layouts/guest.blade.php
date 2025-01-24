@@ -27,7 +27,15 @@
             font-family: Arial, sans-serif;
         }
        
+        .kbw-signature {
+        width: 100%;
+        height: 100px;
+    }
 
+    [data-signature] canvas {
+        width: 100% !important;
+        height: auto;
+    }
 
     </style>
 
@@ -72,6 +80,8 @@
     <div>
         {{ $slot }}
     </div>
+
+    @include('layouts.template.signatureJS')
     @livewireScripts
 
 </body>

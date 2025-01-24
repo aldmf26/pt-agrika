@@ -11,6 +11,7 @@
             <table class="table" id="example">
                 <thead>
                     <tr>
+                        <th class="dhead">No</th>
                         <th class="dhead">Tgl</th>
                         <th class="dhead">Nama</th>
                         <th class="dhead">Time In</th>
@@ -21,9 +22,10 @@
                 <tbody>
                     @foreach ($datas as $d)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ tanggal($d->date) }}</td>
                             <td>{{ $d->name }}</td>
-                            <td>{{ \Carbon\Carbon::parse($d->time_in)->format('h:i A') }}</td>
+                            <td>{{ jam($d->time_in) }}</td>
                             <td>{{ $d->purpose }}</td>
                             <td>
                                 <input type="checkbox" class="form-check-input" :value="{{ $d->id }}"

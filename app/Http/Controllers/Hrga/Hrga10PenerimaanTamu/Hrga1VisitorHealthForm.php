@@ -4,15 +4,15 @@ namespace App\Http\Controllers\Hrga\Hrga10PenerimaanTamu;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tamu;
+use App\Services\TtdUploadService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class Hrga1VisitorHealthForm extends Controller
 {
     public function index()
     {
-        $datas = Tamu::orderBy('created_at', 'desc')->get();
+        $datas = Tamu::orderBy('id', 'desc')->get();
         $data = [
             'title' => 'Hrga 10.1 VISITOR HEALTH MONITORING FORM',
             'datas' => $datas
@@ -27,35 +27,17 @@ class Hrga1VisitorHealthForm extends Controller
         ];
         return view('hrga.hrga10.hrga1_visitor_healt.tamu', $data);
     }
-    protected function storeSignature($signature, $prefix)
-    {
-        // Decode Base64
-        $signature = str_replace('data:image/png;base64,', '', $signature);
-        $signature = str_replace(' ', '+', $signature);
-        $image = base64_decode($signature);
 
-        // Generate unique filename
-        $fileName = $prefix . '_' . time() . '.png';
-
-        // Path untuk menyimpan file
-        $filePath = 'signatures/' . $fileName;
-
-        // Simpan file ke storage
-        Storage::disk('public')->put($filePath, $image);
-        return $filePath; // Kembalikan path untuk disimpan ke database
-    }
-    
-    public function storeTamu(Request $r)
+    public function storeTamu(Request $r, TtdUploadService $service)
     {
         try {
             DB::beginTransaction();
 
             $existingRecord = Tamu::where([['date', $r->date],['name', $r->name]])
                 ->first();
-
             if (!$existingRecord) {
-                $visitorSignaturePath = $this->storeSignature($r->visitor_signature, 'visitor_signature');
-                $recipientSignaturePath = $this->storeSignature($r->recipient_signature, 'recipient_signature');
+                $visitorSignaturePath = $service->store($r->visitor_signature, 'visitor_signature');
+                $recipientSignaturePath = $service->store($r->recipient_signature, 'recipient_signature');
 
                 Tamu::create([
                     'date' => $r->date,

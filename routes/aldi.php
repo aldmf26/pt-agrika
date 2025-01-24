@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga1Visitor;
 use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga1VisitorHealthForm;
+use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga2RegistrasiTamu;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga1PermohonanKaryawanController;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga2HasilWawancara;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga3HasilEvaluasiKaryawanBaru;
@@ -72,5 +73,15 @@ Route::controller(Hrga1VisitorHealthForm::class)
     ->name('hrga10.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+         Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga2RegistrasiTamu::class)
+    ->prefix('hrga/10/2-registrasi-tamu')
+    ->name('hrga10.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/add', 'add')->name('add');
+        Route::post('/add', 'store')->name('store');
          Route::get('/print', 'print')->name('print');
     });
