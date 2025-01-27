@@ -7,6 +7,8 @@ use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga1PermohonanKaryawa
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga2HasilWawancara;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga3HasilEvaluasiKaryawanBaru;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga4DataPegawai;
+use App\Http\Controllers\Hrga\Hrga7PengelolaanLimbah\Hrga1SchedulePembuanganSampah;
+use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga4CeklistSuhuAc;
 use Illuminate\Support\Facades\Route;
 
 // Route::group(['middleware' => ['role:presiden']], function () {
@@ -73,7 +75,7 @@ Route::controller(Hrga1VisitorHealthForm::class)
     ->name('hrga10.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-         Route::get('/print', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(Hrga2RegistrasiTamu::class)
@@ -83,5 +85,23 @@ Route::controller(Hrga2RegistrasiTamu::class)
         Route::get('/', 'index')->name('index');
         Route::get('/add', 'add')->name('add');
         Route::post('/add', 'store')->name('store');
-         Route::get('/print', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga1SchedulePembuanganSampah::class)
+    ->prefix('hrga/7/1-schedule-pembuangan-sampah')
+    ->name('hrga7.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga4CeklistSuhuAc::class)
+    ->prefix('hrga/8/4-ceklist-suhu-ac')
+    ->name('hrga8.4.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::get('/print', 'print')->name('print');
     });

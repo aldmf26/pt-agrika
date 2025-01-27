@@ -199,5 +199,9 @@
         right: 1px;
         width: 20px;
     }
+
+    .table {
+        font-size: 12px;
+    }
 </style>
 @yield('styles')
