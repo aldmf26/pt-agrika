@@ -1,3 +1,3 @@
 <x-app-layout :title="$title">
-    @livewire('hrga8.ceklist-suhu-ruangan')
+    @livewire('hrga6.ceklist-sanitasi')
 </x-app-layout>

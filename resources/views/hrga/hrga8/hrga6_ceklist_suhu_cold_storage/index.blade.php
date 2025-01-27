@@ -25,12 +25,12 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $d->ruangan }}</td>
                         <td><a
-                                href="{{ route('hrga8.4.create', $param) }}">{{ formatTglGaji($d->bulan, $d->tahun) }}</a>
+                                href="{{ route('hrga8.6.create', $param) }}">{{ formatTglGaji($d->bulan, $d->tahun) }}</a>
                         </td>
                         <td>{{ $d->standar_suhu }}</td>
                         <td>
                             <a target="_blank" class="btn btn-sm btn-primary"
-                                href="{{ route('hrga8.4.print', $param) }}"><i class="fas fa-print"></i> Cetak</a>
+                                href="{{ route('hrga8.6.print', $param) }}"><i class="fas fa-print"></i> Cetak</a>
                         </td>
                     </tr>
                 @endforeach

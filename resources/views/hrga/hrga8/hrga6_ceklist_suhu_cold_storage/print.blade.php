@@ -52,5 +52,5 @@
             </div>
         </div>
     
-    </x-hccp_print>
+    </x-theme.hccp_print>
     

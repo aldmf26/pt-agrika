@@ -12,8 +12,10 @@
 <link rel="stylesheet" href="{{ asset('assets') }}/compiled/css/iconly.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://cdn.datatables.net/v/bs5/dt-2.1.8/datatables.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="{{ asset('assets') }}/extensions/toastify-js/src/toastify.css">
+
+{{-- select2 --}}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
 {{-- ttd     --}}
@@ -203,5 +205,11 @@
     .table {
         font-size: 12px;
     }
+    .btn-xs {
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            /* Sesuaikan ukuran font */
+            line-height: 1.5;
+        }
 </style>
 @yield('styles')

@@ -19,6 +19,27 @@
             width: '100%'
         });
     });
+
+     // alpine select2
+     function initSelect2() {
+        $('.select2-alpine').select2();
+        $('.select2-alpine-data').select2();
+    }
+
+    window.addEventListener('alpine:init', () => {
+        Alpine.directive('select2', (el, {
+            expression
+        }) => {
+            return {
+                init() {
+                    initSelect2();
+                },
+                updated() {
+                    initSelect2();
+                },
+            };
+        });
+    });
 </script>
 
 <script>
@@ -43,7 +64,7 @@
             }).showToast();
         });
     }
-
+    
     document.addEventListener('livewire:initialized', () => {
         Livewire.on('showAlert', ([{
             type,
