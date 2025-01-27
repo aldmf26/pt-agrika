@@ -13,9 +13,11 @@ Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
     ->name('hrga5.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/get_item', 'get_item')->name('get_item');
+        Route::get('/get_merk', 'get_merk')->name('get_merk');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
     });
-
-
 Route::controller(Hrga1ProgramKalibrasi::class)
     ->prefix('hrga/hrga9/hrga9.1_Program_Kalibrasi')
     ->name('hrga9.1.')

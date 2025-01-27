@@ -64,61 +64,75 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('assets/img/logo_agrika.png') }}" alt="">
+                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">HASIL SUMMARY KALIBRASI</p>
+                    <p class="cop_judul">PROGRAM PERAWATAN SARANA & PRASARANA UMUM</p>
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text float-end">Dok.No.: FRM.HRGA.09.02, Rev.00</p>
+                <p class="cop_text">Dok.No.: FRM.HRGA.05.01, Rev.00</p>
             </div>
             <div class="col-lg-12">
-                <table class="table table-bordered text-nowrap">
+                <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th class="text-nowrap">Nama Alat Ukur</th>
-                            <th class="text-nowrap">Merek</th>
-                            <th class="text-nowrap">Type / Nomor seri</th>
-                            <th class="text-nowrap">Lokasi</th>
-                            <th class="text-nowrap">Frekuensi Kalibrasi</th>
-                            <th class="text-nowrap">Rentang Min-Maks</th>
-                            <th class="text-nowrap">Resolusi</th>
-                            <th class="text-nowrap">Tanggal Aktual Kalibrasi</th>
-                            <th class="text-nowrap">Standard Nilai koreksi</th>
-                            <th class="text-nowrap">Aktual nilai koreksi</th>
-                            <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap">Rencana Kalibrasi selanjutnya</th>
+                            <th class="text-center dhead" rowspan="2">No</th>
+                            <th class="text-center dhead" rowspan="2">Nama Sarana dan Prasarana Umum</th>
+                            <th class="text-center dhead" rowspan="2">Merek</th>
+                            <th class="text-center dhead" rowspan="2">No. Identifikasi</th>
+                            <th class="text-center dhead" rowspan="2">Lokasi</th>
+                            <th class="text-center dhead" rowspan="2">Frekuensi Perawatan</th>
+                            <th class="text-center dhead" rowspan="2">Penanggung Jawab</th>
+                            <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
+                        </tr>
+                        <tr>
+                            @foreach ($bulan as $b)
+                                <th class="text-center dhead">{{ substr($b->nm_bulan, 0, 3) }}</th>
+                            @endforeach
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($jadwal as $j)
+                        @foreach ($program as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $j->itemKalibrasi->name }}</td>
-                                <td>{{ $j->itemKalibrasi->merk }}</td>
-                                <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
-                                <td>{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>
-                                <td>{{ $j->frekuensi }}</td>
-                                <td>{{ $j->rentang }}</td>
-                                <td>{{ $j->resolusi }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tanggal)) }}</td>
-                                <td>{{ $j->standar_nilai }}</td>
-                                <td>{{ $j->aktual_nilai }}</td>
-                                <td>{{ $j->status }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
+                                <td>{{ $p->item->nama_item }}</td>
+                                <td>{{ $p->item->merek }}</td>
+                                <td>{{ $p->item->no_identifikasi }}</td>
+                                <td>{{ $p->item->lokasi->lokasi }}</td>
+                                <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
+                                <td>{{ $p->penanggung_jawab }}</td>
+                                @php
+                                    $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
+                                    $frekuensi = is_numeric($p->frekuensi_perawatan)
+                                        ? (int) $p->frekuensi_perawatan
+                                        : 1;
+                                    $bulanPerawatan = [];
+                                    $currentDate = $startDate->copy();
+                                    while ($currentDate->year === $startDate->year) {
+                                        $bulanPerawatan[] = $currentDate->month;
+                                        $currentDate->addMonths($frekuensi);
+                                    }
+                                @endphp
+
+                                @foreach ($bulan as $index => $b)
+                                    <td class="{{ in_array($index + 1, $bulanPerawatan) ? 'bg-secondary' : '' }}"></td>
+                                @endforeach
+
+
                             </tr>
                         @endforeach
+
                     </tbody>
 
                 </table>
             </div>
-            <div class="col-4">
+            <div class="col-7">
 
             </div>
-            <div class="col-4">
+            <div class="col-5">
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
@@ -137,9 +151,6 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col-4">
-
             </div>
 
 

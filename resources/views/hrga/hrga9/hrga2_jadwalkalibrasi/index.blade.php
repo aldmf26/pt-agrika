@@ -36,7 +36,7 @@
                                 <td>{{ $j->itemKalibrasi->name }}</td>
                                 <td>{{ $j->itemKalibrasi->merk }}</td>
                                 <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
-                                <td>{{ $j->itemKalibrasi->lokasi->lokasi }}</td>
+                                <td>{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>
                                 <td>{{ $j->frekuensi }}</td>
                                 <td>{{ $j->rentang }}</td>
                                 <td>{{ $j->resolusi }}</td>
