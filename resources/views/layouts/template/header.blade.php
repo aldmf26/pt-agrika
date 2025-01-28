@@ -83,7 +83,8 @@
                                 <ul class="submenu-group">
                                     @foreach ($menu->children as $submenu)
                                         <li class="submenu-item has-sub">
-                                            <a href="#" class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}</a>
+                                            <a href="#"
+                                                class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}</a>
                                             @if ($submenu->children->isNotEmpty())
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)

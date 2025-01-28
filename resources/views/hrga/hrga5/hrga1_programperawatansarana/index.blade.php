@@ -6,6 +6,8 @@
             <a href="{{ route('hrga5.1.print', ['tahun' => $tahun]) }}" target="_blank"
                 class="btn btn-primary float-end me-2"><i class="fas fa-print"></i>
                 Print</a>
+            <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
+                    class="fas fa-calendar"></i> View</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -127,6 +129,33 @@
 
 
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <form action="" method="get">
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">View</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <select name="tahun" id="" class=" form-control">
+                            @foreach ($tahuns as $t)
+                                <option value="{{ $t }}" @selected($tahun == $t)>{{ $t }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

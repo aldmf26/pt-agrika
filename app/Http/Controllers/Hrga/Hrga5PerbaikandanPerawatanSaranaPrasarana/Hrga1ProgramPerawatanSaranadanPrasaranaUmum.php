@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana;
 use App\Http\Controllers\Controller;
 use App\Models\ItemPerawatan;
 use App\Models\LokasiModel;
+use App\Models\PerawatanModel;
 use App\Models\ProgramPerawatanSaranaPrasarana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,10 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $tahun,
             'program' => ProgramPerawatanSaranaPrasarana::whereYear('tanggal_mulai', $tahun)->orderBy('id', 'desc')->get(),
+            'tahuns' => ProgramPerawatanSaranaPrasarana::selectRaw('YEAR(tanggal_mulai) as tahun')
+                ->distinct()
+                ->pluck('tahun')
+                ->toArray()
         ];
         return view('hrga.hrga5.hrga1_programperawatansarana.index', $data);
     }
@@ -58,8 +63,27 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
             'penanggung_jawab' => 'required',
             'tanggal_mulai' => 'required',
         ]);
-
         ProgramPerawatanSaranaPrasarana::create($r->all());
+
+        $item = ItemPerawatan::find($r->item_id);
+
+        $total = floor(12 / $r->frekuensi_perawatan);
+
+        for ($i = 0; $i < $total; $i++) {
+            $tgl = date('Y-m-d', strtotime($r->tanggal_mulai . ' + ' . ($i * $r->frekuensi_perawatan) . ' month'));
+            $data = [
+                'item_id' => $r->item_id,
+                'tgl' => $tgl,
+                'kesimpulan' => 'kondisi masih bagus',
+                'fungsi' => 'bagus',
+            ];
+            PerawatanModel::create($data);
+        }
+
+
+
+
+
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 

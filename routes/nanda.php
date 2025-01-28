@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
+use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
+use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3PermintaanPerbaikan;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\RolePermissionController;
@@ -18,6 +20,24 @@ Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
     });
+Route::controller(Hrga2RiwayatPerwatanPerbaikan::class)
+    ->prefix('hrga/hrga5/hrga5.2_Riwayat_perwatan_dan_perbaikan_sarana_dan_prasarana_umum')
+    ->name('hrga5.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Hrga3PermintaanPerbaikan::class)
+    ->prefix('hrga/hrga5/hrga5.3_Permintaan_perbaikan_sarana_dan_prasarana_umum')
+    ->name('hrga5.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/formPermintaanperbaikan', 'formPermintaanperbaikan')->name('formPermintaanperbaikan');
+        Route::get('/sukses', 'sukses')->name('sukses');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+
 Route::controller(Hrga1ProgramKalibrasi::class)
     ->prefix('hrga/hrga9/hrga9.1_Program_Kalibrasi')
     ->name('hrga9.1.')
