@@ -12,31 +12,31 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     {{-- ttd     --}}
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet"> 
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
+        rel="stylesheet">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
     <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
 
-  
-    
+
+
     <style>
+
         * {
             font-family: Arial, sans-serif;
         }
-       
         .kbw-signature {
-        width: 100%;
-        height: 100px;
-    }
+            width: 100%;
+            height: 100px;
+        }
 
-    [data-signature] canvas {
-        width: 100% !important;
-        height: auto;
-    }
-
+        [data-signature] canvas {
+            width: 100% !important;
+            height: auto;
+        }
     </style>
 
 

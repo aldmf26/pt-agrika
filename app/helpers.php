@@ -59,3 +59,9 @@ if (!function_exists('jam')) {
         return $jam;
     }
 }
+if (!function_exists('formatTglGaji')) {
+    function formatTglGaji($bulan, $tahun)
+    {
+        return date('M Y', strtotime($tahun . '-' . $bulan . '-01'));
+    }
+}

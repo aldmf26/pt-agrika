@@ -9,8 +9,8 @@
                 </a>
             </div>
             <div class="header-top-right">
-                <div class="dropdown">
-                    <a href="#" id="topbarUserDropdown"
+                <div x-data="{ open: false }" @click.outside="open = false">
+                    <a @click="open = ! open" href="#" id="topbarUserDropdown"
                         class="user-dropdown d-flex align-items-center dropend dropdown-toggle "
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="avatar avatar-md2">
@@ -21,21 +21,71 @@
                             <p class="mb-0 text-sm text-success">{{ ucwords(auth()->user()->roles[0]->name) }}</p>
                         </div>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end shadow-lg" aria-labelledby="topbarUserDropdown">
-                        <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
+                    <style>
+                        .dropdownAldi {
+                            position: absolute;
+                            z-index: 1000;
+                            background-color: #ffffff;
+                            border: 1px solid #e0e0e0;
+                            border-radius: 8px;
+                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                            min-width: 200px;
+                            padding: 10px 0;
+                            list-style-type: none;
+                            margin: 0;
+                        }
 
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button class="dropdown-item" type="submit">Logout</button>
-                            </form>
-                        </li>
-                    </ul>
+                        .dropdownAldi li {
+                            padding: 10px 10px;
+                        }
+
+                        .dropdownAldi li:hover {
+                            background-color: #f5f5f5;
+                            cursor: pointer;
+                        }
+
+                        .dropdownAldi li a,
+                        .dropdownAldi li button {
+                            color: #333;
+                            text-decoration: none;
+                            background: none;
+                            border: none;
+                            width: 100%;
+                            text-align: left;
+                            cursor: pointer;
+                            font-size: 14px;
+                        }
+
+                        .dropdownAldi li a:hover,
+                        .dropdownAldi li button:hover {
+                            color: #007bff;
+                            cursor: pointer;
+
+                        }
+
+                        .dropdownAldi li hr {
+                            margin: 2px 0;
+                            border: none;
+                            border-top: 1px solid #e0e0e0;
+                        }
+                    </style>
+                    <div x-show="open" class="position-absolute">
+                        <ul class="dropdownAldi" aria-labelledby="topbarUserDropdown">
+                            <a class="" href="#">
+                                <li>
+                                    {{ Auth::user()->name }}
+                                </li>
+                            </a>
+                            <hr class="">
+                            <li>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="" type="submit">Logout</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-
                 <!-- Burger button responsive -->
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
@@ -61,7 +111,7 @@
             <ul>
                 @foreach ($listMenu as $menu)
                     <li class="menu-item {{ $getRouteName == $menu['route'] ? 'active' : '' }}">
-                        <a href="{{ route($menu['route']) }}" class='menu-link'>
+                        <a wire:navigate href="{{ route($menu['route']) }}" class='menu-link'>
                             <span><i class="bi bi-{{ $menu['icon'] }}"></i> {{ $menu['name'] }}</span>
                         </a>
                     </li>
@@ -89,7 +139,7 @@
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
                                                         <li class="subsubmenu-item">
-                                                            <a href="{{ route($subsubmenu->link) }}"
+                                                            <a wire:navigate href="{{ route($subsubmenu->link) }}"
                                                                 class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
                                                         </li>
                                                     @endforeach
@@ -113,9 +163,9 @@
                         <div class="submenu-group-wrapper">
                             <ul class="submenu-group">
                                 <li class="submenu-item">
-                                    <a href="{{ route('user.index') }}" class='submenu-link'>Daftar
+                                    <a wire:navigate href="{{ route('user.index') }}" class='submenu-link'>Daftar
                                         User</a>
-                                    <a href="{{ route('role.index') }}" class='submenu-link'>Role &
+                                    <a wire:navigate href="{{ route('role.index') }}" class='submenu-link'>Role &
                                         Permission</a>
                                 </li>
                             </ul>
