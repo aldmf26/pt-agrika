@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga1InformasiTawaranPelatihan;
+use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga2ProgramPelatihanTahunan;
+use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga3UsulandanIdentifikasi;
+use App\Http\Controllers\Hrga\Hrga4MedicalScreening\Hrga1JadwalMedicalCheckup;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3PermintaanPerbaikan;
@@ -10,6 +14,40 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 
+Route::controller(Hrga1InformasiTawaranPelatihan::class)
+    ->prefix('hrga/hrga3/hrga3.1_Informasi_tawaran_pelatihan')
+    ->name('hrga3.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+    });
+Route::controller(Hrga2ProgramPelatihanTahunan::class)
+    ->prefix('hrga/hrga3/hrga3.2_Program_pelatihan_tahunan')
+    ->name('hrga3.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+    });
+Route::controller(Hrga3UsulandanIdentifikasi::class)
+    ->prefix('hrga/hrga3/hrga3.3_Usulan_dan_identifikasi_kebutuhan_pelatihan')
+    ->name('hrga3.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Hrga1JadwalMedicalCheckup::class)
+    ->prefix('hrga/hrga4/hrga4.1_Jadwal_medical_checkup')
+    ->name('hrga4.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+    });
 Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
     ->prefix('hrga/hrga5/hrga5.1_Program_perawatan_sarana_dan_prasarana_umum')
     ->name('hrga5.1.')
