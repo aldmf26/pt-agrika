@@ -5,6 +5,7 @@ use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga2ProgramPelatihanTahunan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga3UsulandanIdentifikasi;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga4JadwalDanInformasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga5DaftarHadirPelatihanController;
+use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga6EvaluasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga4MedicalScreening\Hrga1JadwalMedicalCheckup;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
@@ -52,6 +53,13 @@ Route::controller(Hrga4JadwalDanInformasiPelatihan::class)
 Route::controller(Hrga5DaftarHadirPelatihanController::class)
     ->prefix('hrga/hrga3/hrga3.5_Daftar_hadir_pelatihan')
     ->name('hrga3.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Hrga6EvaluasiPelatihan::class)
+    ->prefix('hrga/hrga3/hrga3.6_Evaluasi_pelatihan')
+    ->name('hrga3.6.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
