@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga1Visitor;
 use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga1VisitorHealthForm;
 use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga2RegistrasiTamu;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga1PermohonanKaryawanController;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga2HasilWawancara;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga3HasilEvaluasiKaryawanBaru;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga4DataPegawai;
+use App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi\Hrga2PenilaianKompetensi;
 use App\Http\Controllers\Hrga\Hrga6Sanitasi\Hrga1PerencanaanKebersihan;
 use App\Http\Controllers\Hrga\Hrga6Sanitasi\Hrga2CeklistSanitasi;
 use App\Http\Controllers\Hrga\Hrga6Sanitasi\Hrga4CeklistFoothbath;
@@ -16,34 +16,11 @@ use App\Http\Controllers\Hrga\Hrga7PengelolaanLimbah\Hrga3IdentifikasiLimbah;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga4CeklistSuhuAc;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga6CeklistSuhuColdStorage;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga7ceklistPengecekanAir;
+use App\Http\Controllers\IA\IA1ProgramAuditInternalController;
+use App\Http\Controllers\IA\IA2JadwalAuditInternalController;
+use App\Http\Controllers\IA\IA4LaporanAuditInternalController;
 use Illuminate\Support\Facades\Route;
 
-// Route::group(['middleware' => ['role:presiden']], function () {
-//     Route::controller(UserController::class)
-//         ->prefix('user')
-//         ->name('user.')
-//         ->group(function () {
-//             Route::get('/', 'index')->name('index');
-//             Route::get('/absen', 'absen')->name('absen');
-//             Route::post('/update', 'update')->name('update');
-//         });
-//     Route::controller(RolePermissionController::class)
-//         ->prefix('role')
-//         ->name('role.')
-//         ->group(function () {
-//             Route::get('/', 'index')->name('index');
-//             Route::post('/', 'store')->name('store');
-//             Route::post('/update', 'update')->name('update');
-//             Route::get('/destroy/{id}', 'destroy')->name('destroy');
-//         });
-// });
-
-Route::controller(Hrga1Visitor::class)
-    ->prefix('hrga/hrga10/hrga1-visitor')
-    ->name('hrga10.1.')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
 
 Route::controller(Hrga1PermohonanKaryawanController::class)
     ->prefix('hrga/1/1-permohonan-karyawan-baru')
@@ -77,6 +54,16 @@ Route::controller(Hrga4DataPegawai::class)
         Route::get('/print', 'print')->name('print');
     });
 
+Route::controller(Hrga2PenilaianKompetensi::class)
+    ->prefix('hrga/2/2-penilaian-kompetensi')
+    ->name('hrga2.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/penilaian/{id}', 'penilaian')->name('penilaian');
+        Route::get('/print/{id}', 'print')->name('print');
+    });
+
 Route::controller(Hrga1VisitorHealthForm::class)
     ->prefix('hrga/10/1-visitor-health-monitoring-form')
     ->name('hrga10.1.')
@@ -100,8 +87,8 @@ Route::controller(Hrga1PerencanaanKebersihan::class)
     ->name('hrga6.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-            Route::post('/', 'store')->name('store');
-            Route::get('/print', 'print')->name('print');
+        Route::post('/', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(Hrga2CeklistSanitasi::class)
@@ -109,9 +96,9 @@ Route::controller(Hrga2CeklistSanitasi::class)
     ->name('hrga6.2.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-            Route::get('/create/', 'create')->name('create');
-            Route::get('/add/', 'add')->name('add');
-            Route::get('/print', 'print')->name('print');
+        Route::get('/create/', 'create')->name('create');
+        Route::get('/add/', 'add')->name('add');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(Hrga4CeklistFoothbath::class)
@@ -120,6 +107,7 @@ Route::controller(Hrga4CeklistFoothbath::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
+        Route::get('/add/', 'add')->name('add');
         Route::get('/print', 'print')->name('print');
     });
 
@@ -175,4 +163,32 @@ Route::controller(Hrga7ceklistPengecekanAir::class)
         Route::get('/print', 'print')->name('print');
     });
 
-    
+Route::controller(IA1ProgramAuditInternalController::class)
+    ->prefix('ia/1-program-audit-internal')
+    ->name('ia.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(IA2JadwalAuditInternalController::class)
+    ->prefix('ia/2-jadwal-audit-internal')
+    ->name('ia.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create/', 'store')->name('store');
+        Route::get('/edit/{tgl}', 'edit')->name('edit');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(IA4LaporanAuditInternalController::class)
+    ->prefix('ia/4-laporan-audit-internal')
+    ->name('ia.4.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create/', 'store')->name('store');
+        Route::get('/edit/{tgl}', 'edit')->name('edit');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });

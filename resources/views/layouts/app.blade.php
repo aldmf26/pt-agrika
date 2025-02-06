@@ -15,6 +15,9 @@
     {{-- <script src="{{asset('assets')}}/static/js/initTheme.js"></script> --}}
     <div id="app">
         <div id="main" class="layout-horizontal">
+            @if (!Auth::check())
+                {{ redirect()->intended(route('login'))->send() }}
+            @endif
             @include('layouts.template.header')
 
             <div class="content-wrapper container">

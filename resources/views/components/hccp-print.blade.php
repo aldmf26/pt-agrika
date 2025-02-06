@@ -75,7 +75,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid p-5">
         <div class="row">
             <div class="col-3 mt-4">
                 <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">

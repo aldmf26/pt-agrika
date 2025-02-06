@@ -1,4 +1,7 @@
-<?php 
+<?php
+
+use Carbon\Carbon;
+
 if (!function_exists('tanggal')) {
     function tanggal($tgl)
     {
@@ -55,8 +58,15 @@ if (!function_exists('tanggal')) {
 if (!function_exists('jam')) {
     function jam($jam)
     {
-        $jam = Carbon\Carbon::parse($jam)->format('h:i A');
+        $jam = Carbon::parse($jam)->format('h:i A');
         return $jam;
+    }
+}
+if (!function_exists('umur')) {
+    function umur($tgl)
+    {
+        $tgl = Carbon::parse($tgl)->age;
+        return $tgl;
     }
 }
 if (!function_exists('formatTglGaji')) {

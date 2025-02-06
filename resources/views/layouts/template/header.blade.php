@@ -95,34 +95,22 @@
     </div>
     <nav class="main-navbar bg-secondary">
         <div class="container">
-
             @php
+                use App\Models\Menu;
                 $getRouteName = Route::currentRouteName();
 
-                $listMenu = collect([
-                    [
-                        'name' => 'Dashboard',
-                        'icon' => 'grid-fill',
-                        'route' => 'dashboard',
-                    ],
-                ]);
+                // Ambil menu utama (tanpa parent_id)
+                $menus = Menu::whereNull('parent_id')->with('children')->orderBy('order')->get();
             @endphp
-
             <ul>
-                @foreach ($listMenu as $menu)
-                    <li class="menu-item {{ $getRouteName == $menu['route'] ? 'active' : '' }}">
-                        <a wire:navigate href="{{ route($menu['route']) }}" class='menu-link'>
-                            <span><i class="bi bi-{{ $menu['icon'] }}"></i> {{ $menu['name'] }}</span>
-                        </a>
-                    </li>
-                @endforeach
 
-                @php
-                    use App\Models\Menu;
+                <li class="menu-item {{ 'dashboard' == 'dashboard' ? 'active' : '' }}">
+                    <a wire:navigate href="{{ route('dashboard') }}" class='menu-link'>
+                        <span><i class="bi bi-grid-fill"></i> Dashboard</span>
+                    </a>
+                </li>
 
-                    // Ambil menu utama (tanpa parent_id)
-                    $menus = Menu::whereNull('parent_id')->with('children')->orderBy('order')->get();
-                @endphp
+
                 @foreach ($menus as $menu)
                     <li class="menu-item has-sub">
                         <a href="#" class="menu-link">
@@ -132,13 +120,19 @@
                             <div class="submenu" style="font-size: 13px">
                                 <ul class="submenu-group">
                                     @foreach ($menu->children as $submenu)
-                                        <li class="submenu-item has-sub">
-                                            <a href="#" class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}</a>
-                                            @if ($submenu->children->isNotEmpty())
+                                        @php
+                                            $adaSub = $submenu->children->isEmpty();
+                                        @endphp
+                                        <li class="submenu-item {{ $adaSub ? '' : 'has-sub' }}">
+                                            <a wire:navigate href="{{ $adaSub ? ($submenu->link == 'tidak' ? route($submenu->link, ['q' => $submenu->title]) : route($submenu->link)) : '#' }}"
+                                                class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}
+                                            </a>
+
+                                            @if (!$adaSub)
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
                                                         <li class="subsubmenu-item">
-                                                            <a wire:navigate href="{{ route($subsubmenu->link) }}"
+                                                            <a wire:navigate href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
                                                                 class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
                                                         </li>
                                                     @endforeach
@@ -151,26 +145,6 @@
                         @endif
                     </li>
                 @endforeach
-
-                <li
-                    class="menu-item {{ in_array($getRouteName, ['user.index', 'role.index']) ? 'active' : '' }} has-sub">
-                    <a href="#" class='menu-link'>
-                        <span><i class="bi bi-people"></i> Administrator</span>
-                    </a>
-                    <div class="submenu ">
-                        <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
-                        <div class="submenu-group-wrapper">
-                            <ul class="submenu-group">
-                                <li class="submenu-item">
-                                    <a wire:navigate href="{{ route('user.index') }}" class='submenu-link'>Daftar
-                                        User</a>
-                                    <a wire:navigate href="{{ route('role.index') }}" class='submenu-link'>Role &
-                                        Permission</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
             </ul>
         </div>
     </nav>

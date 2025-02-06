@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nik', 50)->nullable(); // Kode unik karyawan
             $table->string('nama', 100);            // Nama depan
+            $table->string('jenis_kelamin', 50);            // Nama depan
             $table->string('email', 150)->nullable(); // Email (opsional)
             $table->string('no_telepon', 15)->nullable();    // Nomor telepon
             $table->date('tgl_lahir')->nullable();          // Tanggal lahir

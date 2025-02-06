@@ -8,6 +8,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tidak', function () {
+    $data = [
+        'title' => 'tidak'
+    ];
+    return view('tidak',$data);
+})->name('tidak');
+
 Route::get('/tamu', [Hrga1VisitorHealthForm::class, 'tamu']);
 Route::post('/tamu', [Hrga1VisitorHealthForm::class, 'storeTamu'])->name('tamu.store');
 

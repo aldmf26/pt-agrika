@@ -28,14 +28,14 @@
                             <td>{{ $d->nama ?? '' }}</td>
                             <td class="text-center">
                                 @if (isset($d->tgl_lahir))
-                                    {{ \Carbon\Carbon::parse($d->tgl_lahir)->age }}
+                                    {{umur($d->tgl_lahir)}}
                                 @endif
                             </td>
                             <td>{{ $d->jenis_kelamin ?? '' }}</td>
                             <td>{{ $d->posisi ?? '' }}</td>
                             <td>{{ $d->status_karyawan ?? 'Dilanjutkan' }} Bulan</td>
                             <td>
-                                <input type="checkbox" class="form-check-input" :value="{{ $d->id }}"
+                                <input type="checkbox" class="form-check-input" :value="{{ $d->id_karyawan }}"
                                     x-model="checked">
                             </td>
                         </tr>
