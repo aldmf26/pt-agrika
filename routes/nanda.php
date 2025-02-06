@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi\Hrga5JadwalGapAnalysis;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga1InformasiTawaranPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga2ProgramPelatihanTahunan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga3UsulandanIdentifikasi;
@@ -16,6 +17,16 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+
+
+Route::controller(Hrga5JadwalGapAnalysis::class)
+    ->prefix('hrga/2/5-Jadwal-Gap-Analysis')
+    ->name('hrga2.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
 
 Route::controller(Hrga1InformasiTawaranPelatihan::class)
     ->prefix('hrga/hrga3/hrga3.1_Informasi_tawaran_pelatihan')

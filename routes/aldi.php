@@ -64,6 +64,7 @@ Route::controller(Hrga2PenilaianKompetensi::class)
         Route::get('/print/{id}', 'print')->name('print');
     });
 
+
 Route::controller(Hrga1VisitorHealthForm::class)
     ->prefix('hrga/10/1-visitor-health-monitoring-form')
     ->name('hrga10.1.')
