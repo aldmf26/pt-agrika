@@ -11,6 +11,7 @@ use App\Http\Controllers\Hrga\Hrga4MedicalScreening\Hrga1JadwalMedicalCheckup;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3PermintaanPerbaikan;
+use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga1ProgramPerawatanMesin;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\RolePermissionController;
@@ -110,6 +111,15 @@ Route::controller(Hrga3PermintaanPerbaikan::class)
         Route::get('/sukses', 'sukses')->name('sukses');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga1ProgramPerawatanMesin::class)
+    ->prefix('hrga/hrga8/1_Program_perawatan_mesin')
+    ->name('hrga8.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
     });
 
 Route::controller(Hrga1ProgramKalibrasi::class)
