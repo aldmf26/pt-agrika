@@ -145,7 +145,7 @@
                     <button type="button" id="clear" class="btn btn-danger">Clear</button>
                     <textarea id="signature64" name="visitor_signature" style="display: none"></textarea>
                 </div>
-                
+
                 <div>
                     <label for="">Recipient/ <x-label_ind text="Penerima" /></label>
                     <div id="sig2" data-signature="#sig2" data-clear="#clear2" data-sync="#signature642"></div>

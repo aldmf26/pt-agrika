@@ -1,20 +1,35 @@
 <?php
 
+use App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi\Hrga5JadwalGapAnalysis;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga1InformasiTawaranPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga2ProgramPelatihanTahunan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga3UsulandanIdentifikasi;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga4JadwalDanInformasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga5DaftarHadirPelatihanController;
+use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga6EvaluasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga4MedicalScreening\Hrga1JadwalMedicalCheckup;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3PermintaanPerbaikan;
+use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga1ProgramPerawatanMesin;
+use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga2CeklisPerawatanMesin;
+use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPerbaikanMesin;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
+
+
+Route::controller(Hrga5JadwalGapAnalysis::class)
+    ->prefix('hrga/2/5-Jadwal-Gap-Analysis')
+    ->name('hrga2.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
 
 Route::controller(Hrga1InformasiTawaranPelatihan::class)
     ->prefix('hrga/hrga3/hrga3.1_Informasi_tawaran_pelatihan')
@@ -56,6 +71,13 @@ Route::controller(Hrga5DaftarHadirPelatihanController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
     });
+Route::controller(Hrga6EvaluasiPelatihan::class)
+    ->prefix('hrga/hrga3/hrga3.6_Evaluasi_pelatihan')
+    ->name('hrga3.6.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
 Route::controller(Hrga1JadwalMedicalCheckup::class)
     ->prefix('hrga/hrga4/hrga4.1_Jadwal_medical_checkup')
     ->name('hrga4.1.')
@@ -91,6 +113,31 @@ Route::controller(Hrga3PermintaanPerbaikan::class)
         Route::get('/sukses', 'sukses')->name('sukses');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga1ProgramPerawatanMesin::class)
+    ->prefix('hrga/hrga8/1_Program_perawatan_mesin')
+    ->name('hrga8.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+    });
+Route::controller(Hrga2CeklisPerawatanMesin::class)
+    ->prefix('hrga/hrga8/2_Ceklis_perawatan_mesin')
+    ->name('hrga8.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+Route::controller(Hrga3PermintaanPerbaikanMesin::class)
+    ->prefix('hrga/hrga8/3_Permintaan_perbaikan_mesin')
+    ->name('hrga8.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/formpengajuan', 'formpengajuan')->name('formpengajuan');
+        Route::get('/sukses', 'sukses')->name('sukses');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
     });
 
 Route::controller(Hrga1ProgramKalibrasi::class)
