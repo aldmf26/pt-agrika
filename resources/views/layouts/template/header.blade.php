@@ -124,7 +124,8 @@
                                             $adaSub = $submenu->children->isEmpty();
                                         @endphp
                                         <li class="submenu-item {{ $adaSub ? '' : 'has-sub' }}">
-                                            <a wire:navigate href="{{ $adaSub ? ($submenu->link == 'tidak' ? route($submenu->link, ['q' => $submenu->title]) : route($submenu->link)) : '#' }}"
+                                            <a wire:navigate
+                                                href="{{ $adaSub ? ($submenu->link == 'tidak' ? route($submenu->link, ['q' => $submenu->title]) : route($submenu->link)) : '#' }}"
                                                 class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}
                                             </a>
 
@@ -132,7 +133,8 @@
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
                                                         <li class="subsubmenu-item">
-                                                            <a wire:navigate href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
+                                                            <a wire:navigate
+                                                                href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
                                                                 class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
                                                         </li>
                                                     @endforeach

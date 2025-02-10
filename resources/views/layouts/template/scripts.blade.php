@@ -7,6 +7,17 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script>
+    function pencarian(inputId, tblId) {
+
+        $(document).on('keyup', "#" + inputId, function() {
+            var value = $(this).val().toLowerCase();
+            $(`#${tblId} tbody tr`).filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        })
+
+    }
+
     $("#example").dataTable({
         columnDefs: [{
             "defaultContent": "-",
@@ -20,26 +31,24 @@
         });
     });
 
-     // alpine select2
-     function initSelect2() {
-        $('.select2-alpine').select2();
-        $('.select2-alpine-data').select2();
-    }
+    function initSelect2() {
+    $('.select2-alpine').select2();
+}
 
-    window.addEventListener('alpine:init', () => {
-        Alpine.directive('select2', (el, {
-            expression
-        }) => {
-            return {
-                init() {
-                    initSelect2();
-                },
-                updated() {
-                    initSelect2();
-                },
-            };
+// Tunggu sampai Alpine.js diinisialisasi
+window.addEventListener('alpine:init', () => {
+    Alpine.directive('select2', (el, { expression }, { effect }) => {
+        effect(() => {
+            // Gunakan jQuery untuk menginisialisasi Select2
+            $(el).select2();
+
+            // Event untuk menangani perubahan nilai dari Select2 ke Alpine.js
+            $(el).on('change', function () {
+                Alpine.store('select2Value', $(this).val());
+            });
         });
     });
+});
 </script>
 
 <script>
@@ -64,7 +73,7 @@
             }).showToast();
         });
     }
-    
+
     document.addEventListener('livewire:initialized', () => {
         Livewire.on('showAlert', ([{
             type,

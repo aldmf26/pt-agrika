@@ -19,6 +19,7 @@ use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga7ceklistPengec
 use App\Http\Controllers\IA\IA1ProgramAuditInternalController;
 use App\Http\Controllers\IA\IA2JadwalAuditInternalController;
 use App\Http\Controllers\IA\IA4LaporanAuditInternalController;
+use App\Http\Controllers\PPC\Gudang_FG\FG1DeliveryOrderController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -189,6 +190,14 @@ Route::controller(IA4LaporanAuditInternalController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create/', 'store')->name('store');
-        Route::get('/edit/{tgl}', 'edit')->name('edit');
-        Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(FG1DeliveryOrderController::class)
+    ->prefix('ppc/gudang-fg/1-delivery-order')
+    ->name('ppc.gudang-fg.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
     });
