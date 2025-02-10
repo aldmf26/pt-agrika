@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana;
 
 use App\Http\Controllers\Controller;
+use App\Models\ItemPerawatan;
 use App\Models\LokasiModel;
 use App\Models\PermintaanPerbaikanSaranaPrasana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use PgSql\Lob;
 
 class Hrga3PermintaanPerbaikan extends Controller
@@ -48,6 +50,23 @@ class Hrga3PermintaanPerbaikan extends Controller
             'waktu' => now(),
         ];
         PermintaanPerbaikanSaranaPrasana::create($data);
+
+        $item = ItemPerawatan::find($r->item_id);
+        $lokasi = $item->lokasi->lokasi . " Lantai (" . $item->lokasi->lantai . ")";
+
+        if ($r->hasFile('image')) {
+            $image = $r->file('image');
+            $imageName = $no_invoice . '.' . $image->getClientOriginalExtension();
+            $image->storeAs('perbaikan_sarana', $imageName, 'public'); // Simpan di storage public
+        }
+
+
+        $response = Http::withHeaders([
+            'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
+        ])->post('https://api.fonnte.com/send', [
+            'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
+            'message' => "Nama : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://b028-36-83-16-103.ngrok-free.app/storage/perbaikan_sarana/$imageName",
+        ]);
         return redirect()->route('hrga5.3.sukses', ['invoice_pengajuan' => $no_invoice]);
     }
     public function sukses(Request $r)

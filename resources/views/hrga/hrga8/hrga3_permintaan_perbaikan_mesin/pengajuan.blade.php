@@ -48,33 +48,26 @@
 
 <body>
     <div class="container justify-content-center mt-4">
-        <form action="{{ route('hrga5.3.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('hrga8.3.store') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title text-center">Form Permintaan Perbaikan Sarana & Prasarana umum</h5>
+                    <h5 class="title text-center"> PERMINTAAN PERBAIKAN MESIN PROSES PRODUKSI
+                    </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
-                            <label for="">Lokasi</label>
-                            <select name="" id="" class="select2 form-control lokasi">
-                                <option value="">Pilih Lokasi</option>
-                                @foreach ($lokasi as $l)
-                                    <option value="{{ $l->id }}">{{ $l->lokasi }} |
-                                        lantai({{ $l->lantai }})
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+
                         <div class="col-12 mt-2">
-                            <label for="">Nama sarana dan prasarana umum</label>
+                            <label for="">Nama Mesin</label>
                             <select name="item_id" id="" class="select2 item">
-
+                                <option value="">-Pilih Mesin-</option>
+                                @foreach ($mesin as $m)
+                                    <option value="{{ $m->id }}">{{ $m->nama_mesin }}</option>
+                                @endforeach
 
                             </select>
                         </div>
-
                         <div class="col-6 mt-2">
                             <label for="">Merek</label>
                             <input type="text" class="form-control merk" disabled>
@@ -83,9 +76,13 @@
                             <label for="">No identifikasi</label>
                             <input type="text" class="form-control no_identifikasi" disabled>
                         </div>
-                        <div class="col-12 mt-2">
+                        <div class="col-6 mt-2">
                             <label for="">Diajukan oleh</label>
                             <input type="text" class="form-control" name="diajukan_oleh">
+                        </div>
+                        <div class="col-6 mt-2">
+                            <label for="">Deadline</label>
+                            <input type="date" class="form-control" name="deadline">
                         </div>
                         <div class="col-12 mt-2">
                             <label for="">Image</label>
