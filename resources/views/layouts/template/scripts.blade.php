@@ -32,23 +32,27 @@
     });
 
     function initSelect2() {
-    $('.select2-alpine').select2();
-}
+        $('.select2-alpine').select2();
+    }
 
-// Tunggu sampai Alpine.js diinisialisasi
-window.addEventListener('alpine:init', () => {
-    Alpine.directive('select2', (el, { expression }, { effect }) => {
-        effect(() => {
-            // Gunakan jQuery untuk menginisialisasi Select2
-            $(el).select2();
+    // Tunggu sampai Alpine.js diinisialisasi
+    window.addEventListener('alpine:init', () => {
+        Alpine.directive('select2', (el, {
+            expression
+        }, {
+            effect
+        }) => {
+            effect(() => {
+                // Gunakan jQuery untuk menginisialisasi Select2
+                $(el).select2();
 
-            // Event untuk menangani perubahan nilai dari Select2 ke Alpine.js
-            $(el).on('change', function () {
-                Alpine.store('select2Value', $(this).val());
+                // Event untuk menangani perubahan nilai dari Select2 ke Alpine.js
+                $(el).on('change', function() {
+                    Alpine.store('select2Value', $(this).val());
+                });
             });
         });
     });
-});
 </script>
 
 <script>

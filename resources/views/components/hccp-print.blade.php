@@ -71,6 +71,17 @@
         .head {
             background-color: #D9D9D9 !important;
         }
+        .table-xs {
+        font-size: 0.75rem;
+    }
+    .text-xs {
+        font-size: 0.75rem;
+    }
+    .table {
+        border: 1px solid #343a40;
+
+
+    }
     </style>
 </head>
 

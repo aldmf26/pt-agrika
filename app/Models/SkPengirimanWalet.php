@@ -1,0 +1,22 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class SkPengirimanWalet extends Model
+{
+    protected $table = 'sk_pengiriman_walet';
+    protected $primaryKey = 'id';
+    protected $guarded = [];
+
+    public function rumahWalet()
+    {
+        return $this->belongsTo(PenerimaanKemasanSbwKotorHeader::class, 'id_penerimaan');
+    }
+
+    public function ikph()
+    {
+        return $this->belongsTo(Ikph::class, 'id_ikph');
+    }
+}

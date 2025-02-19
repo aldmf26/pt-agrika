@@ -12,8 +12,8 @@
             </div>
         </div>
         <div>
-            <a href="{{ route('ppc.gudang-fg.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                Delivery</a>
+            <a href="{{ route('ppc.gudang-fg.3.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                Bukti Penerimaan</a>
         </div>
     </div>
 
@@ -22,31 +22,27 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>No Order</th>
-                <th>Tanggal Order</th>
-                <th>Pelanggan</th>
+                <th>Tanggal Terima</th>
+                <th>Ttl Serah</th>
+                <th>Ttl Terima</th>
                 <th>Ttl Produk</th>
-                <th>Disetujui Oleh</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($suratJalans as $d)
+            @foreach ($penerimaan as $d)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $d->nomor_order }}</td>
-                    <td>{{ tanggal($d->tanggal_order) }}</td>
-                    <td>{{ $d->pelanggan->nama_pelanggan }}</td>
+                    <td>{{ tanggal($d->tanggal_terima) }}</td>
+                    <td>{{ $d->serah }}</td>
+                    <td>{{ $d->terima }}</td>
+                    <td>{{ $d->ttl_item }}</td>
                     <td>
-                        {{ $d->detailSuratJalan->count('jumlah') }} Item
-                    </td>
-                    <td>{{ $d->disetujui_oleh }}</td>
-                    <td>
-                        <a class="btn btn-xs float-end btn-primary" href="{{route("ppc.gudang-fg.1.print", $d->nomor_order)}}"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-xs float-end btn-primary" href="{{route("ppc.gudang-fg.3.print", $d->tanggal_terima)}}"><i class="fas fa-print"></i></a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    
+  
 </x-app-layout>

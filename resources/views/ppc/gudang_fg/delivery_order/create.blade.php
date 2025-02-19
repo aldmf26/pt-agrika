@@ -2,7 +2,8 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-body">
-                <form>
+                <form method="post" action="" x-data="{ rows: [] }">
+                    @csrf
                     <!-- Header Section -->
                     <div class="row mb-4">
                         <div class="col-md-6">
@@ -32,21 +33,31 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">To:</label>
-                                <input type="text" class="form-control" placeholder="Nama Customer">
+                                <select class="select2pelanggan" name="id_pelanggan" onchange="getAlamat($(this).val())">
+                                    <option value="">-- Pilih Customer --</option>
+                                    @foreach ($pelanggans as $c)
+                                        <option value="{{ $c->id }}" data-alamat="{{ $c->alamat }}">{{ $c->nama_pelanggan }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Alamat:</label>
-                                <textarea class="form-control" rows="2" placeholder="Alamat Customer"></textarea>
+                                <textarea name="alamat" class="form-control" rows="2" id="alamat" readonly></textarea>
                             </div>
+                            <script>
+                                function getAlamat(id) {
+                                    $('#alamat').val($('select[name=id_pelanggan] option:selected').data('alamat'));
+                                }
+                            </script>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">Order No:</label>
-                                <input type="text" class="form-control" value="01" readonly>
+                                <input name="no_order" type="text" class="form-control" value="{{$no_order}}" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tanggal:</label>
-                                <input type="date" class="form-control" value="2025-01-22">
+                                <input name="tgl" type="date" class="form-control" value="{{date('Y-m-d')}}">
                             </div>
                         </div>
                     </div>
@@ -64,7 +75,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody x-data="{ rows: [] }">
+                            <tbody >
                                 <template x-for="(row, index) in rows" :key="index">
                                     <tr>
                                         <td x-text="index + 1"></td>
@@ -73,19 +84,21 @@
                                                 style="width: 100%;">
                                                 <option value="">-- Pilih Item --</option>
                                                 @foreach ($produks as $p)
-                                                <option value="{{$p->id}}">{{$p->nama_produk}} | {{$p->satuan}}</option>
+                                                    <option value="{{ $p->id }}">{{ $p->nama_produk }} |
+                                                        {{ $p->satuan }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" value="100 pack mika / @500gr">
-                                        </td>
-
-                                        <td>
-
+                                            <input onclick="this.select();" type="text" class="form-control text-end"
+                                                name="jumlah[]" value="100">
                                         </td>
                                         <td>
-                                            <select class="form-select">
+                                            <input type="text" class="form-control" placeholder="catatan"
+                                                name="catatan[]">
+                                        </td>
+                                        <td>
+                                            <select name="perlu_coa[]" class="form-select">
                                                 <option value="Y">Y</option>
                                                 <option value="T">T</option>
                                             </select>
@@ -115,11 +128,11 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">No Kendaraan:</label>
-                                <input type="text" class="form-control">
+                                <input name="no_kendaraan" type="text" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Supir:</label>
-                                <input type="text" class="form-control">
+                                <input name="supir" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -129,21 +142,21 @@
                                     <div class="border p-3 text-center mb-2" style="height: 100px;">
                                         &nbsp;
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Nama">
+                                    <input readonly value="{{auth()->user()->name}}" name="dibuat_oleh" type="text" class="form-control" placeholder="Nama">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Disetujui oleh</label>
                                     <div class="border p-3 text-center mb-2" style="height: 100px;">
                                         &nbsp;
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Nama">
+                                    <input name="disetujui_oleh" type="text" class="form-control" placeholder="Nama">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Pengirim</label>
                                     <div class="border p-3 text-center mb-2" style="height: 100px;">
                                         &nbsp;
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Nama">
+                                    <input name="pengirim" type="text" class="form-control" placeholder="Nama">
                                 </div>
                             </div>
                         </div>
@@ -152,15 +165,23 @@
                     <!-- Notes Section -->
                     <div class="mb-3">
                         <label class="form-label">Keterangan:</label>
-                        <textarea class="form-control" rows="2" placeholder="Tanda terima terlampir"></textarea>
+                        <textarea name="keterangan" class="form-control" rows="2" placeholder="Tanda terima terlampir"></textarea>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary" :disabled="rows.length == 0">Simpan</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    @section('scripts')
+        <script>
+            $(document).ready(function () {
+                
+                $('.select2pelanggan').select2({})
+            });
+        </script>
+    @endsection
 </x-app-layout>

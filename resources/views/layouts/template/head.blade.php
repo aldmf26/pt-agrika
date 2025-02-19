@@ -19,7 +19,8 @@
 
 
 {{-- ttd     --}}
-<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet"> 
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
+    rel="stylesheet">
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
 <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
@@ -163,7 +164,7 @@
         line-height: 1.5;
         border-radius: .2rem;
     }
-   
+
     .kbw-signature {
         width: 100%;
         height: 100px;
@@ -206,11 +207,14 @@
     .table {
         font-size: 12px;
     }
+
     .btn-xs {
-            padding: 2px 6px;
-            font-size: 0.75rem;
-            /* Sesuaikan ukuran font */
-            line-height: 1.5;
-        }
+        padding: 2px 6px;
+        font-size: 0.75rem;
+        /* Sesuaikan ukuran font */
+        line-height: 1.5;
+    }
+
+    
 </style>
 @yield('styles')
