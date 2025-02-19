@@ -16,6 +16,10 @@ use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga2CeklisPerawat
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPerbaikanMesin;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
+use App\Http\Controllers\PPC\Gudang_FG\FG2CheklistKendaraanController;
+use App\Http\Controllers\Produksi\Pro1PersiapandanPembersihanController;
+use App\Http\Controllers\Produksi\Pro2FormSerahTerimaBahanBaku;
+use App\Http\Controllers\Produksi\Pro3FormPencabutanBulu;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -156,4 +160,26 @@ Route::controller(Hrga2JadwalKalibrasiVerfikasi::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+    });
+
+Route::controller(Pro1PersiapandanPembersihanController::class)
+    ->prefix('produksi/1_Persiapan_dan_Pembersihan')
+    ->name('produksi.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro2FormSerahTerimaBahanBaku::class)
+    ->prefix('produksi/2_Form_Serah_Terima_Bahan_Baku_Ke_Pencabutan')
+    ->name('produksi.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro3FormPencabutanBulu::class)
+    ->prefix('produksi/3_Form_Pencabutan_Bulu_dan_Laporan_Harian')
+    ->name('produksi.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
     });
