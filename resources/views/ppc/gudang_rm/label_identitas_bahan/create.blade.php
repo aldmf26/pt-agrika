@@ -10,11 +10,9 @@
                                 <label>Identitas</label>
                                 <select x-model="identitas" class="form-control" name="identitas">
                                     <option value="">-- Pilih Identitas --</option>
-                                    @php
-                                        $identitas = ['baku sbw', 'kemas', 'lainnya'];
-                                    @endphp
+                                  
                                     @foreach ($identitas as $p)
-                                        <option value="{{ $p }}">Bahan {{ ucwords($p) }}</option>
+                                        <option value="{{ $p->nama }}">Bahan {{ ucwords($p->nama) }}</option>
                                     @endforeach
                                 </select>
                             </div>

@@ -5,7 +5,7 @@
                     class="fas fa-plus"></i> Barang </button>
             <div x-data="{ showProduk: false }">
                 <x-modal btnSave="T" idModal="tambah" title="Tambah Produk" size="modal-lg">
-                    @livewire('ppc.tbh-barang')
+                    @livewire('ppc.tbh-barang', ['kategori' => 'barang'])
                 </x-modal>
             </div>
         </div>

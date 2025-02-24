@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PPC\Gudang_RM;
 
 use App\Http\Controllers\Controller;
 use App\Models\PenerimaanKemasanSbwKotorHeader;
+use App\Models\RumahWalet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,6 +23,7 @@ class RM3PenerimaanSBWKotorController extends Controller
     {
         $data = [
             'title' => 'Penerimaan Sbw Kotor',
+            'rumahWalet' => RumahWalet::all(),
         ];
         return view('ppc.gudang_rm.penerimaan_sbw_kotor.create', $data);
     }
@@ -30,18 +32,20 @@ class RM3PenerimaanSBWKotorController extends Controller
     {
         DB::beginTransaction();
         try {
+            $rumahWalet = RumahWalet::find($r->id_rumah_walet)->first();
+
             // Simpan header
             $header = PenerimaanKemasanSbwKotorHeader::create([
                 'jenis' => $r->jenis,
-                'no_lot' => $r->no_lot,
+                'no_lot' => $r->tgl_penerimaan . '-'. $rumahWalet->no_reg,
                 'tgl_penerimaan' => $r->tgl_penerimaan,
-                'alamat_rumah_walet' => $r->alamat_rumah_walet,
+                'alamat_rumah_walet' => $rumahWalet->alamat,
                 'no_kendaraan' => $r->no_kendaraan,
                 'pengemudi' => $r->pengemudi,
                 'jumlah_gr' => $r->jumlah_gr,
                 'jumlah_pcs' => $r->jumlah_pcs,
                 'keputusan' => $r->keputusan,
-                'noreg_rumah_walet' => $r->noreg_rumah_walet,
+                'noreg_rumah_walet' => $rumahWalet->no_reg,
                 'admin' => auth()->user()->name,
             ]);
 

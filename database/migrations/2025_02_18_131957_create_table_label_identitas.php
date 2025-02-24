@@ -42,6 +42,22 @@ return new class extends Migration
             DB::table('kode_bahan_baku')->insert($data);
         }
 
+        Schema::create('identitas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->timestamps();
+        });
+
+        $datas = [
+            'baku sbw', 'kemas', 'lainnya'
+        ];
+
+        foreach ($datas as $data) {
+            DB::table('identitas')->insert([
+                'nama' => $data
+            ]);
+        }
+
         Schema::create('label_identitas_bahan_baku', function (Blueprint $table) {
             $table->id();
             // bahan baku sbw, bahan kemas, bahan lainnya.

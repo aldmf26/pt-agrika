@@ -6,6 +6,7 @@ use App\Models\Barang;
 use App\Models\KodeBahanBaku;
 use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
+use App\Models\Suplier;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -13,21 +14,24 @@ class TbhBarang extends Component
 {
     public $nama_barang = "";
     public $kodeBarang = "";
+    public $supplierId = "";
     public $satuan = "";
+    public $kategori;
     public $pesan = "";
     public $lot = [];
 
     public function store()
     {
 
-        $lot = $this->lot;
-        $no_lot = "{$lot['tgl']} {$lot['bulanDanTahun']} {$lot['bulanExpired']} {$lot['tahunExpired']}";
+        // $lot = $this->lot;
+        // $no_lot = "{$lot['tgl']} {$lot['bulanDanTahun']} {$lot['bulanExpired']} {$lot['tahunExpired']}";
 
         Barang::create([
             'nama_barang' => $this->nama_barang,
             'kode_barang' => $this->kodeBarang,
+            'supplier_id' => $this->supplierId,
             'satuan' => $this->satuan,
-            'no_lot' => $no_lot,
+            'kategori' => $this->kategori,
         ]);
 
         $this->reset();
@@ -52,12 +56,14 @@ class TbhBarang extends Component
 
     public function render()
     {
-        $produks = Barang::latest()->get();
+        $produks = Barang::where('kategori', $this->kategori)->latest()->get();
+        $suplier = Suplier::where('kategori', $this->kategori)->latest()->get();
         $kodes = KodeBahanBaku::latest()->get();
-
+        
         $data = [
             'barangs' => $produks,
-            'kodes' => $kodes
+            'kodes' => $kodes,
+            'supliers' => $suplier
         ];
         return view('livewire.ppc.tbh-barang', $data);
     }

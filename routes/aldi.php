@@ -28,6 +28,9 @@ use App\Http\Controllers\PPC\Gudang_RM\RM2PenerimaanKemasanController;
 use App\Http\Controllers\PPC\Gudang_RM\RM3PenerimaanSBWKotorController;
 use App\Http\Controllers\PPC\Gudang_RM\RM4SkPengirimanSbwKotorController;
 use App\Http\Controllers\PPC\Gudang_RM\RM5LabelIdentitasBahanController;
+use App\Http\Controllers\PPC\Gudang_RM\RM6CeklistKendaraanController;
+use App\Http\Controllers\PPC\Gudang_RM\RM7BuktiPermintaanPengeluaranBarangController;
+use App\Http\Controllers\PPC\Gudang_RM\RM8KartuStokController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -246,6 +249,36 @@ Route::controller(RM4SkPengirimanSbwKotorController::class)
 Route::controller(RM5LabelIdentitasBahanController::class)
     ->prefix('ppc/gudang-rm/5-label-identitas-bahan')
     ->name('ppc.gudang-rm.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
+Route::controller(RM6CeklistKendaraanController::class)
+    ->prefix('ppc/gudang-rm/6-ceklis-kendaraan')
+    ->name('ppc.gudang-rm.6.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(RM8KartuStokController::class)
+    ->prefix('ppc/gudang-rm/8-kartu-stok')
+    ->name('ppc.gudang-rm.8.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
+Route::controller(RM7BuktiPermintaanPengeluaranBarangController::class)
+    ->prefix('ppc/gudang-rm/7-bukti-permintaan-pengeluaran-barang')
+    ->name('ppc.gudang-rm.7.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');

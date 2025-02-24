@@ -13,22 +13,24 @@
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label>No Lot SBW</label>
-                                <input type="text" placeholder="Tgl datang-nomor rumah walet" name="no_lot" class="form-control" required>
+                                {{-- <label>No Lot SBW</label>
+                                <input type="text" placeholder="Tgl datang-nomor rumah walet" name="no_lot" class="form-control" required> --}}
+                                <label>Rumah Walet</label>
+                                <select name="id_rumah_walet" class="select2suplier" id="">
+                                    <option value="">-Pilih Rumah Walet-</option>
+                                    @foreach ($rumahWalet as $p)
+                                        <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Tanggal Penerimaan</label>
-                                <input type="date" name="tgl_penerimaan" class="form-control" required>
+                                <input value="{{ date('Y-m-d') }}" type="date" name="tgl_penerimaan" class="form-control" required>
                             </div>
                         </div>
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label>Alamat Rumah Walet</label>
-                                <input type="text" name="alamat_rumah_walet" class="form-control" required>
-                            </div>
-                        </div>
+                      
                         <div class="col-3">
                             <div class="form-group">
                                 <label>No Kendaraan</label>
@@ -58,13 +60,7 @@
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <table class="table table-bordered">
-                                <tr>
-                                    <th>No Reg Rumah Walet: </th>
-                                    <td>
-                                        <input type="text" name="noreg_rumah_walet" class="form-control"
-                                            placeholder="tulis nomor rumah walet">
-                                    </td>
-                                </tr>
+                               
                                 <tr>
                                     <th>Kriteria Penerimaan</th>
                                     <td>

@@ -1,4 +1,5 @@
 <div>
+        
     <div class="row" x-data="{
         tgl: '',
 
@@ -12,7 +13,7 @@
                     aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div style="overflow: auto; height: 300px">
-                @if (isset($pesan))
+                @if (!empty($pesan))
                     <div class="alert alert-danger">{{ $pesan }}</div>
                 @endif
                 <table id="tblInput" class="table table-bordered">
@@ -33,9 +34,9 @@
                                 <td>{{ $d->kode_barang }}</td>
                                 <td>{{ $d->no_lot }}</td>
                                 <td>
-                                    <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"
+                                    {{-- <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"
                                         wire:click="hapus({{ $d->id }})"
-                                        class="btn btn-xs btn-danger">Hapus</button>
+                                        class="btn btn-xs btn-danger">Hapus</button> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -46,15 +47,16 @@
     </div>
 
     <form wire:submit.prevent="store">
+        <h6>{{ ucwords($kategori) }}</h6>
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <div class="form-group">
                     <label for="">Nama Barang</label>
                     <input type="text" wire:model="nama_barang" class="form-control">
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-3">
                 <div class="form-group">
                     <label for="">Kode Barang</label>
                     <div wire:ignore>
@@ -67,16 +69,29 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div class="form-group">
                     <label for="">Satuan</label>
                     <input placeholder="satuan" type="text" wire:model="satuan" class="form-control">
                 </div>
             </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="">Supplier</label>
+                    <div wire:ignore>
+                        <select class="select2" id="supplierId">
+                            <option value="">Pilih Suplier</option>
+                            @foreach ($supliers as $p)
+                                <option value="{{ $p->id }}">{{ $p->nama_supplier }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
        
         </div>
         <hr>
-        Sistem Kode / Lot
+        {{-- Sistem Kode / Lot
         <div class="row">
             <div class="col-2">
                 <div class="form-group">
@@ -104,7 +119,7 @@
                 </div>
             </div>
             
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-12">
                 <div class="form-group">

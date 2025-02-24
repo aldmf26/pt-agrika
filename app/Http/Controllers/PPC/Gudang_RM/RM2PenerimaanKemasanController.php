@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\PenerimaanKemasanHeader;
 use App\Models\Suplier;
+use App\Services\TransaksiStokService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -25,8 +26,7 @@ class RM2PenerimaanKemasanController extends Controller
     {
         $data = [
             'title' => 'Penerimaan kemasan',
-            'barangs' => Barang::latest()->get(),
-            'supliers' => Suplier::latest()->get(),
+            'barangs' => Barang::with('kode_bahan_baku')->where('kategori', 'kemasan')->latest()->get(),
         ];
         return view('ppc.gudang_rm.penerimaan_kemasan_barang.create', $data);
     }
@@ -34,12 +34,17 @@ class RM2PenerimaanKemasanController extends Controller
     public function store(Request $r)
     {
         DB::beginTransaction();
+        $admin = auth()->user()->name;
         try {
+
+            $transaksi = TransaksiStokService::create($r, $admin);
+
+            
             // Simpan header
             $header = PenerimaanKemasanHeader::create([
                 'tanggal_penerimaan' => $r->tgl_penerimaan,
                 'id_barang' => $r->id_barang,
-                'id_supplier' => $r->id_suplier,
+                'id_supplier' => $transaksi->supplier_id,
                 'no_kendaraan' => $r->no_kendaraan,
                 'pengemudi' => $r->pengemudi,
                 'jumlah_barang' => $r->jumlah_barang,

@@ -17,7 +17,11 @@ return new class extends Migration
             $table->string('kode_barang', 50)->unique();
             $table->string('nama_barang', 100);
             $table->string('satuan', 100);
-            $table->string('no_lot', 100);
+            $table->string('kategori');
+            $table->string('tipe_sbw')->nullable();
+            $table->double('stok');
+            $table->integer('supplier_id')->nullable();
+            $table->integer('rumah_walet_id')->nullable();
             $table->timestamps();
         });
 

@@ -4,14 +4,17 @@ namespace App\Http\Controllers\PPC\Gudang_RM;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\Lot;
 use App\Models\PenerimaanHeader;
 use App\Models\Suplier;
+use App\Models\Transaksi;
+use App\Services\TransaksiStokService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RM1PenerimaanBarangController extends Controller
 {
-    public function index() 
+    public function index()
     {
         $penerimaan = PenerimaanHeader::with('barang', 'supplier')->latest()->get();
         $data = [
@@ -21,25 +24,26 @@ class RM1PenerimaanBarangController extends Controller
         return view('ppc.gudang_rm.penerimaan_barang.index', $data);
     }
 
-    public function create() 
+    public function create()
     {
         $data = [
             'title' => 'Penerimaan Barang',
-            'barangs' => Barang::latest()->get(),
-            'supliers' => Suplier::latest()->get(),
+            'barangs' => Barang::with('kode_bahan_baku')->where('kategori', 'barang')->latest()->get(),
         ];
         return view('ppc.gudang_rm.penerimaan_barang.create', $data);
     }
 
     public function store(Request $r)
     {
+        $admin = auth()->user()->name;
         DB::beginTransaction();
         try {
+            $transaksi = TransaksiStokService::create($r, $admin);
             // Simpan header
             $header = PenerimaanHeader::create([
                 'tanggal_terima' => $r->tgl_penerimaan,
                 'id_barang' => $r->id_barang,
-                'id_supplier' => $r->id_suplier,
+                'id_supplier' => $transaksi->supplier_id,
                 'no_kendaraan' => $r->no_kendaraan,
                 'pengemudi' => $r->pengemudi,
                 'jumlah_barang' => $r->jumlah_barang,
@@ -71,13 +75,12 @@ class RM1PenerimaanBarangController extends Controller
             DB::rollBack();
             return redirect()->route('ppc.gudang-rm.1.create')->with('error', $e->getMessage());
         }
-
     }
 
-    public function print($id) 
+    public function print($id)
     {
         $penerimaan = PenerimaanHeader::with(['barang', 'supplier', 'kriteria'])
-        ->findOrFail($id);
+            ->findOrFail($id);
         $data = [
             'title' => 'PENERIMAAN BARANG',
             'dok' => 'Dok.No.: FRM.WH.02.01, Rev.01',
