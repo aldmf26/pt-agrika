@@ -40,7 +40,7 @@
                         </nav>
                     @endif
 
-                    <h5>{{ strtolower(ucwords($title)) }}</h5>
+                    <h5>{{ ucwords(strtolower($title)) }}</h5>
 
                 </div>
                 <div class="page-content" style="margin-top: -30px">

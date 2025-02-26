@@ -65,6 +65,11 @@
 </div>
 @section('scripts')
     <script>
+        function creditCardMask(input) {
+            return input.startsWith('34') || input.startsWith('37') ?
+                '9999 999999 99999' :
+                '99 999999 99 99 99'
+        }
         pencarian('pencarianInput', 'tblInput');
     </script>
 @endsection

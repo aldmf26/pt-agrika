@@ -20,6 +20,17 @@ use App\Http\Controllers\IA\IA1ProgramAuditInternalController;
 use App\Http\Controllers\IA\IA2JadwalAuditInternalController;
 use App\Http\Controllers\IA\IA4LaporanAuditInternalController;
 use App\Http\Controllers\PPC\Gudang_FG\FG1DeliveryOrderController;
+use App\Http\Controllers\PPC\Gudang_FG\FG2CeklisKendaraanController;
+use App\Http\Controllers\PPC\Gudang_FG\FG3BuktiPenerimaanBarangController;
+use App\Http\Controllers\PPC\Gudang_FG\FG4KartuStokController;
+use App\Http\Controllers\PPC\Gudang_RM\RM1PenerimaanBarangController;
+use App\Http\Controllers\PPC\Gudang_RM\RM2PenerimaanKemasanController;
+use App\Http\Controllers\PPC\Gudang_RM\RM3PenerimaanSBWKotorController;
+use App\Http\Controllers\PPC\Gudang_RM\RM4SkPengirimanSbwKotorController;
+use App\Http\Controllers\PPC\Gudang_RM\RM5LabelIdentitasBahanController;
+use App\Http\Controllers\PPC\Gudang_RM\RM6CeklistKendaraanController;
+use App\Http\Controllers\PPC\Gudang_RM\RM7BuktiPermintaanPengeluaranBarangController;
+use App\Http\Controllers\PPC\Gudang_RM\RM8KartuStokController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -195,10 +206,122 @@ Route::controller(IA4LaporanAuditInternalController::class)
         Route::get('/print', 'print')->name('print');
     });
 
+Route::controller(RM1PenerimaanBarangController::class)
+    ->prefix('ppc/gudang-rm/1-penerimaan-barang')
+    ->name('ppc.gudang-rm.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(RM2PenerimaanKemasanController::class)
+    ->prefix('ppc/gudang-rm/2-penerimaan-kemasan')
+    ->name('ppc.gudang-rm.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(RM3PenerimaanSBWKotorController::class)
+    ->prefix('ppc/gudang-rm/3-penerimaan-kemasan-sbw-kotor')
+    ->name('ppc.gudang-rm.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(RM4SkPengirimanSbwKotorController::class)
+    ->prefix('ppc/gudang-rm/4-sk-pengiriman-sbw-kotor')
+    ->name('ppc.gudang-rm.4.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(RM5LabelIdentitasBahanController::class)
+    ->prefix('ppc/gudang-rm/5-label-identitas-bahan')
+    ->name('ppc.gudang-rm.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
+Route::controller(RM6CeklistKendaraanController::class)
+    ->prefix('ppc/gudang-rm/6-ceklis-kendaraan')
+    ->name('ppc.gudang-rm.6.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(RM8KartuStokController::class)
+    ->prefix('ppc/gudang-rm/8-kartu-stok')
+    ->name('ppc.gudang-rm.8.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
+Route::controller(RM7BuktiPermintaanPengeluaranBarangController::class)
+    ->prefix('ppc/gudang-rm/7-bukti-permintaan-pengeluaran-barang')
+    ->name('ppc.gudang-rm.7.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
 Route::controller(FG1DeliveryOrderController::class)
     ->prefix('ppc/gudang-fg/1-delivery-order')
     ->name('ppc.gudang-fg.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{no_order}', 'print')->name('print');
+    });
+
+Route::controller(FG2CeklisKendaraanController::class)
+    ->prefix('ppc/gudang-fg/2-ceklis-kendaraan')
+    ->name('ppc.gudang-fg.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(FG3BuktiPenerimaanBarangController::class)
+    ->prefix('ppc/gudang-fg/3-bukti-penerimaan-barang')
+    ->name('ppc.gudang-fg.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(FG4KartuStokController::class)
+    ->prefix('ppc/gudang-fg/4-kartu-stok')
+    ->name('ppc.gudang-fg.4.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
     });

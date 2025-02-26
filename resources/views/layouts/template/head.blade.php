@@ -215,5 +215,7 @@
         /* Sesuaikan ukuran font */
         line-height: 1.5;
     }
+
+    <<<<<<< HEAD=======>>>>>>>ad3a1b81bdb7db27daacf9f14710eadce66dbb9c
 </style>
 @yield('styles')

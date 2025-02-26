@@ -136,6 +136,7 @@
                                                             <a wire:navigate
                                                                 href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
                                                                 class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
+                                                                
                                                         </li>
                                                     @endforeach
                                                 </ul>
