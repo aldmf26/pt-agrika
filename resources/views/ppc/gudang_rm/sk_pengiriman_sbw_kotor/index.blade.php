@@ -26,10 +26,10 @@
             @foreach ($sk as $d)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $d->rumahWalet->noreg_rumah_walet }}</td>
-                    <td>{{ $d->rumahWalet->alamat_rumah_walet }}</td>
+                    <td>{{ $d->rumahWalet->no_reg }}</td>
+                    <td>{{ $d->rumahWalet->alamat }}</td>
                     <td>{{ $d->tujuan_ikph }}</td>
-                    <td>{{ $d->ikph->noreg_ikph }}</td>
+                    <td>{{ $d->ikph->no_registrasi_ikph }}</td>
                     <td>{{ $d->ikph->alamat_ikph }}</td>
                     <td>{{ tanggal($d->tanggal_sk_pengiriman) }}</td>
                     <td>

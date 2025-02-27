@@ -1,7 +1,7 @@
 <x-app-layout :title="$title" >
     <div x-data="{ checked: [] }">
     <div class="d-flex justify-content-end gap-2" >
-        <div>
+        {{-- <div>
             <button data-bs-toggle="modal" data-bs-target="#tambah" type="button" class="btn btn-sm btn-primary"><i
                     class="fas fa-plus"></i> Barang </button>
             <div x-data="{ showProduk: false }">
@@ -9,7 +9,7 @@
                     @livewire('ppc.tbh-barang')
                 </x-modal>
             </div>
-        </div>
+        </div> --}}
         <div>
             <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                 Label Identitas Bahan</a>

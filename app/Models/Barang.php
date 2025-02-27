@@ -15,8 +15,6 @@ class Barang extends Model
         return $this->belongsTo(KodeBahanBaku::class, 'kode_barang', 'kode');
     }
 
-    
-
     public function penerimaan()
     {
         return $this->hasMany(PenerimaanHeader::class, 'id_barang');

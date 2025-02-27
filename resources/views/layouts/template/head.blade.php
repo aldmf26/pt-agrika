@@ -148,6 +148,10 @@
     .bg-danger {
         background-color: var(--bs-danger) !important;
     }
+    
+    .bg-danger {
+        background-color: var(--bs-danger) !important;
+    }
 
     .pointer {
         cursor: pointer;

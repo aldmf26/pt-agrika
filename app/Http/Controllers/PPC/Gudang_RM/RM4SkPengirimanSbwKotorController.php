@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PPC\Gudang_RM;
 use App\Http\Controllers\Controller;
 use App\Models\Ikph;
 use App\Models\PenerimaanKemasanSbwKotorHeader;
+use App\Models\RumahWalet;
 use App\Models\SkPengirimanWalet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +14,7 @@ class RM4SkPengirimanSbwKotorController extends Controller
 {
     public function index()
     {
-        $sk = SkPengirimanWalet::latest()->groupBy('id_penerimaan')->get();
+        $sk = SkPengirimanWalet::with(['rumahWalet', 'ikph'])->latest()->groupBy('id_penerimaan')->get();
         $data = [
             'title' => 'Sk Pengiriman Sbw Kotor dari Rumah Walet',
             'sk' => $sk
@@ -22,7 +23,7 @@ class RM4SkPengirimanSbwKotorController extends Controller
     }
     public function create() 
     {
-        $penerimaanSbwKotors = PenerimaanKemasanSbwKotorHeader::latest()->get();
+        $penerimaanSbwKotors = RumahWalet::latest()->get();
         $ikph = Ikph::latest()->get();
         $data = [
             'title' => 'Tambah Sk Pengiriman Sbw Kotor dari Rumah Walet',

@@ -3,12 +3,12 @@
         <tr>
             <td>Nama/ No. Registrasi Rumah Walet </td>
             <td>:</td>
-            <td>{{ $sk[0]->rumahWalet->noreg_rumah_walet }}</td>
+            <td>{{ $sk[0]->rumahWalet->no_reg }}</td>
         </tr>
         <tr>
             <td>Alamat Rumah Walet</td>
             <td>:</td>
-            <td>{{ $sk[0]->rumahWalet->alamat_rumah_walet }}</td>
+            <td>{{ $sk[0]->rumahWalet->alamat }}</td>
         </tr>
 
         <tr>

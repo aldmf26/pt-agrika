@@ -11,9 +11,9 @@
                                 <select name="id_penerimaan" class="form-control select2noreg selectNoreg" id="">
                                     <option value="">- Pilih No Reg -</option>
                                     @foreach ($penerimaanSbwKotors as $d)
-                                        <option data-alamat="{{ $d->alamat_rumah_walet }}" data-noreg="{{ $d->noreg_rumah_walet }}"
-                                            value="{{ $d->id }}">{{ $d->noreg_rumah_walet }} |
-                                            {{ $d->jumlah_pcs }}pcs ~ {{ $d->jumlah_gr }}gr</option>
+                                        <option data-alamat="{{ $d->alamat }}" data-noreg="{{ $d->nama }}"
+                                            value="{{ $d->id }}">{{ $d->no_reg }} |
+                                            {{ $d->nama }}</option>
                                     @endforeach
                                 </select>
                             </div>

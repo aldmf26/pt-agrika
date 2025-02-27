@@ -23,6 +23,7 @@ use App\Http\Controllers\PPC\Gudang_FG\FG1DeliveryOrderController;
 use App\Http\Controllers\PPC\Gudang_FG\FG2CeklisKendaraanController;
 use App\Http\Controllers\PPC\Gudang_FG\FG3BuktiPenerimaanBarangController;
 use App\Http\Controllers\PPC\Gudang_FG\FG4KartuStokController;
+use App\Http\Controllers\PPC\Gudang_RM\RM10KodeProdukJadiController;
 use App\Http\Controllers\PPC\Gudang_RM\RM1PenerimaanBarangController;
 use App\Http\Controllers\PPC\Gudang_RM\RM2PenerimaanKemasanController;
 use App\Http\Controllers\PPC\Gudang_RM\RM3PenerimaanSBWKotorController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\PPC\Gudang_RM\RM5LabelIdentitasBahanController;
 use App\Http\Controllers\PPC\Gudang_RM\RM6CeklistKendaraanController;
 use App\Http\Controllers\PPC\Gudang_RM\RM7BuktiPermintaanPengeluaranBarangController;
 use App\Http\Controllers\PPC\Gudang_RM\RM8KartuStokController;
+use App\Http\Controllers\PPC\Gudang_RM\RM9KodeBahanBakuKimiaController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -266,6 +268,17 @@ Route::controller(RM6CeklistKendaraanController::class)
         Route::get('/print/{tgl}', 'print')->name('print');
     });
 
+
+Route::controller(RM7BuktiPermintaanPengeluaranBarangController::class)
+    ->prefix('ppc/gudang-rm/7-bukti-permintaan-pengeluaran-barang')
+    ->name('ppc.gudang-rm.7.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
 Route::controller(RM8KartuStokController::class)
     ->prefix('ppc/gudang-rm/8-kartu-stok')
     ->name('ppc.gudang-rm.8.')
@@ -276,13 +289,19 @@ Route::controller(RM8KartuStokController::class)
         Route::get('/print/', 'print')->name('print');
     });
 
-Route::controller(RM7BuktiPermintaanPengeluaranBarangController::class)
-    ->prefix('ppc/gudang-rm/7-bukti-permintaan-pengeluaran-barang')
-    ->name('ppc.gudang-rm.7.')
+Route::controller(RM9KodeBahanBakuKimiaController::class)
+    ->prefix('ppc/gudang-rm/9-kode-bahan-baku-dan-kimia')
+    ->name('ppc.gudang-rm.9.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create/', 'create')->name('create');
-        Route::post('/create', 'store')->name('store');
+        Route::get('/print/', 'print')->name('print');
+    });
+
+Route::controller(RM10KodeProdukJadiController::class)
+    ->prefix('ppc/gudang-rm/10-kode-produk-jadi')
+    ->name('ppc.gudang-rm.10.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
         Route::get('/print/', 'print')->name('print');
     });
 

@@ -12,7 +12,7 @@ class SkPengirimanWalet extends Model
 
     public function rumahWalet()
     {
-        return $this->belongsTo(PenerimaanKemasanSbwKotorHeader::class, 'id_penerimaan');
+        return $this->belongsTo(RumahWalet::class, 'id_penerimaan');
     }
 
     public function ikph()
