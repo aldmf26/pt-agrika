@@ -20,6 +20,10 @@ use App\Http\Controllers\PPC\Gudang_FG\FG2CheklistKendaraanController;
 use App\Http\Controllers\Produksi\Pro1PersiapandanPembersihanController;
 use App\Http\Controllers\Produksi\Pro2FormSerahTerimaBahanBaku;
 use App\Http\Controllers\Produksi\Pro3FormPencabutanBulu;
+use App\Http\Controllers\Produksi\Pro4FormPenyucianNitrit;
+use App\Http\Controllers\Produksi\Pro5FormPengeringan;
+use App\Http\Controllers\Produksi\Pro6FormCetak;
+use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -179,6 +183,36 @@ Route::controller(Pro2FormSerahTerimaBahanBaku::class)
 Route::controller(Pro3FormPencabutanBulu::class)
     ->prefix('produksi/3_Form_Pencabutan_Bulu_dan_Laporan_Harian')
     ->name('produksi.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro4FormPenyucianNitrit::class)
+    ->prefix('produksi/4_Form_Penyucian_Nitrit')
+    ->name('produksi.4.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro5FormPengeringan::class)
+    ->prefix('produksi/5_Form_Pengeringan')
+    ->name('produksi.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+    });
+Route::controller(Pro6FormCetak::class)
+    ->prefix('produksi/6_Form_cetak')
+    ->name('produksi.6.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro7FormPemilahanAkhir::class)
+    ->prefix('produksi/7_Form_pemilahan_akhir')
+    ->name('produksi.7.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');

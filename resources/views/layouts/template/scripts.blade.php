@@ -5,6 +5,8 @@
 <script src="{{ asset('assets') }}/compiled/js/app.js"></script>
 <script src="https://cdn.datatables.net/v/bs5/dt-2.1.8/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('assets') }}/extensions/choices.js/public/assets/scripts/choices.js"></script>
+<script src="{{ asset('assets') }}/static/js/pages/form-element-select.js"></script>
 
 <script>
     function pencarian(inputId, tblId) {
@@ -52,6 +54,19 @@
                 });
             });
         });
+    });
+</script>
+<script>
+    function initSelect2() {
+        setTimeout(() => {
+            $('.select2').select2({
+                dropdownParent: $('#tambah') // Ganti dengan ID modal yang sesuai
+            });
+        }, 100);
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        initSelect2();
     });
 </script>
 

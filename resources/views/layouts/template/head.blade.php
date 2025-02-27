@@ -8,6 +8,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="{{ asset('assets') }}/extensions/choices.js/public/assets/styles/choices.css">
 {{-- <link rel="stylesheet" href="{{asset('assets')}}/compiled/css/app-dark.css"> --}}
 <link rel="stylesheet" href="{{ asset('assets') }}/compiled/css/iconly.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -219,6 +220,6 @@
         line-height: 1.5;
     }
 
-    
+    <<<<<<< HEAD=======>>>>>>>ad3a1b81bdb7db27daacf9f14710eadce66dbb9c
 </style>
 @yield('styles')
