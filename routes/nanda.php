@@ -17,6 +17,8 @@ use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPer
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\PPC\Gudang_FG\FG2CheklistKendaraanController;
+use App\Http\Controllers\produksi\Pro10PenimbanganHasilProduksi;
+use App\Http\Controllers\Produksi\Pro11FormPengemasanAkhirController;
 use App\Http\Controllers\Produksi\Pro1PersiapandanPembersihanController;
 use App\Http\Controllers\Produksi\Pro2FormSerahTerimaBahanBaku;
 use App\Http\Controllers\Produksi\Pro3FormPencabutanBulu;
@@ -24,6 +26,7 @@ use App\Http\Controllers\Produksi\Pro4FormPenyucianNitrit;
 use App\Http\Controllers\Produksi\Pro5FormPengeringan;
 use App\Http\Controllers\Produksi\Pro6FormCetak;
 use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
+use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -213,6 +216,29 @@ Route::controller(Pro6FormCetak::class)
 Route::controller(Pro7FormPemilahanAkhir::class)
     ->prefix('produksi/7_Form_pemilahan_akhir')
     ->name('produksi.7.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro9Ccp2Pemanasan::class)
+    ->prefix('produksi/9_CCP2_Pemanasan')
+    ->name('produksi.9.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro10PenimbanganHasilProduksi::class)
+    ->prefix('produksi/10_Penimbangan_Hasil_Produksi')
+    ->name('produksi.10.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro11FormPengemasanAkhirController::class)
+    ->prefix('produksi/11_Pengemasan_Akhir')
+    ->name('produksi.11.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
