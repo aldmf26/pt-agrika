@@ -20,17 +20,17 @@
     <meta property="og:url" content="http://ptagrikagatyaarum.com">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-    <link rel="stylesheet" href="{{$assets}}/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{$assets}}/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="{{$assets}}/css/animate.css" />
-    <link rel="stylesheet" href="{{$assets}}/css/owl.carousel.css" />
-    <link rel="stylesheet" href="{{$assets}}/css/owl.theme.default.min.css" />
-    <link rel="stylesheet" href="{{$assets}}/css/magnific-popup.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/animate.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/owl.carousel.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/magnific-popup.css" />
     <link rel="icon" type="image/png" href="https://kasaga.putrirembulan.com/assets/img/logo_agrika.png" />
     <link rel="shortcut icon" href="https://kasaga.putrirembulan.com/assets/img/logo_agrika.png">
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="{{$assets}}/css/templatemo-style.css" />
+    <link rel="stylesheet" href="{{ $assets }}/css/templatemo-style.css" />
 </head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GYX6JVJ2JG"></script>
@@ -364,14 +364,14 @@
     </section>
 
     <!-- SCRIPTS -->
-    <script src="{{$assets}}/js/jquery.js"></script>
-    <script src="{{$assets}}/js/bootstrap.min.js"></script>
-    <script src="{{$assets}}/js/jquery.stellar.min.js"></script>
-    <script src="{{$assets}}/js/wow.min.js"></script>
-    <script src="{{$assets}}/js/owl.carousel.min.js"></script>
-    <script src="{{$assets}}/js/jquery.magnific-popup.min.js"></script>
-    <script src="{{$assets}}/js/smoothscroll.js"></script>
-    <script src="{{$assets}}/js/custom.js"></script>
+    <script src="{{ $assets }}/js/jquery.js"></script>
+    <script src="{{ $assets }}/js/bootstrap.min.js"></script>
+    <script src="{{ $assets }}/js/jquery.stellar.min.js"></script>
+    <script src="{{ $assets }}/js/wow.min.js"></script>
+    <script src="{{ $assets }}/js/owl.carousel.min.js"></script>
+    <script src="{{ $assets }}/js/jquery.magnific-popup.min.js"></script>
+    <script src="{{ $assets }}/js/smoothscroll.js"></script>
+    <script src="{{ $assets }}/js/custom.js"></script>
 </body>
 
 </html>

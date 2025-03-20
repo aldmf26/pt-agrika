@@ -29,6 +29,13 @@ return new class extends Migration
         Schema::create('supplier', function (Blueprint $table) {
             $table->id();
             $table->string('nama_supplier', 100);
+            $table->string('kategori', 100);
+            $table->string('alamat');
+            $table->string('produsen');
+            $table->string('contact_person')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('ket')->nullable();
+            $table->string('hasil_evaluasi')->nullable();
             $table->timestamps();
         });
 
