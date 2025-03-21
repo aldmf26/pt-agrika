@@ -12,14 +12,21 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
+    
     {{-- ttd     --}}
-    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
+    {{-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
         rel="stylesheet">
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://keith-wood.name/js/jquery.signature.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://keith-wood.name/css/jquery.signature.css">
+    <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
+ --}}
+
+ <script type="text/javascript" src="{{asset('assets')}}/tamu/jquery.min.js" ></script>
+ <script type="text/javascript" src="{{asset('assets')}}/tamu/jquery-ui.min.js" ></script>
+ <script type="text/javascript" src="{{asset('assets')}}/tamu/jquery.signature.js" ></script>
+<link rel="stylesheet" href="{{asset('assets')}}/tamu/jquery-ui.css">
+<link rel="stylesheet" href="{{asset('assets')}}/tamu/jquery.signature.css">
 
 
 
