@@ -1,4 +1,5 @@
 <header class="mb-5">
+
     <div class="header-top">
         <div class="container ">
             <div class="logo">
@@ -102,6 +103,7 @@
                 // Ambil menu utama (tanpa parent_id)
                 $menus = Menu::whereNull('parent_id')->with('children')->orderBy('order')->get();
             @endphp
+
             <ul>
 
                 <li class="menu-item {{ 'dashboard' == 'dashboard' ? 'active' : '' }}">
@@ -110,19 +112,20 @@
                     </a>
                 </li>
 
-
                 @foreach ($menus as $menu)
                     <li class="menu-item has-sub">
                         <a href="#" class="menu-link">
                             <span><i class="{{ $menu->icon }}"></i> {{ $menu->title }}</span>
                         </a>
-                        @if ($menu->children->isNotEmpty())
-                            <div class="submenu" style="font-size: 13px">
+
+                        <div class="submenu" style="font-size: 13px">
+                            <div class="submenu-group-wrapper">
                                 <ul class="submenu-group">
                                     @foreach ($menu->children as $submenu)
                                         @php
                                             $adaSub = $submenu->children->isEmpty();
                                         @endphp
+                                        {{-- jika li ini dihapus tidak ada jarak jauh itu --}}
                                         <li class="submenu-item {{ $adaSub ? '' : 'has-sub' }}">
                                             <a wire:navigate
                                                 href="{{ $adaSub ? ($submenu->link == 'tidak' ? route($submenu->link, ['q' => $submenu->title]) : route($submenu->link)) : '#' }}"
@@ -132,11 +135,10 @@
                                             @if (!$adaSub)
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
-                                                        <li class="subsubmenu-item">
+                                                        <li class="submenu-item">
                                                             <a wire:navigate
                                                                 href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
                                                                 class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
-                                                                
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -145,7 +147,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        </div>
                     </li>
                 @endforeach
             </ul>

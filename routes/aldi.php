@@ -33,6 +33,11 @@ use App\Http\Controllers\PPC\Gudang_RM\RM6CeklistKendaraanController;
 use App\Http\Controllers\PPC\Gudang_RM\RM7BuktiPermintaanPengeluaranBarangController;
 use App\Http\Controllers\PPC\Gudang_RM\RM8KartuStokController;
 use App\Http\Controllers\PPC\Gudang_RM\RM9KodeBahanBakuKimiaController;
+use App\Http\Controllers\PUR\Pembelian\PUR1PurchaseRequestController;
+use App\Http\Controllers\PUR\Pembelian\PUR2PurchaseOrderController;
+use App\Http\Controllers\PUR\SeleksiSupplier\PUR1DaftarSupplierController;
+use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA1PenangananProdukController;
+use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA2BeritaAcaraPemusnahanProdukController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -343,4 +348,54 @@ Route::controller(FG4KartuStokController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(PUR1PurchaseRequestController::class)
+    ->prefix('pur/pembelian/purchase-request')
+    ->name('pur.pembelian.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(PUR2PurchaseOrderController::class)
+    ->prefix('pur/pembelian/purchase-order')
+    ->name('pur.pembelian.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{tgl}', 'print')->name('print');
+    });
+
+Route::controller(PUR1DaftarSupplierController::class)
+    ->prefix('pur/seleksi/supplier')
+    ->name('pur.seleksi.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(QA1PenangananProdukController::class)
+    ->prefix('qa/penanganan-barang-tidak-sesuai/penanganan-produk')
+    ->name('qa.penanganan-produk.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{id}', 'print')->name('print');
+    });
+
+Route::controller(QA2BeritaAcaraPemusnahanProdukController::class)
+    ->prefix('qa/penanganan-barang-tidak-sesuai/berita-acara-pemusnahan-produk')
+    ->name('qa.penanganan-produk.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
     });
