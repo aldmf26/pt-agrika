@@ -63,7 +63,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
             'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
         ])->post('https://api.fonnte.com/send', [
             'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
-            'message' => "Pelapor : $r->diajukan_oleh\nNama Mesin : $item->nama_mesin $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://b028-36-83-16-103.ngrok-free.app/storage/perbaikan_mesin/$imageName",
+            'message' => "Pelapor : $r->diajukan_oleh\nNama Mesin : $item->nama_mesin $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_mesin/$imageName",
         ]);
         return redirect()->route('hrga8.3.sukses', ['invoice_pengajuan' => $no_invoice]);
     }

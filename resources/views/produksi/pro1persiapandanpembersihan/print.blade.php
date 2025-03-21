@@ -84,12 +84,13 @@
                     <tr>
                         <td>Hari/Tanggal <br> <span class="fst-italic">date</span></td>
                         <td width="2%">:</td>
-                        <td>{{ $pengawas }}</td>
+                        <td>{{ date('l', strtotime($tanggal)) }}</td>
                     </tr>
                     <tr>
                         <td>Nama Petugas Pembagi<br> <span class="fst-italic">Leader name</span></td>
                         <td width="2%">:</td>
-                        <td>{{ $tanggal }}</td>
+
+                        <td>{{ $pengawas }}</td>
                     </tr>
                 </table>
             </div>
