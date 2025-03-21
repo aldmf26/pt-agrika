@@ -176,7 +176,7 @@
             </svg>
         </div>
 
-        <button type="submit">
+        <button class="btn-submit" type="submit" onclick="this.disabled=true; this.form.submit()">
             Simpan
         </button>
     </form>
