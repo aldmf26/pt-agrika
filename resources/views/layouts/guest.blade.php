@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     {{-- ttd     --}}
     <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
@@ -24,10 +24,10 @@
 
 
     <style>
-
         * {
             font-family: Arial, sans-serif;
         }
+
         .kbw-signature {
             width: 100%;
             height: 100px;
@@ -38,7 +38,12 @@
             height: auto;
         }
     </style>
-
+    <style type="text/tailwindcss">
+        @theme {
+            --color-primary: #D9D9D9;
+            --color-secondary: #BFBFBF;
+        }
+    </style>
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
