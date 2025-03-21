@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hrga\Hrga3Pelatihan;
 
 use App\Http\Controllers\Controller;
 use App\Models\InformasiTawaranPelatihan;
+use App\Models\ProgramPelatihanTahunan;
 use Illuminate\Http\Request;
 
 class Hrga1InformasiTawaranPelatihan extends Controller
@@ -30,6 +31,16 @@ class Hrga1InformasiTawaranPelatihan extends Controller
             'email' => 'required',
         ]);
         InformasiTawaranPelatihan::create($r->all());
+
+        $data = [
+            'materi_pelatihan' => $r->tema,
+            'sumber' => 'eksternal',
+            'narasumber' => '-',
+            'sasaran_peserta' => $r->sasaran,
+            'tgl_rencana' => $r->tanggal,
+            'tgl_realisasi' => $r->tanggal,
+        ];
+        ProgramPelatihanTahunan::create($data);
 
         return redirect()->back()->with('sukses', 'Data berhasil ditambahkan');
     }

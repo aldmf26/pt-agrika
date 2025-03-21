@@ -19,7 +19,7 @@ class Hrga1SchedulePembuanganSampah extends Controller
             'title' => 'Pembuangan Sampah',
             'datas' => $datas
         ];
-        
+
         return view("$this->view.index", $data);
     }
 
@@ -52,5 +52,5 @@ class Hrga1SchedulePembuanganSampah extends Controller
 
         ];
         return view("{$this->view}.print", $data);
-    }   
+    }
 }

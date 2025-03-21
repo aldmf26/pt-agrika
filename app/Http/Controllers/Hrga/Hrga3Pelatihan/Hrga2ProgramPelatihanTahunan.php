@@ -12,7 +12,7 @@ class Hrga2ProgramPelatihanTahunan extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Informasi Tawaran Pelatihan',
+            'title' => 'Program Pelatihan Tahunan',
             'program' => ProgramPelatihanTahunan::all(),
             'tahuns' => ProgramPelatihanTahunan::selectRaw('YEAR(tgl_rencana) as tahun')->distinct()->get(),
 
@@ -22,16 +22,17 @@ class Hrga2ProgramPelatihanTahunan extends Controller
 
     public function store(Request $r)
     {
-        $r->validate([
-            'materi_pelatihan' => 'required',
-            'sumber' => 'required',
-            'narasumber' => 'required',
-            'sasaran_peserta' => 'required',
-            'tgl_rencana' => 'required',
-            'tgl_realisasi' => 'required',
-        ]);
-        ProgramPelatihanTahunan::create($r->all());
-        return redirect()->back()->with('sukses', 'Data berhasil ditambahkan');
+        for ($i = 0; $i < count($r->id); $i++) {
+            $data = [
+                'sumber' => $r->sumber[$i],
+                'narasumber' => $r->narasumber[$i],
+                'tgl_rencana' => $r->tgl_rencana[$i],
+                'tgl_realisasi' => $r->tgl_realisasi[$i],
+            ];
+            ProgramPelatihanTahunan::where('id', $r->id[$i])->update($data);
+        }
+
+        return redirect()->back()->with('sukses', 'Data berhasil di edit');
     }
 
     public function print(Request $r)
