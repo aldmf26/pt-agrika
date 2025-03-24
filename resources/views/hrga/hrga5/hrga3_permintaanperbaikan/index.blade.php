@@ -1,7 +1,9 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
-
+            <a class="btn btn-primary float-end" href="{{ route('hrga5.3.formPermintaanperbaikan') }}" target="_blank"><i
+                    class="fas fa-plus"></i>
+                Data</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

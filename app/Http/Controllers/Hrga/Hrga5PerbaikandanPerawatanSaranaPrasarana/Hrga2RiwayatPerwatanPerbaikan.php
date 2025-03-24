@@ -15,12 +15,8 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
 {
     public function index(Request $r)
     {
+        $tahun = empty($r->tahun) ? date('Y') : $r->tahun;
 
-        if (empty($r->tahun)) {
-            $tahun = date('Y');
-        } else {
-            $tahun = $r->tahun;
-        }
         $permintaan = PermintaanPerbaikanSaranaPrasana::with('item.lokasi')
             ->whereYear('tanggal', $tahun)
             ->get()
@@ -48,7 +44,13 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
                     'jenis' => $perawatan->item->jenis_item
                 ];
             });
+
+        // Pastikan hasil query selalu berupa collection
+        $permintaan = collect($permintaan);
+        $perawatan = collect($perawatan);
+
         $unionData = $permintaan->merge($perawatan);
+
         $grouped = $unionData->groupBy('nama_item')->map(function ($items, $namaItem) {
             return collect([
                 'id' => $items->pluck('id')->unique()->join(', '),
@@ -58,15 +60,17 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
                 'jenis' => $items->pluck('jenis')->unique()->join(', '),
             ]);
         });
+
         $data = [
             'title' => 'Riwayat Perbaikan dan Perawatan Sarana dan Prasarana Umum',
             'grouped' => $grouped,
             'tahun' => $tahun,
             'tahuns' => ProgramPerawatanSaranaPrasarana::selectRaw('YEAR(tanggal_mulai) as tahun')->distinct()->pluck('tahun')->toArray()
-
         ];
+
         return view('hrga.hrga5.hrga2_riwayatperbaikan.index', $data);
     }
+
 
     public function print(Request $r)
     {

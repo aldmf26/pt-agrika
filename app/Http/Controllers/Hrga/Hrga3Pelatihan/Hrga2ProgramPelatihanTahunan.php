@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Hrga\Hrga3Pelatihan;
 
 use App\Http\Controllers\Controller;
+use App\Models\Divisi;
 use App\Models\ProgramPelatihanTahunan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -15,6 +16,7 @@ class Hrga2ProgramPelatihanTahunan extends Controller
             'title' => 'Program Pelatihan Tahunan',
             'program' => ProgramPelatihanTahunan::all(),
             'tahuns' => ProgramPelatihanTahunan::selectRaw('YEAR(tgl_rencana) as tahun')->distinct()->get(),
+            'divisi' => Divisi::all(),
 
         ];
         return view('hrga.hrga3.hrga2pelatihantahunan.index', $data);

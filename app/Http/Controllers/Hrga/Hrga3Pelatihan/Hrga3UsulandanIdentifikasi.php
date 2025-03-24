@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Hrga\Hrga3Pelatihan;
 use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
 use App\Models\Divisi;
+use App\Models\JadwalInformasiPelatihan;
+use App\Models\ProgramPelatihanTahunan;
 use App\Models\usulanDanIdentifikasi;
 use Illuminate\Http\Request;
 
@@ -28,6 +30,13 @@ class Hrga3UsulandanIdentifikasi extends Controller
 
     public function store(Request $r)
     {
+        ProgramPelatihanTahunan::where('id', $r->Getid)->update([
+            'isi_usulan' => 'Y'
+        ]);
+
+        $program = ProgramPelatihanTahunan::where('id', $r->Getid)->first();
+        $nota_terakhir = JadwalInformasiPelatihan::orderBy('nota_pelatihan', 'desc')->first();
+        $nota = empty($nota_terakhir->nota_pelatihan) ? 1 : $nota_terakhir->nota_pelatihan + 1;
         for ($i = 0; $i < count($r->id_pegawai); $i++) {
             $data = [
                 'divisi_id' => $r->divisi,
@@ -39,9 +48,24 @@ class Hrga3UsulandanIdentifikasi extends Controller
                 'alasan' => $r->alasan
             ];
             usulanDanIdentifikasi::insert($data);
+
+
+            $data = [
+                'nota_pelatihan' => $nota,
+                'tema_pelatihan' => $r->usulan_jenis_pelatihan,
+                'tanggal' => $r->tanggal,
+                'waktu' => $r->usulan_waktu,
+                'tempat' => "Ruang meeting lantai 2",
+                'narasumber' => $program->narasumber,
+                'kisaran_materi' => $r->alasan,
+                'penyelenggara' => $program->sumber,
+                'data_pegawais_id' => $r->id_pegawai[$i],
+                'konfirmasi_keterangan' => 'Hadir'
+            ];
+            JadwalInformasiPelatihan::insert($data);
         }
 
-        return redirect()->route('hrga3.3.index')->with('sukses', 'Data Berhasil Disimpan');
+        return redirect()->route('hrga3.2.index')->with('sukses', 'Data Berhasil Disimpan');
     }
 
     public function print(Request $r)

@@ -1,8 +1,8 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-header">
-            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Data</button>
+            {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
+                    class="fas fa-plus"></i> Data</button> --}}
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
@@ -29,8 +29,8 @@
                             <td>{{ $j->narasumber }}</td>
                             <td>{{ $j->kisaran_materi }}</td>
                             <td>
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail"
-                                    nota="{{ $j->nota_pelatihan }}"><i class="fas fa-info"></i></button>
+                                {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail"
+                                    nota="{{ $j->nota_pelatihan }}"><i class="fas fa-info"></i></button> --}}
                                 <a href="{{ route('hrga3.4.print', ['nota_pelatihan' => $j->nota_pelatihan]) }}"
                                     target="_blank" class="btn btn-primary"><i class="fas fa-print"></i></a>
                             </td>

@@ -33,7 +33,9 @@
                         @foreach ($program as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item->nama_item }}</td>
+                                <td>{{ $p->item->nama_item }} <a href="{{ route('hrga5.1.copy', ['id' => $p->id]) }}"
+                                        class="btn btn-primary btn-sm float-end"><i class="far fa-copy"></i> Copy</a>
+                                </td>
                                 <td>{{ $p->item->merek }}</td>
                                 <td>{{ $p->item->no_identifikasi }}</td>
                                 <td class="text-nowrap">{{ $p->item->lokasi->lokasi }}</td>
@@ -140,7 +142,8 @@
     </form>
 
     <form action="" method="get">
-        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

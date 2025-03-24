@@ -45,6 +45,37 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
         }
     }
 
+    public function copy(Request $r)
+    {
+        $program = ProgramPerawatanSaranaPrasarana::find($r->id);
+
+        $data = [
+            'item_id' => $program->item_id,
+            'frekuensi_perawatan' => $program->frekuensi_perawatan,
+            'penanggung_jawab' => $program->penanggung_jawab,
+            'tanggal_mulai' => date("Y-m-d", strtotime("+1 year", strtotime($program->tanggal_mulai))),
+            'keterangan' => $program->keterangan,
+        ];
+
+        ProgramPerawatanSaranaPrasarana::create($data);
+
+        $total = floor(12 / $program->frekuensi_perawatan);
+
+        $tgl_mulai = date("Y-m-d", strtotime("+1 year", strtotime($program->tanggal_mulai)));
+        for ($i = 0; $i < $total; $i++) {
+            $tgl = date('Y-m-d', strtotime($tgl_mulai . ' + ' . ($i * $program->frekuensi_perawatan) . ' month'));
+            $data = [
+                'item_id' => $program->item_id,
+                'tgl' => $tgl,
+                'kesimpulan' => 'kondisi masih bagus',
+                'fungsi' => 'bagus',
+            ];
+            PerawatanModel::create($data);
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil disalin');
+    }
+
     public function get_merk(Request $r)
     {
         $item = ItemPerawatan::where('id', $r->id)->first();
