@@ -1,8 +1,10 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-header">
-            <a target="_blank" class="btn  btn-primary float-end" href="{{ route('produksi.11.print') }}"><i
-                    class="fas fa-print"></i> Print</a>
+            <a target="_blank" class="btn  btn-primary float-end"
+                href="{{ route('produksi.11.print', ['tgl' => $tgl]) }}"><i class="fas fa-print"></i> Print</a>
+            <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
+                    class="fas fa-calendar"></i> View</button>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
@@ -43,21 +45,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="text-center">1</td>
-                        <td class="text-center">1001</td>
-                        <td class="text-center">D</td>
-                        <td class="text-center">50</td>
-                        <td class="text-center">500</td>
-                        <td class="text-center">01/01/2025</td>
-                        <td class="text-center">Mika</td>
-                        <td class="text-center">30968</td>
-                        <td class="text-center">30001</td>
-                        <td class="text-center"></td>
-                    </tr>
+                    @foreach ($pengiriman_akhir as $p)
+                        <tr>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $p['no_box'] }}</td>
+                            <td class="text-center">{{ $p['grade'] }}</td>
+                            <td class="text-center">{{ $p['pcs'] }}</td>
+                            <td class="text-center">{{ $p['gr'] }}</td>
+                            <td class="text-center">{{ date('d/m/Y', strtotime($p['tgl_input'])) }}</td>
+                            <td class="text-center">Mika</td>
+                            <td class="text-center">{{ $p['no_nota'] }}</td>
+                            <td class="text-center">{{ $p['no_barcode'] }}</td>
+                            <td class="text-center"></td>
+                        </tr>
+                    @endforeach
                 </tbody>
 
             </table>
         </div>
     </div>
+    <form action="" method="get">
+        <x-modal_plus size="modal-sm" id="view">
+            <div class="row">
+                <div class="col-lg-12">
+                    <label for="">Tanggal</label>
+                    <input type="date" class="form-control" name="tgl" value="{{ $tgl }}">
+                </div>
+
+            </div>
+        </x-modal_plus>
+    </form>
 </x-app-layout>

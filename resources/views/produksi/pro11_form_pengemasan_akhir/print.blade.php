@@ -76,7 +76,7 @@
                 <p class="cop_text">Dok.No.: FRM.PRO.01.11, Rev.00</p>
                 <br>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <table width="100%">
                     <tr style="font-size: 12px">
                         <td>Hari/Tanggal</td>
@@ -126,18 +126,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-center">1</td>
-                            <td class="text-center">1001</td>
-                            <td class="text-center">D</td>
-                            <td class="text-center">50</td>
-                            <td class="text-center">500</td>
-                            <td class="text-center">01/01/2025</td>
-                            <td class="text-center">Mika</td>
-                            <td class="text-center">30968</td>
-                            <td class="text-center">30001</td>
-                            <td class="text-center"></td>
-                        </tr>
+                        @foreach ($pengiriman_akhir as $p)
+                            <tr>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ $p['no_box'] }}</td>
+                                <td class="text-center">{{ $p['grade'] }}</td>
+                                <td class="text-center">{{ $p['pcs'] }}</td>
+                                <td class="text-center">{{ $p['gr'] }}</td>
+                                <td class="text-center">{{ date('d/m/Y', strtotime($p['tgl_input'])) }}</td>
+                                <td class="text-center">Mika</td>
+                                <td class="text-center">{{ $p['no_nota'] }}</td>
+                                <td class="text-center">{{ $p['no_barcode'] }}</td>
+                                <td class="text-center"></td>
+                            </tr>
+                        @endforeach
                     </tbody>
 
                 </table>
