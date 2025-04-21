@@ -65,7 +65,7 @@ class Hrga3PermintaanPerbaikan extends Controller
             'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
         ])->post('https://api.fonnte.com/send', [
             'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
-            'message' => "Nama : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://b028-36-83-16-103.ngrok-free.app/storage/perbaikan_sarana/$imageName",
+            'message' => "Nama : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
         ]);
         return redirect()->route('hrga5.3.sukses', ['invoice_pengajuan' => $no_invoice]);
     }

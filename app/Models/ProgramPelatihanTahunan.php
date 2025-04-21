@@ -14,5 +14,6 @@ class ProgramPelatihanTahunan extends Model
         'sasaran_peserta',
         'tgl_rencana',
         'tgl_realisasi',
+        'isi_usulan',
     ];
 }

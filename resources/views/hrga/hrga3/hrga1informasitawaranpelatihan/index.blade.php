@@ -15,7 +15,8 @@
                         <th rowspan="2" class="text-align-center text-center">Tanggal Informasi</th>
                         <th rowspan="2" class="text-align-center text-center">Jenis Pelatihan</th>
                         <th rowspan="2" class="text-align-center text-center">Sasaran Pelatihan</th>
-                        <th rowspan="2" class="text-align-center text-center">Tema Pelatihan <br> [yang ditawarkan]
+                        <th rowspan="2" class="text-align-center text-center">
+                            Tema Pelatihan <br> [yang ditawarkan]
                         </th>
                         <th rowspan="2" class="text-align-center text-center">Sumber Informasi</th>
                         <th rowspan="2" class="text-align-center text-center">Personil Penghubung</th>

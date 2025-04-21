@@ -107,6 +107,7 @@ Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
         Route::get('/get_merk', 'get_merk')->name('get_merk');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::get('/copy', 'copy')->name('copy');
     });
 Route::controller(Hrga2RiwayatPerwatanPerbaikan::class)
     ->prefix('hrga/hrga5/hrga5.2_Riwayat_perwatan_dan_perbaikan_sarana_dan_prasarana_umum')
