@@ -106,8 +106,8 @@
 
             <ul>
 
-                <li class="menu-item {{ 'dashboard' == 'dashboard' ? 'active' : '' }}">
-                    <a wire:navigate href="{{ route('dashboard') }}" class='menu-link'>
+                <li class="menu-item {{ $getRouteName == 'dashboard.index' ? 'active' : '' }}">
+                    <a wire:navigate href="{{ route('dashboard.index') }}" class='menu-link'>
                         <span><i class="bi bi-grid-fill"></i> Dashboard</span>
                     </a>
                 </li>

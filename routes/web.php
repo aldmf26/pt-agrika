@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga1VisitorHealthForm;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,15 @@ Route::get('/tidak', function () {
 Route::get('/tamu', [Hrga1VisitorHealthForm::class, 'tamu']);
 Route::post('/tamu', [Hrga1VisitorHealthForm::class, 'storeTamu'])->name('tamu.store');
 
-Route::get('/dashboard', function () {
-    return view('dashboard', ['title' => 'Dashboard']);
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::controller(DashboardController::class)
+    ->prefix('dashboard')
+    ->name('dashboard.')
+    ->middleware(['auth', 'verified'])
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/{title}', 'detail')->name('detail');
+        Route::get('/sub/{title}', 'sub')->name('sub');
+    });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
