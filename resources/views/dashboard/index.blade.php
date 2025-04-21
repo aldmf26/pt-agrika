@@ -5,13 +5,16 @@
                 @php
                     $linkRoute = $route;
 
-                    if (!empty($isSubLevel) || (!empty($menu->parent_id) && $menu->parent_id == 113)) {
+                    if (
+                        !empty($isSubLevel) ||
+                        (!empty($menu->parent_id) && ($menu->parent_id == 113 || $menu->parent_id == 154))
+                    ) {
                         $linkRoute = $menu->link;
                     }
-                    
+
                     $linkParam = $menu->title;
                 @endphp
-                
+
                 <a wire:navigate href="{{ route($linkRoute, $linkParam) }}">
                     <div style="cursor:pointer;" class="bg-info card border card-hover text-white">
                         <div class="card-front">
