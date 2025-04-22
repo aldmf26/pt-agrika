@@ -7,7 +7,8 @@
 
                     if (
                         !empty($isSubLevel) ||
-                        (!empty($menu->parent_id) && ($menu->parent_id == 113 || $menu->parent_id == 154))
+                        (!empty($menu->parent_id) &&
+                            ($menu->parent_id == 113 || $menu->parent_id == 154 || $menu->parent_id == 169))
                     ) {
                         $linkRoute = $menu->link;
                     }

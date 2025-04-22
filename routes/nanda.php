@@ -29,6 +29,8 @@ use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\DaftarhadirTinjuanManajemenController;
+use App\Http\Controllers\QA\TinjauanManajemen\NotulenTinjauanManajemenController;
+use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -257,6 +259,22 @@ Route::controller(AgendadanJadwalTinjauanManajemenController::class)
 Route::controller(DaftarhadirTinjuanManajemenController::class)
     ->prefix('qa/tinjauan_manajemen/daftar_hadir_tinjauan_manajemen')
     ->name('qa.daftar_hadir_tinjauan_manajemen.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(NotulenTinjauanManajemenController::class)
+    ->prefix('qa/tinjauan_manajemen/notulen_tinjauan_manajemen')
+    ->name('qa.notulen_tinjauan_manajemen.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::get('/export', 'export')->name('export');
+        Route::post('/import', 'import')->name('import');
+    });
+Route::controller(LaporanPelaksanaanEksporController::class)
+    ->prefix('qc/laporan_pelaksanaan_ekspor')
+    ->name('qc.laporan_pelaksanaan_ekspor.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');

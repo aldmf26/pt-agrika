@@ -1,6 +1,6 @@
 <x-app-layout :title="$title">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end gap-2">
@@ -10,8 +10,7 @@
                         <div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#tambah"
                                 class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                                Input Rundown
-                            </a>
+                                Data</a>
                         </div>
                     </div>
                 </div>
@@ -19,28 +18,30 @@
                     <table id="example" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">Tanggal</th>
-                                <th class="text-center">Total Agenda</th>
-                                <th>Aksi</th>
+                                <th class="text-center align-middle" rowspan="2">#</th>
+                                <th class="text-center align-middle" rowspan="2">Nama dan Tanggal PEB</th>
+                                <th class="text-center align-middle" rowspan="2">Uraian Barang</th>
+                                <th class="text-center align-middle" rowspan="2">Nomor Pos Tarif/Hs</th>
+                                <th class="text-center align-middle" colspan="2">Jumlah</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Volume</th>
+                                <th class="text-center">Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($agenda2 as $d)
+                            @foreach ($laporan as $l)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ tanggal($d->tanggal) }}</td>
-                                    <td class="text-center">{{ $d->jumlah_agenda }}</td>
-                                    <td>
-                                        <a href="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.print', ['tanggal' => $d->tanggal]) }}"
-                                            target="_blank" class="btn btn-sm btn-primary"><i
-                                                class="fas fa-print"></i></a>
-
-                                        {{-- <a href="{{ route('qa.daftar_hadir_tinjauan_manajemen.index', ['tanggal' => $d->tanggal]) }}"
-                                            class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a> --}}
-                                    </td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $l->nama }} & {{ $l->tanggal }}</td>
+                                    <td>{{ $l->uraian_barang }}</td>
+                                    <td>{{ $l->nomo_pos }}</td>
+                                    <td>{{ $l->jumlah }}</td>
+                                    <td>{{ $l->volume }}</td>
+                                    <td>Rp {{ number_format($l->nilai, 0) }}</td>
                                 </tr>
                             @endforeach
+
 
                         </tbody>
                     </table>
@@ -50,7 +51,7 @@
     </div>
 
 
-    <form action="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.store') }}" method="POST">
+    {{-- <form action="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.store') }}" method="POST">
         @csrf
         <x-modal_plus size="modal-xl" id="tambah">
             <div class="row" x-data="{
@@ -70,7 +71,7 @@
                     <div class="col-lg-2">
                         <label>Waktu (Sampai)</label>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <label>Agenda</label>
                     </div>
                     <div class="col-lg-3">
@@ -111,7 +112,7 @@
             </div>
 
         </x-modal_plus>
-    </form>
+    </form> --}}
 
 
 

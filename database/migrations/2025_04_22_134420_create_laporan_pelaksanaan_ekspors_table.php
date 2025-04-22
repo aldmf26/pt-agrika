@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notulen_tinjauan_manajemens', function (Blueprint $table) {
+        Schema::create('laporan_pelaksanaan_ekspors', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->date('tanggal');
-            $table->string('agenda');
-            $table->string('hasil_pembahasan');
-            $table->string('action_plan');
-            $table->string('pic');
-            $table->date('duedate');
-            $table->string('status');
+            $table->string('uraian_barang');
+            $table->string('nomor_pos');
+            $table->string('volume');
+            $table->double('nilai');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notulen_tinjauan_manajemens');
+        Schema::dropIfExists('laporan_pelaksanaan_ekspors');
     }
 };

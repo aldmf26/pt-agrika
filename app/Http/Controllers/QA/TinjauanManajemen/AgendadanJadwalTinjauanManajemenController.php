@@ -55,7 +55,7 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             AgendadanJadwalTinjauanManajemen::create($data2);
         }
 
-        return redirect()->route('qa.agendadan_jadwal_tinjauan_manajemen.index')->with('success', 'Data Berhasil Disimpan');
+        return redirect()->route('qa.agendadan_jadwal_tinjauan_manajemen.index')->with('sukses', 'Data Berhasil Disimpan');
     }
 
     public function print(Request $r)
