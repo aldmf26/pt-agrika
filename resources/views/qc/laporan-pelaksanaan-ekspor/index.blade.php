@@ -41,8 +41,6 @@
                                     <td>Rp {{ number_format($l->nilai, 0) }}</td>
                                 </tr>
                             @endforeach
-
-
                         </tbody>
                     </table>
                 </div>
