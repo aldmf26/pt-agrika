@@ -92,6 +92,14 @@
         </form>
     </div>
     @section('scripts')
+    <script>
+        $(document).ready(function() {
+            // Delay the initialization slightly to ensure DOM is fully ready
+            setTimeout(function() {
+                $('.select2suplier').select2();
+            }, 100);
+        });
+    </script>
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({
@@ -102,7 +110,6 @@
         </script>
         <script>
             $(document).ready(function() {
-                $('.select2suplier').select2({})
 
                 $('.selectBarang').change(function (e) { 
                     e.preventDefault();

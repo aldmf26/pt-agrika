@@ -27,10 +27,11 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label>Tanggal Penerimaan</label>
-                                <input value="{{ date('Y-m-d') }}" type="date" name="tgl_penerimaan" class="form-control" required>
+                                <input value="{{ date('Y-m-d') }}" type="date" name="tgl_penerimaan"
+                                    class="form-control" required>
                             </div>
                         </div>
-                      
+
                         <div class="col-3">
                             <div class="form-group">
                                 <label>No Kendaraan</label>
@@ -56,11 +57,11 @@
                             </div>
                         </div>
                     </div>
-                  
+
                     <div class="row mt-4">
                         <div class="col-md-12">
                             <table class="table table-bordered">
-                               
+
                                 <tr>
                                     <th>Kriteria Penerimaan</th>
                                     <td>
@@ -77,44 +78,51 @@
                                 <tr>
                                     @php
                                         $checkLabel = "<i class='fas fa-check'></i>";
-                                        $labels = ['Warna', 'Kondisi (bulu berat & ringan, bebas jamur)', 'Grade', 'Kadar air'];
+                                        $labels = [
+                                            'Warna',
+                                            'Kondisi (bulu berat & ringan, bebas jamur)',
+                                            'Grade',
+                                            'Kadar air',
+                                        ];
                                         $inputNames = ['warna', 'kondisi', 'grade', 'kadar_air'];
                                     @endphp
                                     @foreach ($labels as $index => $label)
-                                    <tr>
-                                        <th>{{ $label }}</th>
-                                        <td>
-                                            <div class="form-group">
-                                                @for ($i = 1; $i <= 2; $i++)
-                                                    <div class="form-check form-check-inline">
-                                                        <input id="id{{ $i }}{{ $index }}" class="form-check-input" type="checkbox"
-                                                            name="{{ $inputNames[$index] }}[]" value="{{ $i }}">
-                                                        <label for="id{{ $i }}{{ $index }}"
-                                                            class="form-check-label">{!! $checkLabel !!}</label>
-                                                    </div>
-                                                @endfor
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    
+                                <tr>
+                                    <th>{{ $label }}</th>
+                                    <td>
+                                        <div class="form-group">
+                                            @for ($i = 1; $i <= 2; $i++)
+                                                <div class="form-check form-check-inline">
+                                                    <input id="id{{ $i }}{{ $index }}"
+                                                        class="form-check-input" type="checkbox"
+                                                        name="{{ $inputNames[$index] }}[]" value="{{ $i }}">
+                                                    <label for="id{{ $i }}{{ $index }}"
+                                                        class="form-check-label">{!! $checkLabel !!}</label>
+                                                </div>
+                                            @endfor
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+
                                 <tr>
                                     <th>Keputusan:</th>
                                     <td>
                                         <div class="form-group">
                                             <div class="form-check form-check-inline">
-                                                <input id="diterima" class="form-check-input" type="radio" name="keputusan"
-                                                    value="Diterima">
+                                                <input id="diterima" class="form-check-input" type="radio"
+                                                    name="keputusan" value="Diterima">
                                                 <label for="diterima" class="form-check-label">Diterima</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input id="ditolak" class="form-check-input" type="radio" name="keputusan"
-                                                    value="diterima dengan Catatan (sortir)">
-                                                <label for="ditolak" class="form-check-label">Diterima dengan Catatan (sortir)</label>
+                                                <input id="ditolak" class="form-check-input" type="radio"
+                                                    name="keputusan" value="diterima dengan Catatan (sortir)">
+                                                <label for="ditolak" class="form-check-label">Diterima dengan Catatan
+                                                    (sortir)</label>
                                             </div>
                                             <div class="form-check form-check-inline">
-                                                <input id="ditolak" class="form-check-input" type="radio" name="keputusan"
-                                                    value="Ditolak">
+                                                <input id="ditolak" class="form-check-input" type="radio"
+                                                    name="keputusan" value="Ditolak">
                                                 <label for="ditolak" class="form-check-label">Ditolak</label>
                                             </div>
                                         </div>
@@ -124,7 +132,7 @@
                         </div>
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary" >Simpan</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -141,8 +149,10 @@
         </script>
         <script>
             $(document).ready(function() {
-
-                $('.select2suplier').select2({})
+                // Delay the initialization slightly to ensure DOM is fully ready
+                setTimeout(function() {
+                    $('.select2suplier').select2();
+                }, 100);
             });
         </script>
     @endsection

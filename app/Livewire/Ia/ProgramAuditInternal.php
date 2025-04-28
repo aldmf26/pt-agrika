@@ -2,10 +2,13 @@
 
 namespace App\Livewire\Ia;
 
+use App\Models\Notif;
 use App\Models\ProgramAuditInternal as ModelsProgramAuditInternal;
+use App\Services\NotifiService;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Route;
 
 
 
@@ -31,8 +34,24 @@ class ProgramAuditInternal extends Component
         return $cek;
     }
 
+    #[Computed]
+    public function cekSelesai($nama, $month)
+    {
+        $cek = Notif::where([
+            ['nama', $nama],
+            ['month', $month],
+            ['year', $this->tahun],
+            ['user_id', auth()->user()->id],
+            ['is_read', 1]
+        ])->first();
+
+        return $cek;
+    }
+    
+
     public function toggleBulan($auditId, $bulan, $departemen, $audite, $auditor)
     {
+        
         $kolomBulan = "bulan_$bulan";
         $audit = $this->model::where('id', $auditId)->where('tahun', $this->tahun)->first();
         if (!$audit) {
@@ -49,6 +68,8 @@ class ProgramAuditInternal extends Component
             $audit->admin = auth()->user()->name;
             $audit->save();
         }
+        NotifiService::create('ia.1.index','IA 1.1 Program Audit Internal', $departemen, $bulan, $this->tahun);
+        $this->dispatch('refresh');
 
     }
 
