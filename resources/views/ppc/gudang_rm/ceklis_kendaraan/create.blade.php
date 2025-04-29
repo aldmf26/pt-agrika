@@ -139,11 +139,14 @@
         </div>
     </div>
     @section('scripts')
-        
     <script>
-        $(document).ready(function () {
-            $('.select2suplier').select2({});
+        $(document).ready(function() {
+            // Delay the initialization slightly to ensure DOM is fully ready
+            setTimeout(function() {
+                $('.select2suplier').select2();
+            }, 100);
         });
-        </script>
+    </script>
+  
         @endsection
 </x-app-layout>

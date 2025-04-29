@@ -10,7 +10,6 @@
         .td-hover:hover {
             background-color: black !important;
             cursor: pointer;
-
         }
     </style>
 
@@ -30,7 +29,6 @@
                 <button @click="add = !add" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                     Data</button>
             </div>
-
         </div>
         <div>
             <a href="{{ route('ia.1.print', ['tahun' => $tahun]) }}" target="_blank" class="btn btn-sm btn-primary"><i
@@ -66,6 +64,18 @@
 
     <span class="text-sm text-warning float-end"><em>*double click untuk mengisi bulan</em></span>
     <br>
+    <div class="float-end">
+        <span class="text-warning"> Keterangan :</span>
+        <span class="fst-italic text-muted text-sm">Kosong</span>
+        <button class="btn btn-md btn-outline-dark">&nbsp;</button>
+
+        <span class="fst-italic text-muted text-sm">Siap Audit</span>
+        <button class="btn btn-md btn-warning">&nbsp;</button>
+
+        <span class="fst-italic text-muted text-sm">Selesai</span>
+        <button class="btn btn-md btn-success">&nbsp;</button>
+    </div>
+    <br>
     {{-- <span class="text-sm  text-success float-end"><em>*clicik kanan untuk audit</em></span> --}}
     <table class="mt-4 table table-bordered border-dark table-striped">
         <thead>
@@ -98,17 +108,20 @@
                     <td>{{ $audit->auditor }}</td>
                     @for ($i = 1; $i <= 12; $i++)
                 <td 
+                    @if(!$this->cekSelesai($audit->departemen, $i))
                     onclick="{{ $this->getField($i, $audit->id) ? 'showContextMenu(event, ' . $audit->id . ', ' . $i . ')' : '' }}"
+                    @endif
                     @dblclick="$wire.toggleBulan({{ $audit->id }}, {{ $i }}, '{{ $audit->departemen }}', '{{ $audit->audite }}', '{{ $audit->auditor }}')"
-                    class="text-center td-hover {{ $this->getField($i, $audit->id) ? 'bg-success' : '' }}">
+                    class="text-center td-hover {{ $this->cekSelesai($audit->departemen, $i) ? 'bg-success' : ($this->getField($i, $audit->id) ? 'bg-warning' : '') }}">
 
                     <div class="position-absolute mt-2 d-none context-menu" id="contextMenu-{{ $audit->id }}-{{ $i }}">
                         <div class="dropdown-menu show">
                             @php
                                 $link = "https://docs.google.com/spreadsheets/d/17f9GVnbjbtAeSUHw7kPHQgNbiwZlif4pmQh1ChG2Dxc/edit?usp=sharing";
                             @endphp
-                            {{-- <a class="dropdown-item" href="{{route('ia.1.audit', ['id' => $audit->id, 'bulan' => $i])}}">Audit</a> --}}
-                            <a class="dropdown-item" href="{{$link}}">Audit</a>
+                          
+                            <a class="dropdown-item" href="{{route('ia.1.audit', ['id' => $audit->id,'departemen' => $audit->departemen, 'bulan' => $i, 'tahun' => $tahun])}}">Audit</a>
+                            {{-- <a class="dropdown-item" href="{{$link}}">Audit</a> --}}
                         </div>
                     </div>
                 </td>
@@ -117,6 +130,7 @@
             @endforeach
         </tbody>
     </table>
+
 
     <script>
         document.addEventListener('click', (event) => {

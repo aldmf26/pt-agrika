@@ -10,6 +10,8 @@
                 </a>
             </div>
             <div class="header-top-right">
+                @livewire('header-notification')
+
                 <div x-data="{ open: false }" @click.outside="open = false">
                     <a @click="open = ! open" href="#" id="topbarUserDropdown"
                         class="user-dropdown d-flex align-items-center dropend dropdown-toggle "

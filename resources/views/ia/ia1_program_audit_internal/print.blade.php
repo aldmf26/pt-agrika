@@ -1,3 +1,9 @@
+{{-- berubah --}}
+<div class="logo text-center">
+    <a href="dashboard" style="display: inline-block; text-decoration: none;">
+        <img src="{{ asset('img/logocash-tf.png') }}" alt="Logo" style="width: 100%; max-width: 280px; object-fit:cover;">
+    </a>
+</div>
 <x-hccp-print :title="$title" :dok="$dok">
     <div class="mt-5 d-flex justify-content-between">
         <h6>Standar: GMP & HACCP</h6>
@@ -36,8 +42,16 @@
                                 ->where('id', $audit->id)
                                 ->where('tahun', $tahun)
                                 ->value($field);
+
+                            $cekSelesai = App\Models\Notif::where([
+                                ['nama', $audit->departemen],
+                                ['month', $i],
+                                ['year', $tahun],
+                                ['user_id', auth()->user()->id],
+                                ['is_read', 1],
+                            ])->first();
                         @endphp
-                        <td class="text-center td-hover @if ($cek == 1) bg-success @endif">
+                        <td class="text-center td-hover @if ($cekSelesai) bg-success @elseif ($cek == 1) bg-warning @endif">
                         </td>
                     @endfor
                 </tr>
