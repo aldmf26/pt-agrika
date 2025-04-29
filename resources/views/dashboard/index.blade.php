@@ -24,6 +24,9 @@
                                     <img src="{{ asset('img/folder.png') }}" width="80" alt=""><br><br>
                                     {{ ucfirst($menu->title) }}
                                 </h5>
+                                <h5 class="card-title text-white text-center">
+                                    {{ ucfirst($menu->subtitle) }}
+                                </h5>
                             </div>
                         </div>
                     </div>

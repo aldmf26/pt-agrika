@@ -3,9 +3,9 @@
         <div class="card-header">
             <h5 class="float-start">Tanggal : {{ tanggal($tgl) }}</h5>
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Tambah</button>
+                    class="fas fa-plus"></i> tambah</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
             <a href="{{ route('produksi.5.print', ['tgl' => $tgl]) }}" target="_blank"
                 class="btn btn-primary float-end me-2"><i class="fas fa-print"></i>
                 Print</a>
@@ -92,7 +92,7 @@
                             <label for="">Gr</label>
                             <input type="text" class="form-control" name="gr[]">
                         </div>
-                        <div class="col-lg-2 mt-2">
+                        <div class="col-lg-2 ">
                             <label for="">Pcs Akhir</label>
                             <input type="text" class="form-control" name="pcs_akhir[]">
                         </div>

@@ -6,7 +6,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th class="text-center">No Invoice</th>
+                        <th class="text-start">No invoice</th>
                         <th>Tanggal</th>
                         <th>Pengawas</th>
                         <th>Pcs</th>
@@ -18,7 +18,7 @@
                     @foreach ($bk as $b)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ $b['no_invoice'] }}</td>
+                            <td class="text-start">{{ $b['no_invoice'] }}</td>
                             <td>{{ tanggal($b['tanggal']) }}</td>
                             <td>{{ $b['name'] }}</td>
                             <td>{{ number_format($b['pcs'], 0) }}</td>
@@ -30,7 +30,8 @@
                                     $tgl = $b['tanggal'];
                                 @endphp
                                 <a href="{{ route('produksi.1.print', ['no_invoice' => $no_invoice, 'pengawas' => $pengawas, 'tgl' => $tgl]) }}"
-                                    target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-print"></i></a>
+                                    target="_blank" class="btn btn-primary btn-sm"><i class="fas fa-print"></i>
+                                    print</a>
                             </td>
                         </tr>
                     @endforeach

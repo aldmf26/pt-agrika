@@ -3,11 +3,11 @@
         <div class="card-header">
             <h5>Divisi : {{ $nm_divisi->divisi ?? 'All' }}</h5>
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Data</button>
+                    class="fas fa-plus"></i> add</button>
             <button data-bs-toggle="modal" data-bs-target="#print" class="btn btn-primary float-end me-2"><i
-                    class="fas fa-print"></i> Print</button>
+                    class="fas fa-print"></i> print</button>
             <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -29,7 +29,7 @@
                         @foreach ($jadwal as $j)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $j->data_pegawai->nama }}</td>
+                                <td>{{ ucfirst(strtolower($j->data_pegawai->nama)) }}</td>
                                 <td>{{ $j->data_pegawai->divisi->divisi }}</td>
                                 @foreach ($bulan as $b)
                                     <td class="{{ $b->bulan == $j->bulan ? 'bg-primary' : '' }}"></td>

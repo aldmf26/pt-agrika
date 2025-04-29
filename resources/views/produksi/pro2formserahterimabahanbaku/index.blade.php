@@ -2,18 +2,18 @@
     <div class="card">
         <div class="card-header">
             <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
             <a href="{{ route('produksi.2.print', ['bulan' => $bulan, 'tahun' => $tahun]) }}" target="_blank"
-                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
+                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> print</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
                         <th class="text-center" rowspan="2">No</th>
-                        <th class="text-center" rowspan="2">Hari/Tanggal <br> <span
+                        <th class="text-center" rowspan="2">Hari/tanggal <br> <span
                                 class="fst-italic fw-lighter">date</span></th>
-                        <th class="text-center" rowspan="2">Jenis Bahan Baku <br> <span
+                        <th class="text-center" rowspan="2">Jenis bahan baku <br> <span
                                 class="fst-italic fw-lighter">raw material type</span></th>
                         <th class="text-center" rowspan="2">Kode Batch/Lot <br> <span
                                 class="fst-italic fw-lighter">Bacth/Lot code</span></th>
@@ -42,14 +42,14 @@
                             <td>{{ tanggal($b['tgl']) }}</td>
                             <td>{{ $b['tipe'] }}</td>
                             <td>{{ $b['nm_partai'] }}</td>
-                            <td>{{ $b['no_box'] }}</td>
+                            <td class="text-start">{{ $b['no_box'] }}</td>
                             <td>{{ $b['pcs_awal'] }}</td>
                             <td>{{ $b['gr_awal'] }}</td>
-                            <td>{{ $b['pengawas'] }}</td>
-                            <td>{{ $b['no_box'] }}</td>
+                            <td>{{ ucwords(strtolower($b['pengawas'])) }}</td>
+                            <td class="text-start">{{ $b['no_box'] }}</td>
                             <td>{{ $b['pcs_awal'] }}</td>
                             <td>{{ $b['gr_awal'] }}</td>
-                            <td>{{ $b['name'] }}</td>
+                            <td>{{ ucwords(strtolower($b['name'])) }}</td>
                             <td>-</td>
                         </tr>
                     @endforeach

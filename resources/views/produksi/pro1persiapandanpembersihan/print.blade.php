@@ -82,15 +82,15 @@
             <div class="col-10">
                 <table>
                     <tr>
-                        <td>Hari/Tanggal <br> <span class="fst-italic">date</span></td>
-                        <td width="2%">:</td>
-                        <td>{{ date('l', strtotime($tanggal)) }}</td>
+                        <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
+                        <td width="2%">: </td>
+                        <td>&nbsp;{{ date('l', strtotime($tanggal)) }} / {{ tanggal($tanggal) }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Petugas Pembagi<br> <span class="fst-italic">Leader name</span></td>
+                        <td>Nama Petugas Pembagi &nbsp;<br> <span class="fst-italic">Leader name</span> </td>
                         <td width="2%">:</td>
 
-                        <td>{{ $pengawas }}</td>
+                        <td> &nbsp;{{ $pengawas }}</td>
                     </tr>
                 </table>
             </div>
@@ -130,12 +130,12 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>Cabut</td>
-                                <td class="text-center">{{ $d['nama'] }}</td>
+                                <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
                                 <td class="text-center">{{ $d['no_box'] }}</td>
                                 <td class="text-center">{{ $d['tipe'] }}</td>
                                 <td class="text-center">{{ $d['pcs_awal'] }}</td>
                                 <td class="text-center">{{ $d['gr_awal'] }}</td>
-                                <td class="text-center">{{ $d['nama'] }}</td>
+                                <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
                                 <td class="text-center">-</td>
                             </tr>
                         @endforeach

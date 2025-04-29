@@ -100,12 +100,12 @@
                         </tr>
                         <tr>
                             <th class="text-center">Box</th>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gr</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">Box</th>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gr</th>
                             <th class="text-center">Nama</th>
                         </tr>
 
@@ -118,13 +118,13 @@
                                 <td>{{ $b['tipe'] }}</td>
                                 <td>{{ $b['nm_partai'] }}</td>
                                 <td>{{ $b['no_box'] }}</td>
-                                <td>{{ $b['pcs_awal'] }}</td>
-                                <td>{{ $b['gr_awal'] }}</td>
-                                <td>{{ $b['pengawas'] }}</td>
+                                <td class="text-end">{{ $b['pcs_awal'] }}</td>
+                                <td class="text-end">{{ $b['gr_awal'] }}</td>
+                                <td>{{ ucwords(strtolower($b['pengawas'])) }}</td>
                                 <td>{{ $b['no_box'] }}</td>
-                                <td>{{ $b['pcs_awal'] }}</td>
-                                <td>{{ $b['gr_awal'] }}</td>
-                                <td>{{ $b['name'] }}</td>
+                                <td class="text-end">{{ $b['pcs_awal'] }}</td>
+                                <td class="text-end">{{ $b['gr_awal'] }}</td>
+                                <td>{{ ucwords(strtolower($b['name'])) }}</td>
                                 <td>-</td>
                             </tr>
                         @endforeach

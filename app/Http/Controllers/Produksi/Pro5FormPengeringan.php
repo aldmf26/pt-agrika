@@ -17,7 +17,7 @@ class Pro5FormPengeringan extends Controller
             $tgl = $r->tgl;
         }
         $data = [
-            'title' => 'Form Pengeringan',
+            'title' => 'Form pengeringan',
             'pengeringan' => Pengeringan::where('tanggal', $tgl)->get(),
             'pegawai' => DataPegawai::where('divisi_id', 1)->get(),
             'tgl' => $tgl,

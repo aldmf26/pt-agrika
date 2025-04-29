@@ -14,7 +14,7 @@ class Pro1PersiapandanPembersihanController extends Controller
         $bk = json_decode($bk, TRUE);
 
         $data = [
-            'title' => 'Persiapan dan Pembersihan',
+            'title' => 'Persiapan dan pembersihan',
             'bk' => $bk['data']
         ];
         return view('produksi.pro1persiapandanpembersihan.index', $data);
@@ -26,7 +26,7 @@ class Pro1PersiapandanPembersihanController extends Controller
         $detail = json_decode($detail, TRUE);
 
         $data = [
-            'title' => 'Persiapan dan Pembersihan',
+            'title' => 'Persiapan & Pembersihan',
             'detail' => $detail['data'],
             'pengawas' => $r->pengawas,
             'tanggal' => $r->tgl

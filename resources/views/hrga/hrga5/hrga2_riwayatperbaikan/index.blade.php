@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header">
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -31,7 +31,7 @@
                                     @endphp
                                     <a target="_blank"
                                         href="{{ route('hrga5.2.print', ['id' => $id, 'jenis' => $jenis, 'tahun' => $tahun]) }}"
-                                        class="btn btn-sm btn-warning"><i class="fas fa-print"></i></a>
+                                        class="btn btn-sm btn-warning"><i class="fas fa-print"></i> print</a>
                                 </td>
                             </tr>
                         @endforeach

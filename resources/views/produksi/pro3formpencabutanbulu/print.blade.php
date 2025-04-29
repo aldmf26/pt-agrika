@@ -98,57 +98,56 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center align-middle" rowspan="2">No</th>
-                            <th rowspan="2" class="text-center align-middle">Nama Operator Cabut <br><span
+                            <th class=" align-middle" rowspan="2">No</th>
+                            <th rowspan="2" class=" align-middle">Nama Operator Cabut <br><span
                                     class="fst-italic fw-lighter">
                                     Operator
                                     name</span></th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="2" class=" align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">
                                     Batch/Lot
                                     code</span>
-                            <th rowspan="2" class="text-center align-middle">Jenis<br> <span
-                                    class="fst-italic fw-lighter">
+                            <th rowspan="2" class=" align-middle">Jenis<br> <span class="fst-italic fw-lighter">
                                     type</span></th>
-                            <th class="text-center" colspan="2">Jumlah <br> <span class="fst-italic fw-lighter">
+                            <th class="" colspan="2">Jumlah <br> <span class="fst-italic fw-lighter">
                                     Quantity</span></th>
-                            <th class="text-center" colspan="2">Kembali <br> <span
+                            <th class="" colspan="2">Kembali <br> <span
                                     class="fst-italic fw-lighter">Retur</span>
                             </th>
-                            <th class="text-center" colspan="2">Hasil Pencabutan
+                            <th class="" colspan="2">Hasil Pencabutan
                                 <br> <span class="fst-italic fw-lighter">Inspection results</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan<br> <span
+                            <th rowspan="2" class=" align-middle">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
                             </th>
                         </tr>
                         <tr>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
-                            <th class="text-center">Ok</th>
-                            <th class="text-center">Not Ok</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gr</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gr</th>
+                            <th>Ok</th>
+                            <th>Not Ok</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($cabut as $c)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $c['nama'] }}</td>
+                                <td>{{ ucwords(strtolower($c['nama'])) }}</td>
                                 <td>{{ $c['no_box'] }}</td>
                                 <td>{{ $c['tipe'] }}</td>
-                                <td>{{ $c['pcs_awal'] }}</td>
-                                <td>{{ $c['gr_awal'] }}</td>
-                                <td>{{ $c['pcs_akhir'] }}</td>
-                                <td>{{ $c['gr_akhir'] }}</td>
+                                <td class="text-end">{{ $c['pcs_awal'] }}</td>
+                                <td class="text-end">{{ $c['gr_awal'] }}</td>
+                                <td class="text-end">{{ $c['pcs_akhir'] }}</td>
+                                <td class="text-end">{{ $c['gr_akhir'] }}</td>
                                 @php
                                     $susut = (1 - $c['gr_akhir'] / $c['gr_awal']) * 100;
                                 @endphp
-                                <td class="text-center">
+                                <td>
                                     {!! round($susut, 1) < $c['batas_susut'] ? '<i class="fa-solid fa-check"></i>' : '' !!}
                                 </td>
-                                <td class="text-center">
+                                <td>
                                     {!! round($susut, 1) >= $c['batas_susut'] ? '<i class="fa-solid fa-check"></i>' : '' !!}
                                 </td>
                                 <td>{!! round($susut, 1) >= $c['batas_susut'] ? 'Susut melebihi batas susut' : '' !!}</td>
@@ -189,9 +188,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    {{-- <script>
+    <script>
         window.print();
-    </script> --}}
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

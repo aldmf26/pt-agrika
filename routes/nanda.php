@@ -27,12 +27,15 @@ use App\Http\Controllers\Produksi\Pro5FormPengeringan;
 use App\Http\Controllers\Produksi\Pro6FormCetak;
 use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
+use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\DaftarhadirTinjuanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\NotulenTinjauanManajemenController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
+use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
+use App\Models\LaporanPenggunaanInstalasiKarantina;
 use Illuminate\Support\Facades\Route;
 
 
@@ -272,10 +275,26 @@ Route::controller(NotulenTinjauanManajemenController::class)
         Route::get('/export', 'export')->name('export');
         Route::post('/import', 'import')->name('import');
     });
+Route::controller(TraceabilityController::class)
+    ->prefix('qa/mampu_telusur/traceability')
+    ->name('qa.traceability.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
 Route::controller(LaporanPelaksanaanEksporController::class)
     ->prefix('qc/laporan_pelaksanaan_ekspor')
     ->name('qc.laporan_pelaksanaan_ekspor.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+    });
+Route::controller(LaporanPenggunaanInstalasiKarantinaHewan::class)
+    ->prefix('qc/laporan_penggunaan_instalasi_karantina_hewan')
+    ->name('qc.laporan_penggunaan_instalasi_karantina_hewan.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/import', 'import')->name('import');
     });

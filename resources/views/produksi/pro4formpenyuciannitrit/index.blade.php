@@ -5,11 +5,11 @@
 
 
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Tambah</button>
+                    class="fas fa-plus"></i> tambah</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
             <a href="{{ route('produksi.4.print', ['tgl' => $tgl]) }}" target="_blank"
-                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
+                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> print</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
@@ -47,7 +47,7 @@
                     @foreach ($pencucian as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->pegawai->nama }}</td>
+                            <td>{{ ucwords(strtolower($p->pegawai->nama)) }}</td>
                             <td>{{ $p->no_box }}</td>
                             <td>{{ $p->pcs }}</td>
                             <td>{{ $p->gr }}</td>
@@ -74,7 +74,7 @@
                     <input type="date" class="form-control" name="tanggal">
                 </div>
                 <div class="col-lg-3">
-                    <label for="">Nama Pengawas</label>
+                    <label for="">Nama pengawas</label>
                     <input type="text" class="form-control" name="nama_operator">
                 </div>
                 <div class="col-lg-2">
@@ -86,7 +86,7 @@
                     <input type="time" class="form-control" name="end">
                 </div>
                 <div class="col-lg-2">
-                    <label for="">Waktu Cuci Per Pcs</label>
+                    <label for="">Waktu cuci per pcs</label>
                     <input type="text" class="form-control" name="waktu_penyucian" value="50">
                 </div>
                 <div class="col-lg-12">
@@ -94,10 +94,10 @@
                 </div>
                 <div class="row mb-2">
                     <div class="col-lg-3">
-                        <label>Nama Operator Cabut</label>
+                        <label>Nama operator cabut</label>
                     </div>
                     <div class="col-lg-3">
-                        <label>No Box</label>
+                        <label>No box</label>
                     </div>
                     <div class="col-lg-2">
                         <label>Pcs</label>
@@ -137,7 +137,7 @@
                 <div class="col-lg-12">
                     <button type="button" class="btn btn-primary mt-2 btn-block"
                         @click="rows.push({ id: Date.now() }); $nextTick(() => initSelect2())">
-                        <i class="fas fa-plus"></i> Tambah Baris
+                        <i class="fas fa-plus"></i> Tambah baris
                     </button>
                 </div>
 
