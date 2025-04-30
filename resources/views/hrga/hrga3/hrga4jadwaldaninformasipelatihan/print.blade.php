@@ -122,7 +122,7 @@
                         @foreach ($jadwal_detail as $j)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $j->data_pegawai->nama }}</td>
+                                <td class="text-center">{{ ucfirst(strtolower($j->data_pegawai->nama)) }}</td>
                                 <td class="text-center">{{ $j->data_pegawai->divisi->divisi }}</td>
                                 <td class="text-center">{{ $j->konfirmasi_keterangan }}</td>
                             </tr>

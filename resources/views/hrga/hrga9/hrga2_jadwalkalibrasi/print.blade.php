@@ -97,7 +97,7 @@
                         @foreach ($jadwal as $j)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $j->itemKalibrasi->name }}</td>
+                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}</td>
                                 <td>{{ $j->itemKalibrasi->merk }}</td>
                                 <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
                                 <td>{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>

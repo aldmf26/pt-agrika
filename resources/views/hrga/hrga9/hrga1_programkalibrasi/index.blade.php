@@ -4,9 +4,9 @@
             {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> Data</button> --}}
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
             <a href="{{ route('hrga9.1.print', ['tahun' => $tahun]) }}" target="_blank"
-                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
+                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> print</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -14,12 +14,12 @@
                     <thead>
                         <tr>
                             <th rowspan="2">#</th>
-                            <th rowspan="2" class="text-nowrap">Nama Alat Ukur</th>
+                            <th rowspan="2" class="text-nowrap">Nama alat ukur</th>
                             <th rowspan="2" class="text-nowrap">Merek</th>
                             <th rowspan="2" class="text-nowrap">Type / Nomor seri</th>
                             <th rowspan="2" class="text-nowrap">Lokasi</th>
                             <th rowspan="2" class="text-nowrap">Frekuensi kalibrasi</th>
-                            <th rowspan="2" class="text-nowrap">Rentang Min-Maks</th>
+                            <th rowspan="2" class="text-nowrap">Rentang min-Maks</th>
                             <th rowspan="2" class="text-nowrap">Resolusi</th>
                             <th colspan="12" class="text-center">Tahun {{ $tahun }}</th>
                         </tr>
@@ -33,7 +33,7 @@
                         @foreach ($program as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item_kalibrasi->name }}</td>
+                                <td>{{ ucfirst(strtolower($p->item_kalibrasi->name)) }}</td>
                                 <td>{{ $p->item_kalibrasi->merk }}</td>
                                 <td>{{ $p->item_kalibrasi->nomor_seri }}</td>
                                 <td>{{ $p->item_kalibrasi->lokasi->lokasi ?? '-' }}</td>

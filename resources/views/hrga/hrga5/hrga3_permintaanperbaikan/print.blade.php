@@ -90,7 +90,7 @@
                     <tr>
                         <td width="50%">Nama Sarana & Prasarana</td>
                         <td width="2%">:</td>
-                        <td>{{ $permintaan->item->nama_item }}</td>
+                        <td>{{ ucfirst(strtolower($permintaan->item->nama_item)) }}</td>
                     </tr>
                     <tr>
                         <td>Lokasi</td>
@@ -105,7 +105,7 @@
                     <tr>
                         <td>Diajukan oleh Bagian</td>
                         <td>:</td>
-                        <td>{{ $permintaan->diajukan_oleh }}</td>
+                        <td>{{ ucfirst(strtolower($permintaan->diajukan_oleh)) }}</td>
                     </tr>
                     <tr>
                         <td class="fw-bold">Deskripsi Masalah</td>
@@ -115,7 +115,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            {{ $permintaan->deskripsi_masalah }}
+                            {{ ucfirst(strtolower($permintaan->deskripsi_masalah)) }}
                         </td>
                     </tr>
 

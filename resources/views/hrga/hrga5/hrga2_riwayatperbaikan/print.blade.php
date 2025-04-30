@@ -143,7 +143,7 @@
                         @foreach ($union as $r)
                             <tr>
                                 <td class="table_border text-center">{{ date('d/m/Y', strtotime($r->tanggal)) }}</td>
-                                <td class="table_border text-center">{{ $r->ket }}</td>
+                                <td class="table_border text-center">{{ ucfirst(strtolower($r->ket)) }}</td>
                                 <td class="table_border text-center">
                                     @if ($jenis == 'pisah')
                                         {{ $r->ket == 'perawatan' ? 'Kondisi Bersih' : 'Kembali bersih' }}

@@ -10,7 +10,7 @@ class Hrga2CeklisPerawatanMesin extends Controller
     public function index(Request $r)
     {
         $data = [
-            'title' => 'Ceklust Perawatan Mesin'
+            'title' => 'Checklist perawatan mesin'
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.index', $data);
     }

@@ -82,7 +82,7 @@
                     <tr>
                         <td class="border_kiri">Nama</td>
                         <td>:</td>
-                        <td>{{ $evaluasi_detail->data_pegawai->nama }}</td>
+                        <td>{{ ucfirst(strtolower($evaluasi_detail->data_pegawai->nama)) }}</td>
 
                         <td>Dept.</td>
                         <td>:</td>
@@ -90,7 +90,7 @@
 
                         <td class="">Training</td>
                         <td class="">:</td>
-                        <td class="border_kanan">{{ $evaluasi_detail->tema_pelatihan }}</td>
+                        <td class="border_kanan">{{ ucfirst(strtolower($evaluasi_detail->tema_pelatihan)) }}</td>
 
                         <td rowspan="2" width="33%" class="border_kanan border_kiri border_bawah">
                             Periode Evaluasi :
@@ -106,7 +106,7 @@
                     <tr>
                         <td class="border_kiri border_bawah">Jabatan</td>
                         <td class="border_bawah">:</td>
-                        <td class="border_bawah">{{ $evaluasi_detail->data_pegawai->status }}</td>
+                        <td class="border_bawah">{{ ucfirst(strtolower($evaluasi_detail->data_pegawai->status)) }}</td>
 
                         <td class="border_bawah"></td>
                         <td class="border_bawah"></td>
@@ -148,21 +148,24 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td>Memahami Personal Hygiene</td>
+                            <td>Memahami {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
                             <td class="text-center">1</td>
-                            <td class="text-center">Memahami Personal Hygiene</td>
+                            <td class="text-center">Memahami {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
                         </tr>
                         <tr>
                             <td>2</td>
-                            <td>Melakukan kegiatan CCP dengan benar</td>
+                            <td>Melakukan kegiatan {{ strtolower($evaluasi_detail->tema_pelatihan) }} dengan benar</td>
                             <td class="text-center">1</td>
-                            <td class="text-center">Melakukan kegiatan CCP dengan benar</td>
+                            <td class="text-center">Melakukan kegiatan
+                                {{ strtolower($evaluasi_detail->tema_pelatihan) }} dengan benar</td>
                         </tr>
                         <tr>
                             <td>3</td>
-                            <td>Melapor jika ketemu masalah terkait HACCP produk</td>
+                            <td>Melapor jika ketemu masalah terkait {{ strtolower($evaluasi_detail->tema_pelatihan) }}
+                            </td>
                             <td class="text-center">1</td>
-                            <td class="text-center">Melapor jika ketemu masalah terkait HACCP produk</td>
+                            <td class="text-center">Melapor jika ketemu masalah terkait
+                                {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
                         </tr>
                     </tbody>
 
@@ -188,7 +191,7 @@
 
                     </tr>
                     <tr>
-                        <td>Tgl. Review : ddmmy</td>
+                        <td>Tgl. Review : {{ date('dmy', strtotime($evaluasi_detail->tanggal)) }}</td>
                         <td>
                             <input type="checkbox" name="" id="" checked> 1 (Satu) Bulan
                             <input type="checkbox" name="" id=""> 3 (Tiga) Bulan

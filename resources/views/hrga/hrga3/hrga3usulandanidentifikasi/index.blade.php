@@ -4,7 +4,7 @@
             {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> Data</button> --}}
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print"><i
-                    class="fas fa-print"></i> Print</button>
+                    class="fas fa-print"></i> print</button>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
@@ -28,14 +28,14 @@
                     @foreach ($usulan as $u)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $u->data_pegawai->nama }}</td>
+                            <td>{{ ucfirst(strtolower($u->data_pegawai->nama)) }}</td>
                             <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
-                            <td>{{ $u->pengusul }}</td>
+                            <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
                             <td>{{ $u->divisi->divisi }}</td>
-                            <td>{{ $u->usulan_jenis_pelatihan }}</td>
+                            <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                             <td>{{ date('d-m-Y', strtotime($u->tanggal)) }}</td>
                             <td>{{ $u->usulan_waktu }}</td>
-                            <td>{{ $u->alasan }}</td>
+                            <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -106,7 +106,7 @@
             <div class="modal-dialog ">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tambahModalLabel">Print Data</h5>
+                        <h5 class="modal-title" id="tambahModalLabel">Print data</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -128,8 +128,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">close</button>
+                        <button type="submit" class="btn btn-primary">save</button>
                     </div>
                 </div>
             </div>

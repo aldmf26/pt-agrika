@@ -2,24 +2,24 @@
     <div class="card">
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Data</button>
+                    class="fas fa-plus"></i> add</button>
 
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print"><i
-                    class="fas fa-print"></i> Print</button>
+                    class="fas fa-print"></i> print</button>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="text-align-center text-center">No</th>
-                        <th rowspan="2" class="text-align-center text-center">Tanggal Informasi</th>
-                        <th rowspan="2" class="text-align-center text-center">Jenis Pelatihan</th>
-                        <th rowspan="2" class="text-align-center text-center">Sasaran Pelatihan</th>
-                        <th rowspan="2" class="text-align-center text-center">
-                            Tema Pelatihan <br> [yang ditawarkan]
+                        <th rowspan="2" class="align-center">No</th>
+                        <th rowspan="2" class="align-center">Tanggal informasi</th>
+                        <th rowspan="2" class="align-center">Jenis pelatihan</th>
+                        <th rowspan="2" class="align-center">Sasaran pelatihan</th>
+                        <th rowspan="2" class="align-center">
+                            Tema pelatihan <br> [yang ditawarkan]
                         </th>
-                        <th rowspan="2" class="text-align-center text-center">Sumber Informasi</th>
-                        <th rowspan="2" class="text-align-center text-center">Personil Penghubung</th>
+                        <th rowspan="2" class="align-center">Sumber informasi</th>
+                        <th rowspan="2" class="align-center">Personil penghubung</th>
                         <th>No.Telp</th>
                     </tr>
                     <tr>
@@ -31,11 +31,11 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ date('d-m-Y', strtotime($i->tanggal)) }}</td>
-                            <td>{{ $i->jenis }}</td>
-                            <td>{{ $i->sasaran }}</td>
-                            <td>{{ $i->tema }}</td>
-                            <td>{{ $i->sumber_informasi }}</td>
-                            <td>{{ $i->personil_penghubung }}</td>
+                            <td>{{ ucfirst(strtolower($i->jenis)) }}</td>
+                            <td>{{ ucfirst(strtolower($i->sasaran)) }}</td>
+                            <td>{{ ucfirst(strtolower($i->tema)) }}</td>
+                            <td>{{ ucfirst(strtolower($i->sumber_informasi)) }}</td>
+                            <td>{{ ucfirst(strtolower($i->personil_penghubung)) }}</td>
                             <td>{{ $i->no_telp }} <br> {{ $i->email }}</td>
                         </tr>
                     @endforeach

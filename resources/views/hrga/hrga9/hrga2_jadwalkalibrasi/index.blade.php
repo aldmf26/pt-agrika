@@ -2,11 +2,11 @@
     <div class="card">
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Data</button>
+                    class="fas fa-plus"></i> add</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
             <a href="{{ route('hrga9.2.print', ['tahun' => $tahun]) }}" target="_blank"
-                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
+                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> print</a>
             <h2 class="h6 mb-0">Tahun:{{ $tahun }}</h2>
         </div>
         <div class="card-body">
@@ -15,25 +15,25 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th class="text-nowrap">Nama Alat Ukur</th>
+                            <th class="text-nowrap">Nama alat ukur</th>
                             <th class="text-nowrap">Merek</th>
                             <th class="text-nowrap">Type / Nomor seri</th>
                             <th class="text-nowrap">Lokasi</th>
-                            <th class="text-nowrap">Frekuensi Kalibrasi</th>
-                            <th class="text-nowrap">Rentang Min-Maks</th>
+                            <th class="text-nowrap">Frekuensi kalibrasi</th>
+                            <th class="text-nowrap">Rentang min-maks</th>
                             <th class="text-nowrap">Resolusi</th>
-                            <th class="text-nowrap">Tanggal Aktual Kalibrasi</th>
-                            <th class="text-nowrap">Standard Nilai koreksi</th>
+                            <th class="text-nowrap">Tanggal aktual kalibrasi</th>
+                            <th class="text-nowrap">Standard nilai koreksi</th>
                             <th class="text-nowrap">Aktual nilai koreksi</th>
                             <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap">Rencana Kalibrasi selanjutnya</th>
+                            <th class="text-nowrap">Rencana kalibrasi selanjutnya</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jadwal as $j)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $j->itemKalibrasi->name }}</td>
+                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}</td>
                                 <td>{{ $j->itemKalibrasi->merk }}</td>
                                 <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
                                 <td>{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>

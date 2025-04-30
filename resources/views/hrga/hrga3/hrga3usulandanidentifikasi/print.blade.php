@@ -103,12 +103,12 @@
                         @foreach ($usulan as $u)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $u->data_pegawai->nama }}</td>
+                                <td>{{ ucfirst(strtolower($u->data_pegawai->nama)) }}</td>
                                 <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
-                                <td>{{ $u->pengusul }}</td>
-                                <td>{{ $u->usulan_jenis_pelatihan }}</td>
+                                <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
+                                <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                                 <td>{{ $u->usulan_waktu }}</td>
-                                <td>{{ $u->alasan }}</td>
+                                <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

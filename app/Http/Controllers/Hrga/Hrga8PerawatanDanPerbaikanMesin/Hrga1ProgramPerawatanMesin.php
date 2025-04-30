@@ -18,7 +18,7 @@ class Hrga1ProgramPerawatanMesin extends Controller
             $tahun = $r->tahun;
         }
         $data = [
-            'title' => 'Program Perawatan Mesin',
+            'title' => 'Program perawatan mesin',
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $tahun,
             'item' => ItemMesin::all(),

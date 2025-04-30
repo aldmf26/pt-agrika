@@ -2,21 +2,21 @@
     <div class="card">
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Data</button>
+                    class="fas fa-plus"></i> add</button>
             <a href="{{ route('hrga8.1.print') }}" target="_blank" class="btn  btn-primary float-end me-2"><i
-                    class="fas fa-print"></i> Print</a>
+                    class="fas fa-print"></i> print</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
                         <th class="text-center dhead" rowspan="2">No</th>
-                        <th class="text-center dhead" rowspan="2">Nama Mesin</th>
+                        <th class="text-center dhead" rowspan="2">Nama mesin</th>
                         <th class="text-center dhead" rowspan="2">Merek</th>
-                        <th class="text-center dhead" rowspan="2">No. Mesin</th>
+                        <th class="text-center dhead" rowspan="2">No. mesin</th>
                         <th class="text-center dhead" rowspan="2">Lokasi</th>
-                        <th class="text-center dhead" rowspan="2">Frekuensi Perawatan</th>
-                        <th class="text-center dhead" rowspan="2">Penanggung Jawab</th>
+                        <th class="text-center dhead" rowspan="2">Frekuensi perawatan</th>
+                        <th class="text-center dhead" rowspan="2">Penanggung jawab</th>
                         <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
                     </tr>
                     <tr>
@@ -30,12 +30,12 @@
                     @foreach ($perawatan as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->item->nama_mesin }}</td>
-                            <td>{{ $p->item->merek }}</td>
+                            <td>{{ ucfirst(strtolower($p->item->nama_mesin)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->item->merek)) }}</td>
                             <td>{{ $p->item->no_identifikasi }}</td>
                             <td>{{ $p->item->lokasi->lokasi }}</td>
                             <td>{{ $p->frekuensi_perawatan }} bulan</td>
-                            <td>{{ $p->penanggung_jawab }}</td>
+                            <td>{{ ucfirst(strtolower($p->penanggung_jawab)) }}</td>
                             @php
                                 $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                 $frekuensi = is_numeric($p->frekuensi_perawatan) ? (int) $p->frekuensi_perawatan : 1;

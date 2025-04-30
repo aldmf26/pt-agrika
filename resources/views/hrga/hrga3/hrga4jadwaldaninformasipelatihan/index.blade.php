@@ -27,7 +27,7 @@
                             <td>{{ $j->waktu }}</td>
                             <td>{{ $j->tempat }}</td>
                             <td>{{ $j->narasumber }}</td>
-                            <td>{{ $j->kisaran_materi }}</td>
+                            <td>{{ ucfirst(strtolower($j->kisaran_materi)) }}</td>
                             <td>
                                 {{-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detail"
                                     nota="{{ $j->nota_pelatihan }}"><i class="fas fa-info"></i></button> --}}

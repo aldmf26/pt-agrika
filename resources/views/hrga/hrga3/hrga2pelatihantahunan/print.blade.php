@@ -104,10 +104,12 @@
                         @foreach ($program as $t)
                             <tr>
                                 <td rowspan="2" class="align-middle">{{ $loop->iteration }}</td>
-                                <td rowspan="2" class="align-middle">{{ $t->materi_pelatihan }}</td>
+                                <td rowspan="2" class="align-middle">{{ ucfirst(strtolower($t->materi_pelatihan)) }}
+                                </td>
                                 <td rowspan="2" class="align-middle">{{ $t->sumber == 'internal' ? 'I' : 'E' }}</td>
-                                <td rowspan="2" class="align-middle">{{ $t->narasumber }}</td>
-                                <td rowspan="2" class="align-middle">{{ $t->sasaran_peserta }}</td>
+                                <td rowspan="2" class="align-middle">{{ ucfirst(strtolower($t->narasumber)) }}</td>
+                                <td rowspan="2" class="align-middle">{{ ucfirst(strtolower($t->sasaran_peserta)) }}
+                                </td>
                                 <td class="dhead">Rencana</td>
                                 @foreach ($bulan as $b)
                                     <td

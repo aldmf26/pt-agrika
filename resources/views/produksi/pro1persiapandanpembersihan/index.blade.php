@@ -20,7 +20,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td class="text-start">{{ $b['no_invoice'] }}</td>
                             <td>{{ tanggal($b['tanggal']) }}</td>
-                            <td>{{ $b['name'] }}</td>
+                            <td>{{ ucfirst(strtolower($b['name'])) }}</td>
                             <td>{{ number_format($b['pcs'], 0) }}</td>
                             <td>{{ number_format($b['gr_awal'], 0) }}</td>
                             <td class="text-center">

@@ -5,7 +5,7 @@
                 <i class="fas fa-plus"></i> Data
             </button> --}}
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print">
-                <i class="fas fa-print"></i> Print
+                <i class="fas fa-print"></i> print
             </button>
         </div>
         <div class="card-body">
@@ -15,12 +15,12 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Materi Pelatihan</th>
+                            <th>Materi pelatihan</th>
                             <th>I/E <br> *</th>
                             <th>Narasumber</th>
-                            <th>Sasaran Peserta</th>
-                            <th>Tanggal Rencana</th>
-                            <th>Tanggal Realisasi</th>
+                            <th>Sasaran peserta</th>
+                            <th>Tanggal rencana</th>
+                            <th>Tanggal realisasi</th>
                             <th width="200">Aksi</th>
                         </tr>
                     </thead>
@@ -35,12 +35,12 @@
                                 </td>
                                 <td>
                                     @if ($p->isi_usulan == 'Y')
-                                        {{ $p->materi_pelatihan }}
+                                        {{ ucfirst(strtolower($p->materi_pelatihan)) }}
                                     @else
                                         <a href="#" class="usulan" data-bs-toggle="modal" data-bs-target="#tambah"
                                             usulan="{{ $p->materi_pelatihan }}" tgl="{{ $p->tgl_realisasi }}"
                                             Getid="{{ $p->id }}">
-                                            {{ $p->materi_pelatihan }}
+                                            {{ ucfirst(strtolower($p->materi_pelatihan)) }}
                                         </a>
                                     @endif
                                 </td>
@@ -56,11 +56,11 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <span x-show="!edit"> {{ $p->narasumber }}</span>
+                                    <span x-show="!edit"> {{ ucfirst(strtolower($p->narasumber)) }}</span>
                                     <input type="text" x-show="edit" value="{{ $p->narasumber }}"
                                         class="form-control" name="narasumber[]">
                                 </td>
-                                <td>{{ $p->sasaran_peserta }}</td>
+                                <td>{{ ucfirst(strtolower($p->sasaran_peserta)) }}</td>
                                 <td>
 
                                     <span x-show="!edit">{{ $p->tgl_rencana }}</span>
@@ -74,12 +74,12 @@
                                 </td>
                                 <td class="text-center">
                                     <a x-show="!edit" @click="edit = !edit" class="btn btn-sm btn-primary"><i
-                                            class="fa fa-edit"></i> Edit</a>
+                                            class="fa fa-edit"></i> edit</a>
                                     <a x-show="edit" @click="edit = !edit" class="btn btn-sm btn-primary">
-                                        Cancel</a>
+                                        cancel</a>
                                     <button type="submit" x-show="edit" class="btn btn-sm btn-success"><i
                                             class="fa fa-check"></i>
-                                        Simpan</button>
+                                        save</button>
                                 </td>
                             </tr>
                         @endforeach
