@@ -29,7 +29,7 @@ class AuditWizard extends Component
 
     public function mount()
     {
-        $departementBk = ['bk', 'cabut', 'ctk', 'steamer', 'packing'];
+        $departementBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing'];
         $departemen = in_array($this->departemen, $departementBk) ? 'bk' : $this->departemen;
         $this->headings = Heading::with('subHeadings.pertanyaan.hasilChecklist')
             ->where('departemen', $departemen)

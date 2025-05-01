@@ -66,7 +66,7 @@
     <br>
     <div class="float-end">
         <span class="text-warning"> Keterangan :</span>
-        <span class="fst-italic text-muted text-sm">Kosong</span>
+        <span class="fst-italic text-muted text-sm">Nihil</span>
         <button class="btn btn-md btn-outline-dark">&nbsp;</button>
 
         <span class="fst-italic text-muted text-sm">Siap Audit</span>
@@ -102,15 +102,12 @@
                     <td>{{ $key + 1 }}</td>
                     <td>
                         {{ $audit->departemen }}
-
                     </td>
                     <td>{{ $audit->audite }}</td>
                     <td>{{ $audit->auditor }}</td>
                     @for ($i = 1; $i <= 12; $i++)
                 <td 
-                    @if(!$this->cekSelesai($audit->departemen, $i))
                     onclick="{{ $this->getField($i, $audit->id) ? 'showContextMenu(event, ' . $audit->id . ', ' . $i . ')' : '' }}"
-                    @endif
                     @dblclick="$wire.toggleBulan({{ $audit->id }}, {{ $i }}, '{{ $audit->departemen }}', '{{ $audit->audite }}', '{{ $audit->auditor }}')"
                     class="text-center td-hover {{ $this->cekSelesai($audit->departemen, $i) ? 'bg-success' : ($this->getField($i, $audit->id) ? 'bg-warning' : '') }}">
 
@@ -120,7 +117,7 @@
                                 $link = "https://docs.google.com/spreadsheets/d/17f9GVnbjbtAeSUHw7kPHQgNbiwZlif4pmQh1ChG2Dxc/edit?usp=sharing";
                             @endphp
                           
-                            <a class="dropdown-item" href="{{route('ia.1.audit', ['id' => $audit->id,'departemen' => $audit->departemen, 'bulan' => $i, 'tahun' => $tahun])}}">Audit</a>
+                            <a class="dropdown-item" href="{{route('ia.1.audit', ['id' => $audit->id,'departemen' => $audit->departemen, 'bulan' => $i, 'tahun' => $tahun])}}">{{$this->cekSelesai($audit->departemen, $i) ? 'Edit' : 'Audit'}}</a>
                             {{-- <a class="dropdown-item" href="{{$link}}">Audit</a> --}}
                         </div>
                     </div>

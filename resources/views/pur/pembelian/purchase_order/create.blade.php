@@ -22,7 +22,7 @@
                     <select class="select2suplier" name="supplier">
                         <option value="">-- Pilih Item --</option>
                         @foreach ($supplier as $p)
-                            <option value="{{ $p->nama_supplier }}">{{ $p->nama_supplier }}</option>
+                            <option data-alamat="{{ $p->alamat }}" data-no="{{ $p->telepon }}" value="{{ $p->nama_supplier }}">{{ $p->nama_supplier }}</option>
                         @endforeach
                     </select>
                 </div>

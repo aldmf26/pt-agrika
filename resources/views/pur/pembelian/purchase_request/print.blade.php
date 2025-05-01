@@ -67,7 +67,7 @@
                     @foreach ($datas->item as $d)
                         <tr>
                             <td align="center">{{ $d->jumlah }}</td>
-                            <td align="center">{{ $d->item_spesifikasi }}</td>
+                            <td align="center">{{ ucfirst($d->item_spesifikasi) }}</td>
                             <td align="center">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                         </tr>
                     @endforeach

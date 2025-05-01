@@ -163,6 +163,7 @@
                     var kd_tahun = kedatangan_parts[0];
 
                     var expired_parts = tgl_expired.split('-');
+                    
                     var exp_bulan = expired_parts[1];
                     var exp_tahun = expired_parts[0];
 

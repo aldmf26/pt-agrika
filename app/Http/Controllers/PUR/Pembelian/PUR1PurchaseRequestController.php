@@ -76,7 +76,7 @@ class PUR1PurchaseRequestController extends Controller
 
     public function print($id)
     {
-        $datas = PurchaseRequest::find($id)->with('item')->first();
+        $datas = PurchaseRequest::where('id',$id)->with('item')->first();
         $data = [
             'title' => 'PURCHASE REQUEST',
             'dok' => 'Dok.No.: FRM.PUR.01.01, Rev.00',
