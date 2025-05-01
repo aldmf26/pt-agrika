@@ -5,6 +5,7 @@ namespace App\Livewire\Ia;
 use App\Models\Notif;
 use App\Models\ProgramAuditInternal as ModelsProgramAuditInternal;
 use App\Services\NotifiService;
+use App\Traits\WithAlert;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Computed;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 
 class ProgramAuditInternal extends Component
 {
+    use WithAlert;
+
     public $tahun;
     public $form = [];
     public $model = ModelsProgramAuditInternal::class;
