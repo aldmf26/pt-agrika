@@ -26,19 +26,20 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
     public function store(Request $r)
     {
         $agenda = AgendadanJadwalTinjauanManajemen::where('tanggal', $r->tanggal)->delete();
-        for ($i = 0; $i < count($r->start); $i++) {
+
+        for ($i = 0; $i < count($r->agenda); $i++) {
             if (empty($r->id[$i])) {
                 $data = [
-                    'dari_jam' => $r->start[$i],
-                    'sampai_jam' => $r->finish[$i],
+                    'dari_jam' => $r->waktu_dari,
+                    'sampai_jam' => $r->waktu_dari,
                     'agenda' => $r->agenda[$i],
                     'pic' => $r->pic[$i],
                 ];
                 DB::table('agenda')->insert($data);
             } else {
                 $data = [
-                    'dari_jam' => $r->start[$i],
-                    'sampai_jam' => $r->finish[$i],
+                    'dari_jam' => $r->waktu_dari,
+                    'sampai_jam' => $r->waktu_dari,
                     'agenda' => $r->agenda[$i],
                     'pic' => $r->pic[$i],
                 ];
@@ -47,8 +48,8 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
 
             $data2 = [
                 'tanggal' => $r->tanggal,
-                'dari_jam' => $r->start[$i],
-                'sampai_jam' => $r->finish[$i],
+                'dari_jam' => $r->waktu_dari,
+                'sampai_jam' => $r->waktu_dari,
                 'agenda' => $r->agenda[$i],
                 'pic' => $r->pic[$i],
             ];

@@ -95,22 +95,24 @@
                             <th class="text-center dhead">No</th>
                             <th class="text-center dhead">Hari / Tanggal</th>
                             <th class="text-center dhead">Waktu</th>
-                            <th class="text-center dhead">Agenda</th>
+                            <th class="text-center dhead" width="60%">Agenda</th>
                             <th class="text-center dhead">PIC</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($agenda as $a)
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ date('l', strtotime($a->tanggal)) }} /
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ date('l', strtotime($a->tanggal)) }} /
                                     {{ tanggal($a->tanggal) }}</td>
 
-                                <td class="text-center">{{ date('H:i', strtotime($a->dari_jam)) }} -
-                                    {{ date('H:i', strtotime($a->sampai_jam)) }}</td>
+                                <td>{{ date('H:i', strtotime($a->dari_jam)) }} -
+                                    Selesai</td>
                                 </td>
-                                <td class="text-center">{{ $a->agenda }}</td>
-                                <td class="text-center">{{ $a->pic }}</td>
+                                <td>
+                                    <div style="white-space: pre-wrap;">{{ $a->agenda }}</div>
+                                </td>
+                                <td>{{ $a->pic }}</td>
                             </tr>
                         @endforeach
                     </tbody>

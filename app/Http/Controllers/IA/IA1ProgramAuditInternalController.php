@@ -14,8 +14,8 @@ class IA1ProgramAuditInternalController extends Controller
         $data = [
             'title' => 'Program Audit Internal'
         ];
-        
-        return view('ia.ia1_program_audit_internal.index',$data);
+
+        return view('ia.ia1_program_audit_internal.index', $data);
     }
 
     public function print(Request $r)
@@ -39,6 +39,5 @@ class IA1ProgramAuditInternalController extends Controller
             'bulan' => DB::table('bulan')->where('bulan', $r->bulan)->first()
         ];
         return view("ia.ia1_program_audit_internal.audit", $data);
-
     }
 }

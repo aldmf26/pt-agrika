@@ -36,21 +36,21 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">Nama</th>
-                                <th class="text-center">Bagian</th>
-                                <th class="text-center">Tanda Tangan</th>
-                                <th class="text-center">Keterangan</th>
+                                <th>#</th>
+                                <th>Nama</th>
+                                <th>Bagian</th>
+                                <th>Tanda Tangan</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($pegawai as $p)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ $p->nama }}</td>
-                                    <td class="text-center">{{ $p->posisi }}</td>
-                                    <td class="text-center"></td>
-                                    <td class="text-center"></td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ucfirst(strtolower($p->nama)) }}</td>
+                                    <td>{{ $p->posisi }}</td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                             @endforeach
                         </tbody>

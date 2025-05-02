@@ -1,3 +1,3 @@
 <x-app-layout :title="$title">
-    @livewire('ia.program-audit-internal')
+    @livewire('qa.jadwal-verifikasi')
 </x-app-layout>

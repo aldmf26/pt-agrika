@@ -92,21 +92,21 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center dhead">#</th>
-                            <th class="text-center dhead">Nama</th>
-                            <th class="text-center dhead">Bagian</th>
-                            <th class="text-center dhead">Tanda Tangan</th>
-                            <th class="text-center dhead">Keterangan</th>
+                            <th class=" dhead">#</th>
+                            <th class=" dhead">Nama</th>
+                            <th class=" dhead">Bagian</th>
+                            <th class=" dhead">Tanda Tangan</th>
+                            <th class=" dhead">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($pegawai as $p)
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $p->nama }}</td>
-                                <td class="text-center">{{ $p->posisi }}</td>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
+                                <td class="">{{ $loop->iteration }}</td>
+                                <td class="">{{ ucfirst(strtolower($p->nama)) }}</td>
+                                <td class="">{{ $p->posisi }}</td>
+                                <td class=""></td>
+                                <td class=""></td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->time('dari_jam');
             $table->time('sampai_jam');
-            $table->string('agenda');
+            $table->text('agenda');
             $table->string('pic');
             $table->timestamps();
         });

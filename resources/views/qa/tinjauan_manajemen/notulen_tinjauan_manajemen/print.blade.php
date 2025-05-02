@@ -104,13 +104,13 @@
                     <tbody>
                         @foreach ($notulen as $n)
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $n->agenda ?? '-' }}</td>
-                                <td class="text-center">{{ $n->hasil_pembahasan ?? '-' }}</td>
-                                <td class="text-center">{{ $n->action_plan ?? '-' }}</td>
-                                <td class="text-center">{{ $n->pic ?? '-' }}</td>
-                                <td class="text-center">{{ $n->duedate ?? '-' }}</td>
-                                <td class="text-center">{{ $n->status ?? '-' }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $n->agenda ?? '-' }}</td>
+                                <td>{{ $n->hasil_pembahasan ?? '-' }}</td>
+                                <td>{{ $n->action_plan ?? '-' }}</td>
+                                <td>{{ $n->pic ?? '-' }}</td>
+                                <td>{{ $n->duedate ?? '-' }}</td>
+                                <td>{{ $n->status ?? '-' }}</td>
                             </tr>
                         @endforeach
 

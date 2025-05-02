@@ -31,8 +31,10 @@ use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\DaftarhadirTinjuanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\NotulenTinjauanManajemenController;
+use App\Http\Controllers\QA\Verifikasi\JadwalVerifikasiController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
+use App\Http\Controllers\Qc\PengecekanWaktuPencucianTerakhir;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use App\Models\LaporanPenggunaanInstalasiKarantina;
@@ -282,6 +284,13 @@ Route::controller(TraceabilityController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
     });
+Route::controller(JadwalVerifikasiController::class)
+    ->prefix('qa/verifikasi/jadwal_verifikasi')
+    ->name('qa.jadwal_verifikasi.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
 Route::controller(LaporanPelaksanaanEksporController::class)
     ->prefix('qc/laporan_pelaksanaan_ekspor')
     ->name('qc.laporan_pelaksanaan_ekspor.')
@@ -297,4 +306,11 @@ Route::controller(LaporanPenggunaanInstalasiKarantinaHewan::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/import', 'import')->name('import');
+    });
+Route::controller(PengecekanWaktuPencucianTerakhir::class)
+    ->prefix('qc/pengecekan_waktu_pencucian_terakhir')
+    ->name('qc.pengecekan_waktu_pencucian_terakhir.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
     });

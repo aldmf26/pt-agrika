@@ -28,7 +28,7 @@
             font-size: 12px;
             text-align: left;
             font-weight: normal;
-            margin-top: 50px;
+            margin-top: 100px;
 
         }
 
@@ -57,6 +57,14 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        th {
+            font-size: 12px !important;
+        }
+
+        td {
+            font-size: 12px !important;
+        }
     </style>
 </head>
 
@@ -68,64 +76,66 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">LAPORAN PELAKSANAAN EKSPOR SARANG BURUNG WALET</p>
+                    <p class="cop_judul">FORM PENGECEKAN WAKTU PENCUCIAN TERAKHIR</p>
 
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.QC.01.01, Rev.00</p>
+                <p class="cop_text">Dok.No.: FRM.QC.01.04, Rev.01</p>
+                <br>
 
             </div>
-
+            <div class="col-4"></div>
 
             <div class="col-lg-12">
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
-
+                <p>Bulan/Tahun : {{ $bulan }}/{{ $tahun }}</p>
+            </div>
+            <div class="col-lg-12">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="6" class="text-center">PELAKSANAAN EKSPOR</th>
+                            <th class="text-center align-middle">#</th>
+                            <th class="text-center align-middle">Kode Cabut Bulu : No Urut - Tanggal Bulan dan Tahun
+                                Cabut Bulu </th>
+                            <th class="text-center align-middle">No Lot SBW : Tgl Bln Panen - Tgl Bln dtg - 2 digit
+                                trakhir nomor reg rumah walet</th>
+                            <th class="text-center align-middle text-nowrap" style="">Jumlah (pcs / gram)</th>
+                            <th class="text-center align-middle">Jenis (Grade)</th>
+                            <th class="text-center align-middle">Waktu mulai</th>
+                            <th class="text-center align-middle">Waktu akhir</th>
+                            <th class="text-center align-middle">Total waktu</th>
+                            <th class="text-center align-middle text-nowrap">Kesimpulan <br> (OK / TIDAK)</th>
+                            <th class="text-center align-middle">Ttd Petugas Penguji (PRD)</th>
+                            <th class="text-center align-middle">Ttd Verifikator (QC)</th>
+                            <th class="text-center align-middle">Kode Pencucian Nitrit : No Urut - Tanggal Bulan dan
+                                Tahun Pencucian Nitrit</th>
                         </tr>
-                        <tr>
-                            <th class="text-center align-middle" rowspan="2">#</th>
-                            <th class="text-center align-middle" rowspan="2">Nama dan Tanggal PEB</th>
-                            <th class="text-center align-middle" rowspan="2">Uraian Barang</th>
-                            <th class="text-center align-middle" rowspan="2">Nomor Pos Tarif/HS</th>
-                            <th class="text-center align-middle" colspan="2">Jumlah</th>
-                        </tr>
-                        <tr>
-                            <th class="text-center">Volume</th>
-                            <th class="text-center">Nilai</th>
-                        </tr>
+
                     </thead>
                     <tbody>
-                        @foreach ($laporan as $l)
+                        @foreach ($cabut as $c)
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ ucfirst(strtolower($l->nama)) }} & {{ $l->tanggal }}</td>
-                                <td class="text-center">{{ $l->uraian_barang }}</td>
-                                <td class="text-center">{{ $l->nomor_pos }}</td>
-                                <td class="text-center">{{ $l->volume }}</td>
-                                <td class="text-center">Rp {{ number_format($l->nilai, 0) }}</td>
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="text-center">
+                                    {{ $c['no_box'] }}-{{ date('dmY', strtotime($c['tgl_terima'])) }}</td>
+                                <td></td>
+                                <td class="text-center">{{ $c['pcs_awal'] }}/{{ $c['gr_awal'] }}</td>
+                                <td class="text-center">{{ $c['tipe'] }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforeach
                     </tbody>
+
                 </table>
             </div>
 
-            <div class="col-8">
 
-            </div>
-            <div class="col-4">
-                <p>Banjarmasin ...................................</p>
-                <p>PT. AGRIKA GATYA ARUM</p>
-                <p>Pimpinan/penanggungjawab perusahaan</p>
-                <br>
-                <br>
-                <br>
-                <br>
-                <p>(.............................................)</p>
-            </div>
 
 
         </div>
@@ -137,9 +147,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script>
+    {{-- <script>
         window.print();
-    </script>
+    </script> --}}
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

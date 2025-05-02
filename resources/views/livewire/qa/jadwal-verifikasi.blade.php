@@ -27,28 +27,32 @@
             <div class="col-6">
                 <label for="">Aksi</label> <br>
                 <button @click="add = !add" type="button" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                    Data</button>
+                    add</button>
             </div>
         </div>
         <div>
-            <a href="{{ route('ia.1.print', ['tahun' => $tahun]) }}" target="_blank" class="btn btn-sm btn-primary"><i
-                    class="fas fa-print"></i>
-                Print</a>
+            <a href="{{ route('qa.jadwal_verifikasi.print', ['tahun' => $tahun]) }}" target="_blank"
+                class="btn btn-sm btn-primary"><i class="fas fa-print"></i>
+                print</a>
         </div>
     </div>
     <form wire:submit.prevent="add">
         <div class="row" x-show="add" x-transition>
             <div class="col-2">
+                <label for="">Item :</label>
+                <input type="text" wire:model="form.item" class="form-control">
+            </div>
+            <div class="col-2">
+                <label for="">Aktivitas :</label>
+                <input type="text" wire:model="form.aktivitas" class="form-control">
+            </div>
+            <div class="col-2">
+                <label for="">Frekuensi :</label>
+                <input type="text" wire:model="form.frek" class="form-control">
+            </div>
+            <div class="col-2">
                 <label for="">Departemen :</label>
                 <input type="text" wire:model="form.departemen" class="form-control">
-            </div>
-            <div class="col-2">
-                <label for="">Auditee :</label>
-                <input type="text" wire:model="form.audite" class="form-control">
-            </div>
-            <div class="col-2">
-                <label for="">Auditor :</label>
-                <input type="text" wire:model="form.auditor" class="form-control">
             </div>
             <div class="col-2">
                 <label for="">&nbsp;</label><br>
@@ -69,7 +73,7 @@
         <span class="fst-italic text-muted text-sm">Nihil</span>
         <button class="btn btn-md btn-outline-dark">&nbsp;</button>
 
-        <span class="fst-italic text-muted text-sm">Siap Audit</span>
+        <span class="fst-italic text-muted text-sm">Process</span>
         <button class="btn btn-md btn-warning">&nbsp;</button>
 
         <span class="fst-italic text-muted text-sm">Selesai</span>
@@ -81,12 +85,14 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>Item</th>
+                <th>Aktivitas</th>
+                <th>Frekuensi</th>
                 <th>Departemen</th>
-                <th>Auditee</th>
-                <th>Auditor</th>
                 <th colspan="13" class="text-center">Bulan</th>
             </tr>
             <tr>
+                <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -101,26 +107,30 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>
-                        {{ $audit->departemen }}
+                        {{ $audit->item }}
                     </td>
-                    <td>{{ $audit->audite }}</td>
-                    <td>{{ $audit->auditor }}</td>
+                    <td>{{ $audit->aktivitas }}</td>
+                    <td>{{ $audit->frek }}</td>
+                    <td>{{ $audit->departemen }}</td>
                     @for ($i = 1; $i <= 12; $i++)
                         <td onclick="{{ $this->getField($i, $audit->id) ? 'showContextMenu(event, ' . $audit->id . ', ' . $i . ')' : '' }}"
-                            @dblclick="$wire.toggleBulan({{ $audit->id }}, {{ $i }}, '{{ $audit->departemen }}', '{{ $audit->audite }}', '{{ $audit->auditor }}')"
-                            class="text-center td-hover {{ $this->cekSelesai($audit->departemen, $i) ? 'bg-success' : ($this->getField($i, $audit->id) ? 'bg-warning' : '') }}">
+                            @dblclick="$wire.toggleBulan({{ $audit->id }}, {{ $i }}, '{{ $audit->item }}', '{{ $audit->aktivitas }}', '{{ $audit->frek }}', '{{ $audit->departemen }}')"
+                            class="text-center td-hover {{ $this->cekSelesai($audit->item, $i) ? 'bg-success' : ($this->getField($i, $audit->id) ? 'bg-warning' : '') }}">
 
                             <div class="position-absolute mt-2 d-none context-menu"
                                 id="contextMenu-{{ $audit->id }}-{{ $i }}">
                                 <div class="dropdown-menu show">
-                                    @php
-                                        $link =
-                                            'https://docs.google.com/spreadsheets/d/17f9GVnbjbtAeSUHw7kPHQgNbiwZlif4pmQh1ChG2Dxc/edit?usp=sharing';
-                                    @endphp
+                                    @if ($this->cekSelesai($audit->item, $i))
+                                        <a class="dropdown-item"
+                                            x-on:click="$wire.cancel('{{ $audit->item }}', {{ $i }})"
+                                            href="#">cancel</a>
+                                    @else
+                                        <a class="dropdown-item"
+                                            x-on:click="$wire.selesai('{{ $audit->item }}', {{ $i }})"
+                                            href="#">done</a>
+                                    @endif
 
-                                    <a class="dropdown-item"
-                                        href="{{ route('ia.1.audit', ['id' => $audit->id, 'departemen' => $audit->departemen, 'bulan' => $i, 'tahun' => $tahun]) }}">{{ $this->cekSelesai($audit->departemen, $i) ? 'Edit' : 'Audit' }}</a>
-                                    {{-- <a class="dropdown-item" href="{{$link}}">Audit</a> --}}
+
                                 </div>
                             </div>
                         </td>

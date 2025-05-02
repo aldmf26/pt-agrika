@@ -60,37 +60,43 @@
                     <label for="">Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" required>
                 </div>
+                <div class="col-lg-3">
+                    <label for="">Waktu</label>
+                    <input type="time" class="form-control" name="waktu_dari" required>
+                </div>
                 <div class="col-lg-12">
                     <hr>
                 </div>
                 <div class="row mb-2">
-                    <div class="col-lg-2">
+                    {{-- <div class="col-lg-2">
                         <label>Waktu (Dari)</label>
                     </div>
                     <div class="col-lg-2">
                         <label>Waktu (Sampai)</label>
-                    </div>
-                    <div class="col-lg-4">
+                    </div> --}}
+                    <div class="col-lg-8">
                         <label>Agenda</label>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-4">
                         <label>PIC</label>
                     </div>
                 </div>
                 <template x-for="(row, index) in rows" :key="row.id">
 
                     <div class="row mb-4">
-                        <div class="col-lg-2">
+                        {{-- <div class="col-lg-2">
                             <input type="hidden" :value="row.id_agenda" name="id[]">
                             <input type="time" class="form-control" :value="row.dari_jam" name="start[]" required>
                         </div>
                         <div class="col-lg-2">
                             <input type="time" class="form-control" :value="row.sampai_jam" name="finish[]" required>
+                        </div> --}}
+                        <div class="col-lg-7">
+                            <input type="hidden" :value="row.id_agenda" name="id[]">
+                            <textarea name="agenda[]" class="form-control" id="" cols="5" rows="2" x-text="row.agenda"></textarea>
+                            {{-- <input type="text" class="form-control" :value="row.agenda" name="agenda[]" required> --}}
                         </div>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" :value="row.agenda" name="agenda[]" required>
-                        </div>
-                        <div class="col-lg-3">
                             <input type="text" class="form-control" :value="row.pic" name="pic[]" required>
                         </div>
                         <div class="col-lg-1 d-flex align-items-end">

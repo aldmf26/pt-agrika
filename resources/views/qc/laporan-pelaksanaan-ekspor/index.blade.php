@@ -7,9 +7,9 @@
 
                     <a href="#" data-bs-toggle="modal" data-bs-target="#tambah"
                         class="btn btn-sm btn-primary float-end ms-2"><i class="fas fa-plus"></i>
-                        Data</a>
+                        add</a>
                     <a target="_blank" href="{{ route('qc.laporan_pelaksanaan_ekspor.print') }}"
-                        class="btn btn-sm btn-primary float-end"><i class="fas fa-print"></i>Print</a>
+                        class="btn btn-sm btn-primary float-end"><i class="fas fa-print"></i>print</a>
 
 
                 </div>
@@ -18,9 +18,9 @@
                         <thead>
                             <tr>
                                 <th class="text-start align-middle" rowspan="2">#</th>
-                                <th class="text-start align-middle" rowspan="2">Nama dan Tanggal PEB</th>
-                                <th class="text-start align-middle" rowspan="2">Uraian Barang</th>
-                                <th class="text-start align-middle" rowspan="2">Nomor Pos Tarif/Hs</th>
+                                <th class="text-start align-middle" rowspan="2">Nama & tanggal PEB</th>
+                                <th class="text-start align-middle" rowspan="2">Uraian barang</th>
+                                <th class="text-start align-middle" rowspan="2">Nomor pos tarif/hs</th>
                                 <th class="text-center align-middle" colspan="2">Jumlah</th>
                             </tr>
                             <tr>
@@ -32,7 +32,7 @@
                             @foreach ($laporan as $l)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $l->nama }} & {{ $l->tanggal }}</td>
+                                    <td>{{ ucfirst(strtolower($l->nama)) }} & {{ $l->tanggal }}</td>
                                     <td>{{ $l->uraian_barang }}</td>
                                     <td>{{ $l->nomor_pos }}</td>
                                     <td class="text-end">{{ $l->volume }}</td>

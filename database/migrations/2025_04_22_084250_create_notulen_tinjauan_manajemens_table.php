@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('notulen_tinjauan_manajemens', function (Blueprint $table) {
             $table->id();
             $table->date('tanggal');
-            $table->string('agenda');
-            $table->string('hasil_pembahasan');
-            $table->string('action_plan');
+            $table->text('agenda');
+            $table->text('hasil_pembahasan');
+            $table->text('action_plan');
             $table->string('pic');
-            $table->date('duedate');
+            $table->string('duedate');
             $table->string('status');
             $table->timestamps();
         });
