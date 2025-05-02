@@ -23,7 +23,6 @@
                         @foreach ($bulan as $b)
                             <th class="text-center dhead">{{ $b->bulan }}</th>
                         @endforeach
-
                     </tr>
                 </thead>
                 <tbody>
@@ -46,9 +45,15 @@
                                     $currentDate->addMonths($frekuensi);
                                 }
                             @endphp
-
                             @foreach ($bulan as $index => $b)
-                                <td class="{{ in_array($index + 1, $bulanPerawatan) ? 'bg-primary' : '' }}"></td>
+                                @if (in_array($index + 1, $bulanPerawatan))
+                                    <td class="bg-primary text-center" onclick="toggleLink(this)">
+                                        <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1]) }}"
+                                            class="btn btn-success" style="display: none;">checklist</a>
+                                    </td>
+                                @else
+                                    <td class=""></td>
+                                @endif
                             @endforeach
                         </tr>
                     @endforeach
@@ -59,7 +64,7 @@
 
     <form action="{{ route('hrga8.1.store') }}" method="post">
         @csrf
-        <x-modal_plus id="tambah" size="modal-lg">
+        <x-modal_plus id="edit" size="modal-lg">
             <div class="row">
                 <div class="col-lg-4">
                     <label for="">Mesin</label>
@@ -85,4 +90,15 @@
             </div>
         </x-modal_plus>
     </form>
+
+    @section('scripts')
+        <script>
+            function toggleLink(td) {
+                const link = td.querySelector('a');
+                if (link) {
+                    link.style.display = (link.style.display === 'none' || link.style.display === '') ? 'inline' : 'none';
+                }
+            }
+        </script>
+    @endsection
 </x-app-layout>

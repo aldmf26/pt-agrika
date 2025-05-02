@@ -2,12 +2,13 @@
     <div class="card">
         <div class="card-header">
             <h5 class="float-start">Tanggal : {{ tanggal($tgl) }}</h5>
-            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">Tambah</button>
+            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
+                    class="fas fa-plus"></i> add</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
             <a href="{{ route('produksi.9.print', ['tgl' => $tgl]) }}" class="btn btn-primary float-end me-2"
                 target="_blank"><i class="fas fa-print"></i>
-                Print</a>
+                print</a>
 
         </div>
         <div class="card-body">
@@ -78,7 +79,7 @@
                     <input type="text" class="form-control" name="penambahan_air">
                 </div>
                 <div class="col-lg-3 mt-2">
-                    <label for="">Mesin Pemanas </label>
+                    <label for="">Mesin pemanas </label>
                     <input type="text" class="form-control" name="mesin_pemanasan">
                 </div>
                 <div class="col-lg-12">
@@ -91,7 +92,7 @@
                             <input type="text" class="form-control" name="tray[]">
                         </div>
                         <div class="col-lg-2">
-                            <label for="">Kode Batch/Lot</label>
+                            <label for="">Kode batch/lot</label>
                             <input type="text" class="form-control" name="kode_batch[]">
                         </div>
                         <div class="col-lg-2">
@@ -119,7 +120,7 @@
                             <input type="text" class="form-control" name="ttot_c[]">
                         </div>
                         <div div class="col-lg-2 mt-2">
-                            <label for="">ttot (mnt)</label>
+                            <label for="">Ttot (mnt)</label>
                             <input type="text" class="form-control" name="ttot_mnt[]">
                         </div>
                         <div div class="col-lg-2 mt-2">

@@ -14,4 +14,12 @@ class Hrga2CeklisPerawatanMesin extends Controller
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.index', $data);
     }
+
+    public function add(Request $r)
+    {
+        $data = [
+            'title' => 'Tambah checklist perawatan mesin'
+        ];
+        return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.add', $data);
+    }
 }

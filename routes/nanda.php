@@ -35,6 +35,7 @@ use App\Http\Controllers\QA\Verifikasi\JadwalVerifikasiController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
 use App\Http\Controllers\Qc\PengecekanWaktuPencucianTerakhir;
+use App\Http\Controllers\QC\ProdukReleaseController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use App\Models\LaporanPenggunaanInstalasiKarantina;
@@ -149,6 +150,7 @@ Route::controller(Hrga2CeklisPerawatanMesin::class)
     ->name('hrga8.2.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/add', 'add')->name('add');
     });
 Route::controller(Hrga3PermintaanPerbaikanMesin::class)
     ->prefix('hrga/hrga8/3_Permintaan_perbaikan_mesin')
@@ -310,6 +312,13 @@ Route::controller(LaporanPenggunaanInstalasiKarantinaHewan::class)
 Route::controller(PengecekanWaktuPencucianTerakhir::class)
     ->prefix('qc/pengecekan_waktu_pencucian_terakhir')
     ->name('qc.pengecekan_waktu_pencucian_terakhir.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(ProdukReleaseController::class)
+    ->prefix('qc/produk_release')
+    ->name('qc.produk_release.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
