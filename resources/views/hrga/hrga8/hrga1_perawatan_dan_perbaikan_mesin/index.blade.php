@@ -48,7 +48,7 @@
                             @foreach ($bulan as $index => $b)
                                 @if (in_array($index + 1, $bulanPerawatan))
                                     <td class="bg-primary text-center" onclick="toggleLink(this)">
-                                        <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1]) }}"
+                                        <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1, 'tahun' => $tahun]) }}"
                                             class="btn btn-success" style="display: none;">checklist</a>
                                     </td>
                                 @else
