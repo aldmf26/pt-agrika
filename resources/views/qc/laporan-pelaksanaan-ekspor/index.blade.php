@@ -3,15 +3,11 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-
-
                     <a href="#" data-bs-toggle="modal" data-bs-target="#tambah"
                         class="btn btn-sm btn-primary float-end ms-2"><i class="fas fa-plus"></i>
                         add</a>
                     <a target="_blank" href="{{ route('qc.laporan_pelaksanaan_ekspor.print') }}"
                         class="btn btn-sm btn-primary float-end"><i class="fas fa-print"></i>print</a>
-
-
                 </div>
                 <div class="card-body">
                     <table id="example" class="table table-bordered">
@@ -60,10 +56,10 @@
                         <label>Tanggal PEB</label>
                     </div>
                     <div class="col-lg-1">
-                        <label>Uraian Barang</label>
+                        <label>Uraian barang</label>
                     </div>
                     <div class="col-lg-2">
-                        <label>Nomor Pos Tarif/Hs</label>
+                        <label>Nomor pos tarif/Hs</label>
                     </div>
                     <div class="col-lg-2">
                         <label>Volume</label>

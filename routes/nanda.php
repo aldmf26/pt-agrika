@@ -35,6 +35,7 @@ use App\Http\Controllers\QA\Verifikasi\JadwalVerifikasiController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
 use App\Http\Controllers\Qc\PengecekanWaktuPencucianTerakhir;
+use App\Http\Controllers\Qc\PerencanaanSwabController;
 use App\Http\Controllers\QC\ProdukReleaseController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
@@ -319,6 +320,13 @@ Route::controller(PengecekanWaktuPencucianTerakhir::class)
 Route::controller(ProdukReleaseController::class)
     ->prefix('qc/produk_release')
     ->name('qc.produk_release.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(PerencanaanSwabController::class)
+    ->prefix('qc/perencanaan_swab')
+    ->name('qc.perencanaan_swab.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
