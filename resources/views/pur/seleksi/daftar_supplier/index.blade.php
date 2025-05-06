@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <table id="example" class="table table-bordered">
+    <table id="example" class="table table-dark table-bordered">
         <thead>
             <tr>
                 <th>#</th>
