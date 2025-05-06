@@ -34,6 +34,7 @@ use App\Http\Controllers\QA\TinjauanManajemen\NotulenTinjauanManajemenController
 use App\Http\Controllers\QA\Verifikasi\JadwalVerifikasiController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
+use App\Http\Controllers\Qc\MonitoringMuatProdukJadi;
 use App\Http\Controllers\Qc\PengecekanWaktuPencucianTerakhir;
 use App\Http\Controllers\Qc\PerencanaanSwabController;
 use App\Http\Controllers\QC\ProdukReleaseController;
@@ -347,5 +348,13 @@ Route::controller(ReleaseCuciTerakhir::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/strore', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(MonitoringMuatProdukJadi::class)
+    ->prefix('qc/monitoring_muat_produkJadi')
+    ->name('qc.monitoring_muat_produkJadi.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+
         Route::get('/print', 'print')->name('print');
     });
