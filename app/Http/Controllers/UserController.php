@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ttd;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -10,7 +11,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $user = User::with('roles')->get();
+        $user = User::with(['roles', 'ttd'])->get();
         $role = Role::all();
 
         $data = [
@@ -20,6 +21,14 @@ class UserController extends Controller
         ];
         return view('user.index', $data);
     }
+
+    public function upload(Request $r)
+    {
+        $path = $r->file('ttd')->store('ttd', 'public');
+        Ttd::updateOrCreate(['user_id' => $r->id], ['link' => $path]);
+        return redirect()->route('user.index')->with(['sukses' => 'User Updated']);
+    }
+
     public function update(Request $r)
     {
         for ($i = 0; $i < count($r->id); $i++) {

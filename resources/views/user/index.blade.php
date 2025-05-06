@@ -4,13 +4,14 @@
             <div class="col-lg-12">
                 <form action="{{ route('user.update') }}" method="post">
                     @csrf
-                    <table class="table table-stripped table-bordered" id="example">
+                    <table class="table table-dark table-stripped table-bordered" id="example">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
+                                <th>Ttd</th>
                                 <th width="200">Aksi</th>
                             </tr>
                         </thead>
@@ -52,6 +53,17 @@
                                         </select>
                                     </td>
                                     <td>
+                                        @if (empty($user->ttd))
+                                            <button data-id="{{ $user->id }}" class="btn btn-xs btn-info uploadttd"
+                                                type="button">Upload
+                                                ttd</button>
+                                        @else
+                                            <img src="{{ Storage::url($user->ttd->link) }}" width="250"
+                                                alt="">
+                                        @endif
+                                        <img src="" alt="">
+                                    </td>
+                                    <td>
                                         <a x-show="!edit" @click="edit = !edit" class="btn btn-sm btn-primary"><i
                                                 class="fa fa-edit"></i> Edit</a>
                                         <a x-show="edit" @click="edit = !edit" class="btn btn-sm btn-primary">
@@ -71,4 +83,47 @@
 
     </div>
 
+    <form action="{{ route('user.upload') }}" enctype="multipart/form-data" method="post">
+        @csrf
+        <x-modal idModal="uploadttd">
+
+        </x-modal>
+    </form>
+
+    @section('scripts')
+        <script>
+            $('.uploadttd').click(function() {
+                let id = $(this).data('id');
+                $('#uploadttd').modal('show');
+                $('#uploadttd .modal-body').html(`
+                    <input type="hidden" name="id" value="${id}">
+                    <div class="form-group">
+                        <label for="">Upload TTD</label>
+                        <input type="file" name="ttd" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Preview</label>
+                        <img src="" alt="" class="img-preview" width="200" height="100">
+                    </div>
+                `);
+                $('#uploadttd').on('shown.bs.modal', function() {
+                    $(this).find('input[name="ttd"]').focus();
+                });
+                $('#uploadttd').on('hidden.bs.modal', function() {
+                    $(this).find('input[name="ttd"]').val('');
+                    $(this).find('.img-preview').attr('src', '');
+                });
+                $('#uploadttd').on('change', 'input[name="ttd"]', function() {
+                    const file = this.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            $('#uploadttd .img-preview').attr('src', e.target.result);
+                        }
+                        reader.readAsDataURL(file);
+                    }
+                });
+            });
+        </script>
+    @endsection
 </x-app-layout>

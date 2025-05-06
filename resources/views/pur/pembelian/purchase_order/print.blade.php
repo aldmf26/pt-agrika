@@ -54,7 +54,9 @@
                 Dibuat oleh :
             </span>
             <span>Di setujui oleh :
-                <br><br><br>
+                <br>
+                <x-ttd/>
+                <br>
                 <span style="font-size:10px">Sertakan cap perusahaan</span>
             </span>
             <span>
@@ -65,4 +67,3 @@
         </div>
     </center>
 </x-hccp-print>
-

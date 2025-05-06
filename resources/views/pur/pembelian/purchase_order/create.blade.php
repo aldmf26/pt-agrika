@@ -22,7 +22,8 @@
                     <select class="select2suplier" name="supplier">
                         <option value="">-- Pilih Item --</option>
                         @foreach ($supplier as $p)
-                            <option data-alamat="{{ $p->alamat }}" data-no="{{ $p->telepon }}" value="{{ $p->nama_supplier }}">{{ $p->nama_supplier }}</option>
+                            <option data-alamat="{{ $p->alamat }}" data-no="{{ $p->telepon }}"
+                                value="{{ $p->nama_supplier }}">{{ $p->nama_supplier }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -30,7 +31,7 @@
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Alamat</label>
-                    <input type="text" name="alamat" placeholder="alamat" class="form-control">
+                    <input type="text" readonly name="alamat" placeholder="alamat" class="form-control">
                 </div>
             </div>
             <div class="col-3"></div>

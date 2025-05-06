@@ -84,7 +84,9 @@
                         Dibuat oleh :
                     </span>
                     <span>Di setujui oleh :
-                        <br><br><br>
+                        <br>
+                        <x-ttd />
+                        <br>
                         Manager ....
                     </span>
                 </div>

@@ -30,6 +30,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->text('item_spesifikasi');
             $table->date('tgl_dibutuhkan')->nullable();
+            $table->double('harga_po');
             $table->timestamps();
         });
 
@@ -47,7 +48,6 @@ return new class extends Migration
             $table->enum('status', ['draft', 'terkirim', 'selesai'])->default('draft');
             $table->timestamps();
         });
-
     }
 
     /**
