@@ -57,6 +57,14 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        th {
+            font-size: 12px !important;
+        }
+
+        td {
+            font-size: 12px !important;
+        }
     </style>
 </head>
 
@@ -68,100 +76,86 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">PERENCANAAN SWAB</p>
+                    <p class="cop_judul">FORM RELEASE CUCI TERAKHIR</p>
 
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text">Dok.No: FRM.QC.01.07, Rev 00</p>
+                <p class="cop_text">Dok.No.: FRM.QC.01.11, Rev.00</p>
                 <br>
 
             </div>
             <div class="col-4"></div>
-            <div class="col-10">
-                <table>
-                    <tr>
-                        <td width="20%">Tahun</td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ $tahun }}</td>
-                    </tr>
-                </table>
+
+            <div class="col-lg-12">
+                <p>Bulan/Tahun : {{ $bulan }}/{{ $tahun }}</p>
             </div>
             <div class="col-lg-12">
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Jenis kegiatan</th>
-                            <th>Lokasi</th>
-                            @for ($i = 1; $i <= 12; $i++)
-                                @php
-                                    $tgl = date('M', strtotime($tahun . '-' . $i . '-01'));
-                                @endphp
-                                <th class="text-center">{{ $tgl }}</th>
-                            @endfor
+                            <th>#</th>
+                            <th class="text-center align-middle">Jam</th>
+                            <th class="text-center align-middle">Nama produk</th>
+                            <th class="text-center align-middle">Kode pencucian nitrit : no <br> urut - tanggal bulan
+                                dan <br> tahun pencucian nitrit <br>
+                                (lihat produksi)
+                            </th>
+                            <th class="text-center align-middle">Hasil <br> pemeriksaan </th>
+                            <th class="text-center align-middle">Status produk <br> (release/ hold/ <br> reject)</th>
+                            <th class="text-center align-middle">Petugas pemeriksa & <br> paraf</th>
+                            <th class="text-center align-middle">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($datas as $key => $audit)
+                        @foreach ($datas as $d)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
-                                <td>
-                                    {{ $audit->jenis_kegiatan }}
-                                </td>
-                                <td>{{ $audit->lokasi }}</td>
-                                @for ($i = 1; $i <= 12; $i++)
-                                    @php
-                                        $field = 'bulan_' . $i; // Nama kolom di database
-                                        $cek = DB::table('jadwal_verifikasis')
-                                            ->where('id', $audit->id)
-                                            ->where('tahun', $tahun)
-                                            ->value($field);
-
-                                        $cekSelesai = App\Models\Notif::where([
-                                            ['nama', $audit->jenis_kegiatan],
-                                            ['month', $i],
-                                            ['year', $tahun],
-                                            ['user_id', auth()->user()->id],
-                                            ['is_read', 1],
-                                        ])->first();
-                                    @endphp
-                                    <td
-                                        class="text-center td-hover @if ($cekSelesai) bg-success @elseif ($cek == 1) bg-warning @endif">
-                                    </td>
-                                @endfor
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ date('H:i', strtotime($d->jam)) }} </td>
+                                <td class="text-center">{{ $d->nama_produk }}</td>
+                                <td class="text-center">{{ $d->no_urut }} - {{ date('dmY', strtotime($d->tgl)) }}</td>
+                                <td class="text-center">{{ $d->hasil_pemeriksaan }}</td>
+                                <td class="text-center">{{ $d->status }}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center">{{ $d->Keterangan }}</td>
                             </tr>
                         @endforeach
-
                     </tbody>
+
                 </table>
             </div>
-
-            <div class="col-9">
-
+            <div class="col-6">
+                <p>Note : Pengecekan setiap Box</p>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-
+                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+                            <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="height: 80px"></td>
-
+                            <td style="height: 80px"></td>
+                            <td style="height: 80px"></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[..............................................................]
+                            <td class="text-center">[QC Steam]
                             </td>
-
+                            <td class="text-center">[SPV. QC Field]
+                            </td>
+                            <td class="text-center">[SPV. Produksi]
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+
+
 
 
         </div>
@@ -176,6 +170,7 @@
     <script>
         window.print();
     </script>
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
