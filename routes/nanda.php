@@ -37,6 +37,7 @@ use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
 use App\Http\Controllers\Qc\PengecekanWaktuPencucianTerakhir;
 use App\Http\Controllers\Qc\PerencanaanSwabController;
 use App\Http\Controllers\QC\ProdukReleaseController;
+use App\Http\Controllers\Qc\ReleaseCuciTerakhir;
 use App\Http\Controllers\ReleaseSteamingController;
 use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
@@ -335,6 +336,14 @@ Route::controller(PerencanaanSwabController::class)
 Route::controller(ReleaseSteamingController::class)
     ->prefix('qc/release_steaming')
     ->name('qc.release_steaming.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/strore', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(ReleaseCuciTerakhir::class)
+    ->prefix('qc/release_cuci_terakhir')
+    ->name('qc.release_cuci_terakhir.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/strore', 'store')->name('store');

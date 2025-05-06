@@ -4,19 +4,19 @@
             <a href="#" data-bs-toggle="modal" data-bs-target="#tambah" class="btn btn-primary float-end ms-2"><i
                     class="fas fa-plus"></i> add</a>
             <a class="btn btn-primary float-end "
-                href="{{ route('qc.release_steaming.print', ['bulan' => $bulan, 'tahun' => $tahun]) }}" target="_blank"><i
-                    class="fas fa-print"></i> print</a>
+                href="{{ route('qc.release_cuci_terakhir.print', ['bulan' => $bulan, 'tahun' => $tahun]) }}"
+                target="_blank"><i class="fas fa-print"></i> print</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Jam sampling <br>(Jam keluar)</th>
-                        <th>Nomor urut <br>mesin steam</th>
+                        <th>Jam</th>
                         <th>Nama produk</th>
-                        <th>Kode steaming : no urut - <br> tanggal bulan tahun <br> steaming </th>
-                        <th>Hasil <br> pemeriksaan <br> (suhu oC)</th>
+                        <th>Kode pencucian nitrit : no <br> urut - tanggal bulan dan <br> tahun pencucian nitrit <br>
+                            (lihat produksi)</th>
+                        <th>Hasil <br> pemeriksaan </th>
                         <th>Status produk <br> (release/ hold/ <br> reject)</th>
                         <th>Petugas pemeriksa & <br> paraf</th>
                         <th>Keterangan</th>
@@ -26,11 +26,10 @@
                     @foreach ($datas as $d)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ date('H:i', strtotime($d->jam_sampling)) }} </td>
-                            <td>{{ $d->nomor_urut_mesin_steam }}</td>
+                            <td>{{ date('H:i', strtotime($d->jam)) }} </td>
                             <td>{{ $d->nama_produk }}</td>
                             <td>{{ $d->no_urut }} - {{ date('dmY', strtotime($d->tgl)) }}</td>
-                            <td>{{ $d->hasil_pemeriksaan }} °C</td>
+                            <td>{{ $d->hasil_pemeriksaan }}</td>
                             <td>{{ $d->status }}</td>
                             <td></td>
                             <td>{{ $d->Keterangan }}</td>
@@ -42,20 +41,20 @@
         </div>
     </div>
 
-    <form action="{{ route('qc.release_steaming.store') }}" method="POST">
+    <form action="{{ route('qc.release_cuci_terakhir.store') }}" method="POST">
         @csrf
         <x-modal_plus size="modal-xl" id="tambah">
             <div class="row" x-data="{ rows: [{ id: Date.now() }] }" x-init="$nextTick(() => initSelect2())">
                 <template x-for="(row, index) in rows" :key="row.id">
                     <div class="row mb-4">
                         <div class="col-lg-2">
-                            <label>Jam sampling</label>
-                            <input type="time" class="form-control" name="jam_sampling[]">
+                            <label>Jam</label>
+                            <input type="time" class="form-control" name="jam[]">
                         </div>
-                        <div class="col-lg-2">
+                        {{-- <div class="col-lg-2">
                             <label>No urut mesin steam</label>
                             <input type="text" class="form-control" name="nomor_urut_mesin_steam[]">
-                        </div>
+                        </div> --}}
                         <div class="col-lg-2">
                             <label>Nama produk</label>
                             <input type="text" class="form-control" name="nama_produk[]">
@@ -68,7 +67,7 @@
                             <label>Hasil pemeriksaan</label>
                             <input type="text" class="form-control" name="hasil_pemeriksaan[]">
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-1">
                             <label>Status</label>
                             <select name="status[]" id="" class="form-control">
                                 <option value="">Pilih</option>
