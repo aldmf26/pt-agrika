@@ -6,12 +6,12 @@
                 <select class="select2pr" id="selectedPr" name="id_pr">
                     <option value="">Pilih Pr</option>
                     @foreach ($no_pr as $p)
-                        <option value="{{ $p->id }}">{{ $p->no_pr }}</option>
+                        <option @selected($p->id == $selectedPr) value="{{ $p->id }}">{{ $p->no_pr }}</option>
                     @endforeach
                 </select>
             </div>
             <span wire:loading>loading...</span>
-            
+
         </div>
     </div>
     <div class="col-6" x-data="{ rows: ['1'] }">
@@ -58,6 +58,12 @@
         setTimeout(function() {
             $('.select2pr').select2({});
             $('.select2suplier').select2({});
+
+            $('.select2suplier').change(function(e) {
+                e.preventDefault();
+                $('input[name=alamat]').val($(this).find(':selected').data('alamat'));
+
+            });
         }, 500);
 
         $('.select2pr').on('change', function(e) {

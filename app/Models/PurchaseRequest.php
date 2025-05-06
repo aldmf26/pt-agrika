@@ -36,6 +36,11 @@ class PurchaseRequest extends Model
     }
     public function item()
     {
-        return $this->hasMany(PurchaseRequestItem::class,'id');
+        return $this->hasMany(PurchaseRequestItem::class, 'pr_id');
+    }
+
+    public function sudahPo()
+    {
+        return $this->hasMany(PurchaseOrder::class, 'pr_id');
     }
 }

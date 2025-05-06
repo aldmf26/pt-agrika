@@ -9,7 +9,7 @@
                 Purchase Request</a>
         </div>
     </div>
-   
+
     <table id="example" class="table table-bordered">
         <thead>
             <tr>
@@ -36,8 +36,19 @@
                     <td>{{ $d->manager_departemen }}</td>
                     <td>{{ $d->alasan_permintaan }}</td>
                     <td>
-                        <a class="btn btn-xs float-end btn-primary" href="{{ route('pur.pembelian.1.print', $d->id) }}"><i
-                                class="fas fa-print"></i></a>
+
+                        @if ($d->status == 'disetujui')
+                            @if ($d->sudahPo->count() == 0)
+                                <a class="btn btn-xs btn-info"
+                                    href="{{ route('pur.pembelian.2.create', ['id_pr' => $d->id]) }}">po</a>
+                            @endif
+
+                            <a class="btn btn-xs btn-primary" href="{{ route('pur.pembelian.1.print', $d->id) }}"><i
+                                    class="fas fa-print"></i></a>
+                        @else
+                            <a class="btn btn-xs btn-info"
+                                href="{{ route('pur.pembelian.1.selesai', $d->id) }}">selesai</a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

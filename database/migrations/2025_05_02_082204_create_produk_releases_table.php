@@ -18,7 +18,6 @@ return new class extends Migration
             $table->date('tgl_panen');
             $table->date('tgl_bln_datang');
             $table->string('no_reg_walet');
-            $table->string('no_reg_walet');
             $table->timestamps();
         });
     }

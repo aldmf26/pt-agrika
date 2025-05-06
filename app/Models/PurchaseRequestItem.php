@@ -9,11 +9,6 @@ class PurchaseRequestItem extends Model
     protected $table = 'purchase_request_items';
     protected $guarded = [];
     protected $primaryKey = 'id';
-    
-    public function setItemSpesifikasiAttribute($value)
-    {
-        return ucfirst($value);
-    }
 
     public function po()
     {

@@ -358,6 +358,7 @@ Route::controller(PUR1PurchaseRequestController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
+        Route::get('/selesai/{id}', 'selesai')->name('selesai');
         Route::get('/print/{tgl}', 'print')->name('print');
     });
 
@@ -366,6 +367,7 @@ Route::controller(PUR2PurchaseOrderController::class)
     ->name('pur.pembelian.2.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/', 'selesai')->name('selesai');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{tgl}', 'print')->name('print');

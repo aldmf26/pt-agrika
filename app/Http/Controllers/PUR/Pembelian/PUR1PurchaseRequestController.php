@@ -41,7 +41,6 @@ class PUR1PurchaseRequestController extends Controller
     public function store(Request $r)
     {
         DB::beginTransaction();
-
         try {
             $no_pr = $this->getNoPr();
             $tgl = $r->tgl;
@@ -74,9 +73,18 @@ class PUR1PurchaseRequestController extends Controller
         }
     }
 
+
+
+    public function selesai($id)
+    {
+        PurchaseRequest::where('id', $id)->update(['status' => 'disetujui']);
+        return redirect()->route('pur.pembelian.1.index')->with('sukses', 'Purchase Request berhasil disetujui');
+
+    }
+
     public function print($id)
     {
-        $datas = PurchaseRequest::where('id',$id)->with('item')->first();
+        $datas = PurchaseRequest::where('id', $id)->with('item')->first();
         $data = [
             'title' => 'PURCHASE REQUEST',
             'dok' => 'Dok.No.: FRM.PUR.01.01, Rev.00',

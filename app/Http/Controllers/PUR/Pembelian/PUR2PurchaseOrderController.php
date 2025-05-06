@@ -14,7 +14,7 @@ class PUR2PurchaseOrderController extends Controller
 {
     public function index()
     {
-        $datas = PurchaseOrder::latest()->get();
+        $datas = PurchaseOrder::with('item')->latest()->get();
         $data = [
             'title' => 'PUR 2 Purchase Order',
             'datas' => $datas
@@ -39,6 +39,14 @@ class PUR2PurchaseOrderController extends Controller
         $lastRequest = PurchaseOrder::latest()->first();
         $no_po = $lastRequest ? $lastRequest->no_po + 1 : 1001;
         return $no_po;
+    }
+
+    public function selesai(Request $r)
+    {
+        PurchaseOrder::find($r->id)->update([
+            'status' => 'selesai'
+        ]);
+        return redirect()->route('pur.pembelian.2.index')->with('sukses', 'Purchase Order berhasil diselesaikan');
     }
 
     public function store(Request $r)

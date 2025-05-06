@@ -10,6 +10,11 @@ class PurchaseOrder extends Model
     protected $guarded = [];
     protected $primaryKey = 'id';
 
+    
+    public function purchaseRequest()
+    {
+        return $this->belongsTo(PurchaseRequest::class, 'pr_id', 'id');
+    }
     public function item()
     {
         return $this->hasMany(PurchaseRequestItem::class, 'pr_id', 'pr_id');
