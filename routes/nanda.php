@@ -32,6 +32,7 @@ use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenCo
 use App\Http\Controllers\QA\TinjauanManajemen\DaftarhadirTinjuanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\NotulenTinjauanManajemenController;
 use App\Http\Controllers\QA\Verifikasi\JadwalVerifikasiController;
+use App\Http\Controllers\Qc\KontrolGrading;
 use App\Http\Controllers\Qc\KontrolPengemasanController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
@@ -354,6 +355,13 @@ Route::controller(MonitoringMuatProdukJadi::class)
 Route::controller(KontrolPengemasanController::class)
     ->prefix('qc/kontrol_pengemasan')
     ->name('qc.kontrol_pengemasan.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(KontrolGrading::class)
+    ->prefix('qc/kontrol_grading')
+    ->name('qc.kontrol_grading.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
