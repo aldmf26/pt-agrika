@@ -389,6 +389,9 @@ Route::controller(PUR1DaftarSupplierController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
 
 Route::controller(QA1PenangananProdukController::class)

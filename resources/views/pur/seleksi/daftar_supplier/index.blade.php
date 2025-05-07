@@ -25,6 +25,7 @@
                 <th>Jenis Produk / Layanan</th>
                 <th>Hasil Evaluasi</th>
                 <th>Keterangan</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,14 @@
                     <td>{{ $d->kategori }}</td>
                     <td>{{ $d->hasil_evaluasi }}</td>
                     <td>{{ $d->ket }}</td>
+                    <td>
+                        <a href="{{ route('pur.seleksi.1.edit', $d->id) }}" class="btn btn-xs btn-primary"><i
+                                class="fas fa-edit"></i></a>
+
+                        <a onclick="return confirm('Yakin ingin menghapus data ini?')"
+                            href="{{ route('pur.seleksi.1.destroy', $d->id) }}" class="btn btn-xs btn-danger"><i
+                                class="fas fa-trash"></i></a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
