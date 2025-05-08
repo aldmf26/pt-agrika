@@ -16,9 +16,10 @@ class AuditChecklistSeeder extends Seeder
      */
     public function run(): void
     {
-        // E. BAHAN, PENANGANAN DAN PENGOLAHAN
         $this->hrga();
         $this->purchasing();
+        $this->bk();
+        $this->qa();
     }
 
     public function hrga(): void
@@ -638,23 +639,405 @@ class AuditChecklistSeeder extends Seeder
 
     public function purchasing()
     {
-        $hrgaA = $this->createHeading('purchasing', 'A. Sumber Daya Manusia');
+        $hrgaA = $this->createHeading('purchasing', 'A. Menejemen Pengadaan Material');
         $subHrgaA = $this->createSubHeading($hrgaA->id, '');
         $pertanyaanSDM = [
             [
-                'teks' => 'Perusahaan tidak memiliki program recruitment karyawan untuk memastikan karyawan mendapatkan penjelasan awal mengenai pekerjaannya saat akan dipekerjakan',
+                'teks' => 'Perusahaan tidak memiliki meknaisme dan bukti pelaksanaan dalam melakukan seleksi bahan baku, bahan kemas, bahan pembantu, Vendor Jasa, dll',
                 'nomor_urutan' => 1
             ],
             [
-                'teks' => 'Perusahaan tidak memiliki program pelatihan karyawan nsebagai peunjang dalam menjalankan tugas pekerjaan',
+                'teks' => 'Perusahaan tidak memiliki mekanisme dan bukti pelaksanaan untuk melakukan pengadaan / pembelian yang memperhatikan kesesuaian barang sebelum dibeli',
                 'nomor_urutan' => 2
             ],
             [
-                'teks' => 'Perusahaan tidak memiliki program evaluasi kinerja karyawan tahunan Sebagai Langkah menyelidiki kebutuhan peningkatan skill karyawan',
+                'teks' => 'Perusahaan tidak memiliki mekanisme dan bukti pelaksanaan untuk melakukan evaluasi seluruh vendor dengan memperhatikan kualitas barang dan jasa yang disuplai',
                 'nomor_urutan' => 3
             ],
             [
-                'teks' => 'Perusahaan tidak memiliki program pemeriksaan kseshatan Sebagai Langkah pencegahan untuk mendeteksi potensi sumber kontaminasi yang bisa terbawa dari manusia',
+                'teks' => 'Perusahaan tidak memiliki list vendor tetap guna Sebagai list data internal perusahaan',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+    }
+
+    public function bk()
+    {
+        $hrgaA = $this->createHeading('bk', 'A. SANITASI DAN HYGIENE KARYAWAN');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Pembinaan Karyawan');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Manajemen unit pengolahan tidak memiliki tindakan-tindakan efektif untuk mencegah karyawan yang diketahui mengidap penyakit yang dapat mengkontaminasi produk (luka,TBC,Hepatits, Tipus, dsb)',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Pelatihan pekerja dalam hal sanitasi dan hygiene tidak cukup',
+                'nomor_urutan' => 2
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Perilaku Karyawan ');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Perilaku Karyawan 
+                            Kebersihan karyawan tidak dijaga dengan baik dan tidak memperhatikan aspek sanitasi dan hygiene ( seperti pakaian kurang lengkap dan kotor,meludah diruang pengolahan,merokok dan lain-lain)',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Pelatihan pekerja dalam hal sanitasi dan hygiene tidak cukup',
+                'nomor_urutan' => 2
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('bk', 'B. ASPEK YANG DINILAI ');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tindakan karyawan tidak mampu mengurangi dan mencegah kontaminasi baik dari mikroba maupun dari benda asing lainnya.',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Pelatihan pekerja dalam hal sanitasi dan hygiene tidak cukup',
+                'nomor_urutan' => 2
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Sanitasi Karyawan');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Pakaian kerja tidak dipakai dengan benar dan tidak bersih                        ',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Tidak ada pengawasan dalam sanitasi,pencucian tangan dan kaki sebelum masuk ruang pengolahan dan setelah keluar dari toilet',
+                'nomor_urutan' => 3
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Sumber Infeksi');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Karyawan tidak bebas dari penyakit kulit,atau penyakit menular lainnya.',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('bk', 'C. GUDANG BIASA (KERING) ');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Kontrol Sanitasi');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak menggunakan tempat penyimpanan seperti pallet,lemari,kabinet rak dan yang lain-lain yang dibutuhkan untuk mencegah kontaminasi.',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Metode penyimpanan bahan berpeluang terjadinya kontaminsi. ',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Fasilitas penyimpanan tidak besih,tidak saniter dan tidak dirawat dengan baik.',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Penempatan barang tidak teratur dan tidak dipisah-pisahkan ( Penyimpanan bahan pengemas dan bahan-bahan lain:kimia,bahan berbahaya dll)',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Pencegahan serangga,tikus,dan binatang lain');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak ada pengendalian untuk mencegah serangga,tikus dan binatang penggangu lainnya digudang.',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Pencegahan serangga,burung,tikus dan binatang lain tidak efekif.',
+                'nomor_urutan' => 6
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Ventilasi');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Ventilasi tidak berfungsidengan baik',
+                'nomor_urutan' => 7
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('bk', 'D. BAHAN BAKU');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Kontaminasi');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Terindikasi adanya kontaminan setelah dilakukan pengujian bahan baku',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Terindikasi adanya kontaminan setelah dilakukan pengujian bahan baku TerindikasI adanya kemunduran mutu/deteriorasi/dekomposisi setelah dilakukakan pengujian bahan baku',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Terindikasi adanya pencemaran fisik benda-benda asing setelah dilakukan pengujian bahan baku',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Penanganan, pengolahan, penyimpanan, pengangkutan dan pengemasan tidak dilakukan secara higienis',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('bk', 'E. BAHAN, PENANGANAN DAN PENGOLAHAN ');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Bahan baku');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak sesuai dengan standar sehingga membahayakan kesehatan manusia',
+                'nomor_urutan' => 1
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Bahan tambahan');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak sesuai dengan standar dan pemakaiannya tidak sesuai dengan persyaratan',
+                'nomor_urutan' => 2
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Penanganan bahan baku');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Penerimaan bahan baku tidak dilakukan dengan baik, dan tidak terlindung dari kontaminan atau pengaruh lingkungan yang tidak sehat',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Suhu produk yang diolah di dalam ruang pengolahan tidak sesuai',
+                'nomor_urutan' => 4
+            ],
+            [
+                'teks' => 'Bahan  baku yang datang terlebih dahulu tidak diproses lebih dulu (FIFO)',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Penanganan bahan baku ataupun produk dari tahap satu ke tahap berikutnya tidak dilakukan secara hati-hati, higienis dan saniter',
+                'nomor_urutan' => 6
+            ],
+            [
+                'teks' => 'Penanganan produk yang sedang menunggu giliran untuk diproses tidak disimpan/dikumpulkan ditempat yang saniter',
+                'nomor_urutan' => 7
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+    }
+
+    public function qa()
+    {
+        $hrgaA = $this->createHeading('qa/qc', 'L. SANITASI DAN HYGIENE KARYAWAN');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Pembinaan Karyawan');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Manajemen unit pengolahan tidak memiliki tindakan-tindakan efektif untuk mencegah karyawan yang diketahui mengidap penyakit yang dapat mengkontaminasi produk (luka,TBC,Hepatits, Tipus, dsb)',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Pelatihan pekerja dalam hal sanitasi dan hygiene tidak cukup',
+                'nomor_urutan' => 2
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Perilaku Karyawan ');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Kebersihan karyawan tidak dijaga dengan baik dan tidak memperhatikan aspek sanitasi dan hygiene ( seperti pakaian kurang lengkap dan kotor,meludah diruang pengolahan,merokok dan lain-lain)',
+                'nomor_urutan' => 3
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('qa/qc', 'M. ASPEK YANG DINILAI ');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tindakan  karyawan tidak mampu mengurangi dan mencegah kontaminasi baik dari mikroba maupun dari benda asing lainnya.',
+                'nomor_urutan' => 1
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Sanitasi Karyawan');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Pakaian kerja tidak dipakai dengan benar dan tidak bersih',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Tidak ada pengawasan dalam sanitasi,pencucian tangan dan kaki sebelum masuk ruang pengolahan dan setelah keluar dari toilet',
+                'nomor_urutan' => 2
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Sumber Infeksi');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Karyawan tidak bebas dari penyakit kulit,atau penyakit menular lainnya.',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('qa/qc', 'Q. TINDAKAN PENGAWASAN QC');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Bahan baku/mentah');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak dilakukan pengujian mutu sebelum diolah.',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Campuran bahan baku tidak disesuaikan spesiflkasi',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Bahan Tambahan Pangan tidak sesuai dengan peraturan.',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Proses produksi tidak dilakukan pengawasan setiap tahap.',
+                'nomor_urutan' => 4
+            ],
+            [
+                'teks' => 'Produk akhir tidak diakukan pengujian mutu sebelum diedarkan.',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Penyimpanan bahan baku dan produk akhir tidak dipisahkan.',
+                'nomor_urutan' => 6
+            ],
+            [
+                'teks' => 'Penyimpanan dan penyerahan tidak dilakukan secara FIFO',
+                'nomor_urutan' => 7
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('qa/qc', 'S. HASIL UJI');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Pengujian bahan baku dan produk akhir');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak dilakukan pengujian',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Tidak memiliki laboratorium yang sekurang-kurangnya dilengkapi dengan peralatan dan media untuk pengujian organoleptik dan mikrobiologi',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Jumlah tenaga laboratorium tidak mencukupi dan atau kualifikasi tenaganya tidak memadai',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Tidak aktif melaksanakan monitoring terhadap bahan baku, bahan pembantu, kebersihan peralatan dan produk akhir',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Hasil uji tidak memenuhi syarat :');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Angka lLempeng Total (ALT)',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'E. Coli',
+                'nomor_urutan' => 6
+            ],
+            [
+                'teks' => 'Coliform',
+                'nomor_urutan' => 7
+            ],
+            [
+                'teks' => 'Salmonella',
+                'nomor_urutan' => 8
+            ],
+            [
+                'teks' => 'Staphylococcus aureus',
+                'nomor_urutan' => 9
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('qa/qc', 'T. TINDAKAN PENGAWASAN ');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Jaminan Mutu ');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak dilakukan sistem jaminan mutu pada keseluruhan proses (in-process)',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Tidak tersedia bti pemantauan jaminan mutu',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Tidak tersedia program pengendalian bahaya kritis berbahasi HACCP',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Tidak tersedia validasi CCP ',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Prosedur Pelacakan dan Penarikan (Recall Procedure)');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Tidak dilakukan dengan baik, teratur dan continue',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Prosedur recall tidak berisi key contact (Badan Karantina, CB dll)',
+                'nomor_urutan' => 6
+            ],
+            [
+                'teks' => 'Tidak dilakukan mock recall per tahun',
+                'nomor_urutan' => 7
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $hrgaA = $this->createHeading('qa/qc', 'V. PENGGUNAAN BAHAN KIMIA ');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Insektisida/Rodentisida/Peptisida');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Insektisida/rodentisida tidak sesuai dengan persyaratan',
+                'nomor_urutan' => 1
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+
+        $subHrgaA = $this->createSubHeading($hrgaA->id, 'Bahan kimia/sanitizer/deterjen, dll :');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Bahan kimia tidak digunakan sesuai metode yang dipersyaratkan',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Bahan kimia, sanitizer dan bahan tambahan tidak diberi label dan disimpan dengan baik',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Penggunaan bahan kimia yabg tidak diijinkan',
                 'nomor_urutan' => 4
             ],
         ];

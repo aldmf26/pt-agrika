@@ -33,6 +33,7 @@ use App\Http\Controllers\PPC\Gudang_RM\RM6CeklistKendaraanController;
 use App\Http\Controllers\PPC\Gudang_RM\RM7BuktiPermintaanPengeluaranBarangController;
 use App\Http\Controllers\PPC\Gudang_RM\RM8KartuStokController;
 use App\Http\Controllers\PPC\Gudang_RM\RM9KodeBahanBakuKimiaController;
+use App\Http\Controllers\PUR\Evaluasi\PUR1EvaluasiSupplierController;
 use App\Http\Controllers\PUR\Pembelian\PUR1PurchaseRequestController;
 use App\Http\Controllers\PUR\Pembelian\PUR2PurchaseOrderController;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR1DaftarSupplierController;
@@ -384,6 +385,20 @@ Route::controller(PUR2PurchaseOrderController::class)
 Route::controller(PUR1DaftarSupplierController::class)
     ->prefix('pur/seleksi/supplier')
     ->name('pur.seleksi.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::get('/evaluasi/{id}', 'evaluasi')->name('evaluasi');
+        Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+
+Route::controller(PUR1EvaluasiSupplierController::class)
+    ->prefix('pur/evaluasi/supplier')
+    ->name('pur.evaluasi.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
