@@ -38,9 +38,18 @@
                     <td>{{ $d->contact_person }}</td>
                     <td>{{ $d->no_telp }}</td>
                     <td>{{ $d->kategori }}</td>
-                    <td>{{ $d->hasil_evaluasi }}</td>
+                    <td>
+                        @if (!$d->hasil_evaluasi)
+                            <a href="{{ route('pur.seleksi.1.evaluasi', $d->id) }}"
+                                class="btn btn-xs btn-primary">evaluasi</a>
+                        @else
+                            sudah
+                        @endif
+                    </td>
                     <td>{{ $d->ket }}</td>
                     <td>
+
+
                         <a href="{{ route('pur.seleksi.1.edit', $d->id) }}" class="btn btn-xs btn-primary"><i
                                 class="fas fa-edit"></i></a>
 

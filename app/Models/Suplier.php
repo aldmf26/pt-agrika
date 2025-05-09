@@ -9,9 +9,43 @@ class Suplier extends Model
     protected $table = 'supplier';
     protected $primaryKey = 'id';
     protected $guarded = [];
-    
+
+    public function getNamaSupplierAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getKategoriAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    public function getProdusenAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    public function getContactPersonAttribute($value)
+    {
+        return ucfirst($value);
+    }
+    public function getKetAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getAlamatAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+
     public function penerimaan()
     {
         return $this->hasMany(PenerimaanHeader::class, 'id_supplier');
+    }
+
+
+    public function evaluasi()
+    {
+        return $this->hasMany(Evaluasi::class, 'supplier_id');
     }
 }

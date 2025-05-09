@@ -30,6 +30,18 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.create', $data);
     }
 
+    public function evaluasi($id)
+    {
+        $supplier = Suplier::findOrFail($id);
+        $data = [
+            'title' => 'Evaluasi Supplier : ',
+
+            'supplier' => $supplier,
+        ];
+
+        return view('pur.seleksi.daftar_supplier.evaluasi', $data);
+    }
+
     public function edit($id)
     {
         $data = [
