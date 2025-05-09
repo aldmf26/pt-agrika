@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\PUR\SeleksiSupplier;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetailKetidaksesuaian;
+use App\Models\Evaluasi;
 use App\Models\PurchaseOrder;
 use App\Models\Suplier;
 use Illuminate\Http\Request;
@@ -33,13 +35,97 @@ class PUR1DaftarSupplierController extends Controller
     public function evaluasi($id)
     {
         $supplier = Suplier::findOrFail($id);
+
+        $evaluasi = Evaluasi::with(['detail'])->where('supplier_id', $id)->first();
+        $detailAda = !empty($evaluasi->detail);
         $data = [
             'title' => 'Evaluasi Supplier : ',
 
             'supplier' => $supplier,
+            'evaluasi' => $evaluasi,
+            'detailAda' => $detailAda,
         ];
 
         return view('pur.seleksi.daftar_supplier.evaluasi', $data);
+    }
+
+    public function evaluasi_update(Request $r, $id)
+    {
+        try {
+            DB::beginTransaction();
+            $evaluasi =  Evaluasi::updateOrCreate(
+                [
+                    'supplier_id' => $id,
+                    'periode_evaluasi' => $r->periode_evaluasi,
+                ],
+                [
+                    'supplier_id' => $id,
+                    'periode_evaluasi' => $r->periode_evaluasi,
+                ],
+            );
+            $evaluasi->detail()->delete();
+
+            $evaluasi->detail()->create([
+                'jenis_kriteria' => 'harga',
+                'tanggal_ketidaksesuaian' => now(),
+                'alasan' => $r->harga_keterangan ?? null,
+                'penilaian' => $r->harga_penilaian ?? 0,
+            ]);
+
+            $evaluasi->detail()->create([
+                'jenis_kriteria' => 'komunikasi',
+                'tanggal_ketidaksesuaian' => now(),
+                'alasan' => $r->harga_keterangan ?? null,
+                'penilaian' => $r->harga_penilaian ?? 0,
+            ]);
+
+            $kuantitas = collect($r->kuantitas_tanggal)->map(function ($tanggal, $index) use ($r) {
+                return [
+                    'jenis_kriteria' => 'kuantitas',
+                    'tanggal_ketidaksesuaian' => $tanggal,
+                    'alasan' => $r->kuantitas_karena[$index] ?? null,
+                    'penilaian' => $r->kuantitas_penilaian[$index] ?? 0,
+                ];
+            });
+
+            $waktu = collect($r->waktu_tanggal)->map(function ($tanggal, $index) use ($r) {
+                return [
+                    'jenis_kriteria' => 'waktu',
+                    'tanggal_ketidaksesuaian' => $tanggal,
+                    'alasan' => $r->waktu_karena[$index] ?? null,
+                    'penilaian' => $r->waktu_penilaian[$index] ?? 0,
+                ];
+            });
+
+            $kualitas = collect($r->kualitas_tanggal)->map(function ($tanggal, $index) use ($r) {
+                return [
+                    'jenis_kriteria' => 'kualitas',
+                    'tanggal_ketidaksesuaian' => $tanggal,
+                    'alasan' => $r->kualitas_karena[$index] ?? null,
+                    'penilaian' => $r->kualitas_penilaian[$index] ?? 0,
+                ];
+            });
+
+            $evaluasi->detail()->createMany($kuantitas->merge($waktu)->merge($kualitas)->toArray());
+
+            DB::commit();
+            return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Evaluasi Supplier berhasil ditambahkan');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('pur.seleksi.1.index')->with('error', $e->getMessage());
+        }
+    }
+
+    public function evaluasi_print(Evaluasi $evaluasi)
+    {
+        $supplier = Suplier::find($evaluasi->supplier_id)->first();
+        $data = [
+            'title' => 'EVALUASI SUPPLIER/OUTSOURCE',
+            'dok' => 'Dok.No.: FRM.PUR.03.01, Rev.00',
+            'evaluasi' => $evaluasi,
+            'supplier' => $supplier
+        ];
+        return view('pur.seleksi.daftar_supplier.print_evaluasi', $data);
     }
 
     public function edit($id)

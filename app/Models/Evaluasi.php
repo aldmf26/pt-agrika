@@ -11,7 +11,7 @@ class Evaluasi extends Model
     protected $primaryKey = 'id';
 
 
-    public function detail_ketidaksesuian()
+    public function detail()
     {
         return $this->hasMany(DetailKetidaksesuaian::class, 'evaluasi_id', 'id');
     }
