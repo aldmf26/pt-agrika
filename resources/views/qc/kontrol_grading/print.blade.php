@@ -98,8 +98,7 @@
                             <th class="text-center align-middle">Ok/Tidak Ok</th>
                             <th class="text-center align-middle">Keterangan</th>
                             <th class="text-center align-middle">Kode Grading : Nomor Urut - Tanggal Bulan Tahun <br>
-                                Grading <br>
-                                (Lihat di Produksi)</th>
+                                Grading <br> (Lihat di Produksi)</th>
                         </tr>
 
                     </thead>
