@@ -4,7 +4,7 @@
             <div class="float-end">
                 <a href="#" data-bs-target="#tambah" data-bs-toggle="modal" class="btn btn-primary btn-sm"><i
                         class="fas fa-plus"></i>Data</a>
-                <a href="{{route('hrga6.1.print', ['id_lokasi' => $id_lokasi])}}" class="btn btn-primary btn-sm"><i
+                <a href="{{ route('hrga6.1.print', ['id_lokasi' => $id_lokasi]) }}" class="btn btn-primary btn-sm"><i
                         class="fas fa-print"></i> Print</a>
             </div>
         </div>
@@ -20,13 +20,13 @@
                                         href="{{ route('hrga6.1.index', ['area' => $l->lokasi]) }}">{{ ucwords($l->lokasi) }}</a>
                                 </li>
                             @endforeach
-    
+
                         </ul>
                     </div>
-    
+
                 </div>
-    
-                <table id="table1" class="table table-bordered">
+
+                <table id="table1" class="table table-bordered table-dark">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -43,24 +43,24 @@
                     </thead>
                     <tbody>
                         @foreach ($datas as $d)
-                        <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $d->nm_alat }}</td>
-                            <td>{{ $d->identifikasi_alat }}</td>
-                            <td>{{ $d->metode }}</td>
-                            <td>{{ $d->penanggung_jawab }}</td>
-                            <td>{{ $d->frekuensi }}</td>
-                            <td>{{ $d->sarana_cleaning }}</td>
-                            <td>{{ $d->sanitizer }}</td>
-                            <td>{{ $d->tgl }}</td>
-                            <td></td>
-                        </tr>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ucfirst(strtolower($d->nm_alat)) }}</td>
+                                <td>{{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
+                                <td>{{ ucfirst(strtolower($d->metode)) }}</td>
+                                <td>{{ ucfirst(strtolower($d->penanggung_jawab)) }}</td>
+                                <td>{{ ucfirst(strtolower($d->frekuensi)) }}</td>
+                                <td>{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
+                                <td>{{ ucfirst(strtolower($d->sanitizer)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($d->tgl)) }}</td>
+                                <td></td>
+                            </tr>
                         @endforeach
                     </tbody>
-    
+
                 </table>
             </div>
-    
+
             <form action="{{ route('hrga6.1.store') }}" method="post">
                 @csrf
                 <x-modal idModal="tambah" title="Jadwal Sanitasi" size="modal-full" btnSave="Y">
@@ -88,47 +88,46 @@
                                     <td>
                                         <input type="hidden" name="id_lokasi" value="{{ $id_lokasi }}">
                                         <input type="text" class="form-control" name="nm_alat[]"
-                                            placeholder="Nama Alat/Area">
+                                            placeholder="Nama Alat/Area (Contoh: Mesin Produksi 1)">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="identifikasi_alat[]"
-                                            placeholder="Nama Alat/Area">
+                                            placeholder="Identifikasi Alat (Contoh: Mesin Produksi 1)">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="metode[]"
-                                            placeholder="Nama Alat/Area">
+                                            placeholder="Metode Sanitasi (Contoh: Disinfeksi)">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="penanggung_jawab[]"
-                                            placeholder="Nama Alat/Area">
+                                            placeholder="Nama Penanggung Jawab (Contoh: Budi)">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="frekuensi[]"
-                                            placeholder="Nama Alat/Area">
+                                            placeholder="Frekuensi Sanitasi (Contoh: Harian)">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="sarana_cleaning[]"
-                                            placeholder="Nama Alat/Area">
+                                            placeholder="Sarana Cleaning (Contoh: Air)">
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" name="sanitizer[]"
-                                            placeholder="Nama Alat/Area">
-                                    </td>
+                                            placeholder="Sanitizer & Pengenceran (Contoh: Klorin 1%)">
                                     <td>
                                         <button x-show="index > 0" class="btn btn btn-sm btn-danger" type="button"
                                             @click="rows.splice(index, 1)">-</button>
-    
+
                                     </td>
                                 </tr>
-    
+
                             </template>
                             <tr>
                                 <td colspan="9"><button class="btn btn-sm btn-info btn-block" type="button"
                                         @click="rows.push('')">+ Tambah baris</button></td>
                             </tr>
                         </tbody>
-    
-    
+
+
                     </table>
                 </x-modal>
             </form>

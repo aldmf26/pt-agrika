@@ -23,7 +23,7 @@
                 <th>Contact Person</th>
                 <th>No Telp</th>
                 <th>Jenis Produk / Layanan</th>
-                <th>Hasil Evaluasi</th>
+                <th width="100">Hasil Evaluasi</th>
                 <th>Keterangan</th>
                 <th>Aksi</th>
             </tr>
@@ -39,12 +39,10 @@
                     <td>{{ $d->no_telp }}</td>
                     <td>{{ $d->kategori }}</td>
                     <td>
-                        @if (!$d->hasil_evaluasi)
+                        @foreach ($d->evaluasi as $evaluasi)
                             <a href="{{ route('pur.seleksi.1.evaluasi', $d->id) }}"
-                                class="btn btn-xs btn-primary">evaluasi</a>
-                        @else
-                            sudah
-                        @endif
+                                class="btn btn-xs btn-primary">evaluasi Bulan {{ $evaluasi->periode_evaluasi }}</a>
+                        @endforeach
                     </td>
                     <td>{{ $d->ket }}</td>
                     <td>

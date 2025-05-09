@@ -15,7 +15,7 @@ class Hrga1PerencanaanKebersihan extends Controller
         $area = $r->area ?? 'Wc';
 
         $lokasi = DB::table('lokasi')->get();
-        $getIdLokasi = DB::table('lokasi')->where('lokasi', $area)->first()->id;
+        $getIdLokasi = DB::table('lokasi')->where('lokasi', $area)->first()->id ?? 0;
 
         $datas = DB::table('hrga6_perencanaan_sanitasi')->where('id_lokasi', $getIdLokasi)->get();
         $data = [
