@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('checklist_perawatan_mesins', function (Blueprint $table) {
             $table->id();
-            $table->integer('mesin_id');
+            $table->integer('perawatan_mesin_id');
             $table->date('tgl');
             $table->string('kriteria_pemeriksaan');
-            $table->string('mode');
+            $table->string('metode');
             $table->string('hasil_pemeriksaan');
             $table->string('status');
             $table->string('keterangan')->nullable();

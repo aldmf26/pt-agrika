@@ -149,6 +149,8 @@ Route::controller(Hrga2CeklisPerawatanMesin::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/add', 'add')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
     });
 Route::controller(Hrga3PermintaanPerbaikanMesin::class)
     ->prefix('hrga/hrga8/3_Permintaan_perbaikan_mesin')
