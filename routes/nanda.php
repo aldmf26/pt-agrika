@@ -28,6 +28,7 @@ use App\Http\Controllers\Produksi\Pro6FormCetak;
 use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
+use App\Http\Controllers\QA\PenarikanProduk\RecallProdukController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\DaftarhadirTinjuanManajemenController;
 use App\Http\Controllers\QA\TinjauanManajemen\NotulenTinjauanManajemenController;
@@ -37,6 +38,7 @@ use App\Http\Controllers\Qc\KontrolPengemasanController;
 use App\Http\Controllers\Qc\LaporanPelaksanaanEksporController;
 use App\Http\Controllers\Qc\LaporanPenggunaanInstalasiKarantinaHewan;
 use App\Http\Controllers\Qc\MonitoringMuatProdukJadi;
+use App\Http\Controllers\Qc\PemeriksaanRetail;
 use App\Http\Controllers\Qc\PengecekanWaktuPencucianTerakhir;
 use App\Http\Controllers\Qc\PerencanaanSwabController;
 use App\Http\Controllers\QC\ProdukReleaseController;
@@ -367,4 +369,19 @@ Route::controller(KontrolGrading::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+    });
+Route::controller(RecallProdukController::class)
+    ->prefix('qa/penarikan_produk')
+    ->name('qa.penarikan_produk.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(PemeriksaanRetail::class)
+    ->prefix('qc/pemeriksaanretail')
+    ->name('qc.pemeriksaanretail.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
     });
