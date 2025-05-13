@@ -101,6 +101,33 @@ return new class extends Migration
             $table->timestamp('created_at')->useCurrent()->nullable();
             $table->timestamp('updated_at')->useCurrent()->nullable();
         });
+
+        Schema::create('sanitasi', function (Blueprint $table) {
+            $table->bigIncrements('id_sanitasi');
+            $table->integer('id_lokasi');
+            $table->integer('id_item');
+            $table->date('tgl');
+            $table->string('admin', 100);
+            $table->string('paraf_petugas', 100);
+            $table->string('verifikator', 100);
+        });
+
+        Schema::create('foothbath_ceklis', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->integer('id_lokasi')->index();
+            $table->date('tgl');
+            $table->integer('id_frekuensi')->index();
+            $table->string('paraf_petugas', 100)->nullable();
+            $table->string('verifikator', 100)->nullable();
+            $table->string('status', 100)->nullable();
+            $table->string('admin', 100)->nullable();
+        });
+
+        Schema::create('foothbath_template', function (Blueprint $table) {
+            $table->id();
+            $table->string('item', 100);
+            $table->string('frekuensi', 100);
+        });
     }
 
     /**

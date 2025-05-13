@@ -8,6 +8,7 @@
                     @livewire('ppc.tbh-barang', ['kategori' => 'barang'])
                 </x-modal>
             </div>
+
         </div>
         <div>
             <a href="{{ route('ppc.gudang-rm.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
@@ -15,7 +16,7 @@
         </div>
     </div>
 
-    <table id="example" class="table table-bordered">
+    <table id="example" class="table table-dark table-bordered">
         <thead>
             <tr>
                 <th>#</th>
@@ -43,10 +44,11 @@
                     <td>{{ $d->jumlah_barang }}</td>
                     <td>{{ $d->status_penerimaan }}</td>
                     <td>
-                        <a class="btn btn-xs float-end btn-primary" href="{{route("ppc.gudang-rm.1.print", $d->id)}}"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-xs float-end btn-primary"
+                            href="{{ route('ppc.gudang-rm.1.print', $d->id) }}"><i class="fas fa-print"></i></a>
                     </td>
                 </tr>
             @endforeach
     </table>
-   
+
 </x-app-layout>

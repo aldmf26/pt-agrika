@@ -16,12 +16,7 @@
                                 {{-- <label>No Lot SBW</label>
                                 <input type="text" placeholder="Tgl datang-nomor rumah walet" name="no_lot" class="form-control" required> --}}
                                 <label>Rumah Walet</label>
-                                <select name="id_rumah_walet" class="select2suplier" id="">
-                                    <option value="">-Pilih Rumah Walet-</option>
-                                    @foreach ($rumahWalet as $p)
-                                        <option value="{{ $p->id }}">{{ $p->nama }}</option>
-                                    @endforeach
-                                </select>
+                                @livewire('select2-rumahwalet')
                             </div>
                         </div>
                         <div class="col-3">
@@ -146,14 +141,6 @@
                     tgl: "{{ date('Y-m-d') }}"
                 }))
             })
-        </script>
-        <script>
-            $(document).ready(function() {
-                // Delay the initialization slightly to ensure DOM is fully ready
-                setTimeout(function() {
-                    $('.select2suplier').select2();
-                }, 100);
-            });
         </script>
     @endsection
 </x-app-layout>

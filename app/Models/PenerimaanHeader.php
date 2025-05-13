@@ -10,6 +10,26 @@ class PenerimaanHeader extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function getNoKendaraanAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getPengemudiAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getJumlahBarangAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getStatusPenerimaanAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'id_barang');

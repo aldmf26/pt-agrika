@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Hrga7;
 
+use App\Traits\WithAlert;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 
 class IdentifikasiLimbah extends Component
 {
+    use WithAlert;
     public $formLimbah = [];
     public $tbl = 'hrga7_identifikasi_limbah';
 
