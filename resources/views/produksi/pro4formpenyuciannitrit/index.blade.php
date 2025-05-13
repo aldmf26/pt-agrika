@@ -5,7 +5,7 @@
 
 
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> tambah</button>
+                    class="fas fa-plus"></i> add</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
                     class="fas fa-calendar"></i> view</button>
             <a href="{{ route('produksi.4.print', ['tgl' => $tgl]) }}" target="_blank"
@@ -19,26 +19,25 @@
                         <th class="text-center" rowspan="2">Nama Operator Cabut <br> <span
                                 class="fst-italic fw-lighter">Operator
                                 name</span></th>
-                        <th class="text-center" rowspan="2">Kode Batch/Lot <br> <span
+                        <th class="text-start" rowspan="2">Kode Batch/Lot <br> <span
                                 class="fst-italic fw-lighter">Batch/Lot
                                 code</span></th>
-                        <th class="text-center" colspan="2">Jumlah <br> <span
-                                class="fst-italic fw-lighter">Quantity</span></th>
+                        <th class="text-center">Jumlah <br> <span class="fst-italic fw-lighter">Quantity</span></th>
                         <th class="text-center" colspan="2">Jam Cuci <br> <span class="fst-italic fw-lighter">Washing
                                 time</span></th>
-                        <th class="text-center" rowspan="2">Total Waktu <br> <span
+                        <th class="text-start" rowspan="2">Total Waktu <br> <span
                                 class="fst-italic fw-lighter">Time</span></th>
-                        <th class="text-center" rowspan="2">Waktu Cuci Per Pcs <br> <span
+                        <th class="text-end" rowspan="2">Waktu Cuci Per Pcs <br> <span
                                 class="fst-italic fw-lighter">(50 detik/s)</span></th>
-                        <th class="text-center" rowspan="2">Nama Operator Pencucian <br> CCP 1<br>
+                        <th class="text-start" rowspan="2">Nama Operator Pencucian <br> CCP 1<br>
                             <span class="fst-italic fw-lighter">Cleaner name CCP 1</span>
                         </th>
-                        <th class="text-center" rowspan="2">Keterangan<br> <span
+                        <th class="text-start" rowspan="2">Keterangan<br> <span
                                 class="fst-italic fw-lighter">Remaks</span></th>
                     </tr>
                     <tr>
-                        <th class="text-center">Pcs</th>
-                        <th class="text-center">Gr</th>
+                        <th class="text-end">Pcs</th>
+
                         <th class="text-center">Awal/Mulai</th>
                         <th class="text-center">Akhir/Stop</th>
                     </tr>
@@ -48,12 +47,17 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucwords(strtolower($p->pegawai->nama)) }}</td>
-                            <td>{{ $p->no_box }}</td>
+                            <td class="text-start">{{ $p->no_box }}</td>
                             <td>{{ $p->pcs }}</td>
-                            <td>{{ $p->gr }}</td>
-                            <td>{{ $p->start }}</td>
-                            <td>{{ $p->end }}</td>
-                            <td></td>
+                            {{-- <td>{{ $p->gr }}</td> --}}
+                            <td>{{ date('H:i', strtotime($p->start)) }}</td>
+                            <td>{{ date('H:i', strtotime($p->end)) }}</td>
+                            @php
+                                $start = \Carbon\Carbon::parse($p->start);
+                                $end = \Carbon\Carbon::parse($p->end);
+                                $diffInMinutes = $start->diffInMinutes($end);
+                            @endphp
+                            <td>{{ $diffInMinutes }} menit</td>
                             <td>{{ $p->waktu_penyucian }}</td>
                             <td>{{ $p->nama_operator }}</td>
                         </tr>
@@ -102,9 +106,9 @@
                     <div class="col-lg-2">
                         <label>Pcs</label>
                     </div>
-                    <div class="col-lg-2">
+                    {{-- <div class="col-lg-2">
                         <label>Gr</label>
-                    </div>
+                    </div> --}}
                 </div>
                 <template x-for="(row, index) in rows" :key="row.id">
                     <div class="row mb-4">
@@ -123,9 +127,9 @@
                         <div class="col-lg-2">
                             <input type="text" class="form-control" name="pcs[]">
                         </div>
-                        <div class="col-lg-2">
+                        {{-- <div class="col-lg-2">
                             <input type="text" class="form-control" name="gr[]">
-                        </div>
+                        </div> --}}
                         <div class="col-lg-1 d-flex align-items-end">
                             <button type="button" class="btn btn-danger" @click="rows.splice(index, 1)"
                                 x-show="rows.length > 1">

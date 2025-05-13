@@ -52,7 +52,7 @@
                             <td>{{ $b['gr'] + 140 }} gram</td>
                             <td>{{ $b['gr_awal'] }} gram</td>
                             <td></td>
-                            <td></td>
+                            <td class="text-start">{{ date('ymd', strtotime($tgl)) }} - Ok</td>
                         </tr>
                     @endforeach
                 </tbody>

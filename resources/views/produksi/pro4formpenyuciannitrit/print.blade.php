@@ -99,8 +99,8 @@
                             <th class="text-center align-middle" rowspan="2">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot
                                     code</span></th>
-                            <th class="text-center  " colspan="2">Jumlah <br> <span
-                                    class="fst-italic fw-lighter">Quantity</span></th>
+                            <th class="text-center  ">Jumlah <br> <span class="fst-italic fw-lighter">Quantity</span>
+                            </th>
                             <th class="text-center" colspan="2">Jam Cuci <br> <span
                                     class="fst-italic fw-lighter">Washing
                                     time</span></th>
@@ -116,7 +116,7 @@
                         </tr>
                         <tr>
                             <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
+
                             <th class="text-center">Awal/Mulai</th>
                             <th class="text-center">Akhir/Stop</th>
                         </tr>
@@ -128,10 +128,15 @@
                                 <td>{{ $p->pegawai->nama }}</td>
                                 <td>{{ $p->no_box }}</td>
                                 <td>{{ $p->pcs }}</td>
-                                <td>{{ $p->gr }}</td>
-                                <td>{{ $p->start }}</td>
-                                <td>{{ $p->end }}</td>
-                                <td></td>
+                                {{-- <td>{{ $p->gr }}</td> --}}
+                                <td>{{ date('H:i', strtotime($p->start)) }}</td>
+                                <td>{{ date('H:i', strtotime($p->end)) }}</td>
+                                @php
+                                    $start = \Carbon\Carbon::parse($p->start);
+                                    $end = \Carbon\Carbon::parse($p->end);
+                                    $diffInMinutes = $start->diffInMinutes($end);
+                                @endphp
+                                <td>{{ $diffInMinutes }} menit</td>
                                 <td>{{ $p->waktu_penyucian }}</td>
                                 <td>{{ $p->nama_operator }}</td>
                             </tr>

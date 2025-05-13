@@ -3,9 +3,9 @@
         <div class="card-header">
             <label for="" class="float-start">Tanggal : {{ tanggal($tgl) }}</label>
             <a href="{{ route('produksi.6.print', ['tgl' => $tgl]) }}" target="_blank" class="btn btn-primary float-end"><i
-                    class="fas fa-print"></i> Print</a>
+                    class="fas fa-print"></i> print</a>
             <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> view</button>
 
         </div>
         <div class="card-body">
@@ -15,7 +15,8 @@
                         <th rowspan="2">No</th>
                         <th rowspan="2">Nama Personil Cetak <br> <span class="fst-italic fw-lighter">Personil name
                         </th>
-                        <th rowspan="2">Kode Batch/Lot <br> <span class="fst-italic fw-lighter">Batch/Lot code</th>
+                        <th class="text-start" rowspan="2">Kode Batch/Lot <br> <span
+                                class="fst-italic fw-lighter">Batch/Lot code</th>
                         <th rowspan="2">Jenis <br> <span class="fst-italic fw-lighter">Type</th>
                         <th colspan="2">Berat Kering <br> <span class="fst-italic fw-lighter">Qty for moulding</th>
                         <th colspan="2">Berat Hasil <br> <span class="fst-italic fw-lighter">Result qty</th>
@@ -35,7 +36,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $c['nama'] }}</td>
-                            <td>{{ $c['no_box'] }}</td>
+                            <td class="text-start">{{ $c['no_box'] }}</td>
                             <td>{{ $c['tipe'] }}</td>
                             <td>{{ $c['pcs_awal_ctk'] }}</td>
                             <td>{{ $c['gr_awal_ctk'] }}</td>
