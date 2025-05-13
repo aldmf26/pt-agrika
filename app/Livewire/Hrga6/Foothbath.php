@@ -2,12 +2,15 @@
 
 namespace App\Livewire\Hrga6;
 
+use App\Traits\WithAlert;
 use Livewire\Component;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Url;
+
 class Foothbath extends Component
 {
+    use WithAlert;
     public $selectedBulan;
     public $selectedArea;
     public $daysInMonth = 31;
@@ -22,7 +25,7 @@ class Foothbath extends Component
     #[Url]
     public $id_lokasi;
 
-   
+
     public function loadSanitasi($id_lokasi, $selectedBulan)
     {
         return DB::table('foothbath_ceklis as a')
@@ -99,7 +102,6 @@ class Foothbath extends Component
             session()->flash('error', 'Data Tidak ada');
         }
         $this->alert('sukses', 'Data Berhasil disimpan');
-
     }
     public function render()
     {
@@ -120,6 +122,6 @@ class Foothbath extends Component
             'foothbathTemplate' => $foothbathTemplate,
             'adminSanitasi' => $adminSanitasi,
         ];
-        return view('livewire.hrga6.foothbath',$data);
+        return view('livewire.hrga6.foothbath', $data);
     }
 }

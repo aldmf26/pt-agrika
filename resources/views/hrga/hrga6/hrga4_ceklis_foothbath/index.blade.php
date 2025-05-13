@@ -8,7 +8,7 @@
         </div>
         <div class="col-lg-12">
             <section class="row">
-                <table class="table table-hover" id="table1">
+                <table class="table table-hover table-dark" id="table1">
                     <thead>
                         <tr>
                             <th width="5">#</th>
@@ -30,14 +30,15 @@
                                 <td>{{ $d->lokasi }}</td>
                                 <td>
                                     <a target="_blank" class="btn btn-sm btn-primary"
-                                        href="{{ route('hrga6.4.print', $param) }}"><i class="fas fa-print"></i> Cetak</a>
+                                        href="{{ route('hrga6.4.print', $param) }}"><i class="fas fa-print"></i>
+                                        Cetak</a>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </section>
-    
+
             <x-modal btnSave="T" idModal="tambah" title="Tambah Data">
                 @livewire('hrga6.foothbath-template')
             </x-modal>

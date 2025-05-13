@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Livewire\Hrga6;
+
+use App\Traits\WithAlert;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Url;
@@ -8,6 +10,7 @@ use Livewire\Component;
 
 class CeklistSanitasi extends Component
 {
+    use WithAlert;
     public $selectedBulan;
     public $selectedArea;
     public $daysInMonth = 31;
@@ -32,8 +35,8 @@ class CeklistSanitasi extends Component
                     ->where('a.id_lokasi', $id_lokasi)
                     ->whereMonth('a.tgl', $selectedBulan);
             })
-            ->groupBy('b.id', 'b.nama')
-            ->selectRaw('b.id as id_item, b.nama as nama_item,b.no_identifikasi, a.tgl, a.paraf_petugas, a.verifikator, COUNT(a.tgl) as ttl')
+            ->groupBy('b.id', 'b.nama_item')
+            ->selectRaw('b.id as id_item, b.nama_item,b.no_identifikasi, a.tgl, a.paraf_petugas, a.verifikator, COUNT(a.tgl) as ttl')
             ->get();
     }
     public function mount()
@@ -149,11 +152,11 @@ class CeklistSanitasi extends Component
             ->selectRaw('a.id, b.name, a.posisi')
             ->get()
             ->groupBy('posisi');
-            
+
         $data = [
             'itemSanitasi' => $this->itemSanitasi,
             'adminSanitasi' => $adminSanitasi
         ];
-        return view('livewire.hrga6.ceklist-sanitasi',$data);
+        return view('livewire.hrga6.ceklist-sanitasi', $data);
     }
 }

@@ -7,7 +7,7 @@
         </div>
         <div class="col-lg-12">
             <section class="row">
-                <table class="table table-hover" id="table1">
+                <table class="table table-hover table-dark" id="table1">
                     <thead>
                         <tr>
                             <th width="5">#</th>
@@ -18,18 +18,19 @@
                     </thead>
                     <tbody>
                         @foreach ($datas as $d)
-                        @php
-                            $param = ['bulan' => $d->bulan, 'tahun' => $d->tahun, 'id_lokasi' => $d->id_lokasi];
-                        @endphp
+                            @php
+                                $param = ['bulan' => $d->bulan, 'tahun' => $d->tahun, 'id_lokasi' => $d->id_lokasi];
+                            @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td><a
-                                        href="{{ route('hrga6.2.create', $param) }}" wire:navigate>{{ formatTglGaji($d->bulan, $d->tahun) }}</a>
+                                <td><a href="{{ route('hrga6.2.create', $param) }}"
+                                        wire:navigate>{{ formatTglGaji($d->bulan, $d->tahun) }}</a>
                                 </td>
                                 <td>{{ $d->lokasi }}</td>
                                 <td>
-                                    <a target="_blank" class="btn btn-sm btn-primary" href="{{ route('hrga6.2.print', $param) }}"><i
-                                            class="fas fa-print"></i> Cetak</a>
+                                    <a target="_blank" class="btn btn-sm btn-primary"
+                                        href="{{ route('hrga6.2.print', $param) }}"><i class="fas fa-print"></i>
+                                        Cetak</a>
                                 </td>
                             </tr>
                         @endforeach

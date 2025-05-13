@@ -11,7 +11,8 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Alamat Supplier</label>
-                    <input required type="text" name="alamat_supplier" placeholder="Alamat Supplier" class="form-control">
+                    <input required type="text" name="alamat_supplier" placeholder="Alamat Supplier"
+                        class="form-control">
                 </div>
             </div>
             <div class="col-3">
@@ -34,11 +35,15 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="">Jenis Produk / Layanan</label>
-                    <input type="text" name="jenis_produk" placeholder="Jenis Produk / Layanan" class="form-control">
+                    <label for="">
+                        Kategori / Layanan
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                            title="isi Barang: untuk bahan baku, isi kemasan : untuk barang kemasan"></i>
+                    </label>
+                    <input type="text" name="jenis_produk" placeholder="barang, kemasan, dll" class="form-control">
                 </div>
             </div>
-          
+
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Keterangan</label>

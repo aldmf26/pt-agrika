@@ -10,9 +10,13 @@ class Barang extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function getNamaBarangAttribute($value)
+    {
+        return ucfirst($value);
+    }
     public function kode_bahan_baku()
     {
-        return $this->belongsTo(KodeBahanBaku::class, 'kode_barang', 'kode');
+        return $this->belongsTo(KodeBahanBaku::class, 'kode_barang', 'id');
     }
 
     public function penerimaan()

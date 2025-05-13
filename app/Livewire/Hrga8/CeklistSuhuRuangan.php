@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Hrga8;
 
+use App\Traits\WithAlert;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
@@ -9,11 +10,12 @@ use Livewire\Attributes\Url;
 
 class CeklistSuhuRuangan extends Component
 {
+    use WithAlert;
     public
         $bulans,
         $selectedBulan,
         $selectedRuangan,
-        $selectedStandardSuhu, 
+        $selectedStandardSuhu,
         $adaData,
         $daysInMonth = 31,
         $tbl = 'hrga8_ceklist_suhu_ruangan',

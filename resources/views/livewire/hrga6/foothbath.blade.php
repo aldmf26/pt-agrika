@@ -31,7 +31,9 @@
                     @section('scripts')
                         <script>
                             $(document).ready(function() {
-                                $('.selectArea').select2()
+                                setTimeout(function() {
+                                    $('.selectArea').select2();
+                                }, 500);
                                 $('.selectArea').on('change', function(e) {
                                     @this.set('selectedArea', $(this).val());
                                 });

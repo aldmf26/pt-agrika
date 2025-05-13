@@ -28,7 +28,6 @@ class RM1PenerimaanBarangController extends Controller
     {
         $data = [
             'title' => 'Penerimaan Barang',
-            'barangs' => Barang::with('kode_bahan_baku')->where('kategori', 'barang')->latest()->get(),
         ];
         return view('ppc.gudang_rm.penerimaan_barang.create', $data);
     }

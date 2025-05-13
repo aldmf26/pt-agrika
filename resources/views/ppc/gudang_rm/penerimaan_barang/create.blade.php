@@ -4,20 +4,12 @@
             @csrf
             <div class="card">
                 <div class="card-body">
-
-
                     <div class="row mt-4">
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Nama Barang</label>
-                                <select class="select2suplier" name="id_barang">
-                                    <option value="">-- Pilih Item --</option>
-                                    @foreach ($barangs as $p)
-                                        <option value="{{ $p->id }}" data-kode="{{ $p->kode_barang }}">
-                                            {{ $p->nama_barang }} |
-                                            {{ $p->kode_bahan_baku->nama }}</option>
-                                    @endforeach
-                                </select>
+                                @livewire('select2-barang', ['kategori' => 'barang'])
+
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -169,14 +161,14 @@
         </form>
     </div>
     @section('scripts')
-    <script>
-        $(document).ready(function() {
-            // Delay the initialization slightly to ensure DOM is fully ready
-            setTimeout(function() {
-                $('.select2suplier').select2();
-            }, 100);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                // Delay the initialization slightly to ensure DOM is fully ready
+                setTimeout(function() {
+                    $('.select2suplier').select2();
+                }, 100);
+            });
+        </script>
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({
@@ -184,33 +176,6 @@
                     tgl: "{{ date('Y-m-d') }}"
                 }))
             })
-        </script>
-        <script>
-            function updateKodeLot() {
-                var kode_barang = $('.select2suplier').find(':selected').data('kode') || '';
-                var tgl_kedatangan = $('input[name="tgl_penerimaan"]').val();
-                var tgl_expired = $('input[name="tgl_expired"]').val();
-
-                if (tgl_kedatangan && tgl_expired && kode_barang) {
-                    var kedatangan_parts = tgl_kedatangan.split('-');
-                    var kd_tgl = kedatangan_parts[2];
-                    var kd_bulan = kedatangan_parts[1];
-                    var kd_tahun = kedatangan_parts[0];
-
-                    var expired_parts = tgl_expired.split('-');
-                    var exp_bulan = expired_parts[1];
-                    var exp_tahun = expired_parts[0];
-
-                    var kode_lot = `${kd_tgl}${kd_bulan}${kd_tahun}${kode_barang}${exp_bulan}${exp_tahun}`;
-                    $("input[name=kode_lot]").val(kode_lot);
-                }
-            }
-
-            // Event listener untuk semua elemen yang mempengaruhi kode lot
-            $('.select2suplier, input[name="tgl_penerimaan"], input[name="tgl_expired"]').change(updateKodeLot);
-
-            // Panggil fungsi sekali saat halaman dimuat (jika ada data default)
-            $(document).ready(updateKodeLot);
         </script>
     @endsection
 </x-app-layout>
