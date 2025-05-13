@@ -11,14 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('checklist_perawatan_mesins', function (Blueprint $table) {
+        Schema::create('pemriksaan_retails', function (Blueprint $table) {
             $table->id();
-            $table->integer('perawatan_mesin_id');
+            $table->string('retain_sampel');
             $table->date('tgl');
-            $table->string('kriteria_pemeriksaan');
-            $table->string('metode');
-            $table->string('hasil_pemeriksaan');
-            $table->string('status');
+            $table->double('standar_kebutuhan');
+            $table->date('production_date');
+            $table->date('expired_date');
+            $table->double('warna');
+            $table->double('bau');
+            $table->double('tekstur');
+            $table->double('kandungan_nitrit');
+            $table->string('dicek_oleh');
             $table->string('keterangan')->nullable();
             $table->timestamps();
         });
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('checklist_perawatan_mesins');
+        Schema::dropIfExists('pemriksaan_retails');
     }
 };
