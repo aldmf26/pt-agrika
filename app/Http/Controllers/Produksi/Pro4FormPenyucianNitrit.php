@@ -37,7 +37,7 @@ class Pro4FormPenyucianNitrit extends Controller
                 'pegawai_id' => $r->pegawai_id[$i],
                 'no_box' => $r->no_box[$i],
                 'pcs' => $r->pcs[$i],
-                'gr' => $r->gr[$i],
+                'gr' => 0,
                 'ket' => 'Penyucian Nitrit',
             ];
             PenyucianNitrit::create($data);
