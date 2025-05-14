@@ -27,6 +27,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 ->from('label_identitas_bahan_baku as a')
                 ->whereRaw('a.id_barang = barang.id');
         })->latest()->get();
+        
         $penerimaan = PenerimaanKemasanSbwKotorHeader::latest()->get();
         $identitas = Identitas::all();
         $data = [

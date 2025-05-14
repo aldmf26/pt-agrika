@@ -8,7 +8,6 @@
                 {{ $p->kode_bahan_baku->nama }}</option>
         @endforeach
         <option value="tambah">+ Barang</option>
-
     </select>
 
     <x-modal title="Tambah Barang" id="modalTambahBarang" btnSave="T">
