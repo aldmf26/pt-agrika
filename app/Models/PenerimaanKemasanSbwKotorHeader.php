@@ -10,6 +10,12 @@ class PenerimaanKemasanSbwKotorHeader extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function rumahWalet()
+    {
+        return $this->belongsTo(RumahWalet::class, 'noreg_rumah_walet', 'no_reg');
+    }
+
+
     public function kriteria()
     {
         return $this->hasMany(PenerimaanKemasanSbwKotorKriteria::class, 'id_penerimaan');

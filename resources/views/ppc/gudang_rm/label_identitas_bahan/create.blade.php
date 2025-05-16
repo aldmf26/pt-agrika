@@ -10,7 +10,7 @@
                                 <label>Identitas</label>
                                 <select x-model="identitas" class="form-control" name="identitas">
                                     <option value="">-- Pilih Identitas --</option>
-                                  
+
                                     @foreach ($identitas as $p)
                                         <option value="{{ $p->nama }}">Bahan {{ ucwords($p->nama) }}</option>
                                     @endforeach
@@ -25,7 +25,9 @@
                                 <select class="select2suplier selectBarang" name="id_barang">
                                     <option value="">-- Pilih Item --</option>
                                     @foreach ($barangs as $p)
-                                        <option data-kode="{{ $p->kode_barang }}" data-no_lot="{{ $p->no_lot }}" value="{{ $p->id }}">{{ $p->kode_barang }} |
+                                        <option data-supplier="{{ $p->supplier->nama_supplier }}"
+                                            data-kode="{{ $p->kode_barang }}" value="{{ $p->id }}">
+                                            {{ $p->kode_barang }} |
                                             {{ $p->nama_barang }}
                                         </option>
                                     @endforeach
@@ -33,7 +35,7 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            
+
                             <div x-show="identitas == 'baku sbw'" class="form-group">
                                 <label>No. Reg SBW</label>
                                 <select class="select2suplier" name="noregrbw">
@@ -54,7 +56,8 @@
                             <div class="form-group">
                                 <div class="form-group">
                                     <label for="">Tanggal Kedatangan</label>
-                                    <input type="date" value="{{ date('Y-m-d') }}" name="tgl_kedatangan" class="form-control">
+                                    <input type="date" value="{{ date('Y-m-d') }}" name="tgl_kedatangan"
+                                        class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -92,14 +95,14 @@
         </form>
     </div>
     @section('scripts')
-    <script>
-        $(document).ready(function() {
-            // Delay the initialization slightly to ensure DOM is fully ready
-            setTimeout(function() {
-                $('.select2suplier').select2();
-            }, 100);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                // Delay the initialization slightly to ensure DOM is fully ready
+                setTimeout(function() {
+                    $('.select2suplier').select2();
+                }, 100);
+            });
+        </script>
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({
@@ -111,14 +114,16 @@
         <script>
             $(document).ready(function() {
 
-                $('.selectBarang').change(function (e) { 
+                $('.selectBarang').change(function(e) {
                     e.preventDefault();
-                    
+
                     var kode = $(this).find(':selected').data('kode');
                     var no_lot = $(this).find(':selected').data('no_lot');
+                    var supplier = $(this).find(':selected').data('supplier');
 
                     $("input[name=no_lot]").val(no_lot);
                     $("input[name=kode_grading]").val(kode);
+                    $("input[name=nmprodusen]").val(supplier);
                 });
             });
         </script>

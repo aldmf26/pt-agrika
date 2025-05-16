@@ -14,6 +14,12 @@ class Barang extends Model
     {
         return ucfirst($value);
     }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Suplier::class, 'supplier_id');
+    }
+
     public function kode_bahan_baku()
     {
         return $this->belongsTo(KodeBahanBaku::class, 'kode_barang', 'id');
@@ -23,6 +29,7 @@ class Barang extends Model
     {
         return $this->hasMany(PenerimaanHeader::class, 'id_barang');
     }
+
 
     public function penerimaanKemasan()
     {

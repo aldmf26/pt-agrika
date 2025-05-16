@@ -80,49 +80,77 @@
                                 <p>PT. AGRIKAGATYA ARUM</p>
                             </div>
 
-                            <p><strong><u>Identitas Bahan {{ ucwords($d->identitas) }}</u></strong></p>
+                            <p><strong><u>Identitas Bahan {{ ucwords($d->kategori) }}</u></strong></p>
                         </div>
                         <table style="font-size: 10px; text-align: left">
                             <tr>
-                                <td>Nama Bahan Baku</td>
+                                <td>Nama {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
+                                </td>
                                 <td>:</td>
-                                <th>{{ $d->barang->nama_barang }}</th>
+                                <th>{{ $d->nama_barang }}</th>
                             </tr>
                             <tr>
                                 <td>
-                                    @if ($d->identitas == 'baku sbw')
+                                    @if (!in_array($d->kategori, ['barang', 'kemasan']))
                                         No. Reg RBW
                                     @else
                                         Nama Produsen
                                     @endif
                                 </td>
                                 <td>:</td>
-                                <td>{{ $d->noregrbw_nmprodusen }}</td>
+                                <td>{{ $d->supplier->nama_supplier }}</td>
                             </tr>
                             <tr>
                                 <td>Tanggal Kedatangan</td>
                                 <td>:</td>
-                                <td>{{ tanggal($d->tgl_kedatangan) }}</td>
+                                <td>
+                                    @if ($d->kategori == 'barang' && $d->penerimaan->isNotEmpty())
+                                        @foreach ($d->penerimaan as $p)
+                                            {{ tanggal($p->tanggal_terima) }}<br>
+                                        @endforeach
+                                    @elseif($d->kategori == 'kemasan' && $d->penerimaanKemasan->isNotEmpty())
+                                        @foreach ($d->penerimaanKemasan as $p)
+                                            {{ tanggal($p->tanggal_penerimaan) }}<br>
+                                        @endforeach
+                                    @else
+                                        {{ tanggal($d->tgl_penerimaan) }}
+                                    @endif
+                                </td>
                             </tr>
                             <tr>
                                 <td>No. Lot</td>
                                 <td>:</td>
-                                <td>{{ $d->barang->no_lot }}</td>
+                                <td>
+                                    @if ($d->kategori == 'barang' && $d->penerimaan->isNotEmpty())
+                                        @foreach ($d->penerimaan as $p)
+                                            {{ $p->kode_lot }}<br>
+                                        @endforeach
+                                    @elseif($d->kategori == 'kemasan' && $d->penerimaanKemasan->isNotEmpty())
+                                        @foreach ($d->penerimaanKemasan as $p)
+                                            {{ $p->kode_lot }}<br>
+                                        @endforeach
+                                    @else
+                                        {{ $d->no_lot }}
+                                    @endif
+                                </td>
+                                </td>
                             </tr>
                             <tr>
                                 <td>Kode Grading/Bahan</td>
                                 <td>:</td>
-                                <td>{{ $d->barang->kode_barang }}</td>
+                                <td>
+                                    {{ $d->kode_barang }}
+                                </td>
                             </tr>
                             <tr>
                                 <td>Keterangan</td>
                                 <td>:</td>
-                                <td>{{ $d->keterangan }}</td>
+                                {{-- <td>{{ $d->keterangan }}</td> --}}
                             </tr>
                         </table>
                         <table class="signature-table">
                             <tr>
-                                <td>Ka Gudang</td>
+                                <td>KA. Gudang</td>
                                 <td>QC Incoming</td>
                                 <td>Status</td>
                             </tr>
