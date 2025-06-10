@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('keterangan', 200)->nullable();      // Pendidikan terakhir
             $table->string('admin', 200)->nullable();      // Pendidikan terakhir
             $table->timestamps();
-            $table->date('deleted_at');
+            $table->date('deleted_at')->nullable();
         });
 
         // Tabel departemen
@@ -38,7 +38,7 @@ return new class extends Migration
             $table->id();
             $table->string('divisi', 100); // Nama departemen
             $table->text('urutan')->nullable();  // Deskripsi departemen
-            $table->text('deskripsi')->nullable(); 
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
 
@@ -51,7 +51,6 @@ return new class extends Migration
             $table->date('tanggal_berlaku');                    // Tanggal mulai berlaku
             $table->text('alasan_perubahan')->nullable();       // Alasan perubahan gaji
             $table->timestamps();
-
         });
 
         // Tabel riwayat jabatan
@@ -62,7 +61,6 @@ return new class extends Migration
             $table->string('jabatan_baru', 100);                // Jabatan baru
             $table->date('tanggal_perubahan');                  // Tanggal perubahan
             $table->timestamps();
-
         });
     }
 
