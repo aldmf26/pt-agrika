@@ -43,4 +43,6 @@ class PurchaseRequest extends Model
     {
         return $this->hasMany(PurchaseOrder::class, 'pr_id');
     }
+
+    
 }

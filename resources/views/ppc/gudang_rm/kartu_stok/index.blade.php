@@ -19,7 +19,7 @@
                     <th>#</th>
                     <th>Nama Barang</th>
                     <th>Satuan</th>
-                    <th>kategori</th>
+                    <th>Kategori</th>
                     <th>Stok</th>
                     <th>Aksi</th>
                 </tr>

@@ -10,6 +10,21 @@ class PenerimaanKemasanSbwKotorHeader extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function getPengemudiAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getJenisAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getAlamatRumahWaletAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function rumahWalet()
     {
         return $this->belongsTo(RumahWalet::class, 'noreg_rumah_walet', 'no_reg');

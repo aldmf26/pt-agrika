@@ -10,6 +10,16 @@ class SkPengirimanWalet extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function getAlamatRumahWaletAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
+    public function getTujuanIkphAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function rumahWalet()
     {
         return $this->belongsTo(RumahWalet::class, 'id_penerimaan');

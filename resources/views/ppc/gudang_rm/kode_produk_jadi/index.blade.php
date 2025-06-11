@@ -20,17 +20,16 @@
                     <th>Ket</th>
                 </tr>
             </thead>
-            
+
             <tbody>
                 @foreach ($datas as $d)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $d->nama }}</td>
-                        <td class="text-center">{{ $d->kategori }}</td>
-                        <td class="text-center">{{ $d->kode}}</td>
-                        <td class="text-center">{{ $d->satuan }}</td>
-                        <td class="text-center">{{ $d->ket }}</td>
-
+                        <td>{{ $d->kategori }}</td>
+                        <td>{{ $d->kode }}</td>
+                        <td>{{ $d->satuan }}</td>
+                        <td>{{ $d->ket }}</td>
                     </tr>
                 @endforeach
             </tbody>

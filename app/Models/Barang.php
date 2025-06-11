@@ -15,6 +15,16 @@ class Barang extends Model
         return ucfirst($value);
     }
 
+    public function getSatuanAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+    public function getKategoriAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     public function supplier()
     {
         return $this->belongsTo(Suplier::class, 'supplier_id');
