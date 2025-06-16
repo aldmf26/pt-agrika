@@ -1,0 +1,16 @@
+<?php
+
+use App\Http\Controllers\Api\GradeSbwCOntroller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::controller(GradeSbwCOntroller::class)
+    ->prefix('apikodesbw')
+    ->name('apikodesbw.')
+    ->group(function () {
+        Route::get('/grade_sbw', 'grade_sbw')->name('grade_sbw');
+    });
