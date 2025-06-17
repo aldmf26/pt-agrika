@@ -3,12 +3,12 @@
         <tr>
             <td>Jenis SBW Kotor</td>
             <td>:</td>
-            <td>{{ $penerimaan->jenis }}</td>
+            <td>{{ $penerimaan->nama }}</td>
         </tr>
         <tr>
             <td>No Lot SBW</td>
             <td>:</td>
-            <td>{{ $penerimaan->no_lot }}</td>
+            <td>{{ $penerimaan->no_invoice }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -16,13 +16,9 @@
         <tr>
             <td>Tanggal Penerimaan</td>
             <td>:</td>
-            <td>{{ \Carbon\Carbon::parse($penerimaan->tgl_penerimaan)->format('dmy') }}</td>
+            <td>{{ \Carbon\Carbon::parse($penerimaan->tgl)->format('d M Y') }}</td>
         </tr>
-        <tr>
-            <td>Alamat Rumah Walet</td>
-            <td>:</td>
-            <td>{{ $penerimaan->alamat_rumah_walet }}</td>
-        </tr>
+
         <tr>
             <td>No Kendaraan</td>
             <td>:</td>
@@ -37,48 +33,64 @@
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td>Jumlah Sbw Kotor (Gr)</td>
+            <td>Jumlah Sbw Kotor (Kg)</td>
             <td>:</td>
-            <td>{{ $penerimaan->jumlah_gr }}</td>
+            <td>{{ number_format($penerimaan->kg, 1) }}</td>
         </tr>
         <tr>
             <td>Jumlah Pcs</td>
             <td>:</td>
-            <td>{{ $penerimaan->jumlah_pcs }}</td>
+            <td>{{ number_format($penerimaan->pcs, 0) }}</td>
+        </tr>
+        <tr>
+            <td>Jumlah Sample</td>
+            <td>:</td>
+            <td>20 Kg / @ {{ number_format($penerimaan->kg / 20, 0) }} box</td>
         </tr>
     </table>
+    @php
+        $batas = round($penerimaan->kg / 20, 0);
+        $maxPerRow = 10; // maksimal kolom per baris
+        $jumlahKolom = $batas;
+        $jumlahBarisKolom = ceil($jumlahKolom / $maxPerRow);
+    @endphp
 
-    <table class="mt-4 table table-xs table-bordered">
-        <thead>
+    <table class="mt-2 table table-xs table-bordered">
+        <tr>
+            <th></th>
+            <th colspan="{{ $maxPerRow }}">No Reg Rumah Walet :</th>
+        </tr>
+
+        @for ($baris = 0; $baris < $jumlahBarisKolom; $baris++)
+            @php
+                $start = $baris * $maxPerRow + 1;
+                $end = min(($baris + 1) * $maxPerRow, $jumlahKolom);
+            @endphp
             <tr>
-                <th></th>
-                <th colspan="10">No Reg Rumah Walet : {{ $penerimaan->noreg_rumah_walet }}</th>
-            </tr>
-            <tr>
-                <th>Kriteria Penerimaan </th>
-                @for ($i = 1; $i < 3; $i++)
+                <th>Kriteria Penerimaan</th>
+                @for ($i = $start; $i <= $end; $i++)
                     <th class="text-center">{{ $i }}</th>
                 @endfor
             </tr>
-        </thead>
-        <tbody>
-            @foreach ($penerimaan->kriteria as $kriteria)
+            @foreach ($kriteria as $k)
                 <tr>
-                    <th>{{ ucfirst($kriteria->kriteria) }}
-                    </th>
-                    <td class="text-center">{!! $kriteria->check_1 ? '√' : '' !!}</td>
-                    <td class="text-center">{!! $kriteria->check_2 ? '√' : '' !!}</td>
+                    <td>{{ $k->kriteria }}</td>
+                    @for ($i = $start; $i <= $end; $i++)
+                        <td class="text-center">√</td>
+                    @endfor
                 </tr>
             @endforeach
-        </tbody>
+        @endfor
     </table>
+
     <p>Keputusan: <br>
     <div class="ms-5">
-        <input disabled @checked($penerimaan->keputusan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required> Diterima
+        <input disabled type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
         <br>
-        <input disabled @checked($penerimaan->keputusan == 'diterima dengan Catatan (sortir)') type="checkbox" name="keputusan" value="Ditolak" required> diterima dengan Catatan (sortir)
+        <input disabled type="checkbox" name="keputusan" value="Ditolak" required> diterima
+        dengan Catatan .....
         <br>
-        <input disabled @checked($penerimaan->keputusan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
+        <input disabled type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
         <br>
     </div>
     </p>
@@ -89,7 +101,7 @@
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
                         <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -100,7 +112,7 @@
                     <tr>
                         <td class="text-center">[ADM. GUDANG]</td>
                         <td class="text-center">[KA. GUDANG]</td>
-                        <td class="text-center">[DIREKTUR]</td>
+
                     </tr>
                 </tbody>
             </table>
