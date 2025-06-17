@@ -13,4 +13,5 @@ Route::controller(GradeSbwCOntroller::class)
     ->name('apikodesbw.')
     ->group(function () {
         Route::get('/grade_sbw', 'grade_sbw')->name('grade_sbw');
+        Route::get('/rumah_walet', 'rumah_walet')->name('rumah_walet');
     });
