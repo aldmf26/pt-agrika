@@ -20,7 +20,7 @@
             <tr>
                 <th>#</th>
                 <th>Nama Barang</th>
-                <th>Kode Barang</th>
+                <th>Kode Lot</th>
                 <th>Tanggal Penerimaan</th>
                 <th>Supplier</th>
                 <th>No Kendaraan</th>
@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $d->barang->nama_barang }}</td>
-                    <td>{{ $d->barang->kode_barang }}</td>
+                    <td>{{ $d->kode_lot }}</td>
                     <td>{{ tanggal($d->tanggal_penerimaan) }}</td>
                     <td>{{ $d->supplier->nama_supplier }}</td>
                     <td>{{ $d->no_kendaraan }}</td>

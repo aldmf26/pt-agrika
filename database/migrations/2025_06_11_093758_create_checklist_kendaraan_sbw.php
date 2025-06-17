@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('ekspedisi');
             $table->time('jam_datang');
             $table->string('noreg_rumah_walet');
+            $table->string('nomor_kondisi');
+            $table->boolean('check_wh')->nullable();
+            $table->boolean('check_qa')->nullable();
             $table->string('keputusan');
             $table->string('pemeriksa');
             $table->text('komentar')->nullable();

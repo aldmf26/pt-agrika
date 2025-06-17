@@ -78,6 +78,8 @@
         <br>
         <input disabled @checked($penerimaan->keputusan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
         <br>
+        <input disabled @checked(str_contains($penerimaan->keputusan, 'Catatan')) type="checkbox" name="keputusan" value="Diterima dengan Catatan"
+            required> {{ $penerimaan->keputusan }}
     </div>
     </p>
     <table width="100%">

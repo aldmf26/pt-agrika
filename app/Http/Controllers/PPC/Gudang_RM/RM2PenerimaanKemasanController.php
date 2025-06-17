@@ -50,7 +50,7 @@ class RM2PenerimaanKemasanController extends Controller
                 'jumlah_barang' => $r->jumlah_barang,
                 'jumlah_sampel' => $r->jumlah_sampel,
                 'kode_lot' => $r->kode_lot,
-                'keputusan' => $r->keputusan,
+                'keputusan' => $r->keputusan == 'Diterima dengan Catatan' ? 'Diterima dengan Catatan : ' . $r->keputusan_catatan : $r->keputusan,
             ]);
 
             // Simpan kriteria quantity

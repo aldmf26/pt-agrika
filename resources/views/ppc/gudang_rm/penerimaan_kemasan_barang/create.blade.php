@@ -59,10 +59,10 @@
                         <div class="col-md-12">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>KODE LOT:</th>
+                                    <th>KODE KEMASAN:</th>
                                     <td>
                                         <input type="text" name="kode_lot" class="form-control"
-                                            placeholder="kode lot">
+                                            placeholder="kode kemasan">
                                     </td>
                                 </tr>
                                 <tr>
@@ -120,6 +120,18 @@
                                                     name="keputusan" value="Ditolak">
                                                 <label for="ditolak" class="form-check-label">Ditolak</label>
                                             </div>
+
+                                            <div class="form-check form-check-inline">
+                                                <input id="diterimacatatan" class="form-check-input" type="radio"
+                                                    name="keputusan" value="Diterima dengan Catatan">
+                                                <label for="diterimacatatan" class="form-check-label">Diterima dengan
+                                                    Catatan</label>
+                                            </div>
+                                            <div class="form-check form-check-inline ms-2">
+                                                <input class="form-control form-control-sm" type="text"
+                                                    name="keputusan_catatan" value=""
+                                                    placeholder="catatan keputusan">
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -150,6 +162,5 @@
                 }))
             })
         </script>
-       
     @endsection
 </x-app-layout>

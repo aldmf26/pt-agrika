@@ -1,8 +1,8 @@
 <div>
-        
+
     <div class="row" x-data="{
         tgl: '',
-
+    
     }">
         <div class="col-4">
             <span class="badge bg-primary pointer" @click="showProduk = !showProduk">Lihat Produk</span>
@@ -20,24 +20,25 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Kode</th>
                             <th>Nama Barang</th>
-                            <th>Kode Barang</th>
                             <th>No Lot</th>
-                            <th>Aksi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($barangs as $d)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $d->nama_barang }} | {{ $d->satuan }}</td>
                                 <td>{{ $d->kode_barang }}</td>
-                                <td>{{ $d->no_lot }}</td>
+                                <td>{{ $d->nama_barang }}</td>
+                                <td>{{ $d->satuan }}</td>
+                                {{-- <td>{{ $d->no_lot }}</td> 
                                 <td>
-                                    {{-- <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"
+                                    <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"
                                         wire:click="hapus({{ $d->id }})"
-                                        class="btn btn-xs btn-danger">Hapus</button> --}}
-                                </td>
+                                        class="btn btn-xs btn-danger">Hapus</button>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -49,24 +50,26 @@
     <form wire:submit.prevent="store">
         <h6>{{ ucwords($kategori) }}</h6>
         <div class="row">
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="">Nama Barang</label>
-                    <input type="text" wire:model="nama_barang" class="form-control">
-                </div>
-            </div>
+
 
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Kode Barang</label>
-                    <div wire:ignore>
+                    <input type="text" wire:model="kodeBarang" class="form-control">
+                    {{-- <div wire:ignore>
                         <select class="select2" id="kodeBarang">
                             <option value="">Pilih Kode</option>
                             @foreach ($kodes as $kode)
                                 <option value="{{ $kode->kode }}">{{ $kode->kode }} ~ {{ $kode->nama }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="">Nama Barang</label>
+                    <input type="text" wire:model="nama_barang" class="form-control">
                 </div>
             </div>
             <div class="col-3">
@@ -88,7 +91,7 @@
                     </div>
                 </div>
             </div>
-       
+
         </div>
         <hr>
         {{-- Sistem Kode / Lot

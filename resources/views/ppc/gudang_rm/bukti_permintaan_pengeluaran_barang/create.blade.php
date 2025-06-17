@@ -121,7 +121,8 @@
                                 <tr>
                                     <td colspan="8">
                                         <button type="button" @click="addRow"
-                                            class="btn-block btn btn-sm btn-primary"><i class="fas fa-plus"></i> Tambah
+                                            class="btn-block btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                                            Tambah
                                             Baris Data</button>
                                     </td>
                                 </tr>

@@ -51,10 +51,10 @@
                         <div class="col-md-12">
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>KODE LOT:</th>
+                                    <th>KODE BARANG:</th>
                                     <td>
-                                        <input readonly type="text" name="kode_lot" class="form-control"
-                                            placeholder="kode lot">
+                                        <input type="text" name="kode_lot" class="form-control"
+                                            placeholder="kode barang">
                                     </td>
                                 </tr>
                                 <tr>

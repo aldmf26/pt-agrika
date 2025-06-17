@@ -10,10 +10,10 @@
                 </x-modal>
             </div>
         </div> --}}
-            {{-- <div>
-            <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                Label Identitas Bahan</a>
-        </div> --}}
+            <div>
+                <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                    Label Identitas Bahan</a>
+            </div>
             <div>
                 <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary"
                     @click.prevent="window.location.href = `/ppc/gudang-rm/5-label-identitas-bahan/print?checked=${encodeURIComponent(checked.join(','))}`">

@@ -18,7 +18,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    {{-- <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Nama Barang</label>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Simpan</button>

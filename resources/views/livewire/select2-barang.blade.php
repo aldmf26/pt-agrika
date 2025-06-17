@@ -4,27 +4,29 @@
         <option value="">-- Pilih Item --</option>
         @foreach ($barangs as $p)
             <option value="{{ $p->id }}" data-kode="{{ $p->kode_barang }}">
-                {{ $p->nama_barang }} |
-                {{ $p->kode_bahan_baku->nama }}</option>
+                {{ $p->nama_barang }} </option>
         @endforeach
         <option value="tambah">+ Barang</option>
     </select>
 
     <x-modal title="Tambah Barang" id="modalTambahBarang" btnSave="T">
         <div class="row">
-            <div class="col-12 mb-3">
-                <label for="nama_barang" class="form-label">Nama Barang</label>
-                <input type="text" id="nama_barang" class="form-control" placeholder="Nama Barang"
-                    wire:model.defer="barangBaru.nama_barang">
-            </div>
+
             <div class="col-12 mb-3">
                 <label for="kode_barang" class="form-label">Kode Barang</label>
-                <select id="kode_barang" class="select2modal form-select" wire:model.defer="barangBaru.kode_barang">
+                <input type="text" id="nama_barang" class="form-control" placeholder="Nama Barang"
+                    wire:model.defer="barangBaru.kode_barang">
+                {{-- <select id="kode_barang" class="select2modal form-select" wire:model.defer="barangBaru.kode_barang">
                     <option value="">-- Pilih Kode Barang --</option>
                     @foreach ($kodes as $kode)
                         <option value="{{ $kode->id }}">{{ $kode->nama }}</option>
                     @endforeach
-                </select>
+                </select> --}}
+            </div>
+            <div class="col-12 mb-3">
+                <label for="nama_barang" class="form-label">Nama Barang</label>
+                <input type="text" id="nama_barang" class="form-control" placeholder="Nama Barang"
+                    wire:model.defer="barangBaru.nama_barang">
             </div>
             <div class="col-12 mb-3">
                 <label for="satuan" class="form-label">Satuan Barang</label>
@@ -68,7 +70,7 @@
                     var exp_bulan = expired_parts[1];
                     var exp_tahun = expired_parts[0];
 
-                    var kode_lot = `${kd_tgl}${kd_bulan}${kd_tahun}${kode_barang}${exp_bulan}${exp_tahun}`;
+                    var kode_lot = `${kd_tgl}-${kd_bulan}${kd_tahun}-${kode_barang}-${exp_bulan}-${exp_tahun}`;
                     $("input[name=kode_lot]").val(kode_lot);
                 }
             }

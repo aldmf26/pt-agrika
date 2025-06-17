@@ -66,7 +66,6 @@
                 <td>Jam Kedatangan</td>
                 <td>:</td>
                 <td>{{ $checklist->jam_datang }}</td>
-                
             </tr>
         </table>
     </div>
@@ -85,8 +84,8 @@
                 <tr>
                     <td align="center">{{ $item->nomor }}</td>
                     <td>{{ $item->kondisi }}</td>
-                    <td style="text-align: center">{{ $item->check_wh }}</td>
-                    <td style="text-align: center">{{ $item->check_qa }}</td>
+                    <td style="text-align: center">{{ $item->check_wh == '0' ? 'Y' : '' }}</td>
+                    <td style="text-align: center">{{ $item->check_qa == '0' ? 'Y' : '' }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -108,11 +107,12 @@
         </tfoot>
     </table>
     <span style="font-size: 10px">
-    NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN TANDA <b>V</b>
-    DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
-    DAPAT DIPAKAI / DITOLAK
-    LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
-</span>
+        NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
+        TANDA <b>V</b>
+        DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
+        DAPAT DIPAKAI / DITOLAK
+        LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
+    </span>
 
     <div style="margin-top: 30px">
         <table width="100%">
