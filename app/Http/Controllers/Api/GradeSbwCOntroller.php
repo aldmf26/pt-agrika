@@ -44,4 +44,16 @@ class GradeSbwCOntroller extends Controller
         ];
         return response()->json($response);
     }
+    function detail_rumah_walet(Request $r)
+    {
+        $rumah_walet = DB::table('rumah_walet')->where('id', $r->id)->first();
+        $response = [
+            'status' => 'success',
+            'message' => 'Data Sarang berhasil diambil',
+            'data' => [
+                'rumah_walet' => $rumah_walet
+            ],
+        ];
+        return response()->json($response);
+    }
 }
