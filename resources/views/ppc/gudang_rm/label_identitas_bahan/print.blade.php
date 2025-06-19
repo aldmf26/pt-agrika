@@ -101,19 +101,13 @@
                                 <td>Tanggal Kedatangan</td>
                                 <td>:</td>
                                 <td>
-                                    @if ($d->kategori == 'barang' && $d->penerimaan->isNotEmpty())
-                                        @foreach ($d->penerimaan as $p)
-                                            {{ tanggal($p->tanggal_terima) }}<br>
-                                        @endforeach
-                                    @elseif($d->kategori == 'kemasan' && $d->penerimaanKemasan->isNotEmpty())
-                                        @foreach ($d->penerimaanKemasan as $p)
-                                            {{ tanggal($p->tanggal_penerimaan) }}<br>
-                                        @endforeach
-                                    @else
+                                    @if ($d->kategori == 'Baku')
                                         @php
                                             $tgl_sbw = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
                                         @endphp
                                         {{ tanggal($tgl_sbw) }}
+                                    @else
+                                        {{-- {{ tanggal($d->tanggal_terima) }} --}}
                                     @endif
                                 </td>
                             </tr>
