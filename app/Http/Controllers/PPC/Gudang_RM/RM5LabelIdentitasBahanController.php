@@ -22,34 +22,7 @@ class RM5LabelIdentitasBahanController extends Controller
         $barangs = PenerimaanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
         $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
         $sbw = PenerimaanKemasanSbwKotorHeader::get();
-        /// Loop data barang & kemasan
-        foreach ($barangs as $barang) {
-            if ($barang->kategori == 'barang' && $barang->penerimaan->isNotEmpty()) {
-                foreach ($barang->penerimaan as $p) {
-                    $items[] = [
-                        'id' => $barang->id,
-                        'identitas' => 'barang',
-                        'nama_barang' => $barang->nama_barang,
-                        'nama_produsen' => $barang->supplier->nama_supplier,
-                        'tanggal_kedatangan' => $p->tanggal_terima,
-                        'kode_lot' => $p->kode_lot,
-                        'kode_grading' => $barang->kode_barang,
-                    ];
-                }
-            } elseif ($barang->kategori == 'kemasan' && $barang->penerimaanKemasan->where('label', 'Y')->isNotEmpty()) {
-                foreach ($barang->penerimaanKemasan as $p) {
-                    $items[] = [
-                        'id' => $barang->id,
-                        'identitas' => 'kemasan',
-                        'nama_barang' => $barang->nama_barang,
-                        'nama_produsen' => $barang->supplier->nama_supplier,
-                        'tanggal_kedatangan' => $p->tanggal_penerimaan,
-                        'kode_lot' => $p->kode_lot,
-                        'kode_grading' => $barang->kode_barang,
-                    ];
-                }
-            }
-        }
+
         // Tambahkan data SBW
         foreach ($barangs as $s) {
             $items[] = [
