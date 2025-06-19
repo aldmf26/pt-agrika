@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\Identitas;
 use App\Models\LabelIdentitasBahan;
+use App\Models\PenerimaanHeader;
+use App\Models\PenerimaanKemasanHeader;
 use App\Models\PenerimaanKemasanSbwKotorHeader;
 use Illuminate\Http\Request;
 
@@ -17,9 +19,9 @@ class RM5LabelIdentitasBahanController extends Controller
         // $barangs = Barang::with(['penerimaan', 'penerimaanKemasan', 'kode_bahan_baku', 'supplier'])->get();
         // $sbw = PenerimaanKemasanSbwKotorHeader::get();
 
-        $barangs = Barang::with(['penerimaan', 'penerimaanKemasan', 'kode_bahan_baku', 'supplier'])->get();
+        $barangs = PenerimaanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
+        $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
         $sbw = PenerimaanKemasanSbwKotorHeader::get();
-
         /// Loop data barang & kemasan
         foreach ($barangs as $barang) {
             if ($barang->kategori == 'barang' && $barang->penerimaan->isNotEmpty()) {
@@ -34,7 +36,7 @@ class RM5LabelIdentitasBahanController extends Controller
                         'kode_grading' => $barang->kode_barang,
                     ];
                 }
-            } elseif ($barang->kategori == 'kemasan' && $barang->penerimaanKemasan->isNotEmpty()) {
+            } elseif ($barang->kategori == 'kemasan' && $barang->penerimaanKemasan->where('label', 'Y')->isNotEmpty()) {
                 foreach ($barang->penerimaanKemasan as $p) {
                     $items[] = [
                         'id' => $barang->id,
@@ -48,8 +50,31 @@ class RM5LabelIdentitasBahanController extends Controller
                 }
             }
         }
-
         // Tambahkan data SBW
+        foreach ($barangs as $s) {
+            $items[] = [
+                'id' => $s->id,
+                'identitas' => 'barang',
+                'nama_barang' => $s->barang->nama_barang,
+                'nama_produsen' => $s->supplier->nama_supplier,
+                'tanggal_kedatangan' => $s->tanggal_terima,
+                'kode_lot' => $s->kode_lot,
+                'kode_grading' => '-',
+            ];
+        }
+        // Tambahkan data SBW
+        foreach ($kemasan as $s) {
+            $items[] = [
+                'id' => $s->id,
+                'identitas' => 'kemasan',
+                'nama_barang' => $s->barang->nama_barang,
+                'nama_produsen' => $s->supplier->nama_supplier,
+                'tanggal_kedatangan' => $s->tanggal_penerimaan,
+                'kode_lot' => $s->kode_lot,
+                'kode_grading' => '-',
+            ];
+        }
+
         foreach ($sbw as $s) {
             $items[] = [
                 'id' => $s->id,
@@ -61,6 +86,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 'kode_grading' => '-',
             ];
         }
+
 
         $data = [
             'title' => 'Label Identitas Bahan',
@@ -76,40 +102,51 @@ class RM5LabelIdentitasBahanController extends Controller
                 ->whereRaw('a.id_barang = barang.id');
         })->latest()->get();
 
-        $penerimaan = PenerimaanKemasanSbwKotorHeader::latest()->get();
+        $penerimaanBarang = PenerimaanHeader::where('label', 'T')->orderByDesc('id')->get();
+        $penerimaan = PenerimaanKemasanHeader::where('label', 'T')->orderByDesc('id')->get();
+
+        // $penerimaan = PenerimaanKemasanSbwKotorHeader::latest()->get();
         $identitas = Identitas::all();
         $data = [
             'title' => 'Tambah Label Identitas Bahan',
             'barangs' => $barangs,
             'identitas' => $identitas,
-            'penerimaan' => $penerimaan
+            'penerimaan' => $penerimaan,
+            'penerimaanBarang' => $penerimaanBarang,
         ];
         return view('ppc.gudang_rm.label_identitas_bahan.create', $data);
     }
 
     public function store(Request $r)
     {
-        LabelIdentitasBahan::create([
-            'identitas' => $r->identitas,
-            'id_barang' => $r->id_barang,
-            'tgl_kedatangan' => $r->tgl_kedatangan,
-            'noregrbw_nmprodusen' => $r->noregrbw ?? $r->nmprodusen,
-            'keterangan' => $r->keterangan,
-        ]);
+        $no_boxPecah = explode(',', $r->barangChecked); //split string to array
+
+        PenerimaanKemasanHeader::whereIn('kode_lot', $no_boxPecah)
+            ->update(['label' => 'Y']);
+        PenerimaanHeader::whereIn('kode_lot', $no_boxPecah)
+            ->update(['label' => 'Y']);
+
+        // foreach ($barang as $b) {
+        //     LabelIdentitasBahan::create([
+        //         'identitas' => $r->identitas,
+        //         'id_barang' => $b->id_barang,
+        //         'tgl_kedatangan' => $b->tanggal_penerimaan,
+        //         'noregrbw_nmprodusen' =>  $b->id_supplier,
+        //         'keterangan' => $b->keputusan,
+        //     ]);
+        // }
         return redirect()->route('ppc.gudang-rm.5.index')->with('sukses', 'Data berhasil disimpan');
     }
 
     public function print(Request $r)
     {
         $checked = $r->query('checked'); // e.g., "1:barang,2:kemasan,3:sbw"
-
         if (!$checked) {
             return redirect()->back()->with('error', 'No items selected for printing.');
         }
 
         $checkedItems = explode(',', $checked); // Split into array: ["1:barang", "2:kemasan", "3:sbw"]
         $labels = collect();
-
         foreach ($checkedItems as $item) {
             if (!str_contains($item, ':')) {
                 continue; // Skip invalid format
@@ -117,54 +154,111 @@ class RM5LabelIdentitasBahanController extends Controller
 
             [$id, $identitas] = explode(':', $item);
 
-            if (!in_array($identitas, ['barang', 'kemasan', 'sbw']) || !is_numeric($id)) {
+            if (!in_array($identitas, ['barang', 'kemasan', 'sbw'])) {
                 continue; // Skip invalid identitas or non-numeric ID
             }
-
-            if ($identitas === 'barang' || $identitas === 'kemasan') {
-                $barang = Barang::with(['penerimaan', 'penerimaanKemasan', 'kode_bahan_baku', 'supplier'])
-                    ->where('id', $id)
-                    ->where('kategori', $identitas)
-                    ->first();
-
-                if ($barang) {
+            if ($identitas === 'kemasan') {
+                $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
+                if ($kemasan) {
                     // Ensure supplier is an object
-                    $barang->supplier = $barang->supplier ?? (object)['nama_supplier' => '-'];
+                    $kemasan->supplier = $kemasan->supplier ?? (object)['nama_supplier' => '-'];
                     // Set kategori explicitly
-                    $barang->kategori = $identitas;
+                    $kemasan->kategori = 'kemasan';
                     // Ensure kode_barang is set
-                    $barang->kode_barang = $barang->kode_barang ?? '-';
+                    $kemasan->kode_barang = $kemasan->barang->kode_lot ?? '-';
                     // Ensure penerimaan or penerimaanKemasan is a collection
-                    $barang->penerimaan = $identitas === 'barang' ? $barang->penerimaan : collect();
-                    $barang->penerimaanKemasan = $identitas === 'kemasan' ? $barang->penerimaanKemasan : collect();
-                    $labels->push($barang);
-                }
-            } elseif ($identitas === 'sbw') {
-                $sbw = PenerimaanKemasanSbwKotorHeader::where('id', $id)->first();
-
-                if ($sbw) {
-                    // Structure SBW to match Barang model expectations
-                    $sbw->kategori = 'sbw';
-                    $sbw->nama_barang = $sbw->jenis;
-                    $sbw->kode_barang = '-';
-                    $sbw->supplier = (object)['nama_supplier' => $sbw->noreg_rumah_walet ?? '-'];
-                    // Simulate penerimaan-like structure for consistency
-                    $sbw->penerimaan = collect([
+                    $kemasan->penerimaan = collect([
                         (object)[
-                            'tanggal_terima' => $sbw->tgl_penerimaan,
-                            'kode_lot' => $sbw->no_lot,
+                            'tanggal_terima' => $kemasan->tanggal_penerimaan,
+                            'kode_lot' => $kemasan->kode_lot,
                         ]
                     ]);
-                    $sbw->penerimaanKemasan = collect(); // Empty for SBW
-                    $labels->push($sbw);
+                    $labels->push($kemasan);
                 }
             }
+            if ($identitas === 'barang') {
+                $kemasan = PenerimaanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
+                if ($kemasan) {
+                    // Ensure supplier is an object
+                    $kemasan->supplier = $kemasan->supplier ?? (object)['nama_supplier' => '-'];
+                    // Set kategori explicitly
+                    $kemasan->kategori = 'barang';
+                    // Ensure kode_barang is set
+                    $kemasan->kode_barang = $kemasan->barang->kode_lot ?? '-';
+                    // Ensure penerimaan or penerimaanKemasan is a collection
+                    $kemasan->penerimaan = collect([
+                        (object)[
+                            'tanggal_terima' => $kemasan->tanggal_terima,
+                            'kode_lot' => $kemasan->kode_lot,
+                        ]
+                    ]);
+                    $labels->push($kemasan);
+                }
+            }
+
+
+            // if ($identitas === 'barang') {
+            //     $barang = Barang::with(['penerimaan', 'penerimaanKemasan', 'kode_bahan_baku', 'supplier'])
+            //         ->where('id', $id)
+            //         ->where('kategori', $identitas)
+            //         ->first();
+
+            //     if ($barang) {
+            //         // Ensure supplier is an object
+            //         $barang->supplier = $barang->supplier ?? (object)['nama_supplier' => '-'];
+            //         // Set kategori explicitly
+            //         $barang->kategori = $identitas;
+            //         // Ensure kode_barang is set
+            //         $barang->kode_barang = $barang->kode_barang ?? '-';
+            //         // Ensure penerimaan or penerimaanKemasan is a collection
+            //         $barang->penerimaan = $identitas === 'barang' ? $barang->penerimaan : collect();
+            //         $barang->penerimaanKemasan = $identitas === 'kemasan' ? $barang->penerimaanKemasan : collect();
+            //         $labels->push($barang);
+            //     }
+            // } elseif ($identitas === 'kemasan') {
+            //     $sbw = PenerimaanKemasanHeader::where('id', $id)->first();
+
+            //     if ($sbw) {
+            //         // Structure SBW to match Barang model expectations
+            //         $sbw->kategori = 'sbw';
+            //         $sbw->nama_barang = $sbw->jenis;
+            //         $sbw->kode_barang = '-';
+            //         $sbw->supplier = (object)['nama_supplier' => $sbw->noreg_rumah_walet ?? '-'];
+            //         // Simulate penerimaan-like structure for consistency
+            //         $sbw->penerimaan = collect([
+            //             (object)[
+            //                 'tanggal_terima' => $sbw->tgl_penerimaan,
+            //                 'kode_lot' => $sbw->no_lot,
+            //             ]
+            //         ]);
+            //         $sbw->penerimaanKemasan = collect(); // Empty for SBW
+            //         $labels->push($sbw);
+            //     }
+            // } elseif ($identitas === 'sbw') {
+            //     $sbw = PenerimaanKemasanSbwKotorHeader::where('id', $id)->first();
+
+            //     if ($sbw) {
+            //         // Structure SBW to match Barang model expectations
+            //         $sbw->kategori = 'sbw';
+            //         $sbw->nama_barang = $sbw->jenis;
+            //         $sbw->kode_barang = '-';
+            //         $sbw->supplier = (object)['nama_supplier' => $sbw->noreg_rumah_walet ?? '-'];
+            //         // Simulate penerimaan-like structure for consistency
+            //         $sbw->penerimaan = collect([
+            //             (object)[
+            //                 'tanggal_terima' => $sbw->tgl_penerimaan,
+            //                 'kode_lot' => $sbw->no_lot,
+            //             ]
+            //         ]);
+            //         $sbw->penerimaanKemasan = collect(); // Empty for SBW
+            //         $labels->push($sbw);
+            //     }
+            // }
         }
 
         if ($labels->isEmpty()) {
             return redirect()->back()->with('error', 'No valid items found for printing.');
         }
-
         $data = [
             'labels' => $labels,
         ];

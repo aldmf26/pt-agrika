@@ -51,6 +51,7 @@ return new class extends Migration
             $table->string('kode_lot', 50)->nullable();
             $table->string('status_penerimaan');
             $table->text('catatan')->nullable();
+            $table->enum('label', ['T', 'Y'])->default('T');
             $table->timestamps();
         });
 

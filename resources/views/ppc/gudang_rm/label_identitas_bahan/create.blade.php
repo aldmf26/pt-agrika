@@ -12,12 +12,66 @@
                                     <option value="">-- Pilih Identitas --</option>
 
                                     @foreach ($identitas as $p)
-                                        <option value="{{ $p->nama }}">Bahan {{ ucwords($p->nama) }}</option>
+                                        <option value="{{ $p->nama }}">Bahan
+                                            {{ ucwords($p->nama) }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <table class="table table-bordered" id="tableScroll">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">No</th>
+                                        <th class="text-center">Nama Barang</th>
+                                        <th class="text-center">Kode Barang</th>
+                                        <th class="text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody">
+                                    @php
+                                        $no = 1;
+                                    @endphp
+                                    @foreach ($penerimaan as $d)
+                                        <tr>
+                                            <td>{{ $no }}</td>
+                                            <td>{{ $d->barang->nama_barang }}</td>
+                                            <td>{{ $d->kode_lot }}</td>
+                                            <td class="text-center">
+                                                <input x-model="barangChecked" class="form-check-input" type="checkbox"
+                                                    value="{{ $d->kode_lot }}" id="cek-{{ $d->kode_lot }}">
+                                                <label class="form-check-label" for="cek-{{ $d->kode_lot }}">
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        @php
+                                            $no++;
+                                        @endphp
+                                    @endforeach
+                                    @foreach ($penerimaanBarang as $d)
+                                        <tr>
+                                            <td>{{ $no }}</td>
+                                            <td>{{ $d->barang->nama_barang }}</td>
+                                            <td>{{ $d->kode_lot }}</td>
+                                            <td class="text-center">
+                                                <input x-model="barangChecked" class="form-check-input" type="checkbox"
+                                                    value="{{ $d->kode_lot }}" id="cek-{{ $d->kode_lot }}">
+                                                <label class="form-check-label" for="cek-{{ $d->kode_lot }}">
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            <input type="hidden" x-model="barangChecked" name="barangChecked">
+                            <button type="submit" class="btn btn-primary float-end">Simpan</button>
+                        </div>
+
+                    </div>
+
                     {{-- <div class="row">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -88,7 +142,6 @@
                     </div> --}}
 
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
@@ -107,7 +160,8 @@
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({
                     rows: [],
-                    identitas: "baku sbw"
+                    identitas: "kemas",
+                    barangChecked: [],
                 }))
             })
         </script>

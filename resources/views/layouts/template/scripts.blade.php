@@ -19,7 +19,14 @@
         })
 
     }
-
+    $('#tableScroll').DataTable({
+        "searching": true,
+        scrollY: '400px',
+        scrollX: true,
+        scrollCollapse: true,
+        "autoWidth": true,
+        "paging": false,
+    });
     $("#example").dataTable({
         columnDefs: [{
             "defaultContent": "-",

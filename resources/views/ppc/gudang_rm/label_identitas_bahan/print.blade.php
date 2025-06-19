@@ -87,7 +87,7 @@
                                 <td>Nama {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
                                 </td>
                                 <td>:</td>
-                                <th>{{ $d->nama_barang }}</th>
+                                <th>{{ $d->barang->nama_barang }}</th>
                             </tr>
                             <tr>
                                 <td>
@@ -100,7 +100,8 @@
                                 <td>:</td>
                                 <td>{{ $d->supplier->nama_supplier }}</td>
                             </tr>
-                            <tr>
+
+                            {{-- <tr>
                                 <td>Tanggal Kedatangan</td>
                                 <td>:</td>
                                 <td>
@@ -134,12 +135,12 @@
                                     @endif
                                 </td>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             <tr>
                                 <td>Kode Grading/Bahan</td>
                                 <td>:</td>
                                 <td>
-                                    {{ $d->kode_barang }}
+                                    {{ $d->kode_lot }}
                                 </td>
                             </tr>
                             <tr>

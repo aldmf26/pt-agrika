@@ -28,31 +28,52 @@
                 <tr>
                     <th>#</th>
                     <th>Identitas</th>
+                    <th>Kode Lot</th>
                     <th>Nama Barang / Bahan baku</th>
                     <th>Nama Produsen / No. Reg SBW</th>
                     <th>Tanggal Kedatangan</th>
-                    <th>Kode Lot</th>
                     <th>Kode Grading</th>
                     {{-- <th>Keterangan</th> --}}
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                {{-- @forelse ($kemasan as $k)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>Kemasan</td>
+                        <td>{{ $k->kode_lot }}</td>
+                        <td>{{ $k->barang->nama_barang }}</td>
+                        <td>{{ $k->supplier->nama_supplier }}</td>
+                        <td>{{ tanggal($k->tanggal_penerimaan) }}</td>
+                        <td>-</td>
+                        <td>
+                            <input type="hidden" name="checked" :value="JSON.stringify(checked)">
+                            <input type="checkbox" class="form-check-input" :value="'{{ $k['id'] }}:kemasan'"
+                                x-model="checked"
+                                :disabled="checked.length >= 6 && !checked.includes('{{ $k['id'] }}:kemasan')">
+                        </td>
+                    </tr>
 
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center">Tidak ada data kemasan</td>
+                    </tr>
+                @endforelse --}}
                 @foreach ($items as $d)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ ucfirst($d['identitas']) }}</td>
+                        <td>{{ $d['kode_lot'] }}</td>
                         <td>{{ $d['nama_barang'] }}</td>
                         <td>{{ $d['nama_produsen'] }}</td>
                         <td>{{ tanggal($d['tanggal_kedatangan']) }}</td>
-                        <td>{{ $d['kode_lot'] }}</td>
                         <td>{{ $d['kode_grading'] }}</td>
                         <td>
                             <input type="hidden" name="checked" :value="JSON.stringify(checked)">
                             <input type="checkbox" class="form-check-input"
-                                :value="'{{ $d['id'] }}:{{ $d['identitas'] }}'" x-model="checked"
-                                :disabled="checked.length >= 6 && !checked.includes('{{ $d['id'] }}:{{ $d['identitas'] }}')">
+                                :value="'{{ $d['kode_lot'] }}:{{ $d['identitas'] }}'" x-model="checked"
+                                :disabled="checked.length >= 6 && !checked.includes('{{ $d['kode_lot'] }}:{{ $d['identitas'] }}')">
                         </td>
                     </tr>
                 @endforeach

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('jumlah_sampel');
             $table->string('kode_lot', 50)->nullable();
             $table->string('keputusan');
+            $table->enum('label', ['T', 'Y'])->default('T');
             $table->timestamps();
         });
 
