@@ -63,8 +63,8 @@
                                                 style="width: 100%;">
                                                 <option value="">-- Pilih Item --</option>
                                                 @foreach ($labels as $p)
-                                                    <option value="{{ $p->id }}">{{ $p->nama_barang }} |
-                                                        {{ $p->satuan }}</option>
+                                                    <option value="{{ $p['kode_lot'] }}">{{ $p['nama_barang'] }} |
+                                                        {{ $p['satuan'] }}</option>
                                                 @endforeach
                                             </select>
                                         </td>
@@ -96,13 +96,13 @@
                                             <select x-select2 class="select2-alpine" name="noreg[]"
                                                 style="width: 100%;">
                                                 <option value="">-- Pilih Item --</option>
-                                                @foreach ($labels as $p)
+                                                {{-- @foreach ($labels as $p)
                                                     @if (!isset($uniqueLabels[$p->noregrbw_nmprodusen]))
                                                         <option value="{{ $p->noregrbw_nmprodusen }}">
                                                             {{ $p->noregrbw_nmprodusen }}</option>
                                                         @php $uniqueLabels[$p->noregrbw_nmprodusen] = true; @endphp
                                                     @endif
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </td>
                                         <td>
