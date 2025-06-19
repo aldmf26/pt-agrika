@@ -23,6 +23,7 @@ class RM5LabelIdentitasBahanController extends Controller
         $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
         $sbw = PenerimaanKemasanSbwKotorHeader::get();
 
+        $items = [];
         // Tambahkan data SBW
         foreach ($barangs as $s) {
             $items[] = [
