@@ -127,7 +127,7 @@
                                 <td>Kode Grading/Bahan</td>
                                 <td>:</td>
                                 <td>
-                                    {{ $d->kategori == 'Baku' ? $d->grade : $d->kode_lot }}
+                                    {{ $d->kategori == 'Baku' ? $d->kode : $d->kode_lot }}
                                 </td>
                             </tr>
                             <tr>

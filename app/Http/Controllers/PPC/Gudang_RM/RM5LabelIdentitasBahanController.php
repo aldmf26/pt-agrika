@@ -178,7 +178,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 $kemasan = DB::table('sbw_kotor')
                     ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
                     ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
-                    ->select('grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
+                    ->select('grade_sbw_kotor.nama as grade', 'grade_sbw_kotor.kode', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
                     ->where('sbw_kotor.no_invoice', $id)
                     ->first();
                 if ($kemasan) {
