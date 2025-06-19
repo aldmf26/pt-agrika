@@ -106,8 +106,10 @@
                                             $tgl_sbw = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
                                         @endphp
                                         {{ tanggal($tgl_sbw) }}
+                                    @elseif($d->kategori == 'barang')
+                                        {{ tanggal($d->tanggal_terima) }}
                                     @else
-                                        {{-- {{ tanggal($d->tanggal_terima) }} --}}
+                                        {{ tanggal($d->tanggal_penerimaan) }}
                                     @endif
                                 </td>
                             </tr>
