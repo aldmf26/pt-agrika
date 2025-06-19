@@ -57,21 +57,24 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
     public function store(Request $r)
     {
         DB::beginTransaction();
-
         try {
             for ($i = 0; $i < count($r->id_barang); $i++) {
-                $identitas = LabelIdentitasBahan::where('id_barang', $r->id_barang[$i])->first();
+                $barangs = PenerimaanHeader::where('kode_lot', $r->id_barang[$i])->first();
+                $kemasan = PenerimaanKemasanHeader::where('kode_lot', $r->id_barang[$i])->first();
+
+                $identitas = $barangs ? 'Barang' : 'Kemasan';
+                $idBarang = $barangs ? $barangs->id_barang : $kemasan->id_barang;
                 BuktiPermintaanPengeluaranBarang::create([
                     'nama' => $r->nama,
-                    'identitas' => $identitas->identitas,
+                    'identitas' => $identitas,
                     'departemen' => $r->departemen,
-                    'penerima_wm' => $r->penerima_wm,
+                    'penerima_wr' => $r->penerima_wm,
                     'penerima_pr' => $r->penerima_pr,
                     'tgl' => $r->tgl,
-                    'id_barang' => $r->id_barang[$i],
+                    'id_barang' => $idBarang,
                     'pcs' => $r->diminta_pcs[$i],
-                    'gr' => $r->diminta_gr[$i],
-                    'no_lot' => $r->noreg[$i],
+                    'gr' => 0,
+                    'no_lot' => $r->kode_lot[$i],
                     'status' => $r->status[$i],
 
                 ]);

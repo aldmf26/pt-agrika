@@ -10,6 +10,16 @@ class BuktiPermintaanPengeluaranBarang extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
+    public function getNamaAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    public function getDepartemenAttribute($value)
+    {
+        return strtoupper($value);
+    }
+
+
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'id_barang');

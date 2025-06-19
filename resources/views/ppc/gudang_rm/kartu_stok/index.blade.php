@@ -36,6 +36,7 @@
                             @php
                                 $param = [
                                     'id' => $d->id,
+                                    'kategori' => $d->kategori,
                                 ];
                             @endphp
                             <a class="btn btn-xs float-end btn-primary"
