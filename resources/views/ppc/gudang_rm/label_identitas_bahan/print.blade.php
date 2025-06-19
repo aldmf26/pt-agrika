@@ -113,25 +113,25 @@
                                     @endif
                                 </td>
                             </tr>
-                            @if ($d->kategori == 'Baku')
-                                <tr>
-                                    <td>Kode Lot</td>
-                                    <td>:</td>
-                                    <td>
-                                        {{ $d->no_invoice }}
-                                    </td>
-                                    </td>
-                                </tr>
-                            @else
-                            @endif
-
                             <tr>
-                                <td>Kode Grading/Bahan</td>
+                                <td>Kode Lot</td>
                                 <td>:</td>
                                 <td>
-                                    {{ $d->kategori == 'Baku' ? $d->kode : $d->kode_lot }}
+                                    {{ $d->kategori == 'Baku' ? $d->no_invoice : $d->kode_lot }}
+                                </td>
                                 </td>
                             </tr>
+                            @if ($d->kategori == 'Baku')
+                                <tr>
+                                    <td>Kode Grading</td>
+                                    <td>:</td>
+                                    <td>
+                                        {{ $d->kategori == 'Baku' ? $d->kode : $d->kode_lot }}
+                                    </td>
+                                </tr>
+                            @endif
+
+
                             <tr>
                                 <td>Keterangan</td>
                                 <td>:</td>
