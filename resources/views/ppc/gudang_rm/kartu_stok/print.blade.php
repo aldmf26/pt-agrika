@@ -2,7 +2,7 @@
 
     <table width="10%" class="border-dark table table-sm table-bordered">
         <tr>
-            <th width="10%">Nama Barang</th>
+            <th width="20%">Nama Material</th>
             <td width="50%">: {{ strtoupper($barang->nama_barang) }}</td>
         </tr>
 
