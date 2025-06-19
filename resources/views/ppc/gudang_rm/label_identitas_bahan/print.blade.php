@@ -64,6 +64,12 @@
             height: 50px;
             font-size: 12px;
         }
+
+        @media print {
+            html {
+                zoom: .85;
+            }
+        }
     </style>
 </head>
 
