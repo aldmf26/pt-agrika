@@ -15,10 +15,26 @@ class RM8KartuStokController extends Controller
     public function index()
     {
         $barangs = Barang::latest()->get();
+
+        // Tambahkan stok akhir dihitung manual
+        foreach ($barangs as $barang) {
+            $id = $barang->id;
+            $kategori = $barang->kategori;
+
+            $masuk = ($kategori == 'Kemasan')
+                ? PenerimaanKemasanHeader::where('id_barang', $id)->sum('jumlah_barang')
+                : PenerimaanHeader::where('id_barang', $id)->sum('jumlah_barang');
+
+            $keluar = BuktiPermintaanPengeluaranBarang::where('id_barang', $id)->sum('pcs');
+
+            $barang->stok_akhir = $masuk - $keluar;
+        }
+
         $data = [
             'title' => 'Kartu Stok',
-            'barangs' => $barangs
+            'barangs' => $barangs,
         ];
+
         return view('ppc.gudang_rm.kartu_stok.index', $data);
     }
 

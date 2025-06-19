@@ -31,7 +31,7 @@
                         <td>{{ $d->nama_barang }}</td>
                         <td>{{ $d->satuan }}</td>
                         <td>{{ $d->kategori }}</td>
-                        <td>{{ number_format($d->stok, 0) }}</td>
+                        <td>{{ number_format($d->stok_akhir ?? 0, 0) }}</td>
                         <td>
                             @php
                                 $param = [
