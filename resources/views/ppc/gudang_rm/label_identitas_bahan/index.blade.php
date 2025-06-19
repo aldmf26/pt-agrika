@@ -60,7 +60,7 @@
                         <td colspan="8" class="text-center">Tidak ada data kemasan</td>
                     </tr>
                 @endforelse --}}
-                @foreach ($items as $d)
+                @forelse ($items as $d)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ ucfirst($d['identitas']) }}</td>
@@ -76,7 +76,11 @@
                                 :disabled="checked.length >= 6 && !checked.includes('{{ $d['kode_lot'] }}:{{ $d['identitas'] }}')">
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="8" class="text-center">Tidak ada data label identitas bahan</td>
+                    </tr>
+                @endforelse
 
             </tbody>
         </table>
