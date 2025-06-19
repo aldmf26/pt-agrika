@@ -13,13 +13,13 @@
 
         </div>
 
-        <table id="example" class="table table-bordered">
+        <table id="example" class="table table-bordered table-dark">
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Kategori</th>
                     <th>Nama Barang</th>
                     <th>Satuan</th>
-                    <th>Kategori</th>
                     <th>Stok</th>
                     <th>Aksi</th>
                 </tr>
@@ -28,9 +28,9 @@
                 @foreach ($barangs as $d)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $d->kategori }}</td>
                         <td>{{ $d->nama_barang }}</td>
                         <td>{{ $d->satuan }}</td>
-                        <td>{{ $d->kategori }}</td>
                         <td>{{ number_format($d->stok_akhir ?? 0, 0) }}</td>
                         <td>
                             @php
