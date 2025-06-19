@@ -43,17 +43,21 @@
             <td>{{ number_format($penerimaan->pcs, 0) }}</td>
         </tr>
         <tr>
+
+            @php
+                $batas = round($penerimaan->kg / 20, 0);
+                $maxPerRow = 10; // maksimal kolom per baris
+                $jumlahKolom = max(1, $batas); // minimal 1 kolom walaupun $batas 0
+                $jumlahBarisKolom = ceil($jumlahKolom / $maxPerRow);
+            @endphp
             <td>Jumlah Sample</td>
             <td>:</td>
-            <td>20 Kg / @ {{ number_format($penerimaan->kg / 20, 0) }} box</td>
+            <td>
+                {{ $penerimaan->kg < 20 ? '1 Kg / @ 1 box' : '20 Kg / @ ' . number_format($jumlahBox) . ' box' }}
+            </td>
         </tr>
     </table>
-    @php
-        $batas = round($penerimaan->kg / 20, 0);
-        $maxPerRow = 10; // maksimal kolom per baris
-        $jumlahKolom = $batas;
-        $jumlahBarisKolom = ceil($jumlahKolom / $maxPerRow);
-    @endphp
+
 
     <table class="mt-2 table table-xs table-bordered">
         <tr>
@@ -85,12 +89,12 @@
 
     <p>Keputusan: <br>
     <div class="ms-5">
-        <input disabled type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
+        <input readonly type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
         <br>
-        <input disabled type="checkbox" name="keputusan" value="Ditolak" required> diterima
+        <input readonly type="checkbox" name="keputusan" value="Ditolak" required> diterima
         dengan Catatan .....
         <br>
-        <input disabled type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
+        <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
         <br>
     </div>
     </p>

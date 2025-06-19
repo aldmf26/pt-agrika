@@ -87,21 +87,17 @@
                                 <td>Nama {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
                                 </td>
                                 <td>:</td>
-                                <th>{{ $d->barang->nama_barang }}</th>
+                                <th>{{ $d->kategori == 'Baku' ? $d->grade : $d->barang->nama_barang }}</th>
                             </tr>
                             <tr>
                                 <td>
-                                    @if (!in_array($d->kategori, ['barang', 'kemasan']))
-                                        No. Reg RBW
-                                    @else
-                                        Nama Produsen
-                                    @endif
+                                    Nama Produsen
                                 </td>
                                 <td>:</td>
-                                <td>{{ $d->supplier->nama_supplier }}</td>
+                                <td>{{ $d->kategori == 'Baku' ? $d->rumah_walet : $d->supplier->nama_supplier }}</td>
                             </tr>
 
-                            {{-- <tr>
+                            <tr>
                                 <td>Tanggal Kedatangan</td>
                                 <td>:</td>
                                 <td>
@@ -114,33 +110,30 @@
                                             {{ tanggal($p->tanggal_penerimaan) }}<br>
                                         @endforeach
                                     @else
-                                        {{ tanggal($d->tgl_penerimaan) }}
+                                        @php
+                                            $tgl_sbw = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
+                                        @endphp
+                                        {{ tanggal($tgl_sbw) }}
                                     @endif
                                 </td>
                             </tr>
-                            <tr>
-                                <td>No. Lot</td>
-                                <td>:</td>
-                                <td>
-                                    @if ($d->kategori == 'barang' && $d->penerimaan->isNotEmpty())
-                                        @foreach ($d->penerimaan as $p)
-                                            {{ $p->kode_lot }}<br>
-                                        @endforeach
-                                    @elseif($d->kategori == 'kemasan' && $d->penerimaanKemasan->isNotEmpty())
-                                        @foreach ($d->penerimaanKemasan as $p)
-                                            {{ $p->kode_lot }}<br>
-                                        @endforeach
-                                    @else
-                                        {{ $d->no_lot }}
-                                    @endif
-                                </td>
-                                </td>
-                            </tr> --}}
+                            @if ($d->kategori == 'Baku')
+                                <tr>
+                                    <td>Kode Lot</td>
+                                    <td>:</td>
+                                    <td>
+                                        {{ $d->no_invoice }}
+                                    </td>
+                                    </td>
+                                </tr>
+                            @else
+                            @endif
+
                             <tr>
                                 <td>Kode Grading/Bahan</td>
                                 <td>:</td>
                                 <td>
-                                    {{ $d->kode_lot }}
+                                    {{ $d->kategori == 'Baku' ? $d->grade : $d->kode_lot }}
                                 </td>
                             </tr>
                             <tr>

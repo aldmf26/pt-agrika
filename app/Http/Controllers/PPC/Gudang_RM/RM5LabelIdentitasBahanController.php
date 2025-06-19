@@ -10,6 +10,7 @@ use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
 use App\Models\PenerimaanKemasanSbwKotorHeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RM5LabelIdentitasBahanController extends Controller
 {
@@ -21,7 +22,11 @@ class RM5LabelIdentitasBahanController extends Controller
 
         $barangs = PenerimaanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
         $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
-        $sbw = PenerimaanKemasanSbwKotorHeader::get();
+        $sbw = DB::table('sbw_kotor')
+            ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
+            ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
+            ->select('grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
+            ->get();
 
         $items = [];
         // Tambahkan data SBW
@@ -53,10 +58,10 @@ class RM5LabelIdentitasBahanController extends Controller
             $items[] = [
                 'id' => $s->id,
                 'identitas' => 'sbw',
-                'nama_barang' => $s->jenis,
-                'nama_produsen' => $s->noreg_rumah_walet,
-                'tanggal_kedatangan' => $s->tgl_penerimaan,
-                'kode_lot' => $s->no_lot,
+                'nama_barang' => $s->grade,
+                'nama_produsen' => $s->rumah_walet,
+                'tanggal_kedatangan' => date('Y-m-d', strtotime('+1 day', strtotime($s->tgl))),
+                'kode_lot' => $s->no_invoice,
                 'kode_grading' => '-',
             ];
         }
@@ -164,6 +169,30 @@ class RM5LabelIdentitasBahanController extends Controller
                         (object)[
                             'tanggal_terima' => $kemasan->tanggal_terima,
                             'kode_lot' => $kemasan->kode_lot,
+                        ]
+                    ]);
+                    $labels->push($kemasan);
+                }
+            }
+            if ($identitas === 'sbw') {
+                $kemasan = DB::table('sbw_kotor')
+                    ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
+                    ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
+                    ->select('grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
+                    ->where('sbw_kotor.no_invoice', $id)
+                    ->first();
+                if ($kemasan) {
+                    // Ensure supplier is an object
+                    $kemasan->supplier = $kemasan->rumah_walet ?? (object)['nama_supplier' => '-'];
+                    // Set kategori explicitly
+                    $kemasan->kategori = 'Baku';
+                    // Ensure kode_barang is set
+                    $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
+                    // Ensure penerimaan or penerimaanKemasan is a collection
+                    $kemasan->penerimaan = collect([
+                        (object)[
+                            'tanggal_terima' =>  date('Y-m-d', strtotime('+1 day', strtotime($kemasan->tgl))),
+                            'kode_lot' => $kemasan->no_invoice,
                         ]
                     ]);
                     $labels->push($kemasan);
