@@ -2,35 +2,31 @@
     <table>
         <tr>
             <td>Nama/ No. Registrasi Rumah Walet </td>
-            <td>:</td>
-            <td>{{ $sk[0]->rumahWalet->no_reg }}</td>
+            <td>&nbsp; : &nbsp;</td>
+            <td>{{ $rumah_walet->nama }} / {{ $rumah_walet->no_reg }}</td>
         </tr>
         <tr>
             <td>Alamat Rumah Walet</td>
-            <td>:</td>
-            <td>{{ $sk[0]->rumahWalet->alamat }}</td>
+            <td>&nbsp; : &nbsp;</td>
+            <td>{{ $rumah_walet->alamat }}</td>
         </tr>
 
         <tr>
             <td>Tujuan IKH</td>
-            <td>:</td>
-            <td>{{ $sk[0]->tujuan_ikph }}</td>
+            <td>&nbsp; : &nbsp;</td>
+            <td>PT.Agrika Gatya Arum</td>
         </tr>
         <tr>
             <td>No. Registrasi IKPH</td>
-            <td>:</td>
-            <td>{{ $sk[0]->ikph->no_registrasi_ikph }}</td>
+            <td>&nbsp; : &nbsp;</td>
+            <td></td>
         </tr>
         <tr>
             <td>Alamat IKPH</td>
-            <td>:</td>
-            <td>{{ $sk[0]->ikph->alamat_ikph }}</td>
+            <td>&nbsp; : &nbsp;</td>
+            <td></td>
         </tr>
-        <tr>
-            <td>Tanggal, Bulan, Tahun</td>
-            <td>:</td>
-            <td>{{ $sk[0]->tanggal_sk_pengiriman }}</td>
-        </tr>
+
 
     </table>
 
@@ -40,7 +36,7 @@
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
                     <th class="text-center align-middle" rowspan="2">Tanggal Panen</th>
-                    <th class="text-center align-middle" rowspan="2">Berat Panen (gr)</th>
+                    <th class="text-center align-middle" rowspan="2">Berat Panen (kg)</th>
                     <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
                     <th class="text-center align-middle" rowspan="2">Keterangan</th>
                 </tr>
@@ -51,13 +47,16 @@
             </thead>
             <tbody>
                 @foreach ($sk as $d)
+                    @php
+                        $tgl_plus1hari = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
+                    @endphp
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ tanggal($d->tanggal_panen) }}</td>
-                        <td align="right">{{ number_format($d->berat_panen,0) }}</td>
-                        <td>{{ tanggal($d->tanggal_kirim) }}</td>
-                        <td align="right">{{ number_format($d->berat_kirim,0) }}</td>
-                        <td>{{ $d->keterangan }}</td>
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ tanggal($d->tgl) }}</td>
+                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} kg</td>
+                        <td class="text-center">{{ tanggal($tgl_plus1hari) }}</td>
+                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} kg</td>
+                        <td class="text-center"></td>
                     </tr>
                 @endforeach
             </tbody>
