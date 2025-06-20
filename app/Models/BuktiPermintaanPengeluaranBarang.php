@@ -14,6 +14,10 @@ class BuktiPermintaanPengeluaranBarang extends Model
     {
         return ucwords(strtolower($value));
     }
+    public function getPenerimaWrAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
     public function getDepartemenAttribute($value)
     {
         return strtoupper($value);
