@@ -8,7 +8,7 @@
         <tr>
             <td>Kode Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->barang->kode_barang }}</td>
+            <td>{{ $penerimaan->kode_lot }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
