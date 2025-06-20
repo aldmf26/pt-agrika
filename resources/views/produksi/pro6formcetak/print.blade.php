@@ -83,12 +83,12 @@
                     <tr>
                         <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
                         <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ date('l', strtotime($tgl)) }} / {{ tanggal($tgl) }}</td>
+                        <td>{{ tanggal($tgl) }}</td>
                     </tr>
                     <tr>
                         <td>Regu <br> <span class="fst-italic">Team</span></td>
                         <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td class="align-middle">Cetak</td>
+                        <td class="align-middle">{{ $pengawas }}</td>
                     </tr>
                 </table>
             </div>
@@ -118,20 +118,26 @@
                                     class="fst-italic fw-lighter">Remarks</th>
                         </tr>
                         <tr>
-                            <td class="text-center ">Pcs</td>
-                            <td class="text-center ">Gr</td>
-                            <td class="text-center ">Pcs</td>
-                            <td class="text-center ">Gr</td>
+                            <th class="text-center ">Pcs</th>
+                            <th class="text-center ">Gr</th>
+                            <th class="text-center ">Pcs</th>
+                            <th class="text-center ">Gr</th>
                         </tr>
 
                     </thead>
                     <tbody>
                         @foreach ($cetak as $c)
+                            @php
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', $c['nm_partai'])
+                                    ->first();
+                            @endphp
                             <tr>
                                 <td class="text-center ">{{ $loop->iteration }}</td>
                                 <td class="text-center ">{{ $c['nama'] }}</td>
-                                <td class="text-center ">{{ $c['no_box'] }}</td>
-                                <td class="text-center ">{{ $c['tipe'] }}</td>
+                                <td>{{ $sbw->no_invoice }}</td>
+                                <td>{{ ucwords(strtolower($sbw->nama)) }} </td>
                                 <td class="text-center ">{{ $c['pcs_awal_ctk'] }}</td>
                                 <td class="text-center ">{{ $c['gr_awal_ctk'] }}</td>
                                 <td class="text-center ">{{ $c['pcs_akhir'] }}</td>

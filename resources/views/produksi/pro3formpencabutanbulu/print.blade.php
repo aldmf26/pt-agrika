@@ -83,12 +83,12 @@
                     <tr>
                         <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
                         <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ date('l', strtotime($tgl)) }} / {{ tanggal($tgl) }}</td>
+                        <td> {{ tanggal($tgl) }}</td>
                     </tr>
                     <tr>
                         <td>Regu <br> <span class="fst-italic">Team</span></td>
                         <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td class="align-middle">Cabut</td>
+                        <td class="align-middle">{{ ucwords(strtolower($pengawas)) }}</td>
                     </tr>
                 </table>
             </div>
@@ -98,59 +98,70 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class=" align-middle" rowspan="2">No</th>
-                            <th rowspan="2" class=" align-middle">Nama Operator Cabut <br><span
+                            <th class=" align-middle" rowspan="3">No</th>
+                            <th rowspan="3" class=" align-middle">Nama Operator Cabut <br><span
                                     class="fst-italic fw-lighter">
                                     Operator
                                     name</span></th>
-                            <th rowspan="2" class=" align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="3" class=" align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">
                                     Batch/Lot
                                     code</span>
-                            <th rowspan="2" class=" align-middle">Jenis<br> <span class="fst-italic fw-lighter">
+                            <th rowspan="3" class=" align-middle">Jenis<br> <span class="fst-italic fw-lighter">
                                     type</span></th>
                             <th class="" colspan="2">Jumlah <br> <span class="fst-italic fw-lighter">
                                     Quantity</span></th>
                             <th class="" colspan="2">Kembali <br> <span
                                     class="fst-italic fw-lighter">Retur</span>
                             </th>
-                            <th class="" colspan="2">Hasil Pencabutan
+                            <th class="" colspan="4">Hasil Pencabutan
                                 <br> <span class="fst-italic fw-lighter">Inspection results</span>
                             </th>
-                            <th rowspan="2" class=" align-middle">Keterangan<br> <span
+                            <th rowspan="3" class=" align-middle">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
                             </th>
+                        </tr>
+                        <tr>
+                            <th rowspan="2" class="text-end">Pcs</th>
+                            <th rowspan="2" class="text-end">Gr</th>
+                            <th rowspan="2" class="text-end">Pcs</th>
+                            <th rowspan="2" class="text-end">Gr</th>
+                            <th colspan="2">Ok</th>
+                            <th colspan="2">Not Ok</th>
                         </tr>
                         <tr>
                             <th class="text-end">Pcs</th>
                             <th class="text-end">Gr</th>
                             <th class="text-end">Pcs</th>
                             <th class="text-end">Gr</th>
-                            <th>Ok</th>
-                            <th>Not Ok</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($cabut as $c)
+                            @php
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', $c['nm_partai'])
+                                    ->first();
+                            @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ ucwords(strtolower($c['nama'])) }}</td>
-                                <td>{{ $c['no_box'] }}</td>
-                                <td>{{ $c['tipe'] }}</td>
+                                <td>{{ $sbw->no_invoice }}</td>
+                                <td>{{ ucwords(strtolower($sbw->nama)) }}</td>
                                 <td class="text-end">{{ $c['pcs_awal'] }}</td>
                                 <td class="text-end">{{ $c['gr_awal'] }}</td>
+                                <td class="text-end">0</td>
+                                <td class="text-end">0</td>
                                 <td class="text-end">{{ $c['pcs_akhir'] }}</td>
                                 <td class="text-end">{{ $c['gr_akhir'] }}</td>
+                                <td class="text-end">0</td>
+                                <td class="text-end">0</td>
                                 @php
                                     $susut = (1 - $c['gr_akhir'] / $c['gr_awal']) * 100;
                                 @endphp
-                                <td>
-                                    {!! round($susut, 1) < $c['batas_susut'] ? '<i class="fa-solid fa-check"></i>' : '' !!}
-                                </td>
-                                <td>
-                                    {!! round($susut, 1) >= $c['batas_susut'] ? '<i class="fa-solid fa-check"></i>' : '' !!}
-                                </td>
-                                <td>{!! round($susut, 1) >= $c['batas_susut'] ? 'Susut melebihi batas susut' : '' !!}</td>
+
+                                <td></td>
                             </tr>
                         @endforeach
                     </tbody>

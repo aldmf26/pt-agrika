@@ -10,29 +10,26 @@ class Pro6FormCetak extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
-        $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak?tgl=$tgl");
+
+        $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak");
         $cetak = json_decode($cetak, TRUE);
         $data = [
             'title' => 'Form Cetak',
             'cetak' => $cetak['data'],
-            'tgl' =>  $tgl
+
         ];
         return view('produksi.pro6formcetak.index', $data);
     }
 
     public function print(Request $r)
     {
-        $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak?tgl=$r->tgl");
+        $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak_detail?tgl=$r->tgl&id_pengawas=$r->id_pengawas");
         $cetak = json_decode($cetak, TRUE);
         $data = [
             'title' => 'Form Cetak',
             'cetak' => $cetak['data'],
-            'tgl' => $r->tgl
+            'tgl' => $r->tgl,
+            'pengawas' => $r->pengawas
         ];
         return view('produksi.pro6formcetak.print', $data);
     }

@@ -10,30 +10,25 @@ class Pro3FormPencabutanBulu extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
-        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut?tgl=$tgl");
+
+        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut");
         $cabut = json_decode($cabut, TRUE);
         $data = [
             'title' => 'Form Pencabutan Bulu',
             'cabut' => $cabut['data'],
-            'tgl' => $tgl
         ];
-
         return view('produksi.pro3formpencabutanbulu.index', $data);
     }
 
     public function print(Request $r)
     {
-        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut?tgl=$r->tgl");
+        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_detail?tgl=$r->tgl&id_pengawas=$r->id_pengawas");
         $cabut = json_decode($cabut, TRUE);
         $data = [
             'title' => 'Form Pencabutan Bulu',
             'cabut' => $cabut['data'],
-            'tgl' => $r->tgl
+            'tgl' => $r->tgl,
+            'pengawas' => $r->pengawas
         ];
 
         return view('produksi.pro3formpencabutanbulu.print', $data);

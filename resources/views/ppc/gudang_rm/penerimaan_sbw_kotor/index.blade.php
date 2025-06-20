@@ -22,7 +22,7 @@
                         <th>No Kendaraan</th>
                         <th>Pengemudi</th>
                         <th>Jumlah Pcs</th>
-                        <th>Jumlah Gr</th>
+                        <th>Jumlah Kg</th>
 
                         <th>Aksi</th>
                     </tr>
@@ -36,11 +36,11 @@
                             <td>{{ tanggal($d->tgl) }}</td>
                             <td>{{ $d->no_kendaraan }}</td>
                             <td>{{ $d->pengemudi }}</td>
-                            <td>{{ $d->pcs }}</td>
-                            <td>{{ $d->kg }}</td>
+                            <td>{{ number_format($d->pcs, 0) }}</td>
+                            <td>{{ number_format($d->kg, 1) }}</td>
 
                             <td>
-                                <a class="btn btn-xs float-end btn-primary"
+                                <a class="btn btn-xs float-end btn-primary" target="_blank"
                                     href="{{ route('ppc.gudang-rm.3.print', $d->id) }}"><i class="fas fa-print"></i></a>
                             </td>
                         </tr>
