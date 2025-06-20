@@ -75,7 +75,7 @@
 
 <body>
     <center>
-        <div class="container mt-3 p-4">
+        <div class="p-2">
             <div class="row">
                 @foreach ($labels as $d)
                     <!-- Label pertama -->
