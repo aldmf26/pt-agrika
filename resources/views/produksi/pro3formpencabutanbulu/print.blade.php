@@ -148,7 +148,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ ucwords(strtolower($c['nama'])) }}</td>
                                 <td>{{ $sbw->no_invoice }}</td>
-                                <td>{{ ucwords(strtolower($sbw->nama)) }} - {{ $c['no_box'] }}</td>
+                                <td>{{ ucwords(strtolower($sbw->nama)) }}</td>
                                 <td class="text-end">{{ $c['pcs_awal'] }}</td>
                                 <td class="text-end">{{ $c['gr_awal'] }}</td>
                                 <td class="text-end">0</td>

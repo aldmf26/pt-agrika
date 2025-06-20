@@ -16,9 +16,7 @@ class Pro3FormPencabutanBulu extends Controller
         $data = [
             'title' => 'Form Pencabutan Bulu',
             'cabut' => $cabut['data'],
-
         ];
-
         return view('produksi.pro3formpencabutanbulu.index', $data);
     }
 
