@@ -8,7 +8,7 @@
         <tr>
             <td>Kode Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->barang->kode_barang }}</td>
+            <td>{{ $penerimaan->kode_lot }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -93,7 +93,6 @@
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
                             <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                            <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,7 +103,6 @@
                         <tr>
                             <td class="text-center">[ADM. GUDANG]</td>
                             <td class="text-center">[KA. GUDANG]</td>
-                            <td class="text-center">[DIREKTUR]</td>
                         </tr>
                     </tbody>
                 </table>

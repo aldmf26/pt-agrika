@@ -1,4 +1,6 @@
 <x-app-layout :title="$title">
+
+
     <div class="container mt-4" x-data="alpineFunc">
         <form action="" method="post">
             @csrf
@@ -28,13 +30,13 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="">Penerima Warehouse Material</label>
-                                <input type="penerima_wm" name="example" class="form-control">
+                                <input name="penerima_wm" type="text" class="form-control">
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="">Penerima Produksi</label>
-                                <input type="penerima_pr" name="example" class="form-control">
+                                <input name="penerima_pr" type="text" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -43,9 +45,9 @@
                             <thead>
                                 <tr>
                                     <th class="text-center" rowspan="2">No</th>
-                                    <th class="text-center" rowspan="2">Nama Barang</th>
+                                    <th class="text-center" rowspan="2" width="30%">Nama Barang</th>
                                     <th class="text-center" colspan="2">Jumlah</th>
-                                    <th class="text-center" rowspan="2">Kode Lot SBW</th>
+                                    <th class="text-center" rowspan="2" width="20%">Kode Lot SBW</th>
                                     <th class="text-center" rowspan="2">Status Ok/Tidak Ok</th>
                                     <th class="text-center" rowspan="2">Aksi</th>
                                 </tr>
@@ -59,8 +61,13 @@
                                     <tr>
                                         <td x-text="index + 1"></td>
                                         <td>
-                                            <select x-select2 class="select2-alpine" name="id_barang[]"
-                                                style="width: 100%;">
+                                            <select x-ref="selectEl" class="form-control"
+                                                :name="'id_barang[' + index + ']'" x-init="$nextTick(() => {
+                                                    $($refs.selectEl).select2();
+                                                    $($refs.selectEl).on('change', function(e) {
+                                                        updateKodeLot(index, e.target.value);
+                                                    });
+                                                })">
                                                 <option value="">-- Pilih Item --</option>
                                                 @foreach ($labels as $p)
                                                     <option value="{{ $p['kode_lot'] }}">{{ $p['nama_barang'] }} |
@@ -71,39 +78,24 @@
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <div>
-                                                    <input x-model="row.pcs" placeholder="pcs" type="number"
-                                                        name="diminta_pcs[]" class="form-control text-end" required>
-                                                </div>
-                                                <div>
-                                                    <input x-model="row.gr" placeholder="gr" type="number"
-                                                        name="diminta_gr[]" class="form-control text-end" required>
+                                                    <input min="0" @focus="$el.select()" x-model="row.pcs"
+                                                        placeholder="pcs" type="number" name="diminta_pcs[]"
+                                                        class="form-control text-end" required>
                                                 </div>
                                             </div>
                                         <td>
                                             <div class="d-flex gap-2">
                                                 <div>
-                                                    <input readonly x-model="row.pcs" placeholder="pcs" type="number"
+                                                    <input min="0" readonly x-model="row.pcs"
+                                                        @focus="$el.select()" placeholder="pcs" type="number"
                                                         name="diterima_pcs[]" class="form-control text-end" required>
-                                                </div>
-                                                <div>
-                                                    <input readonly x-model="row.gr" placeholder="gr" type="number"
-                                                        name="diterima_gr[]" class="form-control text-end" required>
                                                 </div>
                                             </div>
                                         </td>
 
                                         <td>
-                                            <select x-select2 class="select2-alpine" name="noreg[]"
-                                                style="width: 100%;">
-                                                <option value="">-- Pilih Item --</option>
-                                                {{-- @foreach ($labels as $p)
-                                                    @if (!isset($uniqueLabels[$p->noregrbw_nmprodusen]))
-                                                        <option value="{{ $p->noregrbw_nmprodusen }}">
-                                                            {{ $p->noregrbw_nmprodusen }}</option>
-                                                        @php $uniqueLabels[$p->noregrbw_nmprodusen] = true; @endphp
-                                                    @endif
-                                                @endforeach --}}
-                                            </select>
+                                            <input readonly type="text" name="kode_lot[]" x-model="row.kode_lot"
+                                                class="form-control" readonly>
                                         </td>
                                         <td>
                                             <select name="status[]" class="form-control" id="">
@@ -137,20 +129,32 @@
             </div>
         </form>
     </div>
+
+
+
     @section('scripts')
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({
                     rows: [],
+                    labels: @json($labels), // Data barang dari PHP
                     addRow() {
-                        // Setiap baris baru memiliki pcs dan gr default 0
+
                         this.rows.push({
                             pcs: 0,
-                            gr: 0
+                            gr: 0,
+                            kode_lot: '',
+                            id_barang: ''
                         });
+                    },
+                    updateKodeLot(index, kodeLot) {
+                        const item = this.labels.find(i => i.kode_lot === kodeLot);
+                        if (item) {
+                            this.rows[index].kode_lot = item.kode_lot;
+                        }
                     }
-                }))
-            })
+                }));
+            });
         </script>
     @endsection
 </x-app-layout>

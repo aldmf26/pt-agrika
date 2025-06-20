@@ -40,14 +40,12 @@
                 @foreach ($buktis as $d)
                     <tr>
                         <td align="center">{{ $loop->iteration }}</td>
-                        <td>{{ $d->barang->nama_barang ?? '' }} | {{ $d->barang->satuan ?? '' }}</td>
+                        <td>{{ $d->barang->nama_barang ?? '' }}</td>
                         <td align="right">
-                                {{ $d->pcs }} pcs
-                                {{ $d->gr }} gr
+                            {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                         </td>
                         <td align="right">
-                                {{ $d->pcs }} pcs
-                                {{ $d->gr }} gr
+                            {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                         </td>
                         <td>{{ $d->no_lot }}</td>
                         <td align="center">{{ $d->status }}</td>
@@ -55,10 +53,48 @@
                 @endforeach
             </tbody>
         </table>
+        <div style="font-size: 12px; margin-top: -10px;">
+            <small class="fw-bold">OK : Material / Barang yang diminta dan diterima dalam kondisi baik dan layak
+                pakai.</small>
+            <br>
+            <small class="fw-bold mb-3">TIDAK OK : Material / Barang yang diminta dan diterima dalam kondisi tidak baik
+                dan
+                tidak layak
+                pakai.</small>
+            <br><br>
+            <small class="fw-bold ">Permintaan diterima Warehouse Material:</small>
+            <table>
+                <tr>
+                    <td>Tanggal</td>
+                    <td>:</td>
+                    <td class="fw-bold">{{ tanggal($buktis[0]->tgl) }}</td>
+                </tr>
+                <tr>
+                    <td>Nama Penerima</td>
+                    <td>:</td>
+                    <td class="fw-bold">{{ $buktis[0]->penerima_wr }}</td>
+            </table>
+
+            <br>
+            <small class="fw-bold mt-2">Penyerahan Barang kepada Pengguna:</small>
+            <table>
+                <tr>
+                    <td>Tanggal</td>
+                    <td>:</td>
+                    <td class="fw-bold">{{ tanggal($buktis[0]->tgl) }}</td>
+                </tr>
+                <tr>
+                    <td>Nama Penerima</td>
+                    <td>:</td>
+                    <td class="fw-bold">{{ $buktis[0]->nama }}</td>
+            </table>
+        </div>
+
+
 
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
 
         <div class="col-6">
             <span class="text-xs">Permintaan diterima Warehouse Material:</span>
@@ -72,9 +108,9 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td x-text="tgl">{{  tanggal($buktis[0]->tgl)  }}</td>
+                            <td x-text="tgl">{{ tanggal($buktis[0]->tgl) }}</td>
                             <td>
-                                {{$buktis[0]->penerima_wm}}
+                                {{ $buktis[0]->penerima_wm }}
                             </td>
                         </tr>
                     </tbody>
@@ -91,18 +127,74 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td x-text="tgl">{{  tanggal($buktis[0]->tgl)  }}</td>
+                            <td x-text="tgl">{{ tanggal($buktis[0]->tgl) }}</td>
                             <td>
-                                {{$buktis[0]->penerima_pr}}
+                                {{ $buktis[0]->penerima_pr }}
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-   
+    </div> --}}
     <div class="row">
+        <div class="col-3 d-flex justify-content-end flex-column align-items-end mb-3" style="margin-right: -15px">
+            <span>Nama</span>
+            <span>Tanggal</span>
+        </div>
+        <div class="col-9">
+            <table class="table table-bordered table-xs">
+                <tr>
+                    <th class="text-center">Pemohon</th>
+                    <th class="text-center">Diterima Warehouse Material</th>
+                    <th class="text-center">Diterima Pengguna</th>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <div style="height: 80px"></div>
+                        <div class=""></div>
+                    </td>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                    <td class="text-center">
+                        <div style="height: 10px"></div>
+                        <div class=""></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    {{-- <div class="row">
         <div class="col-4">
             <span class="text-xs">Disetujui Oleh</span>
             <div class="mb-3">
@@ -124,7 +216,7 @@
                 <div class="">Tanda tangan</div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
 </x-hccp-print>
