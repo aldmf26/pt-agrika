@@ -11,6 +11,11 @@
             <td>{{ $penerimaan->barang->kode_barang }}</td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Tanggal Penerimaan</td>
             <td>:</td>
             <td>{{ tanggal($penerimaan->tanggal_terima) }}</td>
@@ -31,9 +36,14 @@
             <td>{{ $penerimaan->pengemudi }}</td>
         </tr>
         <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+        <tr>
             <td>Jumlah Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->jumlah_barang }}</td>
+            <td>{{ $penerimaan->jumlah_barang }} PCS</td>
         </tr>
     </table>
 
@@ -102,7 +112,6 @@
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
                             <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                            <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -113,7 +122,6 @@
                         <tr>
                             <td class="text-center">[ADM. GUDANG]</td>
                             <td class="text-center">[KA. GUDANG]</td>
-                            <td class="text-center">[DIREKTUR]</td>
                         </tr>
                     </tbody>
                 </table>
