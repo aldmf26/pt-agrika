@@ -41,7 +41,7 @@
         <thead>
             <tr>
                 <th></th>
-                <th colspan="10">KODE LOT : {{ $penerimaan->kode_lot }}</th>
+                <th colspan="10">KODE BARANG : {{ $penerimaan->kode_lot }}</th>
             </tr>
             <tr>
                 <th>Kriteria Penerimaan </th>
@@ -51,7 +51,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($penerimaan->kriteria as $kriteria)
+            {{-- @foreach ($penerimaan->kriteria as $kriteria)
                 <tr>
                     <th>{{ ucfirst($kriteria->kriteria) }}
                         {{ $kriteria->kriteria == 'quantity' ? '(jumlah)' : '(kebersihan)' }}</th>
@@ -59,15 +59,36 @@
                     <td class="text-center">{!! $kriteria->check_2 ? '√' : '' !!}</td>
                     <td class="text-center">{!! $kriteria->check_3 ? '√' : '' !!}</td>
                 </tr>
-            @endforeach
+            @endforeach --}}
+            <tr>
+                <th>Keutuhan barang</th>
+                <td class="text-center">√</td>
+                <td class="text-center">√</td>
+                <td class="text-center"></td>
+            </tr>
+            <tr>
+                <th>Kesesuaian jumlah</th>
+                <td class="text-center">√</td>
+                <td class="text-center">√</td>
+                <td class="text-center"></td>
+            </tr>
+            <tr>
+                <th>Kesesuaian kondisi (tebal, warnanya, dll)</th>
+                <td class="text-center">√</td>
+                <td class="text-center">√</td>
+                <td class="text-center"></td>
+            </tr>
         </tbody>
     </table>
     <p>Keputusan: <br>
     <div class="ms-5">
-        <input disabled @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required> Diterima <br>
-        <input disabled @checked($penerimaan->status_penerimaan == 'Diterima dengan Catatan (sortir)') type="checkbox" name="keputusan" value="Diterima dengan Catatan (sortir)"
-            required> Diterima dengan Catatan (sortir) <br>
-        <input disabled @checked($penerimaan->status_penerimaan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required> Ditolak <br>
+        <input disabled @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
+        Diterima
+        <br>
+        <input disabled @checked($penerimaan->status_penerimaan == 'Diterima dengan Catatan (sortir)') type="checkbox" name="keputusan"
+            value="Diterima dengan Catatan (sortir)" required> Diterima dengan Catatan (sortir) <br>
+        <input disabled @checked($penerimaan->status_penerimaan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
+        <br>
     </div>
     </p>
     <table width="100%">
