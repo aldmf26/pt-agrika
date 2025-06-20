@@ -43,19 +43,27 @@
             <td>{{ number_format($penerimaan->pcs, 0) }}</td>
         </tr>
         <tr>
-
             @php
-                $batas = round($penerimaan->kg / 20, 0);
-                $maxPerRow = 10; // maksimal kolom per baris
-                $jumlahKolom = max(1, $batas); // minimal 1 kolom walaupun $batas 0
+                // Konversi kg ke float, ganti koma dengan titik jika perlu
+                $kg = (float) str_replace(',', '.', $penerimaan->kg);
+
+                // Hitung jumlah box berdasarkan 20 kg per box
+                $batas = round($kg / 20, 0);
+
+                $maxPerRow = 10; // Maksimal kolom per baris
+                $jumlahKolom = max(1, $batas); // Minimal 1 kolom
                 $jumlahBarisKolom = ceil($jumlahKolom / $maxPerRow);
+
+                // Set jumlah box (bisa disesuaikan logikanya jika perlu)
+                $jumlahBox = $jumlahKolom;
             @endphp
             <td>Jumlah Sample</td>
             <td>:</td>
             <td>
-                {{ $penerimaan->kg < 20 ? '1 Kg / @ 1 box' : '20 Kg / @ ' . number_format($jumlahBox) . ' box' }}
+                {{ $kg < 20 ? '1 Kg / @ 1 box' : '20 Kg / @ ' . number_format($jumlahBox) . ' box' }}
             </td>
         </tr>
+
     </table>
 
 

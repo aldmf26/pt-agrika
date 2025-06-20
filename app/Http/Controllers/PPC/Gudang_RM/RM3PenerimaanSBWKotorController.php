@@ -39,6 +39,7 @@ class RM3PenerimaanSBWKotorController extends Controller
                 ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
                 ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
                 ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
+                ->orderBy('sbw_kotor.tgl', 'desc')
                 ->get(),
         ];
         return view('ppc.gudang_rm.penerimaan_sbw_kotor.index', $data);
@@ -60,6 +61,7 @@ class RM3PenerimaanSBWKotorController extends Controller
             ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
             ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
             ->where('sbw_kotor.id', $id)
+
             ->first();
         $data = [
             'title' => 'PENERIMAAN SBW KOTOR',

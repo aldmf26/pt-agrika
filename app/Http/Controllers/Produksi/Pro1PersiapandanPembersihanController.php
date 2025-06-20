@@ -22,7 +22,7 @@ class Pro1PersiapandanPembersihanController extends Controller
 
     public function print(Request $r)
     {
-        $detail = Http::get("https://sarang.ptagafood.com/api/apihasap/detail/" . $r->no_invoice);
+        $detail = Http::get("https://sarang.ptagafood.com/api/apihasap/detail/" . $r->id_pengawas . '/' . $r->tgl);
         $detail = json_decode($detail, TRUE);
 
         $data = [

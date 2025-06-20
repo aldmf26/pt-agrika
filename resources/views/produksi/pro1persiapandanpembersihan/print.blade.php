@@ -63,28 +63,31 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-4">
+                <img style="width: 120px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
+            <div class="col-8 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">FORM PERSIAPAN DAN PEMBERSIHAN BAHAN BAKU</p>
+                    <p class="cop_judul">FORM PERSIAPAN DAN FORM SERAH TERIMA <br>
+                        SERTA PEMBERSIHAN BAHAN BAKU
+                    </p>
                     <p class="text-center fst-italic">raw material preparing and cleaning</p>
                 </div>
             </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.01, Rev.00</p>
-                <br>
-                <br>
+            <div class="col-2"></div>
+            <div class="col-8"></div>
+            <div class="col-4 ">
+                <p class="mt-2">Dok.No.: FRM.PRO.01.01, Rev.00</p>
+
             </div>
 
-            <div class="col-2"></div>
-            <div class="col-10">
+
+            <div class="col-12">
                 <table>
                     <tr>
                         <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
                         <td width="2%">: </td>
-                        <td>&nbsp;{{ date('l', strtotime($tanggal)) }} / {{ tanggal($tanggal) }}</td>
+                        <td>&nbsp; {{ tanggal($tanggal) }}</td>
                     </tr>
                     <tr>
                         <td>Nama Petugas Pembagi &nbsp;<br> <span class="fst-italic">Leader name</span> </td>
@@ -127,13 +130,19 @@
                     </thead>
                     <tbody>
                         @foreach ($detail as $d)
+                            @php
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', $d['nm_partai'])
+                                    ->first();
+                            @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>Cabut</td>
+                                <td>{{ $pengawas }}</td>
                                 <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-center">{{ $d['no_box'] }}</td>
-                                <td class="text-center">{{ $d['tipe'] }}</td>
-                                <td class="text-center">{{ $d['pcs_awal'] }}</td>
+                                <td class="text-center">{{ $sbw->no_invoice ?? $d['nm_partai'] }}</td>
+                                <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
+                                <td class="text-center">{{ $d['pcs'] }}</td>
                                 <td class="text-center">{{ $d['gr_awal'] }}</td>
                                 <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
                                 <td class="text-center">-</td>
