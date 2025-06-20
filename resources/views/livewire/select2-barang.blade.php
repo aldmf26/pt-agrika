@@ -68,7 +68,7 @@
                     var expired_parts = tgl_expired.split('-');
 
                     var exp_bulan = expired_parts[1];
-                    var exp_tahun = expired_parts[0];
+                    var exp_tahun = expired_parts[0].slice(-2);
 
                     var kode_lot = `${kd_tgl}-${kd_bulan}${kd_tahun}-${kode_barang}-${exp_bulan}-${exp_tahun}`;
                     $("input[name=kode_lot]").val(kode_lot);

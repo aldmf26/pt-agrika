@@ -8,23 +8,21 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Nama Barang</label>
-
                                 @livewire('select2-barang', ['kategori' => 'kemasan'])
-
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tanggal Penerimaan</label>
-                                <input type="date" name="tgl_penerimaan" class="form-control"
-                                    value="{{ date('Y-m-d') }}" required>
+                                <input x-model="tgl_penerimaan" type="date" name="tgl_penerimaan" id="tgl_penerimaan"
+                                    class="form-control" value="{{ date('Y-m-d') }}" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tanggal Expired</label>
-                                <input type="date" name="tgl_expired" class="form-control"
-                                    value="{{ date('Y-m-d') }}" required>
+                                <input :value="tgl_penerimaan" type="date" name="tgl_expired" class="form-control"
+                                    required readonly>
                             </div>
                         </div>
                     </div>
