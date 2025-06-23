@@ -1,13 +1,5 @@
-@props(['width' => '100%', 'maxHeight' => '80px'])
-
-@if (Auth::user()?->ttd?->link)
-    <img src="{{ Storage::url(Auth::user()->ttd->link) }}"
-        style="
-            display: block;
-            margin: auto;
-            width: {{ $width }};
-            max-height: {{ $maxHeight }};
-            object-fit: contain;
-        "
-        alt="Tanda Tangan" />
-@endif
+@props(['width' => '250'])
+<div class="text-center">
+    <img src="{{ Storage::url(Auth::user()->ttd->link) }}" width="{{ $width }}" alt="">
+    <span class="text-sm">{{ Auth::user()->name }}</span>
+</div>

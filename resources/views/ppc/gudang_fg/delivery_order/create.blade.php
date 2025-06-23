@@ -33,10 +33,12 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label class="form-label">To:</label>
-                                <select class="select2pelanggan" name="id_pelanggan" onchange="getAlamat($(this).val())">
+                                <select class="select2pelanggan" name="id_pelanggan"
+                                    onchange="getAlamat($(this).val())">
                                     <option value="">-- Pilih Customer --</option>
                                     @foreach ($pelanggans as $c)
-                                        <option value="{{ $c->id }}" data-alamat="{{ $c->alamat }}">{{ $c->nama_pelanggan }}</option>
+                                        <option value="{{ $c->id }}" data-alamat="{{ $c->alamat }}">
+                                            {{ $c->nama_pelanggan }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -50,16 +52,46 @@
                                 }
                             </script>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" x-data="orderForm()">
                             <div class="mb-3">
                                 <label class="form-label">Order No:</label>
-                                <input name="no_order" type="text" class="form-control" value="{{$no_order}}" readonly>
+                                <input name="no_order" type="text" x-model="no_order" class="form-control"
+                                    value="{{ $no_order }}" readonly>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Tanggal:</label>
-                                <input name="tgl" type="date" class="form-control" value="{{date('Y-m-d')}}">
+                                <input name="tgl" type="date" class="form-control" x-model="tgl"
+                                    @change="updateNoOrder()" value="{{ date('Y-m-d') }}">
                             </div>
                         </div>
+
+                        <script>
+                            function orderForm() {
+                                return {
+                                    tgl: '{{ date('Y-m-d') }}',
+                                    no_order: '',
+
+                                    updateNoOrder() {
+                                        if (!this.tgl) return;
+
+                                        const date = new Date(this.tgl);
+                                        const bulanRomawi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+                                        const month = bulanRomawi[date.getMonth()];
+                                        const year = String(date.getFullYear()); // ambil 3 digit terakhir (misal 2025 => 025)
+
+                                        // Bisa diganti dengan no urut real dari backend, di sini contoh pakai 02 saja
+                                        const urutan = "{{ $no_order }}";
+
+                                        this.no_order = `${urutan}/${month}/${year}`;
+                                    },
+
+                                    init() {
+                                        this.updateNoOrder();
+                                    }
+                                }
+                            }
+                        </script>
+
                     </div>
 
                     <!-- Item Table -->
@@ -75,7 +107,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody >
+                            <tbody>
                                 <template x-for="(row, index) in rows" :key="index">
                                     <tr>
                                         <td x-text="index + 1"></td>
@@ -142,14 +174,16 @@
                                     <div class="border p-3 text-center mb-2" style="height: 100px;">
                                         &nbsp;
                                     </div>
-                                    <input readonly value="{{auth()->user()->name}}" name="dibuat_oleh" type="text" class="form-control" placeholder="Nama">
+                                    <input readonly value="{{ auth()->user()->name }}" name="dibuat_oleh"
+                                        type="text" class="form-control" placeholder="Nama">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Disetujui oleh</label>
                                     <div class="border p-3 text-center mb-2" style="height: 100px;">
                                         &nbsp;
                                     </div>
-                                    <input name="disetujui_oleh" type="text" class="form-control" placeholder="Nama">
+                                    <input name="disetujui_oleh" type="text" class="form-control"
+                                        placeholder="Nama">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="form-label">Pengirim</label>
@@ -178,8 +212,8 @@
     </div>
     @section('scripts')
         <script>
-            $(document).ready(function () {
-                
+            $(document).ready(function() {
+
                 $('.select2pelanggan').select2({})
             });
         </script>
