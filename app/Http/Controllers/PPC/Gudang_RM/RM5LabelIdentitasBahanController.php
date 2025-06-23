@@ -148,6 +148,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     $kemasan->kategori = 'kemasan';
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->barang->kode_lot ?? '-';
+                    $kemasan->keterangan = '-';
                     // Ensure penerimaan or penerimaanKemasan is a collection
                     $kemasan->penerimaan = collect([
                         (object)[
@@ -168,6 +169,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     $kemasan->kategori = 'barang';
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->barang->kode_lot ?? '-';
+                    $kemasan->keterangan =  '-';
                     // Ensure penerimaan or penerimaanKemasan is a collection
                     $kemasan->penerimaan = collect([
                         (object)[
@@ -193,6 +195,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     $kemasan->kategori = 'Baku';
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
+                    $kemasan->keterangan = $kemasan->nm_partai ?? '-';
                     // Ensure penerimaan or penerimaanKemasan is a collection
                     $kemasan->penerimaan = collect([
                         (object)[
