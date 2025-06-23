@@ -197,7 +197,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
                     $kemasan->keterangan = $kemasan->nm_partai;
 
-                    dd($kemasan);
+
                     // Ensure penerimaan or penerimaanKemasan is a collection
                     $kemasan->penerimaan = collect([
                         (object)[
