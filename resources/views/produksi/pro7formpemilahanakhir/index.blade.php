@@ -1,46 +1,41 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-header">
-            <label for="" class="float-start">Tanggal : {{ tanggal($tgl) }}</label>
+            {{-- <label for="" class="float-start">Tanggal : {{ tanggal($tgl) }}</label>
             <a href="{{ route('produksi.7.print', ['tgl' => $tgl]) }}" target="_blank" class="btn btn-primary float-end"><i
                     class="fas fa-print"></i> Print</a>
             <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
-                    class="fas fa-calendar"></i> View</button>
+                    class="fas fa-calendar"></i> View</button> --}}
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="text-center">No</th>
-                        <th rowspan="2" class="text-center">Jenis Produk<br><span
-                                class="fst-italic fw-lighter">Grade<span></th>
-                        <th colspan="2" class="text-center">Kondisi Produk<br><span
-                                class="fst-italic fw-lighter">Product condition<span>
-                        </th>
-                        <th colspan="3" class="text-center">Jumlah<br><span
-                                class="fst-italic fw-lighter">Quantity<span></th>
-                        <th rowspan="2" class="text-center">Keterangan<br><span
-                                class="fst-italic fw-lighter">Remarks<span></th>
-                    </tr>
-                    <tr>
-                        <th>Ok</th>
-                        <th>Not Ok</th>
-                        <th>pcs</th>
-                        <th>gr</th>
-                        <th>box</th>
+                        <th class="text-center">No</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Kode Lot</th>
+                        <th class="text-center">Pcs</th>
+                        <th class="text-center">Gr</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($grading as $g)
+                        @php
+                            $sbw = DB::table('sbw_kotor')
+                                ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                ->where('nm_partai', $g['nm_partai'])
+                                ->first();
+                        @endphp
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $g['grade'] }}</td>
-                            <td>Ok</td>
-                            <td></td>
+                            <td>{{ tanggal($g['tgl']) }}</td>
+                            <td>{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
                             <td>{{ $g['pcs'] }}</td>
                             <td>{{ $g['gr'] }}</td>
-                            <td>{{ $g['box'] }}</td>
-                            <td></td>
+                            <td class="text-center"><a href="" target="_blank" class="btn btn-primary btn-sm "><i
+                                        class="fas fa-print"></i> Print</a></td>
+
                         </tr>
                     @endforeach
                 </tbody>

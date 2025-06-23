@@ -33,7 +33,7 @@
                     <th>Nama Produsen / No. Reg SBW</th>
                     <th>Tanggal Kedatangan</th>
                     <th>Kode Grading</th>
-                    {{-- <th>Keterangan</th> --}}
+                    <th>Keterangan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -69,6 +69,7 @@
                         <td>{{ $d['nama_produsen'] }}</td>
                         <td>{{ tanggal($d['tanggal_kedatangan']) }}</td>
                         <td>{{ $d['kode_grading'] }}</td>
+                        <td>{{ $d['keterangan'] }}</td>
                         <td>
                             <input type="hidden" name="checked" :value="JSON.stringify(checked)">
                             <input type="checkbox" class="form-check-input"
