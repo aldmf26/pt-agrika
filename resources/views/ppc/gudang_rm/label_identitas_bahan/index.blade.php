@@ -15,7 +15,7 @@
                     Label Identitas Bahan</a>
             </div>
             <div>
-                <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary"
+                <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary" target="_blank"
                     @click.prevent="window.location.href = `/ppc/gudang-rm/5-label-identitas-bahan/print?checked=${encodeURIComponent(checked.join(','))}`">
                     <i class="fas fa-print"></i> Print
                     <span x-transition x-text="checked.length ? `(${checked.length})` : 'Semua'"></span>
