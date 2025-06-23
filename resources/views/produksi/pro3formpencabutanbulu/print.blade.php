@@ -100,17 +100,15 @@
                         <tr>
                             <th class=" align-middle" rowspan="3">No</th>
                             <th rowspan="3" class=" align-middle">Nama Operator Cabut <br><span
-                                    class="fst-italic fw-lighter">
-                                    Operator
-                                    name</span></th>
+                                    class="fst-italic fw-lighter">Operator name</span></th>
                             <th rowspan="3" class=" align-middle">Kode Batch/Lot <br> <span
-                                    class="fst-italic fw-lighter">
-                                    Batch/Lot
-                                    code</span>
+                                    class="fst-italic fw-lighter">Batch/Lot code</span>
                             <th rowspan="3" class=" align-middle">Jenis<br> <span class="fst-italic fw-lighter">
-                                    type</span></th>
-                            <th class="" colspan="2">Jumlah <br> <span class="fst-italic fw-lighter">
-                                    Quantity</span></th>
+                                    type</span>
+                            </th>
+                            <th class="" colspan="2">Jumlah <br>
+                                <span class="fst-italic fw-lighter">Quantity</span>
+                            </th>
                             <th class="" colspan="2">Kembali <br> <span
                                     class="fst-italic fw-lighter">Retur</span>
                             </th>
