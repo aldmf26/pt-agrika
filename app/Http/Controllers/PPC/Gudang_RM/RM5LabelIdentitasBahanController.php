@@ -39,6 +39,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 'tanggal_kedatangan' => $s->tanggal_terima,
                 'kode_lot' => $s->kode_lot,
                 'kode_grading' => '-',
+                'keterangan' => '-',
             ];
         }
         // Tambahkan data SBW
@@ -51,6 +52,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 'tanggal_kedatangan' => $s->tanggal_penerimaan,
                 'kode_lot' => $s->kode_lot,
                 'kode_grading' => '-',
+                'keterangan' => '-',
             ];
         }
 
@@ -63,6 +65,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 'tanggal_kedatangan' => date('Y-m-d', strtotime('+1 day', strtotime($s->tgl))),
                 'kode_lot' => $s->no_invoice,
                 'kode_grading' => '-',
+                'keterangan' => $s->nm_partai,
             ];
         }
 
@@ -150,6 +153,7 @@ class RM5LabelIdentitasBahanController extends Controller
                         (object)[
                             'tanggal_terima' => $kemasan->tanggal_penerimaan,
                             'kode_lot' => $kemasan->kode_lot,
+                            'keterangan' => '-',
                         ]
                     ]);
                     $labels->push($kemasan);
@@ -169,6 +173,7 @@ class RM5LabelIdentitasBahanController extends Controller
                         (object)[
                             'tanggal_terima' => $kemasan->tanggal_terima,
                             'kode_lot' => $kemasan->kode_lot,
+                            'keterangan' =>  '-',
                         ]
                     ]);
                     $labels->push($kemasan);
@@ -193,6 +198,7 @@ class RM5LabelIdentitasBahanController extends Controller
                         (object)[
                             'tanggal_terima' =>  date('Y-m-d', strtotime('+1 day', strtotime($kemasan->tgl))),
                             'kode_lot' => $kemasan->no_invoice,
+                            'keterangan' => $kemasan->nm_partai,
                         ]
                     ]);
                     $labels->push($kemasan);
