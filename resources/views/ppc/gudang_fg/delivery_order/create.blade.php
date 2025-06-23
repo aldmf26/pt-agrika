@@ -58,11 +58,25 @@
                                 <input name="no_order" type="text" x-model="no_order" class="form-control"
                                     value="{{ $no_order }}" readonly>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Tanggal:</label>
-                                <input name="tgl" type="date" class="form-control" x-model="tgl"
-                                    @change="updateNoOrder()" value="{{ date('Y-m-d') }}">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div>
+                                        <label class="form-label">Tanggal Kirim:</label>
+                                        <input name="tgl" type="date" class="form-control" x-model="tgl"
+                                            @change="updateNoOrder()" value="{{ date('Y-m-d') }}">
+                                    </div>
+
+                                </div>
+                                <div class="col-6">
+                                    <div class="">
+                                        <label class="form-label">ETD:</label>
+                                        <input required
+                                            value="{{ date('Y-m-d', strtotime(date('Y-m-d') . ' +2 days')) }}"
+                                            name="tgl_etd" type="date" class="form-control">
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
 
                         <script>
