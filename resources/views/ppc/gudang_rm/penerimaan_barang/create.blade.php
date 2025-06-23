@@ -23,7 +23,7 @@
                             <div class="form-group">
                                 <label>Tanggal Expired</label>
                                 <input type="date" name="tgl_expired" class="form-control"
-                                    value="{{ date('Y-m-d', strtotime('+1 year')) }}" required>
+                                    value="{{ date('Y-m-d', strtotime('+2 year')) }}" required>
                             </div>
                         </div>
                     </div>

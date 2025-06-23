@@ -28,31 +28,53 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
     public function create()
     {
         $labels = collect([]);
-        $barangs = PenerimaanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
-        $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
+
+        $barangs = PenerimaanHeader::with(['barang', 'supplier'])
+            ->where('label', 'Y')
+            ->get();
+
+        $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])
+            ->where('label', 'Y')
+            ->get();
 
         foreach ($barangs as $b) {
-            $labels = $labels->concat(collect([$b->id => [
-                'kode_lot' => $b->kode_lot,
-                'nama_barang' => $b->barang->nama_barang,
-                'satuan' => $b->barang->satuan
-            ]]));
+            $masuk = PenerimaanHeader::where('kode_lot', $b->kode_lot)->sum('jumlah_barang');
+            $keluar = BuktiPermintaanPengeluaranBarang::where('no_lot', $b->kode_lot)->sum('pcs');
+            $stok_akhir = $masuk - $keluar;
+
+            $labels = $labels->concat(collect([
+                $b->id => [
+                    'kode_lot' => $b->kode_lot,
+                    'nama_barang' => $b->barang->nama_barang,
+                    'satuan' => $b->barang->satuan,
+                    'stok_akhir' => $stok_akhir
+                ]
+            ]));
         }
+
         foreach ($kemasan as $b) {
-            $labels = $labels->concat(collect([$b->id => [
-                'kode_lot' => $b->kode_lot,
-                'nama_barang' => $b->barang->nama_barang,
-                'satuan' => $b->barang->satuan
-            ]]));
+            $masuk = PenerimaanKemasanHeader::where('kode_lot', $b->kode_lot)->sum('jumlah_barang');
+            $keluar = BuktiPermintaanPengeluaranBarang::where('no_lot', $b->kode_lot)->sum('pcs');
+            $stok_akhir = $masuk - $keluar;
+
+            $labels = $labels->concat(collect([
+                $b->id => [
+                    'kode_lot' => $b->kode_lot,
+                    'nama_barang' => $b->barang->nama_barang,
+                    'satuan' => $b->barang->satuan,
+                    'stok_akhir' => $stok_akhir
+                ]
+            ]));
         }
 
         $data = [
             'title' => 'Tambah Bukti Permintaan Pengeluaran Barang',
-            'labels' => $labels
-
+            'labels' => $labels->values(), // reset keys
         ];
+
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.create', $data);
     }
+
 
     public function store(Request $r)
     {

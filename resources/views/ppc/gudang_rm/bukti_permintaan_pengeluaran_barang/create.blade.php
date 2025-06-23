@@ -1,6 +1,4 @@
 <x-app-layout :title="$title">
-
-
     <div class="container mt-4" x-data="alpineFunc">
         <form action="" method="post">
             @csrf
@@ -46,6 +44,7 @@
                                 <tr>
                                     <th class="text-center" rowspan="2">No</th>
                                     <th class="text-center" rowspan="2" width="30%">Nama Barang</th>
+                                    <th class="text-center" rowspan="2">Sisa Stok</th>
                                     <th class="text-center" colspan="2">Jumlah</th>
                                     <th class="text-center" rowspan="2" width="20%">Kode Lot SBW</th>
                                     <th class="text-center" rowspan="2">Status Ok/Tidak Ok</th>
@@ -74,6 +73,10 @@
                                                         {{ $p['satuan'] }}</option>
                                                 @endforeach
                                             </select>
+                                        </td>
+                                        <td>
+                                            <input type="text" x-model="row.stok_akhir" name="sisa_stok[]"
+                                                class="form-control text-end" readonly>
                                         </td>
                                         <td>
                                             <div class="d-flex gap-2">
@@ -144,13 +147,15 @@
                             pcs: 0,
                             gr: 0,
                             kode_lot: '',
-                            id_barang: ''
+                            id_barang: '',
+                            stok_akhir: 0
                         });
                     },
                     updateKodeLot(index, kodeLot) {
                         const item = this.labels.find(i => i.kode_lot === kodeLot);
                         if (item) {
                             this.rows[index].kode_lot = item.kode_lot;
+                            this.rows[index].stok_akhir = item.stok_akhir;
                         }
                     }
                 }));

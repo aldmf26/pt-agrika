@@ -89,9 +89,6 @@
                     <td class="fw-bold">{{ $buktis[0]->nama }}</td>
             </table>
         </div>
-
-
-
     </div>
 
     {{-- <div class="row">
