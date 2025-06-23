@@ -158,6 +158,87 @@
                         </table>
                     </div>
                 @endforeach
+                @foreach ($labels as $d)
+                    <!-- Label pertama -->
+                    <div class="label mt-3">
+                        <div class="header">
+                            <div class="d-flex justify-content-evenly">
+                                <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
+                                <p>PT. AGRIKAGATYA ARUM</p>
+                            </div>
+
+                            <p><strong><u>Identitas Bahan {{ ucwords($d->kategori) }}</u></strong></p>
+                        </div>
+                        <table style="font-size: 10px; text-align: left">
+                            <tr>
+                                <td>Nama {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
+                                </td>
+                                <td>:</td>
+                                <th>{{ $d->kategori == 'Baku' ? $d->grade : $d->barang->nama_barang }}</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Nama Produsen
+                                </td>
+                                <td>:</td>
+                                <td>{{ $d->kategori == 'Baku' ? $d->rumah_walet : $d->supplier->nama_supplier }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Tanggal Kedatangan</td>
+                                <td>:</td>
+                                <td>
+                                    @if ($d->kategori == 'Baku')
+                                        @php
+                                            $tgl_sbw = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
+                                        @endphp
+                                        {{ tanggal($tgl_sbw) }}
+                                    @elseif($d->kategori == 'barang')
+                                        {{ tanggal($d->tanggal_terima) }}
+                                    @else
+                                        {{ tanggal($d->tanggal_penerimaan) }}
+                                    @endif
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kode Lot</td>
+                                <td>:</td>
+                                <td>
+                                    {{ $d->kategori == 'Baku' ? $d->no_invoice : $d->kode_lot }}
+                                </td>
+                                </td>
+                            </tr>
+                            @if ($d->kategori == 'Baku')
+                                <tr>
+                                    <td>Kode Grading</td>
+                                    <td>:</td>
+                                    <td>
+                                        {{ $d->kategori == 'Baku' ? $d->kode : $d->kode_lot }}
+                                    </td>
+                                </tr>
+                            @endif
+
+
+                            <tr>
+                                <td>Keterangan</td>
+                                <td>:</td>
+                                {{-- <td>{{ $d->keterangan }}</td> --}}
+                            </tr>
+                        </table>
+                        <table class="signature-table">
+                            <tr>
+                                <td>KA. Gudang</td>
+                                <td>QC Incoming</td>
+                                <td>Status</td>
+                            </tr>
+                            <tr>
+                                <td></td> <!-- Untuk tanda tangan -->
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                @endforeach
 
             </div>
         </div>

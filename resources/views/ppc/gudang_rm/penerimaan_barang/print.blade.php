@@ -1,4 +1,25 @@
 <x-hccp-print :title="$title" :dok="$dok">
+    <style>
+        @media print {
+            @page {
+                margin: 15mm;
+            }
+
+            body {
+                margin: 0;
+            }
+
+            table {
+                border-collapse: collapse;
+            }
+
+            td,
+            th {
+                padding: 2px;
+            }
+        }
+    </style>
+
     <table>
         <tr>
             <td>Nama Barang</td>
@@ -90,43 +111,57 @@
             </tr>
         </tbody>
     </table>
-    <p>Keputusan: <br>
-    <div class="ms-5">
-        <input disabled @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
-        Diterima
-        <br>
-        <input disabled @checked($penerimaan->status_penerimaan == 'Diterima dengan Catatan (sortir)') type="checkbox" name="keputusan"
-            value="Diterima dengan Catatan (sortir)" required> Diterima dengan Catatan (sortir) <br>
-        <input disabled @checked($penerimaan->status_penerimaan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
-        <br>
-    </div>
-    </p>
-    <table width="100%">
-        <tr>
-            <td width="40%">
+    <div class="row">
+        <div class="col-6">
+            <p>Keputusan: <br>
+            <div class="ms-5" style="font-size: 12px">
+                <input disabled @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
+                Diterima
+                <br>
+                <input disabled @checked($penerimaan->status_penerimaan == 'Diterima dengan Catatan (sortir)') type="checkbox" name="keputusan"
+                    value="Diterima dengan Catatan (sortir)" required> Diterima dengan Catatan (sortir) <br>
+                <input disabled @checked($penerimaan->status_penerimaan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required>
+                Ditolak
+                <br>
+            </div>
+            </p>
+        </div>
+        <div class="col-6">
 
-            </td>
-            <td style="width: 60%">
-                <table class="border-dark table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">[ADM. GUDANG]</td>
-                            <td class="text-center">[KA. GUDANG]</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
+            <table width="100%">
+                <tr>
+                    <td width="100%">
+                        <table class="table table-bordered border-dark"
+                            style="width: 100%; table-layout: fixed; font-size: 11px;">
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width: 50%;">Dibuat Oleh:</th>
+                                    <th class="text-center" style="width: 50%;">Diperiksa Oleh:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="height: 100px; text-align: center; vertical-align: middle; padding: 0;">
+                                        <x-ttd />
+                                    </td>
+                                    <td style="height: 100px; text-align: center; vertical-align: middle; padding: 0;">
+                                        {{-- jika ada ttd kepala gudang bisa tambahkan x-ttd2 --}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-center">[ADM. GUDANG]</td>
+                                    <td class="text-center">[KA. GUDANG]</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+
 
 </x-hccp-print>
