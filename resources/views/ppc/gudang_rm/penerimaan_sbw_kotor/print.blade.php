@@ -11,6 +11,11 @@
             <td>{{ $penerimaan->no_invoice }}</td>
         </tr>
         <tr>
+            <td>Keterangan</td>
+            <td>:</td>
+            <td>{{ $penerimaan->nm_partai }}</td>
+        </tr>
+        <tr>
             <td>&nbsp;</td>
         </tr>
         <tr>
