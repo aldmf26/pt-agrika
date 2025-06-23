@@ -15,44 +15,5 @@ Route::controller(GradeSbwCOntroller::class)
         Route::get('/grade_sbw', 'grade_sbw')->name('grade_sbw');
         Route::get('/detail_grade_sbw', 'detail_grade_sbw')->name('detail_grade_sbw');
         Route::get('/rumah_walet', 'rumah_walet')->name('rumah_walet');
-        Route::get('/
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        ', 'detail_rumah_walet')->name('detail_rumah_walet');
+        Route::get('/detail_rumah_walet', 'detail_rumah_walet')->name('detail_rumah_walet');
     });
