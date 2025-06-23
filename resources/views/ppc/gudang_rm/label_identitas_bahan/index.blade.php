@@ -15,7 +15,7 @@
                     Label Identitas Bahan</a>
             </div>
             <div>
-                <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary"
+                <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary" target="_blank"
                     @click.prevent="window.location.href = `/ppc/gudang-rm/5-label-identitas-bahan/print?checked=${encodeURIComponent(checked.join(','))}`">
                     <i class="fas fa-print"></i> Print
                     <span x-transition x-text="checked.length ? `(${checked.length})` : 'Semua'"></span>
@@ -74,7 +74,7 @@
                             <input type="hidden" name="checked" :value="JSON.stringify(checked)">
                             <input type="checkbox" class="form-check-input"
                                 :value="'{{ $d['kode_lot'] }}:{{ $d['identitas'] }}'" x-model="checked"
-                                :disabled="checked.length >= 6 && !checked.includes('{{ $d['kode_lot'] }}:{{ $d['identitas'] }}')">
+                                :disabled="checked.length >= 8 && !checked.includes('{{ $d['kode_lot'] }}:{{ $d['identitas'] }}')">
                         </td>
                     </tr>
                 @empty

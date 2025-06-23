@@ -141,7 +141,7 @@
                             <tr>
                                 <td>Keterangan</td>
                                 <td>:</td>
-                                <td>{{ $d->keterangan ?? '-' }}</td>
+                                {{-- <td>{{ $d->keterangan }}</td> --}}
                             </tr>
                         </table>
                         <table class="signature-table">
@@ -158,6 +158,7 @@
                         </table>
                     </div>
                 @endforeach
+
 
             </div>
         </div>

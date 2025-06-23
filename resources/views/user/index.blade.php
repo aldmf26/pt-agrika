@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <form action="{{ route('user.update') }}" method="post">
                     @csrf
-                    <table class="table table-dark table-stripped table-bordered" id="example">
+                    <table class="table table-dark table-stripped table-bordered">
                         <thead>
                             <tr>
                                 <th>#</th>

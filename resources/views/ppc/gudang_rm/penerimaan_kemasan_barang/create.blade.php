@@ -14,15 +14,15 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tanggal Penerimaan</label>
-                                <input x-model="tgl_penerimaan" type="date" name="tgl_penerimaan" id="tgl_penerimaan"
-                                    class="form-control" value="{{ date('Y-m-d') }}" required>
+                                <input type="date" name="tgl_penerimaan" id="tgl_penerimaan" class="form-control"
+                                    value="{{ date('Y-m-d') }}" required>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Tanggal Expired</label>
-                                <input :value="tgl_penerimaan" type="date" name="tgl_expired" class="form-control"
-                                    required readonly>
+                                <input value="{{ date('Y-m-d', strtotime('+2 year')) }}" type="date"
+                                    name="tgl_expired" class="form-control" required readonly>
                             </div>
                         </div>
                     </div>
