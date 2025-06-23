@@ -3,17 +3,17 @@
         <tr>
             <td>Tanggal Pemohon</td>
             <td>:</td>
-            <td>{{ tanggal($buktis[0]->tgl) }}</td>
+            <td>{{ tanggal($tgl) }}</td>
         </tr>
         <tr>
             <td>Nama Pemohon</td>
             <td>:</td>
-            <td>{{ $buktis[0]->nama }}</td>
+            <td>{{ $nama }}</td>
         </tr>
         <tr>
             <td>Departemen</td>
             <td>:</td>
-            <td>{{ $buktis[0]->departemen }}</td>
+            <td>{{ $k == 'satu' ? $buktis[0]->departemen : 'Cabut' }}</td>
         </tr>
 
 
@@ -37,20 +37,45 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($buktis as $d)
-                    <tr>
-                        <td align="center">{{ $loop->iteration }}</td>
-                        <td>{{ $d->barang->nama_barang ?? '' }}</td>
-                        <td align="right">
-                            {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
-                        </td>
-                        <td align="right">
-                            {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
-                        </td>
-                        <td>{{ $d->no_lot }}</td>
-                        <td align="center">{{ $d->status }}</td>
-                    </tr>
-                @endforeach
+                @if ($k == 'satu')
+                    @foreach ($buktis as $d)
+                        <tr>
+                            <td align="center">{{ $loop->iteration }}</td>
+                            <td>{{ $d->barang->nama_barang ?? '' }}</td>
+                            <td align="right">
+                                {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
+                            </td>
+                            <td align="right">
+                                {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
+                            </td>
+                            <td>{{ $d->no_lot }}</td>
+                            <td align="center">{{ $d->status }}</td>
+                        </tr>
+                    @endforeach
+                @else
+                    @foreach ($buktis2 as $d)
+                        @php
+                            $sbw = DB::table('sbw_kotor')
+                                ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                ->where('nm_partai', $d['nm_partai'])
+                                ->first();
+                        @endphp
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $sbw->nama ?? $d['nm_partai'] }}</td>
+                            <td class="text-center">{{ number_format($d['pcs'], 0) }} Pcs /
+                                {{ number_format($d['gr'], 0) }} Gr
+                            </td>
+                            <td class="text-center">{{ number_format($d['pcs'], 0) }} Pcs /
+                                {{ number_format($d['gr'], 0) }} Gr
+                            </td>
+                            <td class="text-center">{{ $sbw->no_invoice }}</td>
+                            <td class="text-center">Ok</td>
+
+                        </tr>
+                    @endforeach
+                @endif
+
             </tbody>
         </table>
         <div style="font-size: 12px; margin-top: -10px;">
@@ -67,12 +92,12 @@
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
-                    <td class="fw-bold">{{ tanggal($buktis[0]->tgl) }}</td>
+                    <td class="fw-bold">{{ tanggal($tgl) }}</td>
                 </tr>
                 <tr>
                     <td>Nama Penerima</td>
                     <td>:</td>
-                    <td class="fw-bold">{{ $buktis[0]->penerima_wr }}</td>
+                    <td class="fw-bold">{{ $k == 'satu' ? $buktis[0]->penerima_wr : 'Sinta' }}</td>
             </table>
 
             <br>
@@ -81,12 +106,12 @@
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
-                    <td class="fw-bold">{{ tanggal($buktis[0]->tgl) }}</td>
+                    <td class="fw-bold">{{ tanggal($tgl) }}</td>
                 </tr>
                 <tr>
                     <td>Nama Penerima</td>
                     <td>:</td>
-                    <td class="fw-bold">{{ $buktis[0]->nama }}</td>
+                    <td class="fw-bold">{{ ucwords($nama) }}</td>
             </table>
         </div>
     </div>
