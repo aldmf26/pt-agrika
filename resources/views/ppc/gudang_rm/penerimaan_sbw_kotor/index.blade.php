@@ -18,6 +18,7 @@
                         <th>#</th>
                         <th>Jenis</th>
                         <th>No Lot</th>
+                        <th>Partai</th>
                         <th>Tanggal Penerimaan</th>
                         <th>No Kendaraan</th>
                         <th>Pengemudi</th>
@@ -33,6 +34,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama }}</td>
                             <td>{{ $d->no_invoice }}</td>
+                            <td>{{ $d->nm_partai }}</td>
                             <td>{{ tanggal($d->tgl) }}</td>
                             <td>{{ $d->no_kendaraan }}</td>
                             <td>{{ $d->pengemudi }}</td>
