@@ -185,9 +185,10 @@
                         <!-- Label pertama -->
                         <div class="label mt-3">
                             <div class="header">
-                                <div class="d-flex justify-content-evenly">
+                                <div class="d-flex justify-content-between">
                                     <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
                                     <p>PT. AGRIKAGATYA ARUM</p>
+                                    <div></div>
                                 </div>
 
                                 <p><strong><u>Identitas Bahan {{ ucwords($d->kategori) }}</u></strong></p>
