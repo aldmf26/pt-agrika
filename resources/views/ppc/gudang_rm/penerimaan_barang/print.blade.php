@@ -112,53 +112,43 @@
         </tbody>
     </table>
     <div class="row">
-        <div class="col-6">
+        <div class="col-4">
             <p>Keputusan: <br>
-            <div class="ms-5" style="font-size: 12px">
-                <input disabled @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
+            <div class="ms-2" style="font-size: 11px">
+                <input @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
                 Diterima
                 <br>
-                <input disabled @checked($penerimaan->status_penerimaan == 'Diterima dengan Catatan (sortir)') type="checkbox" name="keputusan"
+                <input @checked($penerimaan->status_penerimaan == 'Diterima dengan Catatan (sortir)') type="checkbox" name="keputusan"
                     value="Diterima dengan Catatan (sortir)" required> Diterima dengan Catatan (sortir) <br>
-                <input disabled @checked($penerimaan->status_penerimaan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required>
+                <input @checked($penerimaan->status_penerimaan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required>
                 Ditolak
                 <br>
             </div>
             </p>
         </div>
-        <div class="col-6">
-
-            <table width="100%">
-                <tr>
-                    <td width="100%">
-                        <table class="table table-bordered border-dark"
-                            style="width: 100%; table-layout: fixed; font-size: 11px;">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" style="width: 50%;">Dibuat Oleh:</th>
-                                    <th class="text-center" style="width: 50%;">Diperiksa Oleh:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td style="height: 100px; text-align: center; vertical-align: middle; padding: 0;">
-                                        <x-ttd />
-                                    </td>
-                                    <td style="height: 100px; text-align: center; vertical-align: middle; padding: 0;">
-                                        {{-- jika ada ttd kepala gudang bisa tambahkan x-ttd2 --}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="text-center">[ADM. GUDANG]</td>
-                                    <td class="text-center">[KA. GUDANG]</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
+        <div class="col-8">
+            <table>
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width: 50%;">Dibuat Oleh:</th>
+                        <th class="text-center" style="width: 50%;">Diperiksa Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <x-ttd />
+                        </td>
+                        <td>
+                            {{-- jika ada ttd kepala gudang bisa tambahkan x-ttd2 --}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">[ADM. GUDANG]</td>
+                        <td class="text-center">[KA. GUDANG]</td>
+                    </tr>
+                </tbody>
             </table>
-
-
         </div>
     </div>
 

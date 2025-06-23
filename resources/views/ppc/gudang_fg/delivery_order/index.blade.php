@@ -1,6 +1,6 @@
 <x-app-layout :title="$title">
     <div class="d-flex justify-content-end gap-2">
-        <div>
+        {{-- <div>
             <button data-bs-toggle="modal" data-bs-target="#tambah" type="button" class="btn btn-sm btn-primary"><i
                     class="fas fa-plus"></i> Produk</button>
             <div x-data="{ showProduk: false }">
@@ -10,7 +10,7 @@
                     @livewire('ppc.tbh-produk')
                 </x-modal>
             </div>
-        </div>
+        </div> --}}
         <div>
             <a href="{{ route('ppc.gudang-fg.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                 Delivery</a>
@@ -42,11 +42,12 @@
                     </td>
                     <td>{{ $d->disetujui_oleh }}</td>
                     <td>
-                        <a class="btn btn-xs float-end btn-primary" href="{{route("ppc.gudang-fg.1.print", $d->nomor_order)}}"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-xs float-end btn-primary"
+                            href="{{ route('ppc.gudang-fg.1.print', $d->nomor_order) }}"><i class="fas fa-print"></i></a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    
+
 </x-app-layout>
