@@ -195,7 +195,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     $kemasan->kategori = 'Baku';
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
-                    $kemasan->keterangan = $kemasan->nm_partai ?? '-';
+                    $kemasan->keterangan = $kemasan->nm_partai;
                     // Ensure penerimaan or penerimaanKemasan is a collection
                     $kemasan->penerimaan = collect([
                         (object)[
