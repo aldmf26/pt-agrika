@@ -9,18 +9,26 @@ use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class RM7BuktiPermintaanPengeluaranBarangController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
+
+
         $bukti = BuktiPermintaanPengeluaranBarang::groupBy('nama', 'tgl', 'departemen')
             ->selectRaw('nama, tgl, departemen, count(*) as ttl_produk, sum(pcs) as pcs, sum(gr) as gr')
             ->latest()
             ->get();
+
+        $bukti2 = Http::get("https://sarang.ptagafood.com/api/apihasap/buktiPermintaan");
+        $bukti2 = json_decode($bukti2, TRUE);
         $data = [
             'title' => 'Bukti Permintaan Pengeluaran Barang',
-            'buktis' => $bukti
+            'buktis' =>  $bukti,
+            'buktis2' => $bukti2['data'],
+            'k' => $r->k ?? 'satu',
         ];
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.index', $data);
     }
@@ -119,10 +127,20 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
             ])
             ->latest()
             ->get();
+
+        $bukti2 = Http::get("https://sarang.ptagafood.com/api/apihasap/detailBuktiPermintaan?id_penerima=$r->id_penerima&tanggal=$r->tgl");
+        $bukti2 = json_decode($bukti2, TRUE);
+
         $data = [
             'title' => 'BUKTI PERMINTAAN PENGELUARAN BARANG',
             'dok' => 'Dok.No.: FRM.WH.03.01, Rev.00',
-            'buktis' => $bukti
+            'buktis' => $bukti,
+            'buktis2' => $bukti2['data'],
+            'k' => $r->k ?? 'satu',
+            'nama' => $r->nama,
+            'tgl' => $r->tgl,
+            'departemen' => $r->departemen,
+
         ];
 
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.print', $data);
