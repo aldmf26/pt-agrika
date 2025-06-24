@@ -11,7 +11,7 @@ class Pro1PersiapandanPembersihanController extends Controller
     public function index()
     {
         $posisi = auth()->user()->posisi_id;
-        dd($posisi);
+
         if ($posisi == 1) {
             $bk = Http::get("https://sarang.ptagafood.com/api/apihasap");
             $bk = json_decode($bk, TRUE);
