@@ -40,7 +40,12 @@
                         <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                             title="isi Barang: untuk bahan baku, isi kemasan : untuk barang kemasan"></i>
                     </label>
-                    <input type="text" name="jenis_produk" placeholder="barang, kemasan, dll" class="form-control">
+                    <select name="jenis_produk" class="form-control" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="barang">Barang</option>
+                        <option value="kemasan">Kemasan</option>
+                        <option value="lainnya">Sbw</option>
+                    </select>
                 </div>
             </div>
 
