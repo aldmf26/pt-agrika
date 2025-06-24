@@ -17,8 +17,8 @@ class Pro1PersiapandanPembersihanController extends Controller
             $bk = json_decode($bk, TRUE);
         } else {
             $id_pengawas = auth()->user()->id;
-            dd($id_pengawas);
-            $bk = Http::get("https://sarang.ptagafood.com/api/apihasap?id_pengawas=" . $id_pengawas);
+
+            $bk = Http::get("https://sarang.ptagafood.com/api/apihasap?id_pengawas=$id_pengawas");
             $bk = json_decode($bk, TRUE);
         }
 
