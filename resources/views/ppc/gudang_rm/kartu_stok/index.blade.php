@@ -1,4 +1,7 @@
 <x-app-layout :title="$title">
+    <x-nav-link route="ppc.gudang-rm.8.index" />
+    <br>
+    <br>
     <div x-data="{ checked: [] }">
         <div class="d-flex justify-content-end gap-2">
             <div>

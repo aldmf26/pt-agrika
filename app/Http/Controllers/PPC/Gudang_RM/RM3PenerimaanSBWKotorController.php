@@ -19,6 +19,7 @@ class RM3PenerimaanSBWKotorController extends Controller
         $sbw = $sbw['data']['sbw'];
 
         DB::table('sbw_kotor')->truncate();
+
         foreach ($sbw as $s) {
             DB::table('sbw_kotor')->insert([
                 'grade_id' => $s['grade_id'],
