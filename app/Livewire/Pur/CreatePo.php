@@ -4,6 +4,7 @@ namespace App\Livewire\Pur;
 
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
+use App\Models\Suplier;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 
@@ -31,7 +32,8 @@ class CreatePo extends Component
             'no_pr' => PurchaseRequest::whereNotIn('id', function ($query) {
                 $query->select('pr_id')->from('purchase_orders');
             })->latest()->get(),
-            'getPr' => $getPr
+            'getPr' => $getPr,
+            'suppliers' => Suplier::whereNot('kategori', 'sbw')->latest()->get(),
         ];
         return view('livewire.pur.create-po', $data);
     }
