@@ -10,9 +10,20 @@ class Pro6FormCetak extends Controller
 {
     public function index(Request $r)
     {
+        $posisi = auth()->user()->posisi_id;
 
-        $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak");
-        $cetak = json_decode($cetak, TRUE);
+        if ($posisi == 1) {
+            $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak");
+            $cetak = json_decode($cetak, TRUE);
+        } else {
+            $id_pengawas = auth()->user()->id;
+
+            $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak?id_pengawas=$id_pengawas");
+            $cetak = json_decode($cetak, TRUE);
+        }
+
+
+
         $data = [
             'title' => 'Form Cetak',
             'cetak' => $cetak['data'],

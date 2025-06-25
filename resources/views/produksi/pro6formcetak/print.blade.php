@@ -130,14 +130,14 @@
                             @php
                                 $sbw = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', $c['nm_partai'])
+                                    ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
                                     ->first();
                             @endphp
                             <tr>
                                 <td class="text-center ">{{ $loop->iteration }}</td>
                                 <td class="text-center ">{{ $c['nama'] }}</td>
-                                <td>{{ $sbw->no_invoice }}</td>
-                                <td>{{ ucwords(strtolower($sbw->nama)) }} </td>
+                                <td>{{ $sbw->no_invoice ?? $c['nm_partai'] }}</td>
+                                <td>{{ ucwords(strtolower($sbw->nama ?? '-')) }} </td>
                                 <td class="text-center ">{{ $c['pcs_awal_ctk'] }}</td>
                                 <td class="text-center ">{{ $c['gr_awal_ctk'] }}</td>
                                 <td class="text-center ">{{ $c['pcs_akhir'] }}</td>
