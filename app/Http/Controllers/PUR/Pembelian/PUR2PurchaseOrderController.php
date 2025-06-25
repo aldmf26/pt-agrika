@@ -36,9 +36,26 @@ class PUR2PurchaseOrderController extends Controller
 
     public function getNoPo()
     {
-        $lastRequest = PurchaseOrder::latest()->first();
-        $no_po = $lastRequest ? $lastRequest->no_po + 1 : 1001;
-        return $no_po;
+        $bulan = strtoupper(date('n'));
+        $tahun = date('Y');
+        $lastRequest = PurchaseOrder::whereMonth('tgl', $bulan)
+            ->whereYear('tgl', $tahun)
+            ->latest()
+            ->first();
+
+        if ($lastRequest) {
+            $lastNo = (int) substr($lastRequest->no_pr, 3, 2);
+            $newNo = str_pad($lastNo + 1, 2, '0', STR_PAD_LEFT);
+        } else {
+            $newNo = '01';
+        }
+
+        $romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+        $bulanRoman = $romanMonths[$bulan - 1];
+
+        $no_pr = "PO/{$newNo}/{$bulanRoman}/{$tahun}";
+
+        return $no_pr;
     }
 
     public function selesai(Request $r)

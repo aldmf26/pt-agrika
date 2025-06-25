@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PUR\Pembelian;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
 use Illuminate\Http\Request;
@@ -23,9 +24,11 @@ class PUR1PurchaseRequestController extends Controller
 
     public function create()
     {
+        $barangs = Barang::with('supplier')->get();
         $data = [
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
+            'barangs' => $barangs,
         ];
 
         return view('pur.pembelian.purchase_request.create', $data);
@@ -33,8 +36,25 @@ class PUR1PurchaseRequestController extends Controller
 
     public function getNoPr()
     {
-        $lastRequest = PurchaseRequest::latest()->first();
-        $no_pr = $lastRequest ? $lastRequest->no_pr + 1 : 1001;
+        $bulan = strtoupper(date('n'));
+        $tahun = date('Y');
+        $lastRequest = PurchaseRequest::whereMonth('tgl', $bulan)
+            ->whereYear('tgl', $tahun)
+            ->latest()
+            ->first();
+
+        if ($lastRequest) {
+            $lastNo = (int) substr($lastRequest->no_pr, 3, 2);
+            $newNo = str_pad($lastNo + 1, 2, '0', STR_PAD_LEFT);
+        } else {
+            $newNo = '01';
+        }
+
+        $romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+        $bulanRoman = $romanMonths[$bulan - 1];
+
+        $no_pr = "PR/{$newNo}/{$bulanRoman}/{$tahun}";
+
         return $no_pr;
     }
 
@@ -79,7 +99,6 @@ class PUR1PurchaseRequestController extends Controller
     {
         PurchaseRequest::where('id', $id)->update(['status' => 'disetujui']);
         return redirect()->route('pur.pembelian.1.index')->with('sukses', 'Purchase Request berhasil disetujui');
-
     }
 
     public function print($id)

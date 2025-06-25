@@ -18,8 +18,6 @@
                 <th>Tanggal</th>
                 <th>Diminta Oleh</th>
                 <th>Posisi</th>
-                <th>Departemen</th>
-                <th>Manajer Departemen</th>
                 <th>Alasan Permintaan</th>
                 <td class="text-center">Aksi</td>
             </tr>
@@ -32,8 +30,6 @@
                     <td>{{ tanggal($d->tgl) }}</td>
                     <td>{{ $d->diminta_oleh }}</td>
                     <td>{{ $d->posisi }}</td>
-                    <td>{{ $d->departemen }}</td>
-                    <td>{{ $d->manager_departemen }}</td>
                     <td>{{ $d->alasan_permintaan }}</td>
                     <td>
 
