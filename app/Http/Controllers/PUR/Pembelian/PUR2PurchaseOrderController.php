@@ -44,7 +44,7 @@ class PUR2PurchaseOrderController extends Controller
             ->first();
 
         if ($lastRequest) {
-            $lastNo = (int) substr($lastRequest->no_pr, 3, 2);
+            $lastNo = (int) substr($lastRequest->no_po, 3, 2);
             $newNo = str_pad($lastNo + 1, 2, '0', STR_PAD_LEFT);
         } else {
             $newNo = '01';

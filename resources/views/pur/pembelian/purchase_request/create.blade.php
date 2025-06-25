@@ -2,8 +2,6 @@
     <form action="" method="post">
         @csrf
         <div class="row">
-
-
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Diminta Oleh</label>
@@ -30,17 +28,6 @@
             </div>
         </div>
         <div class="row">
-            {{-- <div class="col-3">
-                <div class="form-group">
-                    <label for="">Departemen</label>
-                    <input type="text" name="departemen" placeholder="departemen" class="form-control">
-                </div>
-            </div> --}}
-            {{-- <div class="col-3">
-                <div class="form-group">
-                    <label for="">Manajer departemen</label>
-                </div>
-            </div> --}}
             <input type="hidden" name="manajer_departemen" placeholder="manajer departemen" class="form-control"
                 value="0">
             <div class="col-6">
@@ -61,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <template x-for="(row, index) in rows">
+                        <template x-for="(row, index) in rows" :key="index">
                             <tr>
                                 <td>
                                     <input required autocomplete="off" type="text" inputmode="numeric"
@@ -74,23 +61,22 @@
                                             <option value="{{ $item->nama_barang }}">{{ $item->nama_barang }}</option>
                                         @endforeach
                                     </select>
-                                    {{-- <input autocomplete="off" type="text" name="item_spesifikasi[]"
-                                        class="form-control form-control-sm" /> --}}
                                 </td>
                                 <td>
                                     <input type="date" name="tgl_dibutuhkan[]"
                                         class="form-control form-control-sm" />
                                 </td>
                                 <td>
-                                    <span @click="rows.splice(index, 1)" class="btn btn-xs btn-danger"><i
-                                            class="fas fa-trash"></i></span>
+                                    <span @click="rows.splice(index, 1); $nextTick(() => initSelect2())"
+                                        class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></span>
                                 </td>
                             </tr>
                         </template>
                         <tr>
                             <td colspan="4">
                                 <button type="button" class="btn btn-xs btn-info text-white btn-block"
-                                    @click="rows.push('')"><i class="fas fa-plus"></i> Baris</button>
+                                    @click="rows.push(''); $nextTick(() => initSelect2())"><i class="fas fa-plus"></i>
+                                    Baris</button>
                             </td>
                         </tr>
                     </tbody>
@@ -102,10 +88,12 @@
 
     @section('scripts')
         <script>
+            function initSelect2() {
+                $('.select2').select2();
+            }
+
             $(document).ready(function() {
-                setTimeout(function() {
-                    $('.select2').select2();
-                }, 100);
+                initSelect2();
             });
         </script>
     @endsection

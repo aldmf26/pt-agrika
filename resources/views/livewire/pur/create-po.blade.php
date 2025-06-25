@@ -38,7 +38,6 @@
                                 <input required autocomplete="off" type="text" inputmode="numeric" name="harga[]"
                                     class="text-end form-control form-control-sm" />
                             </td>
-
                         </tr>
                     @endforeach
                 @else
