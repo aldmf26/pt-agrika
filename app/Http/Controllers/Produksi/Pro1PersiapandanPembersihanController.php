@@ -10,8 +10,19 @@ class Pro1PersiapandanPembersihanController extends Controller
 {
     public function index()
     {
-        $bk = Http::get("https://sarang.ptagafood.com/api/apihasap");
-        $bk = json_decode($bk, TRUE);
+        $posisi = auth()->user()->posisi_id;
+
+        if ($posisi == 1) {
+            $bk = Http::get("https://sarang.ptagafood.com/api/apihasap");
+            $bk = json_decode($bk, TRUE);
+        } else {
+            $id_pengawas = auth()->user()->id;
+
+            $bk = Http::get("https://sarang.ptagafood.com/api/apihasap?id_pengawas=$id_pengawas");
+            $bk = json_decode($bk, TRUE);
+        }
+
+
 
         $data = [
             'title' => 'Persiapan dan pembersihan',

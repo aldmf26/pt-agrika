@@ -30,6 +30,7 @@ class RM8KartuStokController extends Controller
             $barang->stok_akhir = $masuk - $keluar;
         }
 
+
         $data = [
             'title' => 'Kartu Stok',
             'barangs' => $barangs,
