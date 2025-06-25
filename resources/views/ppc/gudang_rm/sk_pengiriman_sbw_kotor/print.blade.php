@@ -1,30 +1,31 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table>
+    <table width="100%" class="p-2">
         <tr>
-            <td>Nama/ No. Registrasi Rumah Walet </td>
-            <td>&nbsp; : &nbsp;</td>
-            <td>{{ $rumah_walet->nama }} / {{ $rumah_walet->no_reg }}</td>
+            <td class="align-middle">Nama/ No. Registrasi Rumah Walet </td>
+            <td class="align-middle"> : </td>
+            <td class="align-middle">&nbsp;{{ $rumah_walet->nama }} / {{ $rumah_walet->no_reg }}</td>
         </tr>
         <tr>
-            <td>Alamat Rumah Walet</td>
-            <td>&nbsp; : &nbsp;</td>
-            <td>{{ $rumah_walet->alamat }}</td>
+            <td class="align-middle">Alamat Rumah Walet</td>
+            <td class="align-middle"> : </td>
+            <td class="align-middle">&nbsp;{{ $rumah_walet->alamat }}</td>
         </tr>
 
         <tr>
-            <td>Tujuan IKH</td>
-            <td>&nbsp; : &nbsp;</td>
-            <td>PT.Agrika Gatya Arum</td>
+            <td class="align-middle">Tujuan IKH</td>
+            <td class="align-middle"> : </td>
+            <td class="align-middle">&nbsp;PT.Agrika Gatya Arum</td>
         </tr>
         <tr>
-            <td>No. Registrasi IKPH</td>
-            <td>&nbsp; : &nbsp;</td>
-            <td></td>
+            <td class="align-middle">No. Registrasi IKPH</td>
+            <td class="align-middle"> : </td>
+            <td class="align-middle">&nbsp;339</td>
         </tr>
         <tr>
-            <td>Alamat IKPH</td>
-            <td>&nbsp; : &nbsp;</td>
-            <td></td>
+            <td class="align-middle">Alamat IKPH</td>
+            <td class="align-middle"> : </td>
+            <td class="align-middle">&nbsp;Jl. Teluk tiram darat no 5B Rt 26 / RW 002 Telawang, Banjarmasin Barat, Kota
+                Banjarmasin, Kalimantan Selatan</td>
         </tr>
 
 
