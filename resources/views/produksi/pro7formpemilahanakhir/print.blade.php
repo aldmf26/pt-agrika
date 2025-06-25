@@ -79,36 +79,33 @@
             </div>
             <div class="col-4"></div>
             <div class="col-10">
-                <table>
+                <table style="border-collapse: collapse; width: 100%;">
                     <tr>
-                        <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ tanggal($tgl) }}</td>
+                        <td style="padding: 8px; width: 20%;">Hari / Tanggal <br> <span class="fst-italic">date</span>
+                        </td>
+                        <td style="padding: 8px; width: 2%;" class="align-middle">:</td>
+                        <td style="padding: 8px;" class="align-middle">{{ tanggal($tgl) }}</td>
                     </tr>
                     <tr>
-                        <td width="20%">Kode Batch/Lot
+                        <td style="padding: 8px; width: 20%;">Kode Batch/Lot
                             <br> <span class="fst-italic"> Batch/Lot code </span>
                         </td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ $kode_lot }}</td>
+                        <td style="padding: 8px; width: 2%;" class="align-middle">:</td>
+                        <td style="padding: 8px;" class="align-middle">{{ $kode_lot }}</td>
                     </tr>
                     <tr>
-                        <td width="20%">Jenis Material
+                        <td style="padding: 8px; width: 20%;">Jenis Material
                             <br> <span class="fst-italic"> Material type </span>
                         </td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ $grade }}</td>
+                        <td style="padding: 8px; width: 2%;" class="align-middle">:</td>
+                        <td style="padding: 8px;" class="align-middle">{{ $grade }}</td>
                     </tr>
-                    {{-- <tr>
-                        <td>Regu <br> <span class="fst-italic">Team</span></td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td class="align-middle">Cetak</td>
-                    </tr> --}}
                 </table>
+
             </div>
             <div class="col-lg-12">
                 <br>
-                <br>
+
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
