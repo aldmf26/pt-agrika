@@ -139,7 +139,7 @@
                             @php
                                 $sbw = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', $c['nm_partai'])
+                                    ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
                                     ->first();
                             @endphp
                             <tr>

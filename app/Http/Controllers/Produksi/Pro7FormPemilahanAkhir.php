@@ -10,29 +10,27 @@ class Pro7FormPemilahanAkhir extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
+
         $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/grading");
         $grading = json_decode($grading, TRUE);
         $data = [
             'title' => 'Form pemilahan akhir',
             'grading' => $grading['data'],
-            'tgl' => $tgl
+
         ];
         return view('produksi.pro7formpemilahanakhir.index', $data);
     }
 
     public function print(Request $r)
     {
-        $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/grading?tgl=$r->tgl");
+        $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/grading_detail?tgl=$r->tgl&nm_partai=$r->nm_partai");
         $grading = json_decode($grading, TRUE);
         $data = [
             'title' => 'Form pemilahan akhir',
             'grading' => $grading['data'],
-            'tgl' => $r->tgl
+            'tgl' => $r->tgl,
+            'kode_lot' => $r->kode_lot,
+            'grade' => $r->grade,
         ];
         return view('produksi.pro7formpemilahanakhir.print', $data);
     }

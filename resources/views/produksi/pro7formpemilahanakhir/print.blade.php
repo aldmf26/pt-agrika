@@ -83,7 +83,21 @@
                     <tr>
                         <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
                         <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ date('l', strtotime($tgl)) }} / {{ tanggal($tgl) }}</td>
+                        <td>{{ tanggal($tgl) }}</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Kode Batch/Lot
+                            <br> <span class="fst-italic"> Batch/Lot code </span>
+                        </td>
+                        <td width="2%" class="align-middle">: &nbsp;</td>
+                        <td>{{ $kode_lot }}</td>
+                    </tr>
+                    <tr>
+                        <td width="20%">Jenis Material
+                            <br> <span class="fst-italic"> Material type </span>
+                        </td>
+                        <td width="2%" class="align-middle">: &nbsp;</td>
+                        <td>{{ $grade }}</td>
                     </tr>
                     {{-- <tr>
                         <td>Regu <br> <span class="fst-italic">Team</span></td>
@@ -98,23 +112,25 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">No</th>
-                            <th rowspan="2" class="text-center">Jenis Produk<br><span
+                            <th rowspan="3" class="text-center align-middle">No</th>
+                            <th rowspan="3" class="text-center align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
-                            <th colspan="2" class="text-center">Kondisi Produk<br><span
+                            <th colspan="4" class="text-center align-middle">Kondisi Produk<br><span
                                     class="fst-italic fw-lighter">Product condition<span>
                             </th>
-                            <th colspan="3" class="text-center">Jumlah<br><span
-                                    class="fst-italic fw-lighter">Quantity<span></th>
-                            <th rowspan="2" class="text-center">Keterangan<br><span
+                            <th rowspan="3" class="text-center align-middle">Jumlah Box</th>
+                            <th rowspan="3" class="text-center align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span></th>
                         </tr>
                         <tr>
-                            <th class="text-center">Ok</th>
-                            <th class="text-center">Not Ok</th>
-                            <th class="text-center">pcs</th>
-                            <th class="text-center">gr</th>
-                            <th class="text-center">box</th>
+                            <th class="text-center" colspan="2">Ok</th>
+                            <th class="text-center" colspan="2">Not Ok</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gram</th>
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gram</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,10 +138,10 @@
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $g['grade'] }}</td>
-                                <td class="text-center">Ok</td>
-                                <td class="text-center"></td>
                                 <td class="text-center">{{ $g['pcs'] }}</td>
                                 <td class="text-center">{{ $g['gr'] }}</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
                                 <td class="text-center">{{ $g['box'] }}</td>
                                 <td class="text-center"></td>
                             </tr>
@@ -134,22 +150,26 @@
 
                 </table>
             </div>
-            <div class="col-7">
+            <div class="col-9">
 
 
             </div>
-            <div class="col-5">
+            <div class="col-3">
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="text-center">KA. GRADING</td>
+
                         </tr>
 
                     </tbody>
