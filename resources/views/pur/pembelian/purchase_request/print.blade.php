@@ -1,15 +1,14 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <center class="container-sm">
+    <div class="container-sm">
         <style>
             table {
                 font-family: 'arial'
             }
         </style>
         <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-12">
                 <table class="table-xs table table-bordered border-dark">
-                    <tr>
+                    {{-- <tr>
                         <th width="150" class="head">No Pr</td>
                         <td>{{ $datas->no_pr }}</td>
                     </tr>
@@ -18,30 +17,27 @@
                         <td>
                             {{ tanggal($datas->tgl) }}
                         </td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <th width="150" class="head">Dimintai oleh</td>
                         <td>{{ $datas->diminta_oleh }}</td>
+                        <th width="150" class="head">No Pr</td>
+                        <td>{{ $datas->no_pr }}</td>
                     </tr>
                     <tr>
                         <th width="150" class="head">Posisi</td>
                         <td>{{ $datas->posisi }}</td>
+                        <th width="150" class="head">Tanggal</td>
+                        <td>
+                            {{ tanggal($datas->tgl) }}
+                        </td>
                     </tr>
-                    <tr>
-                        <th width="150" class="head">Departemen</td>
-                        <td>{{ $datas->departemen }}</td>
-                    </tr>
-                    <tr>
-                        <th width="150" class="head">Manager Departemen</td>
-                        <td>{{ $datas->manager_departemen }}</td>
-                    </tr>
+
 
                 </table>
             </div>
-            <div class="col-1"></div>
 
-            <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-12">
                 <table class="table-xs table table-bordered border-dark">
                     <tr>
                         <th width="150" class="head">Alasan Permintaan</td>
@@ -53,10 +49,8 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-1"></div>
 
-            <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-12">
                 <span class="float-start" for="">Detail Permintaan</span>
                 <table class="table table-xs table-bordered border-dark">
                     <tr>
@@ -73,32 +67,45 @@
                     @endforeach
                 </table>
             </div>
-            <div class="col-1"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-1"></div>
-            <div class="col-10">
+            <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <span>
                         Dibuat oleh :
+                        <br>
+                        <span style="left: -80px !important; position: relative;">
+                            <x-ttd />
+                        </span>
+                        <br>
                     </span>
+
                     <span>Di setujui oleh :
                         <br>
-                        <x-ttd />
                         <br>
-                        Manager ....
+                        <br>
+                        <br class="mb-5">
+                        <p>Gt Andriy Wijaya</p>
                     </span>
                 </div>
-                <span class="d-flex justify-content-start text-start">
-                    Diterima oleh Purchasing: <br>
-                    Nama : <br>
-                    Tanggal : <br>
-                    Tanda Tangan :
-                </span>
 
             </div>
-            <div class="col-1"></div>
         </div>
-    </center>
+        Diterima oleh Purchasing: <br>
+        <table>
+            <tr>
+                <td>Nama</td>
+                <td>:</td>
+                <td>Tasya Salsabila</td>
+            </tr>
+            <tr>
+                <td>Tanggal</td>
+                <td>:</td>
+                <td>{{ tanggal($datas->tgl) }}</td>
+            </tr>
+            <tr>
+                <td>Tanda Tangan</td>
+                <td>:</td>
+                <td></td>
+            </tr>
+        </table>
+        </center>
 </x-hccp-print>

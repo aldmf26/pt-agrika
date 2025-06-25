@@ -2,20 +2,8 @@
     <form action="" method="post">
         @csrf
         <div class="row">
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="">No Pr</label>
-                    <input type="text" readonly value="{{ $no_pr }}" name="no_pr" class="form-control">
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="">Tanggal</label>
-                    <input type="date" name="tgl" value="{{ date('Y-m-d') }}" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="row">
+
+
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Diminta Oleh</label>
@@ -30,17 +18,31 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="">Departemen</label>
-                    <input type="text" name="departemen" placeholder="departemen" class="form-control">
+                    <label for="">No Pr</label>
+                    <input type="text" readonly value="{{ $no_pr }}" name="no_pr" class="form-control">
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="">Manajer departemen</label>
-                    <input type="text" name="manajer_departemen" placeholder="manajer departemen"
-                        class="form-control">
+                    <label for="">Tanggal</label>
+                    <input type="date" name="tgl" value="{{ date('Y-m-d') }}" class="form-control">
                 </div>
             </div>
+        </div>
+        <div class="row">
+            {{-- <div class="col-3">
+                <div class="form-group">
+                    <label for="">Departemen</label>
+                    <input type="text" name="departemen" placeholder="departemen" class="form-control">
+                </div>
+            </div> --}}
+            {{-- <div class="col-3">
+                <div class="form-group">
+                    <label for="">Manajer departemen</label>
+                </div>
+            </div> --}}
+            <input type="hidden" name="manajer_departemen" placeholder="manajer departemen" class="form-control"
+                value="0">
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Alasan Permintaan</label>
@@ -66,8 +68,14 @@
                                         name="jumlah[]" class="form-control form-control-sm" />
                                 </td>
                                 <td>
-                                    <input autocomplete="off" type="text" name="item_spesifikasi[]"
-                                        class="form-control form-control-sm" />
+                                    <select name="item_spesifikasi[]" class="select2" id="">
+                                        <option value="">Pilih Item</option>
+                                        @foreach ($barangs as $item)
+                                            <option value="{{ $item->nama_barang }}">{{ $item->nama_barang }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- <input autocomplete="off" type="text" name="item_spesifikasi[]"
+                                        class="form-control form-control-sm" /> --}}
                                 </td>
                                 <td>
                                     <input type="date" name="tgl_dibutuhkan[]"
@@ -91,4 +99,14 @@
         </div>
         <button type="submit" class="btn btn-sm btn-primary float-end">Simpan</button>
     </form>
+
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $('.select2').select2();
+                }, 100);
+            });
+        </script>
+    @endsection
 </x-app-layout>

@@ -10,7 +10,11 @@ class PurchaseOrder extends Model
     protected $guarded = [];
     protected $primaryKey = 'id';
 
-    
+    public function getPicAttribute($value)
+    {
+        return ucwords($value);
+    }
+
     public function purchaseRequest()
     {
         return $this->belongsTo(PurchaseRequest::class, 'pr_id', 'id');

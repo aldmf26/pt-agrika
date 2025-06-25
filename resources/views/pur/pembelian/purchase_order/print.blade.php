@@ -5,13 +5,26 @@
                 font-family: 'arial'
             }
         </style>
-        <div class="text-start">
-            <strong>To:</strong> {{ $datas->supplier }}<br>
-            <strong>Tanggal:</strong> {{ tanggal($datas->tgl) }}
+        <div class="d-flex justify-content-between">
+            <div>
+                <strong>To:</strong> {{ $datas->supplier }}<br>
+            </div>
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 100px"><strong>Tanggal</strong></td>
+                        <td style="width: 10px">:</td>
+                        <td>{{ tanggal($datas->tgl) }}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No PO</strong></td>
+                        <td>:</td>
+                        <td>{{ $datas->no_po }}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
-        <div class="text-start">
-            <strong>No PO:</strong> {{ $datas->no_po }}
-        </div>
+
         <br>
 
         <div>
@@ -38,7 +51,7 @@
         <div class="text-start">
             <strong>Barang/Jasa di atas harap dikirimkan ke Alamat sebagai berikut :</strong>
             <br>
-            {{ $datas->alamat_pengiriman }}
+            Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
             <br>
             PIC: {{ $datas->pic }}
             <br>
@@ -51,18 +64,19 @@
 
         <div class="d-flex justify-content-between">
             <span>
-                Dibuat oleh :
+                <span style="left: -80px !important; position: relative;">
+                    Dibuat oleh :
+                    <x-ttd />
+                </span>
+                <br>
             </span>
             <span>Di setujui oleh :
                 <br>
-                <x-ttd/>
+                <br>
                 <br>
                 <span style="font-size:10px">Sertakan cap perusahaan</span>
-            </span>
-            <span>
-                Diterima oleh :
-                <br><br><br>
-                <span style="font-size:10px">Sertakan cap perusahaan</span>
+                <br>
+                Gt Andriy Wijaya
             </span>
         </div>
     </center>
