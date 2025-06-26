@@ -14,15 +14,16 @@
     <title>{{ $title }}</title>
     <style>
         @media print {
-            body {
+            /* body {
                 border: 1px solid black;
                 border-radius: 10px;
-            }
+            } */
         }
+
         body {
             font-family: 'Cambria';
         }
-        
+
         .cop_judul {
             font-size: 14px;
             font-weight: bold;
@@ -68,20 +69,24 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
         .head {
             background-color: #D9D9D9 !important;
         }
+
         .table-xs {
-        font-size: 0.75rem;
-    }
-    .text-xs {
-        font-size: 0.75rem;
-    }
-    .table {
-        border: 1px solid #343a40;
+            font-size: 0.75rem;
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+        }
+
+        .table {
+            border: 1px solid #343a40;
 
 
-    }
+        }
     </style>
 </head>
 

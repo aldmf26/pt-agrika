@@ -28,9 +28,10 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nm_walet }}</td>
                             <td>{{ $d->alamat }}</td>
-                            <td>PT.Agrika Gatya Arum</td>
-                            <td></td>
-                            <td></td>
+                            <td>PT. Agrika Gatya Arum</td>
+                            <td>339</td>
+                            <td>Jl. Teluk tiram darat no 5B Rt 26 / RW 002 Telawang, Banjarmasin Barat, Kota
+                                Banjarmasin, Kalimantan Selatan</td>
                             <td><a target="_blank" href="{{ route('ppc.gudang-rm.4.print', $d->rwb_id) }}"
                                     class="btn btn-sm btn-warning"><i class="fas fa-print"></i> </a></td>
 
