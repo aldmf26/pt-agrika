@@ -71,6 +71,7 @@
                                     <label>Jumlah Barang</label>
                                     <input :value="item.jumlah" type="number" name="jumlah_barang[]"
                                         class="form-control" required>
+                                    <input type="hidden" name="id_barang[]" :value="item.id_barang">
                                 </div>
                             </div>
                             </table>
@@ -123,6 +124,7 @@
                                     id: it.id,
                                     nama: it.item_spesifikasi ?? 'Tidak ditemukan',
                                     kode: it.barang.kode_barang,
+                                    id_barang: it.barang.id,
                                     jumlah: it.jumlah,
                                     tgl_penerimaan: today,
                                     tgl_expired: expired,

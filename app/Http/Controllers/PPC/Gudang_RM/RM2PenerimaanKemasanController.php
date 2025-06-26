@@ -25,7 +25,11 @@ class RM2PenerimaanKemasanController extends Controller
 
     public function create()
     {
-        $po = PurchaseOrder::with('purchaseRequest.item.barang')->where('status', 'selesai')->latest()->get();
+        $po = PurchaseOrder::with('purchaseRequest.item.barang')
+            ->where('status', 'selesai')
+            ->latest()
+            ->get();
+
         $data = [
             'title' => 'Penerimaan kemasan',
             'po' => $po,
@@ -36,8 +40,7 @@ class RM2PenerimaanKemasanController extends Controller
 
     public function store(Request $r)
     {
-        dd($r->all());
-        DB::beginTransaction();
+        DB::beginTransaction(); 
         $admin = auth()->user()->name;
         try {
 
@@ -45,36 +48,40 @@ class RM2PenerimaanKemasanController extends Controller
 
 
             // Simpan header
-            $header = PenerimaanKemasanHeader::create([
-                'tanggal_penerimaan' => $r->tgl_penerimaan,
-                'id_barang' => $r->id_barang,
-                'id_supplier' => $transaksi->supplier_id,
-                'no_kendaraan' => $r->no_kendaraan,
-                'pengemudi' => $r->pengemudi,
-                'jumlah_barang' => $r->jumlah_barang,
-                'jumlah_sampel' => $r->jumlah_sampel,
-                'kode_lot' => $r->kode_lot,
-                'keputusan' => $r->keputusan == 'Diterima dengan Catatan' ? 'Diterima dengan Catatan : ' . $r->keputusan_catatan : $r->keputusan,
-            ]);
+            for ($i = 0; $i < count($r->id_barang); $i++) {
+                $barang = Barang::find($r->id_barang[$i]);
+                $jumlahSampel = max(1, round($r->jumlah_barang[$i] * 0.01));
 
-            // Simpan kriteria quantity
-            $header->kriteria()->createMany([
-                [
-                    'kriteria' => 'Warna termasuk hasil print kemasan',
-                    'check_1' => in_array('1', $r->warna) ? true : false,
-                    'check_2' => in_array('2', $r->warna) ? true : false,
-                ],
-                [
-                    'kriteria' => 'Kondisi Kemasan',
-                    'check_1' => in_array('1', $r->kondisi) ? true : false,
-                    'check_2' => in_array('2', $r->kondisi) ? true : false,
-                ],
-                [
-                    'kriteria' => 'ukuran Kemasan',
-                    'check_1' => in_array('1', $r->ukuran) ? true : false,
-                    'check_2' => in_array('2', $r->ukuran) ? true : false,
-                ],
-            ]);
+                $header = PenerimaanKemasanHeader::create([
+                    'tanggal_penerimaan' => $r->tgl_penerimaan[$i],
+                    'id_barang' => $r->id_barang[$i],
+                    'id_supplier' => $barang->supplier_id,
+                    'no_kendaraan' => $r->no_kendaraan[$i],
+                    'pengemudi' => $r->pengemudi[$i],
+                    'jumlah_barang' => $r->jumlah_barang[$i],
+                    'jumlah_sampel' => $jumlahSampel,
+                    'kode_lot' => $r->kode_lot[$i],
+                    'no_po' => $r->no_po,
+                    'keputusan' => 'Diterima',
+                ]);
+
+                // Simpan kriteria quantity
+                // $kriterias = ['Warna termasuk hasil print kemasan', 'Kondisi Kemasan', 'Ukuran Kemasan'];
+                // $kriteriaData = [];
+
+                // foreach ($kriterias as $label) {
+                //     $checkFields = [];
+                //     for ($j = 1; $j <= $jumlahSampel; $j++) {
+                //         $checkFields['check_' . $j] = true;
+                //     }
+                //     $checkFields['kriteria'] = $label;
+
+                //     $kriteriaData[] = $checkFields;
+                // }
+
+                // $header->kriteria()->createMany($kriteriaData);
+            }
+
 
             DB::commit();
             return redirect()->route('ppc.gudang-rm.2.index')->with('sukses', 'berhasil ditambahkan');
