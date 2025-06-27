@@ -147,7 +147,7 @@
 
                             @endphp
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">
                                     {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
@@ -160,6 +160,9 @@
 
                                 <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
                                 <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
                                 <td class="text-center"></td>
                             </tr>
                         @endforeach
