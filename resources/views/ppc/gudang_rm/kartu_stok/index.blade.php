@@ -28,25 +28,52 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($barangs as $d)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $d->kategori }}</td>
-                        <td>{{ $d->nama_barang }}</td>
-                        <td>{{ $d->satuan }}</td>
-                        <td>{{ number_format($d->stok_akhir ?? 0, 0) }}</td>
-                        <td>
-                            @php
-                                $param = [
-                                    'id' => $d->id,
-                                    'kategori' => $d->kategori,
-                                ];
-                            @endphp
-                            <a class="btn btn-xs float-end btn-primary"
-                                href="{{ route('ppc.gudang-rm.8.print', $param) }}"><i class="fas fa-print"></i></a>
-                        </td>
-                    </tr>
-                @endforeach
+                @if ($k == 'satu')
+                    @foreach ($barangs as $d)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $d->kategori }}</td>
+                            <td>{{ $d->nama_barang }}</td>
+                            <td>{{ $d->satuan }}</td>
+                            <td>{{ number_format($d->stok_akhir ?? 0, 0) }}</td>
+                            <td>
+                                @php
+                                    $param = [
+                                        'id' => $d->id,
+                                        'kategori' => $d->kategori,
+                                    ];
+                                @endphp
+                                <a class="btn btn-xs float-end btn-primary"
+                                    href="{{ route('ppc.gudang-rm.8.print', $param) }}"><i class="fas fa-print"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @else
+                    @foreach ($sbw as $d)
+                        @php
+                            $sbw = DB::table('grade_sbw_kotor')->where('id', $d['grade_id'])->first();
+                        @endphp
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>Sbw</td>
+                            <td>{{ $sbw->nama ?? '-' }}</td>
+                            <td>Gr</td>
+                            <td>{{ number_format($d['gr'], 0) }}</td>
+                            <td>
+                                @php
+                                    $param = [
+                                        'nm_barang' => $sbw->nama,
+                                        'kategori' => 'sbw',
+                                        'id' => $d['grade_id'],
+                                    ];
+                                @endphp
+                                <a class="btn btn-xs float-end btn-primary"
+                                    href="{{ route('ppc.gudang-rm.8.print', $param) }}"><i class="fas fa-print"></i></a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
+
             </tbody>
         </table>
     </div>

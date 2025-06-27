@@ -9,10 +9,11 @@ use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class RM8KartuStokController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
         $barangs = Barang::latest()->get();
 
@@ -29,11 +30,15 @@ class RM8KartuStokController extends Controller
 
             $barang->stok_akhir = $masuk - $keluar;
         }
-
+        $sbw = Http::get("https://sarang.ptagafood.com/api/apihasap/stok_grade");
+        $sbw = json_decode($sbw, TRUE);
+        $sbw = $sbw['data'];
 
         $data = [
             'title' => 'Kartu Stok',
             'barangs' => $barangs,
+            'sbw' => $sbw,
+            'k' => $r->k ?? 'satu',
         ];
 
         return view('ppc.gudang_rm.kartu_stok.index', $data);
@@ -73,6 +78,9 @@ class RM8KartuStokController extends Controller
         // Urutkan berdasarkan tanggal
         usort($transaksiGabung, fn($a, $b) => strtotime($a['tgl']) <=> strtotime($b['tgl']));
 
+        $sbw = Http::get("https://sarang.ptagafood.com/api/stok_grade_detail?grade_id=$r->id");
+        $sbw = json_decode($sbw, TRUE);
+
         // Kirim ke view
         $data = [
             'title' => 'KARTU STOK MATERIAL',
@@ -80,6 +88,8 @@ class RM8KartuStokController extends Controller
             'transaksi' => $transaksiGabung,
             'barang' => Barang::find($r->id),
             'kategori' => $kategori,
+            'nm_barang' => $r->nm_barang ?? '-',
+            'sbw' => $sbw['data'],
         ];
         return view('ppc.gudang_rm.kartu_stok.print', $data);
     }

@@ -26,14 +26,14 @@
             <thead>
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
-                    <th class="text-center align-middle" rowspan="2">Nama Barang | Satuan</th>
+                    <th class="text-center align-middle" rowspan="2">Nama Jenis Produk</th>
                     <th class="text-center align-middle" colspan="2">Jumlah</th>
-                    <th class="text-center align-middle" rowspan="2">Kode Lot SBW</th>
-                    <th class="text-center align-middle" rowspan="2">Status Ok/Tidak Ok</th>
+                    <th class="text-center align-middle" rowspan="2">Kode Lot</th>
+                    <th class="text-center align-middle" rowspan="2">Status <br> Ok/Tidak Ok</th>
                 </tr>
                 <tr>
-                    <th class="text-center">Diminta Pcs/Gr</th>
-                    <th class="text-center">Diterima Pcs/Gr</th>
+                    <th class="text-center">Diminta (Pcs/Gr)</th>
+                    <th class="text-center">Diterima (Pcs/Gr)</th>
                 </tr>
             </thead>
             <tbody>

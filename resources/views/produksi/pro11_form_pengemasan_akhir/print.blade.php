@@ -118,7 +118,7 @@
                             <th rowspan="2" class="text-center align-middle">No Batch Kemasan <br>
                                 <span class="fst-italic fw-lighter">Packaging batch no</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Barcode
+                            <th rowspan="2" class="text-center align-middle" width="15%">Barcode
                                 <br>
                                 <span class="fst-italic fw-lighter">Barcode</span>
                             </th>
@@ -155,14 +155,21 @@
 
                                     {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td class="text-center align-middle">{{ $p['grade'] }}</td>
-                                <td class="text-center"></td>
-                                <td class="text-center"></td>
+                                <td class="text-center align-middle">
+                                    {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7 cm)' }}
+                                </td>
+                                <td class="text-center align-middle">1</td>
 
                                 <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
                                 <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
                                 <td class="text-center"></td>
                                 <td class="text-center"></td>
-                                <td class="text-center"></td>
+                                <td class="text-center align-middle">
+                                    <div
+                                        style="height: 60px; display: flex; align-items: center; justify-content: center;">
+                                        {{ $p['no_barcode'] }}
+                                    </div>
+                                </td>
                                 <td class="text-center"></td>
                             </tr>
                         @endforeach
