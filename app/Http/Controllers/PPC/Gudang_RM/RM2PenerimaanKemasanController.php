@@ -26,8 +26,8 @@ class RM2PenerimaanKemasanController extends Controller
     public function create()
     {
         $po = PurchaseOrder::with('purchaseRequest.item.barang')
-            ->where('status', 'selesai')
-            ->latest()
+            ->where('status', '!=', 'selesai')
+            ->orderBy('purchase_orders.created_at', 'desc')
             ->get();
 
         $data = [
@@ -40,12 +40,15 @@ class RM2PenerimaanKemasanController extends Controller
 
     public function store(Request $r)
     {
-        DB::beginTransaction(); 
+        DB::beginTransaction();
         $admin = auth()->user()->name;
         try {
 
             $transaksi = TransaksiStokService::create($r, $admin);
 
+            PurchaseOrder::where('no_po', $r->no_po)->update([
+                'status' => 'selesai',
+            ]);
 
             // Simpan header
             for ($i = 0; $i < count($r->id_barang); $i++) {
