@@ -26,6 +26,7 @@ use App\Http\Controllers\Produksi\Pro4FormPenyucianNitrit;
 use App\Http\Controllers\Produksi\Pro5FormPengeringan;
 use App\Http\Controllers\Produksi\Pro6FormCetak;
 use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
+use App\Http\Controllers\Produksi\Pro8Totalhasilgrading;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\PenarikanProduk\RecallProdukController;
@@ -230,6 +231,13 @@ Route::controller(Pro6FormCetak::class)
 Route::controller(Pro7FormPemilahanAkhir::class)
     ->prefix('produksi/7_Form_pemilahan_akhir')
     ->name('produksi.7.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(Pro8Totalhasilgrading::class)
+    ->prefix('produksi/8_total_hasil_grading')
+    ->name('produksi.8.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');

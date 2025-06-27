@@ -81,7 +81,7 @@
                     <tr style="font-size: 12px">
                         <td>Hari/Tanggal</td>
                         <td width='2%'>:</td>
-                        <td>{{ date('l', strtotime($tgl)) }} / {{ tanggal($tgl) }}</td>
+                        <td>{{ tanggal($tgl) }}</td>
                     </tr>
                 </table>
             </div>
@@ -91,52 +91,75 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center">No</th>
-                            <th rowspan="2" class="text-center">Kode Batch/Lot <br>
+                            <th rowspan="2" class="text-center align-middle">No</th>
+                            <th rowspan="2" class="text-center align-middle">Jenis material<br>
+                                <span class="fst-italic fw-lighter">Material Type</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot<br>
                                 <span class="fst-italic fw-lighter">Batch/Lot code</span>
                             </th>
-                            <th rowspan="2" class="text-center">Jenis Produk <br>
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk<br>
                                 <span class="fst-italic fw-lighter">Grade</span>
                             </th>
-                            <th colspan="2" class="text-center">Jumlah</th>
-                            <th rowspan="2" class="text-center">Tgl/ bln/ thn
-                                <br>
+                            <th rowspan="2" class="text-center align-middle">Jenis Kemasan <br>
+                                <span class="fst-italic fw-lighter">Packaging Type</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Jumlah Per Jenis Kemasan <br>
+                                <span class="fst-italic fw-lighter">Total Packing type</span>
+                            </th>
+                            <th colspan="2" class="text-center align-middle">Jumlah<br>
+                                <span class="fst-italic fw-lighter">Quantity</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Tgl/ bln/ thn
                                 Produksi
+                                (Steaming) <br>
+                                <span class="fst-italic fw-lighter">steaming production date </span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">No Batch Kemasan <br>
+                                <span class="fst-italic fw-lighter">Packaging batch no</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Barcode
                                 <br>
-                                (Steaming)
-                                <br>
-                                <span class="fst-italic fw-lighter">steaming production date (DD/MM/YY)</span>
-                            </th>
-                            <th rowspan="2" class="text-center">Kemasan<br>
-                                <span class="fst-italic fw-lighter">Packaging</span>
-                            </th>
-                            <th rowspan="2" class="text-center">No Lot Kemasan<br>
-                                <span class="fst-italic fw-lighter">Packaging lot no</span>
-                            </th>
-                            <th rowspan="2" class="text-center">Barcode<br>
                                 <span class="fst-italic fw-lighter">Barcode</span>
                             </th>
-                            <th rowspan="2" class="text-center">Keterangan<br>
-                                <span class="fst-italic fw-lighter">Remarks</span>
+                            <th rowspan="2" class="text-center align-middle">Keterangan
+                                <br>
+                                <span class="fst-italic fw-lighter">Remaks</span>
                             </th>
+
                         </tr>
                         <tr>
-                            <th>Pcs</th>
-                            <th>Gr</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
+
                     </thead>
                     <tbody>
                         @foreach ($pengiriman_akhir as $p)
+                            @php
+                                $rawPartai = $p['nm_partai'];
+                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                                $partaiArray = array_map('trim', explode(',', $cleaned));
+                                $sbwList = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->whereIn('nm_partai', $partaiArray)
+                                    ->get();
+
+                            @endphp
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $p['no_box'] }}</td>
-                                <td class="text-center">{{ $p['grade'] }}</td>
-                                <td class="text-center">{{ $p['pcs'] }}</td>
-                                <td class="text-center">{{ $p['gr'] }}</td>
-                                <td class="text-center">{{ date('d/m/Y', strtotime($p['tgl_input'])) }}</td>
-                                <td class="text-center">Mika</td>
-                                <td class="text-center">{{ $p['no_nota'] }}</td>
-                                <td class="text-center">{{ $p['no_barcode'] }}</td>
+                                <td class="text-center align-middle">
+                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
+                                </td>
+                                <td class="text-center align-middle">
+
+                                    {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-center align-middle">{{ $p['grade'] }}</td>
+                                <td class="text-center"></td>
+                                <td class="text-center"></td>
+
+                                <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
                                 <td class="text-center"></td>
                             </tr>
                         @endforeach
@@ -176,9 +199,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script>
+    {{-- <script>
         window.print();
-    </script>
+    </script> --}}
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

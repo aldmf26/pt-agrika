@@ -10,17 +10,13 @@ class Pro11FormPengemasanAkhirController extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
-        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir?tgl=$tgl");
+
+        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
         $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
         $data = [
             'title' => 'Form Pengemasan Akhir',
             'pengiriman_akhir' => $pengiriman_akhir['data'],
-            'tgl' =>  $tgl
+
         ];
         return view('produksi.pro11_form_pengemasan_akhir.index', $data);
     }
@@ -28,7 +24,7 @@ class Pro11FormPengemasanAkhirController extends Controller
     public function print(Request $r)
     {
         $tgl = $r->tgl;
-        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir?tgl=$tgl");
+        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir_detail?tgl=$tgl");
         $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
         $data = [
             'title' => 'Form Pengemasan Akhir',
