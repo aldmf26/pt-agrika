@@ -23,7 +23,7 @@
                         <div class="row mt-4">
                             <h5 class=" p-2 text-start bg-info text-white">
                                 <span x-text="(index + 1) + '. ' + item.nama"></span>
-                                <span x-text="item.kode"></span>
+                                <span x-text="'#' + item.kode"></span>
                             </h5>
                             <div class="col-md-3">
                                 <div class="form-group">

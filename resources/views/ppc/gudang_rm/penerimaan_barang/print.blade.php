@@ -68,6 +68,7 @@
         </tr>
     </table>
 
+
     <table class="mt-4 table table-xs table-bordered">
         <thead>
             <tr>
@@ -151,7 +152,4 @@
             </table>
         </div>
     </div>
-
-
-
 </x-hccp-print>

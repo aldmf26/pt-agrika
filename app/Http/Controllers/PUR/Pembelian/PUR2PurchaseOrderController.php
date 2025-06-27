@@ -61,7 +61,7 @@ class PUR2PurchaseOrderController extends Controller
     public function selesai(Request $r)
     {
         PurchaseOrder::find($r->id)->update([
-            'status' => 'selesai'
+            'status' => 'terkirim'
         ]);
         return redirect()->route('pur.pembelian.2.index')->with('sukses', 'Purchase Order berhasil diselesaikan');
     }
