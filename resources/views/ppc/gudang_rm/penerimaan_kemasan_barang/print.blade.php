@@ -48,30 +48,41 @@
         </tr>
     </table>
 
-    <table class="mt-4 table table-xs table-bordered">
+    @php
+        $kriterias = collect(['Warna termasuk hasil print kemasan', 'Kondisi Kemasan', 'Ukuran Kemasan']);
+
+        $jumlah_sampel = $penerimaan->jumlah_sampel;
+        $chunk_size = 5;
+        $sampel_chunks = collect(range(1, $jumlah_sampel))->chunk($chunk_size);
+    @endphp
+
+    <table class="mt-4 table table-xs table-bordered w-full">
         <thead>
             <tr>
                 <th></th>
-                <th colspan="10">KODE LOT : {{ $penerimaan->kode_lot }}</th>
-            </tr>
-            <tr>
-                <th>Kriteria Penerimaan </th>
-                @for ($i = 1; $i < 3; $i++)
-                    <th class="text-center">{{ $i }}</th>
-                @endfor
+                <th colspan="{{ $jumlah_sampel }}">KODE LOT : {{ $penerimaan->kode_lot }}</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($penerimaan->kriteria as $kriteria)
+            @foreach ($sampel_chunks as $chunk)
                 <tr>
-                    <th>{{ ucfirst($kriteria->kriteria) }}
-                    </th>
-                    <td class="text-center">{!! $kriteria->check_1 ? '√' : '' !!}</td>
-                    <td class="text-center">{!! $kriteria->check_2 ? '√' : '' !!}</td>
+                    <th>Kriteria Penerimaan</th>
+                    @foreach ($chunk as $sampel)
+                        <th class="text-center">{{ $sampel }}</th>
+                    @endforeach
                 </tr>
+                @foreach ($kriterias as $kriteria)
+                    <tr>
+                        <th>{{ ucfirst($kriteria) }}</th>
+                        @foreach ($chunk as $sampel)
+                            <td class="text-center">√</td>
+                        @endforeach
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>
+
     <div class="row">
         <div class="col-4">
             <p>Keputusan: <br>
