@@ -78,7 +78,7 @@ class RM8KartuStokController extends Controller
         // Urutkan berdasarkan tanggal
         usort($transaksiGabung, fn($a, $b) => strtotime($a['tgl']) <=> strtotime($b['tgl']));
 
-        $sbw = Http::get("https://sarang.ptagafood.com/api/stok_grade_detail?grade_id=$r->id");
+        $sbw = Http::get("https://sarang.ptagafood.com/api/apihasap/stok_grade_detail?id=$r->id");
         $sbw = json_decode($sbw, TRUE);
 
         // Kirim ke view

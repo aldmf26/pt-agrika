@@ -5,28 +5,36 @@
             <table id="example" class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>TGL PANEN</th>
-                        <th>TGL DATANG</th>
-                        <th>NO. REG. RUMAH WALET</th>
-                        <th>NAMA RUMAH WALET</th>
-                        <th>BERAT KOTOR (GR)</th>
-                        <th>BERAT AKHIR SORTIR (GR)</th>
-                        <th>SUSUT SORTIR (GR)</th>
+                        <th class="text-center">#</th>
+                        <th class="text-center">Tanggal</th>
+                        <th class="text-center">Kode Batch</th>
+                        <th class="text-center">Kode</th>
+                        <th class="text-center">Nama rumah walet</th>
+                        <th class="text-center">Grade</th>
+                        <th class="text-center">Aksi</th>
+
 
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($bk as $b)
+                        @php
+                            $grade = DB::table('grade_sbw_kotor')->where('id', $b['grade_id'])->first();
+                            $rumah_walet = DB::table('rumah_walet')->where('id', $b['rwb_id'])->first();
+                        @endphp
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ tanggal($b['tgl']) }}</td>
-                            <td>{{ tanggal($b['tgl']) }}</td>
-                            <td>{{ $b['nm_partai'] }}</td>
-                            <td>{{ $b['nm_partai'] }}</td>
-                            <td>{{ number_format($b['gr'], 0) }}</td>
-                            <td>{{ number_format($b['gr_bk'], 0) }}</td>
-                            <td>{{ number_format($b['gr_susut'], 0) }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ tanggal($b['tgl']) }}</td>
+                            <td class="text-center">{{ $b['no_invoice'] }}</td>
+                            <td class="text-center">{{ $b['nm_partai'] }}</td>
+                            <td class="text-center">{{ $rumah_walet->nama }}</td>
+                            <td class="text-center">{{ $grade->nama }}</td>
+                            <td class="text-center">
+                                <a href="{{ route('qa.traceability.print', ['nm_partai' => $b['nm_partai']]) }}"
+                                    class="btn btn-warning btn-sm"> <i class="fas fa-print"></i></a>
+                            </td>
+
+
                         </tr>
                     @endforeach
 
