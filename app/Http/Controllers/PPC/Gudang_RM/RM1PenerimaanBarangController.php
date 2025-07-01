@@ -58,7 +58,7 @@ class RM1PenerimaanBarangController extends Controller
                 $header = PenerimaanHeader::create([
                     'tanggal_terima' => $r->tgl_penerimaan[$i],
                     'id_barang' => $r->id_barang[$i],
-                    'id_supplier' => $barang->supplier_id,
+                    'id_supplier' => 2,
                     'no_kendaraan' => $r->no_kendaraan[$i],
                     'pengemudi' => $r->pengemudi[$i],
                     'jumlah_barang' => $r->jumlah_barang[$i],
