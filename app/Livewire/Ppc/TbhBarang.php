@@ -34,7 +34,7 @@ class TbhBarang extends Component
             'kategori' => $this->kategori,
         ]);
 
-        $this->reset();
+        $this->reset(['nama_barang', 'kodeBarang', 'supplierId', 'satuan']);
     }
 
     public function hapus($id)
@@ -59,7 +59,7 @@ class TbhBarang extends Component
         $produks = Barang::where('kategori', $this->kategori)->latest()->get();
         $suplier = Suplier::where('kategori', $this->kategori)->latest()->get();
         $kodes = KodeBahanBaku::latest()->get();
-        
+
         $data = [
             'barangs' => $produks,
             'kodes' => $kodes,
