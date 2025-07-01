@@ -5,10 +5,9 @@
             <th width="20%">Nama Material</th>
             <td width="50%">: {{ $kategori == 'sbw' ? $nm_barang : strtoupper($barang->nama_barang) }}</td>
         </tr>
-
         <tr>
             <th>PIC</th>
-            <td>: Ratna,Sinta</td>
+            <td>: {{ $kategori != 'sbw' ? 'Ratna,Sinta' : 'Sinta' }}</td>
         </tr>
     </table>
     <table width="100%" class="border-dark table table-xs table-bordered">
@@ -23,28 +22,48 @@
             </tr>
         </thead>
         <tbody>
-            @php $saldo = 0; @endphp
-            @foreach ($transaksi as $t)
+            @if ($kategori != 'sbw')
+                @php $saldo = 0; @endphp
+                @foreach ($transaksi as $t)
+                    @php
+                        if ($t['jenis'] == 'masuk') {
+                            $masuk = $t['jumlah'];
+                            $keluar = 0;
+                            $saldo += $masuk;
+                        } else {
+                            $masuk = 0;
+                            $keluar = $t['jumlah'];
+                            $saldo -= $keluar;
+                        }
+                    @endphp
+                    <tr>
+                        <td>{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
+                        <td align="right">{{ number_format($masuk, 0) }}</td>
+                        <td align="right">{{ number_format($keluar, 0) }}</td>
+                        <td align="right">{{ number_format($saldo, 0) }}</td>
+                        <td>{{ $t['kode_lot'] }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @else
                 @php
-                    if ($t['jenis'] == 'masuk') {
-                        $masuk = $t['jumlah'];
-                        $keluar = 0;
-                        $saldo += $masuk;
-                    } else {
-                        $masuk = 0;
-                        $keluar = $t['jumlah'];
-                        $saldo -= $keluar;
-                    }
+                    $saldo2 = 0;
                 @endphp
-                <tr>
-                    <td>{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
-                    <td align="right">{{ number_format($masuk, 0) }}</td>
-                    <td align="right">{{ number_format($keluar, 0) }}</td>
-                    <td align="right">{{ number_format($saldo, 0) }}</td>
-                    <td>{{ $t['kode_lot'] }}</td>
-                    <td></td>
-                </tr>
-            @endforeach
+                @foreach ($sbw as $s)
+                    @php
+                        $saldo2 += ($s['ket'] == 'masuk' ? $s['gr'] : 0) - ($s['ket'] == 'masuk' ? 0 : $s['gr']);
+                    @endphp
+                    <tr>
+                        <td>{{ tanggal($s['tgl']) }} </td>
+                        <td class="text-end">{{ $s['ket'] == 'masuk' ? number_format($s['gr'], 0) : 0 }}</td>
+                        <td class="text-end">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }}</td>
+                        <td class="text-end">{{ number_format($saldo2, 0) }}</td>
+                        <td class="text-center">{{ $s['no_invoice'] }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
+            @endif
+
         </tbody>
     </table>
 
