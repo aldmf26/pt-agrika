@@ -12,7 +12,7 @@ class PurchaseRequestItem extends Model
 
     public function getJumlahAttribute($value)
     {
-        return number_format($value, 0, ',', '.');
+        return number_format($value, 0);
     }
 
     public function po()
