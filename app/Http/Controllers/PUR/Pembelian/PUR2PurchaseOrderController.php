@@ -38,10 +38,7 @@ class PUR2PurchaseOrderController extends Controller
     {
         $bulan = strtoupper(date('n'));
         $tahun = date('Y');
-        $lastRequest = PurchaseOrder::whereMonth('tgl', $bulan)
-            ->whereYear('tgl', $tahun)
-            ->latest()
-            ->first();
+        $lastRequest = PurchaseOrder::latest()->first();
 
         if ($lastRequest) {
             $lastNo = (int) substr($lastRequest->no_po, 3, 2);
