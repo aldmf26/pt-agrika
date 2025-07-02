@@ -99,7 +99,7 @@ class PUR2PurchaseOrderController extends Controller
 
     public function print($id)
     {
-        $datas = PurchaseOrder::find($id)->with('item')->first();
+        $datas = PurchaseOrder::where('id', $id)->with('item')->first();
         $data = [
             'title' => 'PURCHASE ORDER',
             'dok' => 'Dok.No.: FRM.PUR.01.02, Rev.00',
