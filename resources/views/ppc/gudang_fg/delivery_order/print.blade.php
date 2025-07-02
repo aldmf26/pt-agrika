@@ -102,7 +102,7 @@
                     <td class="text-center align-middle">{{ $loop->iteration }}</td>
                     <td class="text-center align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
                     <td class="text-center align-middle">{{ $d['grade'] }}</td>
-                    <td class="text-center align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                    <td class="text-center align-middle text-nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                     <td class="text-center align-middle">
                         {{ $d['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7,7 cm)' }}
                     </td>
