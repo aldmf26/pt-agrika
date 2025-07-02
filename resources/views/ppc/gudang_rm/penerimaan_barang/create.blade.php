@@ -114,6 +114,7 @@
                     allPo: @json($po),
                     updateItems() {
                         const selected = this.allPo.find(po => po.no_po === this.selectedPo);
+                        console.log(selected);
                         if (selected && selected.purchase_request?.item) {
                             this.items = selected.purchase_request.item.map(it => {
                                 const today = new Date().toISOString().slice(0, 10);
