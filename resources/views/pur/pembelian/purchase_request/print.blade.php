@@ -80,7 +80,7 @@
 
                     <span>Di setujui oleh :
                         <br>
-                        <span style="right: -80px !important; position: relative;">
+                        <span>
                             <x-ttd-ketua userId="468" />
                         </span>
                         <br>
