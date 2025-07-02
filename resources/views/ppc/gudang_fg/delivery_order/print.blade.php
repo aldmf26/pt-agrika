@@ -4,7 +4,7 @@
 
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-6">
             <strong>To:</strong> Hingke Java edible birdnest <br>
             Alamat = Unit B5/F HkyeBn <br>
             group center 13 -15 <br>
@@ -12,8 +12,8 @@
             Tai wai new territories <br>
             Hongkong
         </div>
-        <div class="col-lg-4"></div>
-        <div class="col-md-2 ">
+        <div class="col-4"></div>
+        <div class="col-2 ">
             <table>
                 @php
                     $bulanRomawi = [
@@ -59,10 +59,10 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-6">
             {{-- {{ $datas->pelanggan->alamat }} --}}
         </div>
-        <div class="col-md-6 text-end">
+        <div class="col-6 text-end">
             <br>
         </div>
     </div>
