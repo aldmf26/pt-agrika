@@ -124,7 +124,7 @@
                                 return {
                                     id: it.id,
                                     nama: it.item_spesifikasi ?? 'Tidak ditemukan',
-                                    kode: it.barang.kode_barang,
+                                    kode: it.barang.kode_barang ?? 'Tidak ditemukan',
                                     id_barang: it.barang.id,
                                     jumlah: it.jumlah,
                                     tgl_penerimaan: today,
