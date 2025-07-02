@@ -3,6 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <form action="{{ route('user.store') }}" method="post">
+                    @csrf
                     <div class="row g-3" id="form">
 
                         <div class="col-md-3">
@@ -21,8 +22,7 @@
                         </div>
                         <div class="col-md-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" name="password" class="form-control"
-                                placeholder="Masukkan Password">
+                            <input type="password" name="password" class="form-control" placeholder="Masukkan Password">
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
