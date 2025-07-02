@@ -12,12 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 class PUR1DaftarSupplierController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
         $datas = Suplier::latest()->get();
+
         $data = [
             'title' => 'PUR 1 Daftar Supplier',
-            'datas' => $datas
+            'datas' => $datas,
+            'rumah_walet' => DB::table('rumah_walet')->get(),
+            'k' => $r->k ?? 'satu',
         ];
 
         return view('pur.seleksi.daftar_supplier.index', $data);
@@ -198,13 +201,15 @@ class PUR1DaftarSupplierController extends Controller
 
         return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Seleksi Supplier berhasil dihapus');
     }
-    public function print()
+    public function print(Request $r)
     {
         $datas = Suplier::latest()->get();
         $data = [
             'title' => 'DAFTAR SUPPLIER & OUTSOURCE TERPILIH',
             'dok' => 'Dok.No.: FRM.PUR.02.01, Rev.00',
-            'datas' => $datas
+            'datas' => $datas,
+            'rumah_walet' => DB::table('rumah_walet')->get(),
+            'k' => $r->kategori,
         ];
         return view('pur.seleksi.daftar_supplier.print', $data);
     }
