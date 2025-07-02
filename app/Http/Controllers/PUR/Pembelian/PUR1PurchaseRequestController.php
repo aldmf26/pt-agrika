@@ -98,6 +98,7 @@ class PUR1PurchaseRequestController extends Controller
         return redirect()->route('pur.pembelian.1.index')->with('sukses', 'Purchase Request berhasil disetujui');
     }
 
+
     public function print($id)
     {
         $datas = PurchaseRequest::where('id', $id)->with('item')->first();
