@@ -32,6 +32,7 @@ class TbhBarang extends Component
             'supplier_id' => $this->supplierId,
             'satuan' => $this->satuan,
             'kategori' => $this->kategori,
+            'admin' => auth()->user()->name,
         ]);
 
         $this->reset(['nama_barang', 'kodeBarang', 'supplierId', 'satuan']);
