@@ -9,7 +9,7 @@
         </div>
         <div x-show="showProduk">
             <div class="input-group mb-2 mt-3">
-                <input type="text" id="pencarianInput" class="form-control form-control-sm" placeholder="Cari produk"
+                <input wire:model.live="cari" type="text" id="pencarianInput" class="form-control form-control-sm" placeholder="Cari produk"
                     aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div style="overflow: auto; height: 300px">
