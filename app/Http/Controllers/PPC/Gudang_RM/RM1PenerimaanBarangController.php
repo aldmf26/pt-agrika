@@ -31,6 +31,7 @@ class RM1PenerimaanBarangController extends Controller
             ->where('status', '!=', 'selesai')
             ->orderBy('purchase_orders.created_at', 'desc')
             ->get();
+
         $data = [
             'title' => 'Penerimaan Barang',
             'po' => $po,

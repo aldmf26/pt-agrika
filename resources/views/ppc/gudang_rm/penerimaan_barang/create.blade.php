@@ -114,6 +114,7 @@
                     allPo: @json($po),
                     updateItems() {
                         const selected = this.allPo.find(po => po.no_po === this.selectedPo);
+                        console.log(selected);
                         if (selected && selected.purchase_request?.item) {
                             this.items = selected.purchase_request.item.map(it => {
                                 const today = new Date().toISOString().slice(0, 10);
@@ -123,8 +124,8 @@
                                 return {
                                     id: it.id,
                                     nama: it.item_spesifikasi ?? 'Tidak ditemukan',
-                                    kode: it.barang.kode_barang,
-                                    id_barang: it.barang.id,
+                                    kode: it.barang?.kode_barang ?? 'Tidak ditemukan',
+                                    id_barang: it.barang?.id ?? null,
                                     jumlah: it.jumlah,
                                     tgl_penerimaan: today,
                                     tgl_expired: expired,

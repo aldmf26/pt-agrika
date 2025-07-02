@@ -10,11 +10,6 @@ class PurchaseRequestItem extends Model
     protected $guarded = [];
     protected $primaryKey = 'id';
 
-    public function getJumlahAttribute($value)
-    {
-        return number_format($value, 0);
-    }
-
     public function po()
     {
         return $this->belongsTo(PurchaseRequest::class, 'pr_id');
