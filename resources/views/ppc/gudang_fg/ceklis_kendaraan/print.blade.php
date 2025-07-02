@@ -110,11 +110,12 @@
         </tfoot>
     </table>
     <span style="font-size: 10px">
-    NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN TANDA <b>V</b>
-    DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
-    DAPAT DIPAKAI / DITOLAK
-    LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
-</span>
+        NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
+        TANDA <b>V</b>
+        DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
+        DAPAT DIPAKAI / DITOLAK
+        LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
+    </span>
 
     <div style="margin-top: 30px">
         <table width="100%">
@@ -127,18 +128,18 @@
                     <table class="border-dark table table-bordered" style="font-size: 11px">
                         <thead>
                             <tr>
-                                <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
                                 <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="height: 80px"></td>
+
                                 <td style="height: 80px"></td>
                             </tr>
                             <tr>
-                                <td class="text-center">[ADM. GUDANG]</td>
-                                <td class="text-center">[ KA.GUDANG]</td>
+
+                                <td class="text-center">[ KA.PENGIRIMAN]</td>
                             </tr>
                         </tbody>
                     </table>
