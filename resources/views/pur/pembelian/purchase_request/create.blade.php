@@ -6,7 +6,8 @@
                 <div class="form-group">
                     <label for="">Kategori</label>
                     <select name="kategori" class="form-control kategori">
-                        <option selected value="barang" selected>Barang</option>
+                        <option value="">Pilih Kategori</option>
+                        <option value="barang" selected>Barang</option>
                         <option value="kemasan">Kemasan</option>
                     </select>
                 </div>
