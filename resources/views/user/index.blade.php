@@ -2,6 +2,44 @@
     <div class="section">
         <div class="row">
             <div class="col-lg-12">
+                <form wire:submit.prevent="save">
+                    <div class="row g-3" id="form">
+                        <div class="col-md-3">
+                            <label for="" class="form-label">Posisi</label>
+                            <input readonly type="text" value="Kasir"class="form-control"
+                                placeholder="Masukkan Nama">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <x-label teks="Nama" required />
+                            <input type="text" wire:model="name" class="form-control" placeholder="Masukkan Nama">
+                            @error('name')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <div class="col-md-3">
+                            <x-label teks="Email" required />
+                            <input type="email" wire:model="email" class="form-control" placeholder="Masukkan Email">
+                            @error('email')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                            <input type="hidden" wire:model='idSelected'>
+                        </div>
+                        <div class="col-md-3">
+                            <x-label teks="Password" required />
+                            <input type="password" wire:model="password" class="form-control"
+                                placeholder="Masukkan Password">
+                            @error('password')
+                                <span class="text-danger">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-2">Simpan</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-12">
                 <form action="{{ route('user.update') }}" method="post">
                     @csrf
                     <table class="table table-dark table-stripped table-bordered">
