@@ -70,7 +70,7 @@
                 </span>
                 <br>
             </span>
-            <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
+            <span><span>Di setujui oleh :</span>
                 <br>
                 <span>
                     <x-ttd-ketua userId="468" />
