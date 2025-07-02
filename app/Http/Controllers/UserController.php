@@ -44,4 +44,15 @@ class UserController extends Controller
 
         return redirect()->route('user.index')->with(['sukses' => 'User Updated']);
     }
+
+    public function store(Request $r)
+    {
+        User::create([
+            'name' => $r->name,
+            'email' => $r->email,
+            'password' => bcrypt($r->password),
+            'posisi_id' => 1,
+            'lokasi' => 'bjm',
+        ]);
+    }
 }
