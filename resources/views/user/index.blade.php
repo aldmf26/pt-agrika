@@ -13,14 +13,14 @@
                             @enderror
                         </div>
                         <div class="col-md-3">
-                            <x-label teks="Nama" required />
+                            <label for="name" class="form-label">Nama</label>
                             <input type="text" wire:model="name" class="form-control" placeholder="Masukkan Nama">
                             @error('name')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="col-md-3">
-                            <x-label teks="Email" required />
+                            <label for="email" class="form-label">Email</label>
                             <input type="email" wire:model="email" class="form-control" placeholder="Masukkan Email">
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
@@ -28,7 +28,7 @@
                             <input type="hidden" wire:model='idSelected'>
                         </div>
                         <div class="col-md-3">
-                            <x-label teks="Password" required />
+                            <label for="password" class="form-label">Password</label>
                             <input type="password" wire:model="password" class="form-control"
                                 placeholder="Masukkan Password">
                             @error('password')
