@@ -2,7 +2,7 @@
 <div class="text-center">
     <div>
         @php
-            $ttd = \App\Models\Ttd::where('id_user', $userId)->first();
+            $ttd = \App\Models\Ttd::where('user_id', $userId)->first();
         @endphp
         @if (empty($ttd))
             &nbsp;
@@ -14,4 +14,3 @@
         <span class="text-sm">{{ \App\Models\User::find($userId)->name }}</span>
     </div>
 </div>
-
