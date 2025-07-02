@@ -25,7 +25,7 @@ class PUR1PurchaseRequestController extends Controller
     public function create(Request $r)
     {
         $kategori = $r->kategori ?? 'barang';
-        $barangs = Barang::with('supplier')->where('katgori', $kategori)->get();
+        $barangs = Barang::with('supplier')->where('kategori', $kategori)->get();
         $data = [
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
