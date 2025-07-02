@@ -57,7 +57,7 @@ class TbhBarang extends Component
 
     public function render()
     {
-        $produks = Barang::where('kategori', $this->kategori)->latest()->get();
+        $produks = Barang::with('supplier')->where('kategori', $this->kategori)->orderByKodeBarang('ASC')->get();
         $suplier = Suplier::where('kategori', $this->kategori)->latest()->get();
         $kodes = KodeBahanBaku::latest()->get();
 
