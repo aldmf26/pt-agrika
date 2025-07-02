@@ -6,9 +6,11 @@
                     <div class="row g-3" id="form">
                         <div class="col-md-3">
                             <label for="" class="form-label">Posisi</label>
-                            <input readonly type="text" value="Kasir"class="form-control"
-                                placeholder="Masukkan Nama">
-                            @error('name')
+                            <select wire:model="role" class="form-select">
+                                <option value="presiden">Presiden</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                            @error('role')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>

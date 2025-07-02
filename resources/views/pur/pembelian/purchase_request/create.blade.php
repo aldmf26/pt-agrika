@@ -2,6 +2,17 @@
     <form action="" method="post">
         @csrf
         <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Kategori</label>
+                    <select name="kategori" class="form-control kategori">
+                        <option selected value="barang" selected>Barang</option>
+                        <option value="kemasan">Kemasan</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Diminta Oleh</label>
@@ -94,6 +105,13 @@
 
             $(document).ready(function() {
                 initSelect2();
+
+                $('.kategori').change(function() {
+                    var kategori = $(this).val();
+                    var url = new URL(window.location.href);
+                    url.searchParams.set('kategori', kategori);
+                    window.location.href = url.href;
+                });
             });
         </script>
     @endsection

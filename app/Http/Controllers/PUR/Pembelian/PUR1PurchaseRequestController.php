@@ -22,9 +22,10 @@ class PUR1PurchaseRequestController extends Controller
         return view('pur.pembelian.purchase_request.index', $data);
     }
 
-    public function create()
+    public function create(Request $r)
     {
-        $barangs = Barang::with('supplier')->get();
+        $kategori = $r->kategori ?? 'barang';
+        $barangs = Barang::with('supplier')->where('katgori', $kategori)->get();
         $data = [
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
