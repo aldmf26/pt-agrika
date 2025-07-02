@@ -12,8 +12,8 @@
             Tai wai new territories <br>
             Hongkong
         </div>
-        <div class="col-4"></div>
-        <div class="col-2 ">
+        <div class="col-3"></div>
+        <div class="col-3 ">
             <table>
                 @php
                     $bulanRomawi = [
