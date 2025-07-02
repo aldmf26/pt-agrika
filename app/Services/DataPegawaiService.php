@@ -21,7 +21,7 @@ class DataPegawaiService
         $url = "https://sarang.ptagafood.com/api/data-pegawai";
 
         $response = Http::get($url);
-        
+
         if ($response->successful()) {
             $dataPegawai = $response->json();
             $sumberData = $dataPegawai['sumber_data'];
