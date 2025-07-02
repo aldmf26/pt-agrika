@@ -30,6 +30,7 @@ class PurchaseRequest extends Model
         return ucfirst($value);
     }
 
+
     public function getAlasanPermintaanAttribute($value)
     {
         return ucfirst($value);
@@ -43,6 +44,4 @@ class PurchaseRequest extends Model
     {
         return $this->hasMany(PurchaseOrder::class, 'pr_id');
     }
-
-    
 }

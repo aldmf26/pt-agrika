@@ -70,13 +70,14 @@
                 </span>
                 <br>
             </span>
-            <span>Di setujui oleh :
+            <span><span>Di setujui oleh :</span>
                 <br>
-                <br>
-                <br>
+                <span>
+                    <x-ttd-ketua userId="468" />
+                </span>
                 <span style="font-size:10px">Sertakan cap perusahaan</span>
+
                 <br>
-                Gt Andriy Wijaya
             </span>
         </div>
     </center>

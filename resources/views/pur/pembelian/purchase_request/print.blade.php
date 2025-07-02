@@ -78,12 +78,12 @@
                         <br>
                     </span>
 
-                    <span>Di setujui oleh :
+                    <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
                         <br>
+                        <span>
+                            <x-ttd-ketua userId="468" />
+                        </span>
                         <br>
-                        <br>
-                        <br class="mb-5">
-                        <p>Gt Andriy Wijaya</p>
                     </span>
                 </div>
 
