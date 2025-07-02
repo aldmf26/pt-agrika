@@ -19,6 +19,7 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th>No Po</th>
                 <th>Nama Barang</th>
                 <th>Kode Lot</th>
                 <th>Tanggal Penerimaan</th>
@@ -35,6 +36,7 @@
             @foreach ($penerimaan as $d)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
+                    <td>{{ $d->no_po }}</td>
                     <td>{{ $d->barang->nama_barang }}</td>
                     <td>{{ $d->kode_lot }}</td>
                     <td>{{ tanggal($d->tanggal_penerimaan) }}</td>
