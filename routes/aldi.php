@@ -327,7 +327,7 @@ Route::controller(FG1DeliveryOrderController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
-        Route::get('/print/{no_order}', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(FG2CeklisKendaraanController::class)
