@@ -80,8 +80,14 @@
 
                     <span>Di setujui oleh :
                         <br>
+                        <span style="right: -80px !important; position: relative;">
+                            <x-ttd-ketua userId="468" />
+                        </span>
+                        <br>
+
+                        {{-- <br>
                         <x-ttd-ketua userId="468" />
-                        <br class="mb-5">
+                        <br class="mb-5"> --}}
                         <p>Gt Andriy Wijaya</p>
                     </span>
                 </div>
