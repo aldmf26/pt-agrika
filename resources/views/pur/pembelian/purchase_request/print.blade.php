@@ -82,6 +82,7 @@
                         <br>
                         <br>
                         <br>
+                        <x-ttd-ketua userId="468" />
                         <br class="mb-5">
                         <p>Gt Andriy Wijaya</p>
                     </span>
