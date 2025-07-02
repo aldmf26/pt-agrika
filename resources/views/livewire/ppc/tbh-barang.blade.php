@@ -55,7 +55,7 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Kode Barang</label>
-                    <input type="text" wire:model="kodeBarang" class="form-control">
+                    <input required type="text" wire:model="kodeBarang" class="form-control">
                     {{-- <div wire:ignore>
                         <select class="select2" id="kodeBarang">
                             <option value="">Pilih Kode</option>
@@ -69,20 +69,20 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Nama Barang</label>
-                    <input type="text" wire:model="nama_barang" class="form-control">
+                    <input required type="text" wire:model="nama_barang" class="form-control">
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Satuan</label>
-                    <input placeholder="satuan" type="text" wire:model="satuan" class="form-control">
+                    <input required placeholder="satuan" type="text" wire:model="satuan" class="form-control">
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Supplier</label>
                     <div wire:ignore>
-                        <select class="select2" id="supplierId">
+                        <select required class="select2" id="supplierId">
                             <option value="">Pilih Suplier</option>
                             @foreach ($supliers as $p)
                                 <option value="{{ $p->id }}">{{ $p->nama_supplier }}</option>
