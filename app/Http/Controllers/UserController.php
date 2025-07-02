@@ -54,5 +54,6 @@ class UserController extends Controller
             'posisi_id' => 1,
             'lokasi' => 'bjm',
         ]);
+        return redirect()->route('user.index')->with(['sukses' => 'User Updated']);
     }
 }
