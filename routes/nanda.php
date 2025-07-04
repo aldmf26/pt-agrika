@@ -28,6 +28,7 @@ use App\Http\Controllers\Produksi\Pro6FormCetak;
 use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro8Totalhasilgrading;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
+use App\Http\Controllers\PUR\SeleksiSupplier\PUR2SeleksiSupplier;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\PenarikanProduk\RecallProdukController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
@@ -392,4 +393,12 @@ Route::controller(PemeriksaanRetail::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+    });
+
+Route::controller(PUR2SeleksiSupplier::class)
+    ->prefix('pur/seleksi/seleksisupplier')
+    ->name('pur.seleksi.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
     });
