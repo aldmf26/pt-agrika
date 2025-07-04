@@ -48,6 +48,7 @@ Route::controller(UserController::class)
     ->name('user.')
     ->group(function () {
         Route::post('/upload', 'upload')->name('upload');
+        Route::post('/store', 'store')->name('store');
     });
 
 Route::controller(Hrga1PermohonanKaryawanController::class)

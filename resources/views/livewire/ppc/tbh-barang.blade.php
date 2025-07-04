@@ -9,7 +9,7 @@
         </div>
         <div x-show="showProduk">
             <div class="input-group mb-2 mt-3">
-                <input type="text" id="pencarianInput" class="form-control form-control-sm" placeholder="Cari produk"
+                <input wire:model.live="cari" type="text" id="pencarianInput" class="form-control form-control-sm" placeholder="Cari produk"
                     aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div style="overflow: auto; height: 300px">
@@ -22,8 +22,8 @@
                             <th>#</th>
                             <th>Kode</th>
                             <th>Nama Barang</th>
-                            <th>No Lot</th>
-                            {{-- <th>Aksi</th> --}}
+                            <th>Satuan</th>
+                            <th>Supplier</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +33,7 @@
                                 <td>{{ $d->kode_barang }}</td>
                                 <td>{{ $d->nama_barang }}</td>
                                 <td>{{ $d->satuan }}</td>
+                                <td>{{ $d->supplier->nama_supplier }}</td>
                                 {{-- <td>{{ $d->no_lot }}</td> 
                                 <td>
                                     <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"

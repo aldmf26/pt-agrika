@@ -18,6 +18,7 @@ class TbhBarang extends Component
     public $satuan = "";
     public $kategori;
     public $pesan = "";
+    public $cari;
     public $lot = [];
 
     public function store()
@@ -35,7 +36,7 @@ class TbhBarang extends Component
             'admin' => auth()->user()->name,
         ]);
 
-        $this->reset(['nama_barang', 'kodeBarang', 'supplierId', 'satuan']);
+        $this->reset(['nama_barang', 'kodeBarang', 'satuan']);
     }
 
     public function hapus($id)
@@ -57,7 +58,14 @@ class TbhBarang extends Component
 
     public function render()
     {
-        $produks = Barang::where('kategori', $this->kategori)->latest()->get();
+        $produks = Barang::with('supplier')
+            ->where('kategori', $this->kategori)
+            ->when($this->cari, function ($query) {
+                $query->where('nama_barang', 'like', '%' . $this->cari . '%');
+            })
+            ->orderBy('kode_barang', 'ASC')
+            ->get();
+
         $suplier = Suplier::where('kategori', $this->kategori)->latest()->get();
         $kodes = KodeBahanBaku::latest()->get();
 
