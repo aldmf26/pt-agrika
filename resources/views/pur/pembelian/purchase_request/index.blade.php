@@ -32,13 +32,11 @@
                     <td>{{ $d->posisi }}</td>
                     <td>{{ $d->alasan_permintaan }}</td>
                     <td>
-
                         @if ($d->status == 'disetujui')
                             @if ($d->sudahPo->count() == 0)
                                 <a class="btn btn-xs btn-info"
                                     href="{{ route('pur.pembelian.2.create', ['id_pr' => $d->id]) }}">po</a>
                             @endif
-
                             <a class="btn btn-xs btn-primary" href="{{ route('pur.pembelian.1.print', $d->id) }}"><i
                                     class="fas fa-print"></i></a>
                         @else

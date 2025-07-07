@@ -107,4 +107,14 @@ class RM1PenerimaanBarangController extends Controller
         ];
         return view('ppc.gudang_rm.penerimaan_barang.print', $data);
     }
+
+    public function delete(Request $r)
+    {
+        $no_po = $r->no_op ?? 0;
+
+        PenerimaanHeader::where('no_po', $no_po)->delete();
+        PurchaseOrder::where('no_po', $no_po)->update(['status' => 'terkirim']);
+
+        return redirect()->route('ppc.gudang-rm.1.index')->with('sukses', 'Penerimaan barang berhasil dihapus');
+    }
 }
