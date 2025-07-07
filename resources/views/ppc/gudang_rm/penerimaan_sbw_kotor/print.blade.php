@@ -23,6 +23,11 @@
             <td>:</td>
             <td>{{ \Carbon\Carbon::parse($penerimaan->tgl)->format('d M Y') }}</td>
         </tr>
+        <tr>
+            <td>Nama Rumah Walet</td>
+            <td>:</td>
+            <td>{{ $penerimaan->rumah_walet }}</td>
+        </tr>
 
         <tr>
             <td>No Kendaraan</td>

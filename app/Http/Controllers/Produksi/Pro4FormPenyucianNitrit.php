@@ -6,21 +6,23 @@ use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
 use App\Models\PenyucianNitrit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Pro4FormPenyucianNitrit extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
+        $id_pengawas = auth()->user()->id;
+        $anak = Http::get("https://sarang.ptagafood.com/api/apihasap/tb_anak?id_pengawas=$id_pengawas");
+        $anak = json_decode($anak, TRUE);
+
+
         $data = [
             'title' => 'CCP 1 Penyucian Nitrit',
-            'pencucian' => PenyucianNitrit::where('tanggal', $tgl)->get(),
+            'pencucian' => PenyucianNitrit::where('nama_operator', auth()->user()->name)->groupBy('tanggal')->get(),
             'pegawai' => DataPegawai::where('divisi_id', 1)->get(),
-            'tgl' => $tgl,
+            'anak' => $anak['data'],
+
         ];
         return view('produksi.pro4formpenyuciannitrit.index', $data);
     }
