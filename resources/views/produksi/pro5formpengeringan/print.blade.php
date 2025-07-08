@@ -16,7 +16,8 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin-bottom: 4px;
+
         }
 
         .shapes {
@@ -57,40 +58,56 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+        }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-2">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">FORM PENGERINGAN 1</p>
-                    <p class="text-center fst-italic">Drying I</p>
-                </div>
+            <div class="col-6"></div>
+            <div class="col-4 ">
+                <p class="mt-2">No Dok : FRM.PRO.01.05, Rev 00</p>
             </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.05, Rev.00</p>
-                <br>
-                <br>
+            <div class="col-12 ">
+                <p class="cop_judul">FORM PENGERINGAN 1</p>
+                <p class="cop_bawah text-center">Drying I</p>
             </div>
-            <div class="col-4"></div>
             <div class="col-10">
                 <table>
                     <tr>
-                        <td width="25%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ date('l', strtotime($tgl)) }} / {{ tanggal($tgl) }}</td>
+                        <td width="40%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
+                        <td class="align-middle"> &nbsp; : {{ tanggal($tgl) }}</td>
                     </tr>
                     <tr>
-                        <td width="25%">Nama Opr. Pengeringan
+                        <td width="40%">Nama Opr. Pengeringan
                             <br> <span class="fst-italic">Drying pers. name</span>
                         </td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>Jenah</td>
+                        <td class="align-middle"> &nbsp; : {{ $pengawas }}</td>
                     </tr>
                 </table>
             </div>
@@ -127,18 +144,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pengeringan as $p)
+                        @foreach ($cabut as $p)
+                            @php
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', 'like', '%' . $p['nm_partai'] . '%')
+                                    ->first();
+                            @endphp
                             <tr>
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                                <td class="text-center align-middle">{{ $p->pegawai->nama }}</td>
-                                <td class="text-center align-middle">{{ $p->no_box }}</td>
-                                <td class="text-center align-middle">{{ $p->grade }}</td>
-                                <td class="text-center align-middle">{{ $p->pcs }}</td>
-                                <td class="text-center align-middle">{{ $p->gr }}</td>
-                                <td class="text-center align-middle">{{ $p->pcs_akhir }}</td>
-                                <td class="text-center align-middle">{{ $p->gr_akhir }}</td>
-                                <td class="text-center align-middle">{{ $p->hcr }}</td>
-                                <td class="text-center align-middle">{{ $p->ket }}</td>
+                                <td class="text-center align-middle">{{ ucwords(strtolower($p['nama'])) }}</td>
+                                <td class="text-center align-middle">{{ $sbw->no_invoice }}</td>
+                                <td class="text-center align-middle">{{ ucwords(strtolower($sbw->nama)) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['pcs_awal'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['gr_awal'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['pcs_akhir'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['gr_akhir'], 0) }}</td>
+                                <td class="text-center align-middle">
+                                    {{ number_format($p['gr_awal'] - $p['gr_akhir'], 0) }}</td>
+                                <td class="text-center align-middle">-</td>
                             </tr>
                         @endforeach
                     </tbody>

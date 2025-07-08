@@ -16,7 +16,15 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin-bottom: 4px;
+            /* Atur jarak bawah paragraf pertama */
+
+        }
+
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
         }
 
         .shapes {
@@ -57,38 +65,56 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-2">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">FORM PENCUCIAN NITRIT (CCP 1)</p>
-                    <p class="text-center fst-italic">Material cleaning and washing CCP 1</p>
-                </div>
+            <div class="col-6"></div>
+            <div class="col-4 ">
+                <p class="mt-2">No Dok : FRM.PRO.01.04, Rev.00</p>
             </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.04, Rev.00</p>
-                <br>
-                <br>
+            <div class="col-12">
+
+                <p class="cop_judul">FORM PENCUCIAN NITRIT (CCP 1)</p>
+                <p class="cop_bawah text-center">Material cleaning and washing CCP 1</p>
+
             </div>
+
             <div class="col-4"></div>
             <div class="col-10">
                 <table>
                     <tr>
                         <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ date('l', strtotime($tgl)) }} / {{ tanggal($tgl) }}</td>
+                        <td class="align-middle"> &nbsp; : {{ tanggal($tgl) }}</td>
+                        <td>&nbsp;</td>
+                        <td class="align-middle">Regu</td>
+                        <td class="align-middle"> : {{ $nama_regu }}</td>
                     </tr>
                 </table>
             </div>
             <div class="col-lg-12">
-                <br>
+
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
@@ -107,7 +133,7 @@
                             <th class="text-center align-middle" rowspan="2">Total Waktu <br> <span
                                     class="fst-italic fw-lighter">Time</span></th>
                             <th class="text-center align-middle" rowspan="2">Waktu Cuci Per Pcs <br> <span
-                                    class="fst-italic fw-lighter">(50 detik/s)</span></th>
+                                    class="fst-italic fw-lighter">(30 detik/s)</span></th>
                             <th class="text-center align-middle" rowspan="2">Nama Operator Pencucian <br> CCP 1<br>
                                 <span class="fst-italic fw-lighter">Cleaner name CCP 1</span>
                             </th>
@@ -123,22 +149,29 @@
                     </thead>
                     <tbody>
                         @foreach ($pencucian as $p)
+                            @php
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', 'like', '%' . $p->nm_partai . '%')
+                                    ->first();
+                            @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->pegawai->nama }}</td>
-                                <td>{{ $p->no_box }}</td>
-                                <td>{{ $p->pcs }}</td>
+                                <td>{{ $sbw->no_invoice ?? $p->nm_partai }}</td>
+                                <td class="text-end">{{ $p->pcs }}</td>
                                 {{-- <td>{{ $p->gr }}</td> --}}
-                                <td>{{ date('H:i', strtotime($p->start)) }}</td>
-                                <td>{{ date('H:i', strtotime($p->end)) }}</td>
+                                <td class="text-end">{{ date('H:i', strtotime($p->start)) }}</td>
+                                <td class="text-end">{{ date('H:i', strtotime($p->end)) }}</td>
                                 @php
                                     $start = \Carbon\Carbon::parse($p->start);
                                     $end = \Carbon\Carbon::parse($p->end);
                                     $diffInMinutes = $start->diffInMinutes($end);
                                 @endphp
                                 <td>{{ $diffInMinutes }} menit</td>
-                                <td>{{ $p->waktu_penyucian }}</td>
-                                <td>{{ $p->nama_operator }}</td>
+                                <td class="text-center">{{ $p->waktu_penyucian }}</td>
+                                <td class="text-center">{{ $p->pegawai->nama }}</td>
+                                <td></td>
                             </tr>
                         @endforeach
                     </tbody>

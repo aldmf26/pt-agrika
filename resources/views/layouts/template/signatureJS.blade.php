@@ -1,6 +1,6 @@
 {{-- ttd scripts --}}
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         // Fungsi untuk inisialisasi signature pad
         function initializeSignature(selector, clearButton, syncField) {
             // Inisialisasi signature pad
@@ -10,7 +10,7 @@
             });
 
             // Event untuk tombol clear
-            $(clearButton).click(function (e) {
+            $(clearButton).click(function(e) {
                 e.preventDefault();
                 signaturePad.signature('clear'); // Clear canvas
                 $(syncField).val(''); // Clear hidden textarea
@@ -20,7 +20,7 @@
         }
 
         // Cari semua elemen signature yang memiliki atribut data-signature
-        $('[data-signature]').each(function () {
+        $('[data-signature]').each(function() {
             var signatureId = $(this).data('signature'); // ID untuk elemen tanda tangan
             var clearButton = $(this).data('clear'); // ID untuk tombol clear
             var syncField = $(this).data('sync'); // ID untuk hidden textarea

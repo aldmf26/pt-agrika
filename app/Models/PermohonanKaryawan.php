@@ -11,7 +11,7 @@ class PermohonanKaryawan extends Model
 
     public static function dapatkan($id = null)
     {
-        $func = $id ? "selectOne" : "select"; 
+        $func = $id ? "selectOne" : "select";
         $where = $id ? "WHERE a.id = $id" : "";
 
         return DB::$func("SELECT 
