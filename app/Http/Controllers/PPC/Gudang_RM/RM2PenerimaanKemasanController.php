@@ -80,7 +80,7 @@ class RM2PenerimaanKemasanController extends Controller
                 //     $checkFields['kriteria'] = $label;
 
                 //     $kriteriaData[] = $checkFields;
-                // }
+                // } 
 
                 // $header->kriteria()->createMany($kriteriaData);
             }
@@ -104,5 +104,14 @@ class RM2PenerimaanKemasanController extends Controller
             'penerimaan' => $penerimaan
         ];
         return view('ppc.gudang_rm.penerimaan_kemasan_barang.print', $data);
+    }
+
+    public function delete(Request $r)
+    {
+        $no_po = $r->no_op ?? 0;
+        PenerimaanKemasanHeader::where('no_po', $no_po)->delete();
+        PurchaseOrder::where('no_po', $no_po)->update(['status' => 'terkirim']);
+
+        return redirect()->route('ppc.gudang-rm.2.index')->with('sukses', 'Penerimaan kemasan berhasil dihapus');
     }
 }

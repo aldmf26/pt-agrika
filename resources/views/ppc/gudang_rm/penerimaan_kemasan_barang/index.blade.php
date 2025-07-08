@@ -47,6 +47,13 @@
                     <td>{{ $d->jumlah_sampel }}</td>
                     <td>{{ $d->keputusan }}</td>
                     <td>
+                        @can('presiden')
+                            <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                class="btn btn-xs float-end btn-danger ms-1"
+                                href="{{ route('ppc.gudang-rm.2.delete', ['no_op' => $d->no_po]) }}"><i
+                                    class="fas fa-trash"></i></a>
+                        @endcan
+
                         <a class="btn btn-xs float-end btn-primary"
                             href="{{ route('ppc.gudang-rm.2.print', $d->id) }}"><i class="fas fa-print"></i></a>
                     </td>

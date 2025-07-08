@@ -232,6 +232,7 @@ Route::controller(RM1PenerimaanBarangController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/delete/', 'delete')->name('delete');
     });
 
 Route::controller(RM2PenerimaanKemasanController::class)
@@ -242,6 +243,7 @@ Route::controller(RM2PenerimaanKemasanController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/delete/', 'delete')->name('delete');
     });
 
 Route::controller(RM3PenerimaanSBWKotorController::class)
