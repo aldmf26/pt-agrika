@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('pegawai_id');
             $table->date('tanggal');
             $table->string('no_box');
+            $table->string('nm_partai');
             $table->double('pcs');
             $table->double('gr');
             $table->time('start');

@@ -6,21 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
 use App\Models\Pengeringan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Pro5FormPengeringan extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
+        $posisi = auth()->user()->posisi_id;
+
+        if ($posisi == 1) {
+            $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut");
+            $cabut = json_decode($cabut, TRUE);
         } else {
-            $tgl = $r->tgl;
+            $id_pengawas = auth()->user()->id;
+
+            $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut?id_pengawas=$id_pengawas");
+            $cabut = json_decode($cabut, TRUE);
         }
+
         $data = [
             'title' => 'Form pengeringan',
-            'pengeringan' => Pengeringan::where('tanggal', $tgl)->get(),
+            'cabut' => $cabut['data'],
             'pegawai' => DataPegawai::where('divisi_id', 1)->get(),
-            'tgl' => $tgl,
+
         ];
         return view('produksi.pro5formpengeringan.index', $data);
     }
@@ -50,16 +58,14 @@ class Pro5FormPengeringan extends Controller
 
     public function print(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
+
+        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_detail?tgl=$r->tgl&id_pengawas=$r->id_pengawas");
+        $cabut = json_decode($cabut, TRUE);
         $data = [
             'title' => 'Form Pengeringan',
-            'pengeringan' => Pengeringan::where('tanggal', $tgl)->get(),
-            'pegawai' => DataPegawai::where('divisi_id', 1)->get(),
-            'tgl' => $tgl,
+            'cabut' => $cabut['data'],
+            'tgl' => $r->tgl,
+            'pengawas' => $r->pengawas
         ];
         return view('produksi.pro5formpengeringan.print', $data);
     }

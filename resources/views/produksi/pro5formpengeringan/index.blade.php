@@ -1,29 +1,19 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-header">
-            <h5 class="float-start">Tanggal : {{ tanggal($tgl) }}</h5>
-            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
-            <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> view</button>
-            <a href="{{ route('produksi.5.print', ['tgl' => $tgl]) }}" target="_blank"
-                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i>
-                print</a>
+
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
                         <th rowspan="2">#</th>
-                        <th rowspan="2">Nama Operator cabut <br> <span class="fst-italic fw-lighter">Operator name
-                        </th>
-                        <th class="text-start" rowspan="2">Kode Batch/Lot <br> <span
-                                class="fst-italic fw-lighter">Batch/Lot code</th>
-                        <th rowspan="2">Jenis <br> <span class="fst-italic fw-lighter">type</th>
+                        <th rowspan="2">Tanggal</th>
+                        <th rowspan="2">Nama operator pengeringan</th>
                         <th colspan="2">Berat awal <br> <span class="fst-italic fw-lighter">Qty before dry</th>
                         <th colspan="2">Berat kering <br> <span class="fst-italic fw-lighter">Qty After drying</th>
                         <th rowspan="2">Hcr <br> <span><span class="fst-italic fw-lighter">(gr)</th>
-                        <th rowspan="2">Keterangan <br> <span><span class="fst-italic fw-lighter">Remarks</th>
+                        <th rowspan="2">Aksi</th>
                     </tr>
                     <tr>
                         <th>Pcs</th>
@@ -33,18 +23,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pengeringan as $p)
+                    @foreach ($cabut as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->pegawai->nama }}</td>
-                            <td class="text-start">{{ $p->no_box }}</td>
-                            <td>{{ $p->grade }}</td>
-                            <td>{{ $p->pcs }}</td>
-                            <td>{{ $p->gr }}</td>
-                            <td>{{ $p->pcs_akhir }}</td>
-                            <td>{{ $p->gr_akhir }}</td>
-                            <td>{{ $p->hcr }}</td>
-                            <td>{{ $p->ket }}</td>
+                            <td>{{ tanggal($p['tgl']) }}</td>
+                            <td>{{ ucwords(strtolower($p['name'])) }}</td>
+                            <td>{{ number_format($p['pcs_awal'], 0) }}</td>
+                            <td>{{ number_format($p['gr_awal'], 0) }}</td>
+                            <td>{{ number_format($p['pcs_akhir'], 0) }} </td>
+                            <td>{{ number_format($p['gr_akhir'], 0) }}</td>
+                            <td>{{ number_format($p['gr_awal'] - $p['gr_akhir'], 0) }}</td>
+                            <td>
+                                @php
+                                    $tgl = $p['tgl'];
+                                    $id_pengawas = $p['id_pengawas'];
+                                    $pengawas = $p['name'];
+
+                                @endphp
+                                <a target="_blank"
+                                    href="{{ route('produksi.5.print', ['tgl' => $tgl, 'id_pengawas' => $id_pengawas, 'pengawas' => $pengawas]) }}"
+                                    class="btn btn-warning btn-sm"> <i class="fas fa-print"></i> </a>
+                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <form action="{{ route('produksi.5.store') }}" method="post">
+    {{-- <form action="{{ route('produksi.5.store') }}" method="post">
         @csrf
         <x-modal_plus size="modal-xl" id="tambah">
             <div class="row" x-data="{ rows: [{ id: Date.now() }] }" x-init="$nextTick(() => initSelect2())">
@@ -142,5 +142,5 @@
             </div>
 
         </x-modal_plus>
-    </form>
+    </form> --}}
 </x-app-layout>
