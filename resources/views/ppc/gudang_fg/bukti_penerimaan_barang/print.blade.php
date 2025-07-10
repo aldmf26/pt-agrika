@@ -5,22 +5,25 @@
     <span><b>Hari/Tanggal :</b> {{ $tgl1 }}</span>
 
     <table style="font-size: 10px" class="mt-2 table table-bordered border-dark">
-        <thead class="bg-info text-center align-middle">
+        <thead class=" text-center align-middle">
             <tr>
-                <th class="text-white" rowspan="2">No</th>
-                <th class="text-white" rowspan="2">Nama dan Jenis Kode Produk (XXXX)</th>
-                <th class="text-white" colspan="2">Jumlah</th>
-                <th class="text-white" rowspan="2">No Batch/ <span style="font-size: 6px">
-                        Kode SBW kotor untuk Sarang Walet</span>
-                </th>
-                <th class="text-white" rowspan="2">Lot Produk Jadi</th>
-                <th class="text-white" rowspan="2">Barcode</th>
-                <th class="text-white" rowspan="2">Tanggal Produksi (YYMMDD)</th>
-                <th class="text-white" rowspan="2">Status OK/Tidak</th>
+                <th rowspan="2">No</th>
+                <th rowspan="2">Nama Produk</th>
+                <th rowspan="2">Kode Produk</th>
+                <th colspan="3">Jumlah</th>
+                <th colspan="2">Jenis Kemasan</th>
+                <th rowspan="2">No Batch/ Kode SBW kotor <br> untuk Sarang Walet</th>
+                <th rowspan="2">Barcode</th>
+                <th rowspan="2">Tgl/bln/thn <br> Produksi <br> (Steaming) <br> steaming production <br> date</th>
+                <th rowspan="2">Status <br> Ok/Tidak</th>
+
             </tr>
             <tr>
-                <th class="text-white">Serah</th>
-                <th class="text-white">Diterima</th>
+                <th>Pcs</th>
+                <th>Gram</th>
+                <th>Pack</th>
+                <th>Premier</th>
+                <th>Sekunder</th>
             </tr>
         </thead>
         <tbody>
@@ -40,6 +43,28 @@
                     <td class="text-center align-middle">
                         {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                     </td>
+                    <td class="text-center align-middle">{{ $p['grade'] }}</td>
+                    <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
+                    <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
+                    <td class="text-center align-middle">1 pack</td>
+                    <td class="text-center align-middle">
+                        {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7 cm)' }}
+                    </td>
+                    <td class="text-center align-middle">
+                        -
+                    </td>
+                    <td class="text-center align-middle">
+                        {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
+                    </td>
+                    <td class="text-center align-middle">
+                        {{ $p['no_barcode'] }}
+                    </td>
+                    <td class="text-center align-middle">
+                        {{ $tgl1 }}
+                    </td>
+                    <td class="text-center align-middle">
+                        Ok
+                    </td>
 
                 </tr>
             @endforeach
@@ -47,53 +72,72 @@
     </table>
 
     <div class="row">
-        <div class="col-6">
-            <span class="text-xs">Barang diterima Warehouse FG/ Produk Jadi:</span>
+        <div class="col-8">
             <div class="mb-3">
-                <table class="table table-xs table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Nama Penerima</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td x-text="tgl">{{ $tgl }}</td>
-                            <td>
-                                Ratna
-                            </td>
-                        </tr>
-                    </tbody>
+                <table width="100%" border="1" style="border-collapse: collapse; text-align: left;">
+                    <!-- Bagian Barang Diterima -->
+                    <tr>
+                        <th colspan="2" style="padding: 5px;border-right: 1px solid black;">Barang diterima Warehouse
+                            FG/ Produk Jadi:</th>
+                        <th style="padding: 5px; border-bottom: 1px solid black; border-top: 1px solid black">
+                            Tanda tangan
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; width: 20%;">Tanggal</td>
+                        <td style="padding: 5px;border-right: 1px solid black;">: {{ $tgl1 }}</td>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px; border-bottom: 1px solid black; " class="text-nowrap">Nama Penerima
+                        </td>
+                        <td style="padding: 5px;border-right: 1px solid black;border-bottom: 1px solid black;">: Ratna
+                            Sari
+                        </td>
+
+                    </tr>
+
+                    <!-- Bagian Penyerahan Barang -->
+                    <tr>
+                        <th colspan="2" style="padding: 5px;border-right: 1px solid black;">Penyerahan Barang kepada
+                            Warehouse FG/ Produk Jadi:
+                        </th>
+                        <th style="padding: 5px; border-bottom: 1px solid black; border-top: 1px solid black">
+                            Tanda tangan
+                        </th>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Tanggal</td>
+                        <td style="padding: 5px;border-right: 1px solid black;">: {{ $tgl1 }}</td>
+                        <td rowspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px;">Nama Penerima</td>
+                        <td style="padding: 5px;border-right: 1px solid black;">: Maysarah</td>
+
+                    </tr>
                 </table>
             </div>
-
         </div>
-        <div class="col-6">
+
+
+        {{-- <div class="col-6">
             <span class="text-xs">Penyerahan Barang oleh Warehouse FG/Produk Jadi:</span>
             <div class="mb-3">
                 <table class="table-xs table table-bordered">
                     <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Nama Penerima</th>
-                        </tr>
+
                     </thead>
                     <tbody>
-                        <tr>
-                            <td x-text="tgl">{{ $tgl }}</td>
-                            <td>
-                                Imay
-                            </td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
 
-        </div>
+        </div> --}}
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between">
                 <h6 class="text-center">Tanda tangan</h6>
@@ -113,5 +157,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </x-hccp-print>
