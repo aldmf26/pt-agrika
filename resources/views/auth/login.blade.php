@@ -1,5 +1,6 @@
 <x-auth>
     <!-- Session Status -->
+    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Silahkan Login</h2>
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <form method="POST" action="{{ route('login') }}">
@@ -15,7 +16,7 @@
         <div>
             <div class="flex items-center justify-between">
                 <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-                
+
             </div>
             <div class="mt-2">
                 <input type="password" name="password" id="password" autocomplete="current-password" required
