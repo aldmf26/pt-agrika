@@ -1,8 +1,8 @@
 <x-hccp-print :title="$title" :dok="$dok">
     @php
-        $tgl = tanggal($datas[0]->tanggal_terima);
+        $tgl1 = tanggal($tgl);
     @endphp
-    <span><b>Hari/Tanggal :</b> {{$tgl}}</span>
+    <span><b>Hari/Tanggal :</b> {{ $tgl1 }}</span>
 
     <table style="font-size: 10px" class="mt-2 table table-bordered border-dark">
         <thead class="bg-info text-center align-middle">
@@ -24,17 +24,23 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($datas as $index => $detail)
+            @foreach ($datas as $p)
+                @php
+                    $rawPartai = $p['nm_partai'];
+                    $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                    $partaiArray = array_map('trim', explode(',', $cleaned));
+                    $sbwList = DB::table('sbw_kotor')
+                        ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                        ->whereIn('nm_partai', $partaiArray)
+                        ->get();
+
+                @endphp
                 <tr>
-                    <td>{{ $index + 1 }}</td>
-                    <td>{{ $detail->produk->nama_produk . ' ' . $detail->produk->kode_produk }}</td>
-                    <td>{{ $detail->terima }} {{ $detail->produk->satuan }}</td>
-                    <td>{{ $detail->serah }} {{ $detail->produk->satuan }}</td>
-                    <td>{{ $detail->nomor_batch }}</td>
-                    <td>{{ $detail->lot }}</td>
-                    <td>{{ $detail->barcode }}</td>
-                    <td>{{ date('ymd', strtotime($detail->tanggal_produksi)) }}</td>
-                    <td align="center">{{ $detail->status }}</td>
+                    <td>{{ $loop->iteration }}</td>
+                    <td class="text-center align-middle">
+                        {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
+                    </td>
+
                 </tr>
             @endforeach
         </tbody>
@@ -55,7 +61,7 @@
                         <tr>
                             <td x-text="tgl">{{ $tgl }}</td>
                             <td>
-                                {{$datas[0]->nama_penerima}}
+                                Ratna
                             </td>
                         </tr>
                     </tbody>
@@ -77,8 +83,7 @@
                         <tr>
                             <td x-text="tgl">{{ $tgl }}</td>
                             <td>
-                                {{$datas[0]->nama_penyerah}}
-
+                                Imay
                             </td>
                         </tr>
                     </tbody>
@@ -99,12 +104,14 @@
                 <div class="col-4">
                     <div class="form-group">
                         <label for="">Nama</label>
-                        {{$datas[0]->nama_ttd}}
+
                     </div>
                     <div class="form-group">
                         <label for="">Tanggal : </label>
                         <label x-text="tgl" for="">{{ $tgl }}</label>
                     </div>
                 </div>
+            </div>
+        </div>
     </div>
 </x-hccp-print>

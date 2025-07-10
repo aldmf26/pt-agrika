@@ -16,9 +16,6 @@
             <td>{{ $k == 'satu' ? $buktis[0]->departemen : 'Cabut' }}</td>
         </tr>
 
-
-
-
     </table>
 
     <div class="row mt-4">
