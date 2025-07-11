@@ -28,7 +28,9 @@
             @foreach ($datas as $d)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td class="text-start">{{ $d->no_po }}</td>
+                    <td data-bs-toggle="modal" data-bs-target="#detail"
+                        onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
+                        class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
                     <td>{{ tanggal($d->tgl) }}</td>
                     <td>{{ $d->supplier }}</td>
                     <td>{{ $d->alamat_pengiriman }}</td>
@@ -49,6 +51,10 @@
         </tbody>
     </table>
 
+    <x-modal title="Detail Purchase Order" idModal="detail" btnSave="T">
+        @livewire('pur.detail')
+    </x-modal>
+
     <form action="" method="post">
         @csrf
         <x-modal title="Detail Po" idModal="selesai">
@@ -68,6 +74,7 @@
             </table>
         </x-modal>
     </form>
+
     @section('scripts')
         <script>
             $(document).ready(function() {
