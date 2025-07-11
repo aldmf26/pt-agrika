@@ -24,7 +24,6 @@
             </tr>
         </thead>
         <tbody>
-
             @foreach ($datas as $d)
                 <tr>
                     <td>{{ $loop->iteration }}</td>

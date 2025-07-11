@@ -1,5 +1,6 @@
 <div>
     @forelse ($datas as $d)
+
         <table class="table table-bordered table-dark">
             <tr>
                 <th>NO PR</th>
@@ -11,7 +12,7 @@
             </tr>
             <tr>
                 <th>Tanggal PO</th>
-                <td>{{ $d['tgl'] }}</td>
+                <td>{{ tanggal($d['tgl']) }}</td>
             </tr>
             <tr>
                 <th>Supplier</th>
@@ -31,7 +32,7 @@
             </tr>
             <tr>
                 <th>Estimasi Kedatangan</th>
-                <td>{{ $d['estimasi_kedatangan'] }}</td>
+                <td>{{ tanggal($d['estimasi_kedatangan']) }}</td>
             </tr>
             <tr>
                 <th>Total Harga</th>
@@ -54,7 +55,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $i['jumlah'] }}</td>
                         <td>{{ $i['item_spesifikasi'] }}</td>
-                        <td>{{ $i['tgl_dibutuhkan'] }}</td>
+                        <td>{{ tanggal($i['tgl_dibutuhkan']) }}</td>
                     </tr>
                 @endforeach
             </tbody>
