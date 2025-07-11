@@ -7,16 +7,19 @@ use App\Models\KartuStok;
 use App\Models\BuktiPenerimaanBarang as PenerimaanBarang;
 use App\Models\Produk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class FG3BuktiPenerimaanBarangController extends Controller
 {
 
     public function index()
     {
-        $penerimaan = PenerimaanBarang::selectRaw("tanggal_terima, sum(terima) as terima, sum(serah) as serah, count(*) as ttl_item")->latest()->groupBy('tanggal_terima')->get();
+        // $penerimaan = PenerimaanBarang::selectRaw("tanggal_terima, sum(terima) as terima, sum(serah) as serah, count(*) as ttl_item")->latest()->groupBy('tanggal_terima')->get();
+        $penerimaan = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
+        $penerimaan = json_decode($penerimaan, TRUE);
         $data = [
             'title' => 'Bukti Penerimaan Barang',
-            'penerimaan' => $penerimaan
+            'penerimaan' => $penerimaan['data']
         ];
 
         return view('ppc.gudang_fg.bukti_penerimaan_barang.index', $data);
@@ -73,13 +76,27 @@ class FG3BuktiPenerimaanBarangController extends Controller
 
         return redirect()->route('ppc.gudang-fg.3.index')->with('sukses', 'Data Berhasil Disimpan');
     }
+    // public function print($tgl)
+    // {
+    //     $datas = PenerimaanBarang::with('produk')->where('tanggal_terima', $tgl)->get();
+    //     $data = [
+    //         'title' => 'BUKTI PENERIMAAN BARANG',
+    //         'dok' => 'Dok.No.: FRM.WH.04.03, Rev.00',
+    //         'datas' => $datas,
+    //     ];
+
+    //     return view('ppc.gudang_fg.bukti_penerimaan_barang.print', $data);
+    // }
     public function print($tgl)
     {
-        $datas = PenerimaanBarang::with('produk')->where('tanggal_terima', $tgl)->get();
+
+        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir_detail?tgl=$tgl");
+        $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
         $data = [
             'title' => 'BUKTI PENERIMAAN BARANG',
             'dok' => 'Dok.No.: FRM.WH.04.03, Rev.00',
-            'datas' => $datas,
+            'datas' => $pengiriman_akhir['data'],
+            'tgl' => $tgl
         ];
 
         return view('ppc.gudang_fg.bukti_penerimaan_barang.print', $data);

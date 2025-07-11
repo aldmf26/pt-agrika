@@ -11,8 +11,8 @@
             </div>
         </div> --}}
         <div>
-            <a href="{{ route('ppc.gudang-fg.3.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                Bukti Penerimaan</a>
+            {{-- <a href="{{ route('ppc.gudang-fg.3.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                Bukti Penerimaan</a> --}}
         </div>
     </div>
 
@@ -21,26 +21,22 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>Tanggal Terima</th>
-                <th>Ttl Serah</th>
-                <th>Ttl Terima</th>
-                <th>Ttl Produk</th>
-                <th>Aksi</th>
+                <th class="text-center">Tanggal</th>
+                <th>Pcs</th>
+                <th>Gr</th>
+                <th class="text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($penerimaan as $d)
+            @foreach ($penerimaan as $p)
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ tanggal($d->tanggal_terima) }}</td>
-                    <td>{{ $d->serah }}</td>
-                    <td>{{ $d->terima }}</td>
-                    <td>{{ $d->ttl_item }}</td>
-                    <td>
-                        <a class="btn btn-xs float-end btn-primary"
-                            href="{{ route('ppc.gudang-fg.3.print', $d->tanggal_terima) }}"><i
-                                class="fas fa-print"></i></a>
-                    </td>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ tanggal($p['tgl_input']) }}</td>
+                    <td>{{ number_format($p['pcs'], 0) }}</td>
+                    <td>{{ number_format($p['gr'], 0) }}</td>
+                    <td class="text-center"><a href="{{ route('ppc.gudang-fg.3.print', $p['tgl_input']) }}" target="_blank"
+                            class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
+                            Print</a></td>
                 </tr>
             @endforeach
         </tbody>
