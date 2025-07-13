@@ -16,7 +16,15 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 5px;
+            margin-bottom: 4px;
+            /* Atur jarak bawah paragraf pertama */
+
+        }
+
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
         }
 
         .shapes {
@@ -57,31 +65,45 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 120px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-2">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">FORM PENIMBANGAN HASIL PRODUKSI</p>
-                    <p class="text-center fst-italic">Production results</p>
-                </div>
+            <div class="col-6"></div>
+            <div class="col-4 ">
+                <p class="mt-2">No Dok : FRM.PRO.01.10, Rev 00</p>
             </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.10, Rev.00</p>
-                <br>
+            <div class="col-12 ">
+                <p class="cop_judul">FORM PENIMBANGAN HASIL PRODUKSI</p>
+                <p class="cop_bawah text-center">Production results</p>
             </div>
-            <div class="col-12">
+            <div class="col-6">
                 <table width="100%">
                     <tr>
-                        <td>Tanggal <br> <span class="fst-italic">date</span></td>
+                        <td>Hari / Tanggal <br> <span class="fst-italic">date</span></td>
                         <td width='4%'>&nbsp;&nbsp;:</td>
-                        <td>{{ tanggal($head->tanggal) }}</td>
+                        <td>{{ tanggal($tgl) }}</td>
                     </tr>
                 </table>
             </div>
@@ -92,37 +114,54 @@
                     <thead>
                         <tr>
                             <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-center align-middle">Jenis Produk <br> <span
-                                    class="fst-italic fw-lighter align-middle">Grade</span></th>
+                            <th rowspan="2" class="text-center align-middle">Jenis material <br> <span
+                                    class="fst-italic fw-lighter align-middle">Material type</span></th>
                             <th rowspan="2" class="text-center align-middle">Kode Batch/Lot
                                 <br> <span class="fst-italic fw-lighter">Batch/Lot code</span>
                             </th>
-                            <th colspan="3" class="text-center align-middle">Jumlah
-                                <br> <span class="fst-italic fw-lighter">Quantity</span>
-                            </th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan
-                                <br> <span class="fst-italic fw-lighter">Remarks</span>
-                            </th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk <br> <span
+                                    class="fst-italic fw-lighter align-middle">Grade</span></th>
+                            <th colspan="3" class="text-center align-middle">Jumlah <br> <span
+                                    class="fst-italic fw-lighter align-middle">Quantity</span> </th>
+                            <th rowspan="2" class="text-center align-middle">Keterangan <br> <span
+                                    class="fst-italic fw-lighter align-middle">Remarks</span></th>
+
                         </tr>
                         <tr>
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
-                            <th class="text-center align-middle">Box</th>
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gram</th>
+                            <th class="text-center">Box</th>
                         </tr>
+
                     </thead>
                     <tbody>
                         @foreach ($penimbangan as $p)
+                            @php
+                                $rawPartai = $p['nm_partai'];
+                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                                $partaiArray = array_map('trim', explode(',', $cleaned));
+                                $sbwList = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->whereIn('nm_partai', $partaiArray)
+                                    ->get();
+
+                            @endphp
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $p->jenis_produk }}</td>
-                                <td class="text-center">{{ $p->kode_batch }}</td>
-                                <td class="text-center">{{ $p->pcs }}</td>
-                                <td class="text-center">{{ $p->gr }}</td>
-                                <td class="text-center">{{ $p->box }}</td>
-                                <td class="text-center">{{ $p->keterangan }}</td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">
+                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
+                                </td>
+                                <td class="text-center align-middle">
+
+                                    {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
+                                </td>
+                                <td class="text-center align-middle">{{ $p['grade'] }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($p['jlh_box'], 0) }}</td>
+                                <td></td>
                             </tr>
                         @endforeach
-
                     </tbody>
 
                 </table>

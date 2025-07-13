@@ -1,55 +1,37 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-header">
-            <h5 class="float-start">Tanggal : {{ tanggal($tgl) }}</h5>
-            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">Tambah</button>
-            <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> View</button>
-            <a href="{{ route('produksi.10.print', ['tgl' => $tgl]) }}" class="btn btn-primary float-end me-2"
-                target="_blank"><i class="fas fa-print"></i>
-                Print</a>
+
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
-                        <th rowspan="2" class="text-center">No</th>
-                        <th rowspan="2" class="text-center">Jenis Produk <br> <span
-                                class="fst-italic fw-lighter">Grade</span></th>
-                        <th rowspan="2" class="text-center">Kode Batch/Lot
-                            <br> <span class="fst-italic fw-lighter">Batch/Lot code</span>
-                        </th>
-                        <th colspan="3" class="text-center">Jumlah
-                            <br> <span class="fst-italic fw-lighter">Quantity</span>
-                        </th>
-                        <th rowspan="2" class="text-center">Keterangan
-                            <br> <span class="fst-italic fw-lighter">Remarks</span>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="text-center">Pcs</th>
-                        <th class="text-center">Gr</th>
-                        <th class="text-center">Box</th>
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Pcs</th>
+                        <th>Gr</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($penimbangan as $p)
+                    @foreach ($pengemasan as $p)
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ $p->jenis_produk }}</td>
-                            <td class="text-center">{{ $p->kode_batch }}</td>
-                            <td class="text-center">{{ $p->pcs }}</td>
-                            <td class="text-center">{{ $p->gr }}</td>
-                            <td class="text-center">{{ $p->box }}</td>
-                            <td class="text-center">{{ $p->keterangan }}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ tanggal($p['tgl_input']) }}</td>
+                            <td>{{ number_format($p['pcs']) }}</td>
+                            <td>{{ number_format($p['gr']) }}</td>
+                            <td class="text-center">
+                                <a target="_blank" href="{{ route('produksi.10.print', ['tgl' => $p['tgl_input']]) }}"
+                                    class="btn btn-sm btn-primary"><i class="fas fa-print"></i></a>
+                            </td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
     </div>
-    <form action="{{ route('produksi.10.store') }}" method="POST">
+    {{-- <form action="{{ route('produksi.10.store') }}" method="POST">
         @csrf
         <x-modal_plus size="modal-xl" id="tambah">
             <div class="row" x-data="{ rows: [{ id: Date.now() }] }" x-init="$nextTick(() => initSelect2())">
@@ -107,9 +89,9 @@
 
             </div>
         </x-modal_plus>
-    </form>
+    </form> --}}
 
-    <form action="" method="get">
+    {{-- <form action="" method="get">
         <x-modal_plus size="modal-sm" id="view">
             <div class="row">
                 <div class="col-lg-12">
@@ -120,5 +102,5 @@
             </div>
 
         </x-modal_plus>
-    </form>
+    </form> --}}
 </x-app-layout>
