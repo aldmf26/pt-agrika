@@ -17,7 +17,7 @@
                     <td>{{ number_format($d['pcs'] - $d['pcs_akhir'], 0) }}</td>
                     <td>{{ number_format($d['gr'] - $d['gr_akhir'], 0) }}</td>
                     <td>
-                        <a class="btn btn-xs  btn-primary"
+                        <a class="btn btn-xs  btn-primary" target="_blank"
                             href="{{ route('ppc.gudang-fg.4.print', ['grade' => $d['grade']]) }}"><i
                                 class="fas fa-print"></i></a>
                     </td>

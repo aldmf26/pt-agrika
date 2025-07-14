@@ -45,16 +45,24 @@
             @php
                 $saldo_pcs += ($d['ket'] == 'masuk' ? $d['pcs'] : 0) - ($d['ket'] == 'keluar' ? $d['pcs'] : 0);
                 $saldo_gr += ($d['ket'] == 'masuk' ? $d['gr'] : 0) - ($d['ket'] == 'keluar' ? $d['gr'] : 0);
+
+                $rawPartai = $d['nm_partai'];
+                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                $partaiArray = array_map('trim', explode(',', $cleaned));
+                $sbwList = DB::table('sbw_kotor')
+                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                    ->whereIn('nm_partai', $partaiArray)
+                    ->get();
             @endphp
             <tr>
-                <td>{{ tanggal($d['tgl']) }}</td>
-                <td align="right">{{ $d['ket'] == 'masuk' ? number_format($d['pcs']) : '0' }}</td>
-                <td align="right">{{ $d['ket'] == 'masuk' ? number_format($d['gr']) : '0' }}</td>
-                <td align="right">{{ $d['ket'] == 'keluar' ? number_format($d['pcs']) : '0' }}</td>
-                <td align="right">{{ $d['ket'] == 'keluar' ? number_format($d['gr']) : '0' }}</td>
-                <td class="text-end">{{ number_format($saldo_pcs, 0) }}</td>
-                <td class="text-end">{{ number_format($saldo_gr, 0) }}</td>
-                <td></td>
+                <td class="text-center align-middle">{{ tanggal($d['tgl']) }}</td>
+                <td class="text-end align-middle">{{ $d['ket'] == 'masuk' ? number_format($d['pcs']) : '0' }}</td>
+                <td class="text-end align-middle">{{ $d['ket'] == 'masuk' ? number_format($d['gr']) : '0' }}</td>
+                <td class="text-end align-middle">{{ $d['ket'] == 'keluar' ? number_format($d['pcs']) : '0' }}</td>
+                <td class="text-end align-middle">{{ $d['ket'] == 'keluar' ? number_format($d['gr']) : '0' }}</td>
+                <td class="text-end align-middle">{{ number_format($saldo_pcs, 0) }}</td>
+                <td class="text-end align-middle">{{ number_format($saldo_gr, 0) }}</td>
+                <td class="text-center">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                 <td></td>
             </tr>
         @endforeach
