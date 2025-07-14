@@ -11,10 +11,10 @@
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
-                        <th class="text-center">No</th>
+                        <th class="text-end">No</th>
                         <th class="text-center">Tanggal</th>
-                        <th class="text-center">Pcs</th>
-                        <th class="text-center">Gr</th>
+                        <th class="text-end">Pcs</th>
+                        <th class="text-end">Gr</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -22,15 +22,14 @@
                     @foreach ($grading as $g)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ tanggal($g['tgl']) }}</td>
-                            <td>{{ $g['pcs'] }}</td>
-                            <td>{{ $g['gr'] }}</td>
+                            <td class="text-center">{{ tanggal($g['tgl']) }}</td>
+                            <td>{{ number_format($g['pcs'], 0) }}</td>
+                            <td>{{ number_format($g['gr'], 0) }}</td>
                             <td class="text-center">
                                 <a href="{{ route('produksi.8.print', ['tgl' => $g['tgl']]) }}" target="_blank"
                                     class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
                                     Print</a>
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
