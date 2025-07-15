@@ -37,14 +37,13 @@ class PUR1DaftarSupplierController extends Controller
 
     public function evaluasi($id)
     {
-        $supplier = Suplier::findOrFail($id);
 
-        $evaluasi = Evaluasi::with(['detail'])->where('supplier_id', $id)->first();
+        $evaluasi = Evaluasi::with(['detail', 'supplier'])->where('id', $id)->first();
         $detailAda = !empty($evaluasi->detail);
         $data = [
             'title' => 'Evaluasi Supplier : ',
 
-            'supplier' => $supplier,
+            'supplier' => $evaluasi->supplier,
             'evaluasi' => $evaluasi,
             'detailAda' => $detailAda,
         ];

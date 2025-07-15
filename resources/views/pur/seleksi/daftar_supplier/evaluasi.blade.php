@@ -23,14 +23,13 @@
             <div class="col-3">
                 <div class="form-group mt-3">
                     <label for="periode_evaluasi">Periode Bulan Evaluasi:</label>
-                    <input value="{{ $evaluasi->periode_evaluasi ?? '' }}" type="number" placeholder="masukan bulan"
-                        id="periode_evaluasi" name="periode_evaluasi" class="form-control"
-                        value="{{ $supplier->periode_evaluasi ?? '' }}">
+                    <input type="number" placeholder="masukan bulan" id="periode_evaluasi" name="periode_evaluasi"
+                        class="form-control" value="{{ $evaluasi->periode_evaluasi ?? '' }}">
                 </div>
             </div>
         </div>
 
-        {{-- kuantitas tidak sesuai --}}
+        {{-- Kuantitas tidak sesuai --}}
         <h6>Jumlah pengiriman dengan kuantitas yang tidak sesuai:</h6>
         <button class="btn btn-xs btn-info" type="button" @click="showKuantitas = !showKuantitas">Tambah</button>
         <div x-show="showKuantitas" x-transition>
@@ -46,15 +45,15 @@
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="jumlah">Karena</label>
+                        <label for="karena">Karena</label>
                         <input type="text" id="karena" name="kuantitas_karena[]"
                             class="form-control form-control-sm">
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="jumlah">Hasil Penilaian</label>
-                        <input type="text" id="karena" name="kuantitas_penilaian[]"
+                        <label for="penilaian">Hasil Penilaian</label>
+                        <input type="text" id="penilaian" placeholder="Contoh: 90" name="kuantitas_penilaian[]"
                             class="form-control form-control-sm">
                     </div>
                 </div>
@@ -78,14 +77,14 @@
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="jumlah">Karena</label>
+                        <label for="karena">Karena</label>
                         <input type="text" id="karena" name="waktu_karena[]" class="form-control form-control-sm">
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="jumlah">Hasil Penilaian</label>
-                        <input type="text" id="karena" name="waktu_penilaian[]"
+                        <label for="penilaian">Hasil Penilaian</label>
+                        <input type="text" id="penilaian" name="waktu_penilaian[]"
                             class="form-control form-control-sm">
                     </div>
                 </div>
@@ -109,47 +108,45 @@
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="jumlah">Karena</label>
+                        <label for="karena">Karena</label>
                         <input type="text" id="karena" name="kualitas_karena[]"
                             class="form-control form-control-sm">
                     </div>
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="jumlah">Hasil Penilaian</label>
-                        <input type="text" id="karena" name="kualitas_penilaian[]"
+                        <label for="penilaian">Hasil Penilaian</label>
+                        <input type="text" id="penilaian" placeholder="Contoh: 90" name="kualitas_penilaian[]"
                             class="form-control form-control-sm">
                     </div>
                 </div>
             </x-multiple-input>
         </div>
         <hr>
+
         <div class="row mt-4">
             <div class="col-3">
                 <h6>Harga Produk/Jasa:</h6>
                 <label>Keterangan</label>
                 <input placeholder="keterangan" type="text" name="harga_keterangan"
-                    value="{{ $detailAda ?? ($evaluasi->detail->where('jenis_kriteria', 'harga')->first()->alasan ?? '') }}"
+                    value="{{ $evaluasi->detail->where('jenis_kriteria', 'harga')->first()->alasan ?? '' }}"
                     class="form-control">
                 <label>Penilaian</label>
-                <input placeholder="hasil penilaian" type="text" name="harga_penilaian"
-                    value="{{ $detailAda ?? ($evaluasi->detail->where('jenis_kriteria', 'harga')->first()->penilaian ?? '') }}"
+                <input placeholder="hasil penilaian" placeholder="Contoh: 90" type="text" name="harga_penilaian"
+                    value="{{ $evaluasi->detail->where('jenis_kriteria', 'harga')->first()->penilaian ?? '' }}"
                     class="form-control">
             </div>
 
             <div class="col-3">
                 <h6>Kemudahan Komunikasi:</h6>
-
                 <label>Keterangan</label>
                 <input placeholder="keterangan" type="text" name="komunikasi_keterangan"
-                    value="{{ $detailAda ?? ($evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first()->alasan ?? '') }}"
+                    value="{{ $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first()->alasan ?? '' }}"
                     class="form-control">
-
                 <label>Penilaian</label>
-                <input placeholder="hasil penilaian" type="text" name="komunikasi_penilaian"
-                    value="{{ $detailAda ?? ($evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first()->penilaian ?? '') }}"
+                <input placeholder="hasil penilaian" placeholder="Contoh: 90" type="text" name="komunikasi_penilaian"
+                    value="{{ $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first()->penilaian ?? '' }}"
                     class="form-control">
-
             </div>
         </div>
 
@@ -160,23 +157,20 @@
         </div>
     </form>
 
-
-
-    @if ($detailAda)
+    @if ($evaluasi->detail->count() > 0)
         @php
             $kuantitas = $evaluasi->detail->where('jenis_kriteria', 'kuantitas')->whereNotNull('alasan');
             $waktu = $evaluasi->detail->where('jenis_kriteria', 'waktu')->whereNotNull('alasan');
             $kualitas = $evaluasi->detail->where('jenis_kriteria', 'kualitas')->whereNotNull('alasan');
+            $harga = $evaluasi->detail->where('jenis_kriteria', 'harga')->first();
+            $komunikasi = $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first();
 
-            $harga = $evaluasi->detail->where('jenis_kriteria', 'harga')->whereNotNull('alasan')->first();
-            $komunikasi = $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->whereNotNull('alasan')->first();
-            
             $totalPenilaian =
-                $kuantitas->avg('penilaian') +
-                $waktu->avg('penilaian') +
-                $kualitas->avg('penilaian') +
-                $harga->penilaian +
-                $komunikasi->penilaian;
+                ($kuantitas->avg('penilaian') ?: 0) +
+                ($waktu->avg('penilaian') ?: 0) +
+                ($kualitas->avg('penilaian') ?: 0) +
+                ($harga ? $harga->penilaian : 0) +
+                ($komunikasi ? $komunikasi->penilaian : 0);
 
             $rataRata = $totalPenilaian / 5;
         @endphp
@@ -206,7 +200,7 @@
                             Jumlah pengiriman dengan kuantitas yang tidak sesuai: <br>
                             <x-evaluasi-detail :datas="$kuantitas" />
                         </td>
-                        <td align="center">{{ number_format($kuantitas->avg('penilaian'), 0) }}</td>
+                        <td align="center">{{ number_format($kuantitas->avg('penilaian') ?: 0, 0) }}</td>
                     </tr>
                     <tr>
                         <td>2</td>
@@ -214,9 +208,8 @@
                         <td>
                             Jumlah pengiriman dengan waktu pengiriman yang tidak sesuai: <br>
                             <x-evaluasi-detail :datas="$waktu" />
-
                         </td>
-                        <td align="center">{{ number_format($waktu->avg('penilaian'), 0) }}</td>
+                        <td align="center">{{ number_format($waktu->avg('penilaian') ?: 0, 0) }}</td>
                     </tr>
                     <tr>
                         <td>3</td>
@@ -224,21 +217,20 @@
                         <td>
                             Jumlah pengiriman dengan kualitas yang tidak sesuai: <br>
                             <x-evaluasi-detail :datas="$kualitas" />
-
                         </td>
-                        <td align="center">{{ number_format($kualitas->avg('penilaian'), 0) }}</td>
+                        <td align="center">{{ number_format($kualitas->avg('penilaian') ?: 0, 0) }}</td>
                     </tr>
                     <tr>
                         <td>4</td>
                         <td>Harga Produk/Jasa</td>
-                        <td>{{ $harga->alasan }}</td>
-                        <td align="center">{{ number_format($harga->penilaian, 0) }}</td>
+                        <td>{{ $harga ? $harga->alasan : '-' }}</td>
+                        <td align="center">{{ $harga ? number_format($harga->penilaian, 0) : '-' }}</td>
                     </tr>
                     <tr>
                         <td>5</td>
                         <td>Kemudahan Komunikasi</td>
-                        <td>{{ $komunikasi->alasan }}</td>
-                        <td align="center">{{ number_format($komunikasi->penilaian, 0) }}</td>
+                        <td>{{ $komunikasi ? $komunikasi->alasan : '-' }}</td>
+                        <td align="center">{{ $komunikasi ? number_format($komunikasi->penilaian, 0) : '-' }}</td>
                     </tr>
                     <tr>
                         <td colspan="3" align="right">Total</td>
@@ -252,5 +244,4 @@
             </div>
         </div>
     @endif
-
 </x-app-layout>

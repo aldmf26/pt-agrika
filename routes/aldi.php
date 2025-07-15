@@ -390,6 +390,7 @@ Route::controller(PUR1DaftarSupplierController::class)
     ->name('pur.seleksi.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
@@ -406,6 +407,7 @@ Route::controller(PUR1EvaluasiSupplierController::class)
     ->name('pur.evaluasi.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print', 'print')->name('print');

@@ -21,7 +21,7 @@
                 <div class="col-2">
                     <div class="form-group">
                         <label for="jumlah">Hasil Penilaian</label>
-                        <input value="{{ $detail->penilaian }}" type="text" id="karena"
+                        <input placeholder="Contoh: 90" value="{{ $detail->penilaian }}" type="text" id="karena"
                             name="{{ $kriteria }}_penilaian[]" class="form-control form-control-sm">
                     </div>
                 </div>

@@ -10,6 +10,10 @@ class Evaluasi extends Model
     protected $guarded = [''];
     protected $primaryKey = 'id';
 
+    public function supplier()
+    {
+        return $this->belongsTo(Suplier::class, 'supplier_id', 'id');
+    }
 
     public function detail()
     {

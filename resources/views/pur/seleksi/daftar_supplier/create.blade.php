@@ -17,8 +17,8 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="">Produsen</label>
-                    <input type="text" name="produsen" placeholder="Produsen" class="form-control">
+                    <label for="">NIK / Produsen</label>
+                    <input type="text" name="produsen" placeholder="Nik / Produsen" class="form-control">
                 </div>
             </div>
             <div class="col-3">
