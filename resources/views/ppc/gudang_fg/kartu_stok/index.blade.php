@@ -4,9 +4,8 @@
             <tr>
                 <th>#</th>
                 <th>Nama Barang</th>
-                <th>Satuan</th>
-                <th>Stok Akhir</th>
-                <th>Gudang</th>
+                <th class="text-end">Pcs</th>
+                <th class="text-end">Gr</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -14,16 +13,17 @@
             @foreach ($kartu as $d)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $d->produk->nama_produk }}</td>
-                    <td>{{ $d->produk->satuan }}</td>
-                    <td>{{ number_format($d->stok_akhir,0) }}</td>
-                    <td>FG</td>
+                    <td>{{ $d['grade'] }}</td>
+                    <td>{{ number_format($d['pcs'] - $d['pcs_akhir'], 0) }}</td>
+                    <td>{{ number_format($d['gr'] - $d['gr_akhir'], 0) }}</td>
                     <td>
-                        <a class="btn btn-xs float-end btn-primary" href="{{route("ppc.gudang-fg.4.print", $d->id_produk)}}"><i class="fas fa-print"></i></a>
+                        <a class="btn btn-xs  btn-primary" target="_blank"
+                            href="{{ route('ppc.gudang-fg.4.print', ['grade' => $d['grade']]) }}"><i
+                                class="fas fa-print"></i></a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-   
+
 </x-app-layout>

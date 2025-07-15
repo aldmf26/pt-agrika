@@ -16,7 +16,15 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin-bottom: 4px;
+            /* Atur jarak bawah paragraf pertama */
+
+        }
+
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
         }
 
         .shapes {
@@ -57,26 +65,42 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-2">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">FORM HARIAN PEMILAHAN AKHIR</p>
-                    <p class="text-center fst-italic">Daily final grading</p>
-                </div>
+            <div class="col-6"></div>
+            <div class="col-4 ">
+                <p class="mt-2">No Dok : FRM.PRO.01.07, Rev 00</p>
             </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.07, Rev.00</p>
-                <br>
-                <br>
+            <div class="col-12 ">
+
+                <p class="cop_judul">FORM HARIAN PEMILAHAN AKHIR</p>
+                <p class="text-center cop_bawah">Daily final grading</p>
+
             </div>
+
             <div class="col-4"></div>
             <div class="col-10">
                 <table style="border-collapse: collapse; width: 100%;">

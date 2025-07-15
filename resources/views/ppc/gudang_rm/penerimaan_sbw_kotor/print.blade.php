@@ -13,7 +13,7 @@
         <tr>
             <td>Keterangan</td>
             <td>:</td>
-            <td>{{ $penerimaan->nm_partai }}</td>
+           <td>{{ substr($penerimaan->nm_partai, 3) }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>

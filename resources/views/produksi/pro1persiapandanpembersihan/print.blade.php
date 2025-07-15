@@ -169,7 +169,9 @@
                                 <td class="text-center">{{ $d['pcs'] }}</td>
                                 <td class="text-center">{{ $d['gr_awal'] }}</td>
                                 <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-center">barang dari {{ $d['tgl'] }} ~ {{ $d['tgl_selesai'] }}</td>
+                                <td class="text-center">
+                                    {{-- barang dari {{ $d['tgl'] }} ~ {{ $d['tgl_selesai'] }} --}}
+                                </td>
                             </tr>
                         @endforeach
 

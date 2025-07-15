@@ -360,7 +360,7 @@ Route::controller(FG4KartuStokController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
-        Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(PUR1PurchaseRequestController::class)

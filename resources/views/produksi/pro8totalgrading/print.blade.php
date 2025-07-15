@@ -16,7 +16,15 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin-bottom: 4px;
+            /* Atur jarak bawah paragraf pertama */
+
+        }
+
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
         }
 
         .shapes {
@@ -57,26 +65,42 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-2">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">FORM TOTAL HASIL PEMILAHAN AKHIR</p>
-                    <p class="text-center fst-italic">Final grading results</p>
-                </div>
+            <div class="col-6"></div>
+            <div class="col-4 ">
+                <p class="mt-2">No Dok : FRM.PRO.01.08, Rev 00</p>
             </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.08, Rev.00</p>
-                <br>
-                <br>
+            <div class="col-12 ">
+
+                <p class="cop_judul">FORM TOTAL HASIL PEMILAHAN AKHIR</p>
+                <p class="cop_bawah text-center">Final grading results</p>
+
             </div>
+
             <div class="col-4"></div>
             <div class="col-10">
                 <table style="border-collapse: collapse; width: 100%;">
@@ -115,18 +139,22 @@
                     <tbody>
                         @foreach ($grading as $g)
                             @php
-                                $sbw = DB::table('sbw_kotor')
+
+                                $rawPartai = $g['nm_partai'];
+                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                                $partaiArray = array_map('trim', explode(',', $cleaned));
+                                $sbwList = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', 'like', '%' . $g['nm_partai'] . '%')
-                                    ->first();
+                                    ->whereIn('nm_partai', $partaiArray)
+                                    ->get();
                             @endphp
                             <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
-                                <td class="text-center">{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
-                                <td class="text-center">{{ $g['grade'] }}</td>
-                                <td class="text-center">{{ $g['box'] }}</td>
-                                <td class="text-center"></td>
+                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-center align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-center align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-center align-middle">{{ $g['grade'] }}</td>
+                                <td class="text-center align-middle">{{ $g['box'] }}</td>
+                                <td class="text-center align-middle"></td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -5,20 +5,18 @@ namespace App\Http\Controllers\produksi;
 use App\Http\Controllers\Controller;
 use App\Models\PenimbanganHasilProduksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class Pro10PenimbanganHasilProduksi extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
+        $pengemasan = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
+        $pengemasan = json_decode($pengemasan, TRUE);
+
         $data = [
             'title' => 'Penimbangan Hasil Produksi',
-            'tgl' => $tgl,
-            'penimbangan' => PenimbanganHasilProduksi::where('tanggal', $tgl)->get()
+            'pengemasan' => $pengemasan['data'],
         ];
         return view('produksi.pro10_penimbangan_hasil_produksi.index', $data);
     }
@@ -43,16 +41,14 @@ class Pro10PenimbanganHasilProduksi extends Controller
 
     public function print(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tgl = date('Y-m-d');
-        } else {
-            $tgl = $r->tgl;
-        }
+        $tgl = $r->tgl;
+        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir_detail_group_grade?tgl=$tgl");
+        $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
         $data = [
             'title' => 'Penimbangan Hasil Produksi',
             'tgl' => $tgl,
-            'penimbangan' => PenimbanganHasilProduksi::where('tanggal', $tgl)->get(),
-            'head' => PenimbanganHasilProduksi::where('tanggal', $tgl)->first()
+            'penimbangan' => $pengiriman_akhir['data'],
+
         ];
         return view('produksi.pro10_penimbangan_hasil_produksi.print', $data);
     }
