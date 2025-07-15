@@ -34,7 +34,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama }}</td>
                             <td>{{ $d->no_invoice }}</td>
-                            <td>{{ $d->nm_partai }}</td>
+
+                            <td>{{ substr($d->nm_partai, 3) }}</td>
                             <td>{{ tanggal($d->tgl) }}</td>
                             <td>{{ $d->no_kendaraan }}</td>
                             <td>{{ $d->pengemudi }}</td>
