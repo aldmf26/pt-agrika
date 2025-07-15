@@ -15,7 +15,7 @@ class Pro5FormPengeringan extends Controller
         $posisi = auth()->user()->posisi_id;
 
         if ($posisi == 1) {
-            $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut");
+            $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_pengeringan");
             $cabut = json_decode($cabut, TRUE);
         } else {
             $id_pengawas = auth()->user()->id;
@@ -59,7 +59,7 @@ class Pro5FormPengeringan extends Controller
     public function print(Request $r)
     {
 
-        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_detail?tgl=$r->tgl&id_pengawas=$r->id_pengawas");
+        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_detail_pengeringan?tgl=$r->tgl&id_pengawas=$r->id_pengawas");
         $cabut = json_decode($cabut, TRUE);
         $data = [
             'title' => 'Form Pengeringan',

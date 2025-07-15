@@ -26,7 +26,7 @@
                     @foreach ($cabut as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ tanggal($p['tgl']) }}</td>
+                            <td>{{ tanggal($p['tgl_akhir']) }}</td>
                             <td>{{ ucwords(strtolower($p['name'])) }}</td>
                             <td>{{ number_format($p['pcs_awal'], 0) }}</td>
                             <td>{{ number_format($p['gr_awal'], 0) }}</td>
@@ -35,7 +35,7 @@
                             <td>{{ number_format($p['gr_awal'] - $p['gr_akhir'], 0) }}</td>
                             <td>
                                 @php
-                                    $tgl = $p['tgl'];
+                                    $tgl = $p['tgl_akhir'];
                                     $id_pengawas = $p['id_pengawas'];
                                     $pengawas = $p['name'];
 

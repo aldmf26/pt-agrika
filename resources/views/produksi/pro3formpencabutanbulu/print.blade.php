@@ -142,18 +142,18 @@
                             </th>
                         </tr>
                         <tr>
-                            <th rowspan="2" class="text-end">Pcs</th>
-                            <th rowspan="2" class="text-end">Gr</th>
-                            <th rowspan="2" class="text-end">Pcs</th>
-                            <th rowspan="2" class="text-end">Gr</th>
-                            <th colspan="2" class="text-center">Ok</th>
-                            <th colspan="2" class="text-center">Not Ok</th>
+                            <th rowspan="2" class="text-end align-middle">Pcs</th>
+                            <th rowspan="2" class="text-end align-middle">Gr</th>
+                            <th rowspan="2" class="text-end align-middle">Pcs</th>
+                            <th rowspan="2" class="text-end align-middle">Gr</th>
+                            <th colspan="2" class="text-center align-middle">Ok</th>
+                            <th colspan="2" class="text-center align-middle">Not Ok</th>
                         </tr>
                         <tr>
-                            <th class="text-end">Pcs</th>
-                            <th class="text-end">Gr</th>
-                            <th class="text-end">Pcs</th>
-                            <th class="text-end">Gr</th>
+                            <th class="text-end align-middle">Pcs</th>
+                            <th class="text-end align-middle">Gr</th>
+                            <th class="text-end align-middle">Pcs</th>
+                            <th class="text-end align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -181,7 +181,7 @@
                                     $susut = (1 - $c['gr_akhir'] / $c['gr_awal']) * 100;
                                 @endphp
 
-                                <td></td>
+                                <td>dari {{ tanggal($c['tgl']) }} sampai {{ tanggal($c['tgl_akhir']) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
