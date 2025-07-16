@@ -17,7 +17,7 @@ use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPer
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\PPC\Gudang_FG\FG2CheklistKendaraanController;
-use App\Http\Controllers\produksi\Pro10PenimbanganHasilProduksi;
+use App\Http\Controllers\Produksi\Pro10PenimbanganHasilProduksi;
 use App\Http\Controllers\Produksi\Pro11FormPengemasanAkhirController;
 use App\Http\Controllers\Produksi\Pro1PersiapandanPembersihanController;
 use App\Http\Controllers\Produksi\Pro2FormSerahTerimaBahanBaku;
