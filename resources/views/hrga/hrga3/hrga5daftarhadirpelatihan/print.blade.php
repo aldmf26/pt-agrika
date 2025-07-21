@@ -82,7 +82,7 @@
                     </tr>
                     <tr>
                         <td width="20%" class="dhead p-2">Hari/Tanggal</td>
-                        <td>{{ date('l', strtotime($jadwal->tanggal)) }}/{{ date('d-m-Y', strtotime($jadwal->tanggal)) }}
+                        <td>{{ tanggal($jadwal->tanggal) }}
                         </td>
                         <td width="20%" class="dhead p-2">Waktu</td>
                         <td>{{ $jadwal->waktu }}</td>
@@ -103,7 +103,7 @@
                     <thead>
                         <tr>
                             <th class="text-center dhead align-middle">No</th>
-                            <th class="text-center dhead align-middle">
+                            <th class="text-start dhead align-middle">
                                 Nama Peserta Training
                             </th>
                             <th class="text-center dhead align-middle">
@@ -121,7 +121,7 @@
                         @foreach ($jadwal_detail as $j)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $j->data_pegawai->nama }}</td>
+                                <td class="text-start">{{ $j->data_pegawai->nama }}</td>
                                 <td class="text-center">{{ $j->data_pegawai->divisi->divisi }}</td>
                                 <td class="text-center">{{ $j->data_pegawai->posisi }}</td>
                             </tr>

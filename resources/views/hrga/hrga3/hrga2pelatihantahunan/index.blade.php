@@ -60,7 +60,11 @@
                                     <input type="text" x-show="edit" value="{{ $p->narasumber }}"
                                         class="form-control" name="narasumber[]">
                                 </td>
-                                <td>{{ ucfirst(strtolower($p->sasaran_peserta)) }}</td>
+                                <td>
+                                    <span x-show="!edit"> {{ ucfirst(strtolower($p->sasaran_peserta)) }}</span>
+                                    <input type="text" x-show="edit" value="{{ $p->sasaran_peserta }}"
+                                        class="form-control" name="sasaran_peserta[]">
+                                </td>
                                 <td>
 
                                     <span x-show="!edit">{{ $p->tgl_rencana }}</span>

@@ -13,7 +13,7 @@ Route::get('/tidak', function () {
     $data = [
         'title' => 'tidak'
     ];
-    return view('tidak',$data);
+    return view('tidak', $data);
 })->name('tidak');
 
 Route::get('/tamu', [Hrga1VisitorHealthForm::class, 'tamu']);
@@ -25,6 +25,7 @@ Route::controller(DashboardController::class)
     ->middleware(['auth', 'verified'])
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
         Route::get('/{title}', 'detail')->name('detail');
         Route::get('/sub/{title}', 'sub')->name('sub');
     });

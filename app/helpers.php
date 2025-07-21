@@ -9,49 +9,36 @@ if (!function_exists('tanggal')) {
 
         $bln  = $date[1];
 
-        switch ($bln) {
-            case '01':
-                $bulan = "Januari";
-                break;
-            case '02':
-                $bulan = "Februari";
-                break;
-            case '03':
-                $bulan = "Maret";
-                break;
-            case '04':
-                $bulan = "April";
-                break;
-            case '05':
-                $bulan = "Mei";
-                break;
-            case '06':
-                $bulan = "Juni";
-                break;
-            case '07':
-                $bulan = "Juli";
-                break;
-            case '08':
-                $bulan = "Agustus";
-                break;
-            case '09':
-                $bulan = "September";
-                break;
-            case '10':
-                $bulan = "Oktober";
-                break;
-            case '11':
-                $bulan = "November";
-                break;
-            case '12':
-                $bulan = "Desember";
-                break;
-        }
+        $bulanArray = [
+            '01' => 'Januari',
+            '02' => 'Februari',
+            '03' => 'Maret',
+            '04' => 'April',
+            '05' => 'Mei',
+            '06' => 'Juni',
+            '07' => 'Juli',
+            '08' => 'Agustus',
+            '09' => 'September',
+            '10' => 'Oktober',
+            '11' => 'November',
+            '12' => 'Desember',
+        ];
+
+        $bulan = $bulanArray[$bln] ?? '';
+
         $tanggal = $date[2];
         $tahun   = $date[0];
 
         $strTanggal = "$tanggal $bulan $tahun";
         return $strTanggal;
+    }
+}
+
+if (!function_exists('ddmmyyy_')) {
+    function ddmmyyy($tgl)
+    {
+        $date = explode("-", $tgl);
+        return "{$date[2]}-{$date[1]}-{$date[0]}";
     }
 }
 

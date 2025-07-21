@@ -17,7 +17,6 @@ class Hrga2ProgramPelatihanTahunan extends Controller
             'program' => ProgramPelatihanTahunan::all(),
             'tahuns' => ProgramPelatihanTahunan::selectRaw('YEAR(tgl_rencana) as tahun')->distinct()->get(),
             'divisi' => Divisi::all(),
-
         ];
         return view('hrga.hrga3.hrga2pelatihantahunan.index', $data);
     }
@@ -30,6 +29,7 @@ class Hrga2ProgramPelatihanTahunan extends Controller
                 'narasumber' => $r->narasumber[$i],
                 'tgl_rencana' => $r->tgl_rencana[$i],
                 'tgl_realisasi' => $r->tgl_realisasi[$i],
+                'sasaran_peserta' => $r->sasaran_peserta[$i],
             ];
             ProgramPelatihanTahunan::where('id', $r->id[$i])->update($data);
         }

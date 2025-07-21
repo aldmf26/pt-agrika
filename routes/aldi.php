@@ -6,6 +6,7 @@ use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga1PermohonanKaryawa
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga2HasilWawancara;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga3HasilEvaluasiKaryawanBaru;
 use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga4DataPegawai;
+use App\Http\Controllers\Hrga\Hrga1PenerimaanKaryawanBaru\Hrga5JobDeskController;
 use App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi\Hrga2PenilaianKompetensi;
 use App\Http\Controllers\Hrga\Hrga6Sanitasi\Hrga1PerencanaanKebersihan;
 use App\Http\Controllers\Hrga\Hrga6Sanitasi\Hrga2CeklistSanitasi;
@@ -80,6 +81,22 @@ Route::controller(Hrga4DataPegawai::class)
     ->name('hrga1.4.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga5JobDeskController::class)
+    ->prefix('hrga/1/5-job-description')
+    ->name('hrga1.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/print', 'print')->name('print');
+    });
+
+Route::controller(Hrga5JobDeskController::class)
+    ->prefix('hrga/1/6-struktur')
+    ->name('hrga1.6.')
+    ->group(function () {
+        Route::get('/', 'struktur')->name('struktur');
         Route::get('/print', 'print')->name('print');
     });
 
