@@ -13,7 +13,7 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 20px;
             font-weight: bold;
             text-align: center;
             margin: 15px;
@@ -57,6 +57,10 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        th {
+            height: 150px;
+        }
     </style>
 </head>
 
@@ -64,79 +68,80 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-2 mt-4">
-                <img style="width: 120px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-8 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">Form Ketelusuran (Traceability)
-                    </p>
+            <div class="col-12 ">
 
+                <h4 class="cop_judul">Form Ketelusuran (Traceability)
+                </h4>
+            </div>
+
+            <div class="col-12 ">
+                <p class="mt-2 text-center">Dok.No.: FRM.QA.07.01</p>
+
+            </div>
+            <div class="d-flex gap-3">
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle text-nowrap">NO URUT</th>
+                                <th class="text-center align-middle text-nowrap">TGL PANEN</th>
+                                <th class="text-center align-middle text-nowrap">TGL <br> DATANG</th>
+                                <th class="text-center align-middle text-nowrap">NO. REG. <br> RUMAH <br> WALET</th>
+                                <th class="text-center align-middle text-nowrap">NAMA <br> RUMAH <br> WALET</th>
+                                <th class="text-center align-middle text-nowrap">BATCH MATERIAL</th>
+                                <th class="text-center align-middle text-nowrap">BERAT <br> KOTOR <br> RAW (KG)</th>
+                                <th class="text-center align-middle text-nowrap">BERAT <br> AKHIR <br> GRADING <br> RAW
+                                    (KG)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">SUSUT <br> SORTIR (KG)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @php
+                                    $rumah_walet = DB::table('rumah_walet')->where('id', $bk['rwb_id'])->first();
+                                @endphp
+                                <td class="align-middle text-center">1</td>
+                                <td class="align-middle text-center">{{ date('d/m/Y', strtotime($bk['tgl'])) }}</td>
+                                <td class="align-middle text-center">
+                                    {{ date('d/m/Y', strtotime($bk['tgl'] . ' + 1 day')) }}
+                                </td>
+                                <td class="align-middle text-center">{{ $rumah_walet->no_reg }}</td>
+                                <td class="align-middle text-center">{{ $rumah_walet->nama }}</td>
+                                <td class="align-middle text-nowrap">{{ $bk['no_invoice'] }}</td>
+                                <td class="align-middle text-center text-nowrap">
+                                    {{ number_format($bk['gr_kotor'] / 1000, 2) }} Kg</td>
+                                <td class="align-middle text-center text-nowrap">
+                                    {{ number_format($bk['gr_awal'] / 1000, 2) }} Kg</td>
+                                <td class="align-middle text-center text-nowrap">
+                                    {{ number_format(($bk['gr_kotor'] - $bk['gr_awal']) / 1000, 2) }} Kg</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-8"></div>
-            <div class="col-4 ">
-                <p class="mt-2">Dok.No.: FRM.QA.07.01</p>
+                <div class="table-container">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle text-nowrap">BERAT SAAT <br> PEMBAGIAN <br> (Gram)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">TGL PRODUKSI <br> (PENCABUTAN)</th>
+                                <th class="text-center align-middle text-nowrap">JML KEPING AWAL (pcs & gram)</th>
+                                <th class="text-center align-middle text-nowrap">BERAT HASIL <br> CABUT & DRYING <br>
+                                    (pcs / gram)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI DRYING</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
 
-            </div>
-            <div class="col-lg-12">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th class="text-center align-middle">NO URUT</th>
-                            <th class="text-center align-middle">TGL PANEN</th>
-                            <th class="text-center align-middle">TGL DATANG</th>
-                            <th class="text-center align-middle">NO. REG. RUMAH WALET</th>
-                            <th class="text-center align-middle">NAMA RUMAH WALET</th>
-                            <th class="text-center align-middle">BATCH MATERIAL</th>
-                            <th class="text-center align-middle">BERAT KOTOR RAW (KG)</th>
-                            <th class="text-center align-middle">BERAT AKHIR GRADING RAW (KG)</th>
-                            <th class="text-center align-middle">SUSUT SORTIR (KG)</th>
-                            <th class="text-center align-middle">BERAT SAAT PEMBAGIAN (Gram)</th>
-                            <th class="text-center align-middle">TGL PRODUKSI (PENCABUTAN)</th>
-                            <th class="text-center align-middle">JML KEPING AWAL (pcs & gram)</th>
-                            <th class="text-center align-middle">BERAT HASIL CABUT & DRYING (pcs / gram)</th>
-                            <th class="text-center align-middle">TANGGAL SELESAI DRYING</th>
-                            <th class="text-center align-middle">TANGGAL SELESAI CETAK</th>
-                            <th class="text-center align-middle">JUMLAH KEPING CETAK</th>
-                            <th class="text-center align-middle">BERAT HASIL CETAK</th>
-                            <th class="text-center align-middle">TGL FINEAL GRADING AKHIR</th>
-                            <th class="text-center align-middle">JUMLAH KEPING GRADING AKHIR</th>
-                            <th class="text-center align-middle">BERAT AKHIR GRADING AKHIR (KERING)</th>
-                            <th class="text-center align-middle">TANGGAL STEAM</th>
-                            <th class="text-center align-middle">JML KEPING AKHIR (pcsm)</th>
-                            <th class="text-center align-middle">JML BERAT AKHIR (gram)</th>
-                            <th class="text-center align-middle">PRESENTASE YIELD (%)</th>
-                            <th class="text-center align-middle">JUMLAHKEPING YANG DITERIMA GUDANG</th>
-                            <th class="text-center align-middle">BERAT MASUK GUDANG PRODUK JADI</th>
-                            <th class="text-center align-middle">TANGGAL MASUK GUDANG PRODUK JADI</th>
-                            <th class="text-center align-middle">JUMLAH KEPING TERKIRIM</th>
-                            <th class="text-center align-middle">PRODUK TERKIRIM (Gram)</th>
-                            <th class="text-center align-middle">TGL PENGIRIMAN</th>
-                            <th class="text-center align-middle">TUJUAN</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @php
-                                $rumah_walet = DB::table('rumah_walet')->where('id', $bk['rwb_id'])->first();
-                            @endphp
-                            <td class="align-middle text-center">1</td>
-                            <td class="align-middle text-center">{{ date('d/m/Y', strtotime($bk['tgl'])) }}</td>
-                            <td class="align-middle text-center">{{ date('d/m/Y', strtotime($bk['tgl'] . ' + 1 day')) }}
-                            </td>
-                            <td class="align-middle text-center">{{ $rumah_walet->no_reg }}</td>
-                            <td class="align-middle text-center">{{ $rumah_walet->nama }}</td>
-                            <td class="align-middle text-nowrap">{{ $bk['no_invoice'] }}</td>
-                            <td class="align-middle text-center text-nowrap">
-                                {{ number_format($bk['gr_kotor'] / 1000, 2) }} Kg</td>
-                            <td class="align-middle text-center text-nowrap">
-                                {{ number_format($bk['gr_awal'] / 1000, 2) }} Kg</td>
-                            <td class="align-middle text-center text-nowrap">
-                                {{ number_format(($bk['gr_kotor'] - $bk['gr_awal']) / 1000, 2) }} Kg</td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
 

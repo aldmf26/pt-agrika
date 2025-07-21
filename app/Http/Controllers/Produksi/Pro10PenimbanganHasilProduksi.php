@@ -11,6 +11,8 @@ class Pro10PenimbanganHasilProduksi extends Controller
 {
     public function index(Request $r)
     {
+
+
         $pengemasan = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
         $pengemasan = json_decode($pengemasan, TRUE);
 
