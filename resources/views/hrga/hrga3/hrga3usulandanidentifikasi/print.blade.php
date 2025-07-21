@@ -76,7 +76,7 @@
             </div>
             <div class="col-lg-8">
                 <p class="fw-bold" style="font-size: 11px">Bagian : {{ $divisi->divisi }}</p>
-                <p class="fw-bold" style="font-size: 11px">Tanggal : {{ date('d m Y', strtotime($tanggal)) }}</p>
+                <p class="fw-bold" style="font-size: 11px">Tanggal : {{ tanggal($tanggal) }}</p>
             </div>
             <div class="col-lg-4">
 
@@ -107,7 +107,7 @@
                                 <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
                                 <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
                                 <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
-                                <td>{{ $u->usulan_waktu }}</td>
+                                <td>{{ \Carbon\Carbon::parse($tanggal)->locale('id')->translatedFormat('F Y') }}</td>
                                 <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
                             </tr>
                         @endforeach

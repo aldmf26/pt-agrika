@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grade_sbw_kotor', function (Blueprint $table) {
+        Schema::create('daftar_induk_dokumen_internal', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
-            $table->string('nama');
+            $table->string('no_dokumen')->unique();
+            $table->string('divisi');
+            $table->string('pic');
+            $table->string('judul');
+            $table->text('deskripsi')->nullable();
+            $table->text('tags')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grade_sbw_kotor');
+        Schema::dropIfExists('daftar_induk_dokumen_internal');
     }
 };

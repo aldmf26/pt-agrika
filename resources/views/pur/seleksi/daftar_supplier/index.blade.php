@@ -1,6 +1,7 @@
 <x-app-layout :title="$title">
     <x-nav-link route="pur.seleksi.1.index" />
     <br>
+
     <div class="d-flex justify-content-end gap-2">
         <div>
 
@@ -101,4 +102,6 @@
             </x-modal>
         </form>
     </div>
+
+
 </x-app-layout>
