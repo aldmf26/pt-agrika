@@ -14,9 +14,9 @@
         <thead>
             <tr>
                 <th class="text-center">Tanggal</th>
-                <th class="text-center">Stok Masuk</th>
-                <th class="text-center">Stok Keluar</th>
-                <th class="text-center">Stok Akhir</th>
+                <th class="text-center">Stok Masuk {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
+                <th class="text-center">Stok Keluar {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
+                <th class="text-center">Stok Akhir {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
                 <th class="text-center">Kode Lot</th>
                 <th class="text-center">Ttd</th>
             </tr>

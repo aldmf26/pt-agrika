@@ -23,7 +23,7 @@ class TraceabilityController extends Controller
 
     public function print(Request $r)
     {
-        $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/first_tracebelity2?nm_partai=" . $r->nm_partai);
+        $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/tracebelity1?nm_partai=" . $r->nm_partai);
         $bk = json_decode($bk, TRUE);
 
         $data = [

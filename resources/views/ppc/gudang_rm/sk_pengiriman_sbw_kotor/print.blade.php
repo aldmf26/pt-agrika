@@ -37,7 +37,7 @@
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
                     <th class="text-center align-middle" rowspan="2">Tanggal Panen</th>
-                    <th class="text-center align-middle" rowspan="2">Berat Panen (kg)</th>
+                    <th class="text-center align-middle" rowspan="2">Berat Panen (gr)</th>
                     <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
                     <th class="text-center align-middle" rowspan="2">Keterangan</th>
                 </tr>
@@ -54,9 +54,9 @@
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td class="text-center">{{ tanggal($d->tgl) }}</td>
-                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} kg</td>
+                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} gr</td>
                         <td class="text-center">{{ tanggal($tgl_plus1hari) }}</td>
-                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} kg</td>
+                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} gr</td>
                         <td class="text-center"></td>
                     </tr>
                 @endforeach

@@ -44,7 +44,8 @@
 
                             <td>
                                 <a class="btn btn-xs float-end btn-primary" target="_blank"
-                                    href="{{ route('ppc.gudang-rm.3.print', $d->id) }}"><i class="fas fa-print"></i></a>
+                                    href="{{ route('ppc.gudang-rm.3.print', ['id' => $d->id, 'nm_partai' => $d->nm_partai]) }}"><i
+                                        class="fas fa-print"></i></a>
                             </td>
                         </tr>
                     @endforeach

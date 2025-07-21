@@ -61,6 +61,10 @@
         th {
             height: 150px;
         }
+
+        td {
+            font-weight: 10px;
+        }
     </style>
 </head>
 
@@ -96,52 +100,68 @@
                                     (KG)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">SUSUT <br> SORTIR (KG)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                @php
-                                    $rumah_walet = DB::table('rumah_walet')->where('id', $bk['rwb_id'])->first();
-                                @endphp
-                                <td class="align-middle text-center">1</td>
-                                <td class="align-middle text-center">{{ date('d/m/Y', strtotime($bk['tgl'])) }}</td>
-                                <td class="align-middle text-center">
-                                    {{ date('d/m/Y', strtotime($bk['tgl'] . ' + 1 day')) }}
-                                </td>
-                                <td class="align-middle text-center">{{ $rumah_walet->no_reg }}</td>
-                                <td class="align-middle text-center">{{ $rumah_walet->nama }}</td>
-                                <td class="align-middle text-nowrap">{{ $bk['no_invoice'] }}</td>
-                                <td class="align-middle text-center text-nowrap">
-                                    {{ number_format($bk['gr_kotor'] / 1000, 2) }} Kg</td>
-                                <td class="align-middle text-center text-nowrap">
-                                    {{ number_format($bk['gr_awal'] / 1000, 2) }} Kg</td>
-                                <td class="align-middle text-center text-nowrap">
-                                    {{ number_format(($bk['gr_kotor'] - $bk['gr_awal']) / 1000, 2) }} Kg</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="table-container">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th class="text-center align-middle text-nowrap">BERAT SAAT <br> PEMBAGIAN <br> (Gram)
-                                </th>
+
                                 <th class="text-center align-middle text-nowrap">TGL PRODUKSI <br> (PENCABUTAN)</th>
-                                <th class="text-center align-middle text-nowrap">JML KEPING AWAL (pcs & gram)</th>
+                                <th class="text-center align-middle text-nowrap">JML KEPING AWAL <br> (pcs & gram)</th>
                                 <th class="text-center align-middle text-nowrap">BERAT HASIL <br> CABUT & DRYING <br>
                                     (pcs / gram)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI DRYING</th>
+                                <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI CETAK</th>
+                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING CETAK <br> (pcs & gram)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">BERAT HASIL CETAK <br> (pcs & gram)
+                                </th>
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @php $first = true; @endphp
+                            @foreach ($bk as $b)
+                                <tr>
+                                    @if ($loop->first == 1)
+                                        <td class="text-center">1</td>
+                                        <td>{{ tanggal($b['tgl_panen']) }}</td>
+                                        @php
+                                            $tgl = date('Y-m-d', strtotime($b['tgl_panen'] . ' + 1 days'));
+                                            $rumah_walet = DB::table('rumah_walet')->where('id', $b['rwb_id'])->first();
+                                        @endphp
+                                        <td>{{ tanggal($tgl) }}</td>
+                                        <td>{{ $rumah_walet->no_reg }}</td>
+                                        <td>{{ $rumah_walet->nama }}</td>
+                                        <td>{{ $b['no_invoice'] }}</td>
+                                        <td>{{ $b['gr_kotor'] }}</td>
+                                        <td>{{ $b['berat_bersih'] }}</td>
+                                        <td>{{ $b['gr_kotor'] - $b['berat_bersih'] }}</td>
+                                    @else
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    @endif
 
-                            </tr>
+                                    <td>{{ tanggal($b['tgl_terima']) }}</td>
+                                    <td class="text-center">{{ number_format($b['pcs_awal'], 0) }} /
+                                        {{ number_format($b['gr_awal'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir'], 0) }}
+                                        /
+                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir'], 0) }}
+                                    </td>
+                                    <td>{{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah']) }}</td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>
+
             </div>
 
 

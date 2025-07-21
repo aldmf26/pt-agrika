@@ -253,7 +253,7 @@ Route::controller(RM3PenerimaanSBWKotorController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
-        Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(RM4SkPengirimanSbwKotorController::class)
@@ -283,7 +283,7 @@ Route::controller(RM6CeklistKendaraanController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
-        Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
     });
 
 
