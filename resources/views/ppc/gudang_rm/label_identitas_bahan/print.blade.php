@@ -71,6 +71,10 @@
             font-size: 8px;
         }
 
+        .ms-4 {
+            margin-left: 2.5rem !important;
+        }
+
         /* .signature-table td {
             border: 1px solid black;
             text-align: center;
