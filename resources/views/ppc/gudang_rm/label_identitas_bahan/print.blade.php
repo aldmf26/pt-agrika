@@ -112,7 +112,8 @@
                                     <div></div>
                                 </div>
 
-                                <p class="text-center ms-4" style="font-size: 8px"><strong><u>&nbsp;&nbsp;Identitas
+                                <p class="text-center ms-4" style="font-size: 8px">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<strong><u>Identitas
                                             Bahan
                                             {{ ucwords($d->kategori) }}</u></strong></p>
                             </div>
