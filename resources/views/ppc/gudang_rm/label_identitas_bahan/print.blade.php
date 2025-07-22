@@ -67,9 +67,16 @@
         .signature-table td {
             border: 1px solid black;
             text-align: center;
+            height: 35px;
+            font-size: 8px;
+        }
+
+        /* .signature-table td {
+            border: 1px solid black;
+            text-align: center;
             height: 50px;
             font-size: 12px;
-        }
+        } */
 
         @media print {
             html {
