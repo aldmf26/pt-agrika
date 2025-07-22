@@ -108,14 +108,14 @@
                             <div class="header">
                                 <div class="d-flex justify-content-between">
                                     <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
-                                    <p style="font-size: 10px">PT. AGRIKAGATYA ARUM</p>
+                                    <p style="font-size: 8px">PT. AGRIKAGATYA ARUM</p>
                                     <div></div>
                                 </div>
 
-                                <p style="font-size: 10px"><strong><u>Identitas Bahan
+                                <p style="font-size: 8px"><strong><u>Identitas Bahan
                                             {{ ucwords($d->kategori) }}</u></strong></p>
                             </div>
-                            <table style="font-size: 10px; text-align: left">
+                            <table style="font-size: 8px; text-align: left">
                                 <tr>
                                     <td>Nama
                                         {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
