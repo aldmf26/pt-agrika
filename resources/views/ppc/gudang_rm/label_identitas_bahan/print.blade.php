@@ -104,7 +104,7 @@
                 @foreach ($labels as $d)
                     <template x-for="i in jumlah" :key="i">
                         <!-- Label pertama -->
-                        <div class="label mt-3">
+                        <div class="label mt-1">
                             <div class="header">
                                 <div class="d-flex justify-content-between">
                                     <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
