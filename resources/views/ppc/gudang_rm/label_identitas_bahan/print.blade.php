@@ -37,7 +37,7 @@
             border: 1px solid #000;
             padding: 10px;
             text-align: center;
-            width: 48%;
+            width: 30%;
             display: inline-block;
             margin: 1%;
         }

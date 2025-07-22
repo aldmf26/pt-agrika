@@ -13,7 +13,7 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
@@ -25,6 +25,7 @@
             margin-top: 0;
             /* Hilangkan jarak atas paragraf kedua */
             font-style: italic;
+            font-size: 10px
         }
 
         .shapes {
@@ -81,6 +82,18 @@
             vertical-align: top;
             border-color: #41464b !important;
         }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
     </style>
 
 </head>
@@ -106,7 +119,7 @@
 
 
             <div class="col-12">
-                <table>
+                <table class="table-tes">
                     <tr>
                         <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
                         <td width="2%">: </td>
@@ -121,8 +134,7 @@
                 </table>
             </div>
             <div class="col-lg-12">
-                <br>
-                <br>
+
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
@@ -136,11 +148,11 @@
                                     class="fst-italic fw-lighter">Bacth/Lot code</span></th>
                             <th class="align-middle text-center" rowspan="2">Jenis<br><span
                                     class="fst-italic fw-lighter">type</span></th>
+                            <th class="align-middle text-center" rowspan="2">Nomor box</th>
                             <th class="align-middle text-center" colspan="2">Jumlah <br><span
                                     class="fst-italic fw-lighter">Quantity</span></th>
-                            <th class="align-middle text-center" rowspan="2">Nama Operator <br> Pencucian <br> <span
-                                    class="fst-italic fw-lighter">Cleaner
-                                    name</span></th>
+
+
                             <th class="align-middle text-center" rowspan="2">Keterangan <br><span
                                     class="fst-italic fw-lighter">Remaks</span></th>
 
@@ -166,9 +178,10 @@
                                 <td class="text-center">{{ $sbw->no_invoice ?? $d['nm_partai'] }} / {{ $d['no_box'] }}
                                 </td>
                                 <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
+                                <td class="text-center">{{ $d['no_box'] }}</td>
                                 <td class="text-center">{{ $d['pcs'] }}</td>
                                 <td class="text-center">{{ $d['gr_awal'] }}</td>
-                                <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
+
                                 <td class="text-center">
                                     {{-- barang dari {{ $d['tgl'] }} ~ {{ $d['tgl_selesai'] }} --}}
                                 </td>
