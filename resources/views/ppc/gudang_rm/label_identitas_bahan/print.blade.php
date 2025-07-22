@@ -35,7 +35,7 @@
 
         .label {
             border: 1px solid #000;
-            padding: 7px;
+            padding: 10px;
             text-align: center;
             width: 30%;
             display: inline-block;
