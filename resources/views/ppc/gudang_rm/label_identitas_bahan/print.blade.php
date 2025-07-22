@@ -48,7 +48,7 @@
         }
 
         .logo {
-            width: 35px;
+            width: 50px;
             height: auto;
         }
 
@@ -108,11 +108,12 @@
                             <div class="header">
                                 <div class="d-flex justify-content-between">
                                     <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
-                                    <p>PT. AGRIKAGATYA ARUM</p>
+                                    <p style="font-size: 10px">PT. AGRIKAGATYA ARUM</p>
                                     <div></div>
                                 </div>
 
-                                <p><strong><u>Identitas Bahan {{ ucwords($d->kategori) }}</u></strong></p>
+                                <p style="font-size: 10px"><strong><u>Identitas Bahan
+                                            {{ ucwords($d->kategori) }}</u></strong></p>
                             </div>
                             <table style="font-size: 10px; text-align: left">
                                 <tr>
