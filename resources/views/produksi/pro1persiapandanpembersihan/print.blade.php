@@ -106,7 +106,7 @@
             </div>
             <div class="col-6"></div>
             <div class="col-4 ">
-                <p class="mt-2">No Dok : FRM.PRO.01.01, Rev 00</p>
+                <p class="mt-2" style="font-size: 10px">No Dok : FRM.PRO.01.01, Rev 00</p>
             </div>
             <div class="col-12 ">
                 <p class="cop_judul">FORM PERSIAPAN DAN FORM SERAH TERIMA <br>
@@ -175,7 +175,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pengawas }}</td>
                                 <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-center">{{ $sbw->no_invoice ?? $d['nm_partai'] }} / {{ $d['no_box'] }}
+                                <td class="text-center">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
                                 </td>
                                 <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
                                 <td class="text-center">{{ $d['no_box'] }}</td>
