@@ -37,7 +37,14 @@
                     <tr>
                         <th>Tgl berakhirnya masa percobaan</th>
                         <th>:</th>
-                        <td>-</td>
+                        <td>
+                            @if ($karyawan->status_karyawan != 'Karyawan Tetap')
+                                {{ $karyawan->status_karyawan }} bulan, berakhir tanggal
+                                {{ tanggal(date('Y-m-d', strtotime('+' . $karyawan->status_karyawan . ' month', strtotime($karyawan->tgl_masuk)))) }}
+                            @else
+                                {{ $karyawan->status_karyawan }}
+                            @endif
+                        </td>
                     </tr>
                     <tr>
                         <th>Status</th>
@@ -49,16 +56,52 @@
             </div>
         </div>
 
-        <span>I. Penilaian Kompetensi</span> <br><br>
+        <span>I. Penilaian Kompetensi</span>
+        <div class="row">
+            <div class="col-7">
+                <table class="table table-bordered text-center align-middle">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th class="text-start">Standard Kompetensi</th>
+                            <th>Aktual</th>
+                            <th class="text-start">Tidak Lanjut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td align="left">Menguasai pekerjaan di divisinya</td>
+                            <td>X</td>
+                            <td align="left">Dibriefing dan diberikan pendampingan selama pekerjaan selama 1 minggu
+                                kedepan
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td align="left">Tidak pernah melakukan kecerobohan dalam pekerjaannya</td>
+                            <td>√</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td align="left">Telah mendapat training HACCP, GMP, CCP</td>
+                            <td>√</td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <span>II. CATATAN KEHADIRAN</span>
 
         <table class="table table-bordered border-dark text-center align-middle">
             <thead class="">
                 <tr>
-                    <th class="dhead" rowspan="3">No</th>
-                    <th class="dhead" rowspan="3">Keterangan</th>
+                    <th class="dhead text-center align-middle" rowspan="3">No</th>
+                    <th class="dhead text-center align-middle" rowspan="3">Keterangan</th>
                     <th class="dhead" colspan="24">Bulan</th>
-                    <th class="dhead" rowspan="3">Total</th>
+                    <th class="dhead align-middle" rowspan="3" colspan="2">Total</th>
                 </tr>
                 <tr>
                     <!-- Angka bulan -->
@@ -107,127 +150,63 @@
                 <!-- Data rows -->
                 <tr>
                     <td>1</td>
-                    <td>Terlambat</td>
-                    <!-- Kolom data bulan -->
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td align="left">Terlambat</td>
+                    @for ($bulan = 1; $bulan <= 12; $bulan++)
+                        <td>-</td>
+                        <td>-</td>
+                    @endfor
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>Sakit</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td align="left">Sakit</td>
+                    @for ($bulan = 1; $bulan <= 12; $bulan++)
+                        <td>-</td>
+                        <td>-</td>
+                    @endfor
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>Tanpa Keterangan</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td align="left">Tanpa Keterangan</td>
+                    @for ($bulan = 1; $bulan <= 12; $bulan++)
+                        <td>-</td>
+                        <td>-</td>
+                    @endfor
+                    <td>-</td>
+                    <td>-</td>
                 </tr>
                 <tr>
                     <td>4</td>
-                    <td>Izin</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
+                    <td align="left">Izin</td>
+                    @php
+                        $grandTotal = 0;
+                    @endphp
+                    @for ($bulan = 1; $bulan <= 12; $bulan++)
+                        @if ($karyawan->posisi == 'Staf Cabut')
+                            <td>{{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : 26 - $absen['total_per_bulan'][$bulan] }}
+                            </td>
+                            <td>-</td>
+                        @else
+                            <td>{{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : $absen['total_per_bulan'][$bulan] }}
+                            </td>
+                            <td>-</td>
+                        @endif
+                        @php
+                            $grandTotal += $absen['total_per_bulan'][$bulan];
+                        @endphp
+                    @endfor
+                    <td>{{ $grandTotal }}</td>
+                    <td>-</td>
                 </tr>
             </tbody>
             <tfoot class="">
                 <tr>
                     <th colspan="2">Grand Total</th>
-                    <th colspan="24"></th>
-                    <th>0</th>
+                    <th colspan="24">{{ $grandTotal }}</th>
+                    <th>-</th>
                 </tr>
             </tfoot>
         </table>
@@ -244,7 +223,18 @@
                 <p><strong>Catatan:</strong> 1 hari = 8 jam</p>
             </div>
             <div class="m-auto">
-                NILAI CATATAN KEHADIRAN : Baik Sekali <s>/ Baik / Cukup / Kurang</s>
+                NILAI CATATAN KEHADIRAN :
+                <span><b>
+                        @if ($grandTotal < 3)
+                            Baik Sekali
+                        @elseif($grandTotal >= 3 && $grandTotal <= 7)
+                            Baik
+                        @elseif($grandTotal > 7 && $grandTotal <= 12)
+                            Cukup
+                        @else
+                            Kurang
+                        @endif
+                    </b></span>
             </div>
         </div>
     </x-hccp-print>
@@ -281,19 +271,23 @@
                         <tbody>
                             @php
                                 $parameters = [
-                                    ['Disiplin', 90],
-                                    ['Sikap Kerja', 90],
-                                    ['Kerjasama', 80],
-                                    ['Tanggung jawab', 80],
-                                    ['Kesopanan', 80],
-                                    ['Kejujuran', 80],
-                                    ['Kerapian', 80],
-                                    ['Inisiatif', 80],
-                                    ['Pengetahuan', 80],
-                                    ['Keahlian', 80],
-                                    ['Leadership', 80],
-                                    ['Manajerial', 80],
+                                    ['Disiplin', rand(85, 95)],
+                                    ['Sikap Kerja', rand(80, 90)],
+                                    ['Kerjasama', rand(80, 90)],
+                                    ['Tanggung jawab', rand(85, 95)],
+                                    ['Kesopanan', rand(85, 95)],
+                                    ['Kejujuran', rand(90, 100)],
+                                    ['Kerapian', rand(80, 90)],
+                                    ['Inisiatif', rand(80, 90)],
+                                    ['Pengetahuan', rand(85, 95)],
+                                    ['Keahlian', rand(85, 95)],
+                                    ['Leadership', $divisi_id == 1 ? 'N/A' : rand(80, 90)],
+                                    ['Manajerial', $divisi_id == 1 ? 'N/A' : rand(80, 90)],
                                 ];
+
+                                $total = collect($parameters)
+                                    ->filter(fn($param) => is_numeric($param[1]))
+                                    ->sum(fn($param) => $param[1]);
                             @endphp
 
                             @foreach ($parameters as $index => $param)
@@ -305,7 +299,7 @@
                             @endforeach
                             <tr>
                                 <th colspan="2" class="text-center">TOTAL</th>
-                                <th class="text-end">980</th>
+                                <th class="text-end">{{ $total }}</th>
                             </tr>
                         </tbody>
                     </table>
@@ -348,10 +342,10 @@
                             <td>SP III = 40</td>
                         </tr>
                     </table>
-                    
+
                     <div class="d-flex p-2 border border-dark">
                         <div class="m-auto">
-                            Nilai = 
+                            Nilai =
                         </div>
                         <div class="m-auto" style="line-height: 1">
                             <p>Total Nilai - SP</p>
@@ -360,7 +354,7 @@
                         </div>
                     </div>
 
-                    
+
                 </div>
 
             </div>
@@ -371,7 +365,7 @@
                         <br>
                         <br>
                         <br>
-                        [  Head      ]
+                        [ Head ]
                     </span>
                 </div>
                 <div class="col-3"></div>
@@ -397,13 +391,19 @@
         </div>
         <div class="col-7">
             <h6 class="mb-5">V. REKOMENDASI</h6>
-            <p>Aktual Nilai : 81 </p>
+            <p>Aktual Nilai :
+                {{ number_format(
+                    collect($parameters)->filter(fn($param) => is_numeric($param[1]))->sum(fn($param) => $param[1]) /
+                        collect($parameters)->filter(fn($param) => is_numeric($param[1]))->count(),
+                    0,
+                ) }}
+            </p>
             <p>Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya. Ybs bisa dilanjut kontrak /
                 kerjasama dengan <br> perusahaan. Dipertimbangkan. . . . . . . </p>
         </div>
 
     </div>
-    
+
 </x-hccp-print>
 
 <style>

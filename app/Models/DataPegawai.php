@@ -16,76 +16,87 @@ class DataPegawai extends Model
 
     public static function hasilEvaluasi($value = null)
     {
-        $where = is_array($value) ? "a.karyawan_id_dari_api in (".implode(',', $value).") and" : '';
-        
-        $datas =  DB::select("SELECT 
-                a.id,
-                a.nama,
-                a.tgl_lahir,
-                a.jenis_kelamin,
-                a.posisi,
-                a.karyawan_id_dari_api as id_karyawan,
-                a.tgl_masuk,
-                b.divisi,
-                CASE 
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) 
-                    THEN '1'
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) 
-                    THEN '3'
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) 
-                    THEN '6'
-                    ELSE 'Karyawan Tetap'
-                END as status_karyawan,
-                CASE
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
-                    THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 1 MONTH), CURDATE())
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
-                    THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 3 MONTH), CURDATE())
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-                    THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 6 MONTH), CURDATE())
-                    ELSE 0
-                END as sisa_hari_sesuai_masa_percobaan
-                FROM data_pegawais as a
-                LEFT JOIN divisis as b on a.divisi_id = b.id
-                WHERE $where a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH);"
-                    );
-           return  $datas;
+        $query = "SELECT 
+                    a.id,
+                    a.nama,
+                    a.tgl_lahir,
+                    a.jenis_kelamin,
+                    a.posisi,
+                    a.karyawan_id_dari_api as id_karyawan,
+                    a.tgl_masuk,
+                    a.divisi_id,
+                    b.divisi,
+                    CASE 
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) 
+                        THEN '1'
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) 
+                        THEN '3'
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) 
+                        THEN '6'
+                        ELSE 'Karyawan Tetap'
+                    END as status_karyawan,
+                    CASE
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+                        THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 1 MONTH), CURDATE())
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+                        THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 3 MONTH), CURDATE())
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+                        THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 6 MONTH), CURDATE())
+                        ELSE 0
+                    END as sisa_hari_sesuai_masa_percobaan
+                    FROM data_pegawais as a
+                    LEFT JOIN divisis as b on a.divisi_id = b.id
+                    WHERE a.tgl_masuk <= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+                    ORDER BY a.nama";
+
+        // Jika $value adalah array dan tidak kosong, tambahkan kondisi WHERE
+        if (is_array($value) && !empty($value)) {
+            // Membuat placeholder untuk setiap ID
+            $placeholders = implode(',', array_fill(0, count($value), '?'));
+            $query .= " WHERE a.karyawan_id_dari_api IN ($placeholders)";
+            $datas = DB::select($query, $value);
+        } else {
+            // Jika $value kosong, ambil semua karyawan
+            $datas = DB::select($query);
+        }
+
+        return $datas;
     }
     public static function oneHasilEvaluasi($id = null)
     {
-        $where = $id ? "a.karyawan_id_dari_api = $id AND" : '';
-        
-        $datas = DB::selectOne("SELECT 
-                a.id,
-                a.nama,
-                a.tgl_lahir,
-                a.jenis_kelamin,
-                a.posisi,
-                a.karyawan_id_dari_api as id_karyawan,
-                a.tgl_masuk,
-                b.divisi,
-                CASE 
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) 
-                    THEN '1'
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) 
-                    THEN '3'
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) 
-                    THEN '6'
-                    ELSE 'Karyawan Tetap'
-                END as status_karyawan,
-                CASE
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
-                    THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 1 MONTH), CURDATE())
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
-                    THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 3 MONTH), CURDATE())
-                    WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
-                    THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 6 MONTH), CURDATE())
-                    ELSE 0
-                END as sisa_hari_sesuai_masa_percobaan
-                FROM data_pegawais as a
-                LEFT JOIN divisis as b on a.divisi_id = b.id
-                WHERE $where a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH);"
-        );
+        $query = "SELECT 
+                    a.id,
+                    a.nama,
+                    a.tgl_lahir,
+                    a.jenis_kelamin,
+                    a.posisi,
+                    a.karyawan_id_dari_api as id_karyawan,
+                    a.tgl_masuk,
+                    b.divisi,
+                    CASE 
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) 
+                        THEN '1'
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH) 
+                        THEN '3'
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH) 
+                        THEN '6'
+                        ELSE 'Karyawan Tetap'
+                    END as status_karyawan,
+                    CASE
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH)
+                        THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 1 MONTH), CURDATE())
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+                        THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 3 MONTH), CURDATE())
+                        WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+                        THEN DATEDIFF(DATE_ADD(a.tgl_masuk, INTERVAL 6 MONTH), CURDATE())
+                        ELSE 0
+                    END as sisa_hari_sesuai_masa_percobaan
+                    FROM data_pegawais as a
+                    LEFT JOIN divisis as b on a.divisi_id = b.id
+                    WHERE a.karyawan_id_dari_api = ?";
+
+        $datas = DB::selectOne($query, [$id]);
+
         return $datas;
     }
 }
