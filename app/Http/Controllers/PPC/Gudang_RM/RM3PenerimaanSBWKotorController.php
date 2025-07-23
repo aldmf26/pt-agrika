@@ -55,20 +55,26 @@ class RM3PenerimaanSBWKotorController extends Controller
     }
 
 
-    public function print($id)
+    public function print(Request $r)
     {
         $penerimaan =  DB::table('sbw_kotor')
             ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
             ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
             ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
-            ->where('sbw_kotor.id', $id)
+            ->where('sbw_kotor.id', $r->id)
+            ->orderBy('sbw_kotor.tgl', 'desc')
 
             ->first();
+
+        $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/detail_bjm_sinta?nm_partai=" . $r->nm_partai);
+        $bk = json_decode($bk, TRUE);
+
         $data = [
             'title' => 'PENERIMAAN SBW KOTOR',
-            'dok' => 'Dok.No.: FRM.WH.02.03, Rev.01',
+            'dok' => 'Dok.No.: FRM.WH.02.03, Rev.00',
             'penerimaan' => $penerimaan,
             'kriteria' => DB::table('kriteria_sbw_kotor')->get(),
+            'acuan' => $bk['data']
         ];
         return view('ppc.gudang_rm.penerimaan_sbw_kotor.print', $data);
     }

@@ -35,9 +35,9 @@
 
         .label {
             border: 1px solid #000;
-            padding: 10px;
+            padding: 5px;
             text-align: center;
-            width: 48%;
+            width: 30%;
             display: inline-block;
             margin: 1%;
         }
@@ -67,9 +67,20 @@
         .signature-table td {
             border: 1px solid black;
             text-align: center;
+            height: 35px;
+            font-size: 8px;
+        }
+
+        .ms-4 {
+            margin-left: 2.5rem !important;
+        }
+
+        /* .signature-table td {
+            border: 1px solid black;
+            text-align: center;
             height: 50px;
             font-size: 12px;
-        }
+        } */
 
         @media print {
             html {
@@ -97,17 +108,20 @@
                 @foreach ($labels as $d)
                     <template x-for="i in jumlah" :key="i">
                         <!-- Label pertama -->
-                        <div class="label mt-3">
+                        <div class="label mt-1">
                             <div class="header">
                                 <div class="d-flex justify-content-between">
                                     <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
-                                    <p>PT. AGRIKAGATYA ARUM</p>
+                                    <p style="font-size: 8px">PT. AGRIKAGATYA ARUM</p>
                                     <div></div>
                                 </div>
 
-                                <p><strong><u>Identitas Bahan {{ ucwords($d->kategori) }}</u></strong></p>
+                                <p class="text-center ms-4" style="font-size: 8px">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<strong><u>Identitas
+                                            Bahan
+                                            {{ ucwords($d->kategori) }}</u></strong></p>
                             </div>
-                            <table style="font-size: 10px; text-align: left">
+                            <table style="font-size: 8px; text-align: left">
                                 <tr>
                                     <td>Nama
                                         {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}

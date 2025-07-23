@@ -3,74 +3,111 @@
         <tr>
             <td>Jenis SBW Kotor</td>
             <td>:</td>
-            <td>{{ $penerimaan->nama }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->nama }}</td>
         </tr>
         <tr>
             <td>No Lot SBW</td>
             <td>:</td>
-            <td>{{ $penerimaan->no_invoice }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->no_invoice }}</td>
         </tr>
-        <tr>
+        {{-- <tr>
             <td>Keterangan</td>
             <td>:</td>
-           <td>{{ substr($penerimaan->nm_partai, 3) }}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
+            <td>{{ substr($penerimaan->nm_partai, 3) }}</td>
+        </tr> --}}
+
         <tr>
             <td>Tanggal Penerimaan</td>
             <td>:</td>
-            <td>{{ \Carbon\Carbon::parse($penerimaan->tgl)->format('d M Y') }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">
+                @php
+                    $tgl_terima = date('Y-m-d', strtotime($penerimaan->tgl . ' +1 day'));
+                @endphp
+                {{ tanggal($tgl_terima) }}</td>
+
         </tr>
         <tr>
             <td>Nama Rumah Walet</td>
             <td>:</td>
-            <td>{{ $penerimaan->rumah_walet }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->rumah_walet }}</td>
         </tr>
 
         <tr>
             <td>No Kendaraan</td>
             <td>:</td>
-            <td>{{ $penerimaan->no_kendaraan }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->no_kendaraan }}</td>
         </tr>
         <tr>
             <td>Pengemudi</td>
             <td>:</td>
-            <td>{{ $penerimaan->pengemudi }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->pengemudi }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td>Jumlah Sbw Kotor (Kg)</td>
+            <td>Jumlah Sbw Kotor (Gr)</td>
             <td>:</td>
-            <td>{{ number_format($penerimaan->kg, 1) }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['gr_awal'], 0) }} gr</td>
         </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            @php
+                $kg_bk = $acuan['gr_awal'];
+                $penerimaan_kg = $penerimaan->kg;
+            @endphp
+            <td style="border-bottom: 1px solid black"><input type="checkbox"
+                    {{ $kg_bk != $penerimaan_kg ? 'checked' : '' }} name="" id=""> <span
+                    style="font-size: 11px" class="align-middle">Berbeda dengan
+                    surat keterangan</span>
+
+            </td>
+            <td style="border-bottom: 1px solid black">&nbsp;<input type="checkbox"
+                    {{ $kg_bk == $penerimaan_kg ? 'checked' : '' }} name="" id=""> <span
+                    style="font-size: 11px" class="align-middle">Tidak berbeda dengan
+                    surat
+                    keterangan</span></td>
+        </tr>
+        @if ($kg_bk != $penerimaan_kg)
+            <tr>
+                <td></td>
+                <td></td>
+                <td style="font-size: 11px;border-bottom: 1px solid black" colspan="2">
+
+                    Alasan : kadar air masih tinggi saat dipanen hingga muat pengiriman
+
+
+
+                </td>
+
+            </tr>
+        @else
+        @endif
         <tr>
             <td>Jumlah Pcs</td>
             <td>:</td>
-            <td>{{ number_format($penerimaan->pcs, 0) }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['pcs_awal'], 0) }} pcs
+            </td>
         </tr>
         <tr>
             @php
-                // Konversi kg ke float, ganti koma dengan titik jika perlu
-                $kg = (float) str_replace(',', '.', $penerimaan->kg);
+                // Konversi kg ke float
+                $kg = (float) str_replace(',', '.', $acuan['gr_awal']);
 
-                // Hitung jumlah box berdasarkan 20 kg per box
-                $batas = round($kg / 20, 0);
+                // Hitung jumlah box: 20 kg per box
+                $jumlahBox = max(1, round($kg / 20000, 0)); // minimal 1 box
 
-                $maxPerRow = 10; // Maksimal kolom per baris
-                $jumlahKolom = max(1, $batas); // Minimal 1 kolom
-                $jumlahBarisKolom = ceil($jumlahKolom / $maxPerRow);
+                // Set total kolom sample yang ingin ditampilkan (default 20)
+                $totalBoxDisplay = max(20, $jumlahBox); // tampilkan minimal 20 kolom
 
-                // Set jumlah box (bisa disesuaikan logikanya jika perlu)
-                $jumlahBox = $jumlahKolom;
+                $maxPerRow = 10; // jumlah kolom per baris
+                $jumlahBaris = ceil($totalBoxDisplay / $maxPerRow);
             @endphp
             <td>Jumlah Sample</td>
             <td>:</td>
             <td>
-                {{ $kg < 20 ? '1 Kg / @ 1 box' : '20 Kg / @ ' . number_format($jumlahBox) . ' box' }}
+                {{ $kg < 20000 ? '1 gr / @ 1 box' : '20,000 gr / @ ' . number_format($jumlahBox) . ' box' }}
             </td>
         </tr>
 
@@ -83,22 +120,27 @@
             <th colspan="{{ $maxPerRow }}">No Reg Rumah Walet :</th>
         </tr>
 
-        @for ($baris = 0; $baris < $jumlahBarisKolom; $baris++)
+        @for ($baris = 0; $baris < $jumlahBaris; $baris++)
             @php
                 $start = $baris * $maxPerRow + 1;
-                $end = min(($baris + 1) * $maxPerRow, $jumlahKolom);
+                $end = min(($baris + 1) * $maxPerRow, $totalBoxDisplay);
             @endphp
+
             <tr>
                 <th>Kriteria Penerimaan</th>
                 @for ($i = $start; $i <= $end; $i++)
                     <th class="text-center">{{ $i }}</th>
                 @endfor
             </tr>
+
             @foreach ($kriteria as $k)
                 <tr>
                     <td>{{ $k->kriteria }}</td>
                     @for ($i = $start; $i <= $end; $i++)
-                        <td class="text-center">√</td>
+                        <td class="text-center">
+                            {{-- Hanya centang sesuai jumlah box asli --}}
+                            {!! $i <= $jumlahBox ? '&#10004;' : '&nbsp;' !!}
+                        </td>
                     @endfor
                 </tr>
             @endforeach
@@ -128,8 +170,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
+                        <td style="height: 50px"></td>
+                        <td style="height: 50px"></td>
                     </tr>
                     <tr>
                         <td class="text-center">[ADM. GUDANG]</td>
@@ -148,7 +190,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
+                        <td style="height: 50px"></td>
                     </tr>
                     <tr>
                         <td class="text-center">[Dokter Hewan]</td>

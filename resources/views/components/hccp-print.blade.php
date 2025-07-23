@@ -25,7 +25,7 @@
         }
 
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin: 15px;
@@ -40,7 +40,7 @@
             font-size: 12px;
             text-align: left;
             font-weight: normal;
-            margin-top: 100px;
+            margin-top: 60px;
 
         }
 
@@ -91,12 +91,12 @@
 </head>
 
 <body>
-    <div class="container-fluid p-5">
+    <div class="container-fluid p-3">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-3 ">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-6 mt-4">
+            <div class="col-6 ">
                 <div class="shapes">
                     <p class="cop_judul">{{ $title }}</p>
                 </div>

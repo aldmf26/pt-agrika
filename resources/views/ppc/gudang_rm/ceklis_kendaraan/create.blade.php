@@ -3,7 +3,8 @@
         <div class="card">
             <div class="card-header">
                 <h4>Form Pemeriksaan Kendaraan</h4>
-                <span>BERI TANDA V UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA X UNTUK TIAP KOLOM YANG TIDAK SESUAI STANDAR</span>
+                <span>BERI TANDA V UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA X UNTUK TIAP KOLOM YANG TIDAK SESUAI
+                    STANDAR</span>
             </div>
             <div class="card-body">
                 <form action="" method="POST">
@@ -28,7 +29,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -52,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="row mb-3">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -65,9 +66,9 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                     </div>
-    
+
                     <div class="table-responsive mt-4">
                         <table class="table table-bordered">
                             <thead class="bg-light">
@@ -79,33 +80,33 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($kondisi as $item)
-                                <tr>
-                                    <td>{{ $item->nomor }}</td>
-                                    <td>
-                                        {{ $item->kondisi }}
-                                        <input type="hidden" name="nomor_kondisi[]" value="{{ $item->id }}">
-                                    </td>
-                                    <td class="text-center">
-                                        <select name="check_wh[]" class="form-control">
-                                            <option value="">-</option>
-                                            <option value="V">V</option>
-                                            <option value="X">X</option>
-                                        </select>
-                                    </td>
-                                    <td class="text-center">
-                                        <select name="check_qa[]" class="form-control">
-                                            <option value="">-</option>
-                                            <option value="V">V</option>
-                                            <option value="X">X</option>
-                                        </select>
-                                    </td>
-                                </tr>
+                                @foreach ($kondisi as $item)
+                                    <tr>
+                                        <td>{{ $item->nomor }}</td>
+                                        <td>
+                                            {{ $item->kondisi }}
+                                            <input type="hidden" name="nomor_kondisi[]" value="{{ $item->id }}">
+                                        </td>
+                                        <td class="text-center">
+                                            <select name="check_wh[]" class="form-control">
+                                                <option value="">-</option>
+                                                <option value="V">V</option>
+                                                <option value="X">X</option>
+                                            </select>
+                                        </td>
+                                        <td class="text-center">
+                                            <select name="check_qa[]" class="form-control">
+                                                <option value="">-</option>
+                                                <option value="V">V</option>
+                                                <option value="X">X</option>
+                                            </select>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
                     </div>
-    
+
                     <div class="row mt-4">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -124,12 +125,12 @@
                             </div>
                         </div>
                     </div>
-    
+
                     <div class="form-group mt-3">
                         <label>Komentar</label>
                         <textarea name="komentar" class="form-control" rows="3"></textarea>
                     </div>
-    
+
                     <div class="mt-4 float-end">
                         <a href="{{ route('ppc.gudang-fg.2.index') }}" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -139,14 +140,13 @@
         </div>
     </div>
     @section('scripts')
-    <script>
-        $(document).ready(function() {
-            // Delay the initialization slightly to ensure DOM is fully ready
-            setTimeout(function() {
-                $('.select2suplier').select2();
-            }, 100);
-        });
-    </script>
-  
-        @endsection
+        <script>
+            $(document).ready(function() {
+                // Delay the initialization slightly to ensure DOM is fully ready
+                setTimeout(function() {
+                    $('.select2suplier').select2();
+                }, 100);
+            });
+        </script>
+    @endsection
 </x-app-layout>
