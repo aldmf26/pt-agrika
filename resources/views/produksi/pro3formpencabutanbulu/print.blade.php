@@ -145,11 +145,11 @@
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
-                            <th colspan="17">
+                            <th colspan="18">
                                 <p class="cop_judul mt-3">FORM PENCUCIAN AWAL, PENCABUTAN BULU & PENGERINGAN 1</p>
                                 <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p>
                             </th>
-                            <th class="align-top text-end text-nowrap" colspan="2">
+                            <th class="align-top text-end text-nowrap">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok :
                                     FRM.PRO.01.03, Rev 00</p>
                             </th>
