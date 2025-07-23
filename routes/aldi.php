@@ -106,8 +106,10 @@ Route::controller(Hrga2PenilaianKompetensi::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
+        Route::get('/absen', 'absen')->name('absen');
+        Route::get('/singkron', 'singkron')->name('singkron');
         Route::get('/penilaian/{id}', 'penilaian')->name('penilaian');
-        Route::get('/print/{id}', 'print')->name('print');
+        Route::get('/print/{id}/{divisi_id}', 'print')->name('print');
     });
 
 

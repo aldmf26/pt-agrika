@@ -8,6 +8,8 @@
                         style="height: 80px !important;"> --}}
                     PT AGRIKA GATYA ARUM
                 </a>
+
+                <x-notes />
             </div>
             <div class="header-top-right">
                 @livewire('header-notification')
