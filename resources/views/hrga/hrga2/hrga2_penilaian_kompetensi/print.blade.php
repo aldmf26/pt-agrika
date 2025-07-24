@@ -269,7 +269,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php
+                            {{-- @php
                                 $parameters = [
                                     ['Disiplin', rand(85, 95)],
                                     ['Sikap Kerja', rand(80, 90)],
@@ -288,7 +288,7 @@
                                 $total = collect($parameters)
                                     ->filter(fn($param) => is_numeric($param[1]))
                                     ->sum(fn($param) => $param[1]);
-                            @endphp
+                            @endphp --}}
 
                             @foreach ($parameters as $index => $param)
                                 <tr>
