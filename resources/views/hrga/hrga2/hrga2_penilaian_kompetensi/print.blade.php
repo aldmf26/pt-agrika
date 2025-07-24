@@ -72,9 +72,8 @@
                         <tr>
                             <td>1</td>
                             <td align="left">Menguasai pekerjaan di divisinya</td>
-                            <td>X</td>
-                            <td align="left">Dibriefing dan diberikan pendampingan selama pekerjaan selama 1 minggu
-                                kedepan
+                            <td>√</td>
+                            <td align="left">
                             </td>
                         </tr>
                         <tr>
