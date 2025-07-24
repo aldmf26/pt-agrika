@@ -13,7 +13,7 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
@@ -63,6 +63,8 @@
             margin-top: 0;
             /* Hilangkan jarak atas paragraf kedua */
             font-style: italic;
+            font-size: 10px;
+            font-weight: normal
         }
 
         .table {
@@ -80,26 +82,48 @@
             vertical-align: top;
             border-color: #41464b !important;
         }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* ⬅️ ini agar tidak membungkus teks */
+        }
     </style>
+
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 mt-2">
-                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            {{-- <div class="col-2 mt-4">
+                <img style="width: 80px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
-            <div class="col-4 ">
-                <p class="mt-2">No Dok : FRM.PRO.01.03, Rev 00</p>
+            <div class="col-4 mt-4">
+                <p class="" style="font-size: 10px">No Dok : FRM.PRO.01.03, Rev 00</p>
             </div>
             <div class="col-12 ">
-                <p class="cop_judul">FORM PENCABUTAN BULU dan LAPORAN HARIAN
-                </p>
-                <p class="cop_bawah text-center">Feather removal and Production Daily Report</p>
-            </div>
-            <div class="col-10">
-                <table>
+                <p class="cop_judul">FORM PENCUCIAN AWAL, PENCABUTAN BULU & PENGERINGAN 1</p>
+                <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p>
+            </div> --}}
+            {{-- <div class="col-10">
+                <table class="table-tes">
                     <tr>
                         <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
                         <td width="2%">: </td>
@@ -112,51 +136,80 @@
                         <td class="align-middle"> &nbsp;{{ $pengawas }}</td>
                     </tr>
                 </table>
-            </div>
-            <div class="col-lg-12">
-                <br>
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
+            </div> --}}
+            <div class="col-lg-12 ">
+
+                <table class=" " style="font-size: 11px" width="100%">
                     <thead>
+
                         <tr>
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+                            <th colspan="18">
+                                <p class="cop_judul mt-3">FORM PENCUCIAN AWAL, PENCABUTAN BULU & PENGERINGAN 1</p>
+                                <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p>
+                            </th>
+                            <th class="align-top text-end text-nowrap">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok :
+                                    FRM.PRO.01.03, Rev 00</p>
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
+
+                            <td class="align-middle"> &nbsp;:{{ $pengawas }}</td>
+                        </tr>
+
+                        <tr class="table-bawah">
                             <th class=" align-middle" rowspan="3">No</th>
-                            <th rowspan="3" class=" align-middle text-center">Nama Operator Cabut <br><span
-                                    class="fst-italic fw-lighter">Operator name</span></th>
+                            <th rowspan="3" class=" align-middle text-center">Nama Operator Cuci & <br> Cabut
+                                <br><span class="fst-italic fw-lighter">Wash & removal Operator <br> name</span>
+                            </th>
                             <th rowspan="3" class=" align-middle text-center">Kode Batch/Lot <br> <span
-                                    class="fst-italic fw-lighter">Batch/Lot code</span>
+                                    class="fst-italic fw-lighter">Batch/Lot code</span> </th>
+                            <th rowspan="3" class=" align-middle text-center">No Box</th>
+
                             <th rowspan="3" class=" align-middle text-center">Jenis<br> <span
                                     class="fst-italic fw-lighter">
                                     type</span>
                             </th>
-                            <th class="text-center" colspan="2">Jumlah <br>
+                            <th rowspan="3" class=" align-middle text-center">Tanggal <br> terima</th>
+                            <th class="text-center" colspan="2">Jumlah <br> diserahkan <br>
                                 <span class="fst-italic fw-lighter">Quantity</span>
                             </th>
                             <th class="text-center" colspan="2">Kembali <br> <span
                                     class="fst-italic fw-lighter">Retur</span>
                             </th>
-                            <th class="text-center" colspan="4">Hasil Pencabutan
+                            <th rowspan="3" class=" align-middle text-center">Tanggal <br> selesai</th>
+                            <th class="text-center" colspan="4">Hasil Pencabutan & Drying
                                 <br> <span class="fst-italic fw-lighter">Inspection results</span>
                             </th>
+                            <th rowspan="3" class=" align-middle text-center">Waktu <br> mulai <br> drying</th>
+                            <th rowspan="3" class=" align-middle text-center">Waktu <br> selesai <br> drying</th>
+                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (min susut 15%)</th>
+                            <th rowspan="3" class=" align-middle text-center">Ok/ Not Ok</th>
                             <th rowspan="3" class=" align-middle text-center">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
                             </th>
                         </tr>
-                        <tr>
-                            <th rowspan="2" class="text-end align-middle">Pcs</th>
-                            <th rowspan="2" class="text-end align-middle">Gr</th>
-                            <th rowspan="2" class="text-end align-middle">Pcs</th>
-                            <th rowspan="2" class="text-end align-middle">Gr</th>
+                        <tr class="table-bawah">
+                            <th rowspan="2" class="text-center align-middle">Pcs</th>
+                            <th rowspan="2" class="text-center align-middle">Gr</th>
+                            <th rowspan="2" class="text-center align-middle">Pcs</th>
+                            <th rowspan="2" class="text-center align-middle">Gr</th>
                             <th colspan="2" class="text-center align-middle">Ok</th>
                             <th colspan="2" class="text-center align-middle">Not Ok</th>
                         </tr>
-                        <tr>
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gr</th>
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gr</th>
+                        <tr class="table-bawah">
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
+
                         @foreach ($cabut as $c)
                             @php
                                 $sbw = DB::table('sbw_kotor')
@@ -164,50 +217,69 @@
                                     ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
                                     ->first();
                             @endphp
-                            <tr>
+                            <tr class="table-bawah">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ ucwords(strtolower($c['nama'])) }}</td>
+                                <td class="text-center">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
                                 <td class="text-center">{{ $sbw->no_invoice }}</td>
-                                <td class="text-center">{{ ucwords(strtolower($sbw->nama)) }}</td>
-                                <td class="text-end">{{ $c['pcs_awal'] }}</td>
-                                <td class="text-end">{{ $c['gr_awal'] }}</td>
-                                <td class="text-end">0</td>
-                                <td class="text-end">0</td>
-                                <td class="text-end">{{ $c['pcs_akhir'] }}</td>
-                                <td class="text-end">{{ $c['gr_akhir'] }}</td>
-                                <td class="text-end">0</td>
-                                <td class="text-end">0</td>
+                                <td class="text-center">{{ $c['no_box'] }}</td>
+                                <td class="text-center">{{ $sbw->nama }}</td>
+                                <td class="text-center">{{ tanggal($c['tgl']) }}</td>
+                                <td class="text-center">{{ number_format($c['pcs'], 0) }}</td>
+                                <td class="text-center">{{ number_format($c['gr'], 0) }}</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">0</td>
+                                <td class="text-center">{{ tanggal($c['tgl']) }}</td>
                                 @php
-                                    $susut = (1 - $c['gr_akhir'] / $c['gr_awal']) * 100;
+                                    $gr_akhir = $c['gr_akhir'] / $c['pcs'];
+                                    $gr_ok = $gr_akhir * ($c['pcs'] - $c['pcs_not_ok']);
+                                    $gr_not_ok = $gr_akhir * $c['pcs_not_ok'];
                                 @endphp
+                                <td class="text-center">{{ number_format($c['pcs'] - $c['pcs_not_ok'], 0) }}</td>
+                                <td class="text-center">{{ number_format($gr_ok, 0) }} </td>
 
-                                <td>dari {{ tanggal($c['tgl']) }} sampai {{ tanggal($c['tgl_akhir']) }}</td>
+                                <td class="text-center">{{ number_format($c['pcs_not_ok'], 0) }}</td>
+                                <td class="text-center">{{ number_format($gr_not_ok, 0) }}</td>
+                                <td class="text-center">17:00</td>
+                                <td class="text-center">03:00</td>
+                                <td class="text-center">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
+                                    %
+                                </td>
+                                <td>
+                                    @php
+                                        $susut = (1 - $c['gr_akhir'] / $c['gr']) * 100;
+                                    @endphp
+                                    @if ($susut < 15)
+                                        OK
+                                    @else
+                                        Not ok
+                                    @endif
+                                </td>
+                                <td></td>
+
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="20">&nbsp;</th>
+                        </tr>
+                        <tr class="table-bawah">
+
+                            <th style="border: none" colspan="15"></th>
+                            <th class="text-center" colspan="3">Dibuat Oleh:</th>
+                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="15"></th>
+                            <td colspan="3" style="height: 80px"></td>
+                            <td colspan="2" style="height: 80px"></td>
+                        </tr>
+
+                    </tfoot>
 
                 </table>
             </div>
-            <div class="col-7">
 
-            </div>
-            <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
 
 
         </div>
@@ -219,9 +291,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    {{-- <script>
+    <script>
         window.print();
-    </script> --}}
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
