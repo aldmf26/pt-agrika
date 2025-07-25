@@ -268,27 +268,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
-                                $parameters = [
-                                    ['Disiplin', rand(85, 95)],
-                                    ['Sikap Kerja', rand(80, 90)],
-                                    ['Kerjasama', rand(80, 90)],
-                                    ['Tanggung jawab', rand(85, 95)],
-                                    ['Kesopanan', rand(85, 95)],
-                                    ['Kejujuran', rand(90, 100)],
-                                    ['Kerapian', rand(80, 90)],
-                                    ['Inisiatif', rand(80, 90)],
-                                    ['Pengetahuan', rand(85, 95)],
-                                    ['Keahlian', rand(85, 95)],
-                                    ['Leadership', $divisi_id == 1 ? 'N/A' : rand(80, 90)],
-                                    ['Manajerial', $divisi_id == 1 ? 'N/A' : rand(80, 90)],
-                                ];
-
-                                $total = collect($parameters)
-                                    ->filter(fn($param) => is_numeric($param[1]))
-                                    ->sum(fn($param) => $param[1]);
-                            @endphp --}}
-
                             @foreach ($parameters as $index => $param)
                                 <tr>
                                     <td>{{ $index + 1 }}</td>

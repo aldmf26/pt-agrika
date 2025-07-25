@@ -20,7 +20,6 @@
                     <th class="head">No</th>
                     <th class="head">Nama Supplier</th>
                     <th class="head">Alamat Supplier</th>
-                    <th class="head">Produsen</th>
                     <th class="head">Contact Person</th>
                     <th class="head">No Telp</th>
                     <th class="head">Jenis Produk / Layanan</th>
@@ -29,23 +28,20 @@
                 </tr>
             </thead>
             <tbody>
-
-
                 @foreach ($datas as $d)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $d->nama_supplier }}</td>
                         <td>{{ $d->alamat }}</td>
-                        <td>{{ $d->produsen }}</td>
                         <td>{{ $d->contact_person }}</td>
                         <td>{{ $d->no_telp }}</td>
-                        <td>{{ $d->kategori }}</td>
+                        <td>
+                            ini produk nya
+                        </td>
                         <td>{{ $d->hasil_evaluasi }}</td>
                         <td>{{ $d->ket }}</td>
                     </tr>
                 @endforeach
-
-
             </tbody>
         </table>
     @else
@@ -80,6 +76,32 @@
             </tbody>
         </table>
     @endif
+    <div class="row">
+        <div class="col-6"></div>
+        <div class="col-2"></div>
+        <div class="col-4">
+            <table class="table table-bordered border-white" style="font-size: 11px">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 80px"></td>
+                        <td style="height: 80px"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">
+                        </td>
+                        <td class="text-center">
+                        </td>
 
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </x-hccp-print>

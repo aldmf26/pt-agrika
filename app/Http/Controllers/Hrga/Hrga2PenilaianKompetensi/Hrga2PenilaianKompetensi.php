@@ -14,7 +14,7 @@ class Hrga2PenilaianKompetensi extends Controller
 {
     public function index()
     {
-        $datas = DataPegawai::hasilEvaluasi();
+        $datas = DataPegawai::hasilEvaluasi('penilaian');
         $data = [
             'title' => 'Hrga 2 penilaian kompetensi',
             'datas' => $datas

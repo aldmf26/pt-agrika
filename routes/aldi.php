@@ -415,6 +415,7 @@ Route::controller(PUR1DaftarSupplierController::class)
         Route::get('/print', 'print')->name('print');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::get('/evaluasi/{id}', 'evaluasi')->name('evaluasi');
+        Route::get('/seleksi/{supplier}', 'seleksi')->name('seleksi');
         Route::post('/evaluasi/{id}', 'evaluasi_update')->name('evaluasi_update');
         Route::get('/print-evaluasi/{evaluasi}', 'evaluasi_print')->name('evaluasi_print');
         Route::post('/update/{id}', 'update')->name('update');
