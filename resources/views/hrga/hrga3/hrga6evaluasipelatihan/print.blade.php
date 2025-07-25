@@ -199,15 +199,16 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Dievaluasi oleh: Tulis nama Kepala Div</td>
+                        <td>Dievaluasi oleh: Kepala Div</td>
                         <td>
                             Kesimpulan:
                             <br>
-                            <input type="checkbox" name="" id="" checked> (1) Belum dapat melaksanakan
+                            <input type="checkbox" name="" id=""> (1) Belum dapat melaksanakan
                             tugas sesuai materi <br>
                             <input type="checkbox" name="" id=""> (2) Dapat melaksanakan tugas namun
                             harus dipantau ketat <br>
-                            <input type="checkbox" name="" id=""> (3) Dapat melaksanakan tugas tanpa
+                            <input type="checkbox" name="" id="" checked> (3) Dapat melaksanakan tugas
+                            tanpa
                             dipantau ketat <br>
                             <input type="checkbox" name="" id=""> (4) Dapat memberikan training
                             terkait dengan aktivitas <br>

@@ -14,16 +14,27 @@ class PUR1DaftarSupplierController extends Controller
 {
     public function index(Request $r)
     {
-        $datas = Suplier::latest()->get();
+        $kategori = $r->kategori ?? 'barang';
+        $datas = Suplier::where('kategori', $kategori)->latest()->get();
 
         $data = [
             'title' => 'PUR 1 Daftar Supplier',
             'datas' => $datas,
             'rumah_walet' => DB::table('rumah_walet')->get(),
-            'k' => $r->k ?? 'satu',
+            'kategori' => $kategori,
         ];
 
         return view('pur.seleksi.daftar_supplier.index', $data);
+    }
+
+    public function seleksi(Suplier $supplier)
+    {
+        $data = [
+            'title' => 'Seleksi Supplier',
+            'supplier' => $supplier,
+            'dok' => 'Dok.No.: FRM.PUR.02.02, Rev.00',
+        ];
+        return view('pur.seleksi.daftar_supplier.seleksi', $data);
     }
 
     public function create()
@@ -145,16 +156,18 @@ class PUR1DaftarSupplierController extends Controller
         DB::beginTransaction();
 
         try {
-            Suplier::create([
-                'nama_supplier' => $r->nama_supplier,
-                'kategori' => $r->jenis_produk,
-                'alamat' => $r->alamat_supplier,
-                'produsen' => $r->produsen,
-                'contact_person' => $r->contact_person,
-                'no_telp' => $r->no_telp,
-                'ket' => $r->ket,
-                'hasil_evaluasi' => $r->hasil,
-            ]);
+            for ($i = 0; $i < count($r->nama_supplier); $i++) {
+                Suplier::create([
+                    'nama_supplier' => $r->nama_supplier[$i],
+                    'kategori' => $r->jenis_produk[$i],
+                    'alamat' => $r->alamat_supplier[$i],
+                    'produsen' => 0,
+                    'contact_person' => $r->contact_person[$i],
+                    'no_telp' => $r->no_telp[$i],
+                    'ket' => $r->keterangan[$i],
+                    'hasil_evaluasi' => 0,
+                ]);
+            }
 
             DB::commit();
 

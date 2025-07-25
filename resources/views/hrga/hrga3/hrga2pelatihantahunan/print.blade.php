@@ -76,7 +76,7 @@
             </div>
             <div class="col-lg-8"></div>
             <div class="col-lg-4">
-                <p class="fw-bold" style="font-size: 11px">Periode : {{ $tahun }}</p>
+                <p class="fw-bold" style="font-size: 11px">Tahun : {{ $tahun }}</p>
             </div>
 
             <div class="col-lg-12">

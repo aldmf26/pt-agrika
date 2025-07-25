@@ -62,3 +62,14 @@ if (!function_exists('formatTglGaji')) {
         return date('M Y', strtotime($tahun . '-' . $bulan . '-01'));
     }
 }
+if (!function_exists('jenisProduk')) {
+    function jenisProduk()
+    {
+        return [
+            'barang' => 'Barang',
+            'kemasan' => 'Kemasan',
+            'lainnya' => 'Sbw',
+            'jasa' => 'Jasa',
+        ];
+    }
+}

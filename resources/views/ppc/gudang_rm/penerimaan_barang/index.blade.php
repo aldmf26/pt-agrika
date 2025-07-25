@@ -8,7 +8,6 @@
                     @livewire('ppc.tbh-barang', ['kategori' => 'barang'])
                 </x-modal>
             </div>
-
         </div>
         <div>
             <a href="{{ route('ppc.gudang-rm.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>

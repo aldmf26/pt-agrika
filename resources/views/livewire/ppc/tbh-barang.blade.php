@@ -9,8 +9,8 @@
         </div>
         <div x-show="showProduk">
             <div class="input-group mb-2 mt-3">
-                <input wire:model.live="cari" type="text" id="pencarianInput" class="form-control form-control-sm" placeholder="Cari produk"
-                    aria-label="Username" aria-describedby="basic-addon1">
+                <input wire:model.live="cari" type="text" id="pencarianInput" class="form-control form-control-sm"
+                    placeholder="Cari produk" aria-label="Username" aria-describedby="basic-addon1">
             </div>
             <div style="overflow: auto; height: 300px">
                 @if (!empty($pesan))
@@ -24,6 +24,7 @@
                             <th>Nama Barang</th>
                             <th>Satuan</th>
                             <th>Supplier</th>
+                            <th>Spesifikasi (untuk seleksi supplier)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +35,7 @@
                                 <td>{{ $d->nama_barang }}</td>
                                 <td>{{ $d->satuan }}</td>
                                 <td>{{ $d->supplier->nama_supplier }}</td>
+                                <td>{{ $d->spek }}</td>
                                 {{-- <td>{{ $d->no_lot }}</td> 
                                 <td>
                                     <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"
@@ -90,6 +92,13 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="">Spesifikasi</label>
+                    <input type="text" class="form-control" wire:model="spek"
+                        placeholder="Contoh: Berbahan Stainless steel, panjang">
                 </div>
             </div>
 

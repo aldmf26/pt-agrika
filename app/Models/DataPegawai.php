@@ -46,17 +46,17 @@ class DataPegawai extends Model
                     END as sisa_hari_sesuai_masa_percobaan
                     FROM data_pegawais as a
                     LEFT JOIN divisis as b on a.divisi_id = b.id
-                    WHERE a.tgl_masuk <= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
-                    ORDER BY a.nama";
+                    ";
 
-        // Jika $value adalah array dan tidak kosong, tambahkan kondisi WHERE
+        if ($value == 'penilaian') {
+            $query .= " WHERE a.tgl_masuk <= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)";
+        }
+
         if (is_array($value) && !empty($value)) {
-            // Membuat placeholder untuk setiap ID
             $placeholders = implode(',', array_fill(0, count($value), '?'));
-            $query .= " WHERE a.karyawan_id_dari_api IN ($placeholders)";
+            $query .= " AND a.karyawan_id_dari_api IN ($placeholders)";
             $datas = DB::select($query, $value);
         } else {
-            // Jika $value kosong, ambil semua karyawan
             $datas = DB::select($query);
         }
 

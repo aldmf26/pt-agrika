@@ -16,6 +16,7 @@ class TbhBarang extends Component
     public $kodeBarang = "";
     public $supplierId = "";
     public $satuan = "";
+    public $spek = "";
     public $kategori;
     public $pesan = "";
     public $cari;
@@ -32,11 +33,12 @@ class TbhBarang extends Component
             'kode_barang' => $this->kodeBarang,
             'supplier_id' => $this->supplierId,
             'satuan' => $this->satuan,
+            'spek' => $this->spek,
             'kategori' => $this->kategori,
             'admin' => auth()->user()->name,
         ]);
 
-        $this->reset(['nama_barang', 'kodeBarang', 'satuan']);
+        $this->reset(['nama_barang', 'kodeBarang', 'satuan', 'spek']);
     }
 
     public function hapus($id)
