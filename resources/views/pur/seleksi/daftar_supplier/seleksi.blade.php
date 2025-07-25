@@ -91,7 +91,7 @@
             <th colspan="2" class="text-center fw-bold bg-info">SAMPEL</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : <br>
+            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : TIDAK TERSEDIA SAMPLE<br>
                 a.
             </td>
         </tr>
