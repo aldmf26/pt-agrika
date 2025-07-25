@@ -156,15 +156,18 @@
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
-                            <th colspan="6" class="text-center">
-                                <p class="cop_judul mt-3 ">FORM HARIAN PEMILAHAN AKHIR</p>
-                                <p class="cop_bawah text-center">Daily final grading</p>
-                            </th>
-                            <th class="align-top text-end text-nowrap">
+                            <th colspan="5"></th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.07,
                                     Rev 00</p>
                             </th>
 
+                        </tr>
+                        <tr>
+                            <th colspan="8" class="text-center">
+                                <p class="cop_judul">FORM HARIAN PEMILAHAN AKHIR</p>
+                                <p class="cop_bawah text-center">Daily final grading</p>
+                            </th>
                         </tr>
                         <tr>
                             <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
@@ -226,17 +229,17 @@
                             <th colspan="8">&nbsp;</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="7"></th>
-                            <th class="text-center">Dibuat Oleh:</th>
+                            <th style="border: none" colspan="6"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="7"></th>
-                            <td style="height: 80px"></td>
+                            <th style="border: none" colspan="6"></th>
+                            <td style="height: 40px" colspan="2"></td>
 
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="7"></th>
-                            <td class="text-center">KA. GRADING</td>
+                            <th style="border: none" colspan="6"></th>
+                            <td class="text-center" colspan="2">KA. GRADING</td>
 
                         </tr>
                     </tfoot>

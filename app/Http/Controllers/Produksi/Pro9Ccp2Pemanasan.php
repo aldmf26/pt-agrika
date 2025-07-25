@@ -6,21 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Models\PemanasanCpp2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class Pro9Ccp2Pemanasan extends Controller
 {
     public function index(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tanggal = date('Y-m-d');
-        } else {
-            $tanggal = $r->tgl;
-        }
+        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
+        $pemanasan = json_decode($pemanasan, TRUE);
         $data = [
             'title' => 'Form pemanasan CCP 2',
-            'pemanasan' => PemanasanCpp2::where('tanggal', $tanggal)->orderBy('id', 'desc')->get(),
-            'tgl' => $tanggal,
-
+            'pemanasan' => $pemanasan['data'],
         ];
         return view('produksi.pro9ccp2pemanasan.index', $data);
     }
@@ -58,16 +54,13 @@ class Pro9Ccp2Pemanasan extends Controller
 
     public function print(Request $r)
     {
-        if (empty($r->tgl)) {
-            $tanggal = date('Y-m-d');
-        } else {
-            $tanggal = $r->tgl;
-        }
+        $tgl = $r->tgl;
+        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_new_detail?tgl=$tgl");
+        $pemanasan = json_decode($pemanasan, TRUE);
         $data = [
             'title' => 'Form pemanasan CCP 2',
-            'pemanasan' => PemanasanCpp2::where('tanggal', $tanggal)->orderBy('id', 'desc')->get(),
-            'tgl' => $tanggal,
-            'ruang' => DB::table('ruangans')->where('tanggal', $tanggal)->first(),
+            'pemanasan' => $pemanasan['data'],
+            'tgl' => date('Y-m-d', strtotime('-1 day', strtotime($tgl))),
 
         ];
         return view('produksi.pro9ccp2pemanasan.print', $data);
