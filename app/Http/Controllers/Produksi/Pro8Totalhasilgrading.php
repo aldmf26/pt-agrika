@@ -22,7 +22,7 @@ class Pro8Totalhasilgrading extends Controller
 
     public function print(Request $r)
     {
-        $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/ttlgrading_detail?tgl=$r->tgl");
+        $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/ttlgrading_detail2?tgl=$r->tgl");
         $grading = json_decode($grading, TRUE);
         $data = [
             'title' => 'Form pemilahan akhir',

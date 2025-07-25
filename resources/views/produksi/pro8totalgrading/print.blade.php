@@ -13,18 +13,11 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
-            /* Atur jarak bawah paragraf pertama */
 
-        }
-
-        .cop_bawah {
-            margin-top: 0;
-            /* Hilangkan jarak atas paragraf kedua */
-            font-style: italic;
         }
 
         .shapes {
@@ -66,6 +59,14 @@
             padding-left: 6px;
         }
 
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+            font-size: 10px;
+            font-weight: normal
+        }
+
         .table {
             --bs-table-bg: transparent;
             --bs-table-accent-bg: transparent;
@@ -81,13 +82,35 @@
             vertical-align: top;
             border-color: #41464b !important;
         }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* ⬅️ ini agar tidak membungkus teks */
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 mt-2">
+            {{-- <div class="col-2 mt-2">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
@@ -113,26 +136,53 @@
 
                 </table>
 
-            </div>
+            </div> --}}
             <div class="col-lg-12">
-                <br>
 
-                <table class="table table-bordered" style="font-size: 11px">
+
+                <table width="100%" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center align-middle">No</th>
-                            <th class="text-center align-middle">Jenis Material<br><span
+                            <th colspan="8">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+                            <th colspan="5" class="text-center">
+                                <p class="cop_judul mt-3 ">FORM TOTAL HASIL PEMILAHAN AKHIR</p>
+                                <p class="cop_bawah text-center">Final grading results</p>
+                            </th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.08,
+                                    Rev 00</p>
+                            </th>
+
+                        </tr>
+
+                        <tr>
+                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
+                            </td>
+
+                            <td style="padding: 8px;" class="align-middle"> : {{ tanggal($tgl) }}</td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th rowspan="2" class="text-center align-middle">No</th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Material<br><span
                                     class="fst-italic fw-lighter">Material Type<span></th>
-                            <th class="text-center align-middle">Kode Batch<br><span class="fst-italic fw-lighter">Batch
+                            <th rowspan="2" class="text-center align-middle">Kode Batch<br><span
+                                    class="fst-italic fw-lighter">Batch
                                     code<span></th>
-                            <th class="text-center align-middle">Jenis Produk<br><span
+                            <th colspan="2" class="text-center align-middle">Jumlah</th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
-                            <th class="text-center align-middle">Jumlah Box</th>
-                            <th class="text-center align-middle">Keterangan<br><span
-                                    class="fst-italic fw-lighter">Remarks<span></th>
-
-
-
+                            <th rowspan="2" class="text-center align-middle">Jumlah <br> Box</th>
+                            <th rowspan="2" class="text-center align-middle">Keterangan<br><span
+                                    class="fst-italic fw-lighter">Remarks<span>
+                            </th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gram</th>
                         </tr>
 
                     </thead>
@@ -148,20 +198,38 @@
                                     ->whereIn('nm_partai', $partaiArray)
                                     ->get();
                             @endphp
-                            <tr>
+                            <tr class="table-bawah">
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td class="text-center align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-center align-middle">{{ $g['pcs'] }}</td>
+                                <td class="text-center align-middle">{{ $g['gr'] }}</td>
                                 <td class="text-center align-middle">{{ $g['grade'] }}</td>
                                 <td class="text-center align-middle">{{ $g['box'] }}</td>
                                 <td class="text-center align-middle"></td>
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="20">&nbsp;</th>
+                        </tr>
+                        <tr class="table-bawah">
+
+                            <th style="border: none; text-align: start" colspan="5"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            <th class="text-center">Diperiksa Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="5"></th>
+                            <td colspan="2" style="height: 80px"></td>
+                            <td style="height: 80px"></td>
+                        </tr>
+                    </tfoot>
 
                 </table>
             </div>
-            <div class="col-9">
+            {{-- <div class="col-9">
 
 
             </div>
@@ -185,7 +253,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
 
 
         </div>

@@ -4,31 +4,41 @@
             <h5 class="float-start"></h5>
 
 
-            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
+            {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
+                    class="fas fa-plus"></i> add</button> --}}
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
-                        <th class="text-center">No</th>
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-end">Pcs</th>
-                        <th class="text-end">Box</th>
-                        <th class="text-center">Aksi</th>
+                        <th class="">No</th>
+                        <th class="">Tanggal</th>
+                        <th class="">Regu</th>
+                        <th class="">Pcs</th>
+                        <th class="">Gr</th>
+                        <th class="">Gr Akhir</th>
+                        <th>Aksi</th>
                     </tr>
+
                 </thead>
                 <tbody>
-                    @foreach ($pencucian as $p)
+                    @foreach ($cabut as $c)
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ tanggal($p->tanggal) }}</td>
-                            <td>{{ $p->total_pcs }}</td>
-                            <td>{{ $p->jumlah_data }}</td>
-                            <td class="text-center">
-                                <a href="{{ route('produksi.4.print', ['tgl' => $p->tanggal, 'nama_regu' => $p->nama_operator]) }}"
-                                    target="_blank" class="btn btn-sm btn-primary "><i class="fas fa-print"></i> </a>
-                            </td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ tanggal($c['tgl']) }}</td>
+                            <td>{{ ucwords(strtolower($c['nm_pengawas'])) }}</td>
+                            <td>{{ number_format($c['pcs'], 0) }}</td>
+                            <td>{{ number_format($c['gr'], 0) }}</td>
+                            <td>{{ number_format($c['gr_akhir'], 0) }}</td>
+                            @php
+                                $id_pengawas = $c['id_pengawas'];
+                                $pengawas = $c['nm_pengawas'];
+                                $tanggal = $c['tgl'];
+                            @endphp
+                            <td><a target="_blank"
+                                    href="{{ route('produksi.4.print', ['tgl' => $tanggal, 'id_pengawas' => $id_pengawas, 'pengawas' => $pengawas]) }}"
+                                    class="btn btn-warning btn-sm"> <i class="fas fa-print"></i> </a></td>
+
                         </tr>
                     @endforeach
                 </tbody>
@@ -54,12 +64,12 @@
 
 
     <!-- Modal Tambah -->
-    <form action="{{ route('produksi.4.store') }}" method="POST">
+    {{-- <form action="{{ route('produksi.4.store') }}" method="POST">
         @csrf
         <x-modal_plus size="modal-xl" id="tambah">
             <div class="row">
 
-                {{-- Header Input --}}
+               
                 <div class="col-lg-3">
                     <label for="">Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" value="{{ date('Y-m-d') }}">
@@ -97,7 +107,6 @@
                     <div class="col-lg-2"><label>Pcs</label></div>
                 </div>
 
-                {{-- Dynamic Rows --}}
                 @foreach ($anak as $a)
                     <div class="row mb-4">
                         <div class="col-lg-3">
@@ -143,7 +152,7 @@
             </div>
 
         </x-modal_plus>
-    </form>
+    </form> --}}
     @section('scripts')
         <script>
             $(document).ready(function() {

@@ -148,7 +148,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pencucian as $p)
+                        {{-- @foreach ($pencucian as $p)
                             @php
                                 $sbw = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
@@ -160,7 +160,7 @@
                                 <td>{{ $p->pegawai->nama }}</td>
                                 <td>{{ $sbw->no_invoice ?? $p->nm_partai }}</td>
                                 <td class="text-end">{{ $p->pcs }}</td>
-                                {{-- <td>{{ $p->gr }}</td> --}}
+
                                 <td class="text-end">{{ date('H:i', strtotime($p->start)) }}</td>
                                 <td class="text-end">{{ date('H:i', strtotime($p->end)) }}</td>
                                 @php
@@ -173,7 +173,7 @@
                                 <td class="text-center">{{ $p->pegawai->nama }}</td>
                                 <td></td>
                             </tr>
-                        @endforeach
+                        @endforeach --}}
                     </tbody>
 
                 </table>

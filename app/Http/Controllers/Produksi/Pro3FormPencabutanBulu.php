@@ -10,13 +10,8 @@ class Pro3FormPencabutanBulu extends Controller
 {
     public function index(Request $r)
     {
-
-
         $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_pengeringan_new");
         $cabut = json_decode($cabut, TRUE);
-
-
-
         $data = [
             'title' => 'Form Pencabutan Bulu',
             'cabut' => $cabut['data'],
@@ -34,7 +29,6 @@ class Pro3FormPencabutanBulu extends Controller
             'tgl' => $r->tgl,
             'pengawas' => $r->pengawas
         ];
-
         return view('produksi.pro3formpencabutanbulu.print', $data);
     }
 }

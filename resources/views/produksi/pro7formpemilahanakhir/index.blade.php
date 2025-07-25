@@ -36,7 +36,7 @@
                             <td>{{ $g['pcs'] }}</td>
                             <td>{{ $g['gr'] }}</td>
                             <td class="text-center">
-                                <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama, 'kode_lot' => $sbw->no_invoice]) }}"
+                                <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama ?? '-', 'kode_lot' => $sbw->no_invoice]) }}"
                                     target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
                                     Print</a>
                             </td>

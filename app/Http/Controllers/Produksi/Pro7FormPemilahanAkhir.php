@@ -13,6 +13,8 @@ class Pro7FormPemilahanAkhir extends Controller
 
         $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/grading");
         $grading = json_decode($grading, TRUE);
+
+
         $data = [
             'title' => 'Form pemilahan akhir',
             'grading' => $grading['data'],

@@ -230,8 +230,10 @@
                                 <td class="text-center">0</td>
                                 <td class="text-center">{{ tanggal($c['tgl']) }}</td>
                                 @php
-                                    $gr_akhir = $c['gr_akhir'] / $c['pcs'];
-                                    $gr_ok = $gr_akhir * ($c['pcs'] - $c['pcs_not_ok']);
+
+                                    $gr_akhir = $c['pcs'] == 0 ? $c['gr_akhir'] : $c['gr_akhir'] / $c['pcs'];
+                                    $gr_ok =
+                                        $c['pcs'] == 0 ? $c['gr_akhir'] : $gr_akhir * ($c['pcs'] - $c['pcs_not_ok']);
                                     $gr_not_ok = $gr_akhir * $c['pcs_not_ok'];
                                 @endphp
                                 <td class="text-center">{{ number_format($c['pcs'] - $c['pcs_not_ok'], 0) }}</td>
