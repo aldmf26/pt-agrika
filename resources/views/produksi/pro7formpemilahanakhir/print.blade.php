@@ -104,6 +104,14 @@
             white-space: nowrap;
             /* ⬅️ ini agar tidak membungkus teks */
         }
+
+        .table-bawah2 {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -172,8 +180,8 @@
                         <tr>
                             <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
                             </td>
-
                             <td class="align-middle"> : {{ tanggal($tgl) }}</td>
+
                         </tr>
                         <tr>
                             <td>Kode Batch/Lot
@@ -181,12 +189,25 @@
                             </td>
 
                             <td colspan="2" class="align-middle"> : {{ $kode_lot }}</td>
+
+
+                            <td></td>
+                            <td class="table-bawah2">Pcs Awal</td>
+                            <td class="table-bawah2">Gram Awal</td>
+                            <td class="table-bawah2">Pcs Akhir</td>
+                            <td class="table-bawah2">Gr Akhir</td>
                         </tr>
                         <tr>
                             <td>Jenis Material
                                 <br> <span class="fst-italic"> Material type </span>
                             </td>
                             <td class="align-middle"> : {{ $grade }}</td>
+                            <td></td>
+                            <td></td>
+                            <td class="table-bawah2">{{ sumBk($grading, 'pcs') }}</td>
+                            <td class="table-bawah2">{{ sumBk($grading, 'gr') }}</td>
+                            <td class="table-bawah2">Pcs Akhir</td>
+                            <td class="table-bawah2">Gr Akhir</td>
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="3" class="text-center align-middle">No</th>
@@ -215,10 +236,10 @@
                             <tr class="table-bawah">
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $g['grade'] }}</td>
-                                <td class="text-center">{{ $g['pcs'] }}</td>
-                                <td class="text-center">{{ $g['gr'] }}</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">0</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? 0 : $g['pcs'] }}</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? 0 : $g['gr'] }}</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
                                 <td class="text-center">{{ $g['box'] }}</td>
                                 <td class="text-center"></td>
                             </tr>
