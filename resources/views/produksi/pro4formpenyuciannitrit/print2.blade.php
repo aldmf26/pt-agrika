@@ -106,116 +106,133 @@
         }
     </style>
 
-
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            {{-- <div class="col-2 mt-2">
-                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            {{-- <div class="col-2 mt-4">
+                <img style="width: 80px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
-            <div class="col-4 ">
-                <p class="mt-2">No Dok : FRM.PRO.01.06, Rev 00</p>
+            <div class="col-4 mt-4">
+                <p class="" style="font-size: 10px">No Dok : FRM.PRO.01.03, Rev 00</p>
             </div>
             <div class="col-12 ">
-
-                <p class="cop_judul">FORM CETAK</p>
-                <p class="cop_bawah text-center">Moulding results</p>
-
-            </div>
-
-            <div class="col-10">
-                <table>
+                <p class="cop_judul">FORM PENCUCIAN AWAL, PENCABUTAN BULU & PENGERINGAN 1</p>
+                <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p>
+            </div> --}}
+            {{-- <div class="col-10">
+                <table class="table-tes">
                     <tr>
-                        <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
-                        <td class="align-middle">&nbsp; : {{ tanggal($tgl) }}</td>
+                        <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
+                        <td width="2%">: </td>
+                        <td class="align-middle">&nbsp; {{ tanggal($tgl) }}</td>
                     </tr>
                     <tr>
-                        <td>Regu <br> <span class="fst-italic">Team</span></td>
-                        <td class="align-middle">&nbsp; : {{ $pengawas }}</td>
+                        <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
+                        <td width="2%">:</td>
+
+                        <td class="align-middle"> &nbsp;{{ $pengawas }}</td>
                     </tr>
                 </table>
             </div> --}}
-            <div class="col-lg-12">
+            <div class="col-lg-12 ">
 
-                <table style="font-size: 11px" width="100%">
+                <table class=" " style="font-size: 11px" width="100%">
                     <thead>
+
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
                             <th colspan="9">
-                                <p class="cop_judul mt-3">FORM CETAK</p>
-                                <p class="cop_bawah text-center">Moulding results</p>
+                                <p class="cop_judul mt-3">FORM PENCUCIAN NITRIT (CCP 1)</p>
+                                <p class="cop_bawah text-center">Material cleaning and washing CCP 1</p>
                             </th>
                             <th class="align-top text-end text-nowrap">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.06,
-                                    Rev 00</p>
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.04,
+                                    Rev.00</p>
                             </th>
 
                         </tr>
                         <tr>
-                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span></td>
-                            <td class="align-middle">&nbsp; : {{ tanggal($tgl) }}</td>
-                        </tr>
-                        <tr>
-
-                            <td>Regu <br> <span class="fst-italic">Team</span></td>
-                            <td class="align-middle">&nbsp; : {{ $pengawas }}</td>
-                        </tr>
-                        <tr class="table-bawah">
-                            <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-center align-middle">Nama Personil Cetak <br> <span
-                                    class="fst-italic fw-lighter">Personil
-                                    name</th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
-                                    class="fst-italic fw-lighter">Batch/Lot code
-                            </th>
-                            <th rowspan="2" class="text-center align-middle">No Box
-                            </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis <br> <span
-                                    class="fst-italic fw-lighter">Type</th>
-                            <th colspan="2" class="text-center ">Berat Kering <br> <span
-                                    class="fst-italic fw-lighter">Qty for moulding
-                            </th>
-                            <th colspan="2" class="text-center ">Berat Hasil <br> <span
-                                    class="fst-italic fw-lighter">Result qty</th>
-                            <th rowspan="2" class="text-center align-middle">Hcr <br> <span
-                                    class="fst-italic fw-lighter">(gr)</th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan <br> <span
-                                    class="fst-italic fw-lighter">Remarks</th>
-                        </tr>
-                        <tr class="table-bawah">
-                            <th class="text-center ">Pcs</th>
-                            <th class="text-center ">Gr</th>
-                            <th class="text-center ">Pcs</th>
-                            <th class="text-center ">Gr</th>
+                            <td>Hari/Tanggal &nbsp;<br> <span class="fst-italic">date</span> </td>
+                            <td class="align-middle"> &nbsp;:{{ tanggal($tgl) }}</td>
+                            <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
+                            <td class="align-middle"> &nbsp;:{{ $nama_regu }}</td>
                         </tr>
 
+                        <tr class="table-bawah">
+                            <th class="text-center align-middle" rowspan="2">No</th>
+                            <th class="text-center align-middle" rowspan="2">Nama Operator Cabut <br> <span
+                                    class="fst-italic fw-lighter">Operator
+                                    name</span></th>
+                            <th class="text-center align-middle" rowspan="2">Kode Batch/Lot <br> <span
+                                    class="fst-italic fw-lighter">Batch/Lot
+                                    code</span></th>
+                            <th class="text-center align-middle" rowspan="2">No Box</th>
+                            <th class="text-center  ">Jumlah <br> <span class="fst-italic fw-lighter">Quantity</span>
+                            </th>
+                            <th class="text-center" colspan="2">Jam Cuci <br> <span
+                                    class="fst-italic fw-lighter">Washing
+                                    time</span></th>
+                            <th class="text-center align-middle" rowspan="2">Total Waktu <br> <span
+                                    class="fst-italic fw-lighter">Time</span></th>
+                            <th class="text-center align-middle" rowspan="2">Waktu Cuci Per Pcs <br> <span
+                                    class="fst-italic fw-lighter">(30 detik/s)</span></th>
+                            <th class="text-center align-middle" rowspan="2">Nama Operator Pencucian <br> CCP 1<br>
+                                <span class="fst-italic fw-lighter">Cleaner name CCP 1</span>
+                            </th>
+                            <th class="text-center align-middle" rowspan="2">Keterangan<br> <span
+                                    class="fst-italic fw-lighter">Remaks</span></th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Awal/Mulai</th>
+                            <th class="text-center">Akhir/Stop</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        @foreach ($cetak as $c)
+                        @foreach ($pencucian as $c)
                             @php
+
+                                $namaAnak = strtolower($c['nm_anak']);
+                                if (!isset($counterNamaAnak[$namaAnak])) {
+                                    $counterNamaAnak[$namaAnak] = 0;
+                                }
+                                $counterNamaAnak[$namaAnak]++;
+
+                                $jamMulai = 14 + ($counterNamaAnak[$namaAnak] - 1); // 14 = 14:00
+                                $startTime = \Carbon\Carbon::createFromFormat('H:i', $jamMulai . ':00');
+
+                                $pcs = (int) $c['pcs'];
+                                $endTime = $startTime->copy()->addMinutes($pcs);
+                                $diffInMinutes = $startTime->diffInMinutes($endTime);
+
+                                // Ambil data sbw
                                 $sbw = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
                                     ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
                                     ->first();
                             @endphp
                             <tr class="table-bawah">
-                                <td class="text-center ">{{ $loop->iteration }}</td>
-                                <td class="text-center ">{{ $c['nama'] }}</td>
-                                <td>{{ $sbw->no_invoice ?? $c['nm_partai'] }}</td>
-                                <td>{{ $c['no_box'] }} </td>
-                                <td>{{ ucwords(strtolower($sbw->nama ?? '-')) }} </td>
-                                <td class="text-center ">{{ $c['pcs_awal_ctk'] }}</td>
-                                <td class="text-center ">{{ $c['gr_awal_ctk'] }}</td>
-                                <td class="text-center ">{{ $c['pcs_akhir'] }}</td>
-                                <td class="text-center ">{{ $c['gr_akhir'] }}</td>
-                                <td class="text-center ">0</td>
-                                <td class="text-center ">-</td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
+                                <td class="text-center">{{ $sbw->no_invoice }}</td>
+                                <td class="text-center">{{ $c['no_box'] }}</td>
+                                <td class="text-center">{{ number_format($c['pcs'], 0) }}</td>
+
+
+                                <td class="text-center">{{ $startTime->format('H:i') }}</td>
+                                <td class="text-center">{{ $endTime->format('H:i') }}</td>
+                                <td class="text-center">{{ $diffInMinutes }} menit</td>
+                                <td class="text-center">30</td>
+                                <td class="text-center">{{ $nama_regu }}</td>
+                                <td class="text-center"></td>
                             </tr>
                         @endforeach
+
+
                     </tbody>
                     <tfoot>
                         <tr>
@@ -223,7 +240,7 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="6"></th>
+                            <th style="border: none" colspan="6"></th>
                             <th class="text-center" colspan="3">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
@@ -237,27 +254,7 @@
 
                 </table>
             </div>
-            {{-- <div class="col-7">
-                <p>Keterangan: HCR = Hancuran</p>
 
-            </div>
-            <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div> --}}
 
 
         </div>

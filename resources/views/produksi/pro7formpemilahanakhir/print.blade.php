@@ -13,18 +13,11 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
-            /* Atur jarak bawah paragraf pertama */
 
-        }
-
-        .cop_bawah {
-            margin-top: 0;
-            /* Hilangkan jarak atas paragraf kedua */
-            font-style: italic;
         }
 
         .shapes {
@@ -66,6 +59,14 @@
             padding-left: 6px;
         }
 
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+            font-size: 10px;
+            font-weight: normal
+        }
+
         .table {
             --bs-table-bg: transparent;
             --bs-table-accent-bg: transparent;
@@ -81,13 +82,35 @@
             vertical-align: top;
             border-color: #41464b !important;
         }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* ⬅️ ini agar tidak membungkus teks */
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 mt-2">
+            {{-- <div class="col-2 mt-2">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
@@ -101,8 +124,8 @@
 
             </div>
 
-            <div class="col-4"></div>
-            <div class="col-10">
+            <div class="col-4"></div> --}}
+            {{-- <div class="col-12">
                 <table style="border-collapse: collapse; width: 100%;">
                     <tr>
                         <td style="padding: 8px; width: 20%;">Hari / Tanggal <br> <span class="fst-italic">date</span>
@@ -126,13 +149,43 @@
                     </tr>
                 </table>
 
-            </div>
-            <div class="col-lg-12">
-                <br>
-
-                <table class="table table-bordered" style="font-size: 11px">
+            </div> --}}
+            <div class="col-lg-12 mt-2">
+                <table width="100%" style="font-size: 11px">
                     <thead>
                         <tr>
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+                            <th colspan="6" class="text-center">
+                                <p class="cop_judul mt-3 ">FORM HARIAN PEMILAHAN AKHIR</p>
+                                <p class="cop_bawah text-center">Daily final grading</p>
+                            </th>
+                            <th class="align-top text-end text-nowrap">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.07,
+                                    Rev 00</p>
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
+                            </td>
+
+                            <td class="align-middle"> : {{ tanggal($tgl) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Kode Batch/Lot
+                                <br> <span class="fst-italic"> Batch/Lot code </span>
+                            </td>
+
+                            <td colspan="2" class="align-middle"> : {{ $kode_lot }}</td>
+                        </tr>
+                        <tr>
+                            <td>Jenis Material
+                                <br> <span class="fst-italic"> Material type </span>
+                            </td>
+                            <td class="align-middle"> : {{ $grade }}</td>
+                        </tr>
+                        <tr class="table-bawah">
                             <th rowspan="3" class="text-center align-middle">No</th>
                             <th rowspan="3" class="text-center align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
@@ -143,11 +196,11 @@
                             <th rowspan="3" class="text-center align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span></th>
                         </tr>
-                        <tr>
+                        <tr class="table-bawah">
                             <th class="text-center" colspan="2">Ok</th>
                             <th class="text-center" colspan="2">Not Ok</th>
                         </tr>
-                        <tr>
+                        <tr class="table-bawah">
                             <th class="text-center">Pcs</th>
                             <th class="text-center">Gram</th>
                             <th class="text-center">Pcs</th>
@@ -156,7 +209,7 @@
                     </thead>
                     <tbody>
                         @foreach ($grading as $g)
-                            <tr>
+                            <tr class="table-bawah">
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $g['grade'] }}</td>
                                 <td class="text-center">{{ $g['pcs'] }}</td>
@@ -168,34 +221,29 @@
                             </tr>
                         @endforeach
                     </tbody>
-
-                </table>
-            </div>
-            <div class="col-9">
-
-
-            </div>
-            <div class="col-3">
-                <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
+                    <tfoot>
                         <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-
+                            <th colspan="8">&nbsp;</th>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="7"></th>
+                            <th class="text-center">Dibuat Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="7"></th>
                             <td style="height: 80px"></td>
 
                         </tr>
-                        <tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="7"></th>
                             <td class="text-center">KA. GRADING</td>
 
                         </tr>
+                    </tfoot>
 
-                    </tbody>
                 </table>
             </div>
+
 
 
         </div>

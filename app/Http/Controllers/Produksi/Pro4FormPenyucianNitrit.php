@@ -14,28 +14,11 @@ class Pro4FormPenyucianNitrit extends Controller
 {
     public function index(Request $r)
     {
-        $id_pengawas = auth()->user()->id;
-        $anak = Http::get("https://sarang.ptagafood.com/api/apihasap/tb_anak?id_pengawas=$id_pengawas");
-        $anak = json_decode($anak, TRUE);
-        $no_box = Http::get("https://sarang.ptagafood.com/api/apihasap/no_box?id_pengawas=$id_pengawas");
-        $no_box = json_decode($no_box, TRUE);
-
-        $pencucian = PenyucianNitrit::select(
-            'tanggal',
-            'nama_operator',
-            DB::raw('SUM(pcs) as total_pcs'),
-            DB::raw('COUNT(*) as jumlah_data')
-        )
-            ->where('nama_operator', auth()->user()->name)
-            ->groupBy('tanggal')
-            ->get();
+        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cuci_nitrit");
+        $cabut = json_decode($cabut, TRUE);
         $data = [
-            'title' => 'CCP 1 Penyucian Nitrit',
-            'pencucian' => $pencucian,
-            'pegawai' => DataPegawai::where('divisi_id', 1)->get(),
-            'anak' => $anak['data'],
-            'no_box' => $no_box['data'],
-
+            'title' => 'Form Pencucian Nitrit',
+            'cabut' => $cabut['data'],
         ];
         return view('produksi.pro4formpenyuciannitrit.index', $data);
     }
@@ -76,13 +59,16 @@ class Pro4FormPenyucianNitrit extends Controller
 
     public function print(Request $r)
     {
+        $pencucian = Http::get("https://sarang.ptagafood.com/api/apihasap/nitrit_detail?id_pengawas=$r->id_pengawas&tgl=$r->tgl");
+        $pencucian = json_decode($pencucian, TRUE);
+
         $data = [
+
             'title' => 'CCP 1 Penyucian Nitrit',
-            'pencucian' => PenyucianNitrit::where('tanggal', $r->tgl)->where('nama_operator', $r->nama_regu)->get(),
-            'pegawai' => DataPegawai::where('divisi_id', 1)->get(),
+            'pencucian' => $pencucian['data'],
             'tgl' => $r->tgl,
-            'nama_regu' => $r->nama_regu
+            'nama_regu' => $r->pengawas
         ];
-        return view('produksi.pro4formpenyuciannitrit.print', $data);
+        return view('produksi.pro4formpenyuciannitrit.print2', $data);
     }
 }
