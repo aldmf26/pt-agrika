@@ -60,7 +60,7 @@ class Pro9Ccp2Pemanasan extends Controller
         $data = [
             'title' => 'Form pemanasan CCP 2',
             'pemanasan' => $pemanasan['data'],
-            'tgl' => date('Y-m-d', strtotime('-1 day', strtotime($tgl))),
+            'tgl' => $tgl,
 
         ];
         return view('produksi.pro9ccp2pemanasan.print', $data);

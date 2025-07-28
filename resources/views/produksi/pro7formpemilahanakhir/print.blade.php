@@ -198,16 +198,23 @@
                             <td class="table-bawah2">Gr Akhir</td>
                         </tr>
                         <tr>
+                            @php
+                                $pcsNotOkeT = collect($grading)->where('not_oke', 'Y')->sum('pcs');
+                                $pcsNotOkeY = collect($grading)->where('not_oke', 'T')->sum('pcs');
+
+                                $grNotOkeT = collect($grading)->where('not_oke', 'Y')->sum('gr');
+                                $grNotOkeY = collect($grading)->where('not_oke', 'T')->sum('gr');
+                            @endphp
                             <td>Jenis Material
                                 <br> <span class="fst-italic"> Material type </span>
                             </td>
                             <td class="align-middle"> : {{ $grade }}</td>
                             <td></td>
                             <td></td>
-                            <td class="table-bawah2">{{ sumBk($grading, 'pcs') }}</td>
-                            <td class="table-bawah2">{{ sumBk($grading, 'gr') }}</td>
-                            <td class="table-bawah2">Pcs Akhir</td>
-                            <td class="table-bawah2">Gr Akhir</td>
+                            <td class="table-bawah2">{{ number_format($pcsNotOkeY, 0) }}</td>
+                            <td class="table-bawah2">{{ number_format($grNotOkeY, 0) }}</td>
+                            <td class="table-bawah2">{{ number_format($pcsNotOkeT, 0) }}</td>
+                            <td class="table-bawah2">{{ number_format($grNotOkeT, 0) }}</td>
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="3" class="text-center align-middle">No</th>
