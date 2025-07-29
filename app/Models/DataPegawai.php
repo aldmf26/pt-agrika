@@ -19,6 +19,16 @@ class DataPegawai extends Model
         return $this->belongsTo(Divisi::class, 'divisi_id');
     }
 
+    public function hasilWawancara()
+    {
+        return $this->hasOne(HasilWawancara::class, 'id_anak', 'id');
+    }
+
+    public function penilaianKaryawan()
+    {
+        return $this->hasOne(PenilaianKaryawan::class, 'id_anak', 'id');
+    }
+
     public static function hasilEvaluasi($value = null)
     {
         $query = "SELECT 

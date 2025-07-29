@@ -39,8 +39,11 @@
                             <td>Adanya penambahan kapasitas aktivitas {{ $d->divisi->divisi }}</td>
                             <td>Widani</td>
                             <td>
+                                <a href="{{ route('hrga1.1.edit', [$d]) }}" class="btn btn-sm btn-primary"><i
+                                        class="fas fa-pen"></i> Edit </a>
+
                                 <a target="_blank" href="{{ route('hrga1.1.print', [$d]) }}"
-                                    class="btn btn-sm btn-primary float-end"><i class="fas fa-print"></i> Print </a>
+                                    class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print </a>
                             </td>
                         </tr>
                     @endforeach

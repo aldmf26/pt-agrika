@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\PermohonanKaryawan;
 use App\Services\DataPegawaiService;
+use Faker\Provider\ar_EG\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,7 +17,7 @@ class Hrga1PermohonanKaryawanController extends Controller
     {
         $dataPegawaiService->download();
         $datas = PermohonanKaryawan::dapatkan();
-        PermohonanKaryawan::where('admin', 'import')->truncate();
+        PermohonanKaryawan::where('admin', 'import')->delete();
         foreach ($datas as $d) {
             PermohonanKaryawan::create([
                 'status_posisi' => $d->status_posisi ?? 'Kontrak',
@@ -61,6 +62,39 @@ class Hrga1PermohonanKaryawanController extends Controller
         return view('hrga.hrga1.hrga1_permohonan_karyawan.create', $data);
     }
 
+    public function edit(PermohonanKaryawan $permohonan)
+    {
+        $data = [
+            'title' => 'Edit Permohonan Karyawan Baru',
+            'divisis' => Divisi::all(),
+            'permohonan' => $permohonan,
+        ];
+        return view('hrga.hrga1.hrga1_permohonan_karyawan.edit', $data);
+    }
+
+    public function update(Request $r, PermohonanKaryawan $permohonan)
+    {
+        $permohonan->update([
+            'status_posisi' => $r->status_posisi,
+            'jabatan' => '-',
+            'id_divisi' => $r->divisi,
+            'jumlah' => $r->jumlah,
+            'alasan_penambahan' => $r->alasan_penambahan,
+            'umur' => $r->umur,
+            'jenis_kelamin' => $r->jenis_kelamin,
+            'pendidikan' => $r->pendidikan,
+            'pengalaman' => $r->pengalaman,
+            'pelatihan' => $r->pelatihan,
+            'mental' => $r->mental,
+            'uraian_kerja' => $r->uraian_kerja,
+            'tgl_dibutuhkan' => $r->tgl_dibutuhkan,
+            'diajukan_oleh' => $r->diajukan_oleh,
+            'admin' => auth()->user()->name,
+        ]);
+        return redirect()->route('hrga1.1.index')->with('sukses', 'Data Berhasil diperbarui');
+    }
+
+
     public function store(Request $r)
     {
         PermohonanKaryawan::create([
@@ -79,7 +113,7 @@ class Hrga1PermohonanKaryawanController extends Controller
             'tgl_dibutuhkan' => $r->tgl_dibutuhkan,
             'diajukan_oleh' => $r->diajukan_oleh,
             'tgl_input' => date('Y-m-d H:i:s'),
-            'admin' => auth()->user()->id,
+            'admin' => auth()->user()->name,
         ]);
         return redirect()->route('hrga1.1.index')->with('sukses', 'Data Berhasil ditambahkan');
     }

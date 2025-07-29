@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('hasil_wawancaras', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_anak');
+            $table->string('nama');
+            $table->string('nik');
+            $table->date('tgl_lahir');
+            $table->string('jenis_kelamin');
+            $table->unsignedBigInteger('id_divisi');
+            $table->text('kesimpulan');
+            $table->string('keputusan');
+            $table->date('tgl_masuk');
             $table->timestamps();
         });
     }
