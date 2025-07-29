@@ -24,11 +24,13 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
 
         $bukti2 = Http::get("https://sarang.ptagafood.com/api/apihasap/buktiPermintaan");
         $bukti2 = json_decode($bukti2, TRUE);
+
+
         $data = [
             'title' => 'Bukti Permintaan Pengeluaran Barang',
             'buktis' =>  $bukti,
             'buktis2' => $bukti2['data'],
-            'k' => $r->k ?? 'satu',
+            'k' => $r->kategori == 'lainnya' ? '2' : 'satu',
         ];
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.index', $data);
     }
