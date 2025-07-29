@@ -218,7 +218,7 @@
 
                     <!-- Submit Button -->
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary" :disabled="rows.length == 0">Simpan</button>
+                        <button type="submit" class="btn btn-primary" :disabled="rows.length == 0">Save</button>
                     </div>
                 </form>
             </div>

@@ -34,12 +34,12 @@
                     <input required type="text" name="alasan" placeholder="Alasan Pemusnahan" class="form-control">
                 </div>
             </div>
-            
-           
+
+
         </div>
         <div class="row">
             <div class="col-12">
-                <button type="submit" class="btn btn-sm btn-primary float-end">Simpan</button>
+                <button type="submit" class="btn btn-sm btn-primary float-end">Save</button>
             </div>
         </div>
     </form>

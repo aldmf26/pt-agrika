@@ -9,9 +9,24 @@ class DataPegawai extends Model
 {
     protected $guarded = [];
 
+    public function getJenisKelaminAttribute($value)
+    {
+        return $value === 'L' ? 'Laki-laki' : 'Perempuan';
+    }
+
     public function divisi()
     {
         return $this->belongsTo(Divisi::class, 'divisi_id');
+    }
+
+    public function hasilWawancara()
+    {
+        return $this->hasOne(HasilWawancara::class, 'id_anak', 'id');
+    }
+
+    public function penilaianKaryawan()
+    {
+        return $this->hasOne(PenilaianKaryawan::class, 'id_anak', 'id');
     }
 
     public static function hasilEvaluasi($value = null)
@@ -20,7 +35,7 @@ class DataPegawai extends Model
                     a.id,
                     a.nama,
                     a.tgl_lahir,
-                    a.jenis_kelamin,
+                    CASE WHEN a.jenis_kelamin = 'L' THEN 'Laki-laki' ELSE 'Perempuan' END as jenis_kelamin,
                     a.posisi,
                     a.karyawan_id_dari_api as id_karyawan,
                     a.tgl_masuk,
@@ -68,7 +83,7 @@ class DataPegawai extends Model
                     a.id,
                     a.nama,
                     a.tgl_lahir,
-                    a.jenis_kelamin,
+                    CASE WHEN a.jenis_kelamin = 'L' THEN 'Laki-laki' ELSE 'Perempuan' END as jenis_kelamin,
                     a.posisi,
                     a.karyawan_id_dari_api as id_karyawan,
                     a.tgl_masuk,

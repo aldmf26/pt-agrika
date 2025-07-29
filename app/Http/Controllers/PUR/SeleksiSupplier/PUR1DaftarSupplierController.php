@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DetailKetidaksesuaian;
 use App\Models\Evaluasi;
 use App\Models\PurchaseOrder;
+use App\Models\RumahWalet;
 use App\Models\Suplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,7 @@ class PUR1DaftarSupplierController extends Controller
         $data = [
             'title' => 'PUR 1 Daftar Supplier',
             'datas' => $datas,
-            'rumah_walet' => DB::table('rumah_walet')->get(),
+            'rumah_walet' => RumahWalet::get(),
             'kategori' => $kategori,
         ];
 
@@ -35,6 +36,16 @@ class PUR1DaftarSupplierController extends Controller
             'dok' => 'Dok.No.: FRM.PUR.02.02, Rev.00',
         ];
         return view('pur.seleksi.daftar_supplier.seleksi', $data);
+    }
+
+    public function seleksi_sbw(RumahWalet $supplier)
+    {
+        $data = [
+            'title' => 'Seleksi Supplier',
+            'supplier' => $supplier,
+            'dok' => 'Dok.No.: FRM.PUR.02.02, Rev.00',
+        ];
+        return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
 
     public function create()

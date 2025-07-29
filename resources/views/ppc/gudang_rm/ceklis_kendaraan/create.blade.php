@@ -133,7 +133,7 @@
 
                     <div class="mt-4 float-end">
                         <a href="{{ route('ppc.gudang-fg.2.index') }}" class="btn btn-secondary">Kembali</a>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>

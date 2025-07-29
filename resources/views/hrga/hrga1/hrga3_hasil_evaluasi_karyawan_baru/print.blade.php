@@ -1,7 +1,5 @@
-@foreach ($datas as $d)
 <div class="employee-record" style="page-break-after: always;">
     <x-hccp-print :title="$title" :dok="$dok">
-
         <div class="row">
             <div class="col-1"></div>
             <div class="col-11">
@@ -9,22 +7,22 @@
                     <tr>
                         <td>Nama Calon Karyawan</td>
                         <td>:</td>
-                        <td>{{ $d->nama }}</td>
+                        <td>{{ $data->nama }}</td>
                     </tr>
                     <tr>
                         <td>Usia</td>
                         <td>:</td>
-                        <td>{{ \Carbon\Carbon::parse($d->tgl_lahir)->age }}</td>
+                        <td>{{ \Carbon\Carbon::parse($data->tgl_lahir)->age }} Tahun</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
-                        <td>{{ $d->jenis_kelamin }}</td>
+                        <td>{{ $data->jenis_kelamin }}</td>
                     </tr>
                     <tr>
                         <td>Posisi</td>
                         <td>:</td>
-                        <td>{{ $d->posisi }}</td>
+                        <td>{{ $data->posisi }}</td>
                     </tr>
                     <tr>
                         <td>Periode Masa Percobaan</td>
@@ -84,7 +82,8 @@
                     </tr>
                 </table>
 
-                <span class="fw-bold text-decoration-underline">Keterangan:</span> <span>Karyawan dilanjut kontrak dan diikutkan MCU thn ini / depan</span>
+                <span class="fw-bold text-decoration-underline">Keterangan:</span> <span>Karyawan dilanjut kontrak dan
+                    diikutkan MCU thn ini / depan</span>
             </div>
         </div>
         <div class="row mt-5">
@@ -110,7 +109,6 @@
         </div>
     </x-hccp-print>
 </div>
-@endforeach
 <style>
     @media print {
         .employee-record {
@@ -118,7 +116,7 @@
             margin-bottom: 0;
             padding-bottom: 0;
         }
-        
+
         /* Pastikan halaman terakhir tidak memiliki page break */
         .employee-record:last-child {
             page-break-after: avoid;
@@ -128,7 +126,7 @@
         table {
             page-break-inside: avoid;
         }
-        
+
         /* Mengatur margin halaman */
         @page {
             margin: 2cm;

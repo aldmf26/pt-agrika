@@ -13,13 +13,6 @@
 
     <title>{{ $title }}</title>
     <style>
-        @media print {
-            /* body {
-                border: 1px solid black;
-                border-radius: 10px;
-            } */
-        }
-
         body {
             font-family: 'Cambria';
         }
@@ -87,36 +80,179 @@
 
 
         }
+
+        @media print {
+            @page {
+                margin: 1.5cm 1cm 1cm 1cm;
+                size: A4;
+            }
+
+            /* SOLUSI HYBRID: Kombinasi Table Structure + Override Bootstrap */
+            .print-wrapper {
+                display: table;
+                width: 100%;
+                border-collapse: separate;
+            }
+
+            .repeating-header {
+                display: table-header-group;
+                position: relative;
+            }
+
+            .content-body {
+                display: table-row-group;
+            }
+
+            /* Override Bootstrap classes untuk print */
+            .table,
+            .table-responsive,
+            table {
+                display: table !important;
+                width: 100% !important;
+                border-collapse: collapse !important;
+            }
+
+            .table thead,
+            table thead,
+            .thead-light,
+            .thead-dark {
+                display: table-header-group !important;
+            }
+
+            .table tbody,
+            table tbody {
+                display: table-row-group !important;
+            }
+
+            .table tr,
+            table tr {
+                display: table-row !important;
+                page-break-inside: avoid;
+            }
+
+            .table th,
+            .table td,
+            table th,
+            table td {
+                display: table-cell !important;
+                page-break-inside: avoid;
+            }
+
+            /* Bootstrap container fixes */
+            .container,
+            .container-fluid {
+                width: 100% !important;
+                max-width: none !important;
+                padding-left: 15px !important;
+                padding-right: 15px !important;
+            }
+
+            .row {
+                display: flex !important;
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+            }
+
+            .col,
+            .col-1,
+            .col-2,
+            .col-3,
+            .col-4,
+            .col-5,
+            .col-6,
+            .col-7,
+            .col-8,
+            .col-9,
+            .col-10,
+            .col-11,
+            .col-12,
+            .col-auto,
+            .col-sm,
+            .col-md,
+            .col-lg,
+            .col-xl {
+                padding-left: 5px !important;
+                padding-right: 5px !important;
+            }
+
+            /* Reset Bootstrap spacing untuk print */
+            .mt-1,
+            .mt-2,
+            .mt-3,
+            .mt-4,
+            .mt-5,
+            .mb-1,
+            .mb-2,
+            .mb-3,
+            .mb-4,
+            .mb-5,
+            .pt-1,
+            .pt-2,
+            .pt-3,
+            .pt-4,
+            .pt-5,
+            .pb-1,
+            .pb-2,
+            .pb-3,
+            .pb-4,
+            .pb-5 {
+                margin-top: 5px !important;
+                margin-bottom: 5px !important;
+                padding-top: 2px !important;
+                padding-bottom: 2px !important;
+            }
+
+            /* Force proper page breaks */
+            .page-break {
+                page-break-before: always !important;
+            }
+
+            .no-break {
+                page-break-inside: avoid !important;
+            }
+
+            /* Hide elements yang tidak perlu di print */
+            .no-print {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid p-3">
-        <div class="row">
-            <div class="col-3 ">
-                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
-            </div>
-            <div class="col-6 ">
-                <div class="shapes">
-                    <p class="cop_judul">{{ $title }}</p>
+    <div class="print-wrapper">
+        <!-- Header yang berulang di setiap halaman -->
+        <div class="repeating-header">
+            <div style="padding: 10px; background: white;">
+                <div class="container-fluid p-3">
+                    <div class="row">
+                        <div class="col-3">
+                            <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                        </div>
+                        <div class="col-6">
+                            <div class="shapes">
+                                <p class="cop_judul">{{ $title }}</p>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <p class="cop_text text-sm" style="font-size: 10px">{{ $dok }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-3">
-                <p class="cop_text text-sm" style="font-size: 10px">{{ $dok }}</p>
+        </div>
+
+        <!-- Konten utama -->
+        <div class="content-body">
+            <div class="container-fluid p-3">
+                {{ $slot }}
             </div>
         </div>
-        {{ $slot }}
     </div>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
     <script>
         window.print();
     </script>
+
 
 </body>
 

@@ -27,7 +27,7 @@
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-primary mt-2">Simpan</button>
+                        <button type="submit" class="btn btn-primary mt-2">Save</button>
                     </div>
                 </form>
             </div>
@@ -100,7 +100,7 @@
                                             Cancel</a>
                                         <button type="submit" x-show="edit" class="btn btn-sm btn-success"><i
                                                 class="fa fa-check"></i>
-                                            Simpan</button>
+                                            Save</button>
                                     </td>
                                 </tr>
                             @endforeach

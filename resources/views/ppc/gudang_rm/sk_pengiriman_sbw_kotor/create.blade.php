@@ -8,7 +8,8 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="">No Reg Rumah Walet</label>
-                                <select name="id_penerimaan" class="form-control select2noreg selectNoreg" id="">
+                                <select name="id_penerimaan" class="form-control select2noreg selectNoreg"
+                                    id="">
                                     <option value="">- Pilih No Reg -</option>
                                     @foreach ($penerimaanSbwKotors as $d)
                                         <option data-alamat="{{ $d->alamat }}" data-noreg="{{ $d->nama }}"
@@ -44,8 +45,9 @@
                                 <select name="id_ikph" class="form-control select2noreg selectIkph" id="">
                                     <option value="">- Pilih Ikph -</option>
                                     @foreach ($ikph as $d)
-                                        <option data-alamat="{{ $d->alamat_ikph }}" data-noreg="{{ $d->no_registrasi_ikph }}"
-                                            value="{{ $d->id }}">{{ $d->no_registrasi_ikph }}
+                                        <option data-alamat="{{ $d->alamat_ikph }}"
+                                            data-noreg="{{ $d->no_registrasi_ikph }}" value="{{ $d->id }}">
+                                            {{ $d->no_registrasi_ikph }}
                                             {{ $d->nama_ikph }}</option>
                                     @endforeach
                                 </select>
@@ -104,26 +106,31 @@
                                             <input type="date" name="tgl_panen[]" class="form-control" required>
                                         </td>
                                         <td>
-                                            <input type="number" name="berat_panen[]" class="form-control text-end" required>
+                                            <input type="number" name="berat_panen[]" class="form-control text-end"
+                                                required>
                                         </td>
                                         <td>
                                             <input type="date" name="tgl_kirim[]" class="form-control" required>
                                         </td>
                                         <td>
-                                            <input type="number" name="berat_kirim[]" class="form-control text-end" required>
+                                            <input type="number" name="berat_kirim[]" class="form-control text-end"
+                                                required>
                                         </td>
                                         <td>
                                             <input type="text" name="keterangan[]" class="form-control">
                                         </td>
                                         </td>
                                         <td>
-                                            <span @click="rows.splice(index, 1)" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></span>
+                                            <span @click="rows.splice(index, 1)" class="btn btn-sm btn-danger"><i
+                                                    class="fas fa-trash"></i></span>
                                         </td>
                                     </tr>
                                 </template>
                                 <tr>
                                     <td colspan="8">
-                                        <button type="button" @click="rows.push({})" class="btn-block btn btn-sm btn-primary"><i class="fas fa-plus"></i> Tambah Baris Data</button>
+                                        <button type="button" @click="rows.push({})"
+                                            class="btn-block btn btn-sm btn-primary"><i class="fas fa-plus"></i> Tambah
+                                            Baris Data</button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -131,21 +138,21 @@
 
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
     @section('scripts')
-    <script>
-        $(document).ready(function() {
-            // Delay the initialization slightly to ensure DOM is fully ready
-            setTimeout(function() {
-                $('.select2noreg').select2();
-            }, 100);
-        });
-    </script>
+        <script>
+            $(document).ready(function() {
+                // Delay the initialization slightly to ensure DOM is fully ready
+                setTimeout(function() {
+                    $('.select2noreg').select2();
+                }, 100);
+            });
+        </script>
         <script>
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({

@@ -48,13 +48,15 @@
                                 <td colspan="4" class="text-center text-black">LUNCH BREAK</td>
                             </tr>
                         @else
-                        @php
-                            $getJadwal = DB::table('jadwal_audit_internals')->where([['tgl', $tgl],['waktu', $value]])->first();
-                        @endphp
+                            @php
+                                $getJadwal = DB::table('jadwal_audit_internals')
+                                    ->where([['tgl', $tgl], ['waktu', $value]])
+                                    ->first();
+                            @endphp
                             <tr>
                                 <th scope="row" class="text-nowrap">
                                     {{ $value }}
-                                   
+
                                     <input type="hidden" value="{{ $value }}" name="waktu[{{ $key }}]">
                                 </th>
                                 <td>
@@ -67,20 +69,18 @@
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="auditor_{{ $key }}"
-                                        name="auditor[{{ $key }}]"
-                                        value="{{ $getJadwal->auditor ?? '' }}">
+                                        name="auditor[{{ $key }}]" value="{{ $getJadwal->auditor ?? '' }}">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="auditee_{{ $key }}"
-                                        name="auditee[{{ $key }}]"
-                                        value="{{ $getJadwal->audite ?? '' }}">
+                                        name="auditee[{{ $key }}]" value="{{ $getJadwal->audite ?? '' }}">
                                 </td>
                             </tr>
                         @endif
                     @endforeach
                 </tbody>
             </table>
-            <button type="submit" class="btn btn-primary float-end">Simpan</button>
+            <button type="submit" class="btn btn-primary float-end">Save</button>
         </form>
     </div>
 

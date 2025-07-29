@@ -99,7 +99,7 @@
 
                 </div>
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-primary float-end">Simpan</button>
+                    <button type="submit" class="btn btn-primary float-end">Save</button>
                 </div>
             </div>
         </form>

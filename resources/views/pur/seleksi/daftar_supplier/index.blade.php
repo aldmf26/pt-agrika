@@ -80,8 +80,21 @@
                             <td>{{ $r->alamat }}</td>
                             <td></td>
                             <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>
+                                {{-- @forelse ($r->evaluasi as $evaluasi)
+                                    <a href="{{ route('pur.seleksi.1.evaluasi', $evaluasi->id) }}"
+                                        class="mb-1 btn btn-xs btn-primary">Evaluasi Bulan
+                                        {{ $evaluasi->periode_evaluasi }}</a>
+                                @empty
+                                    <a href="#addEvaluasi" data-bs-toggle="modal"
+                                        @click="idSuplier = {{ $r->id }}" class="mb-1 btn btn-xs btn-info"><i
+                                            class="fas fa-plus"></i> Evaluasi</a>
+                                @endforelse --}}
+                            </td>
+                            <td>
+                                <a href="{{ route('pur.seleksi.1.seleksi_sbw', $r) }}" target="_blank"
+                                    class="mb-1 btn btn-xs btn-info"><i class="fas fa-print"></i> Print</a>
+                            </td>
                             <td>
                                 <a href="{{ route('pur.seleksi.1.edit', $r->id) }}" class="btn btn-xs btn-primary"><i
                                         class="fas fa-edit"></i></a>

@@ -26,34 +26,29 @@
         </div>
         <div class="col-12 mt-4">
             <table class="table table-bordered">
-                <thead>
+                <tr>
+                    <th class="text-center dhead align-middle">No</th>
+                    <th class="text-start dhead align-middle">
+                        Nama Peserta Training
+                    </th>
+                    <th class="text-center dhead align-middle">
+                        Div / Dept
+                    </th>
+                    <th class="text-center dhead align-middle">
+                        Jabatan
+                    </th>
+                    <th class="text-center dhead align-middle">
+                        Tanda Tangan
+                    </th>
+                </tr>
+                @foreach ($jadwal_detail as $j)
                     <tr>
-                        <th class="text-center dhead align-middle">No</th>
-                        <th class="text-start dhead align-middle">
-                            Nama Peserta Training
-                        </th>
-                        <th class="text-center dhead align-middle">
-                            Div / Dept
-                        </th>
-                        <th class="text-center dhead align-middle">
-                            Jabatan
-                        </th>
-                        <th class="text-center dhead align-middle">
-                            Tanda Tangan
-                        </th>
+                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td class="text-start">{{ $j->data_pegawai->nama }}</td>
+                        <td class="text-center">{{ $j->data_pegawai->divisi->divisi }}</td>
+                        <td class="text-center">{{ $j->data_pegawai->posisi }}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($jadwal_detail as $j)
-                        <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-start">{{ $j->data_pegawai->nama }}</td>
-                            <td class="text-center">{{ $j->data_pegawai->divisi->divisi }}</td>
-                            <td class="text-center">{{ $j->data_pegawai->posisi }}</td>
-                        </tr>
-                    @endforeach
-
-                </tbody>
+                @endforeach
             </table>
 
         </div>

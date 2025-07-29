@@ -97,6 +97,6 @@
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary float-end">Simpan</button>
+                <button type="submit" class="btn btn-primary float-end">Save</button>
             </form>
 </x-app-layout>
