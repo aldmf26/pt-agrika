@@ -56,7 +56,7 @@
             </div>
             <div class="col-2">
                 <label for="">&nbsp;</label><br>
-                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-sm btn-primary">Save</button>
             </div>
         </div>
     </form>

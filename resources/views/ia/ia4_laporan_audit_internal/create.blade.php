@@ -24,7 +24,8 @@
                 <div class="col-md-2 col-sm-4">
                     <div>
                         <label for="tgl_audit" class="form-label">Tanggal Audit</label>
-                        <input type="date" value="{{ date('Y-m-d') }}" class="form-control" id="tgl_audit" name="tgl_audit" required>
+                        <input type="date" value="{{ date('Y-m-d') }}" class="form-control" id="tgl_audit"
+                            name="tgl_audit" required>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
@@ -39,7 +40,7 @@
                         <input type="text" class="form-control" id="auditor" name="auditor" required>
                     </div>
                 </div>
-                
+
                 <div class="col-md-12 col-sm-12">
                     <div class="">
                         <label for="laporan_audit" class="form-label">Laporan Audit</label>
@@ -48,7 +49,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary float-end mt-3">Simpan</button>
+            <button type="submit" class="btn btn-primary float-end mt-3">Save</button>
         </form>
     </div>
 

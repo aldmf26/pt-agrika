@@ -33,7 +33,7 @@
                             class="form-control form-control-sm">
                     </td>
                     <td colspan="2">
-                        <button type="submit" class="btn btn-xs btn-block btn-info">Simpan</button>
+                        <button type="submit" class="btn btn-xs btn-block btn-info">Save</button>
                     </td>
                 </form>
             </tr>
@@ -68,12 +68,13 @@
                     <td>{{ $d->admin }}</td>
 
                     <td>
-                        <a wire:click='edit({{ $d->id }})' @click.prevent="toggleEdit" href="#" class="btn btn-primary btn-xs"
-                            x-text="editInput ? 'Batal' : 'Edit'"></a>
+                        <a wire:click='edit({{ $d->id }})' @click.prevent="toggleEdit" href="#"
+                            class="btn btn-primary btn-xs" x-text="editInput ? 'Batal' : 'Edit'"></a>
                         <button x-show="editInput" @click="saveEdit" class="btn btn-success btn-xs">Save</button>
 
-                        <a x-show="!editInput" wire:confirm='"Yakin ingin menghapus data ini?"' wire:click="destroy({{ $d->id }})"
-                            href="#" class="btn btn-danger btn-xs"><i class="fas fa-trash"></i></a>
+                        <a x-show="!editInput" wire:confirm='"Yakin ingin menghapus data ini?"'
+                            wire:click="destroy({{ $d->id }})" href="#" class="btn btn-danger btn-xs"><i
+                                class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             @endforeach

@@ -14,5 +14,8 @@ class RumahWalet extends Model
     {
         return ucwords(strtolower($value));
     }
-    
+    // public function evaluasi()
+    // {
+    //     return $this->hasMany(Evaluasi::class, 'supplier_id');
+    // }
 }

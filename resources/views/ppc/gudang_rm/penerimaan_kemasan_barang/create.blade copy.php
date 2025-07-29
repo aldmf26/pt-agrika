@@ -11,9 +11,9 @@
                                 <select name="no_po" x-model="selectedPo" @change="updateItems" class="form-control">
                                     <option value="">Pilih No PO</option>
                                     @foreach ($po as $item)
-                                        <option value="{{ $item->no_po }}">
-                                            {{ $item->no_po }}
-                                        </option>
+                                    <option value="{{ $item->no_po }}">
+                                        {{ $item->no_po }}
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -127,120 +127,120 @@
                                         @foreach ($labels as $index => $label)
                                     <tr>
                                         <th>{{ $label }}</th>
-                                        <td>
-                                            <div class="form-group">
-                                                @for ($i = 1; $i <= 2; $i++)
-                                                    <div class="form-check form-check-inline">
-                                                        <input id="id{{ $i }}{{ $index }}"
-                                                            class="form-check-input" type="checkbox"
-                                                            name="{{ $inputNames[$index] }}[]"
-                                                            value="{{ $i }}">
-                                                        <label for="id{{ $i }}{{ $index }}"
-                                                            class="form-check-label">{!! $checkLabel !!}</label>
-                                                    </div>
-                                                @endfor
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    <tr>
-                                        <th>Keputusan:</th>
-                                        <td>
-                                            <div class="form-group">
-                                                <div class="form-check form-check-inline">
-                                                    <input id="diterima" class="form-check-input" type="radio"
-                                                        name="keputusan" value="Diterima">
-                                                    <label for="diterima" class="form-check-label">Diterima</label>
-                                                </div>
-                                                <div class="form-check form-check-inline">
-                                                    <input id="ditolak" class="form-check-input" type="radio"
-                                                        name="keputusan" value="Ditolak">
-                                                    <label for="ditolak" class="form-check-label">Ditolak</label>
-                                                </div>
-
-                                                <div class="form-check form-check-inline">
-                                                    <input id="diterimacatatan" class="form-check-input" type="radio"
-                                                        name="keputusan" value="Diterima dengan Catatan">
-                                                    <label for="diterimacatatan" class="form-check-label">Diterima
-                                                        dengan
-                                                        Catatan</label>
-                                                </div>
-                                                <div class="form-check form-check-inline ms-2">
-                                                    <input class="form-control form-control-sm" type="text"
-                                                        name="keputusan_catatan" value=""
-                                                        placeholder="catatan keputusan">
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr> --}}
-                            </table>
+                            <td>
+                                <div class="form-group">
+                                    @for ($i = 1; $i <= 2; $i++)
+                                        <div class="form-check form-check-inline">
+                                        <input id="id{{ $i }}{{ $index }}"
+                                            class="form-check-input" type="checkbox"
+                                            name="{{ $inputNames[$index] }}[]"
+                                            value="{{ $i }}">
+                                        <label for="id{{ $i }}{{ $index }}"
+                                            class="form-check-label">{!! $checkLabel !!}</label>
+                                </div>
+                                @endfor
                         </div>
-                </div>
-                </template>
+                        </td>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <th>Keputusan:</th>
+                            <td>
+                                <div class="form-group">
+                                    <div class="form-check form-check-inline">
+                                        <input id="diterima" class="form-check-input" type="radio"
+                                            name="keputusan" value="Diterima">
+                                        <label for="diterima" class="form-check-label">Diterima</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input id="ditolak" class="form-check-input" type="radio"
+                                            name="keputusan" value="Ditolak">
+                                        <label for="ditolak" class="form-check-label">Ditolak</label>
+                                    </div>
 
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <div class="form-check form-check-inline">
+                                        <input id="diterimacatatan" class="form-check-input" type="radio"
+                                            name="keputusan" value="Diterima dengan Catatan">
+                                        <label for="diterimacatatan" class="form-check-label">Diterima
+                                            dengan
+                                            Catatan</label>
+                                    </div>
+                                    <div class="form-check form-check-inline ms-2">
+                                        <input class="form-control form-control-sm" type="text"
+                                            name="keputusan_catatan" value=""
+                                            placeholder="catatan keputusan">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr> --}}
+                        </table>
                 </div>
             </div>
+            </template>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+    </div>
     </div>
     </form>
     </div>
     @section('scripts')
-        <script>
-            $(document).ready(function() {
-                // Delay the initialization slightly to ensure DOM is fully ready
-                setTimeout(function() {
-                    $('.select2suplier').select2();
-                    $('.select2po').select2();
-                }, 100);
+    <script>
+        $(document).ready(function() {
+            // Delay the initialization slightly to ensure DOM is fully ready
+            setTimeout(function() {
+                $('.select2suplier').select2();
+                $('.select2po').select2();
+            }, 100);
 
-                $('.select2po').change(function(e) {
-                    e.preventDefault();
-                    var ttl_produk = $('.select2po').find(':selected').data('ttl-produk');
-                    $('#ttl_produk').text(ttl_produk);
-                });
+            $('.select2po').change(function(e) {
+                e.preventDefault();
+                var ttl_produk = $('.select2po').find(':selected').data('ttl-produk');
+                $('#ttl_produk').text(ttl_produk);
             });
+        });
 
-            document.addEventListener('alpine:init', () => {
-                Alpine.data('alpineFunc', () => ({
-                    rows: [],
-                    tgl: "{{ date('Y-m-d') }}",
-                    tgl_penerimaan: "{{ date('Y-m-d') }}",
-                    tgl_expired: new Date(new Date("{{ date('Y-m-d') }}").setFullYear(new Date(
-                        "{{ date('Y-m-d') }}").getFullYear() + 2)).toISOString().slice(0, 10),
-                    selectedPo: '',
-                    items: [],
-                    allPo: @json($po),
-                    updateItems() {
-                        const selected = this.allPo.find(po => po.no_po === this.selectedPo);
-                        if (selected && selected.purchase_request?.item) {
-                            this.items = selected.purchase_request.item.map(it => {
-                                const today = new Date().toISOString().slice(0, 10);
-                                const expired = new Date(new Date().setFullYear(new Date()
-                                    .getFullYear() + 2)).toISOString().slice(0, 10);
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('alpineFunc', () => ({
+                rows: [],
+                tgl: "{{ date('Y-m-d') }}",
+                tgl_penerimaan: "{{ date('Y-m-d') }}",
+                tgl_expired: new Date(new Date("{{ date('Y-m-d') }}").setFullYear(new Date(
+                    "{{ date('Y-m-d') }}").getFullYear() + 2)).toISOString().slice(0, 10),
+                selectedPo: '',
+                items: [],
+                allPo: @json($po),
+                updateItems() {
+                    const selected = this.allPo.find(po => po.no_po === this.selectedPo);
+                    if (selected && selected.purchase_request?.item) {
+                        this.items = selected.purchase_request.item.map(it => {
+                            const today = new Date().toISOString().slice(0, 10);
+                            const expired = new Date(new Date().setFullYear(new Date()
+                                .getFullYear() + 2)).toISOString().slice(0, 10);
 
-                                return {
-                                    id: it.id,
-                                    nama: it.item_spesifikasi ?? 'Tidak ditemukan',
-                                    kode: it.barang.kode_barang,
-                                    jumlah: it.jumlah,
-                                    tgl_penerimaan: today,
-                                    tgl_expired: expired,
-                                    no_kendaraan: '',
-                                    pengemudi: '',
-                                    jumlah_barang: '',
-                                    jumlah_sampel: '',
-                                    keputusan: '',
-                                    keputusan_catatan: '',
-                                };
-                            });
-                        } else {
-                            this.items = [];
-                        }
+                            return {
+                                id: it.id,
+                                nama: it.item_spesifikasi ?? 'Tidak ditemukan',
+                                kode: it.barang.kode_barang,
+                                jumlah: it.jumlah,
+                                tgl_penerimaan: today,
+                                tgl_expired: expired,
+                                no_kendaraan: '',
+                                pengemudi: '',
+                                jumlah_barang: '',
+                                jumlah_sampel: '',
+                                keputusan: '',
+                                keputusan_catatan: '',
+                            };
+                        });
+                    } else {
+                        this.items = [];
                     }
+                }
 
-                }))
-            })
-        </script>
+            }))
+        })
+    </script>
     @endsection
 </x-app-layout>

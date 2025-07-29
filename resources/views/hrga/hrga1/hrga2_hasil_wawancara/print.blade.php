@@ -13,7 +13,7 @@
                     <tr>
                         <td>Usia</td>
                         <td>:</td>
-                        <td>{{ \Carbon\Carbon::parse($d->tgl_lahir)->age }}</td>
+                        <td>{{ \Carbon\Carbon::parse($d->tgl_lahir)->age }} Tahun</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
@@ -43,11 +43,11 @@
                             <td style="height: 80px">
                                 Kesimpulan:
                                 <br>
-                                - Ybs memahami cara kerja {{$d->posisi}}
+                                - Ybs memahami cara kerja {{ $d->posisi }}
                                 <br>
-                                @if ($d->posisi== 'Staf Cabut')
-                                - Ybs kenal dengan karyawan cabut bulu saat ini sehingga bisa belajar
-                                <br>
+                                @if ($d->posisi == 'Staf Cabut')
+                                    - Ybs kenal dengan karyawan cabut bulu saat ini sehingga bisa belajar
+                                    <br>
                                 @endif
                                 - Ybs Tidak neko-neko, Terlihat teliti dan tidak mudah bosan
                             </td>
@@ -67,7 +67,7 @@
                     <tr colspan="5">
                         <td>&nbsp;</td>
                     </tr>
-                   
+
                     <tr>
                         <td>Pewawancara: </td>
                         <td width="20%">&nbsp;</td>

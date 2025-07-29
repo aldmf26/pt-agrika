@@ -4,11 +4,11 @@
             <table style="font-size: 11px">
                 <tr>
                     <th width="150">Nama Supplier</th>
-                    <td>: {{ $supplier->nama_supplier }}</td>
+                    <td>: {{ $supplier->nama }}</td>
                 </tr>
                 <tr>
                     <th width="150">Jenis Supply</th>
-                    <td>: {{ $supplier->kategori }}</td>
+                    <td>: Material SBW Kotor</td>
                 </tr>
                 <tr>
                     <th width="150">Alamat</th>
@@ -25,25 +25,21 @@
         <tr>
             <th>Material/Kemasan/Barang/Jasa yang ditawarkan</th>
             <td>
-                @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ $item->nama_barang }}<br>
-                @endforeach
+                1. SBW Kotor
             </td>
         </tr>
         <tr>
             <th>Spesifikasi</th>
             <td>
-                @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ $item->nama_barang }} : {{ $item->spek ?? '-' }}<br>
-                @endforeach
+                1.
             </td>
         </tr>
         <tr>
             <th>Nomor Reg RW</th>
             <td>
-                <input type="checkbox"> Ada (lampirkan)
+                <input type="checkbox" checked> Ada (lampirkan)
                 <input type="checkbox"> Tidak Ada
-                <input type="checkbox" checked> Tidak relevan
+                <input type="checkbox"> Tidak relevan
             </td>
         </tr>
         <tr>

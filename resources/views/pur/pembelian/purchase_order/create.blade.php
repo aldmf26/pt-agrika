@@ -58,7 +58,7 @@
         @livewire('pur.create_po')
         <div class="row">
             <div class="col-9">
-                <button type="submit" class="btn btn-sm btn-primary float-end">Simpan</button>
+                <button type="submit" class="btn btn-sm btn-primary float-end">Save</button>
             </div>
         </div>
     </form>

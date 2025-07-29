@@ -57,7 +57,10 @@ Route::controller(Hrga1PermohonanKaryawanController::class)
     ->name('hrga1.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/print/{id}', 'print')->name('print');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/singkron', 'singkron')->name('singkron');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print/{permohonan}', 'print')->name('print');
     });
 
 Route::controller(Hrga2HasilWawancara::class)
@@ -73,7 +76,7 @@ Route::controller(Hrga3HasilEvaluasiKaryawanBaru::class)
     ->name('hrga1.3.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/print', 'print')->name('print');
+        Route::get('/print/{id}', 'print')->name('print');
     });
 
 Route::controller(Hrga4DataPegawai::class)
@@ -416,6 +419,7 @@ Route::controller(PUR1DaftarSupplierController::class)
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::get('/evaluasi/{id}', 'evaluasi')->name('evaluasi');
         Route::get('/seleksi/{supplier}', 'seleksi')->name('seleksi');
+        Route::get('/seleksi_sbw/{supplier}', 'seleksi_sbw')->name('seleksi_sbw');
         Route::post('/evaluasi/{id}', 'evaluasi_update')->name('evaluasi_update');
         Route::get('/print-evaluasi/{evaluasi}', 'evaluasi_print')->name('evaluasi_print');
         Route::post('/update/{id}', 'update')->name('update');

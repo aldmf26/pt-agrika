@@ -28,7 +28,8 @@
                     @endif
                     <td>{{ $row->frekuensi }}</td>
                     <td align="center">
-                        <span Wire:confirm="Apakah anda yakin ingin menghapus data ini?" wire:click.prevent="delete({{ $row->id }})" class="pointer badge bg-danger">
+                        <span Wire:confirm="Apakah anda yakin ingin menghapus data ini?"
+                            wire:click.prevent="delete({{ $row->id }})" class="pointer badge bg-danger">
                             <i class="fas fa-trash"></i>
                         </span>
                     </td>
@@ -60,7 +61,7 @@
                     </td>
                     <td class="align-middle">
                         <button x-show="$wire.items.length" :disabled="$wire.disabled" class="btn btn-sm btn-success"
-                            type="submit">Simpan</button>
+                            type="submit">Save</button>
 
                         <div wire:loading wire:target="store,delete,addRow,removeRow"
                             class="ms-2 spinner-border spinner-border-sm text-primary" role="status"

@@ -144,7 +144,8 @@
                     value="{{ $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first()->alasan ?? '' }}"
                     class="form-control">
                 <label>Penilaian</label>
-                <input placeholder="hasil penilaian" placeholder="Contoh: 90" type="text" name="komunikasi_penilaian"
+                <input placeholder="hasil penilaian" placeholder="Contoh: 90" type="text"
+                    name="komunikasi_penilaian"
                     value="{{ $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first()->penilaian ?? '' }}"
                     class="form-control">
             </div>
@@ -152,7 +153,7 @@
 
         <div class="row mt-3">
             <div class="col-12">
-                <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-sm btn-primary">Save</button>
             </div>
         </div>
     </form>

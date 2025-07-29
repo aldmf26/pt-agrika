@@ -136,7 +136,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="form-group">
-                    <button type="submit" class="float-end btn btn-sm btn-primary">Simpan</button>
+                    <button type="submit" class="float-end btn btn-sm btn-primary">Save</button>
                 </div>
             </div>
         </div>

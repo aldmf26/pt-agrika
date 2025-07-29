@@ -22,15 +22,15 @@ class Hrga3HasilEvaluasiKaryawanBaru extends Controller
         return view('hrga.hrga1.hrga3_hasil_evaluasi_karyawan_baru.index', $data);
     }
 
-    public function print(Request $r)
+    public function print($id)
     {
-        $checkedValues = explode(',', $r->checked);
-        $datas = DataPegawai::hasilEvaluasi($checkedValues);
+        // $checkedValues = explode(',', $r->checked);
+        $datas = DataPegawai::oneHasilEvaluasi($id);
 
         $data = [
             'title' => 'HASIL EVALUASI KARYAWAN BARU',
             'dok' => 'Dok.No.: FRM.HRGA.01.03, Rev.00',
-            'datas' => $datas
+            'data' => $datas
         ];
         return view('hrga.hrga1.hrga3_hasil_evaluasi_karyawan_baru.print', $data);
     }
