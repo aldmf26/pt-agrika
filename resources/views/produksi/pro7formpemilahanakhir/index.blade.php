@@ -14,6 +14,7 @@
                         <th class="text-center">No</th>
                         <th class="text-center">Tanggal</th>
                         <th class="text-center">Kode Lot</th>
+                        <th class="text-center">Nomer Po grading</th>
                         <th class="text-center">Grade</th>
                         <th class="text-center">Pcs</th>
                         <th class="text-center">Gr</th>
@@ -32,11 +33,12 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ tanggal($g['tgl']) }}</td>
                             <td class="text-center">{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
+                            <td>{{ $g['no_invoice'] }}</td>
                             <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
                             <td>{{ $g['pcs'] }}</td>
                             <td>{{ $g['gr'] }}</td>
                             <td class="text-center">
-                                <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama ?? '-', 'kode_lot' => $sbw->no_invoice]) }}"
+                                <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama ?? '-', 'kode_lot' => $sbw->no_invoice, 'no_po' => $g['no_invoice']]) }}"
                                     target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
                                     Print</a>
                             </td>

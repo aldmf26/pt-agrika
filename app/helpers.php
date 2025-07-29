@@ -73,3 +73,9 @@ if (!function_exists('jenisProduk')) {
         ];
     }
 }
+if (!function_exists('sumBk')) {
+    function sumBk($kategori, $data)
+    {
+        return array_sum(array_column($kategori, $data));
+    }
+}

@@ -104,6 +104,14 @@
             white-space: nowrap;
             /* ⬅️ ini agar tidak membungkus teks */
         }
+
+        .table-bawah2 {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -156,21 +164,24 @@
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
-                            <th colspan="6" class="text-center">
-                                <p class="cop_judul mt-3 ">FORM HARIAN PEMILAHAN AKHIR</p>
-                                <p class="cop_bawah text-center">Daily final grading</p>
-                            </th>
-                            <th class="align-top text-end text-nowrap">
+                            <th colspan="5"></th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.07,
                                     Rev 00</p>
                             </th>
 
                         </tr>
                         <tr>
+                            <th colspan="8" class="text-center">
+                                <p class="cop_judul">FORM HARIAN PEMILAHAN AKHIR</p>
+                                <p class="cop_bawah text-center">Daily final grading</p>
+                            </th>
+                        </tr>
+                        <tr>
                             <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
                             </td>
-
                             <td class="align-middle"> : {{ tanggal($tgl) }}</td>
+
                         </tr>
                         <tr>
                             <td>Kode Batch/Lot
@@ -178,12 +189,32 @@
                             </td>
 
                             <td colspan="2" class="align-middle"> : {{ $kode_lot }}</td>
+
+
+                            <td></td>
+                            <td class="table-bawah2">Pcs Awal</td>
+                            <td class="table-bawah2">Gram Awal</td>
+                            <td class="table-bawah2">Pcs Akhir</td>
+                            <td class="table-bawah2">Gr Akhir</td>
                         </tr>
                         <tr>
+                            @php
+                                $pcsNotOkeT = collect($grading)->where('not_oke', 'Y')->sum('pcs');
+                                $pcsNotOkeY = collect($grading)->where('not_oke', 'T')->sum('pcs');
+
+                                $grNotOkeT = collect($grading)->where('not_oke', 'Y')->sum('gr');
+                                $grNotOkeY = collect($grading)->where('not_oke', 'T')->sum('gr');
+                            @endphp
                             <td>Jenis Material
                                 <br> <span class="fst-italic"> Material type </span>
                             </td>
                             <td class="align-middle"> : {{ $grade }}</td>
+                            <td></td>
+                            <td></td>
+                            <td class="table-bawah2">{{ number_format($pcsNotOkeY, 0) }}</td>
+                            <td class="table-bawah2">{{ number_format($grNotOkeY, 0) }}</td>
+                            <td class="table-bawah2">{{ number_format($pcsNotOkeT, 0) }}</td>
+                            <td class="table-bawah2">{{ number_format($grNotOkeT, 0) }}</td>
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="3" class="text-center align-middle">No</th>
@@ -212,10 +243,10 @@
                             <tr class="table-bawah">
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td class="text-center">{{ $g['grade'] }}</td>
-                                <td class="text-center">{{ $g['pcs'] }}</td>
-                                <td class="text-center">{{ $g['gr'] }}</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">0</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? 0 : $g['pcs'] }}</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? 0 : $g['gr'] }}</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
+                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
                                 <td class="text-center">{{ $g['box'] }}</td>
                                 <td class="text-center"></td>
                             </tr>
@@ -226,17 +257,17 @@
                             <th colspan="8">&nbsp;</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="7"></th>
-                            <th class="text-center">Dibuat Oleh:</th>
+                            <th style="border: none" colspan="6"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="7"></th>
-                            <td style="height: 80px"></td>
+                            <th style="border: none" colspan="6"></th>
+                            <td style="height: 40px" colspan="2"></td>
 
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="7"></th>
-                            <td class="text-center">KA. GRADING</td>
+                            <th style="border: none" colspan="6"></th>
+                            <td class="text-center" colspan="2">KA. GRADING</td>
 
                         </tr>
                     </tfoot>

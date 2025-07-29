@@ -13,10 +13,11 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin-bottom: 4px;
+
         }
 
         .shapes {
@@ -57,123 +58,200 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+            font-size: 10px;
+            font-weight: normal
+        }
+
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.1rem;
+            /* ⬅️ Padding kecil, bisa juga pakai 2px */
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* agar teks tidak turun ke bawah */
+        }
+
+
+        @media print {
+            .repeat-header {
+                display: table-header-group;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
-            </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">FORM PEMANASAN CCP 2</p>
-                    <p class="text-center fst-italic">Steaming CCP 2</p>
-                </div>
-            </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.PRO.01.09, Rev.00</p>
-                <br>
-                <br>
-            </div>
-            <div class="col-12">
-                <table width="100%">
-                    <tr>
-                        <td>Tanggal <br> <span class="fst-italic">date</span></td>
-                        <td width='4%'>&nbsp;&nbsp;:</td>
-                        <td>{{ tanggal($ruang->tanggal) }}</td>
 
-                        <td>Suhu ruang<br> <span class="fst-italic">Room temperature</span></td>
-                        <td width='4%'>&nbsp;&nbsp;:</td>
-                        <td>{{ $ruang->suhu_ruang }}</td>
-
-                        <td>Mesin Pemanas <br> <span class="fst-italic">Steamer type</span></td>
-                        <td width='4%'>&nbsp;&nbsp;:</td>
-                        <td>{{ $ruang->mesin_pemanasan }}</td>
-                    </tr>
-                    <tr>
-                        <td>Suhu sarang walet awal <br> <span class="fst-italic">Material
-                                temperature</span></td>
-                        <td width='4%'>&nbsp;&nbsp;:</td>
-                        <td>{{ $ruang->suhu_sarang_walet_awal }} °C</td>
-                        <td>Penambahan air <br> <span class="fst-italic">Adding water
-                                temperature</span></td>
-                        <td width='4%'>&nbsp;&nbsp;:</td>
-                        <td>{{ $ruang->penambahan_air }} </td>
-                    </tr>
-                </table>
-            </div>
             <div class="col-lg-12">
-                <br>
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
+                <table width="100%" style="font-size: 11px">
+                    <thead class="repeat-header">
                         <tr>
-                            <th rowspan="2" class="text-center align-middle">#</th>
-                            <th rowspan="2" class="text-center align-middle">Penampaan <br> <span
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+
+                            <th colspan="10">
+                                <p class="cop_judul text-center">FORM PEMANASAN CCP 2</p>
+                                <p class="cop_bawah text-center">Steaming CCP 2</p>
+                            </th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.09,
+                                    Rev 00</p>
+                            </th>
+
+                        </tr>
+
+                        <tr>
+                            <td>Tanggal <br> <span class="fst-italic">date</span></td>
+                            <td colspan="2"> : {{ tanggal($tgl) }}</td>
+
+                            <td colspan="2">Suhu ruang<br> <span class="fst-italic">Room temperature</span></td>
+                            <td colspan="3"> : 28,6 °C</td>
+
+                            <td colspan="2">Mesin Pemanas <br> <span class="fst-italic">Steamer type</span></td>
+                            <td colspan="3"> : Sistem Retort - Pemanasan Uap bertingkat</td>
+                        </tr>
+                        <tr>
+                            <td>Suhu sarang walet awal <br> <span class="fst-italic">Material
+                                    temperature</span></td>
+                            <td colspan="2"> : 23.6 °C</td>
+
+                            <td colspan="2">Penambahan air <br> <span class="fst-italic">Adding water
+                                    temperature</span></td>
+                            <td colspan="3"> : Otomatis </td>
+
+                            <td colspan="5"></td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th rowspan="2" class="text-center align-middle">Urutan <br> Pemanasan <br> <span
+                                    class="fst-italic fw-lighter">Heating number</span></th>
+                            <th rowspan="2" class="text-center align-middle">Nampan <br> <span
                                     class="fst-italic fw-lighter">Tray</th>
                             <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
                             <th rowspan="2" class="text-center align-middle">Jenis <br> <span
                                     class="fst-italic fw-lighter">Type</th>
+                            <th rowspan="2" class="text-center align-middle">Waktu <br> mulai <br> Steam</th>
                             <th colspan="2" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</th>
-                            <th rowspan="2" class="text-center align-middle">Tventing (°C) </th>
-                            <th rowspan="2" class="text-center align-middle">Tventing (mnt) </th>
-                            <th rowspan="2" class="text-center align-middle">Ttot (°C) </th>
-                            <th rowspan="2" class="text-center align-middle">Ttot (mnt) </th>
-                            <th rowspan="2" class="text-center align-middle">Petugas pengecekan (paraf) </th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>venting</sub> (°C)</th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>venting</sub> (mnt) </th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>tot</sub> (°C) </th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>tot</sub> (mnt) </th>
+                            <th rowspan="2" class="text-center align-middle">Petugas <br> pengecekan <br> (paraf)
+                            </th>
                             <th rowspan="2" class="text-center align-middle">Keterangan </th>
                         </tr>
-                        <tr>
+                        <tr class="table-bawah">
                             <th class="text-center align-middle">Pcs</th>
                             <th class="text-center align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pemanasan as $p)
-                            <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $p->tray }}</td>
-                                <td class="text-center">{{ $p->kode_batch }}</td>
-                                <td class="text-center">{{ $p->jenis }}</td>
-                                <td class="text-center">{{ $p->pcs }}</td>
-                                <td class="text-center">{{ $p->gr }}</td>
-                                <td class="text-center">{{ $p->tventing_c }}</td>
-                                <td class="text-center">{{ $p->tventing_mnt }}</td>
-                                <td class="text-center">{{ $p->ttot_c }}</td>
-                                <td class="text-center">{{ $p->ttot_mnt }}</td>
-                                <td class="text-center"></td>
-                                <td class="text-center">{{ $p->keterangan }}</td>
+                        @foreach ($pemanasan as $index => $p)
+                            @php
+                                $rawPartai = $p['nm_partai'];
+                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                                $partaiArray = array_map('trim', explode(',', $cleaned));
+                                $sbwList = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->whereIn('nm_partai', $partaiArray)
+                                    ->get();
+
+                                $startTime = \Carbon\Carbon::createFromTime(9, 0); // 09:00
+                                $groupNumber = ceil(($index + 1) / 6);
+                                $time = $startTime
+                                    ->copy()
+                                    ->addMinutes(15 * ($groupNumber - 1))
+                                    ->format('H:i');
+
+                            @endphp
+                            @if ($index > 0 && $index % 6 == 0)
+                                <tr class="table-bawah">
+                                    <td colspan="13">&nbsp;</td>
+                                </tr>
+                            @endif
+                            <tr class="table-bawah">
+                                <td>{{ ceil(($index + 1) / 6) }}</td>
+                                <td>{{ ($index % 6) + 1 }}</td>
+                                <td>{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td>
+                                    {!! collect(explode(',', $p['grades']))->map(fn($g) => trim($g))->filter()->unique()->implode(', <br>') ?:
+                                        '-' !!}
+                                </td>
+                                <td>{{ $time }}</td>
+                                <td>{{ number_format($p['total_pcs'], 0) }}</td>
+                                <td>{{ number_format($p['total_gr'], 0) }}</td>
+                                <td>60.5</td>
+                                <td>1 menit 3 detik</td>
+                                <td>80.4</td>
+                                <td>35 detik</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @endforeach
+
+
+
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="13">&nbsp;</th>
+                        </tr>
+                        <tr class="table-bawah">
+
+                            <th style="border: none; text-align: start" colspan="9"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="9"></th>
+                            <td colspan="2" style="height: 80px" class="text-center align-bottom">KA. STEAM</td>
+                            <td colspan="2" style="height: 80px" class="text-center align-bottom">QC</td>
+                        </tr>
+
+                    </tfoot>
 
                 </table>
             </div>
-            <div class="col-7">
 
-
-            </div>
-            <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
 
 
         </div>
@@ -185,9 +263,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    {{-- <script>
+    <script>
         window.print();
-    </script> --}}
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
