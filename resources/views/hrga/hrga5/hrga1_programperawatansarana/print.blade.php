@@ -80,8 +80,8 @@
                         <tr>
                             <th class="text-center dhead" rowspan="2">No</th>
                             <th class="text-center dhead" rowspan="2">Nama Sarana dan Prasarana Umum</th>
-                            <th class="text-center dhead" rowspan="2">Merek</th>
-                            <th class="text-center dhead" rowspan="2">No. Identifikasi</th>
+                            <th class="text-center dhead" rowspan="2">Jumlah</th>
+                            {{-- <th class="text-center dhead" rowspan="2">No. Identifikasi</th> --}}
                             <th class="text-center dhead" rowspan="2">Lokasi</th>
                             <th class="text-center dhead" rowspan="2">Frekuensi Perawatan</th>
                             <th class="text-center dhead" rowspan="2">Penanggung Jawab</th>
@@ -99,8 +99,8 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->item->nama_item }}</td>
-                                <td>{{ $p->item->merek }}</td>
-                                <td>{{ $p->item->no_identifikasi }}</td>
+                                <td>{{ $p->item->jumlah }}</td>
+                                {{-- <td>{{ $p->item->no_identifikasi }}</td> --}}
                                 <td>{{ $p->item->lokasi->lokasi }}</td>
                                 <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
                                 <td>{{ $p->penanggung_jawab }}</td>

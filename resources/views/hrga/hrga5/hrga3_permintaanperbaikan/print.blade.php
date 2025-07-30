@@ -139,9 +139,9 @@
 
             <div class="col-1"></div>
             <div class="col-6 mt-4">Tanggal : {{ date('d-m-Y', strtotime($permintaan->tanggal)) }} <br> Pukul :
-                {{ date('H:i', strtotime($permintaan->time)) }}</div>
+                {{ date('H:i', strtotime($permintaan->waktu)) }}</div>
             <div class="col-4 mt-4">Tanggal : {{ date('d-m-Y', strtotime($permintaan->tanggal)) }} <br> Pukul :
-                {{ date('H:i', strtotime($permintaan->time)) }}</div>
+                {{ date('H:i', strtotime($permintaan->waktu)) }}</div>
             <div class="col-1"></div>
 
             <div class="col-1"></div>
@@ -200,12 +200,13 @@
                     </tr>
                     <tr>
                         <td>Pukul
-                            {{ date('H:i', strtotime($permintaan->time)) }}
+                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(5)->format('H:i') }}
                         </td>
                         <td>Pukul
-                            {{ date('H:i', strtotime($permintaan->time)) }}
+                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(5)->format('H:i') }}
                         </td>
                     </tr>
+
                 </table>
             </div>
             <div class="col-1"></div>

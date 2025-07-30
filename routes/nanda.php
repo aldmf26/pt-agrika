@@ -115,6 +115,7 @@ Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
     ->name('hrga5.1.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/load_baris', 'load_baris')->name('load_baris');
         Route::get('/get_item', 'get_item')->name('get_item');
         Route::get('/get_merk', 'get_merk')->name('get_merk');
         Route::post('/store', 'store')->name('store');
@@ -219,6 +220,7 @@ Route::controller(Pro5FormPengeringan::class)
     ->name('produksi.5.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
     });
@@ -272,6 +274,7 @@ Route::controller(AgendadanJadwalTinjauanManajemenController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+
         Route::post('/store', 'store')->name('store');
     });
 Route::controller(DaftarhadirTinjuanManajemenController::class)
