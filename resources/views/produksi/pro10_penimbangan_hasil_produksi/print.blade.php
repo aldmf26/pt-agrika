@@ -13,18 +13,11 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
-            /* Atur jarak bawah paragraf pertama */
 
-        }
-
-        .cop_bawah {
-            margin-top: 0;
-            /* Hilangkan jarak atas paragraf kedua */
-            font-style: italic;
         }
 
         .shapes {
@@ -66,6 +59,14 @@
             padding-left: 6px;
         }
 
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+            font-size: 10px;
+            font-weight: normal
+        }
+
         .table {
             --bs-table-bg: transparent;
             --bs-table-accent-bg: transparent;
@@ -81,13 +82,43 @@
             vertical-align: top;
             border-color: #41464b !important;
         }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.1rem;
+            /* ⬅️ Padding kecil, bisa juga pakai 2px */
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* agar teks tidak turun ke bawah */
+        }
+
+
+        @media print {
+            .repeat-header {
+                display: table-header-group;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 mt-2">
+            {{-- <div class="col-2 mt-2">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
@@ -106,18 +137,43 @@
                         <td>{{ tanggal($tgl) }}</td>
                     </tr>
                 </table>
-            </div>
+            </div> --}}
             <div class="col-lg-12">
 
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
+
+                <table width="100%" style="font-size: 11px">
                     <thead>
                         <tr>
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+
+                            <th colspan="7"></th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.10,
+                                    Rev 00</p>
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <th colspan="10">
+                                <p class="cop_judul text-center">FORM PENIMBANGAN HASIL PRODUKSI</p>
+                                <p class="cop_bawah text-center">Production results</p>
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span></td>
+
+                            <td>&nbsp; : {{ tanggal($tgl) }}</td>
+                        </tr>
+
+                        <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">No</th>
                             <th rowspan="2" class="text-center align-middle">Jenis material <br> <span
                                     class="fst-italic fw-lighter align-middle">Material type</span></th>
                             <th rowspan="2" class="text-center align-middle">Kode Batch/Lot
                                 <br> <span class="fst-italic fw-lighter">Batch/Lot code</span>
+                            </th>
+                            <th colspan="2" class="text-center align-middle">Jumlah
                             </th>
                             <th rowspan="2" class="text-center align-middle">Jenis Produk <br> <span
                                     class="fst-italic fw-lighter align-middle">Grade</span></th>
@@ -127,7 +183,9 @@
                                     class="fst-italic fw-lighter align-middle">Remarks</span></th>
 
                         </tr>
-                        <tr>
+                        <tr class="table-bawah">
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gram</th>
                             <th class="text-center">Pcs</th>
                             <th class="text-center">Gram</th>
                             <th class="text-center">Box</th>
@@ -135,38 +193,100 @@
 
                     </thead>
                     <tbody>
-                        @foreach ($penimbangan as $p)
+                        @php
+                            $grouped = collect($penimbangan)->groupBy('grade');
+
+                            $rekap = collect($penimbangan)
+                                ->groupBy('grade')
+                                ->map(function ($items) {
+                                    return [
+                                        'pcs' => $items->sum('pcs'),
+                                        'gr' => $items->sum('gr'),
+                                        'box' => $items->pluck('box_pengiriman')->unique()->count(),
+                                    ];
+                                });
+
+                            $no = 1;
+                        @endphp
+
+                        @foreach ($grouped as $grade => $items)
                             @php
-                                $rawPartai = $p['nm_partai'];
-                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
-                                $partaiArray = array_map('trim', explode(',', $cleaned));
-                                $sbwList = DB::table('sbw_kotor')
-                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->whereIn('nm_partai', $partaiArray)
-                                    ->get();
-
+                                // Group ulang berdasarkan partai dalam grade
+                                $groupedByPartai = $items->groupBy('nm_partai');
+                                $rowspan = $groupedByPartai->count();
                             @endphp
-                            <tr>
-                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                                <td class="text-center align-middle">
-                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
-                                </td>
-                                <td class="text-center align-middle">
 
-                                    {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
-                                </td>
-                                <td class="text-center align-middle">{{ $p['grade'] }}</td>
-                                <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
-                                <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
-                                <td class="text-center align-middle">{{ number_format($p['jlh_box'], 0) }}</td>
-                                <td></td>
-                            </tr>
+                            @foreach ($groupedByPartai as $partai => $records)
+                                @php
+                                    // Total untuk partai ini
+                                    $totalPcs = $records->sum('pcs');
+                                    $totalGr = $records->sum('gr');
+                                    $sbwList = DB::table('sbw_kotor')
+                                        ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                        ->whereIn(
+                                            'nm_partai',
+                                            array_map('trim', explode(',', str_replace("'", '', $partai))),
+                                        )
+                                        ->get();
+                                @endphp
+
+                                <tr class="table-bawah">
+                                    @if ($loop->first)
+                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
+                                            {{ $no++ }}</td>
+                                    @endif
+                                    <td class="text-center align-middle">
+                                        {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
+                                    </td>
+                                    <td class="text-center align-middle">
+                                        {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
+                                    </td>
+                                    <td class="text-center align-middle">{{ number_format($totalPcs, 0) }}</td>
+                                    <td class="text-center align-middle">{{ number_format($totalGr, 0) }}</td>
+
+                                    @if ($loop->first)
+                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
+                                            {{ $grade }}
+                                        </td>
+                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
+                                            {{ number_format($rekap[$grade]['pcs'], 0) }}
+                                        </td>
+                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
+                                            {{ number_format($rekap[$grade]['gr'], 0) }}
+                                        </td>
+                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
+                                            {{ number_format($rekap[$grade]['box'], 0) }}
+                                        </td>
+                                        <td rowspan="{{ $rowspan }}"></td>
+                                    @endif
+
+
+                                </tr>
+                            @endforeach
                         @endforeach
+
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="13">&nbsp;</th>
+                        </tr>
+                        <tr class="table-bawah">
+
+                            <th style="border: none; text-align: start" colspan="5"></th>
+                            <th class="text-center" colspan="3">Dibuat Oleh:</th>
+                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="5"></th>
+                            <td colspan="3" style="height: 80px"></td>
+                            <td colspan="2" style="height: 80px"></td>
+                        </tr>
+
+                    </tfoot>
 
                 </table>
             </div>
-            <div class="col-7">
+            {{-- <div class="col-7">
 
 
             </div>
@@ -186,7 +306,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
 
 
         </div>
