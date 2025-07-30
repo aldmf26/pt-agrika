@@ -19,7 +19,7 @@ class RM5LabelIdentitasBahanController extends Controller
         // $label = LabelIdentitasBahan::with('barang')->latest()->get();
         // $barangs = Barang::with(['penerimaan', 'penerimaanKemasan', 'kode_bahan_baku', 'supplier'])->get();
         // $sbw = PenerimaanKemasanSbwKotorHeader::get();
-        $k = $r->k;
+        $k = $r->kategori;
 
         $barangs = PenerimaanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
         $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('label', 'Y')->get();
@@ -34,46 +34,51 @@ class RM5LabelIdentitasBahanController extends Controller
         // Tambahkan data SBW
 
 
-        if ($k == 'sbw') {
-            foreach ($sbw as $s) {
-                $items[] = [
-                    'id' => $s->id,
-                    'identitas' => 'sbw',
-                    'nama_barang' => $s->grade,
-                    'nama_produsen' => $s->rumah_walet,
-                    'tanggal_kedatangan' => date('Y-m-d', strtotime('+1 day', strtotime($s->tgl))),
-                    'kode_lot' => $s->no_invoice,
-                    'kode_grading' => '-',
-                    'keterangan' => $s->nm_partai,
-                    'kategori' => !$k ? 'barang' : $k, // Tambahkan kategori jika diperlukan
-                ];
-            }
-        } else {
-            foreach ($barangs as $s) {
-                $items[] = [
-                    'id' => $s->id,
-                    'identitas' => 'barang',
-                    'nama_barang' => $s->barang->nama_barang,
-                    'nama_produsen' => $s->supplier->nama_supplier,
-                    'tanggal_kedatangan' => $s->tanggal_terima,
-                    'kode_lot' => $s->kode_lot,
-                    'kode_grading' => '-',
-                    'keterangan' => '-',
-                ];
-            }
-            // Tambahkan data SBW
-            foreach ($kemasan as $s) {
-                $items[] = [
-                    'id' => $s->id,
-                    'identitas' => 'kemasan',
-                    'nama_barang' => $s->barang->nama_barang,
-                    'nama_produsen' => $s->supplier->nama_supplier,
-                    'tanggal_kedatangan' => $s->tanggal_penerimaan,
-                    'kode_lot' => $s->kode_lot,
-                    'kode_grading' => '-',
-                    'keterangan' => '-',
-                ];
-            }
+        $items = [];
+
+        switch ($k) {
+            case 'barang':
+                $items = $barangs->map(function ($s) {
+                    return [
+                        'id' => $s->id,
+                        'identitas' => 'barang',
+                        'nama_barang' => $s->barang->nama_barang,
+                        'nama_produsen' => $s->supplier->nama_supplier,
+                        'tanggal_kedatangan' => $s->tanggal_terima,
+                        'kode_lot' => $s->kode_lot,
+                        'kode_grading' => '-',
+                        'keterangan' => '-',
+                    ];
+                })->toArray();
+                break;
+            case 'kemasan':
+                $items = $kemasan->map(function ($s) {
+                    return [
+                        'id' => $s->id,
+                        'identitas' => 'kemasan',
+                        'nama_barang' => $s->barang->nama_barang,
+                        'nama_produsen' => $s->supplier->nama_supplier,
+                        'tanggal_kedatangan' => $s->tanggal_penerimaan,
+                        'kode_lot' => $s->kode_lot,
+                        'kode_grading' => '-',
+                        'keterangan' => '-',
+                    ];
+                })->toArray();
+                break;
+            case 'lainnya':
+                $items = $sbw->map(function ($s) {
+                    return [
+                        'id' => $s->id,
+                        'identitas' => 'sbw',
+                        'nama_barang' => $s->grade,
+                        'nama_produsen' => $s->rumah_walet,
+                        'tanggal_kedatangan' => date('Y-m-d', strtotime('+1 day', strtotime($s->tgl))),
+                        'kode_lot' => $s->no_invoice,
+                        'kode_grading' => '-',
+                        'keterangan' => $s->nm_partai,
+                    ];
+                })->toArray();
+                break;
         }
 
 

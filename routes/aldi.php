@@ -74,7 +74,7 @@ Route::controller(Hrga2HasilWawancara::class)
         Route::post('/create', 'store')->name('store');
         Route::get('/edit/{pegawai}', 'edit')->name('edit');
         Route::post('/update/{pegawai}', 'update')->name('update');
-        Route::get('/print/{hasilWawancara}', 'print')->name('print');
+        Route::get('/print/{pegawai}', 'print')->name('print');
         Route::get('/edit/{hasilWawancara}', 'edit')->name('edit');
         Route::get('/singkron', 'singkron')->name('singkron');
     });
@@ -84,7 +84,7 @@ Route::controller(Hrga3HasilEvaluasiKaryawanBaru::class)
     ->name('hrga1.3.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/print/{id}', 'print')->name('print');
+        Route::get('/print/{pegawai}', 'print')->name('print');
     });
 
 Route::controller(Hrga4DataPegawai::class)

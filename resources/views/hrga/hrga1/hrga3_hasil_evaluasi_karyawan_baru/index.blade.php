@@ -14,6 +14,7 @@
                     <tr>
                         <th class="dhead">No</th>
                         <th class="dhead">Nama karyawan</th>
+                        <th class="dhead">No KTP</th>
                         <th class="dhead text-center">Usia</th>
                         <th class="dhead">Jenis <br> kelamin</th>
                         <th class="dhead">Posisi</th>
@@ -26,6 +27,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama ?? '' }}</td>
+                            <td>{{ $d->nik ?? '' }}</td>
                             <td class="text-center">
                                 @if (isset($d->tgl_lahir))
                                     {{ umur($d->tgl_lahir) }}
@@ -33,9 +35,9 @@
                             </td>
                             <td>{{ $d->jenis_kelamin ?? '' }}</td>
                             <td>{{ $d->posisi ?? '' }}</td>
-                            <td>{{ $d->status_karyawan ?? 'Dilanjutkan' }} Bulan</td>
+                            <td>{{ $d->penilaianKaryawan->periode ?? '' }} Bulan</td>
                             <td>
-                                <a target="_blank" href="{{ route('hrga1.3.print', $d->id_karyawan) }}"
+                                <a target="_blank" href="{{ route('hrga1.3.print', $d) }}"
                                     class="btn btn-sm btn-primary">Cetak</a>
                             </td>
                         </tr>

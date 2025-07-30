@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use App\Models\DataPegawai;
+use App\Models\HasilWawancara;
+use App\Models\PenilaianKaryawan;
 
 class DataPegawaiService
 {
@@ -55,6 +57,49 @@ class DataPegawaiService
                         ]
                     );
                 }
+            }
+
+            HasilWawancara::where('admin', 'download')->delete();
+            foreach ($dataPegawai['hasil_wawancara'] as $wawancara) {
+                HasilWawancara::updateOrCreate(
+                    [
+                        'id_anak' => $wawancara['id'] ?? null,
+                    ],
+                    [
+                        'nama' => $wawancara['nama_lengkap'] ?? null,
+                        'nik' => $wawancara['nik'] ?? null,
+                        'tgl_lahir' => $wawancara['tgl_lahir'] ?? null,
+                        'jenis_kelamin' => $wawancara['jenis_kelamin'] ?? null,
+                        'id_divisi' => $wawancara['id_divisi'] ?? null,
+                        'kesimpulan' => $wawancara['kesimpulan'] ?? null,
+                        'keputusan' => $wawancara['keputusan'] ?? 'dilanjutkan',
+                        'tgl_masuk' => $wawancara['tgl_masuk'] ?? null,
+                        'admin' => 'download',
+                    ]
+                );
+            }
+
+            PenilaianKaryawan::where('admin', 'download')->delete();
+            foreach ($dataPegawai['penilaian_karyawan'] as $penilaian) {
+                PenilaianKaryawan::updateOrCreate(
+                    [
+                        'id_anak' => $penilaian['id_anak'] ?? null,
+                    ],
+                    [
+                        'periode' => $penilaian['periode'] ?? null,
+                        'pendidikan_standar' => $penilaian['pendidikan_standar'] ?? null,
+                        'pendidikan_hasil' => $penilaian['pendidikan_hasil'] ?? null,
+                        'pengalaman_standar' => $penilaian['pengalaman_standar'] ?? null,
+                        'pengalaman_hasil' => $penilaian['pengalaman_hasil'] ?? null,
+                        'pelatihan_standar' => $penilaian['pelatihan_standar'] ?? null,
+                        'pelatihan_hasil' => $penilaian['pelatihan_hasil'] ?? null,
+                        'keterampilan_standar' => $penilaian['keterampilan_standar'] ?? null,
+                        'keterampilan_hasil' => $penilaian['keterampilan_hasil'] ?? null,
+                        'kompetensi_inti_standar' => $penilaian['kompetensi_inti_standar'] ?? null,
+                        'kompetensi_inti_hasil' => $penilaian['kompetensi_inti_hasil'] ?? null,
+                        'admin' => 'download',
+                    ]
+                );
             }
         } else {
             throw new \Exception('Gagal mengunduh data dari ' . $url);

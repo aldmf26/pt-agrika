@@ -7,22 +7,22 @@
                     <tr>
                         <td>Nama Calon Karyawan</td>
                         <td>:</td>
-                        <td>{{ $data->nama }}</td>
+                        <td>{{ $pegawai->nama }}</td>
                     </tr>
                     <tr>
                         <td>Usia</td>
                         <td>:</td>
-                        <td>{{ \Carbon\Carbon::parse($data->tgl_lahir)->age }} Tahun</td>
+                        <td>{{ \Carbon\Carbon::parse($pegawai->tgl_lahir)->age }} Tahun</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
                         <td>:</td>
-                        <td>{{ $data->jenis_kelamin }}</td>
+                        <td>{{ $pegawai->jenis_kelamin }}</td>
                     </tr>
                     <tr>
                         <td>Posisi</td>
                         <td>:</td>
-                        <td>{{ $data->posisi }}</td>
+                        <td>{{ $pegawai->posisi }}</td>
                     </tr>
                     <tr>
                         <td>Periode Masa Percobaan</td>
@@ -45,28 +45,30 @@
                     </tr>
                     <tr>
                         <td>Pendidikan</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pendidikan ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pendidikan ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td>Pengalaman</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pengalaman ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pengalaman ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td>Pelatihan</td>
-                        <td>N/A</td>
-                        <td>N/A</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pelatihan ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pelatihan ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td>Ketrampilan</td>
-                        <td>Teliti, Cepat</td>
-                        <td>Teliti, Cepat</td>
+                        <td>{{ $pegawai->penilaiankaryawan->ketrampilan ?? 'Teliti, Cepat' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->ketrampilan ?? 'Teliti, Cepat' }}</td>
                     </tr>
                     <tr>
                         <td>Kompetensi Inti</td>
-                        <td>Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW</td>
-                        <td>Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW</td>
+                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        </td>
+                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        </td>
                     </tr>
                 </table>
             </div>

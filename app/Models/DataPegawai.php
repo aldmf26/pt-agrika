@@ -14,6 +14,15 @@ class DataPegawai extends Model
         return $value === 'L' ? 'Laki-laki' : 'Perempuan';
     }
 
+    public function getNamaAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    public function getPosisiAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+
     public function divisi()
     {
         return $this->belongsTo(Divisi::class, 'divisi_id');
@@ -21,12 +30,12 @@ class DataPegawai extends Model
 
     public function hasilWawancara()
     {
-        return $this->hasOne(HasilWawancara::class, 'id_anak', 'id');
+        return $this->hasOne(HasilWawancara::class, 'id_anak', 'karyawan_id_dari_api');
     }
 
     public function penilaianKaryawan()
     {
-        return $this->hasOne(PenilaianKaryawan::class, 'id_anak', 'id');
+        return $this->hasOne(PenilaianKaryawan::class, 'id_anak', 'karyawan_id_dari_api');
     }
 
     public static function hasilEvaluasi($value = null)
