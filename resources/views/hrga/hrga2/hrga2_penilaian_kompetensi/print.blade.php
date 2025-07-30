@@ -182,20 +182,32 @@
                     <td align="left">Izin</td>
                     @php
                         $grandTotal = 0;
+                        $cekCabut = ['Staf Cabut', 'Staf Molding/perapian'];
                     @endphp
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        @if ($karyawan->posisi == 'Staf Cabut')
-                            <td>{{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : 26 - $absen['total_per_bulan'][$bulan] }}
+                        @if (in_array($karyawan->posisi, $cekCabut))
+                            @php
+                                $absenCabut =
+                                    $absen['total_per_bulan'][$bulan] > 26
+                                        ? 0
+                                        : ($absen['total_per_bulan'][$bulan] == 0
+                                            ? 0
+                                            : 26 - $absen['total_per_bulan'][$bulan]);
+                            @endphp
+                            <td>{{ $absenCabut == 0 ? '-' : $absenCabut }}</td>
                             </td>
                             <td>-</td>
+                            @php
+                                $grandTotal += $absenCabut;
+                            @endphp
                         @else
                             <td>{{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : $absen['total_per_bulan'][$bulan] }}
                             </td>
                             <td>-</td>
+                            @php
+                                $grandTotal += $absen['total_per_bulan'][$bulan];
+                            @endphp
                         @endif
-                        @php
-                            $grandTotal += $absen['total_per_bulan'][$bulan];
-                        @endphp
                     @endfor
                     <td>{{ $grandTotal }}</td>
                     <td>-</td>
