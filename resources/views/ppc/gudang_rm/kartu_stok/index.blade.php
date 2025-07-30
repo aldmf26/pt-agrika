@@ -1,5 +1,16 @@
 <x-app-layout :title="$title">
-    <x-nav-link route="ppc.gudang-rm.8.index" />
+    <nav>
+        <ul class="nav nav-pills float-start">
+            <li class="nav-item">
+                <a class="nav-link {{ $k == 'satu' ? 'active' : '' }}"
+                    href="{{ route('ppc.gudang-rm.8.index', ['k' => 'satu']) }}">Barang & Kemasan</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $k == 'lainnya' ? 'active' : '' }}"
+                    href="{{ route('ppc.gudang-rm.8.index', ['k' => 'lainnya']) }}">Sbw</a>
+            </li>
+        </ul>
+    </nav>
     <br>
     <br>
     <div x-data="{ checked: [] }">
@@ -62,13 +73,14 @@
                             <td>
                                 @php
                                     $param = [
-                                        'nm_barang' => $sbw->nama,
+                                        'nm_barang' => $sbw->nama ?? '',
                                         'kategori' => 'sbw',
                                         'id' => $d['grade_id'],
                                     ];
                                 @endphp
                                 <a class="btn btn-xs float-end btn-primary"
-                                    href="{{ route('ppc.gudang-rm.8.print', $param) }}"><i class="fas fa-print"></i></a>
+                                    href="{{ route('ppc.gudang-rm.8.print', $param) }}"><i
+                                        class="fas fa-print"></i></a>
                             </td>
                         </tr>
                     @endforeach

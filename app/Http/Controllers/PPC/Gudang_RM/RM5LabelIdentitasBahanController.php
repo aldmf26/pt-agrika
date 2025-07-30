@@ -36,50 +36,39 @@ class RM5LabelIdentitasBahanController extends Controller
 
         $items = [];
 
-        switch ($k) {
-            case 'barang':
-                $items = $barangs->map(function ($s) {
-                    return [
-                        'id' => $s->id,
-                        'identitas' => 'barang',
-                        'nama_barang' => $s->barang->nama_barang,
-                        'nama_produsen' => $s->supplier->nama_supplier,
-                        'tanggal_kedatangan' => $s->tanggal_terima,
-                        'kode_lot' => $s->kode_lot,
-                        'kode_grading' => '-',
-                        'keterangan' => '-',
-                    ];
-                })->toArray();
-                break;
-            case 'kemasan':
-                $items = $kemasan->map(function ($s) {
-                    return [
-                        'id' => $s->id,
-                        'identitas' => 'kemasan',
-                        'nama_barang' => $s->barang->nama_barang,
-                        'nama_produsen' => $s->supplier->nama_supplier,
-                        'tanggal_kedatangan' => $s->tanggal_penerimaan,
-                        'kode_lot' => $s->kode_lot,
-                        'kode_grading' => '-',
-                        'keterangan' => '-',
-                    ];
-                })->toArray();
-                break;
-            case 'lainnya':
-                $items = $sbw->map(function ($s) {
-                    return [
-                        'id' => $s->id,
-                        'identitas' => 'sbw',
-                        'nama_barang' => $s->grade,
-                        'nama_produsen' => $s->rumah_walet,
-                        'tanggal_kedatangan' => date('Y-m-d', strtotime('+1 day', strtotime($s->tgl))),
-                        'kode_lot' => $s->no_invoice,
-                        'kode_grading' => '-',
-                        'keterangan' => $s->nm_partai,
-                    ];
-                })->toArray();
-                break;
-        }
+        $items = match ($k ?: 'barang') {
+            'barang' => $barangs->map(fn($s) => [
+                'id' => $s->id,
+                'identitas' => 'barang',
+                'nama_barang' => $s->barang->nama_barang,
+                'nama_produsen' => $s->supplier->nama_supplier,
+                'tanggal_kedatangan' => $s->tanggal_terima,
+                'kode_lot' => $s->kode_lot,
+                'kode_grading' => '-',
+                'keterangan' => '-',
+            ])->toArray(),
+            'kemasan' => $kemasan->map(fn($s) => [
+                'id' => $s->id,
+                'identitas' => 'kemasan',
+                'nama_barang' => $s->barang->nama_barang,
+                'nama_produsen' => $s->supplier->nama_supplier,
+                'tanggal_kedatangan' => $s->tanggal_penerimaan,
+                'kode_lot' => $s->kode_lot,
+                'kode_grading' => '-',
+                'keterangan' => '-',
+            ])->toArray(),
+            'lainnya' => $sbw->map(fn($s) => [
+                'id' => $s->id,
+                'identitas' => 'sbw',
+                'nama_barang' => $s->grade,
+                'nama_produsen' => $s->rumah_walet,
+                'tanggal_kedatangan' => date('Y-m-d', strtotime('+1 day', strtotime($s->tgl))),
+                'kode_lot' => $s->no_invoice,
+                'kode_grading' => '-',
+                'keterangan' => $s->nm_partai,
+            ])->toArray(),
+            default => [],
+        };
 
 
         $data = [
