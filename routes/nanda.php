@@ -8,6 +8,7 @@ use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga4JadwalDanInformasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga5DaftarHadirPelatihanController;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga6EvaluasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga4MedicalScreening\Hrga1JadwalMedicalCheckup;
+use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\DaftarSaranaPrasarana;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3PermintaanPerbaikan;
@@ -109,6 +110,16 @@ Route::controller(Hrga1JadwalMedicalCheckup::class)
         Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+    });
+Route::controller(DaftarSaranaPrasarana::class)
+    ->prefix('hrga/hrga5/daftar_sarana_dan_prasarana_umum')
+    ->name('daftar.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/delete', 'delete')->name('delete');
+        Route::get('/get_data', 'get_data')->name('get_data');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
     });
 Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
     ->prefix('hrga/hrga5/hrga5.1_Program_perawatan_sarana_dan_prasarana_umum')
