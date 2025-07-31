@@ -37,7 +37,7 @@
                             <td>{{ $d->divisi->divisi }}</td>
                             <td>{{ $d->jumlah }} Orang</td>
                             <td>Adanya penambahan kapasitas aktivitas {{ $d->divisi->divisi }}</td>
-                            <td>Widani</td>
+                            <td>{{ $d->admin }}</td>
                             <td>
                                 <a href="{{ route('hrga1.1.edit', [$d]) }}" class="btn btn-sm btn-primary"><i
                                         class="fas fa-pen"></i> Edit </a>
