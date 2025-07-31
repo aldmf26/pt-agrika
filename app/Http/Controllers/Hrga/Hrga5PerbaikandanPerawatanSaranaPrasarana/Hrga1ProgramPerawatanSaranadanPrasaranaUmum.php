@@ -19,18 +19,40 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
         } else {
             $tahun = $r->tahun;
         }
+        $kategori = $r->kategori ?? 'ruangan';
+        $item = ItemPerawatan::where('jenis_item',  $kategori)->get();
         $data = [
             'title' => 'Program Perawatan Sarana dan Prasarana Umum',
             'lokasi' => LokasiModel::all(),
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $tahun,
-            'program' => ProgramPerawatanSaranaPrasarana::whereYear('tanggal_mulai', $tahun)->orderBy('id', 'desc')->get(),
+            'program' => ProgramPerawatanSaranaPrasarana::whereYear('tanggal_mulai', $tahun)
+                ->whereHas('item', function ($query) use ($kategori) {
+                    $query->where('jenis_item', $kategori);
+                })
+                ->orderBy('id', 'desc')
+                ->get(),
             'tahuns' => ProgramPerawatanSaranaPrasarana::selectRaw('YEAR(tanggal_mulai) as tahun')
                 ->distinct()
                 ->pluck('tahun')
-                ->toArray()
+                ->toArray(),
+            'kategori' =>  $kategori,
+            'item' => $item,
         ];
         return view('hrga.hrga5.hrga1_programperawatansarana.index', $data);
+    }
+
+    public function load_baris(Request $r)
+    {
+        $kategori = $r->kategori ?? 'ruangan';
+        $item = ItemPerawatan::where('jenis_item',  $kategori)->get();
+
+        $data = [
+            'item' => $item,
+            'kategori' => $kategori,
+            'count' => $r->count
+        ];
+        return view('hrga.hrga5.hrga1_programperawatansarana.tambah_baris', $data);
     }
 
     public function get_item(Request $r)
@@ -94,22 +116,31 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
             'penanggung_jawab' => 'required',
             'tanggal_mulai' => 'required',
         ]);
-        ProgramPerawatanSaranaPrasarana::create($r->all());
+        // ProgramPerawatanSaranaPrasarana::create($r->all());
 
-        $item = ItemPerawatan::find($r->item_id);
+        // $item = ItemPerawatan::find($r->item_id);
 
-        $total = floor(12 / $r->frekuensi_perawatan);
+        for ($i = 0; $i < count($r->item_id); $i++) {
+            ProgramPerawatanSaranaPrasarana::create([
+                'item_id' => $r->item_id[$i],
+                'frekuensi_perawatan' => $r->frekuensi_perawatan[$i],
+                'penanggung_jawab' => $r->penanggung_jawab[$i],
+                'tanggal_mulai' => $r->tanggal_mulai[$i],
+            ]);
+            $total = floor(12 / $r->frekuensi_perawatan[$i]);
 
-        for ($i = 0; $i < $total; $i++) {
-            $tgl = date('Y-m-d', strtotime($r->tanggal_mulai . ' + ' . ($i * $r->frekuensi_perawatan) . ' month'));
-            $data = [
-                'item_id' => $r->item_id,
-                'tgl' => $tgl,
-                'kesimpulan' => 'kondisi masih bagus',
-                'fungsi' => 'bagus',
-            ];
-            PerawatanModel::create($data);
+            for ($j = 0; $j < $total; $j++) {
+                $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
+                $data = [
+                    'item_id' => $r->item_id[$i],
+                    'tgl' => $tgl,
+                    'kesimpulan' => 'kondisi masih bagus',
+                    'fungsi' => 'bagus',
+                ];
+                PerawatanModel::create($data);
+            }
         }
+
 
 
 
@@ -120,12 +151,18 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
 
     public function print(Request $r)
     {
+        $kategori = $r->kategori ?? 'ruangan';
         $data = [
             'title' => 'Program Perawatan Sarana dan Prasarana Umum',
             'lokasi' => LokasiModel::all(),
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $r->tahun,
-            'program' => ProgramPerawatanSaranaPrasarana::whereYear('tanggal_mulai', $r->tahun)->orderBy('id', 'desc')->get(),
+            'program' => ProgramPerawatanSaranaPrasarana::whereYear('tanggal_mulai', $r->tahun)
+                ->whereHas('item', function ($query) use ($kategori) {
+                    $query->where('jenis_item', $kategori);
+                })
+                ->orderBy('id', 'desc')
+                ->get(),
         ];
         return view('hrga.hrga5.hrga1_programperawatansarana.print', $data);
     }

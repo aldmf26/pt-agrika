@@ -56,7 +56,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <label for="">Lokasi</label>
                             <select name="" id="" class="select2 form-control lokasi">
                                 <option value="">Pilih Lokasi</option>
@@ -66,23 +66,27 @@
                                     </option>
                                 @endforeach
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="col-12 mt-2">
                             <label for="">Nama sarana dan prasarana umum</label>
                             <select name="item_id" id="" class="select2 item">
-
+                                <option value="">Pilih Sarana & Prasarana</option>
+                                @foreach ($item as $i)
+                                    <option value="{{ $i->id }}">{{ $i->nama_item }} ({{ $i->no_identifikasi }})
+                                    </option>
+                                @endforeach
 
                             </select>
                         </div>
 
-                        <div class="col-6 mt-2">
+                        {{-- <div class="col-6 mt-2">
                             <label for="">Merek</label>
                             <input type="text" class="form-control merk" disabled>
-                        </div>
-                        <div class="col-6 mt-2">
+                        </div> --}}
+                        {{-- <div class="col-6 mt-2">
                             <label for="">No identifikasi</label>
                             <input type="text" class="form-control no_identifikasi" disabled>
-                        </div>
+                        </div> --}}
                         <div class="col-12 mt-2">
                             <label for="">Diajukan oleh</label>
                             <input type="text" class="form-control" name="diajukan_oleh">

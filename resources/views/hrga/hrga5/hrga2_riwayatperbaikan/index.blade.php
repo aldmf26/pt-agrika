@@ -1,6 +1,9 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
+            @include('hrga.hrga5.hrga1_programperawatansarana.nav', [
+                'url' => 'hrga5.2.index',
+            ])
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
                     class="fas fa-calendar"></i> view</button>
         </div>

@@ -16,7 +16,8 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin-bottom: 4px;
+
         }
 
         .shapes {
@@ -58,19 +59,50 @@
             padding-left: 6px;
         }
 
-        tbody,
-        td,
-        tfoot,
-        th,
-        thead,
-        tr {
-
-            padding: 4px;
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+            font-size: 10px;
+            font-weight: normal
         }
 
-        .table_border {
-            border-collapse: collapse !important;
-            border: 1px solid black !important;
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
+
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* ⬅️ ini agar tidak membungkus teks */
         }
     </style>
 </head>
@@ -78,8 +110,8 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            {{-- <div class="col-3 mt-4">
+                <img style="width: 120px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
@@ -100,9 +132,9 @@
                         <td>{{ $items->nama_item }}</td>
                     </tr>
                     <tr>
-                        <td width="30%">Merk</td>
+                        <td width="30%">Jumlah</td>
                         <td width="2%">:</td>
-                        <td>{{ $items->merek }}</td>
+                        <td>{{ $items->jumlah }}</td>
                     </tr>
                     <tr>
                         <td width="30%">No Identifikasi</td>
@@ -126,82 +158,183 @@
                     </tr>
 
                 </table>
-            </div>
+            </div> --}}
             <div class="col-lg-12 mt-3">
-                <table class="table " width="100%">
+                <table width="100%">
                     <thead>
                         <tr>
-                            <th class="dhead table_border align-middle text-center">Tanggal</th>
-                            <th class="dhead table_border align-middle text-center">Perawatan/Perbaikan</th>
-                            <th class="dhead table_border align-middle text-center">Kebersihan</th>
-                            <th class="dhead table_border align-middle text-center">Fungsi</th>
-                            <th class="dhead table_border align-middle text-center">Kesimpulan Hasil Pemeriksaan</th>
-                            <th class="dhead table_border align-middle text-center">Paraf Pelaksana</th>
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+                            <th colspan="5"></th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.:FRM.HRGA.05.02,
+                                    Rev.00</p>
+                            </th>
+
+                        </tr>
+                        <tr>
+                            <th colspan="2"></th>
+                            <th colspan="4">
+                                <p class="cop_judul  shapes">RIWAYAT PEMELIHARAAN SARANA & <br> PRASARANA UMUM</p>
+                                {{-- <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p> --}}
+                            </th>
+                            <th colspan="2"></th>
+                        </tr>
+                        <tr>
+                            <th colspan="8">&nbsp;</th>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Nama Sarana/Prasarana Umum</td>
+
+                            <td colspan="2"> : {{ $items->nama_item }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Jumlah</td>
+
+                            <td colspan="2"> : {{ $items->jumlah }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">No Identifikasi</td>
+
+                            <td colspan="2"> : {{ $items->no_identifikasi }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Lokasi</td>
+
+                            <td colspan="2"> : {{ $items->lokasi }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Tahun Pemeriksaan</td>
+
+                            <td colspan="2"> : {{ $tahun }}</td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th class="dhead  align-middle text-center">Tanggal</th>
+                            <th class="dhead  align-middle text-center">Urutan unit / <br> Ruang</th>
+                            <th class="dhead  align-middle text-center">Perawatan/ <br> Perbaikan</th>
+                            <th class="dhead  align-middle text-center">Jenis yang <br> dilakukan</th>
+                            <th class="dhead  align-middle text-center">Kondisi kebersihan akhir</th>
+                            <th class="dhead  align-middle text-center">Kondisi fungsi akhir</th>
+                            <th class="dhead  align-middle text-center">Kesimpulan <br> (Ok/Not OK)</th>
+                            <th class="dhead  align-middle text-center">Paraf Pelaksana</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($union as $r)
-                            <tr>
-                                <td class="table_border text-center">{{ date('d/m/Y', strtotime($r->tanggal)) }}</td>
-                                <td class="table_border text-center">{{ ucfirst(strtolower($r->ket)) }}</td>
-                                <td class="table_border text-center">
-                                    @if ($jenis == 'pisah')
-                                        {{ $r->ket == 'perawatan' ? 'Kondisi Bersih' : 'Kembali bersih' }}
+                            <tr class="table-bawah">
+                                <td class="text-start">{{ date('d/m/Y', strtotime($r->tanggal)) }}</td>
+                                <td class="text-start" style="white-space: normal">{{ $items->no_identifikasi }} -
+                                    {{ $items->lokasi }}</td>
+                                <td class="text-start">{{ ucfirst(strtolower($r->ket)) }}</td>
+                                <td class="text-start">
+                                    @if ($jenis == 'ac')
+                                        {{ $r->ket == 'perawatan' ? 'Pembersihan AC ' : 'Kembali bersih' }}
                                     @else
                                         {{ $r->nama_item }} :
                                         {{ $r->ket == 'perawatan' ? 'Kondisi Bersih' : 'Kembali bersih' }}
                                     @endif
                                 </td>
-                                <td class="table_border text-center">
-                                    {{ $r->ket == 'perawatan' ? 'Normal' : 'Sudah kembali normal' }}
+                                <td class="text-start">
+                                    @if ($jenis == 'ac')
+                                        {{ $r->ket == 'perawatan' ? 'Kondisi bersih ' : 'Kembali bersih' }}
+                                    @else
+                                        {{ $r->nama_item }} :
+                                        {{ $r->ket == 'perawatan' ? 'Kondisi Bersih' : 'Kembali bersih' }}
+                                    @endif
                                 </td>
-                                <td class="table_border text-center">
-                                    {{ $r->ket == 'perawatan' ? 'Kondisi masih bagus' : 'Keadaan normal' }}
+                                <td class="text-start" class="text-start" style="white-space: normal">
+                                    {{ $r->ket == 'perawatan' ? 'Normal setelah dibersihkan, mencapai suhu yang diinginkan' : 'Sudah kembali normal' }}
                                 </td>
+                                <td class="text-start">
+                                    Ok
+                                </td>
+                                <td class="text-start"></td>
 
-                                <td class="table_border text-center"></td>
+
                             </tr>
                         @endforeach
 
 
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="8" style="font-size: 9px; font-weight: normal">Note:</th>
+                        </tr>
+                        <tr>
+                            <th colspan="8" style="font-size: 9px; font-weight: normal">1. Untuk pemeriksaan
+                                kebersihan dilakukan
+                                pengecekan kebersihan kondisi
+                                fisik dari
+                                sarana dan
+                                prasarana umum
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="8" style="font-size: 9px; font-weight: normal">
+                                2. Untuk pemeriksaan fungsi dari sarana prasarana umum dilakukan dengan cara
+                                menjalangkan fungsi alat
+                                dan menilai apakah alat masih berfungsi dengan normal atau tidak
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="8" style="font-size: 9px; font-weight: normal">
+                                Untuk perbaikan tidak perlu diisikan hasil pemeriksaan kebersihan dan fungsi dari alat
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="8">&nbsp;</th>
+                        </tr>
+                        <tr class="table-bawah">
+
+                            <th colspan="2" style="border: none"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                            <th class="text-center" colspan="2">Diketahui Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th colspan="2" style="border: none"></th>
+                            <td style="height: 80px;" colspan="2" class="align-bottom">[GENERAL MAINTENANCE]</td>
+                            <td style="height: 80px;" colspan="2" class="align-bottom">[SPV. GA-IR]</td>
+                            <td style="height: 80px;" colspan="2" class="align-bottom">[KA.HRGA]</td>
+                        </tr>
+                    </tfoot>
 
                 </table>
             </div>
-            <div class="col-lg-12">
+            {{-- <div class="col-lg-12">
                 <p>Note:</p>
                 <p>1. Untuk pemeriksaan kebersihan dilakukan pengecekan kebersihan kondisi fisik dari sarana dan
                     prasarana umum</p>
                 <p>2. Untuk pemeriksaan fungsi dari sarana prasarana umum dilakukan dengan cara menjalangkan fungsi alat
                     dan menilai apakah alat masih berfungsi dengan normal atau tidak</p>
                 <p>Untuk perbaikan tidak perlu diisikan hasil pemeriksaan kebersihan dan fungsi dari alat</p>
-            </div>
-            <div class="col-4">
+            </div> --}}
+            {{-- <div class="col-4">
 
             </div>
             <div class="col-8">
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center table_border" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center table_border" width="33.33%">Diperiksa Oleh:</th>
-                            <th class="text-center table_border" width="33.33%">Diketahui Oleh:</th>
+                            <th class="text-center " width="33.33%">Dibuat Oleh:</th>
+                            <th class="text-center " width="33.33%">Diperiksa Oleh:</th>
+                            <th class="text-center " width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px" class="table_border"></td>
-                            <td style="height: 80px" class="table_border"></td>
-                            <td style="height: 80px" class="table_border"></td>
+                            <td style="height: 80px" class=""></td>
+                            <td style="height: 80px" class=""></td>
+                            <td style="height: 80px" class=""></td>
                         </tr>
                         <tr>
-                            <td class="text-center table_border">[GENERAL MAINTENANCE]</td>
-                            <td class="text-center table_border">[SPV. GA-IR]</td>
-                            <td class="text-center table_border">[KA.HRGA]</td>
+                            <td class="text-center ">[GENERAL MAINTENANCE]</td>
+                            <td class="text-center ">[SPV. GA-IR]</td>
+                            <td class="text-center ">[KA.HRGA]</td>
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
 
 
 

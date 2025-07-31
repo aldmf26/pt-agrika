@@ -1,7 +1,11 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary float-end" href="{{ route('hrga5.3.formPermintaanperbaikan') }}" target="_blank"><i
+            @include('hrga.hrga5.hrga1_programperawatansarana.nav', [
+                'url' => 'hrga5.3.index',
+            ])
+            <a class="btn btn-primary float-end"
+                href="{{ route('hrga5.3.formPermintaanperbaikan', ['kategori' => $kategori]) }}" target="_blank"><i
                     class="fas fa-plus"></i>
                 add</a>
         </div>

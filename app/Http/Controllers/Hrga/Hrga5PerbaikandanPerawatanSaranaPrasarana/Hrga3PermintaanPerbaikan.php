@@ -12,11 +12,15 @@ use PgSql\Lob;
 
 class Hrga3PermintaanPerbaikan extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
+        $kategori = empty($r->kategori) ? 'ruangan' : $r->kategori;
         $data = [
             'title' => 'Permintaan Perbaikan Sarana dan Prasarana Umum',
-            'permintaan' => PermintaanPerbaikanSaranaPrasana::all(),
+            'permintaan' => PermintaanPerbaikanSaranaPrasana::whereHas('item', function ($query) use ($kategori) {
+                $query->where('jenis_item', $kategori);
+            })->get(),
+            'kategori' => $kategori,
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.index', $data);
     }
@@ -26,6 +30,7 @@ class Hrga3PermintaanPerbaikan extends Controller
         $data = [
             'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
             'lokasi' => LokasiModel::all(),
+            'item' => ItemPerawatan::where('jenis_item', $r->kategori)->get(),
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.form_permintaanperbaikan', $data);
     }

@@ -1,9 +1,13 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
+            @include('hrga.hrga5.hrga1_programperawatansarana.nav', [
+                'url' => 'hrga5.1.index',
+            ])
+
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> add</button>
-            <a href="{{ route('hrga5.1.print', ['tahun' => $tahun]) }}" target="_blank"
+            <a href="{{ route('hrga5.1.print', ['tahun' => $tahun, 'kategori' => $kategori]) }}" target="_blank"
                 class="btn btn-primary float-end me-2"><i class="fas fa-print"></i>
                 print</a>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
@@ -16,7 +20,7 @@
                         <tr>
                             <th class="text-center text-nowrap" rowspan="2">No</th>
                             <th class="text-center text-nowrap" rowspan="2">Nama Sarana dan Prasarana Umum</th>
-                            <th class="text-center text-nowrap" rowspan="2">Merek</th>
+                            <th class="text-center text-nowrap" rowspan="2">Jumlah</th>
                             <th class="text-center text-nowrap" rowspan="2">No. Identifikasi</th>
                             <th class="text-center text-nowrap" rowspan="2">Lokasi</th>
                             <th class="text-center text-nowrap" rowspan="2">Frekuensi Perawatan</th>
@@ -35,7 +39,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $p->item->nama_item }}
                                 </td>
-                                <td>{{ $p->item->merek }}</td>
+                                <td>{{ $p->item->jumlah }}</td>
                                 <td>{{ $p->item->no_identifikasi }}</td>
                                 <td class="text-nowrap">{{ $p->item->lokasi->lokasi }}</td>
                                 <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
@@ -73,6 +77,7 @@
         }
     </style>
 
+    <!-- FORM -->
     <form action="{{ route('hrga5.1.store') }}" method="post">
         @csrf
         <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -84,61 +89,62 @@
                     </div>
 
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <label for="">Lokasi</label>
-                                <select id="" class="select2 lokasi">
-                                    <option value="">Pilih Lokasi</option>
-                                    @foreach ($lokasi as $l)
-                                        <option value="{{ $l->id }}">{{ $l->lokasi }} lantai
-                                            ({{ $l->lantai }})
+                        <!-- Header Baris -->
+                        <div class="row fw-bold mb-2">
+                            <div class="col-lg-3">Nama Sarana dan Prasarana</div>
+                            <div class="col-lg-3">Frekuensi Perawatan (bulan)</div>
+                            <div class="col-lg-2">Penanggung Jawab</div>
+                            <div class="col-lg-2">Tanggal Pelaksanaan</div>
+                            <div class="col-lg-1">Aksi</div>
+                        </div>
+
+                        <!-- Dynamic Rows -->
+
+                        <div class="row mb-2">
+                            <div class="col-lg-3">
+                                <select class="form-control select2" name="item_id[]">
+                                    <option value="">Pilih Sarana dan Prasarana</option>
+                                    @foreach ($item as $i)
+                                        <option value="{{ $i->id }}">{{ $i->nama_item }}
+                                            ({{ $i->no_identifikasi }})
                                         </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="col-lg-3">
-                                <label for="">Nama Sarana dan Prasarana Umum</label>
-                                <select name="item_id" id="" class="select2 item">
-
-                                </select>
-                            </div>
-
-                            <div class="col-lg-2">
-                                <label for="">Merek</label>
-                                <input type="text" class="form-control merk" disabled>
-                            </div>
-
-                            <div class="col-lg-2">
-                                <label for="">No identifikasi</label>
-                                <input type="text" class="form-control no_identifikasi" disabled>
+                                <input type="number" class="form-control" name="frekuensi_perawatan[]" min="1"
+                                    max="12" value="1">
                             </div>
                             <div class="col-lg-2">
-                                <label for="">Frekuensi Perawatan</label>
-                                <input type="number" class="form-control" name="frekuensi_perawatan" value="1">
+                                <input type="text" class="form-control" name="penanggung_jawab[]">
                             </div>
-                            <div class="col-lg-2 mt-2">
-                                <label for="">Penanggung jawab </label>
-                                <input type="text" class="form-control" name="penanggung_jawab">
+                            <div class="col-lg-2">
+                                <input type="date" class="form-control" name="tanggal_mulai[]">
                             </div>
-                            <div class="col-lg-2 mt-2">
-                                <label for="">Tanggal pelaksanaan</label>
-                                <input type="date" class="form-control" name="tanggal_mulai">
+                            <div class="col-lg-1 d-flex align-items-end">
+
                             </div>
+                        </div>
+                        <div id="load_baris"></div>
 
 
-
-
-
+                        <!-- Tambah Baris -->
+                        <div class="col-lg-12 mt-3">
+                            <button type="button" class="btn btn-block btn-warning btn-sm tambah-baris">
+                                + Tambah Baris
+                            </button>
                         </div>
                     </div>
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </div>
             </div>
         </div>
     </form>
+
 
     <form action="" method="get">
         <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -198,6 +204,31 @@
                     });
 
                 })
+                count = 0;
+                $(document).on('click', '.tambah-baris', function() {
+                    count++;
+                    var kategori = '{{ $kategori }}';
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('hrga5.1.load_baris') }}",
+                        data: {
+                            count: count,
+                            kategori: kategori
+                        },
+                        success: function(response) {
+                            $('#load_baris').append(response);
+                            $('.select2_baru').select2({
+                                dropdownParent: $('#tambah'), // Ganti dengan ID modal kamu
+                                width: '100%'
+                            });
+                        }
+                    });
+
+                })
+                $(document).on('click', '.hapus-baris', function() {
+                    var baris = $(this).attr('baris');
+                    $('[baris="' + baris + '"]').remove();
+                });
             });
         </script>
     @endsection

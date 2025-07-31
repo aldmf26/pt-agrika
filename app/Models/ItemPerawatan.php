@@ -11,8 +11,9 @@ class ItemPerawatan extends Model
     protected $fillable = [
         'lokasi_id',
         'nama_item',
-        'merek',
+        'jumlah',
         'no_identifikasi',
+        'jenis_item'
     ];
 
     public function lokasi()
