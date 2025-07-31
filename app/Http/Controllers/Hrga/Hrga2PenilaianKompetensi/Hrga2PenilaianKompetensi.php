@@ -79,7 +79,7 @@ class Hrga2PenilaianKompetensi extends Controller
 
         // Baca file JSON atau buat array kosong jika belum ada
         $penilaianData = Storage::exists($file) ? json_decode(Storage::get($file), true) : [];
-
+        dd($penilaianData);
         // Cek apakah ID karyawan sudah ada di JSON
         if (!isset($penilaianData[$id])) {
             // Generate nilai acak jika belum ada
