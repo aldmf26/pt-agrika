@@ -73,7 +73,7 @@ class DataPegawai extends Model
                     ";
 
         if ($value == 'penilaian') {
-            $query .= " WHERE a.tgl_masuk <= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)";
+            $query .= " WHERE a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 3 MONTH)";
         }
 
         if (is_array($value) && !empty($value)) {

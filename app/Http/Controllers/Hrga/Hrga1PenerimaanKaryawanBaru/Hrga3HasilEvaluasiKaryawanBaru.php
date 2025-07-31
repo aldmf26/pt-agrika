@@ -14,9 +14,9 @@ class Hrga3HasilEvaluasiKaryawanBaru extends Controller
     public function index()
     {
         $datas = DataPegawai::with(['penilaianKaryawan'])
-            ->where('tgl_masuk', '<', now()->subMonths(3))
             ->latest()
             ->get();
+
         $data = [
             'title' => 'Hrga 1.3 hasil evaluasi karyawan baru',
             'datas' => $datas
