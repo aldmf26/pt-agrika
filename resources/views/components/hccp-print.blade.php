@@ -81,13 +81,13 @@
 
         }
 
-        @media print {
+        /* @media print {
             @page {
                 margin: 1.5cm 1cm 1cm 1cm;
                 size: A4;
             }
 
-            /* SOLUSI HYBRID: Kombinasi Table Structure + Override Bootstrap */
+
             .print-wrapper {
                 display: table;
                 width: 100%;
@@ -103,7 +103,7 @@
                 display: table-row-group;
             }
 
-            /* Override Bootstrap classes untuk print */
+
             .table,
             .table-responsive,
             table {
@@ -138,7 +138,7 @@
                 page-break-inside: avoid;
             }
 
-            /* Bootstrap container fixes */
+
             .container,
             .container-fluid {
                 width: 100% !important;
@@ -175,7 +175,7 @@
                 padding-right: 5px !important;
             }
 
-            /* Reset Bootstrap spacing untuk print */
+
             .mt-1,
             .mt-2,
             .mt-3,
@@ -202,7 +202,7 @@
                 padding-bottom: 2px !important;
             }
 
-            /* Force proper page breaks */
+
             .page-break {
                 page-break-before: always !important;
             }
@@ -211,11 +211,11 @@
                 page-break-inside: avoid !important;
             }
 
-            /* Hide elements yang tidak perlu di print */
+
             .no-print {
                 display: none !important;
             }
-        }
+        } */
     </style>
 </head>
 

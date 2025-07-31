@@ -15,7 +15,7 @@
         .table td {
             border: 1px solid #000;
             padding: 5px;
-            font-size: 8px;
+            font-size: 7px;
         }
 
         .header-info {
@@ -188,7 +188,7 @@
     </div>
 
 
-    <span style="font-size: 10px">
+    <span style="font-size: 7px">
         NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
         TANDA <b>V</b>
         DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
