@@ -1,9 +1,18 @@
 <x-app-layout :title="$title">
+    <div class="d-flex justify-content-between gap-2">
+        <nav>
+            <ul class="nav nav-pills float-start">
+                <li class="nav-item">
+                    <a class="nav-link {{ $kategori == 'barang' ? 'active' : '' }}"
+                        href="{{ route('pur.pembelian.1.index', ['kategori' => 'barang']) }}">Barang & ategoriemasan</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $kategori == 'lainnya' ? 'active' : '' }}"
+                        href="{{ route('pur.pembelian.1.index', ['kategori' => 'lainnya']) }}">Sbw</a>
+                </li>
+            </ul>
+        </nav>
 
-    <div class="d-flex justify-content-end gap-2">
-        <div>
-
-        </div>
         <div>
             <a href="{{ route('pur.pembelian.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                 Purchase Request</a>

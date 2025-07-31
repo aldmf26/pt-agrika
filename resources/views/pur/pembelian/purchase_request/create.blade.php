@@ -7,8 +7,8 @@
                     <label for="">Kategori</label>
                     <select name="kategori" class="form-control kategori">
                         <option value="">Pilih Kategori</option>
-                        <option value="barang" selected>Barang</option>
-                        <option value="kemasan">Kemasan</option>
+                        <option value="barang" @selected($kategori == 'barang')>Barang</option>
+                        <option value="kemasan" @selected($kategori == 'kemasan')>Kemasan</option>
                     </select>
                 </div>
             </div>

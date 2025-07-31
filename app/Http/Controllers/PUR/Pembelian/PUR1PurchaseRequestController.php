@@ -8,15 +8,54 @@ use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class PUR1PurchaseRequestController extends Controller
 {
+    public function singkron()
+    {
+        $sbw = Http::get("https://gudangsarang.ptagafood.com/api/sbw/sbw_kotor");
+        $sbw = json_decode($sbw, TRUE);
+
+        $sbw = $sbw['data']['sbw'];
+
+        DB::table('sbw_kotor')->truncate();
+
+        foreach ($sbw as $s) {
+            DB::table('sbw_kotor')->insert([
+                'grade_id' => $s['grade_id'],
+                'rwb_id' => $s['rwb_id'],
+                'nm_partai' => $s['nm_partai'],
+                'no_invoice' => $s['no_invoice'],
+                'pcs' => $s['pcs'],
+                'kg' => $s['kg'],
+                'no_kendaraan' => $s['no_kendaraan'],
+                'pengemudi' => $s['pengemudi'],
+                'tgl' => $s['tgl'],
+            ]);
+        }
+    }
     public function index()
     {
-        $datas = PurchaseRequest::latest()->get();
+        $kategori = request()->kategori ?? 'barang';
+        $this->singkron();
+
+        if ($kategori == 'barang') {
+            $datas = PurchaseRequest::latest()->get();
+        } else {
+            $datas = collect([]);
+        }
+
+        $sbw = DB::table('sbw_kotor')
+            ->orderBy('sbw_kotor.tgl', 'desc')
+            ->get();
+
         $data = [
+
             'title' => 'PUR 1 Purchase Request',
-            'datas' => $datas
+            'datas' => $datas,
+            'penerimaan' => $sbw,
+            'kategori' => $kategori,
         ];
 
         return view('pur.pembelian.purchase_request.index', $data);
@@ -30,6 +69,7 @@ class PUR1PurchaseRequestController extends Controller
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
             'barangs' => $barangs,
+            'kategori' => $kategori
         ];
 
         return view('pur.pembelian.purchase_request.create', $data);

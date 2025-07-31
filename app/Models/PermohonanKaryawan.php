@@ -25,8 +25,9 @@ class PermohonanKaryawan extends Model
             CONCAT(a.tgl_lahir) as tgl_lahir,
             TIMESTAMPDIFF(YEAR, a.tgl_lahir, a.tgl_masuk) as umur,
             CONCAT(a.status) as status,
-            date_sub(a.tgl_masuk, interval floor(14+7) day) as tgl_dibutuhkan, 
-            DATE_SUB(a.tgl_masuk, INTERVAL 31 DAY) AS tgl_input,
+            -- tgl_dibutuhkan diacak antara 5-10 hari sebelum tgl_masuk
+            DATE_SUB(a.tgl_masuk, INTERVAL (FLOOR(5 + (RAND(a.id) * 6))) DAY) as tgl_dibutuhkan,
+            DATE_SUB(DATE_SUB(a.tgl_masuk, INTERVAL (FLOOR(5 + (RAND(a.id) * 6))) DAY), INTERVAL 1 DAY) AS tgl_input,
             COUNT(*) AS jumlah
         FROM data_pegawais AS a
         LEFT JOIN divisis AS b ON a.divisi_id = b.id

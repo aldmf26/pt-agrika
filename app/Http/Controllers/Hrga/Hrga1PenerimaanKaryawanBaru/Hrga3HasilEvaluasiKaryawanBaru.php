@@ -11,10 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class Hrga3HasilEvaluasiKaryawanBaru extends Controller
 {
-    public function index(DataPegawaiService $dataPegawaiService)
+    public function index()
     {
-        $dataPegawaiService->download();
-
         $datas = DataPegawai::with(['penilaianKaryawan'])
             ->where('tgl_masuk', '<', now()->subMonths(3))
             ->latest()

@@ -27,7 +27,7 @@
                     <tr>
                         <td>Periode Masa Percobaan</td>
                         <td>:</td>
-                        <td>1 bulan <strike>/ 3 bulan/ 6 bulan*</strike></td>
+                        <td>{{ $pegawai->penilaiankaryawan->periode }} Bulan</td>
                     </tr>
                     <tr>
                         <td><span style="font-size: 12px"><em>* Coret yang tidak sesuai</em></span></td>
@@ -45,29 +45,29 @@
                     </tr>
                     <tr>
                         <td>Pendidikan</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pendidikan ?? 'N/A' }}</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pendidikan ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pendidikan_standar ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pendidikan_hasil ?? 'N/A' }}</td> 
                     </tr>
                     <tr>
                         <td>Pengalaman</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pengalaman ?? 'N/A' }}</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pengalaman ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pengalaman_standar ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pengalaman_hasil ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td>Pelatihan</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pelatihan ?? 'N/A' }}</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pelatihan ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pelatihan_standar ?? 'N/A' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->pelatihan_hasil ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td>Ketrampilan</td>
-                        <td>{{ $pegawai->penilaiankaryawan->ketrampilan ?? 'Teliti, Cepat' }}</td>
-                        <td>{{ $pegawai->penilaiankaryawan->ketrampilan ?? 'Teliti, Cepat' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->ketrampilan_standar ?? 'Teliti, Cepat' }}</td>
+                        <td>{{ $pegawai->penilaiankaryawan->ketrampilan_hasil ?? 'Teliti, Cepat' }}</td>
                     </tr>
                     <tr>
                         <td>Kompetensi Inti</td>
-                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti_standar ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
                         </td>
-                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti_hasil ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
                         </td>
                     </tr>
                 </table>

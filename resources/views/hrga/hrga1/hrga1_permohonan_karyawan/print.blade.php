@@ -84,7 +84,7 @@
                         <td>Tanggal Dibutuhkan</td>
                         <td>:</td>
                         <td>{{ tanggal($datas->tgl_dibutuhkan) }} <span style="margin-left: 20%">Diajukan Oleh:
-                                {{ $datas->admin }}</span></td>
+                                {{ $datas->diajukan_oleh }}</span></td>
                     </tr>
                     <tr>
                         <td colspan="3">&nbsp;</td>
