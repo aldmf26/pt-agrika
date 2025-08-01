@@ -112,7 +112,7 @@
                             <div class="header">
                                 <div class="d-flex justify-content-between">
                                     <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
-                                    <p style="font-size: 8px">PT. AGRIKAGATYA ARUM</p>
+                                    <p style="font-size: 8px">PT. AGRIKA GATYA ARUM</p>
                                     <div></div>
                                 </div>
 

@@ -84,7 +84,7 @@ class RM8KartuStokController extends Controller
         // Kirim ke view
         $data = [
             'title' => 'KARTU STOK MATERIAL',
-            'dok' => 'Dok.No.: FRM.WH.04.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.WH.03.02, Rev.00',
             'transaksi' => $transaksiGabung,
             'barang' => Barang::find($r->id),
             'kategori' => $kategori,
