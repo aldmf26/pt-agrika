@@ -75,7 +75,7 @@ Route::controller(Hrga2HasilWawancara::class)
         Route::get('/edit/{pegawai}', 'edit')->name('edit');
         Route::post('/update/{pegawai}', 'update')->name('update');
         Route::get('/print/{pegawai}', 'print')->name('print');
-        Route::get('/edit/{hasilWawancara}', 'edit')->name('edit');
+        Route::get('/edit/{pegawai}', 'edit')->name('edit');
         Route::get('/singkron', 'singkron')->name('singkron');
     });
 

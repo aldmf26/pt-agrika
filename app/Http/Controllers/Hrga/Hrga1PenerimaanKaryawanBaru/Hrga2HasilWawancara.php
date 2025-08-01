@@ -20,7 +20,7 @@ class Hrga2HasilWawancara extends Controller
     }
     public function index()
     {
-        $datas = DataPegawai::with('divisi')->latest()->get();
+        $datas = DataPegawai::with('divisi')->orderBy('id', 'desc')->get();
         $data = [
             'title' => 'Hrga 1.2 hasil wawancara',
             'datas' => $datas
@@ -102,7 +102,6 @@ class Hrga2HasilWawancara extends Controller
 
     public function edit(DataPegawai $pegawai)
     {
-
         $data = [
             'title' => 'Edit Hasil Wawancara',
             'pegawai' => $pegawai,
