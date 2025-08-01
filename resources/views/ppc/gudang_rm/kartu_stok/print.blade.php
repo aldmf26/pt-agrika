@@ -1,6 +1,6 @@
 <x-hccp-print :title="$title" :dok="$dok">
 
-    <table width="10%" class="border-dark table table-sm table-bordered">
+    <table width="100%">
         <tr>
             <th width="20%">Nama Material</th>
             <td width="50%">: {{ $kategori == 'sbw' ? $nm_barang : strtoupper($barang->nama_barang) }}</td>
@@ -85,7 +85,7 @@
                             <td style="height: 80px"></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[KA.GUDANg]</td>
+                            <td class="text-center">[KA.GUDANG]</td>
                         </tr>
                     </tbody>
                 </table>

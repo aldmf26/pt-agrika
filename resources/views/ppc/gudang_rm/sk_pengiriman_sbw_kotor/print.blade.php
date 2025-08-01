@@ -54,9 +54,9 @@
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td class="text-center">{{ tanggal($d->tgl) }}</td>
-                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} gr</td>
+                        <td class="text-center" align="right">{{ number_format($d->kg, 0) }} gr</td>
                         <td class="text-center">{{ tanggal($tgl_plus1hari) }}</td>
-                        <td class="text-center" align="right">{{ number_format($d->kg, 1) }} gr</td>
+                        <td class="text-center" align="right">{{ number_format($d->kg, 0) }} gr</td>
                         <td class="text-center"></td>
                     </tr>
                 @endforeach
@@ -83,7 +83,7 @@
                         <td style="height: 80px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center">[Tandatatangan dan nama]</td>
+                        <td class="text-center">[TTD dan Nama]</td>
                     </tr>
                 </tbody>
             </table>

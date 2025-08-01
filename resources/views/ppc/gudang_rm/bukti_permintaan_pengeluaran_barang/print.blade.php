@@ -108,7 +108,7 @@
                 <tr>
                     <td>Nama Penerima</td>
                     <td>:</td>
-                    <td class="fw-bold">{{ ucwords($nama) }} dsa</td>
+                    <td class="fw-bold">{{ ucwords($nama) }}</td>
             </table>
         </div>
     </div>

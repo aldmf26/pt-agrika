@@ -107,7 +107,7 @@
             <td>Jumlah Sample</td>
             <td>:</td>
             <td>
-                {{ $kg < 20000 ? '1 gr / @ 1 box' : '20,000 gr / @ ' . number_format($jumlahBox) . ' box' }}
+                {{ $kg < 20000 ? '1,000 gr / @ 1 box' : '20,000 gr / @ ' . number_format($jumlahBox) . ' box' }}
             </td>
         </tr>
 
