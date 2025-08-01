@@ -27,7 +27,7 @@
                 <tr>
                     <td>Posisi</td>
                     <td>:</td>
-                    <td>{{ $pegawai->posisi }}</td>
+                    <td>{{ !empty($pegawai->posisi) ? $pegawai->cabut : 'Staff cabut' }}</td>
                 </tr>
             </table>
         </div>
