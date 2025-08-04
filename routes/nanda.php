@@ -51,6 +51,8 @@ use App\Http\Controllers\RolePermissionController;
 use App\Http\Controllers\UserController;
 use App\Models\LaporanPenggunaanInstalasiKarantina;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 
 
@@ -416,3 +418,41 @@ Route::controller(PUR2SeleksiSupplier::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
     });
+
+
+Route::get('/update-jam-kedatangan', function (Request $request) {
+    $partai = DB::table('data_edit_wh')
+        ->where('nm_partai', $request->partai)
+        ->first();
+
+    if ($request->kategori == 'jam_kedatangan') {
+        if (empty($partai->nm_partai)) {
+            DB::table('data_edit_wh')
+                ->insert(['nm_partai' => $request->partai, 'jam_kedatangan' => $request->jam]);
+        } else {
+            DB::table('data_edit_wh')
+                ->where('nm_partai', $request->partai)
+                ->update(['jam_kedatangan' => $request->jam]);
+        }
+    } elseif ($request->kategori == 'no_kendaraan') {
+        if (empty($partai->nm_partai)) {
+            DB::table('data_edit_wh')
+                ->insert(['nm_partai' => $request->partai, 'no_kendaraan' => $request->no_kendaraan]);
+        } else {
+            DB::table('data_edit_wh')
+                ->where('nm_partai', $request->partai)
+                ->update(['no_kendaraan' => $request->no_kendaraan]);
+        }
+    } elseif ($request->kategori == 'driver') {
+        if (empty($partai->nm_partai)) {
+            DB::table('data_edit_wh')
+                ->insert(['nm_partai' => $request->partai, 'driver' => $request->driver]);
+        } else {
+            DB::table('data_edit_wh')
+                ->where('nm_partai', $request->partai)
+                ->update(['driver' => $request->driver]);
+        }
+    }
+
+    return response()->json(['success' => true]);
+});
