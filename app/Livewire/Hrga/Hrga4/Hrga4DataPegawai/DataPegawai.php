@@ -16,8 +16,8 @@ class DataPegawai extends Component
         $selectAll = false,
         $cekPegawai = [],
         $search = '',
-        $sort = '',
-        $sortDirection = '',
+        $sort = 'id',
+        $sortDirection = 'desc',
         $paginate = 10;
 
     public function mount(DataPegawaiService $dataPegawaiService)
@@ -74,3 +74,4 @@ class DataPegawai extends Component
         return view('livewire.hrga.hrga4.hrga4-data-pegawai.data-pegawai', $data);
     }
 }
+

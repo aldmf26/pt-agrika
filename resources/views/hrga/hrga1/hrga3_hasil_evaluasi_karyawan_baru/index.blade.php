@@ -38,7 +38,7 @@
                             <td>{{ $d->penilaianKaryawan->periode ?? '' }} Bulan</td>
                             <td>
                                 <a target="_blank" href="{{ route('hrga1.3.print', $d) }}"
-                                    class="btn btn-sm btn-primary">Cetak</a>
+                                    class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print</a>
                             </td>
                         </tr>
                     @endforeach

@@ -2,14 +2,14 @@
 
     <div class="header-top">
         <div class="container ">
-            <div class="logo">
+            <div class="logo d-flex align-items-center">
+                {{-- <img src="{{ asset('assets/compiled/png/logo.png') }}" alt="Logo" style="height: 80px !important;"> --}}
                 <a href="index.html">
                     {{-- <img src="" alt="Logo"
                         style="height: 80px !important;"> --}}
                     PT AGRIKA GATYA ARUM
                 </a>
-
-                <x-notes />
+                @livewire('notes')
             </div>
             <div class="header-top-right">
                 @livewire('header-notification')

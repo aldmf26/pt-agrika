@@ -32,7 +32,7 @@
                     @foreach ($dataBaru as $d)
                         <tr>
                             <td>{{ $no++ }}</td>
-                            <td align="right">{{ tanggal($d->tgl_dibutuhkan) }} - {{ $d->tgl_masuk ?? '' }}</td>
+                            <td align="right">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                             <td>{{ ucwords($d->status) }}</td>
                             <td>{{ $d->divisi->divisi }}</td>
                             <td>{{ $d->jumlah }} Orang</td>

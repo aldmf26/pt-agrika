@@ -14,7 +14,7 @@ class Hrga3HasilEvaluasiKaryawanBaru extends Controller
     public function index()
     {
         $datas = DataPegawai::with(['penilaianKaryawan'])
-            ->latest()
+            ->orderBy('id', 'desc')
             ->get();
 
         $data = [

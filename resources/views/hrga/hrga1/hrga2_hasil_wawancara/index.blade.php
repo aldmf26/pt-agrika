@@ -47,8 +47,8 @@
                             <td>{{ $d->posisi ?? '' }}</td>
                             <td>{{ $d->keputusan ?? 'Dilanjutkan' }}</td>
                             <td>
-                                <a href="{{ route('hrga1.2.edit', $d->karyawan_id_dari_api) }}"
-                                    class="btn btn-sm btn-primary"><i class="fas fa-pen"></i> Edit </a>
+                                <a href="{{ route('hrga1.2.edit', $d) }}" class="btn btn-sm btn-primary"><i
+                                        class="fas fa-pen"></i> Edit </a>
 
                                 <a target="_blank" href="{{ route('hrga1.2.print', $d->karyawan_id_dari_api) }}"
                                     class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print </a>

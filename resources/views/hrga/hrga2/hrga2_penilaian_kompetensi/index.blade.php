@@ -45,8 +45,9 @@
                                     </td>
                                     <td>
                                         @if ($d->status_karyawan != 'Karyawan Tetap')
-                                            {{ $d->status_karyawan }} bulan, berakhir tanggal
-                                            {{-- {{ tanggal(date('Y-m-d', strtotime('+' . $d->status_karyawan . ' month', strtotime($d->tgl_masuk)))) }} --}}
+                                            {{ $d->status_karyawan }} bulan
+                                            {{-- , berakhir tanggal
+                                            {{ tanggal(date('Y-m-d', strtotime('+' . $d->status_karyawan . ' month', strtotime($d->tgl_masuk)))) }} --}}
                                         @else
                                             {{ $d->status_karyawan }}
                                         @endif
