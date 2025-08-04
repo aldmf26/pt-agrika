@@ -28,13 +28,13 @@ class Hrga1PermohonanKaryawanController extends Controller
                 'umur' => $d->umur,
                 'jenis_kelamin' => $d->jenis_kelamin,
                 'pendidikan' => $d->pendidikan ?? 'open seluruh pendidikan',
-                'pengalaman' => $d->pengalaman ?? '',
+                'pengalaman' => $d->pengalaman ?? 'tidak perlu',
                 'pelatihan' => $d->pelatihan ?? 'tidak perlu',
                 'mental' => $d->mental ?? 'tidak perlu',
                 'uraian_kerja' => $d->uraian_kerja,
-                'tgl_dibutuhkan' => $d->tgl_dibutuhkan,
+                'tgl_dibutuhkan' => $d->tgl_masuk,
                 'diajukan_oleh' => $d->diajukan_oleh ?? '',
-                'tgl_input' => $d->tgl_masuk,
+                'tgl_input' => $d->tgl_input,
                 'admin' => "import",
             ]);
         }
