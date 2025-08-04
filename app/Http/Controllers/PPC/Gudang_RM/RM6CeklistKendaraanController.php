@@ -116,9 +116,10 @@ class RM6CeklistKendaraanController extends Controller
         //     ->select('master_kondisi.*', 'checklist_kendaraan_sbw.check_wh', 'checklist_kendaraan_sbw.check_qa')
         //     ->get();
 
-        $checklist = DB::select("SELECT a.tgl, a.no_kendaraan, b.nama as nama_suplier, a.pengemudi
+        $checklist = DB::select("SELECT a.nm_partai, a.tgl, a.no_kendaraan, b.nama as nama_suplier, a.pengemudi, c.jam_kedatangan, c.driver, c.no_kendaraan as no_kndraan_new
         FROM sbw_kotor as a 
         left join rumah_walet as b on b.id = a.rwb_id
+        left join data_edit_wh as c on c.nm_partai = a.nm_partai
         where MONTH(a.tgl) = '$r->bulan' and YEAR(a.tgl)='$r->tahun'
         group by b.nama, a.tgl;");
 

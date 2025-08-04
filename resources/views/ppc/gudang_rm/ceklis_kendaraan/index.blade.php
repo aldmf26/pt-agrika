@@ -25,7 +25,7 @@
                                     <td>Data : {{ $item->bulan }}/{{ $item->tahun }}</td>
 
                                     <td>
-                                        <a class="btn btn-xs float-end btn-primary"
+                                        <a target="_blank" class="btn btn-xs float-end btn-primary"
                                             href="{{ route('ppc.gudang-rm.6.print', ['bulan' => $item->bulan, 'tahun' => $item->tahun]) }}"><i
                                                 class="fas fa-print"></i></a>
                                     </td>

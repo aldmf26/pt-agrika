@@ -1,3 +1,4 @@
+@props(['title', 'dok'])
 <!doctype html>
 <html lang="en">
 
@@ -15,26 +16,6 @@
         body {
             font-family: Arial, sans-serif;
             font-size: 12px;
-        }
-
-        .cop_judul {
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            margin: 15px;
-        }
-
-        .shapes {
-            border: 1px solid black;
-            border-radius: 10px;
-        }
-
-        .cop_text {
-            font-size: 12px;
-            text-align: left;
-            font-weight: normal;
-            margin-top: 100px;
-
         }
 
         .table {
@@ -62,26 +43,11 @@
             padding: 3px;
         }
 
-        .print {
-            display: none;
-            /* disembunyikan saat layar biasa */
-        }
 
-        .input {
-            font-size: 8px
-        }
 
         @media print {
             .no-print {
-                display: none !important;
-            }
-
-            .print {
-                display: inline !important;
-            }
-
-            .input {
-                display: none !important;
+                display: none;
             }
         }
     </style>
@@ -90,9 +56,6 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-12 no-print">
-                <button class="btn btn-primary mt-2 float-end" onclick="window.print()">Print</button>
-            </div>
             <div class="col-3 mt-4">
                 <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
@@ -135,21 +98,14 @@
                 <tr>
                     <td colspan="2">Jam Kedatangan</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">
-                            <input type="time" name="jam_kedatangan[]"
-                                value="{{ $c->jam_kedatangan == '00:00:00' || empty($c->jam_kedatangan) ? '15:00' : $c->jam_kedatangan }}"
-                                class="form-control input jam_kedatangan" partai="{{ $c->nm_partai }}">
-
-                            <span class="print jam_update"
-                                data-partai="{{ $c->nm_partai }}">{{ $c->jam_kedatangan == '00:00:00' || empty($c->jam_kedatangan) ? '15:00' : $c->jam_kedatangan }}</span>
-                        </td>
+                        <td class="text-center" width="8%" colspan="2">15:00</td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
                         <td class="text-center" width="8%" colspan="2"></td>
                     @endfor
-                </tr>
 
+                </tr>
                 <tr>
                     <td colspan="2">Kendaraan (Internal / Eksternal)</td>
                     @foreach ($checklist as $c)
@@ -164,20 +120,11 @@
                 <tr>
                     <td colspan="2">Nomor Kendaraan</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">
-                            <input type="text"
-                                value="{{ empty($c->no_kndraan_new) ? $c->no_kendaraan : $c->no_kndraan_new }}"
-                                class="form-control input no_kendaraan" partai="{{ $c->nm_partai }}">
-
-                            <span class="print no_kendaraan_update"
-                                data-partai="{{ $c->nm_partai }}">{{ empty($c->no_kndraan_new) ? $c->no_kendaraan : $c->no_kndraan_new }}</span>
-
-                        </td>
+                        <td class="text-center" width="8%" colspan="2">{{ $c->no_kendaraan }}</td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2">
-                        </td>
+                        <td class="text-center" width="8%" colspan="2"></td>
                     @endfor
 
                 </tr>
@@ -206,16 +153,7 @@
                 <tr>
                     <td colspan="2">Nama Pengemudi</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">
-                            <input type="text" value="{{ empty($c->driver) ? $c->pengemudi : $c->driver }}"
-                                class="form-control input driver" partai="{{ $c->nm_partai }}">
-
-                            <span class="print driver_update"
-                                data-partai="{{ $c->nm_partai }}">{{ empty($c->driver) ? $c->pengemudi : $c->driver }}</span>
-
-
-
-                        </td>
+                        <td class="text-center" width="8%" colspan="2">{{ $c->pengemudi }}</td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
@@ -329,107 +267,6 @@
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.jam_kedatangan').change(function(e) {
-                e.preventDefault();
-                var partai = $(this).attr('partai');
-                var jam = $(this).val();
-                $.ajax({
-                    type: "Get",
-                    url: "/update-jam-kedatangan",
-                    data: {
-                        partai: partai,
-                        jam: jam,
-                        kategori: 'jam_kedatangan',
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.success) {
-                            console.log('Jam kedatangan berhasil diperbarui.');
-                        } else {
-                            alert('Gagal update.');
-                        }
-                        $('.jam_update[data-partai="' + partai + '"]').text(jam);
-
-                    },
-                    error: function(xhr) {
-                        console.error(xhr.responseText);
-                        alert('Terjadi kesalahan saat mengirim data.');
-                    }
-                });
-
-            });
-
-            // $('.no_kendaraan').keyup(function(e) {
-            //     alert('dsa')
-            // });
-            $('.no_kendaraan').keyup(function(e) {
-                e.preventDefault();
-
-                var partai = $(this).attr('partai');
-                var no_kendaraan = $(this).val();
-                $.ajax({
-                    type: "Get",
-                    url: "/update-jam-kedatangan",
-                    data: {
-                        partai: partai,
-                        no_kendaraan: no_kendaraan,
-                        kategori: 'no_kendaraan',
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.success) {
-                            console.log('Jam kedatangan berhasil diperbarui.');
-                        } else {
-                            alert('Gagal update.');
-                        }
-                        $('.no_kendaraan_update[data-partai="' + partai + '"]').text(
-                            no_kendaraan);
-
-                    },
-                    error: function(xhr) {
-                        console.error(xhr.responseText);
-                        alert('Terjadi kesalahan saat mengirim data.');
-                    }
-                });
-
-            });
-            $('.driver').keyup(function(e) {
-                e.preventDefault();
-
-                var partai = $(this).attr('partai');
-                var driver = $(this).val();
-
-                $('.driver_update[data-partai="' + partai + '"]').text(driver);
-                $.ajax({
-                    type: "Get",
-                    url: "/update-jam-kedatangan",
-                    data: {
-                        partai: partai,
-                        driver: driver,
-                        kategori: 'driver',
-                    },
-                    dataType: "json",
-                    success: function(response) {
-                        if (response.success) {
-                            console.log('Jam kedatangan berhasil diperbarui.');
-                        } else {
-                            alert('Gagal update.');
-                        }
-
-                    },
-                    error: function(xhr) {
-                        console.error(xhr.responseText);
-                        alert('Terjadi kesalahan saat mengirim data.');
-                    }
-                });
-
-            });
-        });
     </script>
     {{-- <script>
         window.print();
