@@ -95,13 +95,13 @@
                         <td>&nbsp; <span style="margin-left: 40%">
                                 Tanggal :
                                 @php
-                                    
-                                $date = new DateTime($datas->tgl_dibutuhkan);
-                                $date->modify('-14 days');
-                                while ($date->format('w') == 0 || $date->format('w') == 6) {
-                                    $date->modify('-1 days');
-                                }
-                                echo tanggal($date->format('Y-m-d'));
+
+                                    $date = new DateTime($datas->tgl_dibutuhkan);
+                                    $date->modify('-14 days');
+                                    while ($date->format('w') == 0 || $date->format('w') == 6) {
+                                        $date->modify('-1 days');
+                                    }
+                                    echo tanggal($date->format('Y-m-d'));
                                 @endphp
                             </span>
                         </td>

@@ -43,6 +43,7 @@ class DataPegawai extends Model
         $query = "SELECT 
                     a.id,
                     a.nama,
+                    a.nik,
                     a.tgl_lahir,
                     CASE WHEN a.jenis_kelamin = 'L' THEN 'Laki-laki' ELSE 'Perempuan' END as jenis_kelamin,
                     a.posisi,

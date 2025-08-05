@@ -16,6 +16,7 @@
                             <tr>
                                 <th class="dhead">#</th>
                                 <th class="dhead">Nama Karyawan</th>
+                                <th class="dhead">Nik</th>
                                 <th class="dhead">Usia</th>
                                 <th class="dhead">Jenis Kelamin</th>
                                 <th class="dhead">Divisi</th>
@@ -30,6 +31,7 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $d->nama }}</td>
+                                    <td>{{ $d->nik }}</td>
                                     <td>{{ umur($d->tgl_lahir) }}</td>
                                     <td>{{ $d->jenis_kelamin }}</td>
                                     <td>{{ $d->divisi }}</td>

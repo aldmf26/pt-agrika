@@ -35,6 +35,7 @@ class DataPegawaiService
                     DataPegawai::updateOrCreate(
                         [
                             'karyawan_id_dari_api' => $pegawai['id_pegawai'] ?? null,
+                            'nik' => $pegawai['nik'] ?? null,
                         ],
                         [
                             'nik' => $pegawai['nik'] ?? null,
