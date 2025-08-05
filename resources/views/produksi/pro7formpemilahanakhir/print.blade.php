@@ -192,10 +192,10 @@
 
 
                             <td></td>
-                            <td class="table-bawah2">Pcs Awal</td>
-                            <td class="table-bawah2">Gram Awal</td>
-                            <td class="table-bawah2">Pcs Akhir</td>
-                            <td class="table-bawah2">Gr Akhir</td>
+                            <td class="table-bawah2">Pcs Ok</td>
+                            <td class="table-bawah2">Gram Ok</td>
+                            <td class="table-bawah2">Pcs Not Oke</td>
+                            <td class="table-bawah2">Gr Not Oke</td>
                         </tr>
                         <tr>
                             @php

@@ -37,10 +37,10 @@
 
                             <td>{{ substr($d->nm_partai, 3) }}</td>
                             <td>{{ tanggal($d->tgl) }}</td>
-                            <td>{{ $d->no_kendaraan }}</td>
-                            <td>{{ $d->pengemudi }}</td>
+                            <td>{{ empty($d->no_kendaraan_edit) ? $d->no_kendaraan : $d->no_kendaraan_edit }}</td>
+                            <td>{{ empty($d->driver) ? $d->pengemudi : $d->driver }}</td>
                             <td>{{ number_format($d->pcs, 0) }}</td>
-                            <td>{{ number_format($d->kg, 1) }}</td>
+                            <td>{{ number_format($d->kg, 0) }}</td>
 
                             <td>
                                 <a class="btn btn-xs float-end btn-primary" target="_blank"

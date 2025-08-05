@@ -187,7 +187,7 @@
                             </th>
                             <th rowspan="3" class=" align-middle text-center">Waktu <br> mulai <br> drying</th>
                             <th rowspan="3" class=" align-middle text-center">Waktu <br> selesai <br> drying</th>
-                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (min susut 15%)</th>
+                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (min susut 30%)</th>
                             <th rowspan="3" class=" align-middle text-center">Ok/ Not Ok</th>
                             <th rowspan="3" class=" align-middle text-center">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
@@ -242,7 +242,7 @@
                                 <td class="text-center">{{ number_format($c['pcs_not_ok'], 0) }}</td>
                                 <td class="text-center">{{ number_format($gr_not_ok, 0) }}</td>
                                 <td class="text-center">17:00</td>
-                                <td class="text-center">03:00</td>
+                                <td class="text-center">05:00</td>
                                 <td class="text-center">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
                                     %
                                 </td>
@@ -250,7 +250,7 @@
                                     @php
                                         $susut = (1 - $c['gr_akhir'] / $c['gr']) * 100;
                                     @endphp
-                                    @if ($susut < 15)
+                                    @if ($susut < 30)
                                         OK
                                     @else
                                         Not ok
