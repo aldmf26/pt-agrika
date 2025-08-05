@@ -159,7 +159,7 @@
                             <td>Hari/Tanggal &nbsp;<br> <span class="fst-italic">date</span> </td>
                             <td class="align-middle"> &nbsp;:{{ tanggal($tgl) }}</td>
                             <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
-                            <td class="align-middle"> &nbsp;:{{ $nama_regu }}</td>
+                            <td class="align-middle" colspan="3"> &nbsp;:{{ $nama_regu }}</td>
                         </tr>
 
                         <tr class="table-bawah">
@@ -171,7 +171,8 @@
                                     class="fst-italic fw-lighter">Batch/Lot
                                     code</span></th>
                             <th class="text-center align-middle" rowspan="2">No Box</th>
-                            <th class="text-center  ">Jumlah <br> <span class="fst-italic fw-lighter">Quantity</span>
+                            <th class="text-center  " colspan="2">Jumlah <br> <span
+                                    class="fst-italic fw-lighter">Quantity</span>
                             </th>
                             <th class="text-center" colspan="2">Jam Cuci <br> <span
                                     class="fst-italic fw-lighter">Washing
@@ -188,6 +189,7 @@
                         </tr>
                         <tr class="table-bawah">
                             <th class="text-center">Pcs</th>
+                            <th class="text-center">Gr</th>
                             <th class="text-center">Awal/Mulai</th>
                             <th class="text-center">Akhir/Stop</th>
                         </tr>
@@ -205,7 +207,8 @@
                                 $jamMulai = 14 + ($counterNamaAnak[$namaAnak] - 1); // 14 = 14:00
                                 $startTime = \Carbon\Carbon::createFromFormat('H:i', $jamMulai . ':00');
 
-                                $pcs = (int) $c['pcs'];
+                                $pcs = (int) ($c['pcs'] == 0 ? round($c['gr'] / 6, 0) : $c['pcs']);
+
                                 $endTime = $startTime->copy()->addMinutes($pcs);
                                 $diffInMinutes = $startTime->diffInMinutes($endTime);
 
@@ -221,6 +224,7 @@
                                 <td class="text-center">{{ $sbw->no_invoice }}</td>
                                 <td class="text-center">{{ $c['no_box'] }}</td>
                                 <td class="text-center">{{ number_format($c['pcs'], 0) }}</td>
+                                <td class="text-center">{{ number_format($c['gr'], 0) }}</td>
 
 
                                 <td class="text-center">{{ $startTime->format('H:i') }}</td>

@@ -35,12 +35,15 @@
         <tr>
             <td>No Kendaraan</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->no_kendaraan }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">
+                {{ empty($penerimaan->no_kendaraan_edit) ? $penerimaan->no_kendaraan : $penerimaan->no_kendaraan_edit }}
+            </td>
         </tr>
         <tr>
             <td>Pengemudi</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->pengemudi }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">
+                {{ empty($penerimaan->driver) ? $penerimaan->pengemudi : $penerimaan->driver }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>

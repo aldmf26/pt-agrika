@@ -138,6 +138,11 @@
 
             </div> --}}
             <div class="col-lg-12">
+                <style>
+                    .border-bold {
+                        border-top: 2px solid black
+                    }
+                </style>
 
 
                 <table width="100%" style="font-size: 11px">
@@ -187,6 +192,9 @@
 
                     </thead>
                     <tbody>
+                        @php
+                            $prevInvoice = null;
+                        @endphp
                         @foreach ($grading as $g)
                             @php
 
@@ -197,8 +205,12 @@
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
                                     ->whereIn('nm_partai', $partaiArray)
                                     ->get();
+
+                                $currentInvoice = $sbwList->pluck('no_invoice')->unique()->implode(', ');
+                                $borderClass = $currentInvoice !== $prevInvoice ? 'border-bold' : '';
+                                $prevInvoice = $currentInvoice;
                             @endphp
-                            <tr class="table-bawah">
+                            <tr class="table-bawah {{ $borderClass }}">
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-center align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td class="text-center align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
