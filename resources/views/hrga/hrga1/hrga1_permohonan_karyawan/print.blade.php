@@ -60,7 +60,7 @@
                     <tr>
                         <td>4. Pengalaman</td>
                         <td>:</td>
-                        <td>{{ $datas->pengalaman }}</td>
+                        <td>{{ $datas->pengalaman ?? 'Tidak perlu' }}</td>
                     </tr>
                     <tr>
                         <td>5. Pelatihan</td>
@@ -75,7 +75,7 @@
                     <tr>
                         <td width="25%">7. Uraian Kerja</td>
                         <td>:</td>
-                        <td>{{ $datas->uraian_kerja }}</td>
+                        <td>{{ $datas->divisi->uraian_kerja }}</td>
                     </tr>
                     <tr>
                         <td colspan="3">&nbsp;</td>
@@ -84,7 +84,7 @@
                         <td>Tanggal Dibutuhkan</td>
                         <td>:</td>
                         <td>{{ tanggal($datas->tgl_dibutuhkan) }} <span style="margin-left: 20%">Diajukan Oleh:
-                                {{ $datas->diajukan_oleh }}</span></td>
+                                Kepala Divisi</span></td>
                     </tr>
                     <tr>
                         <td colspan="3">&nbsp;</td>
@@ -92,7 +92,19 @@
                     <tr>
                         <td>&nbsp;</td>
                         <td></td>
-                        <td>&nbsp; <span style="margin-left: 40%">Tanggal :{{ tanggal($datas->tgl_input) }}</span></td>
+                        <td>&nbsp; <span style="margin-left: 40%">
+                                Tanggal :
+                                @php
+                                    
+                                $date = new DateTime($datas->tgl_dibutuhkan);
+                                $date->modify('-14 days');
+                                while ($date->format('w') == 0 || $date->format('w') == 6) {
+                                    $date->modify('-1 days');
+                                }
+                                echo tanggal($date->format('Y-m-d'));
+                                @endphp
+                            </span>
+                        </td>
                     </tr>
                 </table>
             </div>

@@ -21,7 +21,8 @@ class PermohonanKaryawan extends Model
             b.uraian_kerja,
             IF(a.jenis_kelamin = 'L','Laki-laki','Perempuan') as jenis_kelamin,
             MONTH(a.tgl_masuk) as bulan,
-            CONCAT(a.tgl_masuk) as tgl_masuk,
+            CONCAT(a.tgl_masuk) as countTgl_masuk,
+            a.tgl_masuk as tgl_masuk,
             CONCAT(a.tgl_lahir) as tgl_lahir,
             TIMESTAMPDIFF(YEAR, a.tgl_lahir, a.tgl_masuk) as umur,
             CONCAT(a.status) as status,
@@ -32,8 +33,8 @@ class PermohonanKaryawan extends Model
         FROM data_pegawais AS a
         LEFT JOIN divisis AS b ON a.divisi_id = b.id
         $where
-        GROUP BY b.divisi, MONTH(a.tgl_masuk), a.jenis_kelamin
-        HAVING tgl_dibutuhkan IS NOT NULL");
+        GROUP BY a.tgl_masuk, a.divisi_id
+        ");
     }
 
     public function divisi()
