@@ -9,6 +9,17 @@ class PermohonanKaryawan extends Model
 {
     public $table = 'permohonan_karyawans';
     public $guarded = [];
+
+    public function getAlasanPenambahanAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getDiajukanOlehAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
     public static function dapatkan($id = null)
     {
         $func = $id ? "selectOne" : "select";

@@ -31,12 +31,12 @@
                     @endphp
                     @foreach ($dataBaru as $d)
                         <tr>
-                            <td>{{ $no++ }} - {{$d->id}}</td>
+                            <td>{{ $no++ }}</td>
                             <td align="right">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                             <td>{{ ucwords($d->status) }}</td>
                             <td>{{ $d->divisi->divisi }}</td>
                             <td>{{ $d->jumlah }} Orang</td>
-                            <td>Adanya penambahan kapasitas aktivitas {{ $d->divisi->divisi }}</td>
+                            <td>{{ $d->alasan_penambahan }}</td>
                             <td>{{ $d->diajukan_oleh }}</td>
                             <td>
                                 <a href="{{ route('hrga1.1.edit', [$d]) }}" class="btn btn-sm btn-primary"><i

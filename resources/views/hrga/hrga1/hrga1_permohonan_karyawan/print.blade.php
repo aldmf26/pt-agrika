@@ -32,7 +32,7 @@
                         <td width="25%">Alasan Penambahan</td>
                         <td>:</td>
                         <td></td>
-                        <td>Adanya penambahan kapasitas aktivitas {{ $datas->divisi->divisi ?? '' }}</td>
+                        <td>{{ $datas->alasan_penambahan }}</td>
                     </tr>
                 </table>
             </div>
@@ -75,7 +75,7 @@
                     <tr>
                         <td width="25%">7. Uraian Kerja</td>
                         <td>:</td>
-                        <td>{{ $datas->divisi->uraian_kerja }}</td>
+                        <td>{{ $datas->uraian_kerja ?? $datas->divisi->uraian_kerja }}</td>
                     </tr>
                     <tr>
                         <td colspan="3">&nbsp;</td>

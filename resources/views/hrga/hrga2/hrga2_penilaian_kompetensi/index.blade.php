@@ -32,7 +32,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $d->nama }}</td>
                                     <td>{{ $d->nik }}</td>
-                                    <td>{{ umur($d->tgl_lahir) }}</td>
+                                    <td>{{ umur($d->tgl_lahir) }} Tahun</td>
                                     <td>{{ $d->jenis_kelamin }}</td>
                                     <td>{{ $d->divisi }}</td>
                                     <td>{{ $d->posisi ?? '' }}</td>

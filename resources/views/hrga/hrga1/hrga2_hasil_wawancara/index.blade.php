@@ -40,7 +40,7 @@
                             <td>{{ $d->nik ?? '' }}</td>
                             <td class="text-center">
                                 @if (isset($d->tgl_lahir))
-                                    {{ \Carbon\Carbon::parse($d->tgl_lahir)->age }}
+                                    {{ \Carbon\Carbon::parse($d->tgl_lahir)->age }} Tahun
                                 @endif
                             </td>
                             <td>{{ $d->jenis_kelamin ?? '' }}</td>

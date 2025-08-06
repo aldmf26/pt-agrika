@@ -45,7 +45,13 @@
                 </div>
                 <div class="page-content" style="margin-top: -30px">
                     <x-alert />
-                    {{ $slot }}
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                {{ $slot }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

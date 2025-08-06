@@ -4,7 +4,7 @@
             {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">
                 <i class="fas fa-plus"></i> Data
             </button> --}}
-            <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print">
+            <button class="btn btn-sm btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print">
                 <i class="fas fa-print"></i> print
             </button>
         </div>

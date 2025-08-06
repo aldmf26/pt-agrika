@@ -30,7 +30,7 @@
                             <td>{{ $d->nik ?? '' }}</td>
                             <td class="text-center">
                                 @if (isset($d->tgl_lahir))
-                                    {{ umur($d->tgl_lahir) }}
+                                    {{ umur($d->tgl_lahir) }} Tahun
                                 @endif
                             </td>
                             <td>{{ $d->jenis_kelamin ?? '' }}</td>
