@@ -9,6 +9,17 @@ class DataPegawai extends Model
 {
     protected $guarded = [];
 
+    public function scopePengawas($query)
+    {
+        return $query->with('divisi')->where('posisi', 'pengawas');
+    }
+
+    public function scopeAdmin($query)
+    {
+        return $query->with('divisi')->where('posisi', 'LIKE', '%Admin%');
+    }
+
+
     public function getJenisKelaminAttribute($value)
     {
         return $value === 'L' ? 'Laki-laki' : 'Perempuan';

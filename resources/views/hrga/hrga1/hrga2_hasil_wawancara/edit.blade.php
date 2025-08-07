@@ -7,6 +7,7 @@
                 <div class="form-group">
                     <label for="">Nama Lengkap</label>
                     <input required type="text" name="nama_lengkap" value="{{ $pegawai->nama }}" class="form-control">
+                    <input type="hidden" name="id_karyawan_dari_api" value="{{ $pegawai->id_karyawan_dari_api }}">
                 </div>
             </div>
             <div class="col-lg-6">

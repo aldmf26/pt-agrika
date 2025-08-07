@@ -79,3 +79,10 @@ if (!function_exists('sumBk')) {
         return array_sum(array_column($kategori, $data));
     }
 }
+
+if (!function_exists('dataDariBulan')) {
+    function dataDariBulan()
+    {
+        return 7;
+    }
+}

@@ -47,8 +47,8 @@
             </div>
         </div>
         <div class="row">
-            <input type="hidden" name="manajer_departemen" placeholder="manajer departemen" class="form-control"
-                value="0">
+            <input type="hidden" name="departemen" placeholder="manajer departemen" class="form-control"
+                value="{{ $kategori }}">
             <div class="col-6">
                 <div class="form-group">
                     <label for="">Alasan Permintaan</label>

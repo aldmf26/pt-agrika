@@ -20,7 +20,8 @@ class Hrga2HasilWawancara extends Controller
     }
     public function index()
     {
-        $datas = DataPegawai::with('divisi')->orderBy('id', 'desc')->get();
+        $bulan = dataDariBulan();
+        $datas = DataPegawai::with('divisi')->whereRaw("month(tgl_masuk) >= $bulan")->orderBy('id', 'desc')->get();
         $data = [
             'title' => 'Hrga 1.2 hasil wawancara',
             'datas' => $datas
@@ -116,7 +117,7 @@ class Hrga2HasilWawancara extends Controller
     {
         try {
             DB::beginTransaction();
-            DataPegawai::where('id_karyawan_dari_api', $pegawai)->update([
+            DataPegawai::where('karyawan_id_dari_api', $r->id_karyawan_dari_api)->update([
                 'nik' => $r->nik,
                 'nama' => $r->nama_lengkap,
                 'status' => $r->status,
@@ -133,7 +134,7 @@ class Hrga2HasilWawancara extends Controller
                 'admin' => auth()->user()->name,
             ]);
 
-            HasilWawancara::where('id_anak', $pegawai)->update([
+            HasilWawancara::where('id_anak', $r->id_karyawan_dari_api)->update([
                 'nama' => $r->nama_lengkap,
                 'nik' => $r->nik,
                 'tgl_lahir' => $r->tgl_lahir,
@@ -144,7 +145,7 @@ class Hrga2HasilWawancara extends Controller
                 'tgl_masuk' => $r->tgl_masuk,
             ]);
 
-            PenilaianKaryawan::where('id_anak', $pegawai)->update([
+            PenilaianKaryawan::where('id_anak', $r->id_karyawan_dari_api)->update([
                 'periode' => $r->periode,
                 'pendidikan_standar' => $r->pendidikan_standar,
                 'pendidikan_hasil' => $r->pendidikan_hasil,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\PUR\Pembelian;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataPegawai;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseRequestItem;
@@ -23,12 +24,15 @@ class PUR2PurchaseOrderController extends Controller
         return view('pur.pembelian.purchase_order.index', $data);
     }
 
-    public function create()
+    public function create(Request $r)
     {
+        $user = DataPegawai::admin()->get();
+        $suplier = Suplier::where('kategori', $r->kategori)->latest()->get();
         $data = [
             'title' => 'Tambah Purchase Order',
             'no_po' => $this->getNoPo(),
-            'supplier' => Suplier::latest()->get()
+            'supplier' => $suplier,
+            'user' => $user
         ];
 
         return view('pur.pembelian.purchase_order.create', $data);

@@ -46,7 +46,6 @@
                             belum dipilih no pr
                         </td>
                     </tr>
-
                 @endif
             </tbody>
         </table>
@@ -55,13 +54,11 @@
 @section('scripts')
     <script>
         setTimeout(function() {
-            $('.select2pr').select2({});
-            $('.select2suplier').select2({});
+            $('.select2pr, .select2pic, .select2suplier').select2({});
 
             $('.select2suplier').change(function(e) {
                 e.preventDefault();
                 $('input[name=alamat]').val($(this).find(':selected').data('alamat'));
-
             });
         }, 500);
 

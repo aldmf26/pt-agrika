@@ -71,7 +71,7 @@ class PUR1PurchaseRequestController extends Controller
     {
         $kategori = $r->kategori ?? 'barang';
         $barangs = Barang::with('supplier')->where('kategori', $kategori)->get();
-        $user = DataPegawai::with('divisi')->where('posisi', 'pengawas')->get();
+        $user = DataPegawai::pengawas()->get();
         $data = [
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
@@ -117,7 +117,7 @@ class PUR1PurchaseRequestController extends Controller
                 'diminta_oleh' => $r->diminta_oleh,
                 'posisi' => $r->posisi,
                 'departemen' => $r->departemen,
-                'manager_departemen' => $r->manajer_departemen,
+                'manager_departemen' => '0',
                 'alasan_permintaan' => $r->alasan_permintaan,
             ]);
 

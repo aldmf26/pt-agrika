@@ -43,7 +43,8 @@ class Hrga1PermohonanKaryawanController extends Controller
     }
     public function index()
     {
-        $dataBaru = PermohonanKaryawan::with('divisi')->orderByDesc('tgl_input')->get();
+        $bulan = dataDariBulan();
+        $dataBaru = PermohonanKaryawan::with('divisi')->whereRaw("month(tgl_dibutuhkan) >= $bulan")->orderByDesc('tgl_input')->get();
 
         $data = [
             'title' => 'Hrga 1.1 permohonan karyawan',

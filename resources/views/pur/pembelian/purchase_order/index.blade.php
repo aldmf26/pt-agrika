@@ -65,7 +65,6 @@
                         <th>Jumlah</th>
                         <th>Item</th>
                         <th>Harga</th>
-                        <th>Tgl Dibutuhkan</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-purchase-request">
@@ -92,7 +91,6 @@
                             <td>${value.jumlah}</td>
                             <td>${value.item_spesifikasi}</td>
                             <td>${Number(value.harga_po).toLocaleString('id-ID')}</td>
-                            <td>${value.tgl_dibutuhkan}</td>
                         </tr>
                         `);
                     });
