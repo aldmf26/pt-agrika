@@ -4,8 +4,10 @@ namespace App\Http\Controllers\PUR\Pembelian;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
+use App\Models\DataPegawai;
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -47,6 +49,10 @@ class PUR1PurchaseRequestController extends Controller
         }
 
         $sbw = DB::table('sbw_kotor')
+            ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
+            ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
+            ->leftJoin('data_edit_wh', 'data_edit_wh.nm_partai', '=', 'sbw_kotor.nm_partai')
+            ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*', 'data_edit_wh.driver', 'data_edit_wh.no_kendaraan as no_kendaraan_edit')
             ->orderBy('sbw_kotor.tgl', 'desc')
             ->get();
 
@@ -54,7 +60,7 @@ class PUR1PurchaseRequestController extends Controller
 
             'title' => 'PUR 1 Purchase Request',
             'datas' => $datas,
-            'penerimaan' => $sbw,
+            'sbw' => $sbw,
             'kategori' => $kategori,
         ];
 
@@ -65,11 +71,13 @@ class PUR1PurchaseRequestController extends Controller
     {
         $kategori = $r->kategori ?? 'barang';
         $barangs = Barang::with('supplier')->where('kategori', $kategori)->get();
+        $user = DataPegawai::with('divisi')->where('posisi', 'pengawas')->get();
         $data = [
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
             'barangs' => $barangs,
-            'kategori' => $kategori
+            'kategori' => $kategori,
+            'user' => $user,
         ];
 
         return view('pur.pembelian.purchase_request.create', $data);

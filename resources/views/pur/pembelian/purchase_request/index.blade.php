@@ -4,7 +4,8 @@
             <ul class="nav nav-pills float-start">
                 <li class="nav-item">
                     <a class="nav-link {{ $kategori == 'barang' ? 'active' : '' }}"
-                        href="{{ route('pur.pembelian.1.index', ['kategori' => 'barang']) }}">Barang & ategoriemasan</a>
+                        href="{{ route('pur.pembelian.1.index', ['kategori' => 'barang']) }}">Barang & kategori
+                        kemasan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ $kategori == 'lainnya' ? 'active' : '' }}"

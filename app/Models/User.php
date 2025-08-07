@@ -46,6 +46,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+public function getNameAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class);
+    }
 
     public function ttd()
     {

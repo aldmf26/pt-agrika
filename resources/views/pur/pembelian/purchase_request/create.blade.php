@@ -17,13 +17,20 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Diminta Oleh</label>
-                    <input type="text" name="diminta_oleh" placeholder="diminta oleh" class="form-control">
+                    <select name="diminta_oleh" class="form-control dimintaoleh select2">
+                        <option value="">Pilih Diminta oleh</option>
+                        @foreach ($user as $d)
+                            <option value="{{ $d->nama }}" data-divisi="{{ $d->posisi }}">
+                                {{ $d->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Posisi</label>
-                    <input type="text" name="posisi" placeholder="posisi" class="form-control">
+                    <input readonly type="text" name="posisi" id="posisi" placeholder="posisi"
+                        class="form-control">
                 </div>
             </div>
             <div class="col-3">
@@ -106,6 +113,11 @@
 
             $(document).ready(function() {
                 initSelect2();
+
+                $('.dimintaoleh').change(function() {
+                    var divisi = $(this).find(':selected').data('divisi');
+                    $('#posisi').val(divisi);
+                });
 
                 $('.kategori').change(function() {
                     var kategori = $(this).val();
