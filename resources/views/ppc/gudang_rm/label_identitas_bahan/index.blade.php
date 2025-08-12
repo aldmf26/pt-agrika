@@ -13,9 +13,9 @@
                 </x-modal>
             </div>
         </div> --}}
-            <div>
-                {{-- <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                    Label Identitas Bahan</a> --}}
+            {{-- <div>
+                <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                    Label Identitas Bahan</a>
 
             </div>
             <div>
@@ -24,7 +24,7 @@
                     <i class="fas fa-print"></i> Print
                     <span x-transition x-text="checked.length ? `(${checked.length})` : 'Semua'"></span>
                 </a>
-            </div>
+            </div> --}}
         </div>
 
 
