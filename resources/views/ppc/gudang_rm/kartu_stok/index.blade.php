@@ -14,8 +14,8 @@
                 </ul>
             </nav> --}}
             <x-nav-link route="ppc.gudang-rm.8.index" />
-    <br>
-    <br>
+            <br>
+            <br>
             <div x-data="{ checked: [] }">
                 <div class="d-flex justify-content-end gap-2">
                     <div>
@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($k == 'satu')
+                        @if ($k != 'lainnya')
                             @foreach ($barangs as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
