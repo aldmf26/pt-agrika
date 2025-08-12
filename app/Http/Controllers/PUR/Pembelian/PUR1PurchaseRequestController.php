@@ -194,6 +194,7 @@ class PUR1PurchaseRequestController extends Controller
         ];
         return view('pur.pembelian.purchase_request.print', $data);
     }
+
     public function print_sbw(Request $r)
     {
         $no_pr = $r->no_pr;
@@ -212,8 +213,10 @@ class PUR1PurchaseRequestController extends Controller
 
         $items = DB::table('sbw_kotor as s')
             ->join('grade_sbw_kotor as g', 'g.id', '=', 's.grade_id')
-            ->where('s.tgl', $tgl)
-            ->where('s.rwb_id', $rwb_id)
+            ->where([
+                ['tgl', '=', $tgl],
+                ['rwb_id', '=', $rwb_id]
+            ])
             ->groupBy('s.grade_id', 'g.nama') // grup per barang
             ->selectRaw('
                 g.nama,
