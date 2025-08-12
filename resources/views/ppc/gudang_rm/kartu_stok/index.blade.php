@@ -1,7 +1,7 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-body">
-            <nav>
+            {{-- <nav>
                 <ul class="nav nav-pills float-start">
                     <li class="nav-item">
                         <a class="nav-link {{ $k == 'satu' ? 'active' : '' }}"
@@ -12,9 +12,10 @@
                             href="{{ route('ppc.gudang-rm.8.index', ['k' => 'lainnya']) }}">Sbw</a>
                     </li>
                 </ul>
-            </nav>
-            <br>
-            <br>
+            </nav> --}}
+            <x-nav-link route="ppc.gudang-rm.8.index" />
+    <br>
+    <br>
             <div x-data="{ checked: [] }">
                 <div class="d-flex justify-content-end gap-2">
                     <div>
