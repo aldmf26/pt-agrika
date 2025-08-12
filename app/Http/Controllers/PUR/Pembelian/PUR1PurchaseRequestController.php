@@ -36,31 +36,67 @@ class PUR1PurchaseRequestController extends Controller
                 'tgl' => $s['tgl'],
             ]);
         }
+
+        // Ambil nomor PR terakhir dari purchase_requests
+        $lastNoPr = PurchaseRequest::latest()->first()->no_pr ?? null;
+        $lastNumber = 0;
+        if ($lastNoPr) {
+            $parts = explode('/', $lastNoPr);
+            if (isset($parts[1])) {
+                $lastNumber = (int) $parts[1];
+            }
+        }
+
+        // Ambil data sbw_kotor urut ASC untuk hitung no PR
+        $dataAsc = DB::table('sbw_kotor')
+            ->groupBy('tgl', 'rwb_id')
+            ->selectRaw("tgl, rwb_id")
+            ->orderBy('tgl', 'ASC')
+            ->get();
+
+        // Format bulan romawi
+        $bulanRomawi = [
+            1 => 'I',
+            2 => 'II',
+            3 => 'III',
+            4 => 'IV',
+            5 => 'V',
+            6 => 'VI',
+            7 => 'VII',
+            8 => 'VIII',
+            9 => 'IX',
+            10 => 'X',
+            11 => 'XI',
+            12 => 'XII'
+        ];
+
+        $bulan = $bulanRomawi[date('n')];
+        $tahun = date('Y');
+
+        // Generate nomor PR sesuai ASC
+        foreach ($dataAsc as $i => $item) {
+            $noUrut = $lastNumber + ($i + 1);
+            $item->no_pr = "PR/{$noUrut}/{$bulan}/{$tahun}";
+        }
+
+        // Balik lagi ke DESC untuk ditampilkan
+        $datas = $dataAsc->sortByDesc('tgl')->values();
+        return $datas;
     }
     public function index()
     {
         $kategori = request()->kategori ?? 'barang';
-        $this->singkron();
+
 
         if ($kategori == 'barang') {
             $datas = PurchaseRequest::latest()->get();
         } else {
-            $datas = collect([]);
+            $datas = $this->singkron();
         }
-
-        $sbw = DB::table('sbw_kotor')
-            ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
-            ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
-            ->leftJoin('data_edit_wh', 'data_edit_wh.nm_partai', '=', 'sbw_kotor.nm_partai')
-            ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*', 'data_edit_wh.driver', 'data_edit_wh.no_kendaraan as no_kendaraan_edit')
-            ->orderBy('sbw_kotor.tgl', 'desc')
-            ->get();
-
         $data = [
 
             'title' => 'PUR 1 Purchase Request',
             'datas' => $datas,
-            'sbw' => $sbw,
             'kategori' => $kategori,
         ];
 
@@ -157,5 +193,42 @@ class PUR1PurchaseRequestController extends Controller
             'datas' => $datas
         ];
         return view('pur.pembelian.purchase_request.print', $data);
+    }
+    public function print_sbw(Request $r)
+    {
+        $no_pr = $r->no_pr;
+        $tgl = $r->tgl;
+        $rwb_id = $r->rwb_id;
+
+        $datas = DB::table('sbw_kotor')
+            ->where([
+                ['tgl', '=', $tgl],
+                ['rwb_id', '=', $rwb_id]
+            ])
+            ->groupBy('tgl', 'rwb_id')
+            ->selectRaw("tgl, rwb_id, group_concat(grade_id) as grade_id")
+            ->orderBy('tgl', 'ASC')
+            ->first();
+
+        $items = DB::table('sbw_kotor as s')
+            ->join('grade_sbw_kotor as g', 'g.id', '=', 's.grade_id')
+            ->where('s.tgl', $tgl)
+            ->where('s.rwb_id', $rwb_id)
+            ->groupBy('s.grade_id', 'g.nama') // grup per barang
+            ->selectRaw('
+                g.nama,
+                SUM(s.pcs) as jumlah_pcs,
+                SUM(s.kg) as jumlah_kg
+            ')
+            ->get();
+
+        $data = [
+            'title' => 'PURCHASE REQUEST',
+            'dok' => 'Dok.No.: FRM.PUR.01.01, Rev.00',
+            'datas' => $datas,
+            'no_pr' => $no_pr,
+            'items' => $items,
+        ];
+        return view('pur.pembelian.purchase_request.print_sbw', $data);
     }
 }
