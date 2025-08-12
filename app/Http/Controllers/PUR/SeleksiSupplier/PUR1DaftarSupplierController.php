@@ -156,7 +156,7 @@ class PUR1DaftarSupplierController extends Controller
     {
         $data = [
             'title' => 'Edit Daftar Supplier',
-            'supplier' => Suplier::findOrFail($id)->first(),
+            'supplier' => Suplier::where('id', $id)->first(),
         ];
 
         return view('pur.seleksi.daftar_supplier.edit', $data);
