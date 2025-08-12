@@ -206,7 +206,7 @@ class PUR1DaftarSupplierController extends Controller
 
             DB::commit();
 
-            return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Seleksi Supplier berhasil diupdate');
+            return redirect()->route('pur.seleksi.1.index', ['kategori' => $r->jenis_produk])->with('sukses', 'Seleksi Supplier berhasil diupdate');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('pur.seleksi.1.create')->with('error', $e->getMessage());
