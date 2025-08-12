@@ -32,8 +32,6 @@
                             {{ tanggal(date('Y-m-d', strtotime('-7 days', strtotime($datas->tgl)))) }}
                         </td>
                     </tr>
-
-
                 </table>
             </div>
 
