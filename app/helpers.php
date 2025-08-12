@@ -83,6 +83,9 @@ if (!function_exists('sumBk')) {
 if (!function_exists('dataDariBulan')) {
     function dataDariBulan()
     {
-        return 7;
+        return [
+            'bulan' => 7,
+            'tahun' => 2025,
+        ];
     }
 }

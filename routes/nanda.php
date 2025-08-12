@@ -55,8 +55,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 
-
-
 Route::controller(Hrga1InformasiTawaranPelatihan::class)
     ->prefix('hrga/hrga3/hrga3.1_Informasi_tawaran_pelatihan')
     ->name('hrga3.1.')

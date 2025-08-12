@@ -20,8 +20,10 @@ class Hrga2HasilWawancara extends Controller
     }
     public function index()
     {
-        $bulan = dataDariBulan();
-        $datas = DataPegawai::with('divisi')->whereRaw("month(tgl_masuk) >= $bulan")->orderBy('id', 'desc')->get();
+        $bulan = dataDariBulan()['bulan'];
+        $tahun = dataDariBulan()['tahun'];
+
+        $datas = DataPegawai::with('divisi')->whereRaw("year(tgl_masuk) = $tahun and month(tgl_masuk) >= $bulan")->orderBy('id', 'desc')->get();
         $data = [
             'title' => 'Hrga 1.2 hasil wawancara',
             'datas' => $datas

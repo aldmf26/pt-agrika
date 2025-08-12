@@ -10,6 +10,7 @@ class TransaksiStokService
 {
     public static function create($request, $admin)
     {
+        dd($request);
         // Buat Lot baru
         for ($i = 0; $i < count($request->id_barang); $i++) {
             $lot = Lot::create([
