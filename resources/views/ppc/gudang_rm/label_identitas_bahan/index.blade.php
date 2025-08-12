@@ -3,9 +3,9 @@
     <br>
     <br>
     <div x-data="{ checked: [] }">
-        {{-- <div class="d-flex justify-content-end gap-2">
+        <div class="d-flex justify-content-end gap-2">
 
-            <div>
+            {{-- <div>
             <button data-bs-toggle="modal" data-bs-target="#tambah" type="button" class="btn btn-sm btn-primary"><i
                     class="fas fa-plus"></i> Barang </button>
             <div x-data="{ showProduk: false }">
@@ -13,12 +13,12 @@
                     @livewire('ppc.tbh-barang')
                 </x-modal>
             </div>
-        </div>
-            <div>
+        </div> --}}
+            {{-- <div>
                 <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                     Label Identitas Bahan</a>
 
-            </div>
+            </div> --}}
             <div>
                 <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary" target="_blank"
                     @click.prevent="window.location.href = `/ppc/gudang-rm/5-label-identitas-bahan/print?checked=${encodeURIComponent(checked.join(','))}&k={{ $k }}`">
@@ -26,7 +26,7 @@
                     <span x-transition x-text="checked.length ? `(${checked.length})` : 'Semua'"></span>
                 </a>
             </div>
-        </div> --}}
+        </div>
 
 
         <table id="example" class="table table-bordered">
