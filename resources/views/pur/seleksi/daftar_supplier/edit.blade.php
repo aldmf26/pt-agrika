@@ -40,7 +40,8 @@
                     <select name="jenis_produk" class="form-control" required>
                         <option value="">Pilih Kategori</option>
                         @foreach (jenisProduk() as $d => $i)
-                            <option value="{{ $d }}">{{ $i }}</option>
+                            <option @selected($supplier->kategori == $i) value="{{ $d }}">{{ $i }}
+                            </option>
                         @endforeach
 
                     </select>
