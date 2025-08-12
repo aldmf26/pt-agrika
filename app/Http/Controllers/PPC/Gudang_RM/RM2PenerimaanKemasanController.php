@@ -43,8 +43,6 @@ class RM2PenerimaanKemasanController extends Controller
         DB::beginTransaction();
         $admin = auth()->user()->name;
         try {
-+
-
             $transaksi = TransaksiStokService::create($r, $admin);
 
             PurchaseOrder::where('no_po', $r->no_po)->update([

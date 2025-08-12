@@ -12,20 +12,19 @@ class TransaksiStokService
     {
         // Buat Lot baru
         for ($i = 0; $i < count($request->id_barang); $i++) {
-            // $lot = Lot::create([
-            //     'barang_id' => $request->id_barang[$i],
-            //     'kode_lot' => $request->kode_lot[$i],
-            //     'tgl_kedatangan' => $request->tgl_penerimaan[$i],
-            //     'tgl_expired' => $request->tgl_expired[$i],
-            //     'qty' => $request->jumlah_barang[$i],
-            //     'tgl' => date('Y-m-d'),
-            //     'admin' => $admin
-            // ]);
+            $lot = Lot::create([
+                'barang_id' => $request->id_barang[$i],
+                'kode_lot' => $request->kode_lot[$i],
+                'tgl_kedatangan' => $request->tgl_penerimaan[$i],
+                'tgl_expired' => $request->tgl_expired[$i],
+                'qty' => $request->jumlah_barang[$i],
+                'tgl' => date('Y-m-d'),
+                'admin' => $admin
+            ]);
 
             // Update stok barang
             $barang = Barang::find($request->id_barang[$i]);
             $stok = $barang->stok;
-            dd($barang, $stok);
             // Buat transaksi masuk
             Transaksi::create([
                 'barang_id' => $request->id_barang[$i],
