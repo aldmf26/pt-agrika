@@ -197,11 +197,11 @@ class PUR1DaftarSupplierController extends Controller
                 'nama_supplier' => $r->nama_supplier,
                 'kategori' => $r->jenis_produk,
                 'alamat' => $r->alamat_supplier,
-                'produsen' => $r->produsen,
+                'produsen' => 0,
                 'contact_person' => $r->contact_person,
                 'no_telp' => $r->no_telp,
-                'ket' => $r->ket,
-                'hasil_evaluasi' => $r->hasil,
+                'ket' => $r->keterangan,
+                'hasil_evaluasi' => 0,
             ]);
 
             DB::commit();

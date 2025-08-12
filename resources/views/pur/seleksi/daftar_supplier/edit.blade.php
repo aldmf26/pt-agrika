@@ -37,7 +37,7 @@
                         <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                             title="isi Barang: untuk bahan baku, isi kemasan : untuk barang kemasan"></i>
                     </label>
-                    <select name="jenis_produk[]" class="form-control" required>
+                    <select name="jenis_produk" class="form-control" required>
                         <option value="">Pilih Kategori</option>
                         @foreach (jenisProduk() as $d => $i)
                             <option value="{{ $d }}">{{ $i }}</option>
@@ -49,7 +49,7 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Keterangan</label>
-                    <input type="text" name="ket" value="{{ $supplier->ket }}" placeholder="Keterangan"
+                    <input type="text" name="keterangan" value="{{ $supplier->ket }}" placeholder="Keterangan"
                         class="form-control">
                 </div>
             </div>
