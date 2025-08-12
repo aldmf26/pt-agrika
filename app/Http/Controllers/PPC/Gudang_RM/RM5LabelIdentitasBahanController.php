@@ -21,8 +21,8 @@ class RM5LabelIdentitasBahanController extends Controller
         // $sbw = PenerimaanKemasanSbwKotorHeader::get();
         $k = $r->kategori;
 
-        $barangs = PenerimaanHeader::with(['barang', 'supplier'])->get();
-        $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->get();
+        $barangs = PenerimaanHeader::with(['barang', 'supplier'])latest()->get();
+        $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])latest()->get();
         $sbw = DB::table('sbw_kotor')
             ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
             ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
