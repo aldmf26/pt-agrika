@@ -14,8 +14,8 @@
             </div>
         </div> --}}
             <div>
-                <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                    Label Identitas Bahan</a>
+                {{-- <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                    Label Identitas Bahan</a> --}}
 
             </div>
             <div>
