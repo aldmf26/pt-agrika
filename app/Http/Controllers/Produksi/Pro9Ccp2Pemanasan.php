@@ -12,7 +12,7 @@ class Pro9Ccp2Pemanasan extends Controller
 {
     public function index(Request $r)
     {
-        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
+        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_baru");
         $pemanasan = json_decode($pemanasan, TRUE);
         $data = [
             'title' => 'Form pemanasan CCP 2',
@@ -55,7 +55,7 @@ class Pro9Ccp2Pemanasan extends Controller
     public function print(Request $r)
     {
         $tgl = $r->tgl;
-        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_new_detail?tgl=$tgl");
+        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_baru_detail?tgl=$tgl");
         $pemanasan = json_decode($pemanasan, TRUE);
         $data = [
             'title' => 'Form pemanasan CCP 2',

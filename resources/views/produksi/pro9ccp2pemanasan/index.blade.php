@@ -19,12 +19,12 @@
                     @foreach ($pemanasan as $p)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ tanggal($p['tgl_input']) }}</td>
+                            <td class="text-center">{{ tanggal($p['tgl_terakhir']) }}</td>
                             <td>{{ number_format($p['pcs'], 0) }}</td>
                             <td>{{ number_format($p['gr'], 0) }}</td>
                             <td class="text-center"><a
-                                    href="{{ route('produksi.9.print', ['tgl' => $p['tgl_input']]) }}" target="_blank"
-                                    class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
+                                    href="{{ route('produksi.9.print', ['tgl' => $p['tgl_terakhir']]) }}"
+                                    target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
                                     Print</a></td>
                         </tr>
                     @endforeach

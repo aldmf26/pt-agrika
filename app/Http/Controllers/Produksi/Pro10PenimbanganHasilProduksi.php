@@ -11,9 +11,7 @@ class Pro10PenimbanganHasilProduksi extends Controller
 {
     public function index(Request $r)
     {
-
-
-        $pengemasan = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir");
+        $pengemasan = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_baru");
         $pengemasan = json_decode($pengemasan, TRUE);
 
         $data = [
@@ -44,7 +42,7 @@ class Pro10PenimbanganHasilProduksi extends Controller
     public function print(Request $r)
     {
         $tgl = $r->tgl;
-        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_akhir_detail_group_grade2?tgl=$tgl");
+        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_baru_detail?tgl=$tgl");
         $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
         $data = [
             'title' => 'Penimbangan Hasil Produksi',

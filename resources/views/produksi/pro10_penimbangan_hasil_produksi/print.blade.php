@@ -193,77 +193,46 @@
 
                     </thead>
                     <tbody>
-                        @php
-                            $grouped = collect($penimbangan)->groupBy('grade');
-
-                            $rekap = collect($penimbangan)
-                                ->groupBy('grade')
-                                ->map(function ($items) {
-                                    return [
-                                        'pcs' => $items->sum('pcs'),
-                                        'gr' => $items->sum('gr'),
-                                        'box' => $items->pluck('box_pengiriman')->unique()->count(),
-                                    ];
-                                });
-
-                            $no = 1;
-                        @endphp
-
-                        @foreach ($grouped as $grade => $items)
+                        @foreach ($penimbangan as $i)
                             @php
-                                // Group ulang berdasarkan partai dalam grade
-                                $groupedByPartai = $items->groupBy('nm_partai');
-                                $rowspan = $groupedByPartai->count();
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', 'like', '%' . $i['nm_partai'] . '%')
+                                    ->first();
                             @endphp
+                            <tr class="table-bawah">
 
-                            @foreach ($groupedByPartai as $partai => $records)
-                                @php
-                                    // Total untuk partai ini
-                                    $totalPcs = $records->sum('pcs');
-                                    $totalGr = $records->sum('gr');
-                                    $sbwList = DB::table('sbw_kotor')
-                                        ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                        ->whereIn(
-                                            'nm_partai',
-                                            array_map('trim', explode(',', str_replace("'", '', $partai))),
-                                        )
-                                        ->get();
-                                @endphp
+                                <td class="text-center align-middle">
+                                    {{ $loop->iteration }}
+                                </td>
 
-                                <tr class="table-bawah">
-                                    @if ($loop->first)
-                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
-                                            {{ $no++ }}</td>
-                                    @endif
-                                    <td class="text-center align-middle">
-                                        {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
-                                    </td>
-                                    <td class="text-center align-middle">{{ number_format($totalPcs, 0) }}</td>
-                                    <td class="text-center align-middle">{{ number_format($totalGr, 0) }}</td>
+                                <td class="text-center align-middle">
+                                    {{ $sbw->nama }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    {{ $sbw->no_invoice }}
+                                </td>
+                                <td class="text-center align-middle">{{ number_format($i['total_pcs'], 0) }}</td>
+                                <td class="text-center align-middle">{{ number_format($i['total_gr'], 0) }}</td>
 
-                                    @if ($loop->first)
-                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
-                                            {{ $grade }}
-                                        </td>
-                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
-                                            {{ number_format($rekap[$grade]['pcs'], 0) }}
-                                        </td>
-                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
-                                            {{ number_format($rekap[$grade]['gr'], 0) }}
-                                        </td>
-                                        <td class="text-center align-middle" rowspan="{{ $rowspan }}">
-                                            {{ number_format($rekap[$grade]['box'], 0) }}
-                                        </td>
-                                        <td rowspan="{{ $rowspan }}"></td>
-                                    @endif
+                                <td class="text-center align-middle">
+                                    {{ $i['grade'] }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    {{ number_format($i['total_pcs'], 0) }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    {{ number_format($i['total_gr'], 0) }}
+                                </td>
+                                <td class="text-center align-middle">
+                                    {{ $i['jumlah_box_didalamnya'] }}
+                                </td>
+                                <td></td>
 
 
-                                </tr>
-                            @endforeach
+                            </tr>
                         @endforeach
+
 
                     </tbody>
                     <tfoot>

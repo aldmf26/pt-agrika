@@ -213,7 +213,7 @@
                                 <td>{{ ($index % 6) + 1 }}</td>
                                 <td>{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td>
-                                    {!! collect(explode(',', $p['grades']))->map(fn($g) => trim($g))->filter()->unique()->implode(', <br>') ?:
+                                    {!! collect(explode(',', $p['grade']))->map(fn($g) => trim($g))->filter()->unique()->implode(', <br>') ?:
                                         '-' !!}
                                 </td>
                                 <td>{{ $time }}</td>
