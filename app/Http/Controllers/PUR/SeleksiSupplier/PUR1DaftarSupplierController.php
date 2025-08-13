@@ -156,7 +156,7 @@ class PUR1DaftarSupplierController extends Controller
     {
         $data = [
             'title' => 'Edit Daftar Supplier',
-            'supplier' => Suplier::findOrFail($id)->first(),
+            'supplier' => Suplier::where('id', $id)->first(),
         ];
 
         return view('pur.seleksi.daftar_supplier.edit', $data);
@@ -197,16 +197,16 @@ class PUR1DaftarSupplierController extends Controller
                 'nama_supplier' => $r->nama_supplier,
                 'kategori' => $r->jenis_produk,
                 'alamat' => $r->alamat_supplier,
-                'produsen' => $r->produsen,
+                'produsen' => 0,
                 'contact_person' => $r->contact_person,
                 'no_telp' => $r->no_telp,
-                'ket' => $r->ket,
-                'hasil_evaluasi' => $r->hasil,
+                'ket' => $r->keterangan,
+                'hasil_evaluasi' => 0,
             ]);
 
             DB::commit();
 
-            return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Seleksi Supplier berhasil diupdate');
+            return redirect()->route('pur.seleksi.1.index', ['kategori' => $r->jenis_produk])->with('sukses', 'Seleksi Supplier berhasil diupdate');
         } catch (\Exception $e) {
             DB::rollback();
             return redirect()->route('pur.seleksi.1.create')->with('error', $e->getMessage());

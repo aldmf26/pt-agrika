@@ -14,7 +14,7 @@
             </div>
         </div>
         <div>
-            <input type="text" wire:model.live="search" class="form-control mb-2" placeholder="Cari produk..." />
+            <input type="text" wire:model.live="search" class="form-control mb-2" placeholder="Cari pegawai..." />
         </div>
     </div>
 </div>

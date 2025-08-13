@@ -1,8 +1,18 @@
 <x-app-layout :title="$title">
-    <div class="d-flex justify-content-end gap-2">
-        <div>
-
-        </div>
+    <div class="d-flex justify-content-between">
+        <nav>
+            <ul class="nav nav-pills float-start">
+                <li class="nav-item">
+                    <a wire:navigate class="nav-link {{ $kategori == 'barang' ? 'active' : '' }}"
+                        href="{{ route('pur.pembelian.2.index', ['kategori' => 'barang']) }}">Barang & kategori
+                        kemasan</a>
+                </li>
+                <li class="nav-item">
+                    <a wire:navigate class="nav-link {{ $kategori == 'lainnya' ? 'active' : '' }}"
+                        href="{{ route('pur.pembelian.2.index', ['kategori' => 'lainnya']) }}">Sbw</a>
+                </li>
+            </ul>
+        </nav>
         <div>
             <a href="{{ route('pur.pembelian.2.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                 Purchase Order</a>
@@ -25,27 +35,54 @@
         </thead>
         <tbody>
             @foreach ($datas as $d)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td data-bs-toggle="modal" data-bs-target="#detail"
-                        onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
-                        class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
-                    <td>{{ tanggal($d->tgl) }}</td>
-                    <td>{{ $d->supplier }}</td>
-                    <td>{{ $d->alamat_pengiriman }}</td>
-                    <td>{{ $d->pic }}</td>
-                    <td class="text-start">{{ $d->telp }}</td>
-                    <td>{{ tanggal($d->estimasi_kedatangan) }}</td>
-                    <td>
-                        @if ($d->status == 'draft')
-                            <a class="btn btn-xs float-end btn-info selesai" data-id="{{ $d->id }}"
-                                data-item="{{ json_encode($d->item) }}" href="#">setuju</a>
-                        @else
+                @if ($kategori == 'lainnya')
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td data-bs-toggle="modal" data-bs-target="#detail"
+                            onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
+                            class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
+                        <td>{{ tanggal($d->tgl) }}</td>
+                        <td>{{ $d->supplier }}</td>
+                        <td>{{ $d->alamat_pengiriman }}</td>
+                        <td>Sinta</td>
+                        <td class="text-start">08</td>
+                        <td>{{ tanggal(date('Y-m-d', strtotime('+' . rand(1, 3) . ' days', strtotime($d->tgl)))) }}
+                        </td>
+                        <td>
+
                             <a class="btn btn-xs float-end btn-primary"
-                                href="{{ route('pur.pembelian.2.print', $d->id) }}"><i class="fas fa-print"></i></a>
-                        @endif
-                    </td>
-                </tr>
+                                href="{{ route('pur.pembelian.2.print_sbw', [
+                                    'no_po' => $d->no_po,
+                                    'tgl' => $d->tgl,
+                                    'rwb_id' => $d->rwb_id,
+                                ]) }}"><i
+                                    class="fas fa-print"></i></a>
+                        </td>
+                    </tr>
+                @else
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td data-bs-toggle="modal" data-bs-target="#detail"
+                            onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
+                            class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
+                        <td>{{ tanggal($d->tgl) }}</td>
+                        <td>{{ $d->supplier }}</td>
+                        <td>{{ $d->alamat_pengiriman }}</td>
+                        <td>{{ $d->pic }}</td>
+                        <td class="text-start">{{ $d->telp }}</td>
+                        <td>{{ tanggal($d->estimasi_kedatangan) }}</td>
+                        <td>
+                            @if ($d->status == 'draft')
+                                <a class="btn btn-xs float-end btn-info selesai" data-id="{{ $d->id }}"
+                                    data-item="{{ json_encode($d->item) }}" href="#">setuju</a>
+                            @else
+                                <a class="btn btn-xs float-end btn-primary"
+                                    href="{{ route('pur.pembelian.2.print', $d->id) }}"><i
+                                        class="fas fa-print"></i></a>
+                            @endif
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>
@@ -65,7 +102,6 @@
                         <th>Jumlah</th>
                         <th>Item</th>
                         <th>Harga</th>
-                        <th>Tgl Dibutuhkan</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-purchase-request">
@@ -92,7 +128,6 @@
                             <td>${value.jumlah}</td>
                             <td>${value.item_spesifikasi}</td>
                             <td>${Number(value.harga_po).toLocaleString('id-ID')}</td>
-                            <td>${value.tgl_dibutuhkan}</td>
                         </tr>
                         `);
                     });

@@ -1,6 +1,7 @@
 <x-app-layout :title="$title">
     <x-nav-link />
     <br>
+    <br>
     <div x-data="{ checked: [] }">
         <div class="d-flex justify-content-end gap-2">
 
@@ -13,11 +14,11 @@
                 </x-modal>
             </div>
         </div> --}}
-            <div>
+            {{-- <div>
                 <a href="{{ route('ppc.gudang-rm.5.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                     Label Identitas Bahan</a>
 
-            </div>
+            </div> --}}
             <div>
                 <a x-show="checked.length" href="#" class="float-end btn btn-sm btn-primary" target="_blank"
                     @click.prevent="window.location.href = `/ppc/gudang-rm/5-label-identitas-bahan/print?checked=${encodeURIComponent(checked.join(','))}&k={{ $k }}`">

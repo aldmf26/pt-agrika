@@ -21,7 +21,7 @@ class Hrga1PermohonanKaryawanController extends Controller
         foreach ($datas as $d) {
             PermohonanKaryawan::create([
                 'status_posisi' => $d->status_posisi ?? 'Kontrak',
-                'jabatan' => '-',
+                'jabatan' => $d->jabatan ?? 'open seluruh jabatan',
                 'id_divisi' => $d->id_divisi,
                 'jumlah' => $d->jumlah,
                 'alasan_penambahan' => "Adanya penambahan kapasitas aktivitas $d->jabatan",
@@ -43,7 +43,10 @@ class Hrga1PermohonanKaryawanController extends Controller
     }
     public function index()
     {
-        $dataBaru = PermohonanKaryawan::with('divisi')->orderByDesc('tgl_input')->get();
+        $bulan = dataDariBulan()['bulan'];
+        $tahun = dataDariBulan()['tahun'];
+
+        $dataBaru = PermohonanKaryawan::with('divisi')->whereRaw("year(tgl_dibutuhkan) = $tahun and month(tgl_dibutuhkan) >= $bulan")->orderByDesc('tgl_dibutuhkan')->get();
 
         $data = [
             'title' => 'Hrga 1.1 permohonan karyawan',

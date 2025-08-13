@@ -44,7 +44,7 @@ class PermohonanKaryawan extends Model
         FROM data_pegawais AS a
         LEFT JOIN divisis AS b ON a.divisi_id = b.id
         $where
-        GROUP BY a.tgl_masuk, a.divisi_id
+        GROUP BY a.divisi_id,a.tgl_masuk
         ");
     }
 

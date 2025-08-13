@@ -13,7 +13,11 @@ class Hrga3HasilEvaluasiKaryawanBaru extends Controller
 {
     public function index()
     {
+        $bulan = dataDariBulan()['bulan'];
+        $tahun = dataDariBulan()['tahun'];
+
         $datas = DataPegawai::with(['penilaianKaryawan'])
+            ->whereRaw("year(tgl_masuk) = $tahun and month(tgl_masuk) >= $bulan")
             ->orderBy('id', 'desc')
             ->get();
 

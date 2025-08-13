@@ -1,7 +1,7 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-body">
-            <nav>
+            {{-- <nav>
                 <ul class="nav nav-pills float-start">
                     <li class="nav-item">
                         <a class="nav-link {{ $k == 'satu' ? 'active' : '' }}"
@@ -12,7 +12,8 @@
                             href="{{ route('ppc.gudang-rm.8.index', ['k' => 'lainnya']) }}">Sbw</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> --}}
+            <x-nav-link route="ppc.gudang-rm.8.index" />
             <br>
             <br>
             <div x-data="{ checked: [] }">
@@ -41,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if ($k == 'satu')
+                        @if ($k != 'lainnya')
                             @foreach ($barangs as $d)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>

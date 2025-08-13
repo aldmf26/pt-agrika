@@ -15,7 +15,8 @@ class RM8KartuStokController extends Controller
 {
     public function index(Request $r)
     {
-        $barangs = Barang::latest()->get();
+        $kategori = $r->kategori;
+        $barangs = Barang::where('kategori', $kategori)->latest()->get();
 
         // Tambahkan stok akhir dihitung manual
         foreach ($barangs as $barang) {
@@ -38,7 +39,7 @@ class RM8KartuStokController extends Controller
             'title' => 'Kartu Stok',
             'barangs' => $barangs,
             'sbw' => $sbw,
-            'k' => $r->k ?? 'satu',
+            'k' => $r->kategori,
         ];
 
         return view('ppc.gudang_rm.kartu_stok.index', $data);

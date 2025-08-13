@@ -60,7 +60,7 @@ class DataPegawai extends Component
     public function render()
     {
         $query = ModelsDataPegawai::with('divisi')
-            ->whereAny(['nama', 'nik', 'posisi'], 'LIKE', "%{$this->search}%");
+            ->whereAny(['nama', 'nik', 'posisi', 'tgl_masuk'], 'LIKE', "%{$this->search}%");
 
         // Add sorting
         if ($this->sort && $this->sortDirection) {
@@ -74,4 +74,3 @@ class DataPegawai extends Component
         return view('livewire.hrga.hrga4.hrga4-data-pegawai.data-pegawai', $data);
     }
 }
-

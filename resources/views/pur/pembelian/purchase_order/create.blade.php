@@ -38,7 +38,13 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Pic</label>
-                    <input type="text" name="pic" placeholder="pic" class="form-control">
+                    <select name="pic" class="form-control pic select2pic">
+                        <option value="">Pilih PIC</option>
+                        @foreach ($user as $d)
+                            <option value="{{ $d->nama }}">
+                                {{ $d->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-3">

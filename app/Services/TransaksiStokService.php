@@ -25,7 +25,6 @@ class TransaksiStokService
             // Update stok barang
             $barang = Barang::find($request->id_barang[$i]);
             $stok = $barang->stok;
-
             // Buat transaksi masuk
             Transaksi::create([
                 'barang_id' => $request->id_barang[$i],

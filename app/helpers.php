@@ -79,3 +79,13 @@ if (!function_exists('sumBk')) {
         return array_sum(array_column($kategori, $data));
     }
 }
+
+if (!function_exists('dataDariBulan')) {
+    function dataDariBulan()
+    {
+        return [
+            'bulan' => 7,
+            'tahun' => 2025,
+        ];
+    }
+}

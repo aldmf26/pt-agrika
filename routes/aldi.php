@@ -402,6 +402,7 @@ Route::controller(PUR1PurchaseRequestController::class)
         Route::post('/create', 'store')->name('store');
         Route::get('/selesai/{id}', 'selesai')->name('selesai');
         Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/print_sbw/', 'print_sbw')->name('print_sbw');
     });
 
 Route::controller(PUR2PurchaseOrderController::class)
@@ -413,6 +414,8 @@ Route::controller(PUR2PurchaseOrderController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/print_sbw/', 'print_sbw')->name('print_sbw');
+
     });
 
 Route::controller(PUR1DaftarSupplierController::class)

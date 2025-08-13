@@ -40,11 +40,9 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
         $labels = collect([]);
 
         $barangs = PenerimaanHeader::with(['barang', 'supplier'])
-            ->where('label', 'Y')
             ->get();
 
         $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])
-            ->where('label', 'Y')
             ->get();
 
         foreach ($barangs as $b) {

@@ -18,13 +18,6 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="">Produsen</label>
-                    <input type="text" name="produsen" value="{{ $supplier->produsen }}" placeholder="Produsen"
-                        class="form-control">
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
                     <label for="">Contact Person</label>
                     <input type="text" name="contact_person" value="{{ $supplier->contact_person }}"
                         placeholder="Contact Person" class="form-control">
@@ -39,22 +32,25 @@
             </div>
             <div class="col-3">
                 <div class="form-group">
-                    <label for="">Jenis Produk / Layanan</label>
-                    <input type="text" name="jenis_produk" value="{{ $supplier->kategori }}"
-                        placeholder="Jenis Produk / Layanan" class="form-control">
+                    <label for="">
+                        Kategori / Layanan
+                        <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
+                            title="isi Barang: untuk bahan baku, isi kemasan : untuk barang kemasan"></i>
+                    </label>
+                    <select name="jenis_produk" class="form-control" required>
+                        <option value="">Pilih Kategori</option>
+                        @foreach (jenisProduk() as $d => $i)
+                            <option @selected($supplier->kategori == $i) value="{{ $d }}">{{ $i }}
+                            </option>
+                        @endforeach
+
+                    </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Keterangan</label>
-                    <input type="text" name="ket" value="{{ $supplier->ket }}" placeholder="Keterangan"
-                        class="form-control">
-                </div>
-            </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="">Hasil Evaluasi</label>
-                    <input type="text" name="hasil" value="{{ $supplier->hasil_evaluasi }}" placeholder="Hasil"
+                    <input type="text" name="keterangan" value="{{ $supplier->ket }}" placeholder="Keterangan"
                         class="form-control">
                 </div>
             </div>
