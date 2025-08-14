@@ -1,7 +1,7 @@
 <x-hccp-print :title="$title" :dok="$dok">
 
     <span>Update : {{ date('d-m-Y') }}</span>
-    <table class="table border-dark table-bordered">
+    <table cellpadding="6" class="border-dark table-bordered">
         <thead>
             <tr style="font-size: 12px" class="text-center align-middle">
                 <th class="head">No</th>
