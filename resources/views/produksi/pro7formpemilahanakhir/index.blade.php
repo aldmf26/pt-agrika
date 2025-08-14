@@ -12,12 +12,12 @@
                 <thead>
                     <tr>
                         <th class="text-center">No</th>
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Kode Lot</th>
-                        <th class="text-center">Nomer Po grading</th>
-                        <th class="text-center">Grade</th>
-                        <th class="text-center">Pcs</th>
-                        <th class="text-center">Gr</th>
+                        <th class="text-start">Tanggal</th>
+                        <th class="text-start">Kode Lot</th>
+                        <th class="text-start">Nomer Po grading</th>
+                        <th class="text-start">Grade</th>
+                        <th class="text-end">Pcs</th>
+                        <th class="text-start">Gr</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -32,9 +32,9 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ tanggal($g['tgl']) }}</td>
-                            <td class="text-center">{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
+                            <td>{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
                             <td>{{ $g['no_invoice'] }}</td>
-                            <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
+                            <td>{{ $sbw->nama ?? '-' }}</td>
                             <td>{{ $g['pcs'] }}</td>
                             <td>{{ $g['gr'] }}</td>
                             <td class="text-center">

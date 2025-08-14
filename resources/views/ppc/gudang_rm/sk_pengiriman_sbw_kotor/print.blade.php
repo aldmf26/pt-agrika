@@ -1,30 +1,31 @@
 <x-hccp-print :title="$title" :dok="$dok">
     <table width="100%" class="p-2">
         <tr>
-            <td class="align-middle">Nama/ No. Registrasi Rumah Walet </td>
-            <td class="align-middle"> : </td>
-            <td class="align-middle">&nbsp;{{ $rumah_walet->nama }} / {{ $rumah_walet->no_reg }}</td>
+            <td class="align-middle text-start">Nama/ No. Registrasi Rumah Walet </td>
+            <td class="align-middle text-start"> : </td>
+            <td class="align-middle text-start">&nbsp;{{ $rumah_walet->nama }} / {{ $rumah_walet->no_reg }}</td>
         </tr>
         <tr>
-            <td class="align-middle">Alamat Rumah Walet</td>
-            <td class="align-middle"> : </td>
-            <td class="align-middle">&nbsp;{{ $rumah_walet->alamat }}</td>
+            <td class="align-middle text-start">Alamat Rumah Walet</td>
+            <td class="align-middle text-start"> : </td>
+            <td class="align-middle text-start">&nbsp;{{ $rumah_walet->alamat }}</td>
         </tr>
 
         <tr>
-            <td class="align-middle">Tujuan IKH</td>
-            <td class="align-middle"> : </td>
-            <td class="align-middle">&nbsp;PT.Agrika Gatya Arum</td>
+            <td class="align-middle text-start">Tujuan IKH</td>
+            <td class="align-middle text-start"> : </td>
+            <td class="align-middle text-start">&nbsp;PT.Agrika Gatya Arum</td>
         </tr>
         <tr>
-            <td class="align-middle">No. Registrasi IKPH</td>
-            <td class="align-middle"> : </td>
-            <td class="align-middle">&nbsp;339</td>
+            <td class="align-middle text-start">No. Registrasi IKPH</td>
+            <td class="align-middle text-start"> : </td>
+            <td class="align-middle text-start">&nbsp;339</td>
         </tr>
         <tr>
-            <td class="align-middle">Alamat IKPH</td>
-            <td class="align-middle"> : </td>
-            <td class="align-middle">&nbsp;Jl. Teluk tiram darat no 5B Rt 26 / RW 002 Telawang, Banjarmasin Barat, Kota
+            <td class="align-middle text-start">Alamat IKPH</td>
+            <td class="align-middle text-start"> : </td>
+            <td class="align-middle text-start">&nbsp;Jl. Teluk tiram darat no 5B Rt 26 / RW 002 Telawang, Banjarmasin
+                Barat, Kota
                 Banjarmasin, Kalimantan Selatan</td>
         </tr>
 
@@ -36,14 +37,14 @@
             <thead>
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
-                    <th class="text-center align-middle" rowspan="2">Tanggal Panen</th>
-                    <th class="text-center align-middle" rowspan="2">Berat Panen (gr)</th>
-                    <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
-                    <th class="text-center align-middle" rowspan="2">Keterangan</th>
+                    <th class="text-start align-middle" rowspan="2">Tanggal Panen</th>
+                    <th class="text-end align-middle" rowspan="2">Berat Panen (gr)</th>
+                    <th class="text-start align-middle" colspan="2">Pengiriman ke IKPH</th>
+                    <th class="text-start align-middle" rowspan="2">Keterangan</th>
                 </tr>
                 <tr>
-                    <th class="text-center">Tanggal Kirim</th>
-                    <th class="text-center">Berat Kirim (IKPH)</th>
+                    <th class="text-start">Tanggal Kirim</th>
+                    <th class="text-end">Berat Kirim (IKPH)</th>
                 </tr>
             </thead>
             <tbody>
@@ -52,12 +53,12 @@
                         $tgl_plus1hari = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
                     @endphp
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
-                        <td class="text-center">{{ tanggal($d->tgl) }}</td>
-                        <td class="text-center" align="right">{{ number_format($d->kg, 0) }} gr</td>
-                        <td class="text-center">{{ tanggal($tgl_plus1hari) }}</td>
-                        <td class="text-center" align="right">{{ number_format($d->kg, 0) }} gr</td>
-                        <td class="text-center"></td>
+                        <td class="text-start">{{ $loop->iteration }}</td>
+                        <td class="text-start">{{ tanggal($d->tgl) }}</td>
+                        <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
+                        <td class="text-start">{{ tanggal($tgl_plus1hari) }}</td>
+                        <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
+                        <td class="text-start"></td>
                     </tr>
                 @endforeach
             </tbody>

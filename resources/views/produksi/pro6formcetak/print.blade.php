@@ -166,31 +166,31 @@
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-center align-middle">Nama Personil Cetak <br> <span
+                            <th rowspan="2" class="text-start align-middle">Nama Personil Cetak <br> <span
                                     class="fst-italic fw-lighter">Personil
                                     name</th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="2" class="text-start align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
-                            <th rowspan="2" class="text-center align-middle">No Box
+                            <th rowspan="2" class="text-start align-middle">No Box
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis <br> <span
+                            <th rowspan="2" class="text-start align-middle">Jenis <br> <span
                                     class="fst-italic fw-lighter">Type</th>
                             <th colspan="2" class="text-center ">Berat Kering <br> <span
                                     class="fst-italic fw-lighter">Qty for moulding
                             </th>
                             <th colspan="2" class="text-center ">Berat Hasil <br> <span
                                     class="fst-italic fw-lighter">Result qty</th>
-                            <th rowspan="2" class="text-center align-middle">Hcr <br> <span
+                            <th rowspan="2" class="text-end align-middle">Hcr <br> <span
                                     class="fst-italic fw-lighter">(gr)</th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan <br> <span
+                            <th rowspan="2" class="text-start align-middle">Keterangan <br> <span
                                     class="fst-italic fw-lighter">Remarks</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center ">Pcs</th>
-                            <th class="text-center ">Gr</th>
-                            <th class="text-center ">Pcs</th>
-                            <th class="text-center ">Gr</th>
+                            <th class="text-end ">Pcs</th>
+                            <th class="text-end ">Gr</th>
+                            <th class="text-end ">Pcs</th>
+                            <th class="text-end ">Gr</th>
                         </tr>
 
                     </thead>
@@ -204,16 +204,16 @@
                             @endphp
                             <tr class="table-bawah">
                                 <td class="text-center ">{{ $loop->iteration }}</td>
-                                <td class="text-center ">{{ $c['nama'] }}</td>
-                                <td>{{ $sbw->no_invoice ?? $c['nm_partai'] }}</td>
-                                <td>{{ $c['no_box'] }} </td>
-                                <td>{{ ucwords(strtolower($sbw->nama ?? '-')) }} </td>
-                                <td class="text-center ">{{ $c['pcs_awal_ctk'] }}</td>
-                                <td class="text-center ">{{ $c['gr_awal_ctk'] }}</td>
-                                <td class="text-center ">{{ $c['pcs_akhir'] }}</td>
-                                <td class="text-center ">{{ $c['gr_akhir'] }}</td>
-                                <td class="text-center ">0</td>
-                                <td class="text-center ">-</td>
+                                <td class="text-start ">{{ ucwords(strtolower($c['nama'])) }}</td>
+                                <td class="text-start ">{{ $sbw->no_invoice ?? $c['nm_partai'] }}</td>
+                                <td class="text-start ">{{ $c['no_box'] }} </td>
+                                <td class="text-start ">{{ ucwords(strtolower($sbw->nama ?? '-')) }} </td>
+                                <td class="text-end ">{{ $c['pcs_awal_ctk'] }}</td>
+                                <td class="text-end ">{{ $c['gr_awal_ctk'] }}</td>
+                                <td class="text-end ">{{ $c['pcs_akhir'] }}</td>
+                                <td class="text-end ">{{ $c['gr_akhir'] }}</td>
+                                <td class="text-end ">0</td>
+                                <td class="text-center "></td>
                             </tr>
                         @endforeach
                     </tbody>

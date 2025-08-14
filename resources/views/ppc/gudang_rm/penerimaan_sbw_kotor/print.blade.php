@@ -138,7 +138,7 @@
             @endphp
 
             <tr>
-                <th>Kriteria Penerimaan</th>
+                <th class="text-start">Kriteria Penerimaan</th>
                 @for ($i = $start; $i <= $end; $i++)
                     <th class="text-center">{{ $i }}</th>
                 @endfor
@@ -146,7 +146,7 @@
 
             @foreach ($kriteria as $k)
                 <tr>
-                    <td>{{ $k->kriteria }}</td>
+                    <td class="text-start">{{ $k->kriteria }}</td>
                     @for ($i = $start; $i <= $end; $i++)
                         <td class="text-center">
                             {{-- Hanya centang sesuai jumlah box asli --}}

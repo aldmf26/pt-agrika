@@ -13,7 +13,7 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
@@ -63,7 +63,7 @@
             margin-top: 0;
             /* Hilangkan jarak atas paragraf kedua */
             font-style: italic;
-            font-size: 10px;
+            font-size: 14px;
             font-weight: normal
         }
 
@@ -86,14 +86,22 @@
         .table th,
         .table td {
 
-            font-size: 10px;
+            font-size: 15px;
         }
 
         .table-tes th,
         .table-tes td {
 
-            font-size: 10px;
+            font-size: 15px;
         }
+
+        /* td {
+            font-size: 12px
+        }
+
+        th {
+            font-size: 12px
+        } */
 
         .table-bawah th,
         .table-bawah td {
@@ -143,14 +151,14 @@
                     <thead>
 
                         <tr>
-                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                            <th class="align-top"><img style="width: 100px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
                             <th colspan="18">
                                 <p class="cop_judul mt-3">FORM PENCUCIAN AWAL, PENCABUTAN BULU & PENGERINGAN 1</p>
                                 <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p>
                             </th>
                             <th class="align-top text-end text-nowrap">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok :
+                                <p class="float-end me-2 fw-normal" style="font-size: 14px; ">No Dok :
                                     FRM.PRO.01.03, Rev 00</p>
                             </th>
 
@@ -158,54 +166,54 @@
                         <tr>
                             <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
 
-                            <td class="align-middle"> &nbsp;:{{ $pengawas }}</td>
+                            <td class="align-middle"> &nbsp;:{{ ucwords(strtolower($pengawas)) }}</td>
                         </tr>
 
                         <tr class="table-bawah">
                             <th class=" align-middle" rowspan="3">No</th>
-                            <th rowspan="3" class=" align-middle text-center">Nama Operator Cuci & <br> Cabut
+                            <th rowspan="3" class=" align-middle text-start">Nama <br>Operator Cuci & <br> Cabut
                                 <br><span class="fst-italic fw-lighter">Wash & removal Operator <br> name</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-center">Kode Batch/Lot <br> <span
+                            <th rowspan="3" class=" align-middle text-start">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code</span> </th>
-                            <th rowspan="3" class=" align-middle text-center">No Box</th>
+                            <th rowspan="3" class=" align-middle text-start">No Box</th>
 
-                            <th rowspan="3" class=" align-middle text-center">Jenis<br> <span
+                            <th rowspan="3" class=" align-middle text-start">Jenis<br> <span
                                     class="fst-italic fw-lighter">
                                     type</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-center">Tanggal <br> terima</th>
+                            <th rowspan="3" class=" align-middle text-start">Tanggal <br> terima</th>
                             <th class="text-center" colspan="2">Jumlah <br> diserahkan <br>
                                 <span class="fst-italic fw-lighter">Quantity</span>
                             </th>
                             <th class="text-center" colspan="2">Kembali <br> <span
                                     class="fst-italic fw-lighter">Retur</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-center">Tanggal <br> selesai</th>
+                            <th rowspan="3" class=" align-middle text-start">Tanggal <br> selesai</th>
                             <th class="text-center" colspan="4">Hasil Pencabutan & Drying
                                 <br> <span class="fst-italic fw-lighter">Inspection results</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-center">Waktu <br> mulai <br> drying</th>
-                            <th rowspan="3" class=" align-middle text-center">Waktu <br> selesai <br> drying</th>
-                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (min susut 30%)</th>
-                            <th rowspan="3" class=" align-middle text-center">Ok/ Not Ok</th>
-                            <th rowspan="3" class=" align-middle text-center">Keterangan<br> <span
+                            <th rowspan="3" class=" align-middle text-start">Waktu <br> mulai <br> drying</th>
+                            <th rowspan="3" class=" align-middle text-start">Waktu <br> selesai <br> drying</th>
+                            <th rowspan="3" class=" align-middle text-end">% Susut <br> (min susut <br> 30%)</th>
+                            <th rowspan="3" class=" align-middle text-start">Ok/ <br> Not Ok</th>
+                            <th rowspan="3" class=" align-middle text-start">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
                             </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th rowspan="2" class="text-center align-middle">Pcs</th>
-                            <th rowspan="2" class="text-center align-middle">Gr</th>
-                            <th rowspan="2" class="text-center align-middle">Pcs</th>
-                            <th rowspan="2" class="text-center align-middle">Gr</th>
+                            <th rowspan="2" class="text-end align-middle">Pcs</th>
+                            <th rowspan="2" class="text-end align-middle">Gr</th>
+                            <th rowspan="2" class="text-end align-middle">Pcs</th>
+                            <th rowspan="2" class="text-end align-middle">Gr</th>
                             <th colspan="2" class="text-center align-middle">Ok</th>
                             <th colspan="2" class="text-center align-middle">Not Ok</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-end align-middle">Pcs</th>
+                            <th class="text-end align-middle">Gr</th>
+                            <th class="text-end align-middle">Pcs</th>
+                            <th class="text-end align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -219,16 +227,16 @@
                             @endphp
                             <tr class="table-bawah">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
-                                <td class="text-center">{{ $sbw->no_invoice }}</td>
-                                <td class="text-center">{{ $c['no_box'] }}</td>
-                                <td class="text-center">{{ $sbw->nama }}</td>
-                                <td class="text-center">{{ tanggal($c['tgl']) }}</td>
-                                <td class="text-center">{{ number_format($c['pcs'], 0) }}</td>
-                                <td class="text-center">{{ number_format($c['gr'], 0) }}</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">{{ tanggal($c['tgl']) }}</td>
+                                <td class="text-start">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
+                                <td class="text-start">{{ $sbw->no_invoice }}</td>
+                                <td class="text-start">{{ $c['no_box'] }}</td>
+                                <td class="text-start">{{ $sbw->nama }}</td>
+                                <td class="text-start">{{ tanggal($c['tgl']) }}</td>
+                                <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
+                                <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
+                                <td class="text-end">0</td>
+                                <td class="text-end">0</td>
+                                <td class="text-start">{{ tanggal($c['tgl']) }}</td>
                                 @php
 
                                     $gr_akhir = $c['pcs'] == 0 ? $c['gr_akhir'] : $c['gr_akhir'] / $c['pcs'];
@@ -236,17 +244,17 @@
                                         $c['pcs'] == 0 ? $c['gr_akhir'] : $gr_akhir * ($c['pcs'] - $c['pcs_not_ok']);
                                     $gr_not_ok = $gr_akhir * $c['pcs_not_ok'];
                                 @endphp
-                                <td class="text-center">{{ number_format($c['pcs'] - $c['pcs_not_ok'], 0) }}</td>
-                                <td class="text-center">{{ number_format($gr_ok, 0) }} </td>
+                                <td class="text-end">{{ number_format($c['pcs'] - $c['pcs_not_ok'], 0) }}</td>
+                                <td class="text-end">{{ number_format($gr_ok, 0) }} </td>
 
-                                <td class="text-center">{{ number_format($c['pcs_not_ok'], 0) }}</td>
-                                <td class="text-center">{{ number_format($gr_not_ok, 0) }}</td>
-                                <td class="text-center">17:00</td>
-                                <td class="text-center">05:00</td>
-                                <td class="text-center">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
+                                <td class="text-end">{{ number_format($c['pcs_not_ok'], 0) }}</td>
+                                <td class="text-end">{{ number_format($gr_not_ok, 0) }}</td>
+                                <td class="text-start">17:00</td>
+                                <td class="text-start">05:00</td>
+                                <td class="text-end">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
                                     %
                                 </td>
-                                <td>
+                                <td class="text-start">
                                     @php
                                         $susut = (1 - $c['gr_akhir'] / $c['gr']) * 100;
                                     @endphp
