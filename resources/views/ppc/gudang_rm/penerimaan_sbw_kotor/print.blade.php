@@ -1,4 +1,12 @@
 <x-hccp-print :title="$title" :dok="$dok">
+
+    <style>
+        th,
+        td {
+
+            font-size: 12px;
+        }
+    </style>
     <table>
         <tr>
             <td>Jenis SBW Kotor</td>
@@ -161,6 +169,7 @@
         <br>
     </div>
     </p>
+
     <div class="row">
         <div class="col-8">
             <table class="border-dark table table-bordered" style="font-size: 11px">
@@ -173,8 +182,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px"></td>
-                        <td style="height: 50px"></td>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">TTD &
+                            Nama
+                        </td>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">TTD &
+                            Nama
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-center">[ADM. GUDANG]</td>
@@ -193,7 +206,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px"></td>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">TTD &
+                            Nama
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-center">[Dokter Hewan]</td>

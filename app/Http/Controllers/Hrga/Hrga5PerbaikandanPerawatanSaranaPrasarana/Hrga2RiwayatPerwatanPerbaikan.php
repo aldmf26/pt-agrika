@@ -28,7 +28,7 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
                 return [
                     'id' => $permintaan->item->id ?? '-',
                     'nama_item' => empty($permintaan->item->nama_item) ? '-' :  $permintaan->item->nama_item . ' ' . $permintaan->item->merek . ' ' . $permintaan->item->no_identifikasi,
-                    'lokasi' => empty($permintaan->item->nama_item) ? '-' : $permintaan->item->lokasi->lokasi . ' lantai ' . $permintaan->item->lokasi->lantai,
+                    'lokasi' => empty($permintaan->item->nama_item) ? '-' : $permintaan->item->lokasi->lokasi,
                     'no_identifikasi' => $permintaan->item->no_identifikasi ?? '-',
                     'kategori' => 'Perbaikan',
                     'jenis' => $permintaan->item->jenis_item ?? '-',
@@ -45,7 +45,7 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
                 return [
                     'id' => $perawatan->item->id,
                     'nama_item' =>  $perawatan->item->nama_item . ' ' . $perawatan->item->merek . ' ' . $perawatan->item->no_identifikasi,
-                    'lokasi' => $perawatan->item->lokasi->lokasi . ' lantai ' . $perawatan->item->lokasi->lantai,
+                    'lokasi' => $perawatan->item->lokasi->lokasi,
                     'no_identifikasi' => $perawatan->item->no_identifikasi ?? '-',
                     'kategori' => 'Perawatan',
                     'jenis' => $perawatan->item->jenis_item
@@ -62,7 +62,7 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
             return collect([
                 'id' => $items->pluck('id')->unique()->join(', '),
                 'nama_item' => $namaItem,
-                'lokasi' => $items->pluck('lokasi')->unique()->join(', '),
+                'lokasi' => $items->pluck('lokasi')->first(),
                 'no_identifikasi' => $items->pluck('no_identifikasi')->unique()->join(', '),
                 'jenis' => $items->pluck('jenis')->unique()->join(', '),
             ]);
