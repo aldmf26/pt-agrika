@@ -162,8 +162,8 @@
     <div class="ms-5">
         <input readonly type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
         <br>
-        <input readonly type="checkbox" name="keputusan" value="Ditolak" required> diterima
-        dengan Catatan .....
+        <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Diterima
+        dengan catatan .....
         <br>
         <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
         <br>
@@ -182,10 +182,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">TTD &
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
                             Nama
                         </td>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">TTD &
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
                             Nama
                         </td>
                     </tr>
@@ -206,7 +206,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">TTD &
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
                             Nama
                         </td>
                     </tr>

@@ -39,7 +39,7 @@
         --bs-primary-rgb: 67, 94, 190;
 
         /* Secondary */
-        --bs-secondary: #7bb139;
+        --bs-secondary: #5766eb;
         --bs-secondary-rgb: 108, 117, 125;
 
         /* Success */
