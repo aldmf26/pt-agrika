@@ -103,8 +103,9 @@ class Hrga2HasilWawancara extends Controller
         return redirect()->route('hrga1.2.index')->with('sukses', 'Data berhasil disimpan');
     }
 
-    public function edit(DataPegawai $pegawai)
+    public function edit($id)
     {
+        $pegawai = DataPegawai::with(['hasilWawancara', 'divisi'])->where('karyawan_id_dari_api', $id)->first();
         $data = [
             'title' => 'Edit Hasil Wawancara',
             'pegawai' => $pegawai,
