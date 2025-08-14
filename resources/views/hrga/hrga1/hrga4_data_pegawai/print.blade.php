@@ -30,7 +30,6 @@
                     <td>{{ $d->status ?? '' }}</td>
                     <td>{{ $d->tgl_masuk ? ddmmyyy($d->tgl_masuk) : '' }}</td>
                     <td>{{ $d->deleted_at == null ? '-' : ddmmyyy($d->deleted_at) }}</td>
-
                 </tr>
             @endforeach
         </tbody>

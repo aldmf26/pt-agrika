@@ -17,19 +17,13 @@
             font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
         }
 
-        table tr td:first-child {
-            text-align: center;
-        }
 
-        table tr td:not(:first-child) {
+        table tr td {
             text-align: left;
         }
 
-        table tr th:first-child {
-            text-align: center;
-        }
 
-        table tr th:not(:first-child) {
+        table tr th {
             text-align: left;
         }
 

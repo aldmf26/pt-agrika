@@ -32,7 +32,7 @@ class DataPegawaiService
                 // Simpan atau perbarui data pegawai di database lokal
                 $keterangan = $sumberData == 'sarang' ? ($pegawai['kelas_cbt'] ?? null) : ($pegawai['keterangan'] ?? null);
                 if (($pegawai['id_pengawas'] != null && $pegawai['id_anak'] != 0) || ($pegawai['id_anak'] == 0 && !empty($pegawai['posisi']))) {
-                    DataPegawai::updateOrCreate(
+                    DataPegawai::firstOrCreate(
                         [
                             'karyawan_id_dari_api' => $pegawai['id_pegawai'] ?? null,
                             'nik' => $pegawai['nik'] ?? null,
@@ -62,7 +62,7 @@ class DataPegawaiService
 
             HasilWawancara::where('admin', 'download')->delete();
             foreach ($dataPegawai['hasil_wawancara'] as $wawancara) {
-                HasilWawancara::updateOrCreate(
+                HasilWawancara::firstOrCreate(
                     [
                         'id_anak' => $wawancara['id'] ?? null,
                     ],
@@ -82,7 +82,7 @@ class DataPegawaiService
 
             PenilaianKaryawan::where('admin', 'download')->delete();
             foreach ($dataPegawai['penilaian_karyawan'] as $penilaian) {
-                PenilaianKaryawan::updateOrCreate(
+                PenilaianKaryawan::firstOrCreate(
                     [
                         'id_anak' => $penilaian['id_anak'] ?? null,
                     ],

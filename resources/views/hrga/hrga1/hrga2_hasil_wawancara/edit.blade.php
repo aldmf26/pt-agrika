@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label for="">Nama Lengkap</label>
                     <input required type="text" name="nama_lengkap" value="{{ $pegawai->nama }}" class="form-control">
-                    <input type="hidden" name="id_karyawan_dari_api" value="{{ $pegawai->id_karyawan_dari_api }}">
+                    <input type="hidden" name="id_karyawan_dari_api" value="{{ $pegawai->karyawan_id_dari_api }}">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -116,9 +116,9 @@
                         <tr>
                             <td>Pengalaman</td>
                             <td><input type="text" name="pengalaman_standar" class="form-control"
-                                    value="{{ $pegawai->penilaianKaryawan->pengalaman_standar }}"></td>
+                                    value="{{ $pegawai->penilaianKaryawan->pengalaman_standar ?? 'N/A' }}"></td>
                             <td><input type="text" name="pengalaman_hasil" class="form-control"
-                                    value="{{ $pegawai->penilaianKaryawan->pengalaman_hasil }}"></td>
+                                    value="{{ $pegawai->penilaianKaryawan->pengalaman_hasil ?? 'N/A' }}"></td>
                         </tr>
                         <tr>
                             <td>Pelatihan</td>
