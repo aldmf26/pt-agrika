@@ -94,6 +94,7 @@ class PUR2PurchaseOrderController extends Controller
         } else {
             $datas = $this->singkron();
         }
+        
         $data = [
             'title' => 'PUR 2 Purchase Order',
             'datas' => $datas,
@@ -206,7 +207,8 @@ class PUR2PurchaseOrderController extends Controller
             ->groupBy('a.tgl', 'a.rwb_id')
             ->selectRaw("a.tgl, a.rwb_id, b.nama as supplier, b.alamat as alamat_pengiriman")
             ->orderBy('a.tgl', 'ASC')
-            ->first();;
+            ->first();
+
         $items = DB::table('sbw_kotor as s')
             ->join('grade_sbw_kotor as g', 'g.id', '=', 's.grade_id')
             ->where([
