@@ -83,7 +83,7 @@
                         <td style="height: 80px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center">[TTD dan Nama]</td>
+                        <td class="text-center">[Ttd dan Nama]</td>
                     </tr>
                 </tbody>
             </table>
