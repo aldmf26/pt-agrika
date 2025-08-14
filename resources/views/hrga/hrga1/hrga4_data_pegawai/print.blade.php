@@ -10,16 +10,16 @@
                 <th class="head">NOMOR KTP (NIK)</th>
                 <th class="head">POSISI</th>
                 <th class="head">JENIS KELAMIN</th>
-                <th class="head ">TANGGGAL LAHIR</th>
+                <th class="head" width="10%">TANGGGAL LAHIR</th>
                 <th class="head">STATUS <br> <span style="font-size: 10px">(Tetap / <br> Kontrak / <br>
                         Borongan)</span></th>
-                <th class="head">TANGGAL MASUK</th>
+                <th class="head" width="10%">TANGGAL MASUK</th>
                 <th class="head">KETERANGAN</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($datas as $d)
-                <tr>
+                <tr style="font-size: 13px" class="text-center align-middle">
                     <td>{{ $loop->iteration }}</td>
                     <td align="left">{{ $d->divisi->divisi ?? 'Cabut Bulu' }}</td>
                     <td align="left">{{ $d->nama ?? '' }}</td>

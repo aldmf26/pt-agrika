@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <p class="cop_text text-sm" style="font-size: 10px">{{ $dok }}</p>
+                <p class="cop_text text-sm" style="font-size: 12px">{{ $dok }}</p>
             </div>
         </div>
         {{ $slot }}
