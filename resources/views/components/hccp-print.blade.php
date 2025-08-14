@@ -17,6 +17,14 @@
             font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
         }
 
+        table tr td:first-child {
+            text-align: center;
+        }
+
+        table tr td:not(:first-child) {
+            text-align: left;
+        }
+
         .cop_judul {
             font-size: 14px;
             font-weight: bold;

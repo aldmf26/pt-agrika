@@ -33,7 +33,10 @@ class DataPegawai extends Model
     {
         return ucwords(strtolower($value));
     }
-
+    public function getStatusAttribute($value)
+    {
+        return ucwords(strtolower($value));
+    }
     public function divisi()
     {
         return $this->belongsTo(Divisi::class, 'divisi_id');

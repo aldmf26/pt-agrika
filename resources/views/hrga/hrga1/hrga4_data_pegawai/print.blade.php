@@ -11,7 +11,8 @@
                 <th class="head">POSISI</th>
                 <th class="head">JENIS KELAMIN</th>
                 <th class="head">TANGGGAL LAHIR</th>
-                <th class="head">STATUS <br> <span style="font-size: 10px">(Tetap / Kontrak / Borongan)</span></th>
+                <th class="head">STATUS <br> <span style="font-size: 10px">(Tetap / <br> Kontrak / <br>
+                        Borongan)</span></th>
                 <th class="head">TANGGAL MASUK</th>
                 <th class="head">KETERANGAN</th>
             </tr>
@@ -20,11 +21,11 @@
             @foreach ($datas as $d)
                 <tr style="font-size: 10px" class="text-center">
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $d->divisi->divisi ?? 'Cabut Bulu' }}</td>
+                    <td align="left">{{ $d->divisi->divisi ?? 'Cabut Bulu' }}</td>
                     <td align="left">{{ $d->nama ?? '' }}</td>
                     <td>{{ $d->nik ?? '' }}</td>
                     <td>{{ $d->posisi ?? '' }}</td>
-                    <td>{{ $d->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}</td>
+                    <td>{{ $d->jenis_kelamin }}</td>
                     <td>{{ $d->tgl_lahir ? ddmmyyy($d->tgl_lahir) : '' }}</td>
                     <td>{{ $d->status ?? '' }}</td>
                     <td>{{ $d->tgl_masuk ? ddmmyyy($d->tgl_masuk) : '' }}</td>

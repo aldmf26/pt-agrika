@@ -27,7 +27,6 @@
 <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
 
 
-
 <style>
     * {
         font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -212,6 +211,8 @@
     .table {
         font-size: 12px;
     }
+
+    
 
     .btn-xs {
         padding: 2px 6px;
