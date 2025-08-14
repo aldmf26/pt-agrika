@@ -13,8 +13,28 @@
 
     <title>{{ $title }}</title>
     <style>
-        body {
-            font-family: 'Cambria';
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+        }
+
+        table tr td:first-child {
+            text-align: center;
+        }
+
+        table tr td:not(:first-child) {
+            text-align: left;
+        }
+
+        table tr th:first-child {
+            text-align: center;
+        }
+
+        table tr th:not(:first-child) {
+            text-align: left;
+        }
+
+        thead th {
+            text-transform: capitalize;
         }
 
         .cop_judul {
@@ -81,7 +101,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <p class="cop_text text-sm" style="font-size: 10px">{{ $dok }}</p>
+                <p class="cop_text text-sm" style="font-size: 12px">{{ $dok }}</p>
             </div>
         </div>
         {{ $slot }}
