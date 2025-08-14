@@ -4,17 +4,17 @@
     <table class="table border-dark table-bordered">
         <thead>
             <tr style="font-size: 12px" class="text-center align-middle">
-                <th class="head">NO</th>
-                <th class="head">DIVISI</th>
-                <th class="head text-start">NAMA</th>
-                <th class="head">NOMOR KTP (NIK)</th>
-                <th class="head">POSISI</th>
-                <th class="head">JENIS KELAMIN</th>
-                <th class="head" width="10%">TANGGGAL LAHIR</th>
-                <th class="head">STATUS <br> <span style="font-size: 10px">(Tetap / <br> Kontrak / <br>
+                <th class="head">No</th>
+                <th class="head">Divisi</th>
+                <th class="head text-start">Nama</th>
+                <th class="head">Nomor Ktp (Nik)</th>
+                <th class="head">Posisi</th>
+                <th class="head">Jenis Kelamin</th>
+                <th class="head" width="10%">Tanggal Lahir</th>
+                <th class="head">Status <br> <span style="font-size: 10px">(Tetap / <br> Kontrak / <br>
                         Borongan)</span></th>
-                <th class="head" width="10%">TANGGAL MASUK</th>
-                <th class="head">KETERANGAN</th>
+                <th class="head" width="10%">Tanggal Masuk</th>
+                <th class="head">Keterangan</th>
             </tr>
         </thead>
         <tbody>

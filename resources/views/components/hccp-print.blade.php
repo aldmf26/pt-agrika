@@ -33,6 +33,10 @@
             text-align: left;
         }
 
+        thead th {
+            text-transform: capitalize;
+        }
+
         .cop_judul {
             font-size: 14px;
             font-weight: bold;
