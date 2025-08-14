@@ -13,8 +13,8 @@
 
     <title>{{ $title }}</title>
     <style>
-        body {
-            font-family: 'Cambria';
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
         }
 
         .cop_judul {
