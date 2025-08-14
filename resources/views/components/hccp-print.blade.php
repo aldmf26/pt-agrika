@@ -25,6 +25,14 @@
             text-align: left;
         }
 
+        table tr th:first-child {
+            text-align: center;
+        }
+
+        table tr th:not(:first-child) {
+            text-align: left;
+        }
+
         .cop_judul {
             font-size: 14px;
             font-weight: bold;
