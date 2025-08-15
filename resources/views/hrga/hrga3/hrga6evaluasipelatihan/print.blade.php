@@ -82,7 +82,7 @@
                     <tr>
                         <td class="border_kiri">Nama</td>
                         <td>:</td>
-                        <td>{{ ucfirst(strtolower($evaluasi_detail->data_pegawai->nama)) }}</td>
+                        <td>{{ ucwords(strtolower($evaluasi_detail->data_pegawai->nama)) }}</td>
 
                         <td>Dept.</td>
                         <td>:</td>
@@ -90,7 +90,7 @@
 
                         <td class="">Training</td>
                         <td class="">:</td>
-                        <td class="border_kanan">{{ ucfirst(strtolower($evaluasi_detail->tema_pelatihan)) }}</td>
+                        <td class="border_kanan">{{ ucwords(strtolower($evaluasi_detail->tema_pelatihan)) }}</td>
 
                         <td rowspan="2" width="33%" class="border_kanan border_kiri border_bawah">
                             Periode Evaluasi :
@@ -106,7 +106,7 @@
                     <tr>
                         <td class="border_kiri border_bawah">Jabatan</td>
                         <td class="border_bawah">:</td>
-                        <td class="border_bawah">{{ ucfirst(strtolower($evaluasi_detail->data_pegawai->status)) }}</td>
+                        <td class="border_bawah">{{ ucwords(strtolower($evaluasi_detail->data_pegawai->status)) }}</td>
 
                         <td class="border_bawah"></td>
                         <td class="border_bawah"></td>

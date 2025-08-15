@@ -93,7 +93,7 @@
                     <tbody>
                         @foreach ($informasi as $i)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td align="center">{{ $loop->iteration }}</td>
                                 <td>{{ date('d-m-Y', strtotime($i->tanggal)) }}</td>
                                 <td>{{ $i->jenis }}</td>
                                 <td>{{ $i->sasaran }}</td>
