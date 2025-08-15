@@ -24,12 +24,12 @@
             <tr>
                 <th>#</th>
                 <th class="text-start">No PO</th>
-                <th>Tanggal</th>
+                <th class="text-end" width="120">Tanggal</th>
                 <th>Supplier</th>
                 <th>Alamat Pengiriman</th>
                 <th>PIC</th>
                 <th class="text-start">Telp</th>
-                <th>Estimasi</th>
+                <th class="text-end">Estimasi</th>
                 <td class="text-center">Aksi</td>
             </tr>
         </thead>
@@ -41,7 +41,7 @@
                         <td data-bs-toggle="modal" data-bs-target="#detail"
                             onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
                             class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
-                        <td>{{ tanggal($d->tgl) }}</td>
+                        <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>{{ $d->supplier }}</td>
                         <td>{{ $d->alamat_pengiriman }}</td>
                         <td>Sinta</td>
@@ -65,12 +65,12 @@
                         <td data-bs-toggle="modal" data-bs-target="#detail"
                             onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
                             class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
-                        <td>{{ tanggal($d->tgl) }}</td>
+                        <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>{{ $d->supplier }}</td>
                         <td>{{ $d->alamat_pengiriman }}</td>
                         <td>{{ $d->pic }}</td>
                         <td class="text-start">{{ $d->telp }}</td>
-                        <td>{{ tanggal($d->estimasi_kedatangan) }}</td>
+                        <td class="text-end">{{ tanggal($d->estimasi_kedatangan) }}</td>
                         <td>
                             @if ($d->status == 'draft')
                                 <a class="btn btn-xs float-end btn-info selesai" data-id="{{ $d->id }}"

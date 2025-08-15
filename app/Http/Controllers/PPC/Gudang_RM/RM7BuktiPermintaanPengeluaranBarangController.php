@@ -16,21 +16,23 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
     public function index(Request $r)
     {
 
+        $kategori = $r->kategori ?? 'barang';
 
         $bukti = BuktiPermintaanPengeluaranBarang::groupBy('nama', 'tgl', 'departemen')
             ->selectRaw('nama, tgl, departemen, count(*) as ttl_produk, sum(pcs) as pcs, sum(gr) as gr')
+            ->where('identitas', $kategori)
             ->latest()
             ->get();
 
         $bukti2 = Http::get("https://sarang.ptagafood.com/api/apihasap/buktiPermintaan");
         $bukti2 = json_decode($bukti2, TRUE);
 
-
+        $k = $r->kategori == 'lainnya' ? '2' : 'satu';
         $data = [
             'title' => 'Bukti Permintaan Pengeluaran Barang',
             'buktis' =>  $bukti,
             'buktis2' => $bukti2['data'],
-            'k' => $r->kategori == 'lainnya' ? '2' : 'satu',
+            'kategori' => $kategori,
         ];
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.index', $data);
     }

@@ -32,7 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($k == 'satu')
+                @if ($kategori != 'lainnya')
                     @foreach ($buktis as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
@@ -70,7 +70,7 @@
                                         'id_penerima' => $item['id_penerima'],
                                         'tgl' => $item['tanggal'],
                                         'nama' => $item['name'],
-                                        'k' => $k,
+                                        'k' => $kategori,
                                     ];
                                 @endphp
                                 <a class="btn btn-xs float-end btn-primary" target="_blank"

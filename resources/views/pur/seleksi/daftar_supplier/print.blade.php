@@ -18,19 +18,19 @@
             <thead>
                 <tr>
                     <th class="head">No</th>
-                    <th class="head">Nama Supplier</th>
-                    <th class="head">Alamat Supplier</th>
-                    <th class="head">Contact Person</th>
-                    <th class="head">No Telp</th>
-                    <th class="head">Jenis Produk / Layanan</th>
-                    <th class="head">Hasil Evaluasi</th>
-                    <th class="head">Keterangan</th>
+                    <th class="head text-start">Nama Supplier</th>
+                    <th class="head text-start">Alamat Supplier</th>
+                    <th class="head text-start">Contact Person</th>
+                    <th class="head text-start">No Telp</th>
+                    <th class="head text-start">Jenis Produk / Layanan</th>
+                    <th class="head text-start">Hasil Evaluasi</th>
+                    <th class="head text-start">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($datas as $d)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $d->nama_supplier }}</td>
                         <td>{{ $d->alamat }}</td>
                         <td>{{ $d->contact_person }}</td>
@@ -49,14 +49,13 @@
             <thead>
                 <tr>
                     <th class="head text-center">No</th>
-                    <th class="head text-center">Nama Supplier</th>
-                    <th class="head text-center">Alamat Supplier</th>
-                    <th class="head text-center">Nama Contact Person</th>
-                    <th class="head text-center">Nomor KTP</th>
-                    <th class="head text-center">No Telp</th>
-                    <th class="head text-center">Hasil Evaluasi Rutin</th>
-                    <th class="head text-center">Keterangan</th>
-
+                    <th class="head text-start">Nama Supplier</th>
+                    <th class="head text-start">Alamat Supplier</th>
+                    <th class="head text-start">Nama Contact Person</th>
+                    <th class="head text-start">Nomor Ktp</th>
+                    <th class="head text-start">No Telp</th>
+                    <th class="head text-start">Hasil Evaluasi Rutin</th>
+                    <th class="head text-start">Keterangan</th>
                 </tr>
             </thead>
             <tbody>

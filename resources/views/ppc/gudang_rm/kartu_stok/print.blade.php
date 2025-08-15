@@ -13,10 +13,10 @@
     <table width="100%" class="border-dark table table-xs table-bordered">
         <thead>
             <tr>
-                <th class="text-center">Tanggal</th>
-                <th class="text-center">Stok Masuk {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
-                <th class="text-center">Stok Keluar {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
-                <th class="text-center">Stok Akhir {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
+                <th class="text-end">Tanggal</th>
+                <th class="text-end">Stok Masuk {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
+                <th class="text-end">Stok Keluar {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
+                <th class="text-end">Stok Akhir {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
                 <th class="text-center">Kode Lot</th>
                 <th class="text-center">Ttd</th>
             </tr>
@@ -37,10 +37,10 @@
                         }
                     @endphp
                     <tr>
-                        <td>{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
-                        <td align="right">{{ number_format($masuk, 0) }}</td>
-                        <td align="right">{{ number_format($keluar, 0) }}</td>
-                        <td align="right">{{ number_format($saldo, 0) }}</td>
+                        <td class="text-end">{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
+                        <td class="text-end">{{ number_format($masuk, 0) }}</td>
+                        <td class="text-end">{{ number_format($keluar, 0) }}</td>
+                        <td class="text-end">{{ number_format($saldo, 0) }}</td>
                         <td>{{ $t['kode_lot'] }}</td>
                         <td></td>
                     </tr>
@@ -54,7 +54,7 @@
                         $saldo2 += ($s['ket'] == 'masuk' ? $s['gr'] : 0) - ($s['ket'] == 'masuk' ? 0 : $s['gr']);
                     @endphp
                     <tr>
-                        <td>{{ tanggal($s['tgl']) }} </td>
+                        <td class="text-end">{{ tanggal($s['tgl']) }} </td>
                         <td class="text-end">{{ $s['ket'] == 'masuk' ? number_format($s['gr'], 0) : 0 }}</td>
                         <td class="text-end">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }}</td>
                         <td class="text-end">{{ number_format($saldo2, 0) }}</td>

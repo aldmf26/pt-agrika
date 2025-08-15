@@ -30,21 +30,21 @@
         <div>
             <table class="table table-xs table-bordered border-dark">
                 <tr>
-                    <th class="head text-center">Jumlah</th>
+                    <th class="head text-end">Jumlah</th>
                     <th class="head text-center">Item dan Spesifikasi</th>
-                    <th class="head text-center">Harga</th>
+                    <th class="head text-end">Harga</th>
                 </tr>
                 @foreach ($items as $d)
                     <tr>
-                        <td align="center">{{ number_format($d->jumlah_pcs) }} pcs /
+                        <td class="text-end">{{ number_format($d->jumlah_pcs) }} pcs /
                             {{ number_format($d->jumlah_kg) }} kg</td>
                         <td align="center">{{ ucfirst($d->nama) }}</td>
-                        <td align="center">0</td>
+                        <td class="text-end">0</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan="2" class="head text-end">Total harga</td>
-                    <td align="center">{{ number_format(0, 0) }}</td>
+                    <td class="text-end">{{ number_format(0, 0) }}</td>
                 </tr>
             </table>
         </div>
