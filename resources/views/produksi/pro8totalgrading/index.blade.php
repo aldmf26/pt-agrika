@@ -12,7 +12,7 @@
                 <thead>
                     <tr>
                         <th class="text-end">No</th>
-                        <th class="text-center">Tanggal</th>
+                        <th class="text-start">Tanggal</th>
                         <th class="text-end">Pcs</th>
                         <th class="text-end">Gr</th>
                         <th class="text-center">Aksi</th>
@@ -22,7 +22,7 @@
                     @foreach ($grading as $g)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ tanggal($g['tgl']) }}</td>
+                            <td class="text-start">{{ tanggal($g['tgl']) }}</td>
                             <td>{{ number_format($g['pcs'], 0) }}</td>
                             <td>{{ number_format($g['gr'], 0) }}</td>
                             <td class="text-center">

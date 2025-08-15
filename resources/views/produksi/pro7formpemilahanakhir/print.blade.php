@@ -178,20 +178,20 @@
                             </th>
                         </tr>
                         <tr>
-                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
+                            <td colspan="2">Hari / Tanggal <br> <span class="fst-italic">date</span>
                             </td>
-                            <td class="align-middle"> : {{ tanggal($tgl) }}</td>
+                            <td colspan="2" class="align-middle"> : {{ tanggal($tgl) }}</td>
 
                         </tr>
                         <tr>
-                            <td>Kode Batch/Lot
+                            <td colspan="2">Kode Batch/Lot
                                 <br> <span class="fst-italic"> Batch/Lot code </span>
                             </td>
 
-                            <td colspan="2" class="align-middle"> : {{ $kode_lot }}</td>
+                            <td class="align-middle" colspan="2"> : {{ $kode_lot }}</td>
 
 
-                            <td></td>
+
                             <td class="table-bawah2">Pcs Ok</td>
                             <td class="table-bawah2">Gram Ok</td>
                             <td class="table-bawah2">Pcs Not Oke</td>
@@ -205,26 +205,26 @@
                                 $grNotOkeT = collect($grading)->where('not_oke', 'Y')->sum('gr');
                                 $grNotOkeY = collect($grading)->where('not_oke', 'T')->sum('gr');
                             @endphp
-                            <td>Jenis Material
+                            <td colspan="2">Jenis Material
                                 <br> <span class="fst-italic"> Material type </span>
                             </td>
-                            <td class="align-middle"> : {{ $grade }}</td>
-                            <td></td>
-                            <td></td>
+                            <td class="align-middle" colspan="2"> : {{ $grade }}</td>
+
+
                             <td class="table-bawah2">{{ number_format($pcsNotOkeY, 0) }}</td>
                             <td class="table-bawah2">{{ number_format($grNotOkeY, 0) }}</td>
                             <td class="table-bawah2">{{ number_format($pcsNotOkeT, 0) }}</td>
                             <td class="table-bawah2">{{ number_format($grNotOkeT, 0) }}</td>
                         </tr>
                         <tr class="table-bawah">
-                            <th rowspan="3" class="text-center align-middle">No</th>
-                            <th rowspan="3" class="text-center align-middle">Jenis Produk<br><span
+                            <th rowspan="3" width="1%" class="text-center align-middle">No</th>
+                            <th rowspan="3" class="text-start align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
                             <th colspan="4" class="text-center align-middle">Kondisi Produk<br><span
                                     class="fst-italic fw-lighter">Product condition<span>
                             </th>
-                            <th rowspan="3" class="text-center align-middle">Jumlah Box</th>
-                            <th rowspan="3" class="text-center align-middle">Keterangan<br><span
+                            <th rowspan="3" class="text-end align-middle" width="2%">Jumlah Box</th>
+                            <th rowspan="3" class="text-start align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span></th>
                         </tr>
                         <tr class="table-bawah">
@@ -232,22 +232,22 @@
                             <th class="text-center" colspan="2">Not Ok</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gram</th>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gram</th>
+                            <th class="text-end" width="12%">Pcs</th>
+                            <th class="text-end" width="12%">Gram</th>
+                            <th class="text-end" width="12%">Pcs</th>
+                            <th class="text-end" width="12%">Gram</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($grading as $g)
                             <tr class="table-bawah">
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $g['grade'] }}</td>
-                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? 0 : $g['pcs'] }}</td>
-                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? 0 : $g['gr'] }}</td>
-                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
-                                <td class="text-center">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
-                                <td class="text-center">{{ $g['box'] }}</td>
+                                <td class="text-start">{{ $g['grade'] }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : $g['pcs'] }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : $g['gr'] }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
+                                <td class="text-end">{{ $g['box'] }}</td>
                                 <td class="text-center"></td>
                             </tr>
                         @endforeach
