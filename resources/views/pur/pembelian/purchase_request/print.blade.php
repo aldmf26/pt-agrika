@@ -54,15 +54,15 @@
                 <span class="float-start" for="">Detail Permintaan</span>
                 <table class="table table-xs table-bordered border-dark">
                     <tr>
-                        <th class="head text-center">Jumlah</th>
-                        <th class="head text-center">Item dan Spesifikasi</th>
-                        <th class="head text-center">Tanggal Dibutuhkan</th>
+                        <th class="head text-end">Jumlah</th>
+                        <th class="head text-start">Item dan Spesifikasi</th>
+                        <th class="head text-start">Tanggal Dibutuhkan</th>
                     </tr>
                     @foreach ($datas->item as $d)
                         <tr>
-                            <td align="center">{{ $d->jumlah }}</td>
-                            <td align="center">{{ ucfirst($d->item_spesifikasi) }}</td>
-                            <td align="center">{{ tanggal($d->tgl_dibutuhkan) }}</td>
+                            <td class="text-end">{{ $d->jumlah }}</td>
+                            <td align="start">{{ ucfirst($d->item_spesifikasi) }}</td>
+                            <td align="start">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                         </tr>
                     @endforeach
                 </table>

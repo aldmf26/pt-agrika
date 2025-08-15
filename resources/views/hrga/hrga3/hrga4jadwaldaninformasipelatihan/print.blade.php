@@ -107,13 +107,12 @@
                         <tr>
                             <th class="text-center dhead align-middle">No</th>
                             <th class="text-start dhead align-middle">
-                                Nama Peserta Pelatihan <br>
-                                yang Diusulkan
+                                Nama Peserta Pelatihan <br> yang Diusulkan
                             </th>
-                            <th class="text-center dhead align-middle">
-                                Bagian/ Sub. Bagian
+                            <th class="text-start dhead align-middle">
+                                Bagian/ <br> Sub. Bagian
                             </th>
-                            <th class="text-center dhead align-middle">
+                            <th class="text-start dhead align-middle">
                                 Konfirmasi/ <br> Keterangan
                             </th>
                         </tr>
@@ -122,9 +121,9 @@
                         @foreach ($jadwal_detail as $j)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-start">{{ ucfirst(strtolower($j->data_pegawai->nama)) }}</td>
-                                <td class="text-center">{{ $j->data_pegawai->divisi->divisi }}</td>
-                                <td class="text-center">{{ $j->konfirmasi_keterangan }}</td>
+                                <td class="text-start">{{ ucwords(strtolower($j->data_pegawai->nama)) }}</td>
+                                <td class="text-start">{{ $j->data_pegawai->divisi->divisi }}</td>
+                                <td class="text-start">{{ $j->konfirmasi_keterangan }}</td>
                             </tr>
                         @endforeach
 

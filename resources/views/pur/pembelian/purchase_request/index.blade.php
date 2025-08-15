@@ -25,7 +25,7 @@
             <tr>
                 <th>#</th>
                 <th class="text-start">No PR</th>
-                <th>Tanggal</th>
+                <th class="text-end">Tanggal</th>
                 <th>Diminta Oleh</th>
                 <th>Posisi</th>
                 <th>Alasan Permintaan</th>
@@ -38,7 +38,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td class="text-start">{{ $d->no_pr }}</td>
-                        <td>{{ tanggal($d->tgl) }}</td>
+                        <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>Sinta</td>
                         <td>BK</td>
                         <td>-</td>
@@ -56,7 +56,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td class="text-start">{{ $d->no_pr }}</td>
-                        <td>{{ tanggal($d->tgl) }}</td>
+                        <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>{{ $d->diminta_oleh }}</td>
                         <td>{{ $d->posisi }}</td>
                         <td>{{ $d->alasan_permintaan }}</td>

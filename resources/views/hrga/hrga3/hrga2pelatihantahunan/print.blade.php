@@ -103,7 +103,7 @@
                     <tbody>
                         @foreach ($program as $t)
                             <tr>
-                                <td rowspan="2" class="align-middle">{{ $loop->iteration }}</td>
+                                <td rowspan="2" class="align-middle text-center">{{ $loop->iteration }}</td>
                                 <td rowspan="2" class="align-middle">{{ ucfirst(strtolower($t->materi_pelatihan)) }}
                                 </td>
                                 <td rowspan="2" class="align-middle">{{ $t->sumber == 'internal' ? 'I' : 'E' }}</td>

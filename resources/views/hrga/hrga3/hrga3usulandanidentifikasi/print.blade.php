@@ -86,8 +86,8 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center dhead">#</th>
-                            <th class="text-center dhead">Nama Calon Peserta yang Diusulkan</th>
+                            <th class="text-center dhead">No</th>
+                            <th class="text-start dhead">Nama Calon Peserta yang Diusulkan</th>
                             <th class="text-center dhead">NIP</th>
                             <th class="text-center dhead">Pengusul</th>
                             <th class="text-center dhead">Usulan Jenis Pelatihan <br>
@@ -102,13 +102,13 @@
                     <tbody>
                         @foreach ($usulan as $u)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($u->data_pegawai->nama)) }}</td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td>{{ ucwords(strtolower($u->data_pegawai->nama)) }}</td>
                                 <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
-                                <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
-                                <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
+                                <td>{{ ucwords(strtolower($u->pengusul)) }}</td>
+                                <td>{{ ucwords(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($tanggal)->locale('id')->translatedFormat('F Y') }}</td>
-                                <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
+                                <td>{{ ucwords(strtolower($u->alasan)) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

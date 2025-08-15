@@ -62,30 +62,30 @@
                 <table class="table table-bordered text-center align-middle">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th class="text-center">No</th>
                             <th class="text-start">Standard Kompetensi</th>
-                            <th>Aktual</th>
+                            <th class="text-center">Aktual</th>
                             <th class="text-start">Tidak Lanjut</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
+                            <td class="text-center">1</td>
                             <td align="left">Menguasai pekerjaan di divisinya</td>
-                            <td>√</td>
+                            <td class="text-center">√</td>
                             <td align="left">
                             </td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td class="text-center">2</td>
                             <td align="left">Tidak pernah melakukan kecerobohan dalam pekerjaannya</td>
-                            <td>√</td>
+                            <td class="text-center">√</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td>3</td>
+                            <td class="text-center">3</td>
                             <td align="left">Telah mendapat training HACCP, GMP, CCP</td>
-                            <td>√</td>
+                            <td class="text-center">√</td>
                             <td></td>
                         </tr>
                     </tbody>
@@ -94,91 +94,91 @@
         </div>
         <span>II. CATATAN KEHADIRAN</span>
 
-        <table class="table table-bordered border-dark text-center align-middle">
-            <thead class="">
+        <table class="table table-bordered border-dark  align-middle">
+            <thead class="" style="text-align: center;">
                 <tr>
                     <th class="dhead text-center align-middle" rowspan="3">No</th>
                     <th class="dhead text-center align-middle" rowspan="3">Keterangan</th>
-                    <th class="dhead" colspan="24">Bulan</th>
+                    <th class="dhead text-center" colspan="24">Bulan</th>
                     <th class="dhead align-middle" rowspan="3" colspan="2">Total</th>
                 </tr>
                 <tr>
                     <!-- Angka bulan -->
-                    <th class="dhead" colspan="2">1</th>
-                    <th class="dhead" colspan="2">2</th>
-                    <th class="dhead" colspan="2">3</th>
-                    <th class="dhead" colspan="2">4</th>
-                    <th class="dhead" colspan="2">5</th>
-                    <th class="dhead" colspan="2">6</th>
-                    <th class="dhead" colspan="2">7</th>
-                    <th class="dhead" colspan="2">8</th>
-                    <th class="dhead" colspan="2">9</th>
-                    <th class="dhead" colspan="2">10</th>
-                    <th class="dhead" colspan="2">11</th>
-                    <th class="dhead" colspan="2">12</th>
+                    <th class="dhead text-center" colspan="2">1</th>
+                    <th class="dhead text-center" colspan="2">2</th>
+                    <th class="dhead text-center" colspan="2">3</th>
+                    <th class="dhead text-center" colspan="2">4</th>
+                    <th class="dhead text-center" colspan="2">5</th>
+                    <th class="dhead text-center" colspan="2">6</th>
+                    <th class="dhead text-center" colspan="2">7</th>
+                    <th class="dhead text-center" colspan="2">8</th>
+                    <th class="dhead text-center" colspan="2">9</th>
+                    <th class="dhead text-center" colspan="2">10</th>
+                    <th class="dhead text-center" colspan="2">11</th>
+                    <th class="dhead text-center" colspan="2">12</th>
                 </tr>
                 <tr>
                     <!-- Sub-baris untuk Hari dan Menit -->
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
-                    <th class="dhead">Hari</th>
-                    <th class="dhead">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Hari</th>
+                    <th class="dhead text-center">Menit</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- Data rows -->
                 <tr>
-                    <td>1</td>
+                    <td class="text-center">1</td>
                     <td align="left">Terlambat</td>
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td>-</td>
-                        <td>-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
                     @endfor
-                    <td>-</td>
-                    <td>-</td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
                 </tr>
                 <tr>
-                    <td>2</td>
+                    <td class="text-center">2</td>
                     <td align="left">Sakit</td>
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td>-</td>
-                        <td>-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
                     @endfor
-                    <td>-</td>
-                    <td>-</td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
                 </tr>
                 <tr>
-                    <td>3</td>
+                    <td class="text-center">3</td>
                     <td align="left">Tanpa Keterangan</td>
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td>-</td>
-                        <td>-</td>
+                        <td class="text-center">-</td>
+                        <td class="text-center">-</td>
                     @endfor
-                    <td>-</td>
-                    <td>-</td>
+                    <td class="text-center">-</td>
+                    <td class="text-center">-</td>
                 </tr>
                 <tr>
-                    <td>4</td>
+                    <td class="text-center">4</td>
                     <td align="left">Izin</td>
                     @php
                         $grandTotal = 0;
@@ -194,30 +194,32 @@
                                             ? 0
                                             : 26 - $absen['total_per_bulan'][$bulan]);
                             @endphp
-                            <td>{{ $absenCabut == 0 ? '-' : $absenCabut }}</td>
+                            <td class="text-center">{{ $absenCabut == 0 ? '-' : $absenCabut }}</td>
                             </td>
-                            <td>-</td>
+                            <td class="text-center">-</td>
                             @php
                                 $grandTotal += $absenCabut;
                             @endphp
                         @else
-                            <td>{{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : $absen['total_per_bulan'][$bulan] }}
+                            <td class="text-center">
+                                {{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : $absen['total_per_bulan'][$bulan] }}
                             </td>
-                            <td>-</td>
+                            <td class="text-center">-</td>
                             @php
                                 $grandTotal += $absen['total_per_bulan'][$bulan];
                             @endphp
                         @endif
                     @endfor
-                    <td>{{ $grandTotal }}</td>
-                    <td>-</td>
+                    <td class="text-center">{{ $grandTotal }}</td>
+                    <td class="text-center">-</td>
                 </tr>
             </tbody>
             <tfoot class="">
                 <tr>
                     <th colspan="2">Grand Total</th>
-                    <th colspan="24">{{ $grandTotal }}</th>
-                    <th>-</th>
+                    <th class="text-center" colspan="24">{{ $grandTotal }}</th>
+                    <th class="text-center">-</th>
+                    <th class="text-center">-</th>
                 </tr>
             </tfoot>
         </table>
@@ -276,20 +278,20 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Parameter</th>
-                                <th class="text-center">Nilai</th>
+                                <th class="text-end">Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($parameters as $index => $param)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
+                                    <td class="text-center">{{ $index + 1 }}</td>
                                     <td>{{ $param[0] }}</td>
                                     <td class="text-end">{{ $param[1] }}</td>
                                 </tr>
                             @endforeach
                             <tr>
                                 <th colspan="2" class="text-center">TOTAL</th>
-                                <th class="text-end">{{ $total }}</th>
+                                <th class="text-end">{{ number_format($total, 0) }}</th>
                             </tr>
                         </tbody>
                     </table>

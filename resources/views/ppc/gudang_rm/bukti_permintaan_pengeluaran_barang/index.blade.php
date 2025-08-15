@@ -22,26 +22,26 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Tanggal</th>
+                    <th class="text-end">Tanggal</th>
                     <th>Nama Pemohon</th>
                     <th>Departemen</th>
 
-                    <th>Pcs</th>
-                    <th>Gr</th>
+                    <th class="text-end">Pcs</th>
+                    <th class="text-end">Gr</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                @if ($k == 'satu')
+                @if ($kategori != 'lainnya')
                     @foreach ($buktis as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ tanggal($item->tgl) }}</td>
+                            <td class="text-end">{{ tanggal($item->tgl) }}</td>
                             <td>{{ $item->nama }}</td>
                             <td>{{ $item->departemen }}</td>
 
-                            <td>{{ $item->pcs }} pcs</td>
-                            <td>{{ $item->gr }} gr</td>
+                            <td class="text-end">{{ number_format($item->pcs, 0) }}</td>
+                            <td class="text-end">{{ number_format($item->gr, 0) }}</td>
                             <td>
                                 @php
                                     $param = [
@@ -59,18 +59,18 @@
                     @foreach ($buktis2 as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ tanggal($item['tanggal']) }}</td>
+                            <td class="text-end">{{ tanggal($item['tanggal']) }}</td>
                             <td>{{ $item['name'] }}</td>
                             <td>Cabut Bulu</td>
-                            <td>{{ number_format($item['pcs'], 0) }} pcs</td>
-                            <td>{{ number_format($item['gr'], 0) }} gr</td>
+                            <td class="text-end">{{ number_format($item['pcs'], 0) }}</td>
+                            <td class="text-end">{{ number_format($item['gr'], 0) }}</td>
                             <td>
                                 @php
                                     $param = [
                                         'id_penerima' => $item['id_penerima'],
                                         'tgl' => $item['tanggal'],
                                         'nama' => $item['name'],
-                                        'k' => $k,
+                                        'k' => $kategori,
                                     ];
                                 @endphp
                                 <a class="btn btn-xs float-end btn-primary" target="_blank"
