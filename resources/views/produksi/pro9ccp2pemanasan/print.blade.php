@@ -99,17 +99,38 @@
         .table-bawah td {
             border: 1px solid black;
             padding: 0.1rem;
-            /* ⬅️ Padding kecil, bisa juga pakai 2px */
             vertical-align: middle;
             text-align: center;
             white-space: nowrap;
+
             /* agar teks tidak turun ke bawah */
         }
 
 
         @media print {
-            .repeat-header {
-                display: table-header-group;
+            @page {
+                size: A4 landscape;
+                margin-top: 20mm;
+                /* jarak atas semua halaman */
+                margin-bottom: 15mm;
+                margin-left: 15mm;
+                margin-right: 15mm;
+            }
+
+            body {
+                margin: 0;
+            }
+
+            /* Biar tabel nggak pecah aneh */
+            table {
+                page-break-inside: avoid;
+            }
+
+            /* Kalau mau mulai halaman baru + jarak atas */
+            .page-break {
+                page-break-before: always;
+                padding-top: 20mm;
+                /* jarak dari header halaman */
             }
         }
     </style>
@@ -120,7 +141,8 @@
         <div class="row">
 
             <div class="col-lg-12">
-                <table width="100%" style="font-size: 11px">
+
+                <table width="100%" style="font-size: 11px; ">
                     <thead class="repeat-header">
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
@@ -161,27 +183,27 @@
                         <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">Urutan <br> Pemanasan <br> <span
                                     class="fst-italic fw-lighter">Heating number</span></th>
-                            <th rowspan="2" class="text-center align-middle">Nampan <br> <span
+                            <th rowspan="2" class="text-end align-middle">Nampan <br> <span
                                     class="fst-italic fw-lighter">Tray</th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="2" class="text-start align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis <br> <span
+                            <th rowspan="2" class="text-start align-middle">Jenis <br> <span
                                     class="fst-italic fw-lighter">Type</th>
-                            <th rowspan="2" class="text-center align-middle">Waktu <br> mulai <br> Steam</th>
+                            <th rowspan="2" class="text-start align-middle">Waktu <br> mulai <br> Steam</th>
                             <th colspan="2" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</th>
-                            <th rowspan="2" class="text-center align-middle">T<sub>venting</sub> (°C)</th>
-                            <th rowspan="2" class="text-center align-middle">T<sub>venting</sub> (mnt) </th>
-                            <th rowspan="2" class="text-center align-middle">T<sub>tot</sub> (°C) </th>
-                            <th rowspan="2" class="text-center align-middle">T<sub>tot</sub> (mnt) </th>
-                            <th rowspan="2" class="text-center align-middle">Petugas <br> pengecekan <br> (paraf)
+                            <th rowspan="2" class="text-end align-middle">T<sub>venting</sub> (°C)</th>
+                            <th rowspan="2" class="text-end align-middle">T<sub>venting</sub> (mnt) </th>
+                            <th rowspan="2" class="text-end align-middle">T<sub>tot</sub> (°C) </th>
+                            <th rowspan="2" class="text-end align-middle">T<sub>tot</sub> (mnt) </th>
+                            <th rowspan="2" class="text-start align-middle">Petugas <br> pengecekan <br> (paraf)
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan </th>
+                            <th rowspan="2" class="text-start align-middle">Keterangan </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-end align-middle">Pcs</th>
+                            <th class="text-end align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -210,19 +232,18 @@
                             @endif
                             <tr class="table-bawah">
                                 <td>{{ ceil(($index + 1) / 6) }}</td>
-                                <td>{{ ($index % 6) + 1 }}</td>
-                                <td>{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
-                                <td>
-                                    {!! collect(explode(',', $p['grade']))->map(fn($g) => trim($g))->filter()->unique()->implode(', <br>') ?:
-                                        '-' !!}
+                                <td class="text-end">{{ ($index % 6) + 1 }}</td>
+                                <td class="text-start">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-start">
+                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td>{{ $time }}</td>
-                                <td>{{ number_format($p['total_pcs'], 0) }}</td>
-                                <td>{{ number_format($p['total_gr'], 0) }}</td>
-                                <td>60.5</td>
-                                <td>1 menit 3 detik</td>
-                                <td>80.4</td>
-                                <td>35 detik</td>
+                                <td class="text-start">{{ $time }}</td>
+                                <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
+                                <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
+                                <td class="text-end">60.5</td>
+                                <td class="text-end">1 menit 3 detik</td>
+                                <td class="text-end">80.4</td>
+                                <td class="text-end">35 detik</td>
                                 <td></td>
                                 <td></td>
                             </tr>

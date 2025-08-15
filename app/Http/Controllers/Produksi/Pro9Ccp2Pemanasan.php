@@ -55,7 +55,7 @@ class Pro9Ccp2Pemanasan extends Controller
     public function print(Request $r)
     {
         $tgl = $r->tgl;
-        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_baru_detail?tgl=$tgl");
+        $pemanasan = Http::get("https://sarang.ptagafood.com/api/apihasap/coba_steaming?tgl=$tgl");
         $pemanasan = json_decode($pemanasan, TRUE);
         $data = [
             'title' => 'Form pemanasan CCP 2',
