@@ -212,7 +212,7 @@
         font-size: 12px;
     }
 
-    
+
 
     .btn-xs {
         padding: 2px 6px;

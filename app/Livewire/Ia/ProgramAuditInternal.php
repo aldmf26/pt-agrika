@@ -50,11 +50,11 @@ class ProgramAuditInternal extends Component
 
         return $cek;
     }
-    
+
 
     public function toggleBulan($auditId, $bulan, $departemen, $audite, $auditor)
     {
-        
+
         $kolomBulan = "bulan_$bulan";
         $audit = $this->model::where('id', $auditId)->where('tahun', $this->tahun)->first();
         if (!$audit) {
@@ -71,13 +71,32 @@ class ProgramAuditInternal extends Component
             $audit->admin = auth()->user()->name;
             $audit->save();
         }
-        NotifiService::create('ia.1.index','IA 1.1 Program Audit Internal', $departemen, $bulan, $this->tahun);
+        NotifiService::create('ia.1.index', 'IA 1.1 Program Audit Internal', $departemen, $bulan, $this->tahun);
         $this->dispatch('refresh');
+    }
 
+    public function delete($id)
+    {
+        $audit = $this->model::find($id);
+        if ($audit) {
+            $audit->delete();
+            $this->alert('sukses', 'Data Berhasil dihapus');
+        } else {
+            $this->alert('error', 'Data tidak ditemukan');
+        }
     }
 
     public function add()
     {
+
+        $existing = $this->model::where('departemen', $this->form['departemen'])
+            ->where('tahun', $this->tahun)
+            ->first();
+        if ($existing) {
+            $this->alert('error', 'Departemen sudah ada');
+            return;
+        }
+
         $this->model::create([
             'departemen' => $this->form['departemen'],
             'audite' => $this->form['audite'],
@@ -97,8 +116,11 @@ class ProgramAuditInternal extends Component
 
     public function render()
     {
+        $departemenBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing', 'hrga', 'purchasing', 'qa'];
+
         $data = [
-            'datas' => ModelsProgramAuditInternal::where('tahun', $this->tahun)->get()
+            'datas' => ModelsProgramAuditInternal::where('tahun', $this->tahun)->get(),
+            'departemenBk' => $departemenBk
         ];
         return view('livewire.ia.program-audit-internal', $data);
     }

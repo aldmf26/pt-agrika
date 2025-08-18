@@ -30,7 +30,9 @@ class AuditWizard extends Component
     public function mount()
     {
         $departementBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing'];
+
         $departemen = in_array($this->departemen, $departementBk) ? 'bk' : $this->departemen;
+        dd($departemen);
         $this->headings = Heading::with('subHeadings.pertanyaan.hasilChecklist')
             ->where('departemen', $departemen)
             ->get();
@@ -82,7 +84,7 @@ class AuditWizard extends Component
 
     public function finish()
     {
-        NotifiService::create('ia.1.index','IA 1.1 Program Audit Internal', $this->departemen, $this->bulan, $this->tahun);
+        NotifiService::create('ia.1.index', 'IA 1.1 Program Audit Internal', $this->departemen, $this->bulan, $this->tahun);
         NotifiService::readNotification($this->bulan, $this->departemen);
         $this->alert('sukses', 'Audit Selesai');
         $this->dispatch('refresh');

@@ -6,9 +6,9 @@
                     class="fas fa-sync"></i>
                 Singkron Data</a>
 
-            <a href="{{ route('hrga1.2.create') }}" class="btn btn-primary ms-2 btn-sm float-end mb-2"><i
+            {{-- <a href="{{ route('hrga1.2.create') }}" class="btn btn-primary ms-2 btn-sm float-end mb-2"><i
                     class="fas fa-plus"></i>
-                Hasil Wawancara</a>
+                Hasil Wawancara</a> --}}
 
             {{-- <a href="#" class="btn float-end btn-sm btn-primary"
                 @click.prevent="window.location.href = `/hrga/1/2-hasil-wawancara/print?checked=${$data.checked.join(',')}`"><i
@@ -47,8 +47,8 @@
                             <td>{{ $d->posisi ?? '' }}</td>
                             <td>{{ $d->keputusan ?? 'Dilanjutkan' }}</td>
                             <td>
-                                <a href="{{ route('hrga1.2.edit', $d->karyawan_id_dari_api) }}"
-                                    class="btn btn-sm btn-primary"><i class="fas fa-pen"></i> Edit </a>
+                                {{-- <a href="{{ route('hrga1.2.edit', $d->karyawan_id_dari_api) }}"
+                                    class="btn btn-sm btn-primary"><i class="fas fa-pen"></i> Edit </a> --}}
 
                                 <a target="_blank" href="{{ route('hrga1.2.print', $d->karyawan_id_dari_api) }}"
                                     class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print </a>

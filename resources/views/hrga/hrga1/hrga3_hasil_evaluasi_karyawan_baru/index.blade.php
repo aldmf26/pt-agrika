@@ -35,7 +35,7 @@
                             </td>
                             <td>{{ $d->jenis_kelamin ?? '' }}</td>
                             <td>{{ $d->posisi ?? '' }}</td>
-                            <td>{{ $d->penilaianKaryawan->periode ?? '' }} Bulan</td>
+                            <td>{{ $d->penilaianKaryawan->periode ?? '1' }} Bulan</td>
                             <td>
                                 <a target="_blank" href="{{ route('hrga1.3.print', $d) }}"
                                     class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print</a>
