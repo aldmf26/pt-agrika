@@ -20,7 +20,7 @@
             <td>: Ratna Sari</td>
         </tr>
     </table>
-    <table width="100%" class="border-dark table table-xs table-bordered">
+    <table width="100%" class="border-dark table table-xs table-bordered" style="font-size: 10px">
         <tr>
             <th class="text-center align-middle" rowspan="2">Tanggal</th>
             <th class="text-center" colspan="2">Stok Masuk</th>

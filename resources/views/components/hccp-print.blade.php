@@ -87,7 +87,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 120px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">

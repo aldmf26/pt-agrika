@@ -6,50 +6,56 @@ use App\Http\Controllers\Controller;
 use App\Models\ChecklistKendaraan;
 use App\Models\MasterKondisi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class FG2CeklisKendaraanController extends Controller
 {
-    public function index() 
+    public function index()
     {
-        $checklists = ChecklistKendaraan::select(
-            'tanggal', 
-            'nomor_kendaraan', 
-            'pengemudi', 
-            'jenis_kendaraan',
-            'ekspedisi',
-            'jam_datang',
-            'tujuan',
-            'customer',
-            'negara',
-            'keputusan',
-            'pemeriksa',
-            'komentar'
-        )
-        ->groupBy(
-            'tanggal',
-            'nomor_kendaraan',
-            'pengemudi',
-            'jenis_kendaraan',
-            'ekspedisi', 
-            'jam_datang',
-            'tujuan',
-            'customer',
-            'negara',
-            'keputusan',
-            'pemeriksa',
-            'komentar'
-        )
-        ->orderBy('tanggal', 'desc')
-        ->get();
-    
+        // $checklists = ChecklistKendaraan::select(
+        //     'tanggal',
+        //     'nomor_kendaraan',
+        //     'pengemudi',
+        //     'jenis_kendaraan',
+        //     'ekspedisi',
+        //     'jam_datang',
+        //     'tujuan',
+        //     'customer',
+        //     'negara',
+        //     'keputusan',
+        //     'pemeriksa',
+        //     'komentar'
+        // )
+        //     ->groupBy(
+        //         'tanggal',
+        //         'nomor_kendaraan',
+        //         'pengemudi',
+        //         'jenis_kendaraan',
+        //         'ekspedisi',
+        //         'jam_datang',
+        //         'tujuan',
+        //         'customer',
+        //         'negara',
+        //         'keputusan',
+        //         'pemeriksa',
+        //         'komentar'
+        //     )
+        //     ->orderBy('tanggal', 'desc')
+        //     ->get();
+
+        $pengiriman = Http::get("https://sarang.ptagafood.com/api/apihasap/pengiriman_bulan");
+        $pengiriman = json_decode($pengiriman, TRUE);
+
 
         $data = [
             'title' => 'Ceklis Kendaraan',
-            'checklists' => $checklists
+            'pengiriman' => $pengiriman['data']
+
         ];
         return view('ppc.gudang_fg.ceklis_kendaraan.index', $data);
     }
-    public function create() 
+    public function create()
     {
         $data = [
             'title' => 'Ceklis Kendaraan',
@@ -58,7 +64,7 @@ class FG2CeklisKendaraanController extends Controller
         return view('ppc.gudang_fg.ceklis_kendaraan.create', $data);
     }
 
-    public function store(Request $r) 
+    public function store(Request $r)
     {
         $r->validate([
             'tanggal' => 'required|date',
@@ -71,7 +77,7 @@ class FG2CeklisKendaraanController extends Controller
             'negara' => 'required'
         ]);
 
-        foreach($r->nomor_kondisi as $key => $value) {
+        foreach ($r->nomor_kondisi as $key => $value) {
             ChecklistKendaraan::create([
                 'tanggal' => $r->tanggal,
                 'nomor_kendaraan' => $r->nomor_kendaraan,
@@ -97,9 +103,9 @@ class FG2CeklisKendaraanController extends Controller
     public function print($id)
     {
         $checklist = ChecklistKendaraan::select(
-            'tanggal', 
-            'nomor_kendaraan', 
-            'pengemudi', 
+            'tanggal',
+            'nomor_kendaraan',
+            'pengemudi',
             'jenis_kendaraan',
             'ekspedisi',
             'jam_datang',
@@ -110,9 +116,9 @@ class FG2CeklisKendaraanController extends Controller
             'pemeriksa',
             'komentar'
         )
-        ->where('nomor_kendaraan', $id)
-        ->first();
-    
+            ->where('nomor_kendaraan', $id)
+            ->first();
+
         $details = ChecklistKendaraan::where('nomor_kendaraan', $id)
             ->join('master_kondisi', 'checklist_kendaraan.nomor_kondisi', '=', 'master_kondisi.id')
             ->select('master_kondisi.*', 'checklist_kendaraan.check_wh', 'checklist_kendaraan.check_qa')
@@ -127,6 +133,4 @@ class FG2CeklisKendaraanController extends Controller
 
         return view('ppc.gudang_fg.ceklis_kendaraan.print', $data);
     }
-
-
 }

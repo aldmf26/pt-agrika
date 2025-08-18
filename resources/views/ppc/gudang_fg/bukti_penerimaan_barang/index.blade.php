@@ -21,7 +21,7 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th class="text-center">Tanggal</th>
+                <th>Tanggal</th>
                 <th>Pcs</th>
                 <th>Gr</th>
                 <th class="text-center">Aksi</th>
@@ -31,7 +31,7 @@
             @foreach ($penerimaan as $p)
                 <tr>
                     <td class="text-center">{{ $loop->iteration }}</td>
-                    <td class="text-center">{{ tanggal($p['tgl_input']) }}</td>
+                    <td>{{ tanggal($p['tgl_input']) }}</td>
                     <td>{{ number_format($p['pcs'], 0) }}</td>
                     <td>{{ number_format($p['gr'], 0) }}</td>
                     <td class="text-center"><a href="{{ route('ppc.gudang-fg.3.print', $p['tgl_input']) }}" target="_blank"
