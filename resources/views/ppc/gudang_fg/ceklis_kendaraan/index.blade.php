@@ -22,7 +22,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item['bulan'] }}</td>
                             <td>{{ $item['tahun'] }}</td>
-
                             <td>
                                 <a class="btn btn-xs  btn-primary" target="_blank"
                                     href="{{ route('ppc.gudang-fg.2.print', ['bulan' => $item['bulan'], 'tahun' => $item['tahun']]) }}"><i
