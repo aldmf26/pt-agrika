@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th class="text-center">No</th>
-                        <th class="text-center">Tanggal</th>
+                        <th>Tanggal</th>
                         <th>Pcs</th>
                         <th>Gr</th>
                         <th class="text-center">Aksi</th>
@@ -19,11 +19,10 @@
                     @foreach ($pemanasan as $p)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ tanggal($p['tgl_terakhir']) }}</td>
+                            <td>{{ tanggal($p['tgl']) }}</td>
                             <td>{{ number_format($p['pcs'], 0) }}</td>
                             <td>{{ number_format($p['gr'], 0) }}</td>
-                            <td class="text-center"><a
-                                    href="{{ route('produksi.9.print', ['tgl' => $p['tgl_terakhir']]) }}"
+                            <td class="text-center"><a href="{{ route('produksi.9.print', ['tgl' => $p['tgl']]) }}"
                                     target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
                                     Print</a></td>
                         </tr>
