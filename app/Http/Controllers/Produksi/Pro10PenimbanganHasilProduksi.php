@@ -42,12 +42,12 @@ class Pro10PenimbanganHasilProduksi extends Controller
     public function print(Request $r)
     {
         $tgl = $r->tgl;
-        $pengiriman_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/steaming_baru_detail?tgl=$tgl");
-        $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
+        $penimbangan_akhir = Http::get("https://sarang.ptagafood.com/api/apihasap/hasil_penimbangan_new?tgl=$tgl");
+        $penimbangan_akhir = json_decode($penimbangan_akhir, TRUE);
         $data = [
             'title' => 'Penimbangan Hasil Produksi',
             'tgl' => $tgl,
-            'penimbangan' => $pengiriman_akhir['data'],
+            'penimbangan' => $penimbangan_akhir['data'],
 
         ];
         return view('produksi.pro10_penimbangan_hasil_produksi.print', $data);
