@@ -5,6 +5,26 @@
             font-size: 12px;
         }
 
+        .cop_judul {
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+            margin: 15px;
+        }
+
+        .shapes {
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        .cop_text {
+            font-size: 12px;
+            text-align: left;
+            font-weight: normal;
+            margin-top: 100px;
+
+        }
+
         .table {
             width: 100%;
             border-collapse: collapse;
@@ -15,6 +35,7 @@
         .table td {
             border: 1px solid #000;
             padding: 5px;
+            font-size: 7px;
         }
 
         .header-info {
@@ -29,87 +50,159 @@
             padding: 3px;
         }
 
+        .print {
+            display: none;
+            /* disembunyikan saat layar biasa */
+        }
+
+        .input {
+            font-size: 8px
+        }
+
         @media print {
             .no-print {
-                display: none;
+                display: none !important;
+            }
+
+            .print {
+                display: inline !important;
+            }
+
+            .input {
+                display: none !important;
             }
         }
     </style>
+    <div class="row">
+        <p style="font-size: 10px;">BERI TANDA V UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA X UNTUK TIAP KOLOM
+            YANG
+            TIDAK SESUAI STANDAR</p>
+        <div class="header-info col-lg-6
+        ">
 
-    <div class="header-info">
-        <table>
-            <tr>
-                <td width="150">Tanggal</td>
-                <td width="10">:</td>
-                <td>{{ date('d/m/Y', strtotime($checklist->tanggal)) }}</td>
-                <td width="150">Kendaraan Milik</td>
-                <td width="10">:</td>
-                <td>{{ $checklist->jenis_kendaraan }}</td>
-            </tr>
-            <tr>
-                <td>Nomor Kendaraan</td>
-                <td>:</td>
-                <td>{{ $checklist->nomor_kendaraan }}</td>
-                <td>Ekspedisi</td>
-                <td>:</td>
-                <td>{{ $checklist->ekspedisi }}</td>
-            </tr>
-            <tr>
-                <td>Pengemudi</td>
-                <td>:</td>
-                <td>{{ $checklist->pengemudi }}</td>
-                <td>Customer</td>
-                <td>:</td>
-                <td>{{ $checklist->customer }}</td>
-            </tr>
-            <tr>
-                <td>Jam Kedatangan</td>
-                <td>:</td>
-                <td>{{ $checklist->jam_datang }}</td>
-                <td>Tujuan</td>
-                <td>:</td>
-                <td>{{ $checklist->tujuan }}</td>
-            </tr>
-        </table>
-    </div>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th class="text-center">No</th>
-                <th>Kondisi Kendaraan</th>
-                <th width="80" class="text-center">WH</th>
-                <th width="80" class="text-center">QA</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($details as $item)
+            <table style="font-size: 10px">
                 <tr>
-                    <td align="center">{{ $item->nomor }}</td>
-                    <td>{{ $item->kondisi }}</td>
-                    <td style="text-align: center">{{ $item->check_wh }}</td>
-                    <td style="text-align: center">{{ $item->check_qa }}</td>
+                    <td>Kendaraan Milik </td>
+                    <td>: Internal / <span class="text-decoration-line-through">Ekspedisi</span></td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td>Nomor Kendaraan </td>
+                    <td>: DA 1850 I</td>
+                    <td>Pengemudi</td>
+                    <td>: Maulidan</td>
+                </tr>
+
+            </table>
+        </div>
+
+    </div>
+    <table class="table table-bordered">
+        <tr>
+            <td colspan="2">Tanggal</td>
+            @php
+                $jumlahData = count($checklist);
+                $maxKolom = 9;
+            @endphp
+
+            @foreach ($checklist as $c)
+                <td class="text-center" width="8%" colspan="2">{{ date('d/m/Y', strtotime($c['tgl'])) }}
+                </td>
             @endforeach
-        </tbody>
-        <tbody>
+
+            @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
+                <td class="text-center" width="8%" colspan="2"></td>
+            @endfor
+
+        </tr>
+        <tr>
+            <td colspan="2">Jam Penataan Di mobil</td>
+
+
+            @foreach ($checklist as $c)
+                <td class="text-center" width="8%" colspan="2">14:00 Wita</td>
+            @endforeach
+
+            @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
+                <td class="text-center" width="8%" colspan="2"></td>
+            @endfor
+        </tr>
+        <tr>
+            <td colspan="2">Tujuan</td>
+
+
+            @foreach ($checklist as $c)
+                <td class="text-center" width="8%" colspan="2">HK</td>
+            @endforeach
+
+            @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
+                <td class="text-center" width="8%" colspan="2"></td>
+            @endfor
+        </tr>
+        <tr>
+            <td colspan="100"></td>
+        </tr>
+        <tr>
+            <th class="text-center">No</th>
+            <th>Kondisi Kendaraan</th>
+
+
+            @foreach ($checklist as $c)
+                <th class="text-center">WH</th>
+                <th class="text-center">QA</th>
+            @endforeach
+            @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
+                <th class="text-center">WH</th>
+                <th class="text-center">QA</th>
+            @endfor
+
+
+
+        </tr>
+        @foreach ($kondisi as $k)
             <tr>
-                <td></td>
-                <th>KEPUTUSAN DIPAKAI : Ya (Y) atau TIDAK (T)</th>
-                <td align="center">{{ $checklist->keputusan }}</td>
-                <td align="center">{{ $checklist->keputusan }}</td>
+                <td class="text-center">{{ $loop->iteration }}</td>
+                <td class=" text-nowrap">{{ $k->kondisi }}</td>
+                @foreach ($checklist as $c)
+                    <td class="text-center">v</td>
+                    <td class="text-center">v</td>
+                @endforeach
+
+                @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
+                    <td class="text-center"></td>
+                    <td class="text-center"></td>
+                @endfor
+
             </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <th>Inisial Pemeriksa</th>
-                <td align="center">{{ $checklist->pemeriksa }}</td>
-                <td align="center">{{ $checklist->pemeriksa }}</td>
-            </tr>
-        </tfoot>
+        @endforeach
+        <tr>
+            <td></td>
+            <th>KEPUTUSAN DIPAKAI : Ya (Y) atau TIDAK (T)</th>
+            @foreach ($checklist as $c)
+                <td class="text-center" colspan="2">YA</td>
+            @endforeach
+
+            @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
+                <td class="text-center"></td>
+            @endfor
+
+        </tr>
+        <tr>
+            <td></td>
+            <th>Paraf Pemeriksa</th>
+            @for ($i = 0; $i < $maxKolom; $i++)
+                <td class="text-center"></td>
+                <td class="text-center"></td>
+            @endfor
+
+        </tr>
+
+
     </table>
-    <span style="font-size: 10px">
+
+
+    <span style="font-size: 7px">
         NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
         TANDA <b>V</b>
         DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
@@ -117,29 +210,32 @@
         LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
     </span>
 
-    <div style="margin-top: 30px">
+    <div>
         <table width="100%">
             <tr>
-                <td width="60%">
-                    <p>Komentar:</p>
-                    {{ $checklist->komentar }}
+                <th width="60%" style="border: 1px solid black; " class="align-top">
+                    KOMENTAR:
+                    {{-- {{ $checklist->komentar }} --}}
+                </th>
+                <td width="25%">
+
                 </td>
-                <td style="width: 40%">
+                <td style="width: 15%">
                     <table class="border-dark table table-bordered" style="font-size: 11px">
                         <thead>
                             <tr>
+                                <th class="text-center" width="33.33%">Dibuat Oleh:</th>
 
-                                <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
+                                <td style="height: 50px"></td>
 
-                                <td style="height: 80px"></td>
                             </tr>
                             <tr>
+                                <td class="text-center">[KA. PENGIRIMAN]</td>
 
-                                <td class="text-center">[ KA.PENGIRIMAN]</td>
                             </tr>
                         </tbody>
                     </table>

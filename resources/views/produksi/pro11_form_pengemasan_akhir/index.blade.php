@@ -20,7 +20,7 @@
                             @foreach ($pengiriman_akhir as $p)
                                 <tr>
                                     <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ tanggal($p['tgl_input']) }}</td>
+                                    <td>{{ tanggal($p['tgl_input']) }}</td>
                                     <td>{{ number_format($p['pcs'], 0) }}</td>
                                     <td>{{ number_format($p['gr'], 0) }}</td>
                                     <td class="text-center"><a

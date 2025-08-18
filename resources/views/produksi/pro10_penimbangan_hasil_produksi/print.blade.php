@@ -98,7 +98,7 @@
         .table-bawah th,
         .table-bawah td {
             border: 1px solid black;
-            padding: 0.1rem;
+            padding: 4px;
             /* ⬅️ Padding kecil, bisa juga pakai 2px */
             vertical-align: middle;
             text-align: center;
@@ -108,8 +108,29 @@
 
 
         @media print {
-            .repeat-header {
-                display: table-header-group;
+            @page {
+                size: A4 landscape;
+                margin-top: 20mm;
+                /* jarak atas semua halaman */
+                margin-bottom: 15mm;
+                margin-left: 15mm;
+                margin-right: 15mm;
+            }
+
+            body {
+                margin: 0;
+            }
+
+            /* Biar tabel nggak pecah aneh */
+            table {
+                page-break-inside: avoid;
+            }
+
+            /* Kalau mau mulai halaman baru + jarak atas */
+            .page-break {
+                page-break-before: always;
+                padding-top: 20mm;
+                /* jarak dari header halaman */
             }
         }
     </style>
@@ -147,58 +168,62 @@
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
 
-                            <th colspan="7"></th>
+                            <th colspan="7">
+                                <p class="cop_judul text-center">FORM PENIMBANGAN HASIL PRODUKSI</p>
+                                <p class="cop_bawah text-center">Production results</p>
+                            </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.10,
                                     Rev 00</p>
                             </th>
 
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th colspan="10">
-                                <p class="cop_judul text-center">FORM PENIMBANGAN HASIL PRODUKSI</p>
-                                <p class="cop_bawah text-center">Production results</p>
+
                             </th>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td>Hari / Tanggal <br> <span class="fst-italic">date</span></td>
-
                             <td>&nbsp; : {{ tanggal($tgl) }}</td>
                         </tr>
 
                         <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-center align-middle">Jenis material <br> <span
+                            <th rowspan="2" class="text-start align-middle">Jenis material <br> <span
                                     class="fst-italic fw-lighter align-middle">Material type</span></th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot
+                            <th rowspan="2" class="text-start align-middle">Kode Batch/Lot
                                 <br> <span class="fst-italic fw-lighter">Batch/Lot code</span>
                             </th>
                             <th colspan="2" class="text-center align-middle">Jumlah
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis Produk <br> <span
+                            <th rowspan="2" class="text-start align-middle">Jenis Produk <br> <span
                                     class="fst-italic fw-lighter align-middle">Grade</span></th>
                             <th colspan="3" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter align-middle">Quantity</span> </th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan <br> <span
+                            <th rowspan="2" class="text-start align-middle">Keterangan <br> <span
                                     class="fst-italic fw-lighter align-middle">Remarks</span></th>
 
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gram</th>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gram</th>
-                            <th class="text-center">Box</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gram</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gram</th>
+                            <th class="text-end">Box</th>
                         </tr>
 
                     </thead>
                     <tbody>
                         @foreach ($penimbangan as $i)
                             @php
-                                $sbw = DB::table('sbw_kotor')
+                                $rawPartai = $i['nm_partai'];
+                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
+                                $partaiArray = array_map('trim', explode(',', $cleaned));
+                                $sbwList = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', 'like', '%' . $i['nm_partai'] . '%')
-                                    ->first();
+                                    ->whereIn('nm_partai', $partaiArray)
+                                    ->get();
                             @endphp
                             <tr class="table-bawah">
 
@@ -206,26 +231,26 @@
                                     {{ $loop->iteration }}
                                 </td>
 
-                                <td class="text-center align-middle">
-                                    {{ $sbw->nama }}
+                                <td class="text-start align-middle">
+                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td class="text-center align-middle">
-                                    {{ $sbw->no_invoice }}
+                                <td class="text-start align-middle">
+                                    {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td class="text-center align-middle">{{ number_format($i['total_pcs'], 0) }}</td>
-                                <td class="text-center align-middle">{{ number_format($i['total_gr'], 0) }}</td>
+                                <td class="text-end align-middle">{{ number_format($i['pcs'], 0) }}</td>
+                                <td class="text-end align-middle">{{ number_format($i['gr'], 0) }}</td>
 
-                                <td class="text-center align-middle">
+                                <td class="text-start align-middle">
                                     {{ $i['grade'] }}
                                 </td>
-                                <td class="text-center align-middle">
-                                    {{ number_format($i['total_pcs'], 0) }}
+                                <td class="text-end align-middle">
+                                    {{ number_format($i['pcs'], 0) }}
                                 </td>
-                                <td class="text-center align-middle">
-                                    {{ number_format($i['total_gr'], 0) }}
+                                <td class="text-end align-middle">
+                                    {{ number_format($i['gr'], 0) }}
                                 </td>
-                                <td class="text-center align-middle">
-                                    {{ $i['jumlah_box_didalamnya'] }}
+                                <td class="text-end align-middle">
+                                    {{ number_format($i['box'], 0) }}
                                 </td>
                                 <td></td>
 
@@ -235,7 +260,7 @@
 
 
                     </tbody>
-                    <tfoot>
+                    {{-- <tfoot>
                         <tr>
                             <th colspan="13">&nbsp;</th>
                         </tr>
@@ -247,19 +272,23 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="5"></th>
-                            <td colspan="3" style="height: 80px"></td>
-                            <td colspan="2" style="height: 80px"></td>
+                            <td colspan="3" style="height: 80px; text-align: center; vertical-align: bottom;">
+                                KA.PACKING</td>
+                            <td colspan="2" style="height: 80px; text-align: center; vertical-align: bottom;">QC
+                                PACKING</td>
                         </tr>
 
-                    </tfoot>
+                    </tfoot> --}}
 
                 </table>
             </div>
-            {{-- <div class="col-7">
+
+            <div class="col-7">
 
 
             </div>
             <div class="col-5">
+                <br>
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
@@ -269,13 +298,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px; text-align: center; vertical-align: bottom;">
+                                KA.PACKING
+                            </td>
+                            <td style="height: 80px; text-align: center; vertical-align: bottom;">
+                                QC PACKING
+                            </td>
+
                         </tr>
 
                     </tbody>
                 </table>
-            </div> --}}
+            </div>
 
 
         </div>

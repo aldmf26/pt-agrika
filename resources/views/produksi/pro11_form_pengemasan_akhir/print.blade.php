@@ -116,45 +116,45 @@
                     <thead>
                         <tr>
                             <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-center align-middle">Jenis material<br>
+                            <th rowspan="2" class="text-start align-middle">Jenis material<br>
                                 <span class="fst-italic fw-lighter">Material Type</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot<br>
+                            <th rowspan="2" class="text-start align-middle">Kode Batch/Lot<br>
                                 <span class="fst-italic fw-lighter">Batch/Lot code</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis Produk<br>
+                            <th rowspan="2" class="text-start align-middle">Jenis Produk<br>
                                 <span class="fst-italic fw-lighter">Grade</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis Kemasan <br>
+                            <th rowspan="2" class="text-start align-middle">Jenis Kemasan <br>
                                 <span class="fst-italic fw-lighter">Packaging Type</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jumlah Per Jenis Kemasan <br>
+                            <th rowspan="2" class="text-end align-middle">Jumlah Per Jenis Kemasan <br>
                                 <span class="fst-italic fw-lighter">Total Packing type</span>
                             </th>
                             <th colspan="2" class="text-center align-middle">Jumlah<br>
                                 <span class="fst-italic fw-lighter">Quantity</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Tgl/ bln/ thn
+                            <th rowspan="2" class="text-start align-middle">Tgl/ <br> bln/<br> thn <br>
                                 Produksi
                                 (Steaming) <br>
                                 <span class="fst-italic fw-lighter">steaming production date </span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">No Batch Kemasan <br>
+                            <th rowspan="2" class="text-start align-middle">No Batch Kemasan <br>
                                 <span class="fst-italic fw-lighter">Packaging batch no</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle" width="15%">Barcode
+                            <th rowspan="2" class="text-start align-middle" width="10%">Barcode
                                 <br>
                                 <span class="fst-italic fw-lighter">Barcode</span>
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Keterangan
+                            <th rowspan="2" class="text-start align-middle">Keterangan
                                 <br>
                                 <span class="fst-italic fw-lighter">Remaks</span>
                             </th>
 
                         </tr>
                         <tr>
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-end align-middle">Pcs</th>
+                            <th class="text-end align-middle">Gr</th>
                         </tr>
 
                     </thead>
@@ -172,30 +172,30 @@
                             @endphp
                             <tr>
                                 <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                                <td class="text-center align-middle">
+                                <td class="text-start align-middle">
                                     {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td class="text-center align-middle text-nowrap">
-
+                                <td class="text-start align-middle text-nowrap">
                                     {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
-                                <td class="text-center align-middle">{{ $p['grade'] }}</td>
-                                <td class="text-center align-middle">
-                                    {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7 cm)' }}
+                                <td class="text-start align-middle">{{ $p['grade'] }}</td>
+                                <td class="text-start align-middle">
+                                    {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7,7 cm)' }}
                                 </td>
-                                <td class="text-center align-middle">1</td>
+                                <td class="text-end align-middle">1</td>
 
-                                <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
-                                <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
-                                <td class="text-center align-middle">
+                                <td class="text-end align-middle">{{ number_format($p['pcs'], 0) }}</td>
+                                <td class="text-end align-middle">{{ number_format($p['gr'], 0) }}</td>
+                                <td class="text-start align-middle">
                                     {{ date('d/m/Y', strtotime('-1 day', strtotime($tgl))) }}</td>
-                                <td class="text-center"></td>
-                                <td class="text-center align-middle">
-                                    <div
-                                        style="height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <td class="text-start align-middle">
+                                    {{ $p['grade'] == 'sbt' ? '02-07-2025-01-07-27' : '02-07-2025-02-07-27' }}
+                                </td>
+                                <td class="text-start align-middle">
+                                    <div style="height: 60px; display: flex; align-items: center; ">
                                         {{ $p['no_barcode'] }}
                                     </div>
                                 </td>
-                                <td class="text-center"></td>
+                                <td class="text-start"></td>
                             </tr>
                         @endforeach
                     </tbody>

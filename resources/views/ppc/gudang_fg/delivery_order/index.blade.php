@@ -33,7 +33,7 @@
                                 {{ $d['ttl_box'] }} Box
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-xs  btn-primary"
+                                <a class="btn btn-xs  btn-primary" target="_blank"
                                     href="{{ route('ppc.gudang-fg.1.print', ['no_nota' => $d['no_nota'], 'tgl' => $d['tgl']]) }}"><i
                                         class="fas fa-print"></i></a>
                             </td>

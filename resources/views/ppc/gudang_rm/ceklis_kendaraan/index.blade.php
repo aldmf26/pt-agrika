@@ -1,12 +1,12 @@
-<x-app-layout :title="$title">
+<x-app-layout :title="$title" :size="'col-lg-6'">
     <div class="row">
         <div class="col-12">
-            <a href="{{ route('ppc.gudang-rm.6.create') }}" class="btn btn-sm btn-primary float-end"><i
-                    class="fas fa-plus"></i> Data</a>
+            {{-- <a href="{{ route('ppc.gudang-rm.6.create') }}" class="btn btn-sm btn-primary float-end"><i
+                    class="fas fa-plus"></i> Data</a> --}}
         </div>
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-bordered" id="example">

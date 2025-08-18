@@ -164,7 +164,8 @@
                             <td colspan="2"> : {{ tanggal($tgl) }}</td>
 
                             <td colspan="2">Suhu ruang<br> <span class="fst-italic">Room temperature</span></td>
-                            <td colspan="3"> : 28,6 °C</td>
+                            <td colspan="3"> : {{ empty($header->suhu_ruang) ? '28.6' : $header->suhu_ruang }} °C
+                            </td>
 
                             <td colspan="2">Mesin Pemanas <br> <span class="fst-italic">Steamer type</span></td>
                             <td colspan="3"> : Sistem Retort - Pemanasan Uap bertingkat</td>
@@ -172,7 +173,8 @@
                         <tr>
                             <td>Suhu sarang walet awal <br> <span class="fst-italic">Material
                                     temperature</span></td>
-                            <td colspan="2"> : 23.6 °C</td>
+                            <td colspan="2"> : {{ empty($header->suhu_sbw_awal) ? '23.6' : $header->suhu_sbw_awal }}
+                                °C</td>
 
                             <td colspan="2">Penambahan air <br> <span class="fst-italic">Adding water
                                     temperature</span></td>
@@ -230,6 +232,13 @@
                                     <td colspan="13">&nbsp;</td>
                                 </tr>
                             @endif
+                            @php
+                                $isi = DB::table('isi_ccp2')
+                                    ->where('tgl', $tgl)
+                                    ->where('urutan', ceil(($index + 1) / 6))
+                                    ->first();
+
+                            @endphp
                             <tr class="table-bawah">
                                 <td>{{ ceil(($index + 1) / 6) }}</td>
                                 <td class="text-end">{{ ($index % 6) + 1 }}</td>
@@ -237,13 +246,20 @@
                                 <td class="text-start">
                                     {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td class="text-start">{{ $time }}</td>
+                                <td class="text-start">{{ empty($isi->waktu_mulai) ? $time : $isi->waktu_mulai }}</td>
                                 <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
-                                <td class="text-end">60.5</td>
-                                <td class="text-end">1 menit 3 detik</td>
-                                <td class="text-end">80.4</td>
-                                <td class="text-end">35 detik</td>
+                                <td class="text-end">{{ empty($isi->tventing_c) ? 60.5 : $isi->tventing_c }} </td>
+                                <td class="text-end">{{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }}
+                                    menit {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} detik</td>
+                                <td class="text-end">{{ empty($isi->ttot_c) ? 80.4 : $isi->ttot_c }} </td>
+                                <td class="text-end">
+                                    @if (!empty($isi->ttot_menit) && $isi->ttot_menit > 0)
+                                        {{ $isi->ttot_menit }} menit
+                                    @endif
+
+                                    {{ empty($isi->ttot_detik) ? 35 : $isi->ttot_detik }} detik
+                                </td>
                                 <td></td>
                                 <td></td>
                             </tr>

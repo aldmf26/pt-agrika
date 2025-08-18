@@ -1,4 +1,4 @@
-@props(['title'])
+@props(['title', 'size' => 'col-lg-12'])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,13 +45,19 @@
                 </div>
                 <div class="page-content" style="margin-top: -30px">
                     <x-alert />
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="card-body">
-                                {{ $slot }}
+                    <div class="row">
+                        <div class="{{ $size }}">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        {{ $slot }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
+
                 </div>
             </div>
 

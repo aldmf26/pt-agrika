@@ -370,7 +370,7 @@ Route::controller(FG2CeklisKendaraanController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
-        Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/print', 'print')->name('print');
     });
 
 Route::controller(FG3BuktiPenerimaanBarangController::class)
@@ -415,7 +415,6 @@ Route::controller(PUR2PurchaseOrderController::class)
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{tgl}', 'print')->name('print');
         Route::get('/print_sbw/', 'print_sbw')->name('print_sbw');
-
     });
 
 Route::controller(PUR1DaftarSupplierController::class)

@@ -263,6 +263,7 @@ Route::controller(Pro9Ccp2Pemanasan::class)
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::get('/get_edit', 'get_edit')->name('get_edit');
     });
 Route::controller(Pro10PenimbanganHasilProduksi::class)
     ->prefix('produksi/10_Penimbangan_Hasil_Produksi')

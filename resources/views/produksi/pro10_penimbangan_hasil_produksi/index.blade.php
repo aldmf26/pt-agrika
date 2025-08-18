@@ -18,11 +18,11 @@
                     @foreach ($pengemasan as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ tanggal($p['tgl_terakhir']) }}</td>
+                            <td>{{ tanggal($p['tgl']) }}</td>
                             <td>{{ number_format($p['pcs'], 0) }}</td>
                             <td>{{ number_format($p['gr'], 0) }}</td>
                             <td class="text-center">
-                                <a target="_blank" href="{{ route('produksi.10.print', ['tgl' => $p['tgl_terakhir']]) }}"
+                                <a target="_blank" href="{{ route('produksi.10.print', ['tgl' => $p['tgl']]) }}"
                                     class="btn btn-sm btn-primary"><i class="fas fa-print"></i></a>
                             </td>
                         </tr>

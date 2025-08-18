@@ -39,7 +39,7 @@
 
                 @endphp
                 <tr>
-                    <td>{{ $loop->iteration }}</td>
+                    <td class="text-center align-middle">{{ $loop->iteration }}</td>
                     <td class="text-center align-middle">
                         {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                     </td>
@@ -73,8 +73,9 @@
 
     <div class="row">
         <div class="col-8">
-            <div class="mb-3">
-                <table width="100%" border="1" style="border-collapse: collapse; text-align: left;">
+            <div class="">
+                <table width="100%" border="1"
+                    style="border-collapse: collapse; text-align: left; font-size: 10px">
                     <!-- Bagian Barang Diterima -->
                     <tr>
                         <th colspan="2" style="padding: 5px;border-right: 1px solid black;">Barang diterima Warehouse
@@ -121,20 +122,7 @@
         </div>
 
 
-        {{-- <div class="col-6">
-            <span class="text-xs">Penyerahan Barang oleh Warehouse FG/Produk Jadi:</span>
-            <div class="mb-3">
-                <table class="table-xs table table-bordered">
-                    <thead>
 
-                    </thead>
-                    <tbody>
-
-                    </tbody>
-                </table>
-            </div>
-
-        </div> --}}
     </div>
 
     {{-- <div class="row">
