@@ -24,7 +24,7 @@
                             <td>{{ $item['tahun'] }}</td>
 
                             <td>
-                                <a class="btn btn-xs float-end btn-primary" target="_blank"
+                                <a class="btn btn-xs  btn-primary" target="_blank"
                                     href="{{ route('ppc.gudang-fg.2.print', ['bulan' => $item['bulan'], 'tahun' => $item['tahun']]) }}"><i
                                         class="fas fa-print"></i></a>
                             </td>
