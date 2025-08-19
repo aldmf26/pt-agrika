@@ -101,8 +101,8 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
             'item_id',
             'rincian_id',
             'tanggal',
-            DB::raw('"AC" as kesimpulan'),
-            DB::raw('"-" as fungsi'),
+            'detail_perbaikan as kesimpulan',
+            'verifikasi_user as fungsi',
             DB::raw('"perbaikan" as ket')
         )
             ->where('item_id', $r->id)

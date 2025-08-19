@@ -16,7 +16,7 @@
             font-size: 14px;
             font-weight: bold;
             text-align: center;
-            margin: 15px;
+            margin: 13px;
         }
 
         .shapes {
@@ -25,7 +25,7 @@
         }
 
         .cop_text {
-            font-size: 12px;
+            font-size: 10px;
             text-align: left;
             font-weight: normal;
             margin-top: 100px;
@@ -74,7 +74,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
@@ -155,7 +155,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            Sudah diselesaikan
+                            {{ $permintaan->detail_perbaikan ?? '-' }}
                         </td>
                     </tr>
                     <tr>
@@ -171,7 +171,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            Perbaikan sudah dilakukan
+                            {{ $permintaan->verifikasi_user ?? '-' }}
                         </td>
                     </tr>
 
@@ -200,10 +200,10 @@
                     </tr>
                     <tr>
                         <td>Pukul
-                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(5)->format('H:i') }}
+                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('H:i') }}
                         </td>
                         <td>Pukul
-                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(5)->format('H:i') }}
+                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('H:i') }}
                         </td>
                     </tr>
 

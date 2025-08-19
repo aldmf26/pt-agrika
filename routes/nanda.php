@@ -149,6 +149,7 @@ Route::controller(Hrga3PermintaanPerbaikan::class)
         Route::get('/sukses', 'sukses')->name('sukses');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::post('/save_tindakan', 'save_tindakan')->name('save_tindakan');
     });
 
 Route::controller(Hrga1ProgramPerawatanMesin::class)
