@@ -101,7 +101,7 @@
             padding: 0.5rem;
             vertical-align: middle;
             text-align: center;
-            white-space: nowrap;
+            /* white-space: nowrap; */
             /* ⬅️ ini agar tidak membungkus teks */
         }
     </style>
@@ -163,30 +163,32 @@
                 <table width="100%">
                     <thead>
                         <tr>
-                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
-                                    alt=""></th>
-                            <th colspan="5"></th>
+                            <th class="align-top" colspan="2"><img style="width: 80px"
+                                    src="{{ asset('img/logo.jpeg') }}" alt=""></th>
+                            <th colspan="4">
+                                <p class="cop_judul  shapes">RIWAYAT PEMELIHARAAN SARANA & <br> PRASARANA UMUM</p>
+                            </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.:FRM.HRGA.05.02,
                                     Rev.00</p>
                             </th>
 
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <th colspan="2"></th>
                             <th colspan="4">
                                 <p class="cop_judul  shapes">RIWAYAT PEMELIHARAAN SARANA & <br> PRASARANA UMUM</p>
-                                {{-- <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p> --}}
+
                             </th>
                             <th colspan="2"></th>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <th colspan="8">&nbsp;</th>
                         </tr>
                         <tr>
                             <td colspan="3">Nama Sarana/Prasarana Umum</td>
 
-                            <td colspan="2"> : {{ $items->nama_item }}</td>
+                            <td colspan="5"> : {{ $items->nama_item }}</td>
                         </tr>
                         <tr>
                             <td colspan="3">Jumlah</td>
@@ -209,41 +211,48 @@
                             <td colspan="2"> : {{ $tahun }}</td>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="dhead  align-middle text-center">Tanggal</th>
-                            <th class="dhead  align-middle text-center">Urutan unit / <br> Ruang</th>
-                            <th class="dhead  align-middle text-center">Perawatan/ <br> Perbaikan</th>
-                            <th class="dhead  align-middle text-center">Jenis yang <br> dilakukan</th>
-                            <th class="dhead  align-middle text-center">Kondisi kebersihan akhir</th>
-                            <th class="dhead  align-middle text-center">Kondisi fungsi akhir</th>
-                            <th class="dhead  align-middle text-center">Kesimpulan <br> (Ok/Not OK)</th>
-                            <th class="dhead  align-middle text-center">Paraf Pelaksana</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Tanggal</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Urutan unit / <br>
+                                Ruang</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Perawatan/ <br>
+                                Perbaikan</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap" width="30%">Jenis
+                                yang dilakukan</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Kondisi <br>
+                                kebersihan <br>
+                                akhir</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Kondisi fungsi <br>
+                                akhir
+                            </th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Kesimpulan <br>
+                                (Ok/Not OK)</th>
+                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Paraf Pelaksana</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($union as $r)
                             <tr class="table-bawah">
                                 <td class="text-start">{{ date('d/m/Y', strtotime($r->tanggal)) }}</td>
-                                <td class="text-start" style="white-space: normal">{{ $items->no_identifikasi }} -
-                                    {{ $items->lokasi }}</td>
+                                @if ($items->jenis_item == 'ac')
+                                    <td class="text-start" style="white-space: normal">{{ $items->no_identifikasi }} -
+                                        {{ $items->lokasi }}</td>
+                                @else
+                                    @php
+                                        $rincian = DB::table('rincian_ruangan')->where('id', $r->rincian_id)->first();
+                                    @endphp
+                                    <td class="text-start" style="white-space: normal">{{ $rincian->nama_rincian }}
+                                    </td>
+                                @endif
+
                                 <td class="text-start">{{ ucfirst(strtolower($r->ket)) }}</td>
                                 <td class="text-start">
-                                    @if ($jenis == 'ac')
-                                        {{ $r->ket == 'perawatan' ? 'Pembersihan AC ' : 'Kembali bersih' }}
-                                    @else
-                                        {{ $r->nama_item }} :
-                                        {{ $r->ket == 'perawatan' ? 'Kondisi Bersih' : 'Kembali bersih' }}
-                                    @endif
+                                    {{ $r->kesimpulan }}
                                 </td>
                                 <td class="text-start">
-                                    @if ($jenis == 'ac')
-                                        {{ $r->ket == 'perawatan' ? 'Kondisi bersih ' : 'Kembali bersih' }}
-                                    @else
-                                        {{ $r->nama_item }} :
-                                        {{ $r->ket == 'perawatan' ? 'Kondisi Bersih' : 'Kembali bersih' }}
-                                    @endif
+                                    {{ $r->ket == 'perawatan' ? 'Bersih ' : 'Kembali bersih' }}
                                 </td>
                                 <td class="text-start" class="text-start" style="white-space: normal">
-                                    {{ $r->ket == 'perawatan' ? 'Normal setelah dibersihkan, mencapai suhu yang diinginkan' : 'Sudah kembali normal' }}
+                                    {{ $r->fungsi }}
                                 </td>
                                 <td class="text-start">
                                     Ok

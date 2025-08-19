@@ -12,6 +12,7 @@ class PerawatanModel extends Model
         'tgl',
         'kesimpulan',
         'fungsi',
+        'rincian_id',
     ];
 
     public function item()

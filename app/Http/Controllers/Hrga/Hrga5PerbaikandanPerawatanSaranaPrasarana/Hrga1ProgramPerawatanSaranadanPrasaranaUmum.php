@@ -130,14 +130,32 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
             $total = floor(12 / $r->frekuensi_perawatan[$i]);
 
             for ($j = 0; $j < $total; $j++) {
-                $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
-                $data = [
-                    'item_id' => $r->item_id[$i],
-                    'tgl' => $tgl,
-                    'kesimpulan' => 'kondisi masih bagus',
-                    'fungsi' => 'bagus',
-                ];
-                PerawatanModel::create($data);
+                $item = ItemPerawatan::find($r->item_id[$i]);
+
+                if ($item->jenis_item == 'ruangan') {
+                    $rincian = DB::table('rincian_ruangan')->where('item_id', $r->item_id[$i])->get();
+                    $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
+                    foreach ($rincian as $k) {
+                        $data = [
+                            'item_id' => $r->item_id[$i],
+                            'rincian_id' => $k->id,
+                            'tgl' => $tgl,
+                            'kesimpulan' => 'Meninjau kebersihan dan keadaan dinding, lantai, langit-langit',
+                            'fungsi' => 'Dinding, lantai, langit-langit :tidak menimbulkan kontaminan',
+                        ];
+                        PerawatanModel::create($data);
+                    }
+                } else {
+                    $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
+                    $data = [
+                        'item_id' => $r->item_id[$i],
+                        'rincian_id' => 0,
+                        'tgl' => $tgl,
+                        'kesimpulan' => 'Permbersihan AC',
+                        'fungsi' => 'Normal setelah dibersihkan, mencapai suhu yang diinginkan',
+                    ];
+                    PerawatanModel::create($data);
+                }
             }
         }
 
