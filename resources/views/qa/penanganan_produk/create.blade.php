@@ -58,12 +58,12 @@
                     </select>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="form-group">
                     <label for="">7. Penanganan</label>
-                    <input required type="text" name="penanganan"
+                    <textarea required name="penanganan"
                         placeholder="Jabarkan satu demi satu langkah yang harus dilakukan terhadap status keputusan produk"
-                        class="form-control">
+                        class="form-control" rows="3"></textarea>
                 </div>
             </div>
         </div>

@@ -49,7 +49,7 @@ class QA1PenangananProdukController extends Controller
 
     public function print($id)
     {
-        $datas = PenangananProdukTidakSesuai::find($id)->first();
+        $datas = PenangananProdukTidakSesuai::where('id', $id)->first();
         $data = [
             'title' => 'PENANGANAN PRODUK TIDAK SESUAI  ',
             'dok' => 'Dok.No.: FRM.QA.02.01, Rev.00',
