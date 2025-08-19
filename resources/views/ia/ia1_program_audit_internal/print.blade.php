@@ -1,10 +1,10 @@
 {{-- berubah --}}
-<div class="logo text-center">
+{{-- <div class="logo text-center">
     <a href="dashboard" style="display: inline-block; text-decoration: none;">
         <img src="{{ asset('img/logocash-tf.png') }}" alt="Logo"
             style="width: 100%; max-width: 280px; object-fit:cover;">
     </a>
-</div>
+</div> --}}
 <x-hccp-print :title="$title" :dok="$dok">
     <div class="mt-5 d-flex justify-content-between">
         <h6>Standar: GMP & HACCP</h6>
@@ -13,7 +13,7 @@
             @endfor {{ $tahun }}</h6>
     </div>
 
-    <table class="mt-4 table table-bordered table-striped">
+    <table class="mt-4 table table-bordered border-dark table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -63,28 +63,26 @@
     <div class="row">
         <div class="col-4">
             <span>Note : </span>
-            <ol class="ms-5">
-                <li>- Standar GMP dilakukan audit bulanan</li>
-                <li>- Standar HACCP dilakukan audit tahunan</li>
-            </ol>
+            <br>
+            <span>- Standar HACCP dilakukan audit tahunan</span>
         </div>
         <div class="col-3"></div>
-        <div class="col-5">
-            <table class="table table-bordered" style="font-size: 11px">
+        <div class="col-2"></div>
+        <div class="col-3">
+            <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                        {{-- <th class="text-center" width="33.33%">Diketahui Oleh:</th> --}}
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
                     </tr>
                     <tr>
                         <td class="text-center">[LEAD AUDITOR]</td>
-                        <td class="text-center">[FSTL]</td>
+                        {{-- <td class="text-center">[FSTL]</td> --}}
                     </tr>
                 </tbody>
             </table>
