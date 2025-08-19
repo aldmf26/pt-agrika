@@ -15,6 +15,8 @@ class PermintaanPerbaikanSaranaPrasana extends Model
         'tanggal',
         'waktu',
         'deskripsi_masalah',
+        'detail_perbaikan',
+        'verifikasi_user',
     ];
 
     public function item()

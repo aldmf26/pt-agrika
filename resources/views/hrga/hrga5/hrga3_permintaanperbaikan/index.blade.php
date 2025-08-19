@@ -36,9 +36,9 @@
                                     <a href="{{ route('hrga5.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
                                         class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-print"></i>
                                         print</a>
-                                    <a href="{{ route('hrga5.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
-                                        class="btn btn-primary btn-sm"><i class="fas fa-edit"></i>
-                                        tindakan</a>
+                                    <button type="button" invoice_pengajuan="{{ $p->invoice_pengajuan }}"
+                                        class="btn btn-primary btn-sm tindakan"><i class="fas fa-edit"></i>
+                                        tindakan</button>
                                 </td>
                             </tr>
                         @endforeach
