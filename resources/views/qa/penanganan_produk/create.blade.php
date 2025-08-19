@@ -19,13 +19,20 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">3. Nama produk</label>
-                    <input required type="text" name="nama_produk" placeholder="Nama produk" class="form-control">
+                    <select name="nama_produk" id="" class="select2sbw">
+                        <option value="">Pilih Produk</option>
+                        @foreach ($sbw as $s)
+                            <option value="{{ $s->id }}" data-no_lot="{{ $s->no_lot }}">{{ $s->nama }} -
+                                {{ $s->no_lot }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="col-3">
                 <div class="form-group">
                     <label for="">4. Kode produksi</label>
-                    <input required type="text" name="kode_produksi" placeholder="Tulis Batch number"
+                    <input required type="text" readonly name="kode_produksi" placeholder="Tulis Batch number"
                         class="form-control">
                 </div>
             </div>
@@ -66,5 +73,18 @@
             </div>
         </div>
     </form>
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $('.select2sbw').select2();
+                }, 100);
 
+                $('.select2sbw').change(function() {
+                    var no_lot = $('.select2sbw').find(':selected').data('no_lot');
+                    $('[name="kode_produksi"]').val(no_lot);
+                });
+            });
+        </script>
+    @endsection
 </x-app-layout>
