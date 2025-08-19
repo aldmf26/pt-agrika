@@ -4,16 +4,16 @@
             <div class="float-end">
                 <a href="#" data-bs-target="#tambah" data-bs-toggle="modal" class="btn btn-primary btn-sm"><i
                         class="fas fa-plus"></i>Data</a>
-                <a href="{{ route('hrga6.1.print', ['id_lokasi' => $id_lokasi]) }}" class="btn btn-primary btn-sm"><i
-                        class="fas fa-print"></i> Print</a>
+                <a href="{{ route('hrga6.1.print', ['id_lokasi' => $id_lokasi]) }}" target="_blank"
+                    class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a>
             </div>
         </div>
         <div class="col-lg-12">
             <div>
                 <div class="mb-3 d-flex justify-content-between">
                     <div>
-                        Area Concern :
-                        <ul class="nav nav-pills" style="font-size: 12px">
+                        Area Concern : Produksi
+                        {{-- <ul class="nav nav-pills" style="font-size: 12px">
                             @foreach ($lokasi as $l)
                                 <li class="nav-item ">
                                     <a class="nav-link @if ($area == $l->lokasi) active @endif"aria-current="page"
@@ -21,12 +21,12 @@
                                 </li>
                             @endforeach
 
-                        </ul>
+                        </ul> --}}
                     </div>
 
                 </div>
 
-                <table id="table1" class="table table-bordered table-dark">
+                <table id="example" class="table table-bordered ">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -64,7 +64,7 @@
             <form action="{{ route('hrga6.1.store') }}" method="post">
                 @csrf
                 <x-modal idModal="tambah" title="Jadwal Sanitasi" size="modal-full" btnSave="Y">
-                    <table id="tableScroll" class="table table-bordered" x-data="{
+                    <table class="table table-bordered" x-data="{
                         rows: ['1']
                     }">
                         <thead>

@@ -63,7 +63,7 @@ class Hrga1PerencanaanKebersihan extends Controller
         $data = [
             'title' => 'Perencanaan Kebersihan / Sanitasi',
             'area' => $r->area,
-            'dok' => 'FRM.HRGA.06.01, Rev.00',
+            'dok' => 'Dok.No.:FRM.HRGA.06.01, Rev.00',
             'datas' => $datas
         ];
         return view($this->view . '.print', $data);
