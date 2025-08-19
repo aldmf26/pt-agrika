@@ -82,24 +82,31 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
 
     public function print(Request $r)
     {
-
-        $items = ItemPerawatan::join('lokasi', 'item_perawatan.lokasi_id', '=', 'lokasi.id')->select('nama_item as nama_item', 'jumlah as jumlah', 'no_identifikasi', 'lokasi.lokasi')->where('item_perawatan.id', $r->id)->first();
-
-
+        $items = ItemPerawatan::join('lokasi', 'item_perawatan.lokasi_id', '=', 'lokasi.id')->select('nama_item as nama_item', 'jumlah as jumlah', 'no_identifikasi', 'lokasi.lokasi', 'jenis_item')->where('item_perawatan.id', $r->id)->first();
         $perawatan = PerawatanModel::select(
             'id',
             'item_id',
+            'rincian_id',
             'tgl as tanggal',
+            'kesimpulan',
+            'fungsi',
             DB::raw('"perawatan" as ket')
         )
             ->where('item_id', $r->id)
             ->whereBetween('tgl', [$r->tahun . '-01-01', now()])
             ->whereYear('tgl', $r->tahun);
 
-        $perbaikan = PermintaanPerbaikanSaranaPrasana::select('id', 'item_id', 'tanggal', DB::raw('"perbaikan" as ket'))
+        $perbaikan = PermintaanPerbaikanSaranaPrasana::select(
+            'id',
+            'item_id',
+            'rincian_id',
+            'tanggal',
+            DB::raw('"AC" as kesimpulan'),
+            DB::raw('"-" as fungsi'),
+            DB::raw('"perbaikan" as ket')
+        )
             ->where('item_id', $r->id)
             ->whereYear('tanggal', $r->tahun);
-
         $union = $perawatan->unionAll($perbaikan)->get();
         // } else {
         //     $items = LokasiModel::select(
