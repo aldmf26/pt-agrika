@@ -5,23 +5,29 @@ namespace App\Http\Controllers\QA\PenangananBarangTakSesuai;
 use App\Http\Controllers\Controller;
 use App\Models\PenangananProdukTidakSesuai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QA1PenangananProdukController extends Controller
 {
     public function index()
     {
         $penangan = PenangananProdukTidakSesuai::all();
+
         $data = [
             'title' => 'Penanganan Barang Tak Sesuai',
-            'penanganan' => $penangan
+            'penanganan' => $penangan,
         ];
         return view('qa.penanganan_produk.index', $data);
     }
 
     public function create()
     {
+        $sbw = DB::select("SELECT a.id,b.nama,a.no_invoice as no_lot FROM `sbw_kotor` as a
+                join grade_sbw_kotor as b on a.grade_id = b.id");
+
         $data = [
             'title' => 'Penanganan Barang Tak Sesuai',
+            'sbw' => $sbw,
         ];
         return view('qa.penanganan_produk.create', $data);
     }
@@ -43,7 +49,7 @@ class QA1PenangananProdukController extends Controller
 
     public function print($id)
     {
-        $datas = PenangananProdukTidakSesuai::find($id)->first();
+        $datas = PenangananProdukTidakSesuai::where('id', $id)->first();
         $data = [
             'title' => 'PENANGANAN PRODUK TIDAK SESUAI  ',
             'dok' => 'Dok.No.: FRM.QA.02.01, Rev.00',
@@ -51,5 +57,4 @@ class QA1PenangananProdukController extends Controller
         ];
         return view('qa.penanganan_produk.print', $data);
     }
-
 }

@@ -27,7 +27,7 @@
                     <tr>
                         <td>Periode Masa Percobaan</td>
                         <td>:</td>
-                        <td>{{ $pegawai->penilaiankaryawan->periode }} Bulan</td>
+                        <td>{{ $pegawai->penilaiankaryawan->periode ?? 1 }} Bulan</td>
                     </tr>
                     <tr>
                         <td><span style="font-size: 12px"><em>* Coret yang tidak sesuai</em></span></td>
@@ -46,7 +46,7 @@
                     <tr>
                         <td>Pendidikan</td>
                         <td>{{ $pegawai->penilaiankaryawan->pendidikan_standar ?? 'N/A' }}</td>
-                        <td>{{ $pegawai->penilaiankaryawan->pendidikan_hasil ?? 'N/A' }}</td> 
+                        <td>{{ $pegawai->penilaiankaryawan->pendidikan_hasil ?? 'N/A' }}</td>
                     </tr>
                     <tr>
                         <td>Pengalaman</td>

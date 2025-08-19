@@ -40,7 +40,12 @@
         <div class="row" x-show="add" x-transition>
             <div class="col-2">
                 <label for="">Departemen :</label>
-                <input type="text" wire:model="form.departemen" class="form-control">
+                <select wire:model="form.departemen" class="form-control">
+                    <option value="">Pilih Departemen</option>
+                    @foreach ($departemenBk as $item)
+                        <option value="{{ $item }}">{{ strtoupper($item) }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-2">
                 <label for="">Auditee :</label>
@@ -102,6 +107,8 @@
                     <td>{{ $key + 1 }}</td>
                     <td>
                         {{ $audit->departemen }}
+                        <a class="btn btn-xs btn-danger float-end" wire:click="delete({{ $audit->id }})"
+                            wire:confirm='"Yakin ingin menghapus data ini?"'><i class="fas fa-trash"></i></a>
                     </td>
                     <td>{{ $audit->audite }}</td>
                     <td>{{ $audit->auditor }}</td>
@@ -119,7 +126,7 @@
                                     @endphp
 
                                     <a class="dropdown-item"
-                                        href="{{ route('ia.1.audit', ['id' => $audit->id, 'departemen' => $audit->departemen, 'bulan' => $i, 'tahun' => $tahun]) }}">{{ $this->cekSelesai($audit->departemen, $i) ? 'Edit' : 'Audit' }}</a>
+                                        href="{{ route('ia.1.audit', ['id' => $audit->id, 'departemen' => strtolower($audit->departemen), 'bulan' => $i, 'tahun' => $tahun]) }}">{{ $this->cekSelesai($audit->departemen, $i) ? 'Edit' : 'Audit' }}</a>
                                     {{-- <a class="dropdown-item" href="{{$link}}">Audit</a> --}}
                                 </div>
                             </div>

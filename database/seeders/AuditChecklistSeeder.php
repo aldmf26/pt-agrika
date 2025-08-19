@@ -16,9 +16,9 @@ class AuditChecklistSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->bk();
         $this->hrga();
         $this->purchasing();
-        $this->bk();
         $this->qa();
     }
 
