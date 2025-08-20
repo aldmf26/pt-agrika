@@ -80,7 +80,7 @@
 
     <form action="{{ route('hrga8.1.store') }}" method="post">
         @csrf
-        <x-modal_plus id="edit" size="modal-lg">
+        <x-modal_plus id="tambah" size="modal-lg">
             <div class="row">
                 <div class="col-lg-4">
                     <label for="">Mesin</label>
