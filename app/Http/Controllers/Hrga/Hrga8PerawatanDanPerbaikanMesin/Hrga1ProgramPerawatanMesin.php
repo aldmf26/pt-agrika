@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin;
 
 use App\Http\Controllers\Controller;
+use App\Models\checklistPerawatanMesin;
 use App\Models\ItemMesin;
 use App\Models\ProgramPerawatanMesin;
 use Illuminate\Http\Request;
@@ -37,7 +38,26 @@ class Hrga1ProgramPerawatanMesin extends Controller
                 'tanggal_mulai' => $r->tanggal_mulai[$i],
             ];
             ProgramPerawatanMesin::create($data);
+
+            $total = floor(12 / $r->frekuensi_perawatan[$i]);
+            for ($j = 0; $j < $total; $j++) {
+
+                $kriteria = DB::table('kriteria_pemeriksaan')->where('item_mesin_id', $r->item_mesin_id[$i])->get();
+                $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
+                foreach ($kriteria as $k) {
+                    $data = [
+                        'item_mesin_id' => $r->item_mesin_id[$i],
+                        'kriteria_id' => $k->id,
+                        'tgl' => $tgl,
+                        'metode' => 'Visual',
+                        'hasil_pemeriksaan' => 'Ok',
+                        'status' => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
+                    ];
+                    checklistPerawatanMesin::create($data);
+                }
+            }
         }
+
 
         return redirect()->route('hrga8.1.index')->with('sukses', 'Data Berhasil Disimpan');
     }

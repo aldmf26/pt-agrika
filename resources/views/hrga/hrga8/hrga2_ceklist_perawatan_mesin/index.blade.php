@@ -6,10 +6,10 @@
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Lantai</th>
                         <th>Nama Mesin</th>
-                        <th>Merek</th>
-                        <th>No identifikasi</th>
-                        <th>Bulan & Tahun Jadwal</th>
+                        <th>Jumlah</th>
+                        <th>Lokasi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -17,19 +17,19 @@
                     @foreach ($checklist as $d)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $d->perawatan->item->nama_mesin }}</td>
-                            <td>{{ $d->perawatan->item->merek }}</td>
-                            <td>{{ $d->perawatan->item->no_identifikasi }}</td>
-                            <td>{{ date('m', strtotime($d->tgl)) }}&{{ date('Y', strtotime($d->tgl)) }} </td>
+                            <td>{{ $d->item->lokasi->lantai }}</td>
+                            <td>{{ $d->item->nama_mesin }}</td>
+                            <td>{{ $d->item->jumlah }}</td>
+                            <td>{{ $d->item->lokasi->lokasi }}</td>
                             <td>
-                                @php
+                                {{-- @php
                                     $bulan = date('m', strtotime($d->tgl));
                                     $tahun = date('Y', strtotime($d->tgl));
-                                @endphp
-                                <a href="{{ route('hrga8.2.print', ['id' => $d->perawatan_mesin_id, 'bulan' => $bulan, 'tahun' => $tahun]) }}"
-                                    target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-print"></i> print</a>
-                                <a href="{{ route('hrga8.2.add', ['id' => $d->perawatan_mesin_id, 'bulan' => $bulan, 'tahun' => $tahun]) }}"
-                                    class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> edit</a>
+                                @endphp --}}
+                                <a href="{{ route('hrga8.2.print', ['id' => $d->item_mesin_id]) }}" target="_blank"
+                                    class="btn btn-sm btn-primary"><i class="fas fa-print"></i> print</a>
+                                {{-- <a href="{{ route('hrga8.2.add', ['id' => $d->item_mesin_id]) }}"
+                                    class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> edit</a> --}}
                             </td>
 
                         </tr>

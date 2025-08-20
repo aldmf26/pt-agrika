@@ -47,29 +47,37 @@
                             @endphp
                             @foreach ($bulan as $index => $b)
                                 @php
-                                    $tugas = App\Models\checklistPerawatanMesin::where('perawatan_mesin_id', $p->id)
+                                    $tugas = App\Models\checklistPerawatanMesin::where('item_mesin_id', $p->id)
                                         ->whereMonth('tgl', $index + 1)
                                         ->whereYear('tgl', $tahun)
-                                        ->groupBy('perawatan_mesin_id')
+                                        ->groupBy('item_mesin_id')
                                         ->first();
                                 @endphp
-                                @if (in_array($index + 1, $bulanPerawatan))
+                                <td class="bg-primary text-center">
+
+
+
+                                </td>
+
+                                {{-- @if (in_array($index + 1, $bulanPerawatan))
                                     @if (empty($tugas->tgl))
                                         <td class="bg-primary text-center" onclick="toggleLink(this)">
+
                                             <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1, 'tahun' => $tahun]) }}"
-                                                class="btn btn-success" style="display: none;">checklist</a>
+                                                class="btn btn-success">checklist</a>
 
                                         </td>
                                     @else
                                         <td class="bg-success text-center" onclick="toggleLink(this)">
+
                                             <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1, 'tahun' => $tahun]) }}"
-                                                class="btn btn-primary" style="display: none;">edit</a>
+                                                class="btn btn-primary">edit</a>
 
                                         </td>
                                     @endif
                                 @else
                                     <td class=""></td>
-                                @endif
+                                @endif --}}
                             @endforeach
                         </tr>
                     @endforeach
@@ -109,7 +117,9 @@
                                 <select class="form-control select2" name="item_mesin_id[]">
                                     <option value="">Pilih mesin</option>
                                     @foreach ($item as $i)
-                                        <option value="{{ $i->id }}">{{ $i->nama_mesin }}
+                                        <option value="{{ $i->id }}">{{ $i->nama_mesin }} -
+                                            {{ $i->lokasi->lokasi }}
+                                        </option>
 
                                         </option>
                                     @endforeach

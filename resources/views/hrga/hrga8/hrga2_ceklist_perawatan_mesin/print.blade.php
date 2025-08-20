@@ -12,8 +12,12 @@
 
     <title>{{ $title }}</title>
     <style>
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+        }
+
         .cop_judul {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: bold;
             text-align: center;
             margin: 15px;
@@ -25,7 +29,7 @@
         }
 
         .cop_text {
-            font-size: 12px;
+            font-size: 11px;
             text-align: left;
             font-weight: normal;
             margin-top: 100px;
@@ -57,6 +61,11 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        .table-bordered td,
+        .table-bordered th {
+            border: 1px solid black;
+        }
     </style>
 </head>
 
@@ -64,73 +73,105 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">CEKLIST PERAWATAN MESIN PROSES PRODUKSI</p>
+                    <p class="cop_judul">CEKLIST PERAWATAN MESIN & PERALATAN</p>
                 </div>
             </div>
             <div class="col-3 ">
                 <p class="cop_text">Dok.No.: FRM.HRGA.08.02, Rev.00</p>
             </div>
-            <div class="col-lg-7">
-                <table>
+            <div class="col-4">
+                <table style="font-size: 10px">
                     <tr>
-                        <td>Nama mesin</td>
+                        <td>Lantai</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->item->nama_mesin }}</td>
+                        <td>{{ $mesin->lokasi->lantai }}</td>
                     </tr>
                     <tr>
-                        <td>Merk</td>
+                        <td>Nama mesin / peralatan</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->item->merek }}</td>
+                        <td>{{ $mesin->nama_mesin }}</td>
                     </tr>
                     <tr>
-                        <td>No mesin</td>
+                        <td>Jumlah</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->item->no_identifikasi }}</td>
+                        <td>{{ $mesin->jumlah }}</td>
                     </tr>
                     <tr>
                         <td>Lokasi</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->item->lokasi->lokasi }}</td>
+                        <td>{{ $mesin->lokasi->lokasi }}</td>
                     </tr>
                     <tr>
-                        <td>Tanggal</td>
+                        <td>Frekuensi</td>
                         <td width="1%">:</td>
-
-                        <td>
-                            {{ tanggal($checklist2->tgl) }}
-                        </td>
+                        <td>{{ $perawatan->frekuensi_perawatan }} bulan</td>
                     </tr>
+                    <tr>
+                        <td>PIC</td>
+                        <td width="1%">:</td>
+                        <td>{{ $perawatan->penanggung_jawab }}</td>
+                    </tr>
+
+
                 </table>
             </div>
             <div class="col-lg-12">
                 <br>
-                <br>
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Kriteria pemeriksaan</th>
-                            <th>Metode</th>
-                            <th>Hasil Pemeriksaan</th>
-                            <th>Status</th>
-                            <th>Keterangan</th>
+                            <th class="align-middle">No</th>
+                            <th class="align-middle">Tanggal</th>
+                            <th class="align-middle">Urutan Unit</th>
+                            <th class="align-middle">Kriteria <br> pemeriksaan</th>
+                            <th class="align-middle">Metode</th>
+                            <th class="align-middle">Hasil Pemeriksaan</th>
+                            <th class="align-middle">Status</th>
+                            <th class="align-middle">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            // Hitung berapa kali kombinasi (tgl + mesin) muncul
+                            $grouped = [];
+                            foreach ($checklist as $item) {
+                                $key = $item->tgl . '-' . $mesin->id;
+                                if (!isset($grouped[$key])) {
+                                    $grouped[$key] = 0;
+                                }
+                                $grouped[$key]++;
+                            }
+                        @endphp
+
+                        @php $printed = []; @endphp
+
                         @foreach ($checklist as $c)
+                            @php $key = $c->tgl . '-' . $mesin->id; @endphp
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $c->kriteria_pemeriksaan }}</td>
-                                <td>{{ $c->metode }}</td>
-                                <td>{{ $c->hasil_pemeriksaan }}</td>
-                                <td>{{ $c->status }}</td>
-                                <td>{{ $c->keterangan }}</td>
+                                <td class="text-nowrap class="align-middle"">{{ tanggal($c->tgl) }}</td>
+
+                                {{-- Cek apakah kombinasi ini sudah dicetak --}}
+                                @if (!in_array($key, $printed))
+                                    <td class="align-middle" rowspan="{{ $grouped[$key] }}">
+                                        {{ $mesin->nama_mesin }}
+                                        {{ empty($mesin->jumlah) ? 1 : '1 sampai ' . $mesin->jumlah }}
+                                    </td>
+                                    @php $printed[] = $key; @endphp
+                                @endif
+
+                                <td class="align-middle">{{ $c->kriteria->kriteria }}</td>
+                                <td class="align-middle">{{ $c->metode }}</td>
+                                <td class="align-middle">{{ $c->hasil_pemeriksaan }}</td>
+                                <td class="align-middle">{{ $c->status }}</td>
+                                <td class="align-middle">{{ $c->keterangan }}</td>
                             </tr>
                         @endforeach
+
                     </tbody>
 
                 </table>

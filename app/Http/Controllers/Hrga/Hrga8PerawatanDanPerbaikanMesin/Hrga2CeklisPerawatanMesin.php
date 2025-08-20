@@ -14,7 +14,7 @@ class Hrga2CeklisPerawatanMesin extends Controller
     {
         $data = [
             'title' => 'Checklist perawatan mesin',
-            'checklist' => checklistPerawatanMesin::groupBy('perawatan_mesin_id')->get(),
+            'checklist' => checklistPerawatanMesin::groupBy('item_mesin_id')->get(),
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.index', $data);
     }
@@ -56,11 +56,21 @@ class Hrga2CeklisPerawatanMesin extends Controller
 
     public function print(Request $r)
     {
+        $minDate = checklistPerawatanMesin::min('tgl');
+
+
         $data = [
             'title' => 'Checklist perawatan mesin',
-            'mesin' => ProgramPerawatanMesin::where('id', $r->id)->first(),
-            'checklist' => checklistPerawatanMesin::where('perawatan_mesin_id', $r->id)->whereMonth('tgl', $r->bulan)->whereYear('tgl', $r->tahun)->orderBy('id', 'asc')->get(),
-            'checklist2' => checklistPerawatanMesin::where('perawatan_mesin_id', $r->id)->whereMonth('tgl', $r->bulan)->whereYear('tgl', $r->tahun)->orderBy('id', 'asc')->first(),
+            'mesin' => ItemMesin::where('id', $r->id)->first(),
+            'perawatan' => ProgramPerawatanMesin::where('item_mesin_id', $r->id)
+                ->latest()
+                ->first(),
+
+            'checklist' => checklistPerawatanMesin::where('item_mesin_id', $r->id)
+                ->whereBetween('tgl', [$minDate, now()])
+                ->orderBy('id', 'asc')
+                ->get(),
+            'checklist2' => checklistPerawatanMesin::where('item_mesin_id', $r->id)->whereMonth('tgl', $r->bulan)->whereYear('tgl', $r->tahun)->orderBy('id', 'asc')->first(),
             'bulan' => $r->bulan,
             'tahun' => $r->tahun,
             'id' => $r->id

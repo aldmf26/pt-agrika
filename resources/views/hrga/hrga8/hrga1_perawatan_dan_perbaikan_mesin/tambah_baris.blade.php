@@ -3,7 +3,8 @@
         <select class="form-control select2_baru" name="item_mesin_id[]">
             <option value="">Pilih mesin</option>
             @foreach ($item as $i)
-                <option value="{{ $i->id }}">{{ $i->nama_mesin }}
+                <option value="{{ $i->id }}">{{ $i->nama_mesin }} -
+                    {{ $i->lokasi->lokasi }}
 
                 </option>
             @endforeach
