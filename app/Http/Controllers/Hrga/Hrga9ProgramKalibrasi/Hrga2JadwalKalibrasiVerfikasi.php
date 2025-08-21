@@ -20,7 +20,7 @@ class Hrga2JadwalKalibrasiVerfikasi extends Controller
         }
 
         $data = [
-            'title' => 'FRM.HRGA.09.02 - JADWAL KALIBRASI VERIFIKASI',
+            'title' => 'FRM.HRGA.09.02 - HASIL SUMMARY KALIBRASI',
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $tahun,
             'jadwal' => JadwalKalibrasi::whereYear('tanggal', $tahun)->get(),

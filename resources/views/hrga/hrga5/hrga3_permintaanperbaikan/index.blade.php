@@ -34,7 +34,7 @@
                                 <td>{{ $p->item->no_identifikasi }}</td>
                                 <td>{{ ucfirst(strtolower($p->diajukan_oleh)) }}</td>
                                 <td>{{ ucfirst(strtolower($p->deskripsi_masalah)) }}</td>
-                                <td>
+                                <td class="text-nowrap">
                                     <a href="{{ route('hrga5.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
                                         class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-print"></i>
                                         print</a>

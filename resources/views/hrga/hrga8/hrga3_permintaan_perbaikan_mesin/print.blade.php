@@ -73,10 +73,10 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+            <div class="col-2 mt-4">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
-            <div class="col-7 mt-4">
+            <div class="col-8 mt-4">
                 <div class="shapes">
                     <p class="cop_judul">PERMINTAAN PERBAIKAN MESIN PROSES PRODUKSI</p>
                 </div>
@@ -99,15 +99,15 @@
                         <td>:</td>
                         <td>{{ $permintaan->item_mesin->lokasi->lokasi }}</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td>No Mesin</td>
                         <td>:</td>
                         <td>{{ $permintaan->item_mesin->no_identifikasi }}</td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td>Deadline</td>
                         <td>:</td>
-                        <td>{{ $permintaan->deadline }}</td>
+                        <td>{{ tanggal($permintaan->deadline) }}</td>
                     </tr>
                     <tr>
                         <td>Diajukan oleh Bagian</td>
@@ -162,7 +162,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            Sudah diselesaikan
+                            {{ $permintaan->detail_perbaikan ?? '-' }}
                         </td>
                     </tr>
                     <tr>
@@ -178,7 +178,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            Perbaikan sudah dilakukan
+                            {{ $permintaan->verifikasi_user ?? '-' }}
                         </td>
                     </tr>
 
@@ -207,10 +207,10 @@
                     </tr>
                     <tr>
                         <td>Pukul
-                            {{ empty($permintaan->waktu) ? '' : date('H:i', strtotime($permintaan->waktu)) }}
+                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('H:i') }}
                         </td>
                         <td>Pukul
-                            {{ empty($permintaan->waktu) ? '' : date('H:i', strtotime($permintaan->waktu)) }}
+                            {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('H:i') }}
                         </td>
                     </tr>
                 </table>

@@ -84,4 +84,14 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
         ];
         return view('hrga.hrga8.hrga3_permintaan_perbaikan_mesin.print', $data);
     }
+
+    public function save_tindakan(Request $r)
+    {
+        $data = [
+            'detail_perbaikan' => $r->detail_perbaikan,
+            'verifikasi_user' => $r->verifikasi_user
+        ];
+        PermintaanPerbaikanMesin::where('invoice_pengajuan', $r->invoice_pengajuan)->update($data);
+        return redirect()->back()->with('sukses', 'Data berhasil disimpan');
+    }
 }
