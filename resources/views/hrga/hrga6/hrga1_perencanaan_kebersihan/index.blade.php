@@ -28,7 +28,7 @@
 
                 <table id="example" class="table table-bordered ">
                     <thead>
-                        <tr>
+                        <tr class="text-nowrap">
                             <th>No</th>
                             <th>Nama Alat/Area</th>
                             <th>Identifikasi Alat/Area</th>

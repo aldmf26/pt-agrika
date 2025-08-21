@@ -104,6 +104,10 @@
             white-space: nowrap;
             /* ⬅️ ini agar tidak membungkus teks */
         }
+
+        thead th {
+            text-transform: capitalize;
+        }
     </style>
 
 

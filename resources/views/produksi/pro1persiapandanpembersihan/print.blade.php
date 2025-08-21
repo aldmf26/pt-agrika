@@ -94,6 +94,10 @@
 
             font-size: 10px;
         }
+
+        thead th {
+            text-transform: capitalize;
+        }
     </style>
 
 </head>
@@ -139,27 +143,27 @@
                     <thead>
                         <tr>
                             <th class="align-middle text-center" rowspan="2">No</th>
-                            <th class="align-middle text-center" rowspan="2">Regu/ <br><span
+                            <th class="align-middle" rowspan="2">Regu/ <br><span
                                     class="fst-italic fw-lighter">Team</span></th>
-                            <th class="align-middle text-center" rowspan="2">Nama Operator Cabut<br><span
+                            <th class="align-middle" rowspan="2">Nama Operator Cabut<br><span
                                     class="fst-italic fw-lighter">Operator name</span>
                             </th>
-                            <th class="align-middle text-center" rowspan="2">Kode Bacth/Lot<br><span
+                            <th class="align-middle" rowspan="2">Kode Bacth/Lot<br><span
                                     class="fst-italic fw-lighter">Bacth/Lot code</span></th>
-                            <th class="align-middle text-center" rowspan="2">Jenis<br><span
+                            <th class="align-middle" rowspan="2">Jenis<br><span
                                     class="fst-italic fw-lighter">type</span></th>
-                            <th class="align-middle text-center" rowspan="2">Nomor box</th>
+                            <th class="align-middle" rowspan="2">Nomor box</th>
                             <th class="align-middle text-center" colspan="2">Jumlah <br><span
                                     class="fst-italic fw-lighter">Quantity</span></th>
 
 
-                            <th class="align-middle text-center" rowspan="2">Keterangan <br><span
+                            <th class="align-middle " rowspan="2">Keterangan <br><span
                                     class="fst-italic fw-lighter">Remaks</span></th>
 
                         </tr>
                         <tr>
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
+                            <th class="text-end">Pcs</th>
+                            <th class="text-end">Gr</th>
                         </tr>
 
                     </thead>
@@ -174,13 +178,13 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $pengawas }}</td>
-                                <td class="text-center">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-center">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
+                                <td class="">{{ ucwords(strtolower($d['nama'])) }}</td>
+                                <td class="">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
                                 </td>
-                                <td class="text-center">{{ $sbw->nama ?? '-' }}</td>
-                                <td class="text-center">{{ $d['no_box'] }}</td>
-                                <td class="text-center">{{ $d['pcs'] }}</td>
-                                <td class="text-center">{{ $d['gr_awal'] }}</td>
+                                <td class="">{{ $sbw->nama ?? '-' }}</td>
+                                <td class="">{{ $d['no_box'] }}</td>
+                                <td class="text-end">{{ $d['pcs'] }}</td>
+                                <td class="text-end">{{ $d['gr_awal'] }}</td>
 
                                 <td class="text-center">
                                     {{-- barang dari {{ $d['tgl'] }} ~ {{ $d['tgl_selesai'] }} --}}

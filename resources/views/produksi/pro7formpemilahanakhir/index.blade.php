@@ -14,10 +14,10 @@
                         <th class="text-center">No</th>
                         <th class="text-start">Tanggal</th>
                         <th class="text-start">Kode Lot</th>
-                        <th class="text-start">Nomer Po grading</th>
+                        <th class="text-start">Nomer Po Grading</th>
                         <th class="text-start">Grade</th>
                         <th class="text-end">Pcs</th>
-                        <th class="text-start">Gr</th>
+                        <th class="text-end">Gr</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -35,8 +35,8 @@
                             <td>{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
                             <td>{{ $g['no_invoice'] }}</td>
                             <td>{{ $sbw->nama ?? '-' }}</td>
-                            <td>{{ $g['pcs'] }}</td>
-                            <td>{{ $g['gr'] }}</td>
+                            <td>{{ number_format($g['pcs'], 0) }}</td>
+                            <td>{{ number_format($g['gr'], 0) }}</td>
                             <td class="text-center">
                                 <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama ?? '-', 'kode_lot' => $sbw->no_invoice, 'no_po' => $g['no_invoice']]) }}"
                                     target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>

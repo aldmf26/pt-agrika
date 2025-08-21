@@ -17,14 +17,14 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="example">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th class="text-center text-nowrap" rowspan="2">No</th>
-                            <th class="text-center text-nowrap" rowspan="2">Nama Sarana dan Prasarana Umum</th>
+                            <th class="text-center text-nowrap" rowspan="2">Nama sarana dan prasarana Umum</th>
                             <th class="text-center text-nowrap" rowspan="2">Jumlah</th>
                             <th class="text-center text-nowrap" rowspan="2">No. Identifikasi</th>
                             <th class="text-center text-nowrap" rowspan="2">Lokasi</th>
-                            <th class="text-center text-nowrap" rowspan="2">Frekuensi Perawatan</th>
-                            <th class="text-center text-nowrap" rowspan="2">Penanggung Jawab</th>
+                            <th class="text-center text-nowrap" rowspan="2">Frekuensi perawatan</th>
+                            <th class="text-center text-nowrap" rowspan="2">Penanggung jawab</th>
                             <th class="text-center text-nowrap" colspan="12">Tahun {{ $tahun }}</th>
                         </tr>
                         <tr>
@@ -37,13 +37,12 @@
                         @foreach ($program as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item->nama_item }}
-                                </td>
-                                <td>{{ $p->item->jumlah }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->jumlah)) }}</td>
                                 <td>{{ $p->item->no_identifikasi }}</td>
-                                <td class="text-nowrap">{{ $p->item->lokasi->lokasi }}</td>
+                                <td class="text-nowrap">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
                                 <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
-                                <td>{{ $p->penanggung_jawab }}</td>
+                                <td>{{ ucfirst(strtolower($p->penanggung_jawab)) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)

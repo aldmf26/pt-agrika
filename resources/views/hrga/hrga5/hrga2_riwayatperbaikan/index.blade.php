@@ -11,7 +11,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="example">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th>No</th>
                             <th>Nama Sarana & Prasana</th>
                             <th>Lokasi</th>
@@ -23,9 +23,9 @@
                         @foreach ($grouped as $key => $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $item['nama_item'] }}</td>
-                                <td>{{ $item['lokasi'] }}</td>
-                                <td>{{ $item['no_identifikasi'] }}</td>
+                                <td>{{ ucfirst(strtolower($item['nama_item'])) }}</td>
+                                <td>{{ ucfirst(strtolower($item['lokasi'])) }}</td>
+                                <td>{{ ucfirst(strtolower($item['no_identifikasi'])) }}</td>
                                 {{-- <td>{{ $item['id'] . $item['jenis'] }}</td> --}}
                                 <td class="text-center">
                                     @php

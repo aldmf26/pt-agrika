@@ -35,7 +35,7 @@ class RM4SkPengirimanSbwKotorController extends Controller
         $sk = DB::table('sbw_kotor')
             ->where('sbw_kotor.rwb_id', $id)
             ->groupBy('sbw_kotor.tgl')
-            ->orderBy('sbw_kotor.tgl', 'desc')
+            ->orderBy('sbw_kotor.tgl', 'asc')
             ->select('tgl', DB::raw('SUM(kg) as kg'))
             ->get();
         $data = [

@@ -22,12 +22,12 @@
     </table>
     <table width="100%" class="border-dark table table-xs table-bordered" style="font-size: 10px">
         <tr>
-            <th class="text-center align-middle" rowspan="2">Tanggal</th>
-            <th class="text-center" colspan="2">Stok Masuk</th>
-            <th class="text-center" colspan="2">Stok Keluar</th>
-            <th class="text-center" colspan="2">Stok Akhir</th>
-            <th class="text-center align-middle" rowspan="2">Kode batch produk</th>
-            <th class="text-center align-middle" rowspan="2">Ttd</th>
+            <th class=" align-middle" rowspan="2">Tanggal</th>
+            <th class="text-end" colspan="2">Stok Masuk</th>
+            <th class="text-end" colspan="2">Stok Keluar</th>
+            <th class="text-end" colspan="2">Stok Akhir</th>
+            <th class=" align-middle" rowspan="2">Kode batch produk</th>
+            <th class=" align-middle" rowspan="2">Ttd</th>
         </tr>
         <tr>
             <th class="text-end">Pcs</th>
@@ -55,14 +55,14 @@
                     ->get();
             @endphp
             <tr>
-                <td class="text-center align-middle">{{ tanggal($d['tgl']) }}</td>
+                <td class=" align-middle">{{ tanggal($d['tgl']) }}</td>
                 <td class="text-end align-middle">{{ $d['ket'] == 'masuk' ? number_format($d['pcs']) : '0' }}</td>
                 <td class="text-end align-middle">{{ $d['ket'] == 'masuk' ? number_format($d['gr']) : '0' }}</td>
                 <td class="text-end align-middle">{{ $d['ket'] == 'keluar' ? number_format($d['pcs']) : '0' }}</td>
                 <td class="text-end align-middle">{{ $d['ket'] == 'keluar' ? number_format($d['gr']) : '0' }}</td>
                 <td class="text-end align-middle">{{ number_format($saldo_pcs, 0) }}</td>
                 <td class="text-end align-middle">{{ number_format($saldo_gr, 0) }}</td>
-                <td class="text-center">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                <td class="">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                 <td></td>
             </tr>
         @endforeach

@@ -10,8 +10,8 @@
                 <th rowspan="2">No</th>
                 <th rowspan="2">Nama Produk</th>
                 <th rowspan="2">Kode Produk</th>
-                <th colspan="3">Jumlah</th>
-                <th colspan="2">Jenis Kemasan</th>
+                <th colspan="3" class="text-center">Jumlah</th>
+                <th colspan="2" class="text-center">Jenis Kemasan</th>
                 <th rowspan="2">No Batch/ Kode SBW kotor <br> untuk Sarang Walet</th>
                 <th rowspan="2">Barcode</th>
                 <th rowspan="2">Tgl/bln/thn <br> Produksi <br> (Steaming) <br> steaming production <br> date</th>
@@ -19,8 +19,8 @@
 
             </tr>
             <tr>
-                <th>Pcs</th>
-                <th>Gram</th>
+                <th class="text-end">Pcs</th>
+                <th class="text-end">Gram</th>
                 <th>Pack</th>
                 <th>Premier</th>
                 <th>Sekunder</th>
@@ -40,29 +40,29 @@
                 @endphp
                 <tr>
                     <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">
                         {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
                     </td>
-                    <td class="text-center align-middle">{{ $p['grade'] }}</td>
-                    <td class="text-center align-middle">{{ number_format($p['pcs'], 0) }}</td>
-                    <td class="text-center align-middle">{{ number_format($p['gr'], 0) }}</td>
-                    <td class="text-center align-middle">1 pack</td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">{{ $p['grade'] }}</td>
+                    <td class="text-end align-middle">{{ number_format($p['pcs'], 0) }}</td>
+                    <td class="text-end align-middle">{{ number_format($p['gr'], 0) }}</td>
+                    <td class=" align-middle">1 pack</td>
+                    <td class=" align-middle">
                         {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7 cm)' }}
                     </td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">
                         -
                     </td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">
                         {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
                     </td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">
                         {{ $p['no_barcode'] }}
                     </td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">
                         {{ $tgl1 }}
                     </td>
-                    <td class="text-center align-middle">
+                    <td class=" align-middle">
                         Ok
                     </td>
 
