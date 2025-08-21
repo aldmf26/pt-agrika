@@ -13,7 +13,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered" id="example">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th>No</th>
                             <th class="text-nowrap">Nama alat ukur</th>
                             <th class="text-nowrap">Merek</th>
@@ -133,17 +133,19 @@
 
 
 
-    {{-- <form action="" method="get">
-        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+    <form action="" method="get">
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="tambahModalLabel">View</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
-                        <select name="tahun" id="" class=" form-control">
+                        <select name="tahun" class="form-control">
                             @foreach ($tahuns as $t)
                                 <option value="{{ $t }}" @selected($tahun == $t)>{{ $t }}
                                 </option>
@@ -157,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </form> --}}
+    </form>
 
     @section('scripts')
         <script>

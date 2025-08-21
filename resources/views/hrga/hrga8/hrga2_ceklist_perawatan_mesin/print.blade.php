@@ -91,7 +91,7 @@
                         <td>{{ $mesin->lokasi->lantai }}</td>
                     </tr>
                     <tr>
-                        <td>Nama mesin / peralatan</td>
+                        <td>Nama Mesin / Peralatan</td>
                         <td width="1%">:</td>
                         <td>{{ $mesin->nama_mesin }}</td>
                     </tr>
@@ -123,7 +123,7 @@
                 <br>
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th class="align-middle">No</th>
                             <th class="align-middle">Tanggal</th>
                             <th class="align-middle">Urutan Unit</th>

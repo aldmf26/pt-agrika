@@ -12,7 +12,7 @@
             <div class="table-responsive">
                 <table class="table table-bordered text-nowrap">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th rowspan="2">#</th>
                             <th rowspan="2" class="text-nowrap">Nama alat ukur</th>
                             <th rowspan="2" class="text-nowrap">Merek</th>

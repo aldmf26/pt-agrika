@@ -9,7 +9,7 @@
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
-                    <tr>
+                    <tr style="text-transform: capitalize">
                         <th class=" dhead" rowspan="2">No</th>
                         <th class=" dhead" rowspan="2">Lantai</th>
                         <th class=" dhead" rowspan="2">Nama mesin & peralatan</th>

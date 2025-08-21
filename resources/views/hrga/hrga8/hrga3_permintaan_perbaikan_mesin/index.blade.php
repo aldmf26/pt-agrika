@@ -7,7 +7,7 @@
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
-                    <tr>
+                    <tr style="text-transform: capitalize">
                         <th>#</th>
                         <th>Nama Mesin</th>
                         <th>Lokasi</th>
