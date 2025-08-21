@@ -79,6 +79,15 @@
                             </select>
                         </div>
 
+                        @if ($kategori == 'ruangan')
+                            <div class="col-lg-12">
+                                <label for="">Rincian</label>
+                                <select name="rincian_id" id="" class="rincian form-control select2"></select>
+                            </div>
+                        @else
+                        @endif
+
+
                         {{-- <div class="col-6 mt-2">
                             <label for="">Merek</label>
                             <input type="text" class="form-control merk" disabled>
@@ -90,6 +99,7 @@
                         <div class="col-12 mt-2">
                             <label for="">Diajukan oleh</label>
                             <input type="text" class="form-control" name="diajukan_oleh">
+                            <input type="hidden" name="kategori" value="{{ $kategori }}">
                         </div>
                         <div class="col-12 mt-2">
                             <label for="">Image</label>
@@ -143,13 +153,12 @@
                 var id = $(this).val();
                 $.ajax({
                     type: "get",
-                    url: "{{ route('hrga5.1.get_merk') }}",
+                    url: "{{ route('hrga5.3.get_rincian') }}",
                     data: {
                         id: id
                     },
                     success: function(response) {
-                        $('.merk').val(response.merk);
-                        $('.no_identifikasi').val(response.no_identifikasi);
+                        $('.rincian').html(response);
                     }
                 });
 

@@ -151,6 +151,7 @@ Route::controller(Hrga3PermintaanPerbaikan::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
         Route::post('/save_tindakan', 'save_tindakan')->name('save_tindakan');
+        Route::get('/get_rincian', 'get_rincian')->name('get_rincian');
     });
 
 Route::controller(Hrga1ProgramPerawatanMesin::class)
@@ -180,6 +181,7 @@ Route::controller(Hrga3PermintaanPerbaikanMesin::class)
         Route::get('/sukses', 'sukses')->name('sukses');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+        Route::post('/save_tindakan', 'save_tindakan')->name('save_tindakan');
     });
 Route::controller(daftarMesinController::class)
     ->prefix('hrga/hrga8/daftar_mesin')

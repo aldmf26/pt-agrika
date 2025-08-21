@@ -7,6 +7,7 @@ use App\Models\ItemPerawatan;
 use App\Models\LokasiModel;
 use App\Models\PermintaanPerbaikanSaranaPrasana;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use PgSql\Lob;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
@@ -32,12 +33,14 @@ class Hrga3PermintaanPerbaikan extends Controller
             'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
             'lokasi' => LokasiModel::all(),
             'item' => ItemPerawatan::where('jenis_item', $r->kategori)->get(),
+            'kategori' => $r->kategori
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.form_permintaanperbaikan', $data);
     }
 
     public function store(Request $r)
     {
+
         $max_invoice = PermintaanPerbaikanSaranaPrasana::max('invoice_pengajuan');
         if (empty($max_invoice)) {
             $no_invoice = 10001;
@@ -50,6 +53,7 @@ class Hrga3PermintaanPerbaikan extends Controller
             'invoice_pengajuan' => $no_invoice,
             'diajukan_oleh' => $r->diajukan_oleh,
             'deskripsi_masalah' => $r->deskripsi_masalah,
+            'rincian_id' => $r->rincian_id ?? null, // Tambahkan rincian_id jika ada
             'tanggal' => now(),
             'waktu' => now(),
         ];
@@ -57,6 +61,11 @@ class Hrga3PermintaanPerbaikan extends Controller
 
         $item = ItemPerawatan::find($r->item_id);
         $lokasi = $item->lokasi->lokasi . " Lantai (" . $item->lokasi->lantai . ")";
+        $rincian = DB::table('rincian_ruangan')
+            ->where('id', $r->rincian_id)
+            ->first();
+
+
 
         if ($r->hasFile('image')) {
             $image = $r->file('image');
@@ -64,13 +73,26 @@ class Hrga3PermintaanPerbaikan extends Controller
             $image->storeAs('perbaikan_sarana', $imageName, 'public'); // Simpan di storage public
         }
 
+        if ($r->kategori == 'ruangan') {
 
-        $response = Http::withHeaders([
-            'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
-        ])->post('https://api.fonnte.com/send', [
-            'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
-            'message' => "Nama : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
-        ]);
+            $response = Http::withHeaders([
+                'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
+            ])->post('https://api.fonnte.com/send', [
+                'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
+                'message' => "Diajukan Oleh : $r->diajukan_oleh\nItem : $rincian->nama_rincian \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
+            ]);
+        } else {
+
+            $response = Http::withHeaders([
+                'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
+            ])->post('https://api.fonnte.com/send', [
+                'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
+                'message' => "Diajukan Oleh : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
+            ]);
+        }
+
+
+
         return redirect()->route('hrga5.3.sukses', ['invoice_pengajuan' => $no_invoice]);
     }
     public function sukses(Request $r)
@@ -100,5 +122,17 @@ class Hrga3PermintaanPerbaikan extends Controller
         ];
         PermintaanPerbaikanSaranaPrasana::where('invoice_pengajuan', $r->invoice_pengajuan)->update($data);
         return redirect()->back()->with('sukses', 'Data berhasil disimpan');
+    }
+
+    public function get_rincian(Request $r)
+    {
+        $item = DB::table('rincian_ruangan')
+            ->where('item_id', $r->id)
+            ->get();
+        echo '<option value="">Pilih Rincian</option>';
+        foreach ($item as $key => $value) {
+            $nama =  $value->nama_rincian;
+            echo '<option value="' . $value->id . '">' . $nama . '</option>';
+        }
     }
 }
