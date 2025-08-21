@@ -66,6 +66,8 @@ class AuditWizard extends Component
 
     public function updatedHasilChecklist($value, $key)
     {
+        $tgl = "{$this->tahun}-{$this->bulan}-{$this->tanggalValue}";
+
         // Parse key, contoh: "1.min" atau "1.keterangan"
         [$pertanyaanId, $field] = explode('.', $key);
 
