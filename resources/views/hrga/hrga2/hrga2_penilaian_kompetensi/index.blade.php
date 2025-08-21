@@ -8,7 +8,7 @@
                         Office</a> --}}
 
                     <a href="{{ route('hrga2.2.singkron') }}" class="btn btn-info me-2 btn-sm float-end mb-2"><i
-                            class="fas fa-sync"></i> Singkron Data</a>
+                            class="fas fa-sync"></i> S Data</a>
                 </div>
                 <div class="col-12">
                     <table class="table table-bordered" id="example">

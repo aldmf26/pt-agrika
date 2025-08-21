@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Ia;
 
+use App\Models\DataPegawai;
 use App\Models\Notif;
 use App\Models\ProgramAuditInternal as ModelsProgramAuditInternal;
+use App\Models\User;
 use App\Services\NotifiService;
 use App\Traits\WithAlert;
 use Illuminate\Support\Facades\DB;
@@ -117,10 +119,12 @@ class ProgramAuditInternal extends Component
     public function render()
     {
         $departemenBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing', 'hrga', 'purchasing', 'qa'];
+        $user = DataPegawai::get();
 
         $data = [
             'datas' => ModelsProgramAuditInternal::where('tahun', $this->tahun)->get(),
-            'departemenBk' => $departemenBk
+            'departemenBk' => $departemenBk,
+            'user' => $user,
         ];
         return view('livewire.ia.program-audit-internal', $data);
     }

@@ -40,20 +40,32 @@
         <div class="row" x-show="add" x-transition>
             <div class="col-2">
                 <label for="">Departemen :</label>
-                <select wire:model="form.departemen" class="form-control">
+                <input type="text" wire:model="form.departemen" class="form-control" placeholder="Departemen">
+                {{-- <select wire:model="form.departemen" class="form-control">
                     <option value="">Pilih Departemen</option>
                     @foreach ($departemenBk as $item)
                         <option value="{{ $item }}">{{ strtoupper($item) }}</option>
                     @endforeach
-                </select>
+                </select> --}}
             </div>
             <div class="col-2">
                 <label for="">Auditee :</label>
-                <input type="text" wire:model="form.audite" class="form-control">
+                <select wire:model="form.audite" class="form-control selectAudtor">
+                    <option value="">Pilih Auditee</option>
+                    @foreach ($user as $u)
+                        <option value="{{ $u->nama }}">{{ $u->nama }}</option>
+                    @endforeach
+                </select>
+                {{-- <input type="text" wire:model="form.audite" class="form-control"> --}}
             </div>
             <div class="col-2">
                 <label for="">Auditor :</label>
-                <input type="text" wire:model="form.auditor" class="form-control">
+                <select wire:model="form.auditor" class="form-control selectAudtor">
+                    <option value="">Pilih Auditee</option>
+                    @foreach ($user as $u)
+                        <option value="{{ $u->nama }}">{{ $u->nama }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="col-2">
                 <label for="">&nbsp;</label><br>
@@ -137,8 +149,17 @@
         </tbody>
     </table>
 
-
+    @section('scripts')
+        <script>
+            $(document).ready(function () {
+                setTimeout(function() {
+                    $('.selectAudtor').select2();
+                }, 500);
+            });
+        </script>
+    @endsection
     <script>
+
         document.addEventListener('click', (event) => {
             // Periksa apakah kita mengklik di luar context menu
             const clickedOnMenu = event.target.closest('.context-menu') !== null;

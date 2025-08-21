@@ -4,7 +4,7 @@
         <div class="col-lg-12">
             <a href="{{ route('hrga1.2.singkron') }}" class="btn btn-info ms-2 btn-sm float-end mb-2"><i
                     class="fas fa-sync"></i>
-                Singkron Data</a>
+                Sinkronkan Data</a>
 
             {{-- <a href="{{ route('hrga1.2.create') }}" class="btn btn-primary ms-2 btn-sm float-end mb-2"><i
                     class="fas fa-plus"></i>

@@ -231,6 +231,7 @@ Route::controller(IA1ProgramAuditInternalController::class)
         Route::get('/create/', 'create')->name('create');
         Route::get('/print', 'print')->name('print');
         Route::get('/audit', 'audit')->name('audit');
+        Route::get('/print_audit_departemen', 'print_audit_departemen')->name('print_audit_departemen');
     });
 Route::controller(IA2JadwalAuditInternalController::class)
     ->prefix('ia/2-jadwal-audit-internal')
