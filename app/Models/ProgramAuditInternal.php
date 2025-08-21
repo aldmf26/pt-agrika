@@ -14,10 +14,10 @@ class ProgramAuditInternal extends Model
     }
     public function getAuditeAttribute($value)
     {
-        return ucfirst($value);
+        return ucwords($value);
     }
     public function getAuditorAttribute($value)
     {
-        return ucfirst($value);
+        return ucwords($value);
     }
 }

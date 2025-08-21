@@ -44,12 +44,29 @@ class IA1ProgramAuditInternalController extends Controller
 
     public function print_audit_departemen(Request $r)
     {
-        $id= $r->id;
+        $id = $r->id;
         $departemen = $r->departemen;
         $bulan = $r->bulan;
         $tahun = $r->tahun;
         $program = ProgramAuditInternal::find($r->id)->first();
-        $pertanyaan = Heading::with('subHeadings.pertanyaan')->where('departemen', $departemen)->get();
+        $headings = Heading::with('subHeadings.pertanyaan')->where('departemen', $departemen)->get();
+
+        $hasilChecklist = [];
+        foreach ($headings as $heading) {
+            foreach ($heading->subHeadings as $sub) {
+                foreach ($sub->pertanyaan as $pertanyaan) {
+                    $hasil = $pertanyaan->hasilChecklist->first();
+                    $hasilChecklist[$pertanyaan->id] = [
+                        'min' => $hasil ? (bool) $hasil->min : false,
+                        'maj' => $hasil ? (bool) $hasil->maj : false,
+                        'sr' => $hasil ? (bool) $hasil->sr : false,
+                        'kt' => $hasil ? (bool) $hasil->kt : false,
+                        'ok' => $hasil ? (bool) $hasil->ok : false,
+                        'keterangan' => $hasil ? $hasil->keterangan : ''
+                    ];
+                }
+            }
+        }
 
         $datas = [
             'title' => 'CEKLIS AUDIT INTERNAL',
@@ -57,7 +74,9 @@ class IA1ProgramAuditInternalController extends Controller
             'tahun' => $tahun,
             'bulan' => $bulan,
             'departemen' => $departemen,
-            'program' => $program
+            'program' => $program,
+            'headings' => $headings,
+            'hasilChecklist' => $hasilChecklist,
         ];
         return view("ia.ia1_program_audit_internal.print_audit_departemen", $datas);
     }
