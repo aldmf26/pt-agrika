@@ -7,7 +7,7 @@
                     Permintaan</a> --}}
 
                 <a href="{{ route('hrga1.1.singkron') }}" class="btn btn-info ms-2 btn-sm float-end mb-2"><i
-                        class="fas fa-sync"></i> Singkron Data</a>
+                        class="fas fa-sync"></i> Sinkron Data</a>
             </div>
 
         </div>

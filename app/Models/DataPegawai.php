@@ -19,6 +19,14 @@ class DataPegawai extends Model
         return $query->with('divisi')->where('posisi', 'LIKE', '%Admin%');
     }
 
+    public function scopeKaryawan($query)
+    {
+        return $query->with('divisi')->where([
+            ['posisi', 'pengawas'],
+            ['posisi', 'LIKE', '%Admin%']
+        ]);
+    }
+
 
     public function getJenisKelaminAttribute($value)
     {
@@ -31,7 +39,14 @@ class DataPegawai extends Model
     }
     public function getPosisiAttribute($value)
     {
-        return ucwords(strtolower($value));
+        // Ubah ke huruf kecil untuk konsistensi
+        $value = strtolower($value ?? 'staff cabut');
+
+        // Ganti variasi 'staf' (atau lebih) menjadi 'staff'
+        $value = preg_replace('/sta[f]+/', 'staff', $value);
+
+        // Ubah huruf pertama setiap kata menjadi kapital
+        return ucwords($value);
     }
     public function getStatusAttribute($value)
     {

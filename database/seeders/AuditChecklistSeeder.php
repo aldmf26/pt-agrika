@@ -16,10 +16,172 @@ class AuditChecklistSeeder extends Seeder
      */
     public function run(): void
     {
+        Heading::truncate();
+        SubHeading::truncate();
+        Pertanyaan::truncate();
+        HasilChecklist::truncate();
+        
         $this->bk();
-        $this->hrga();
-        $this->purchasing();
+        $this->cabut();
+        $this->cetak();
+        $this->steam();
         $this->qa();
+        $this->purchasing();
+        $this->it();
+        $this->ekspedisi();
+        $this->hrga();
+    }
+
+    public function cabut(): void
+    {
+        $hrgaA = $this->createHeading('cabut', 'A. Menejemen Pengendalian Proses');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Proses Produksi Cabut bulu dikendalian sesuai dengan instruksi kerja yang berlaku',
+                'nomor_urutan' => 1
+            ],
+            [                'teks' => 'Proses cabut bulu dilakukan dengan menggunakan peralatan yang benar yang dalam keadaan baik',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Proses cabut bulu dipantau yield nya dan seluruh barang berhasil dibersihkan tidak ada sisa bulu saat diserahkan untuk cuci nitrite',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Proses cuci nitrite dilakukan dengan benar sesuai dengan peraturan CCP 1, peralatan yang digunakan dalam keadaan baik',
+                'nomor_urutan' => 4
+            ],
+            [
+                'teks' => 'Proses pengeringan 1 dilakukan menggunakan peralatan yang bebas kontaminasi',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Proses pengeringan 1 berhasil dilakukan tidak ada membiarkan produk yang belum kering untuk di proses lebih lanjut',
+                'nomor_urutan' => 6
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+    }
+
+    public function cetak(): void 
+    {
+        $hrgaA = $this->createHeading('cetak', 'A. Menejemen Pengendalian Proses');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Proses cetak dikendalian sesuai dengan instruksi kerja yang berlaku',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Proses cetak dilakukan dengan menggunakan peralatan yang benar yang dalam keadaan baik',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Proses cetak dipantau yield nya dan seluruh barang berhasil dicetak, tidak ada bentuk yang berubah',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Peralatan cetak yang digunakan selalu dibersihkan setelah digunakan',
+                'nomor_urutan' => 4
+            ],
+            [
+                'teks' => 'Proses pengeringan 2 dilakukan menggunakan peralatan yang bebas kontaminasi',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Proses pengeringan 2 berhasil dilakukan tidak ada membiarkan produk yang belum kering untuk di proses lebih lanjut',
+                'nomor_urutan' => 6
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+    }
+
+    public function steam(): void 
+    {
+        $hrgaA = $this->createHeading('steam', 'A. Menejemen Pengendalian Proses');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Proses steam dikendalian sesuai dengan instruksi kerja yang berlaku dengan instruksi kerja pemanasan (CCP2)',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Proses steam dilakukan dengan menggunakan peralatan yang benar yang dalam keadaan baik',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Proses steam dipantau agar setiap prosesnya dibarengi dengan jenis yang seragam agar kebutuhan suhu steamnya sama',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Peralatan steam yang digunakan selalu dibersihkan setelah digunakan',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+    }
+
+    public function it(): void 
+    {
+        $hrgaA = $this->createHeading('it', 'A. Manajemen Pengendalian Proses');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'IT selalu memberikan support proses pencatatan kegiatan manufacture yang sesuai dengan memberikan akses internet yang cukup baik',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'IT melakukan pelacakan traceability setiap batch produk guna melakukan mass balance study',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'IT selalu mengevaluasi program “HACCP” berbasis website untuk menjamin inputan karyawan dapat dilakukan cepat dan efektif',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Melakukan inputan opname barang & produk untuk melaporkan jumlah asset perusahaan',
+                'nomor_urutan' => 4
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
+    }
+
+    public function ekspedisi(): void 
+    {
+        $hrgaA = $this->createHeading('ekspedisi', 'A. Manajemen Pengendalian Proses');
+        $subHrgaA = $this->createSubHeading($hrgaA->id, '');
+        $pertanyaanSDM = [
+            [
+                'teks' => 'Ekspedisi & export menerima barang siap dikirim dari packing dan terdapat laporannya',
+                'nomor_urutan' => 1
+            ],
+            [
+                'teks' => 'Terdapat Laporan kartu stock dari setiap produk jadi yang sudah diserahterimakan oleh bagian packing',
+                'nomor_urutan' => 2
+            ],
+            [
+                'teks' => 'Terdapat Laporan pemantauan cold storage yang dilakukan rutin',
+                'nomor_urutan' => 3
+            ],
+            [
+                'teks' => 'Setiap proses kartoning dilakukan dengan benar sesuai dengan instruksi kerja yang berlaku',
+                'nomor_urutan' => 4
+            ],
+            [
+                'teks' => 'Proses pengiriman produk mengikuti peraturan pemerintah untuk persiapan dan dokumentasinya',
+                'nomor_urutan' => 5
+            ],
+            [
+                'teks' => 'Terdapat Laporan akhir untuk setiap kegiatan pengiriman produk',
+                'nomor_urutan' => 6
+            ],
+            [
+                'teks' => 'Terdapat data summary pengiriman produk setiap periodenya untuk dilaporkan kepada atasan dan balai karantina',
+                'nomor_urutan' => 7
+            ],
+        ];
+        $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
     }
 
     public function hrga(): void

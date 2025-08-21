@@ -6,8 +6,10 @@ use App\Livewire\Pur\CreatePo;
 use App\Models\HasilChecklist;
 use App\Models\Heading;
 use App\Models\Notif;
+use App\Models\ProgramAuditInternal;
 use App\Services\NotifiService;
 use App\Traits\WithAlert;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Spatie\LivewireWizard\Components\WizardComponent;
@@ -17,24 +19,23 @@ class AuditWizard extends Component
     use WithAlert;
 
     #[Url]
-    public $bulan;
-    #[Url]
-    public $tahun;
+    public $id, $bulan, $tahun, $departemen;
 
-    #[Url]
-    public $departemen;
-
-    public $headings;
+    public $headings, $namaBulan, $tanggalValue;
     public $hasilChecklist = [];
 
     public function mount()
     {
-        $departementBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing'];
+        $this->namaBulan = DB::table('bulan')->where('bulan', $this->bulan)->first()->nm_bulan;
+        $this->tanggalValue = ProgramAuditInternal::find($this->id)->created_at->format('d');
+        $headings = Heading::groupBy('departemen')->pluck('departemen')->toArray();
+        if (!in_array($this->departemen, $headings)) {
+            $this->redirectWithAlert('error', 'Departemen tidak cocok', route('ia.1.index'));
+            return;
+        }
 
-        $departemen = in_array($this->departemen, $departementBk) ? 'bk' : $this->departemen;
-        dd($departemen);
         $this->headings = Heading::with('subHeadings.pertanyaan.hasilChecklist')
-            ->where('departemen', $departemen)
+            ->where('departemen', $this->departemen)
             ->get();
 
         foreach ($this->headings as $heading) {
@@ -53,6 +54,15 @@ class AuditWizard extends Component
             }
         }
     }
+
+    public function updatedTanggalValue($value)
+    {
+        $datas = "{$this->tahun}-{$this->bulan}-{$value}";
+        ProgramAuditInternal::find($this->id)->update(['created_at' => $datas]);
+
+        $this->alert('sukses', 'Tanggal Audit Berhasil diubah');
+    }
+    // Update tanggal audit untuk semua hasil checklist
 
     public function updatedHasilChecklist($value, $key)
     {

@@ -133,7 +133,7 @@
                                         <li class="submenu-item {{ $adaSub ? '' : 'has-sub' }}">
                                             <a wire:navigate
                                                 href="{{ $adaSub ? ($submenu->link == 'tidak' ? route($submenu->link, ['q' => $submenu->title]) : route($submenu->link)) : '#' }}"
-                                                class="submenu-link">{{ $submenu->title }}
+                                                class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}
                                             </a>
 
                                             @if (!$adaSub)
@@ -142,7 +142,7 @@
                                                         <li class="submenu-item">
                                                             <a wire:navigate
                                                                 href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
-                                                                class="subsubmenu-link">{{ $subsubmenu->title }}</a>
+                                                                class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
