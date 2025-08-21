@@ -8,9 +8,12 @@ class checklistPerawatanMesin extends Model
 {
     protected $guarded = [];
 
-
-    public function perawatan()
+    public function item()
     {
-        return $this->belongsTo(ProgramPerawatanMesin::class, 'perawatan_mesin_id', 'id');
+        return $this->belongsTo(ItemMesin::class, 'item_mesin_id');
+    }
+    public function kriteria()
+    {
+        return $this->belongsTo(KriteriaModel::class, 'kriteria_id');
     }
 }

@@ -12,6 +12,7 @@ use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\DaftarSa
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3PermintaanPerbaikan;
+use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\daftarMesinController;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga1ProgramPerawatanMesin;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga2CeklisPerawatanMesin;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPerbaikanMesin;
@@ -149,6 +150,7 @@ Route::controller(Hrga3PermintaanPerbaikan::class)
         Route::get('/sukses', 'sukses')->name('sukses');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::post('/save_tindakan', 'save_tindakan')->name('save_tindakan');
     });
 
 Route::controller(Hrga1ProgramPerawatanMesin::class)
@@ -158,6 +160,7 @@ Route::controller(Hrga1ProgramPerawatanMesin::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+        Route::get('/load_baris', 'load_baris')->name('load_baris');
     });
 Route::controller(Hrga2CeklisPerawatanMesin::class)
     ->prefix('hrga/hrga8/2_Ceklis_perawatan_mesin')
@@ -177,6 +180,16 @@ Route::controller(Hrga3PermintaanPerbaikanMesin::class)
         Route::get('/sukses', 'sukses')->name('sukses');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+    });
+Route::controller(daftarMesinController::class)
+    ->prefix('hrga/hrga8/daftar_mesin')
+    ->name('hrga8.0.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/delete', 'delete')->name('delete');
+        Route::get('/get_data', 'get_data')->name('get_data');
+        Route::post('/update', 'update')->name('update');
     });
 
 Route::controller(Hrga1ProgramKalibrasi::class)

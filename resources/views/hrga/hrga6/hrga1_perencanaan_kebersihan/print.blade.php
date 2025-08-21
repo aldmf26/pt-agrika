@@ -4,16 +4,16 @@
             border-color: black;
         }
     </style>
-    Bulan : 
+    Area concern : Produksi
     <table style="font-size: 13px" id="table1" class="table table-bordered border-dark">
         <thead>
             <tr>
                 <th style="background-color: #D9D9D9">Nama Alat/Area</th>
                 <th style="background-color: #D9D9D9">Identifikasi Alat/Area</th>
                 <th style="background-color: #D9D9D9">Metode Sanitasi</th>
-                <th style="background-color: #D9D9D9" class="text-center">Penanggung Jawab</th>
-                <th style="background-color: #D9D9D9" class="text-center">Frekuensi</th>
-                <th style="background-color: #D9D9D9" class="text-center">Sarana Cleaning</th>
+                <th style="background-color: #D9D9D9">Penanggung Jawab</th>
+                <th style="background-color: #D9D9D9">Frekuensi</th>
+                <th style="background-color: #D9D9D9">Sarana Cleaning</th>
                 <th style="background-color: #D9D9D9">Sanitizer & Pengenceran</th>
             </tr>
         </thead>
@@ -23,9 +23,9 @@
                     <td>{{ $d->nm_alat }}</td>
                     <td>{{ $d->identifikasi_alat }}</td>
                     <td>{{ $d->metode }}</td>
-                    <td class="text-center">{{ $d->penanggung_jawab }}</td>
-                    <td class="text-center">{{ $d->frekuensi }}</td>
-                    <td class="text-center">{{ $d->sarana_cleaning }}</td>
+                    <td>{{ $d->penanggung_jawab }}</td>
+                    <td>{{ $d->frekuensi }}</td>
+                    <td>{{ $d->sarana_cleaning }}</td>
                     <td>{{ $d->sanitizer }}</td>
                 </tr>
             @endforeach
@@ -42,11 +42,12 @@
                     <td style="border: 1px solid black; text-align: center;">Diketahui Oleh:</td>
                 </tr>
                 <tr>
-                    <td style="border: 1px solid black; text-align: center; height: 80px; vertical-align: bottom;">[SPV. GA-IR]</td>
+                    <td style="border: 1px solid black; text-align: center; height: 80px; vertical-align: bottom;">[SPV.
+                        GA-IR]</td>
                     <td style="border: 1px solid black; text-align: center; vertical-align: bottom;">[KA.HRGA]</td>
                 </tr>
             </table>
         </div>
     </div>
-   
+
 </x-hccp-print>

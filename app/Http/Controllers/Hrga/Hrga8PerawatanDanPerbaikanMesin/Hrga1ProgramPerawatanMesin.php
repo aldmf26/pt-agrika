@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin;
 
 use App\Http\Controllers\Controller;
+use App\Models\checklistPerawatanMesin;
 use App\Models\ItemMesin;
 use App\Models\ProgramPerawatanMesin;
 use Illuminate\Http\Request;
@@ -29,13 +30,35 @@ class Hrga1ProgramPerawatanMesin extends Controller
 
     public function store(Request $r)
     {
-        $data = [
-            'item_mesin_id' => $r->item_mesin_id,
-            'frekuensi_perawatan' => $r->frekuensi_perawatan,
-            'penanggung_jawab' => $r->penanggung_jawab,
-            'tanggal_mulai' => $r->tanggal_mulai,
-        ];
-        ProgramPerawatanMesin::create($data);
+        for ($i = 0; $i < count($r->item_mesin_id); $i++) {
+            $data = [
+                'item_mesin_id' => $r->item_mesin_id[$i],
+                'frekuensi_perawatan' => $r->frekuensi_perawatan[$i],
+                'penanggung_jawab' => $r->penanggung_jawab[$i],
+                'tanggal_mulai' => $r->tanggal_mulai[$i],
+            ];
+            ProgramPerawatanMesin::create($data);
+
+            $total = floor(12 / $r->frekuensi_perawatan[$i]);
+            for ($j = 0; $j < $total; $j++) {
+
+                $kriteria = DB::table('kriteria_pemeriksaan')->where('item_mesin_id', $r->item_mesin_id[$i])->get();
+                $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
+                foreach ($kriteria as $k) {
+                    $data = [
+                        'item_mesin_id' => $r->item_mesin_id[$i],
+                        'kriteria_id' => $k->id,
+                        'tgl' => $tgl,
+                        'metode' => 'Visual',
+                        'hasil_pemeriksaan' => 'Ok',
+                        'status' => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
+                    ];
+                    checklistPerawatanMesin::create($data);
+                }
+            }
+        }
+
+
         return redirect()->route('hrga8.1.index')->with('sukses', 'Data Berhasil Disimpan');
     }
 
@@ -54,5 +77,18 @@ class Hrga1ProgramPerawatanMesin extends Controller
             'perawatan' => ProgramPerawatanMesin::whereYear('tanggal_mulai', $tahun)->orderBy('id', 'desc')->get(),
         ];
         return view('hrga.hrga8.hrga1_perawatan_dan_perbaikan_mesin.print', $data);
+    }
+
+    public function load_baris(Request $r)
+    {
+
+        $item = ItemMesin::all();
+
+        $data = [
+            'item' => $item,
+
+            'count' => $r->count
+        ];
+        return view('hrga.hrga8.hrga1_perawatan_dan_perbaikan_mesin.tambah_baris', $data);
     }
 }

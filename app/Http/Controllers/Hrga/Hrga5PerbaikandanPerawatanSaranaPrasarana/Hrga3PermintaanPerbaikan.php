@@ -9,6 +9,7 @@ use App\Models\PermintaanPerbaikanSaranaPrasana;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use PgSql\Lob;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class Hrga3PermintaanPerbaikan extends Controller
 {
@@ -19,7 +20,7 @@ class Hrga3PermintaanPerbaikan extends Controller
             'title' => 'Permintaan Perbaikan Sarana dan Prasarana Umum',
             'permintaan' => PermintaanPerbaikanSaranaPrasana::whereHas('item', function ($query) use ($kategori) {
                 $query->where('jenis_item', $kategori);
-            })->get(),
+            })->orderBy('invoice_pengajuan', 'desc')->get(),
             'kategori' => $kategori,
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.index', $data);
@@ -89,5 +90,15 @@ class Hrga3PermintaanPerbaikan extends Controller
             'permintaan' => PermintaanPerbaikanSaranaPrasana::where('invoice_pengajuan', $r->invoice_pengajuan)->first(),
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.print', $data);
+    }
+
+    public function save_tindakan(Request $r)
+    {
+        $data = [
+            'detail_perbaikan' => $r->detail_perbaikan,
+            'verifikasi_user' => $r->verifikasi_user
+        ];
+        PermintaanPerbaikanSaranaPrasana::where('invoice_pengajuan', $r->invoice_pengajuan)->update($data);
+        return redirect()->back()->with('sukses', 'Data berhasil disimpan');
     }
 }

@@ -64,7 +64,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
@@ -75,17 +75,18 @@
                 <p class="cop_text">Dok.No.: FRM.HRGA.08.01, Rev.00</p>
             </div>
             <div class="col-lg-12">
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered" style="font-size: 11px; white-space: nowrap;">
                     <thead>
                         <tr>
-                            <th class="text-center dhead" rowspan="2">No</th>
-                            <th class="text-center dhead" rowspan="2">Nama Sarana dan Prasarana Umum</th>
-                            <th class="text-center dhead" rowspan="2">Merek</th>
-                            <th class="text-center dhead" rowspan="2">No. Identifikasi</th>
-                            <th class="text-center dhead" rowspan="2">Lokasi</th>
-                            <th class="text-center dhead" rowspan="2">Frekuensi Perawatan</th>
-                            <th class="text-center dhead" rowspan="2">Penanggung Jawab</th>
-                            <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
+                            <th class="text-center dhead align-middle" rowspan="2">No</th>
+                            <th class=" dhead align-middle" rowspan="2">Lantai</th>
+                            <th class=" dhead align-middle" rowspan="2">Nama Mesin & Peralatan</th>
+                            <th class=" dhead align-middle" rowspan="2">Jumlah</th>
+
+                            <th class=" dhead align-middle" rowspan="2">Lokasi</th>
+                            <th class=" dhead align-middle" rowspan="2">Frekuensi Perawatan</th>
+                            <th class=" dhead align-middle" rowspan="2">Penanggung <br> Jawab</th>
+                            <th class="text-center dhead align-middle" colspan="12">Tahun {{ $tahun }}</th>
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
@@ -98,9 +99,9 @@
                         @foreach ($perawatan as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
+                                <td>{{ $p->item->lokasi->lantai }}</td>
                                 <td>{{ $p->item->nama_mesin }}</td>
-                                <td>{{ $p->item->merek }}</td>
-                                <td>{{ $p->item->no_identifikasi }}</td>
+                                <td>{{ $p->item->jumlah }}</td>
                                 <td>{{ $p->item->lokasi->lokasi }}</td>
                                 <td>{{ $p->frekuensi_perawatan }} bulan</td>
                                 <td>{{ $p->penanggung_jawab }}</td>
