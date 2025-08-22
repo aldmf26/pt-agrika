@@ -110,8 +110,8 @@
                         {{ $audit->item }}
                     </td>
                     <td>{{ $audit->aktivitas }}</td>
-                    <td>{{ $audit->frek }}</td>
-                    <td>{{ $audit->departemen }}</td>
+                    <td class="text-nowrap">{{ $audit->frek }}</td>
+                    <td class="text-nowrap">{{ $audit->departemen }}</td>
                     @for ($i = 1; $i <= 12; $i++)
                         <td onclick="{{ $this->getField($i, $audit->id) ? 'showContextMenu(event, ' . $audit->id . ', ' . $i . ')' : '' }}"
                             @dblclick="$wire.toggleBulan({{ $audit->id }}, {{ $i }}, '{{ $audit->item }}', '{{ $audit->aktivitas }}', '{{ $audit->frek }}', '{{ $audit->departemen }}')"
