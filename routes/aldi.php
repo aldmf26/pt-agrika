@@ -457,8 +457,11 @@ Route::controller(QA1PenangananProdukController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
+        Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/create', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
         Route::get('/print/{id}', 'print')->name('print');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
 
 Route::controller(QA2BeritaAcaraPemusnahanProdukController::class)
@@ -468,5 +471,6 @@ Route::controller(QA2BeritaAcaraPemusnahanProdukController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
+        Route::post('/edit', 'edit')->name('edit');
         Route::get('/print', 'print')->name('print');
     });

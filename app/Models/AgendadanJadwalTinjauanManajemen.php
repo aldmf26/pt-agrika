@@ -12,6 +12,7 @@ class AgendadanJadwalTinjauanManajemen extends Model
         'agenda',
         'pic',
         'tanggal',
+        'nota_agenda',
 
     ];
 }

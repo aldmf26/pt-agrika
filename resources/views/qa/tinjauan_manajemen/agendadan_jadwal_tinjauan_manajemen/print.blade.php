@@ -93,26 +93,28 @@
                     <thead>
                         <tr>
                             <th class="text-center dhead">No</th>
-                            <th class="text-center dhead">Hari / Tanggal</th>
-                            <th class="text-center dhead">Waktu</th>
-                            <th class="text-center dhead" width="60%">Agenda</th>
-                            <th class="text-center dhead">PIC</th>
+                            <th class="text-nowrap dhead">Hari / Tanggal</th>
+                            <th class="text-nowrap dhead">Waktu</th>
+                            <th class="text-nowrap dhead" width="60%">Agenda</th>
+                            <th class="text-nowrap dhead">PIC</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($agenda as $a)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ date('l', strtotime($a->tanggal)) }} /
+                                <td class="text-nowrap">
                                     {{ tanggal($a->tanggal) }}</td>
 
-                                <td>{{ date('H:i', strtotime($a->dari_jam)) }} -
-                                    Selesai</td>
+                                <td class="text-nowrap">{{ date('H:i', strtotime($a->dari_jam)) }} -
+                                    {{ date('H:i', strtotime($a->sampai_jam)) }}</td>
                                 </td>
                                 <td>
-                                    <div style="white-space: pre-wrap;">{{ $a->agenda }}</div>
+                                    @foreach (explode('||', $a->agendas) as $i => $agenda)
+                                        {{ $i + 1 }}. {{ $agenda }} <br>
+                                    @endforeach
                                 </td>
-                                <td>{{ $a->pic }}</td>
+                                <td>{{ $a->pics }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -123,6 +125,10 @@
                 <br>
                 <br>
                 <p>Dibuat Oleh :</p>
+                <br>
+                <br>
+                <br>
+                <p>Food Safety Team Leader</p>
             </div>
         </div>
     </div>

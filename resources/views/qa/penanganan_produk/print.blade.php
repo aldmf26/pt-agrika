@@ -6,7 +6,7 @@
     </style>
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered border-dark">
+            <table class="table ">
                 <tr>
                     <td class="text-center">1.</td>
                     <td width="10">Tanggal Kejadian</td>

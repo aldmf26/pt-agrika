@@ -1,16 +1,14 @@
 <x-app-layout :title="$title">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-end gap-2">
-                        <div>
-
-                        </div>
+                        <div></div>
                         <div>
                             <a href="#" data-bs-toggle="modal" data-bs-target="#tambah"
-                                class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                                Input Rundown
+                                class="btn btn-sm btn-primary">
+                                <i class="fas fa-plus"></i> Add
                             </a>
                         </div>
                     </div>
@@ -19,29 +17,37 @@
                     <table id="example" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">Tanggal</th>
-                                <th class="text-center">Total Agenda</th>
+                                <th class="text-center">No</th>
+                                <th class="text-nowrap">Hari / Tanggal</th>
+                                <th class="text-nowrap">Waktu</th>
+                                <th class="text-nowrap" width="60%">Agenda</th>
+                                <th class="text-nowrap">PIC</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($agenda2 as $d)
+                            @foreach ($agenda2 as $a)
                                 <tr>
-                                    <td class="text-center">{{ $loop->iteration }}</td>
-                                    <td class="text-center">{{ tanggal($d->tanggal) }}</td>
-                                    <td class="text-center">{{ $d->jumlah_agenda }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td class="text-nowrap">{{ tanggal($a->tanggal) }}</td>
+                                    <td class="text-nowrap">
+                                        {{ date('H:i', strtotime($a->dari_jam)) }} -
+                                        {{ date('H:i', strtotime($a->sampai_jam)) }}
+                                    </td>
                                     <td>
-                                        <a href="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.print', ['tanggal' => $d->tanggal]) }}"
-                                            target="_blank" class="btn btn-sm btn-primary"><i
-                                                class="fas fa-print"></i></a>
-
-                                        {{-- <a href="{{ route('qa.daftar_hadir_tinjauan_manajemen.index', ['tanggal' => $d->tanggal]) }}"
-                                            class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a> --}}
+                                        @foreach (explode('||', $a->agendas) as $i => $agenda)
+                                            {{ $i + 1 }}. {{ $agenda }} <br>
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $a->pics }}</td>
+                                    <td>
+                                        <a href="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.print', ['tanggal' => $a->tanggal]) }}"
+                                            target="_blank" class="btn btn-sm btn-primary">
+                                            <i class="fas fa-print"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
-
                         </tbody>
                     </table>
                 </div>
@@ -49,77 +55,104 @@
         </div>
     </div>
 
-
+    {{-- FORM TAMBAH --}}
     <form action="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.store') }}" method="POST">
         @csrf
-        <x-modal_plus size="modal-xl" id="tambah">
-            <div class="row" x-data="{
-                rows: {{ json_encode($agenda) }}
-            }">
+        <x-modal_plus size="modal-lg" id="tambah">
+            <div class="row">
+
                 <div class="col-lg-3">
                     <label for="">Tanggal</label>
                     <input type="date" class="form-control" name="tanggal" required>
                 </div>
                 <div class="col-lg-3">
-                    <label for="">Waktu</label>
+                    <label for="">Waktu Dari</label>
                     <input type="time" class="form-control" name="waktu_dari" required>
                 </div>
+                <div class="col-lg-3">
+                    <label for="">Waktu Sampai</label>
+                    <input type="time" class="form-control" name="waktu_sampai" required>
+                </div>
+                <div class="col-lg-12 mt-2">
+                    <label for="">PIC</label>
+                    <div class="form-group">
+                        <select class="choices form-select" name="pic[]" multiple="multiple">
+                            @foreach ($pegawai as $p)
+                                <option value="{{ $p->id }}">{{ ucfirst(strtolower($p->nama)) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
                 <div class="col-lg-12">
                     <hr>
                 </div>
-                <div class="row mb-2">
-                    {{-- <div class="col-lg-2">
-                        <label>Waktu (Dari)</label>
-                    </div>
-                    <div class="col-lg-2">
-                        <label>Waktu (Sampai)</label>
-                    </div> --}}
-                    <div class="col-lg-8">
-                        <label>Agenda</label>
-                    </div>
-                    <div class="col-lg-4">
-                        <label>PIC</label>
-                    </div>
-                </div>
-                <template x-for="(row, index) in rows" :key="row.id">
 
-                    <div class="row mb-4">
-                        {{-- <div class="col-lg-2">
-                            <input type="hidden" :value="row.id_agenda" name="id[]">
-                            <input type="time" class="form-control" :value="row.dari_jam" name="start[]" required>
-                        </div>
-                        <div class="col-lg-2">
-                            <input type="time" class="form-control" :value="row.sampai_jam" name="finish[]" required>
-                        </div> --}}
-                        <div class="col-lg-7">
-                            <input type="hidden" :value="row.id_agenda" name="id[]">
-                            <textarea name="agenda[]" class="form-control" id="" cols="5" rows="2" x-text="row.agenda"></textarea>
-                            {{-- <input type="text" class="form-control" :value="row.agenda" name="agenda[]" required> --}}
-                        </div>
-                        <div class="col-lg-4">
-                            <input type="text" class="form-control" :value="row.pic" name="pic[]" required>
-                        </div>
-                        <div class="col-lg-1 d-flex align-items-end">
-                            <button type="button" class="btn btn-danger" @click="rows.splice(index, 1)"
-                                x-show="rows.length > 1">
-                                <i class="fas fa-minus"></i>
-                            </button>
-                        </div>
+                <div class="row mb-2">
+                    <div class="col-lg-11"><label>Agenda</label></div>
+                    {{-- <div class="col-lg-4"><label>PIC</label></div> --}}
+                </div>
+                <div class="row">
+                    <div class="col-lg-11">
+                        <textarea name="agenda[]" class="form-control" id="" cols="5" rows="2"></textarea>
                     </div>
-                </template>
+                    {{-- <div class="col-lg-4">
+                        <select name="pic[]" class="select2" required>
+                            <option value="">Pilih PIC</option>
+                            @foreach ($pegawai as $p)
+                                <option value="{{ $p->id }}">{{ ucfirst(strtolower($p->nama)) }}</option>
+                            @endforeach
+                        </select>
+                    </div> --}}
+                    <div id="tambah-baris"></div>
+
+                </div>
+
+
+
                 <div class="col-lg-12">
-                    <button type="button" class="btn btn-primary mt-2 btn-block"
-                        @click="rows.push({ id: Date.now() }); $nextTick()">
-                        <i class="fas fa-plus"></i> Tambah Baris
+                    <button type="button" class="btn btn-primary mt-2 btn-block tambah-baris"> <i
+                            class="fas fa-plus"></i> Tambah
+                        Baris
                     </button>
                 </div>
-
             </div>
-
         </x-modal_plus>
     </form>
 
+    {{-- CSS fix untuk select2 agar selalu muncul di atas modal --}}
 
 
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                count = 1;
+                $('.tambah-baris').click(function(e) {
+                    count++;
+                    e.preventDefault();
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('qa.agendadan_jadwal_tinjauan_manajemen.tambah_baris') }}",
+                        data: {
+                            count: count
+                        },
 
+                        success: function(response) {
+                            $('#tambah-baris').append(response);
+                            $('.select-baris').select2({
+                                dropdownParent: $('#tambah'), // Ganti dengan ID modal kamu
+                                width: '100%'
+                            });
+                        }
+                    });
+
+                });
+                $(document).on('click', '.hapus-baris', function() {
+                    var baris = $(this).attr('baris');
+
+                    $('.' + baris).remove();
+                });
+            });
+        </script>
+    @endsection
 </x-app-layout>

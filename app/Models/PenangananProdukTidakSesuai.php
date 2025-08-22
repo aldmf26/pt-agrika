@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class PenangananProdukTidakSesuai extends Model
 {
@@ -38,5 +39,10 @@ class PenangananProdukTidakSesuai extends Model
     public function getCreatedAtAttribute($value)
     {
         return date('Y-m-d', strtotime($value));
+    }
+
+    public function rwb()
+    {
+        return $this->belongsTo(SbwKotorModel::class, 'nama_produk', 'id');
     }
 }
