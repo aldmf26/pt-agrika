@@ -86,7 +86,7 @@
             </div>
             <div class="d-flex gap-3">
                 <div class="table-container">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered text-nowrap" style="font-size: 10px">
                         <thead>
                             <tr>
                                 <th class="text-center align-middle text-nowrap">NO URUT</th>
@@ -100,24 +100,63 @@
                                     (KG)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">SUSUT <br> SORTIR (KG)</th>
-
+                                <th class="text-center align-middle text-nowrap">BERAT SAAT <br> PEMBAGIAN <br> (Gram)
+                                </th>
+                                {{-- cabut --}}
                                 <th class="text-center align-middle text-nowrap">TGL PRODUKSI <br> (PENCABUTAN)</th>
                                 <th class="text-center align-middle text-nowrap">JML KEPING AWAL <br> (pcs & gram)</th>
                                 <th class="text-center align-middle text-nowrap">BERAT HASIL <br> CABUT & DRYING <br>
                                     (pcs / gram)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI DRYING</th>
+                                {{-- cetak --}}
                                 <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI CETAK</th>
                                 <th class="text-center align-middle text-nowrap">JUMLAH KEPING CETAK <br> (pcs & gram)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">BERAT HASIL CETAK <br> (pcs & gram)
                                 </th>
+                                {{-- grading --}}
+                                <th class="text-center align-middle text-nowrap">TGL FINAL <br> GRADING AKHIR
                                 </th>
+                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> GRADING AKHIR</th>
+                                <th class="text-center align-middle text-nowrap">BERAT AKHIR <br> GRADING <br> AKHIR
+                                    (KERING)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">TANGGAL <br> STEAM</th>
+                                <th class="text-center align-middle text-nowrap">JML KEPING <br> AKHIR (pcsm)</th>
+                                <th class="text-center align-middle text-nowrap">JML BERAT AKHIR <br> (gram)</th>
+                                <th class="text-center align-middle text-nowrap">PRESENTASE <br> YIELD (%)</th>
+                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> YANG DITERIMA <br>
+                                    GUDANG
+                                </th>
+                                {{-- <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
+                                </th> --}}
+                                <th class="text-center align-middle text-nowrap">BERAT MASUK <br> GUDANG <br> PRODUK
+                                    JADI
+                                </th>
+                                <th class="text-center align-middle text-nowrap">TANGGAL MASUK <br> GUDANG PRODUK <br>
+                                    JADI
+                                </th>
+                                <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
+                                </th>
+                                <th class="text-center align-middle text-nowrap">PRODUK <br> TERKIRIM <br> (Gram)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">TGL <br> PENGIRIMAN</th>
+                                <th class="text-center align-middle text-nowrap">TUJUAN</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            @php $first = true; @endphp
+                            @php
+                                $first = true;
+                                $b_bersih = 0;
+                                $gr_awal = 0;
+                            @endphp
                             @foreach ($bk as $b)
+                                @php
+                                    $gr_awal += $b['gr_awal'];
+                                    $b_bersih = $b['berat_bersih'];
+                                @endphp
                                 <tr>
                                     @if ($loop->first == 1)
                                         <td class="text-center">1</td>
@@ -130,9 +169,10 @@
                                         <td>{{ $rumah_walet->no_reg }}</td>
                                         <td>{{ $rumah_walet->nama }}</td>
                                         <td>{{ $b['no_invoice'] }}</td>
-                                        <td>{{ $b['gr_kotor'] }}</td>
-                                        <td>{{ $b['berat_bersih'] }}</td>
-                                        <td>{{ $b['gr_kotor'] - $b['berat_bersih'] }}</td>
+                                        <td class="text-end">{{ number_format($b['gr_kotor'], 0) }}</td>
+                                        <td class="text-end">{{ number_format($b['berat_bersih'], 0) }}</td>
+                                        <td class="text-end">{{ number_format($b['gr_kotor'] - $b['berat_bersih'], 0) }}
+                                        </td>
                                     @else
                                         <td></td>
                                         <td></td>
@@ -144,7 +184,9 @@
                                         <td></td>
                                         <td></td>
                                     @endif
-
+                                    <td class="text-end">
+                                        {{ number_format($b['gr_awal'], 0) }}
+                                    </td>
                                     <td>{{ tanggal($b['tgl_terima']) }}</td>
                                     <td class="text-center">{{ number_format($b['pcs_awal'], 0) }} /
                                         {{ number_format($b['gr_awal'], 0) }}
@@ -154,11 +196,85 @@
                                         /
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir'], 0) }}
                                     </td>
-                                    <td>{{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah']) }}</td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah']) }}</td>
+                                    <td class="text-center">{{ tanggal($b['tgl_selesai_ctk']) }}</td>
+
+                                    <td class="text-center">
+                                        {{ number_format($b['pcs_awal_ctk'], 0) }} /
+                                        {{ number_format($b['gr_awal_ctk'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+
+                                        {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir_ctk'], 0) }}
+                                        /
+                                        {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir_ctk'], 0) }}
+                                    </td>
+                                    {{-- grading --}}
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format(($b['gr_grading'] / $b['gr_awal']) * 100, 0) }}%
+                                    </td>
+                                    {{-- dsa --}}
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
+                                    </td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
+                                    </td>
+                                    @php
+                                        $tgl = date('Y-m-d', strtotime($b['tgl_grading'] . ' + 1 days'));
+                                    @endphp
+                                    <td class="text-center">
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($tgl) }}
+                                    </td>
                                 </tr>
                             @endforeach
 
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-end fw-bold">{{ number_format($gr_awal, 0) }}</td>
+                            </tr>
+                            <tr>
+                                <td>Selisih</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-end fw-bold">{{ number_format($b_bersih - $gr_awal, 0) }}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
 

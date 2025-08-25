@@ -30,7 +30,8 @@
                             <td class="text-center">{{ $rumah_walet->nama }}</td>
                             <td class="text-center">{{ $grade->nama }}</td>
                             <td class="text-center">
-                                <a href="{{ route('qa.traceability.print', ['nm_partai' => $b['nm_partai']]) }}"
+                                <a target="_blank"
+                                    href="{{ route('qa.traceability.print', ['nm_partai' => $b['nm_partai']]) }}"
                                     class="btn btn-warning btn-sm"> <i class="fas fa-print"></i></a>
                             </td>
 
