@@ -6,12 +6,12 @@
             ])
 
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
+                    class="fas fa-plus"></i> Add</button>
             <a href="{{ route('hrga5.1.print', ['tahun' => $tahun, 'kategori' => $kategori]) }}" target="_blank"
                 class="btn btn-primary float-end me-2"><i class="fas fa-print"></i>
-                print</a>
+                Print</a>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> view</button>
+                    class="fas fa-calendar"></i> View</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">

@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-header">
             <a href="{{ route('hrga8.3.formpengajuan') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i>
-                Tambah</a>
+                Add</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
@@ -22,12 +22,12 @@
                     @foreach ($permintaan as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->item_mesin->nama_mesin }}</td>
-                            <td>{{ $p->item_mesin->lokasi->lokasi }}</td>
-                            <td>{{ $p->item_mesin->no_identifikasi }}</td>
-                            <td>{{ $p->deadline }}</td>
-                            <td>{{ $p->diajukan_oleh }}</td>
-                            <td>{{ $p->deskripsi_masalah }}</td>
+                            <td>{{ ucfirst(strtolower($p->item_mesin->nama_mesin)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->item_mesin->lokasi->lokasi)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->item_mesin->no_identifikasi)) }}</td>
+                            <td>{{ tanggal($p->deadline) }}</td>
+                            <td>{{ ucfirst(strtolower($p->diajukan_oleh)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->deskripsi_masalah)) }}</td>
                             <td>
                                 <a target="_blank"
                                     href="{{ route('hrga8.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
@@ -38,7 +38,7 @@
                                     deskripsi_masalah="{{ $p->deskripsi_masalah }}"
                                     class="btn {{ empty($p->verifikasi_user) ? 'btn-primary' : 'btn-success' }}  btn-sm tindakan"
                                     data-bs-toggle="modal" data-bs-target="#tindakan"><i class="fas fa-edit"></i>
-                                    tindakan</button>
+                                    Tindakan</button>
                             </td>
                         </tr>
                     @endforeach

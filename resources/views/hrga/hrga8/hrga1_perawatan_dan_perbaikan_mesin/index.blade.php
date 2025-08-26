@@ -2,9 +2,9 @@
     <div class="card">
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
+                    class="fas fa-plus"></i> Add</button>
             <a href="{{ route('hrga8.1.print') }}" target="_blank" class="btn  btn-primary float-end me-2"><i
-                    class="fas fa-print"></i> print</a>
+                    class="fas fa-print"></i> Print</a>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
@@ -32,7 +32,7 @@
                             <td>{{ ucfirst(strtolower($p->item->lokasi->lantai)) }}</td>
                             <td>{{ ucfirst(strtolower($p->item->nama_mesin)) }}</td>
                             <td>{{ $p->item->jumlah }}</td>
-                            <td>{{ $p->item->lokasi->lokasi }}</td>
+                            <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
                             <td>{{ $p->frekuensi_perawatan }} bulan</td>
                             <td>{{ ucfirst(strtolower($p->penanggung_jawab)) }}</td>
                             @php

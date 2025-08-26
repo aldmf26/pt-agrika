@@ -7,7 +7,7 @@
             <a class="btn btn-primary float-end"
                 href="{{ route('hrga5.3.formPermintaanperbaikan', ['kategori' => $kategori]) }}" target="_blank"><i
                     class="fas fa-plus"></i>
-                add</a>
+                Add</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -40,14 +40,14 @@
                                     <a href="{{ route('hrga5.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
                                         class="btn btn-primary btn-sm" target="_blank"
                                         {{ empty($p->verifikasi_user) ? 'hidden' : '' }}><i class="fas fa-print"></i>
-                                        print</a>
+                                        Print</a>
                                     <button type="button" invoice_pengajuan="{{ $p->invoice_pengajuan }}"
                                         detail_perbaikan="{{ $p->detail_perbaikan }}"
                                         verifikasi_user="{{ $p->verifikasi_user }}"
                                         deskripsi_masalah="{{ $p->deskripsi_masalah }}"
                                         class="btn {{ empty($p->verifikasi_user) ? 'btn-primary' : 'btn-success' }}  btn-sm tindakan"
                                         data-bs-toggle="modal" data-bs-target="#tindakan"><i class="fas fa-edit"></i>
-                                        tindakan</button>
+                                        Tindakan</button>
                                 </td>
                             </tr>
                         @endforeach
