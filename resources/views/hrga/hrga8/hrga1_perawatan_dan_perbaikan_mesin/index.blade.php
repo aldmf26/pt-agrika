@@ -34,7 +34,7 @@
                             <td>{{ $p->item->jumlah }}</td>
                             <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
                             <td>{{ $p->frekuensi_perawatan }} bulan</td>
-                            <td>{{ ucfirst(strtolower($p->penanggung_jawab)) }}</td>
+                            <td>{{ ucwords($p->penanggung_jawab) }}</td>
                             @php
                                 $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                 $frekuensi = is_numeric($p->frekuensi_perawatan) ? (int) $p->frekuensi_perawatan : 1;

@@ -36,13 +36,17 @@
                     <tbody>
                         @foreach ($program as $p)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
-                                <td>{{ ucfirst(strtolower($p->item->jumlah)) }}</td>
-                                <td>{{ $p->item->no_identifikasi }}</td>
-                                <td class="text-nowrap">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
-                                <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
-                                <td>{{ ucwords($p->penanggung_jawab) }}</td>
+                                <td style="vertical-align: top !important;">{{ $loop->iteration }}</td>
+                                <td style="vertical-align: top !important;">
+                                    {{ ucfirst(strtolower($p->item->nama_item)) }}</td>
+                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($p->item->jumlah)) }}
+                                </td>
+                                <td style="vertical-align: top !important;">{{ $p->item->no_identifikasi }}</td>
+                                <td style="vertical-align: top !important;" class="text-nowrap">
+                                    {{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
+                                <td style="vertical-align: top !important;">Setiap {{ $p->frekuensi_perawatan }} bulan
+                                </td>
+                                <td style="vertical-align: top !important;">{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)
@@ -146,7 +150,8 @@
 
 
     <form action="" method="get">
-        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

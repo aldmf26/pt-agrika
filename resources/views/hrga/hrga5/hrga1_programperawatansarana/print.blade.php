@@ -102,14 +102,14 @@
                     <tbody>
                         @foreach ($program as $p)
                             <tr>
-                                <td class="align-middle">{{ $loop->iteration }}</td>
-                                <td class="align-middle">{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
-                                <td class="text-nowrap align-middle">{{ ucfirst(strtolower($p->item->jumlah)) }}</td>
+                                <td class="align-top">{{ $loop->iteration }}</td>
+                                <td class="align-top">{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
+                                <td class="text-nowrap align-top">{{ ucfirst(strtolower($p->item->jumlah)) }}</td>
                                 {{-- <td>{{ $p->item->no_identifikasi }}</td> --}}
-                                <td class="text-nowrap align-middle">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}
+                                <td class="text-nowrap align-top">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}
                                 </td>
-                                <td class="align-middle">Setiap {{ $p->frekuensi_perawatan }} bulan</td>
-                                <td class="align-middle">{{ ucwords($p->penanggung_jawab) }}</td>
+                                <td class="align-top">Setiap {{ $p->frekuensi_perawatan }} bulan</td>
+                                <td class="align-top">{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)

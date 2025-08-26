@@ -20,13 +20,13 @@
         <tbody>
             @foreach ($datas as $d)
                 <tr>
-                    <td>{{ $d->nm_alat }}</td>
-                    <td class="align-middle">{{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
-                    <td class="align-middle">{{ ucfirst(strtolower($d->metode)) }}</td>
-                    <td class="align-middle">{{ ucfirst(strtolower($d->penanggung_jawab)) }}</td>
-                    <td class="align-middle">{{ ucfirst(strtolower($d->frekuensi)) }}</td>
-                    <td class="align-middle">{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
-                    <td class="align-middle">{{ ucfirst(strtolower($d->sanitizer)) }}</td>
+                    <td class="align-top">{{ $d->nm_alat }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->metode)) }}</td>
+                    <td class="align-top">{{ ucwords($d->penanggung_jawab) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->frekuensi)) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->sanitizer)) }}</td>
                 </tr>
             @endforeach
         </tbody>

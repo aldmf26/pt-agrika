@@ -17,10 +17,10 @@
                     @foreach ($checklist as $d)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $d->item->lokasi->lantai }}</td>
-                            <td>{{ $d->item->nama_mesin }}</td>
+                            <td>{{ ucfirst(strtolower($d->item->lokasi->lantai)) }}</td>
+                            <td>{{ ucfirst(strtolower($d->item->nama_mesin)) }}</td>
                             <td>{{ $d->item->jumlah }}</td>
-                            <td>{{ $d->item->lokasi->lokasi }}</td>
+                            <td>{{ ucfirst(strtolower($d->item->lokasi->lokasi)) }}</td>
                             <td>
                                 {{-- @php
                                     $bulan = date('m', strtotime($d->tgl));
