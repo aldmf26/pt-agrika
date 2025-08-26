@@ -220,5 +220,10 @@
         /* Sesuaikan ukuran font */
         line-height: 1.5;
     }
+
+    .table td.td_atas,
+    .table th.td_atas {
+        vertical-align: top !important;
+    }
 </style>
 @yield('styles')

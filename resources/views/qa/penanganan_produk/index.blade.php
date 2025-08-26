@@ -26,14 +26,14 @@
         </thead>
         <tbody>
             @foreach ($penanganan as $d)
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ tanggal($d->tgl_kejadian) }}</td>
-                <td>{{ $d->sumber_penyebab }}</td>
-                <td>{{ $d->rwb->grade->nama }}</td>
-                <td>{{ $d->kode_produksi }}</td>
-                <td>{{ $d->jumlah_produk }} gram</td>
-                <td>{{ $d->status }}</td>
-                <td>{{ $d->penanganan }}</td>
+                <td class="td_atas">{{ $loop->iteration }}</td>
+                <td class="td_atas">{{ tanggal($d->tgl_kejadian) }}</td>
+                <td class="td_atas">{{ $d->sumber_penyebab }}</td>
+                <td class="td_atas">{{ $d->rwb->grade->nama }}</td>
+                <td class="td_atas">{{ $d->kode_produksi }}</td>
+                <td class="td_atas">{{ $d->jumlah_produk }} gram</td>
+                <td class="td_atas">{{ $d->status }}</td>
+                <td class="td_atas">{{ $d->penanganan }}</td>
                 <td class="text-nowrap">
                     <a class="btn btn-xs  btn-primary" target="_blank"
                         href="{{ route('qa.penanganan-produk.1.print', $d->id) }}"><i class="fas fa-print"></i>
