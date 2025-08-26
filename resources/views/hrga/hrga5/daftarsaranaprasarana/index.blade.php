@@ -25,11 +25,11 @@
                         @foreach ($item as $i)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $i->nama_item }}</td>
+                                <td>{{ ucwords($i->nama_item) }}</td>
                                 <td>{{ $i->no_identifikasi }}</td>
                                 <td>{{ $i->jumlah }}</td>
-                                <td>{{ $i->lokasi->lokasi ?? '-' }}</td>
-                                <td>{{ $i->jenis_item }}</td>
+                                <td>{{ ucwords($i->lokasi->lokasi ?? '-') }}</td>
+                                <td>{{ ucwords($i->jenis_item) }}</td>
                                 <td class="text-nowrap">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#edit"
                                         data-id="{{ $i->id }}" class="btn btn-sm btn-warning edit">Edit</a>

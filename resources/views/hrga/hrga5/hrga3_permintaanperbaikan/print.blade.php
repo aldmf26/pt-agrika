@@ -113,7 +113,7 @@
                     <tr>
                         <td>Diajukan oleh Bagian</td>
                         <td>:</td>
-                        <td>{{ ucfirst(strtolower($permintaan->diajukan_oleh)) }}</td>
+                        <td>{{ ucwords($permintaan->diajukan_oleh) }}</td>
                     </tr>
                     <tr>
                         <td class="fw-bold">Deskripsi Masalah</td>

@@ -1,7 +1,7 @@
 <x-hccp-print :title="$title" :dok="$dok">
     @php
         // Daftar jenis limbah yang valid
-        $validLimbah = ['Bulu', 'Organik', 'Non Organik'];
+        $validLimbah = ['Organik', 'Non Organik'];
     @endphp
 
     Jenis Limbah:
@@ -22,63 +22,72 @@
     <div class="row">
 
         <div class="col-sm-12 col-lg-12">
-            <table class="table table-bordered border-dark">
+            <table class="table table-bordered border-dark table-sm" style="font-size: 10px;">
                 <thead>
-                    <tr>
-                        @php
-                            $class = 'text-center align-middle fs-bold';
-                        @endphp
-                        <th class="{{ $class }}">Tanggal</th>
-                        <th class="{{ $class }}">Jam Checklist</th>
-                        <th class="{{ $class }}">CEKLIS (✓)</th>
-                        <th class="{{ $class }}">Paraf <br> Petugas</th>
-                        <th class="{{ $class }}">Keterangan</th>
-                    </tr>
+                    @if ($kategori == 'terjadwal')
+                        <tr>
+                            <th class="text-end align-middle">TANGGAL</th>
+                            <th class=" align-middle">JAM CHECKLIST</th>
+                            <th class=" align-middle">CHECKLIST (✓)</th>
+                            <th class=" align-middle">PARAF <br> PETUGAS</th>
+                            <th class=" align-middle">KETERANGAN</th>
+                        </tr>
+                    @else
+                        <tr>
+                            <th class="text-end align-middle">TANGGAL</th>
+                            <th class=" align-middle">JAM</th>
+                            <th class=" align-middle">BERAT</th>
+                            <th class=" align-middle">PARAF <br> PETUGAS</th>
+                            <th class=" align-middle">KETERANGAN</th>
+                        </tr>
+                    @endif
+
                 </thead>
                 <tbody>
-                    @if (!function_exists('cekJam'))
-                        @php
-                            function cekJam($jenisSampah, $jam, $bulan, $hari)
-                            {
-                                return DB::table('pembuangan_sampahs')
-                                    ->where('jenis_sampah', $jenisSampah)
-                                    ->where('jam_cek', $jam)
-                                    ->whereMonth('tgl', $bulan)
-                                    ->whereDay('tgl', $hari)
-                                    ->first();
-                            }
-                        @endphp
-                    @endif
-                    @for ($i = 1; $i <= $daysInMonth; $i++)
-                        @foreach ($jamList as $index => $jam)
-                            @php
-                                $loadCekJam = cekJam($jenis_limbah, $jam['time'], $selectedBulan, $i);
-                            @endphp
+                    @foreach ($pembuangan as $p)
+                        @if ($kategori == 'terjadwal')
                             <tr>
-                                @if ($index === 0)
-                                    <td class="text-center align-middle" rowspan="2">{{ $i }}</td>
-                                @endif
-                                <td class="text-center">{{ $jam['time'] }} {{ $jam['label'] }}</td>
-                                <td class="text-center pointer">
-                                    {{ $loadCekJam ? '√' : '' }}
+                                <td class="text-end">{{ date('d', strtotime($p->tgl)) }}</td>
+                                <td>{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
+                                <td>
+                                    @if ($p->tgl <= date('Y-m-d'))
+                                        ✓
+                                    @else
+                                    @endif
                                 </td>
-                                <td align="center">
-                                    {{$loadCekJam->paraf_petugas ?? ''}}
-                                </td>
-                                <td style="word-wrap: break-word; word-break: break-word; white-space: normal; max-width: 200px;">
-                                    {{$loadCekJam->ket ?? ''}}
-                                </td>
+                                <td></td>
+                                <td>{{ $p->katerangan }}</td>
                             </tr>
-                        @endforeach
-                    @endfor
+                        @else
+                            <tr>
+                                <td class="text-end">{{ date('d', strtotime($p->tgl)) }}</td>
+                                <td>{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
+                                <td>
+                                    {{ $p->berat }}
+                                </td>
+                                <td></td>
+                                <td>{{ ucfirst(strtolower($p->katerangan)) }} </td>
+                            </tr>
+                        @endif
+                    @endforeach
+
+
 
                 </tbody>
             </table>
         </div>
         <div class="col-sm-6 col-lg-4">
             <span>Ket : </span> <br>
-            <span>Bulu akan dikumpulkan terlebih dahulu akan dibakar jika sudah sampai sebanyak 1 plastik makan akan
-                diproses</span>
+            <span>
+                @if ($kategori == 'terjadwal')
+                    Jika sampah organik / non organik tidak diangkut maka dipastikan tidak tercecer dan mengundang
+                    hama
+                @else
+                    Bulu akan dikumpulkan terlebih dahulu, akan dibakar jika sudah benar-benar kering. Pembakaran
+                    dlakukan setiap jam 17.00 wita.
+                @endif
+
+            </span>
         </div>
         <div class="col-sm-6 col-lg-4">
             <table style="border: 1px solid black; border-collapse: collapse; width: 100%; margin-top: 10px;">
@@ -95,4 +104,4 @@
         </div>
     </div>
 
-</x-theme.hccp_print>
+    </x-theme.hccp_print>

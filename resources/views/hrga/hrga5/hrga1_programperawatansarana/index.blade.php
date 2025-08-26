@@ -42,7 +42,7 @@
                                 <td>{{ $p->item->no_identifikasi }}</td>
                                 <td class="text-nowrap">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
                                 <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
-                                <td>{{ ucfirst(strtolower($p->penanggung_jawab)) }}</td>
+                                <td>{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)

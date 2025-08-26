@@ -33,7 +33,7 @@
                                 <td>{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
                                 <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
                                 <td>{{ ucfirst(strtolower($p->item->no_identifikasi)) }}</td>
-                                <td>{{ ucfirst(strtolower($p->diajukan_oleh)) }}</td>
+                                <td>{{ ucwords($p->diajukan_oleh) }}</td>
                                 <td>{{ ucfirst(strtolower($p->deskripsi_masalah)) }}</td>
                                 <td class="text-nowrap">
 

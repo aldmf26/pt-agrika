@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Hrga;
 
+use App\Traits\WithAlert;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,7 @@ use Livewire\Attributes\Url;
 
 class PembuanganSampah extends Component
 {
+    use WithAlert;
     public $selectedBulan;
     public $selectedJenisLimbah;
     public $daysInMonth = 31;
@@ -27,8 +29,7 @@ class PembuanganSampah extends Component
     ];
 
     public $jamList = [
-        ['time' => '07:00:00', 'label' => 'AM'],
-        ['time' => '04:00:00', 'label' => 'PM'],
+        ['time' => '05:00:00', 'label' => 'PM'],
     ];
 
     public $keterangan = [];
@@ -172,6 +173,6 @@ class PembuanganSampah extends Component
         $data = [
             'adminSanitasi' => $adminSanitasi
         ];
-        return view('livewire.hrga.pembuangan-sampah',$data);
+        return view('livewire.hrga.pembuangan-sampah', $data);
     }
 }

@@ -177,6 +177,7 @@ Route::controller(Hrga1SchedulePembuanganSampah::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
+        Route::post('/store/', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
     });
 
