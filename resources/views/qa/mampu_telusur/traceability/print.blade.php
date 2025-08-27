@@ -84,65 +84,86 @@
                 <p class="mt-2 text-center">Dok.No.: FRM.QA.07.01</p>
 
             </div>
-            <div class="d-flex gap-3">
-                <div class="table-container">
-                    <table class="table table-bordered text-nowrap" style="font-size: 10px">
+
+
+            <div style="width: 100%; overflow-x: auto;">
+                <div style="display: flex; align-items: flex-start; width: max-content;">
+                    <table class="table table-bordered text-nowrap"
+                        style="font-size: 10px; width: max-content; margin:0; border-collapse:collapse;">
                         <thead>
                             <tr>
                                 <th class="text-center align-middle text-nowrap">NO URUT</th>
                                 <th class="text-center align-middle text-nowrap">TGL PANEN</th>
                                 <th class="text-center align-middle text-nowrap">TGL <br> DATANG</th>
-                                <th class="text-center align-middle text-nowrap">NO. REG. <br> RUMAH <br> WALET</th>
+                                <th class="text-center align-middle text-nowrap">NO. REG. <br> RUMAH <br> WALET
+                                </th>
                                 <th class="text-center align-middle text-nowrap">NAMA <br> RUMAH <br> WALET</th>
                                 <th class="text-center align-middle text-nowrap">BATCH MATERIAL</th>
-                                <th class="text-center align-middle text-nowrap">BERAT <br> KOTOR <br> RAW (KG)</th>
-                                <th class="text-center align-middle text-nowrap">BERAT <br> AKHIR <br> GRADING <br> RAW
+                                <th class="text-center align-middle text-nowrap">BERAT <br> KOTOR <br> RAW (KG)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">BERAT <br> AKHIR <br> GRADING
+                                    <br> RAW
                                     (KG)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">SUSUT <br> SORTIR (KG)</th>
-                                <th class="text-center align-middle text-nowrap">BERAT SAAT <br> PEMBAGIAN <br> (Gram)
+                                <th class="text-center align-middle text-nowrap">BERAT SAAT <br> PEMBAGIAN <br>
+                                    (Gram)
                                 </th>
                                 {{-- cabut --}}
-                                <th class="text-center align-middle text-nowrap">TGL PRODUKSI <br> (PENCABUTAN)</th>
-                                <th class="text-center align-middle text-nowrap">JML KEPING AWAL <br> (pcs & gram)</th>
-                                <th class="text-center align-middle text-nowrap">BERAT HASIL <br> CABUT & DRYING <br>
+                                <th class="text-center align-middle text-nowrap">TGL PRODUKSI <br> (PENCABUTAN)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">JML KEPING AWAL <br> (pcs &
+                                    gram)</th>
+                                <th class="text-center align-middle text-nowrap">BERAT HASIL <br> CABUT & DRYING
+                                    <br>
                                     (pcs / gram)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI DRYING</th>
+                                <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI DRYING
+                                </th>
                                 {{-- cetak --}}
                                 <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI CETAK</th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING CETAK <br> (pcs & gram)
+                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING CETAK <br> (pcs &
+                                    gram)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">BERAT HASIL CETAK <br> (pcs & gram)
+                                <th class="text-center align-middle text-nowrap">BERAT HASIL CETAK <br> (pcs &
+                                    gram)
                                 </th>
                                 {{-- grading --}}
                                 <th class="text-center align-middle text-nowrap">TGL FINAL <br> GRADING AKHIR
                                 </th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> GRADING AKHIR</th>
-                                <th class="text-center align-middle text-nowrap">BERAT AKHIR <br> GRADING <br> AKHIR
+                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> GRADING
+                                    AKHIR</th>
+                                <th class="text-center align-middle text-nowrap">BERAT AKHIR <br> GRADING <br>
+                                    AKHIR
                                     (KERING)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">TANGGAL <br> STEAM</th>
-                                <th class="text-center align-middle text-nowrap">JML KEPING <br> AKHIR (pcsm)</th>
-                                <th class="text-center align-middle text-nowrap">JML BERAT AKHIR <br> (gram)</th>
+                                <th class="text-center align-middle text-nowrap">JML KEPING <br> AKHIR (pcsm)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">JML BERAT AKHIR <br> (gram)
+                                </th>
                                 <th class="text-center align-middle text-nowrap">PRESENTASE <br> YIELD (%)</th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> YANG DITERIMA <br>
+                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> YANG
+                                    DITERIMA <br>
                                     GUDANG
                                 </th>
                                 {{-- <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
                                 </th> --}}
-                                <th class="text-center align-middle text-nowrap">BERAT MASUK <br> GUDANG <br> PRODUK
+                                <th class="text-center align-middle text-nowrap">BERAT MASUK <br> GUDANG <br>
+                                    PRODUK
                                     JADI
                                 </th>
-                                <th class="text-center align-middle text-nowrap">TANGGAL MASUK <br> GUDANG PRODUK <br>
+                                <th class="text-center align-middle text-nowrap" style="border-right: none">TANGGAL
+                                    MASUK <br> GUDANG
+                                    PRODUK <br>
                                     JADI
                                 </th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
+                                {{-- <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
                                 </th>
                                 <th class="text-center align-middle text-nowrap">PRODUK <br> TERKIRIM <br> (Gram)
                                 </th>
                                 <th class="text-center align-middle text-nowrap">TGL <br> PENGIRIMAN</th>
-                                <th class="text-center align-middle text-nowrap">TUJUAN</th>
+                                <th class="text-center align-middle text-nowrap">TUJUAN</th> --}}
 
                             </tr>
                         </thead>
@@ -171,7 +192,8 @@
                                         <td>{{ $b['no_invoice'] }}</td>
                                         <td class="text-end">{{ number_format($b['gr_kotor'], 0) }}</td>
                                         <td class="text-end">{{ number_format($b['berat_bersih'], 0) }}</td>
-                                        <td class="text-end">{{ number_format($b['gr_kotor'] - $b['berat_bersih'], 0) }}
+                                        <td class="text-end">
+                                            {{ number_format($b['gr_kotor'] - $b['berat_bersih'], 0) }}
                                         </td>
                                     @else
                                         <td></td>
@@ -197,7 +219,8 @@
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir'], 0) }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah']) }}</td>
+                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah']) }}
+                                    </td>
                                     <td class="text-center">{{ tanggal($b['tgl_selesai_ctk']) }}</td>
 
                                     <td class="text-center">
@@ -245,6 +268,10 @@
                                     <td class="text-center">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($tgl) }}
                                     </td>
+                                    {{-- <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td> --}}
                                 </tr>
                             @endforeach
 
@@ -276,9 +303,49 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div>
+                    <table class="table table-bordered text-nowrap"
+                        style="font-size: 10px; width: 400px; margin:0; border-collapse:collapse; border-left:0;">
+                        <thead>
+                            <tr>
+                                <th class="text-center align-middle text-nowrap" style="border-left: 1px solid #dee2e6">
+                                    JUMLAH
+                                    <br>
+                                    KEPING <br>
+                                    TERKIRIM
+                                </th>
+                                <th class="text-center align-middle text-nowrap">PRODUK <br> TERKIRIM <br>
+                                    (Gram)
+                                </th>
+                                <th class="text-center align-middle text-nowrap">TGL <br> PENGIRIMAN</th>
+                                <th class="text-center align-middle text-nowrap">TUJUAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($kirim as $k)
+                                <tr>
+                                    <td class="text-center" style="border-left: 1px solid #dee2e6">
+                                        {{ number_format($k['pcs'], 0) }}</td>
+                                    <td class="text-center">{{ number_format($k['gr'], 0) }}</td>
+                                    <td class="text-center">
+                                        {{ empty($k['tgl_input']) ? '-' : tanggal($k['tgl_input']) }}</td>
+                                    <td class="text-center">{{ $k['tujuan'] }}</td>
+                                </tr>
+                            @endforeach
 
+                        </tbody>
+
+                    </table>
+                </div>
             </div>
+            {{-- <div style="flex: 0 0 400px;">
+
+               
+            </div> --}}
+
+
+
+
+
 
 
 

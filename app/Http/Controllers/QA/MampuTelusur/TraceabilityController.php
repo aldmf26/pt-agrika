@@ -14,6 +14,8 @@ class TraceabilityController extends Controller
         $bk = json_decode($bk, TRUE);
 
 
+
+
         $data = [
             'title' => 'Traceability',
             'bk' => $bk['data'],
@@ -26,10 +28,18 @@ class TraceabilityController extends Controller
         $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/tracebelity1?nm_partai=" . $r->nm_partai);
         $bk = json_decode($bk, TRUE);
 
+        $kirim = Http::get("https://sarang.ptagafood.com/api/apihasap/tracebelity2?nm_partai=" . $r->nm_partai);
+        $kirim = json_decode($kirim, TRUE);
+
+
+
+
+
         $data = [
             'title' => 'Print Traceability',
             'nm_partai' => $r->nm_partai,
             'bk' => $bk['data'],
+            'kirim' => $kirim['data'],
         ];
         return view('qa.mampu_telusur.traceability.print', $data);
     }
