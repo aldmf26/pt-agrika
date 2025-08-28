@@ -40,6 +40,8 @@ use App\Http\Controllers\PUR\Pembelian\PUR2PurchaseOrderController;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR1DaftarSupplierController;
 use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA1PenangananProdukController;
 use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA2BeritaAcaraPemusnahanProdukController;
+use App\Http\Controllers\QA\Recall\HasilAnalisaProsesRecallController;
+use App\Http\Controllers\QA\Recall\InformasiRecallProdukController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -245,14 +247,16 @@ Route::controller(IA2JadwalAuditInternalController::class)
     });
 
 Route::controller(IA4LaporanAuditInternalController::class)
-    ->prefix('ia/4-laporan-audit-internal')
+    ->prefix('ia/4-summary-logsheet-finding-audit-internal')
     ->name('ia.4.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::post('/create/', 'store')->name('store');
-        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/edit/{laporan}', 'edit')->name('edit');
+        Route::post('/update/{laporan}', 'update')->name('update');
         Route::get('/print', 'print')->name('print');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
 
 Route::controller(RM1PenerimaanBarangController::class)
@@ -454,6 +458,26 @@ Route::controller(PUR1EvaluasiSupplierController::class)
 Route::controller(QA1PenangananProdukController::class)
     ->prefix('qa/penanganan-barang-tidak-sesuai/penanganan-produk')
     ->name('qa.penanganan-produk.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create/', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{id}', 'print')->name('print');
+    });
+
+Route::controller(InformasiRecallProdukController::class)
+    ->prefix('qa/informasi-recall-produk')
+    ->name('qa.5.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::get('/print/{id}', 'print')->name('print');
+    });
+
+Route::controller(HasilAnalisaProsesRecallController::class)
+    ->prefix('qa/hasil-analisa-proses-recall')
+    ->name('qa.5.2.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');

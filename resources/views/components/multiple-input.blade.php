@@ -3,7 +3,8 @@
 ])
 <div>
     <div x-data="{
-        rows: ['']
+        rows: [''],
+    
     }">
         <template x-for="(row, index) in rows" :key="index">
             <div class="row">
@@ -17,7 +18,10 @@
                 </div>
             </div>
         </template>
-        <button type="button" @click="rows.push({ value: '' })"
+        <button type="button"
+            @click="rows.push({ value: '' });$nextTick(() => {
+            $('.select2nama').select2();
+        })"
             class="btn btn-primary btn-xs">{{ $label }}</button>
     </div>
 </div>

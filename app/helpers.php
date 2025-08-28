@@ -89,3 +89,20 @@ if (!function_exists('dataDariBulan')) {
         ];
     }
 }
+
+if (!function_exists('divisiAudit')) {
+    function divisiAudit()
+    {
+        return [
+            'bk',
+            'cabut',
+            'cetak',
+            'steam',
+            'qa',
+            'purchasing',
+            'it',
+            'ekspedisi',
+            'hrga',
+        ];
+    }
+}

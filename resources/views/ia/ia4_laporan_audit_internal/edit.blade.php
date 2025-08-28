@@ -1,32 +1,27 @@
 <x-app-layout :title="$title">
-    @if (session()->has('error'))
-        <div class="alert alert-danger">
-            <i class="bi bi-exclamation-triangle"></i> {{ session('error') }}
-        </div>
-    @endif
-
     <div class="container mt-4">
-        <form action="" method="post">
+        <form action="{{ route('ia.4.update', $laporan) }}" method="post">
             @csrf
             <div class="row g-3">
                 <div class="col-2">
                     <div>
                         <label for="tgl_audit" class="form-label">Tanggal Audit</label>
-                        <input type="date" value="{{ date('Y-m-d') }}" class="form-control" id="tgl"
+                        <input type="date" value="{{ $laporan->tgl_audit }}" class="form-control" id="tgl"
                             name="tgl_audit" required>
                     </div>
                 </div>
                 <div class="col-1">
                     <div>
                         <label for="urutan" class="form-label">Urutan</label>
-                        <input readonly type="text" class="form-control" value="{{ $urutan }}" id="urutan"
-                            name="urutan" required>
+                        <input readonly type="text" class="form-control" value="{{ $laporan->urutan }}"
+                            id="urutan" name="urutan" required>
                     </div>
                 </div>
                 <div class="col-md-2 col-sm-4">
                     <div>
                         <label for="divisi" class="form-label">divisi</label>
-                        <input type="text" class="form-control" id="divisi" name="divisi" required>
+                        <input type="text" class="form-control" id="divisi" name="divisi"
+                            value="{{ $laporan->divisi }}" required>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
@@ -35,7 +30,10 @@
                         <select name="audite" class="form-control selectAudtor">
                             <option value="">Pilih Auditee</option>
                             @foreach ($user as $u)
-                                <option value="{{ $u->nama }}">{{ $u->nama }}</option>
+                                <option value="{{ $u->nama }}"
+                                    {{ $laporan->audite == $u->nama ? 'selected' : '' }}>
+                                    {{ $u->nama }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -43,14 +41,14 @@
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <label for="finding" class="form-label">Finding</label>
-                        <input type="text" class="form-control" id="finding" name="finding" required>
+                        <input type="text" class="form-control" id="finding" name="finding"
+                            value="{{ $laporan->finding }}" required>
                     </div>
                 </div>
-
                 <div class="col-md-12 col-sm-12">
                     <div class="">
                         <label for="tindakan" class="form-label">Tindak Perbaikan dan Pencegahan</label>
-                        <textarea rows="10" class="form-control" id="tindakan" name="tindakan" required></textarea>
+                        <textarea rows="10" class="form-control" id="tindakan" name="tindakan" required>{{ $laporan->tindakan }}</textarea>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
@@ -59,7 +57,9 @@
                         <select name="pic" class="form-control selectAudtor">
                             <option value="">Pilih PIC</option>
                             @foreach ($user as $u)
-                                <option value="{{ $u->nama }}">{{ $u->nama }}</option>
+                                <option value="{{ $u->nama }}" {{ $laporan->pic == $u->nama ? 'selected' : '' }}>
+                                    {{ $u->nama }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -67,13 +67,15 @@
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <label for="completion_date" class="form-label">Completion Date</label>
-                        <input type="date" class="form-control" id="completion_date" name="completion_date" required>
+                        <input type="date" class="form-control" id="completion_date" name="completion_date"
+                            value="{{ $laporan->completion_date }}" required>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <div>
                         <label for="status" class="form-label">Status</label>
-                        <input type="text" class="form-control" id="status" name="status" required>
+                        <input type="text" class="form-control" id="status" name="status"
+                            value="{{ $laporan->status }}" required>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12 d-flex justify-content-end">
@@ -82,8 +84,10 @@
                     </div>
                 </div>
             </div>
+
         </form>
     </div>
+
     @section('scripts')
         <script>
             $(document).ready(function() {

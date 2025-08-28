@@ -119,7 +119,7 @@ class ProgramAuditInternal extends Component
     public function render()
     {
         $departemenBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing', 'hrga', 'purchasing', 'qa'];
-        $user = DataPegawai::get();
+        $user = DataPegawai::karyawan()->get();
 
         $data = [
             'datas' => ModelsProgramAuditInternal::where('tahun', $this->tahun)->get(),
