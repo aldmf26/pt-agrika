@@ -78,38 +78,39 @@
                 <p>Tahun : {{ $tahun }}</p>
                 <table class="table table-bordered " style="text-transform: capitalize; font-size: 11px">
                     <thead>
-                        <tr>
-                            <th>No</th>
-                            <th class="text-nowrap">Nama Alat Ukur</th>
-                            <th class="text-nowrap">Merek</th>
-                            <th class="text-nowrap">Type / Nomor seri</th>
-                            <th class="text-nowrap">Lokasi</th>
-                            <th class="text-nowrap">Frekuensi <br> Kalibrasi</th>
-                            <th class="text-nowrap">Rentang Min- <br>Maks</th>
-                            <th class="text-nowrap">Resolusi</th>
-                            <th class="text-nowrap">Tanggal Aktual <br> Kalibrasi</th>
-                            <th class="text-nowrap">Standard Nilai <br> koreksi</th>
-                            <th class="text-nowrap">Aktual nilai koreksi</th>
-                            <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap">Rencana Kalibrasi <br> selanjutnya</th>
+                        <tr style=" text-transform: capitalize;">
+                            <th class="text-nowrap align-middle">No</th>
+                            <th class="text-nowrap align-middle">Nama Alat Ukur</th>
+                            <th class="text-nowrap align-middle">Merek</th>
+                            <th class="text-nowrap align-middle">Type / Nomor seri</th>
+                            <th class="text-nowrap align-middle">Lokasi</th>
+                            <th class="text-nowrap align-middle">Frekuensi <br> Kalibrasi</th>
+                            <th class="text-nowrap align-middle">Rentang Min- <br>Maks</th>
+                            <th class="text-nowrap align-middle">Resolusi</th>
+                            <th class="text-nowrap align-middle">Tanggal Aktual <br> Kalibrasi</th>
+                            <th class="text-nowrap align-middle">Standard Nilai <br> koreksi</th>
+                            <th class="text-nowrap align-middle">Aktual nilai koreksi</th>
+                            <th class="text-nowrap align-middle">Status</th>
+                            <th class="text-nowrap align-middle">Rencana Kalibrasi <br> selanjutnya</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jadwal as $j)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}</td>
-                                <td>{{ $j->itemKalibrasi->merk }}</td>
-                                <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
-                                <td>{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>
-                                <td>{{ $j->frekuensi }}</td>
-                                <td>{{ $j->rentang }}</td>
-                                <td>{{ $j->resolusi }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tanggal)) }}</td>
-                                <td>{{ $j->standar_nilai }}</td>
-                                <td>{{ $j->aktual_nilai }}</td>
-                                <td>{{ $j->status }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
+                                <td class="align-middle">{{ $loop->iteration }}</td>
+                                <td class="align-middle text-nowrap">{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}
+                                </td>
+                                <td class="align-middle">{{ $j->itemKalibrasi->merk }}</td>
+                                <td class="align-middle">{{ $j->itemKalibrasi->nomor_seri }}</td>
+                                <td class="align-middle text-nowrap">{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>
+                                <td class="align-middle">{{ $j->frekuensi }}</td>
+                                <td class="align-middle">{{ $j->rentang }}</td>
+                                <td class="align-middle">{{ $j->resolusi }}</td>
+                                <td class="align-middle">{{ date('d-m-Y', strtotime($j->tanggal)) }}</td>
+                                <td class="align-middle">{{ $j->standar_nilai }}</td>
+                                <td class="align-middle">{{ $j->aktual_nilai }}</td>
+                                <td class="align-middle">{{ $j->status }}</td>
+                                <td class="align-middle">{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -13,8 +13,16 @@ class Hrga2JadwalKalibrasiVerfikasi extends Controller
 {
     public function index(Request $r)
     {
+
+
+        $tahun = JadwalKalibrasi::selectRaw('YEAR(tanggal) as tahun')
+            ->distinct()
+            ->pluck('tahun')
+            ->toArray();
+
+
         if (empty($r->tahun)) {
-            $tahun = date('Y');
+            $tahun = $tahun ? max($tahun) : date('Y');
         } else {
             $tahun = $r->tahun;
         }
@@ -57,7 +65,7 @@ class Hrga2JadwalKalibrasiVerfikasi extends Controller
             'standar_nilai' => $r->standart,
             'aktual_nilai' => $r->aktual,
             'status' => $r->status,
-            'tanggal_selanjutnya' => $r->tgl_selanjutnya,
+            'tanggal_selanjutnya' => date('Y-m-d', strtotime("+1 year", strtotime($r->tanggal))),
         ]);
 
         hrga9_1KalibrasiModel::create([

@@ -32,19 +32,20 @@
                     <tbody>
                         @foreach ($jadwal as $j)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}</td>
-                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->merk)) }}</td>
-                                <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
-                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->lokasi->lokasi ?? '-')) }}</td>
-                                <td>{{ $j->frekuensi }}</td>
-                                <td>{{ $j->rentang }}</td>
-                                <td>{{ $j->resolusi }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tanggal)) }}</td>
-                                <td>{{ $j->standar_nilai }}</td>
-                                <td>{{ $j->aktual_nilai }}</td>
-                                <td>{{ ucfirst(strtolower($j->status)) }}</td>
-                                <td>{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
+                                <td class="td_atas">{{ $loop->iteration }}</td>
+                                <td class="td_atas">{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}</td>
+                                <td class="td_atas">{{ ucfirst(strtolower($j->itemKalibrasi->merk)) }}</td>
+                                <td class="td_atas">{{ $j->itemKalibrasi->nomor_seri }}</td>
+                                <td class="td_atas">{{ ucfirst(strtolower($j->itemKalibrasi->lokasi->lokasi ?? '-')) }}
+                                </td>
+                                <td class="td_atas">{{ $j->frekuensi }}</td>
+                                <td class="td_atas">{{ $j->rentang }}</td>
+                                <td class="td_atas">{{ $j->resolusi }}</td>
+                                <td class="td_atas">{{ date('d-m-Y', strtotime($j->tanggal)) }}</td>
+                                <td class="td_atas">{{ $j->standar_nilai }}</td>
+                                <td class="td_atas">{{ $j->aktual_nilai }}</td>
+                                <td class="td_atas">{{ ucfirst(strtolower($j->status)) }}</td>
+                                <td class="td_atas">{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -116,10 +117,10 @@
                                 <label for="">Status</label>
                                 <input type="text" class="form-control" name="status">
                             </div>
-                            <div class="col-lg-3 col-6 mt-2">
+                            {{-- <div class="col-lg-3 col-6 mt-2">
                                 <label for="">Rencana Kalibrasi selanjutnya</label>
                                 <input type="date" class="form-control" name="tgl_selanjutnya" required>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="modal-footer">

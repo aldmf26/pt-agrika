@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi;
 use App\Http\Controllers\Controller;
 use App\Models\hrga9_1KalibrasiModel;
 use App\Models\ItemKalibrasiModel;
+use App\Models\JadwalKalibrasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,8 +13,15 @@ class Hrga1ProgramKalibrasi extends Controller
 {
     public function index(Request $r)
     {
+
+        $tahun = JadwalKalibrasi::selectRaw('YEAR(tanggal) as tahun')
+            ->distinct()
+            ->pluck('tahun')
+            ->toArray();
+
+
         if (empty($r->tahun)) {
-            $tahun = date('Y');
+            $tahun = $tahun ? max($tahun) : date('Y');
         } else {
             $tahun = $r->tahun;
         }
