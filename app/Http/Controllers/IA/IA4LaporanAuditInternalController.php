@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\IA;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataPegawai;
 use App\Models\LaporanAuditInternal;
 use Illuminate\Http\Request;
 
@@ -10,11 +11,9 @@ class IA4LaporanAuditInternalController extends Controller
 {
     public function index()
     {
-        $datas = LaporanAuditInternal::selectRaw('tgl_audit, departemen, COUNT(*) as count')
-            ->groupBy(['tgl_audit', 'departemen'])
-            ->get();
+        $datas = LaporanAuditInternal::get();
         $data = [
-            'title' => 'laporan Audit Internal',
+            'title' => 'Summary Logsheet Finding Audit Internal',
             'datas' => $datas
         ];
 
@@ -23,8 +22,12 @@ class IA4LaporanAuditInternalController extends Controller
 
     public function create()
     {
+        $user = DataPegawai::karyawan()->get();
+        $urutan = LaporanAuditInternal::latest()->count() + 1;
         $data = [
             'title' => 'Tambah Laporan Audit Internal',
+            'urutan' => $urutan,
+            'user' => $user,
         ];
 
         return view('ia.ia4_laporan_audit_internal.create', $data);
@@ -32,36 +35,67 @@ class IA4LaporanAuditInternalController extends Controller
 
     public function store(Request $r)
     {
+        $urutan = LaporanAuditInternal::latest()->count() + 1;
         LaporanAuditInternal::create(
             [
-                'departemen' => $r->departemen,
+                'urutan' => $urutan,
+                'divisi' => $r->divisi,
                 'tgl_audit' => $r->tgl_audit,
-                'no_ftp' => $r->no_ftpp,
-                'auditor' => $r->auditor,
-                'laporan_audit' => "$r->laporan_audit",
-                'audite' => $r->auditee,
+                'tindakan' => $r->tindakan,
+                'finding' => $r->finding,
+                'audite' => $r->audite,
+                'pic' => $r->pic,
+                'completion_date' => $r->completion_date,
+                'status' => $r->status,
                 'admin' => auth()->user()->name
             ]
         );
-        
+
         return redirect()->route('ia.4.index')->with('sukses', 'Data Berhasil disimpan');
     }
-    public function edit($tgl)
+    public function edit(LaporanAuditInternal $laporan)
     {
+        $user = DataPegawai::karyawan()->get();
         $data = [
             'title' => 'Edit Laporan Audit Internal',
-            'tgl' => $tgl
+            'laporan' => $laporan,
+            'user' => $user,
+
         ];
 
         return view('ia.ia4_laporan_audit_internal.edit', $data);
     }
-    public function print(Request $r)
+
+    public function update(Request $r, LaporanAuditInternal $laporan)
     {
-        $datas = LaporanAuditInternal::where([['tgl_audit', $r->tgl],['departemen', $r->departemen]])->get();
+        $laporan->update([
+            'divisi' => $r->divisi,
+            'tgl_audit' => $r->tgl_audit,
+            'tindakan' => $r->tindakan,
+            'finding' => $r->finding,
+            'audite' => $r->audite,
+            'pic' => $r->pic,
+            'completion_date' => $r->completion_date,
+            'status' => $r->status,
+        ]);
+
+        return redirect()->route('ia.4.index')->with('sukses', 'Data Berhasil diupdate');
+    }
+
+    public function destroy($id)
+    {
+        $laporan = LaporanAuditInternal::findOrFail($id);
+        $laporan->delete();
+
+        return redirect()->route('ia.4.index')->with('sukses', 'Data Berhasil dihapus');
+    }
+    public function print()
+    {
+        $laporan = LaporanAuditInternal::get();
         $data = [
-            'title' => 'LAPORAN AUDIT INTERNAL',
+            'title' => 'SUMMARY & LOGSHEET FINDING AUDIT INTERNAL',
             'dok' => 'Dok.No.: FRM.AI.01.04, Rev.00',
-            'datas' => $datas
+            'laporan' => $laporan
         ];
 
         return view('ia.ia4_laporan_audit_internal.print', $data);

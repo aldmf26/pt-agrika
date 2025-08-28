@@ -1,5 +1,62 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <ul style="list-style-type: none;">
+    <table class="table table-bordered border-dark">
+        <thead>
+            <tr>
+                <th class="text-center align-middle">No</th>
+                <th class="text-left align-middle">Tanggal</th>
+                <th class=" align-middle">Urutan finding</th>
+                <th class=" align-middle">Divisi</th>
+                <th class=" align-middle">Auditee</th>
+                <th class=" align-middle">Finding</th>
+                <th class=" align-middle">Tindakan perbaikan <br> dan pencegahan</th>
+                <th class=" align-middle">PIC</th>
+                <th class=" align-middle">Completion date</th>
+                <th class=" align-middle">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($laporan as $r)
+                <tr>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td>{{ tanggal($r->tgl_audit) }}</td>
+                    <td class="text-center">{{ $r->urutan }}</td>
+                    <td>{{ $r->divisi }}</td>
+                    <td>{{ $r->audite }}</td>
+                    <td>{{ $r->finding }}</td>
+                    <td>{{ $r->tindakan }}</td>
+                    <td>{{ $r->pic }}</td>
+                    <td>{{ tanggal($r->completion_date) }}</td>
+                    <td>{{ $r->status }}</td>
+
+                </tr>
+            @endforeach
+
+        </tbody>
+    </table>
+
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <table class="table table-bordered border-dark float-right" style="font-size: 11px">
+                <thead>
+                    <tr>
+                        <th class="text-center">Received & Approved by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 80px"></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">[Auditor / Operational Director]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {{-- <ul style="list-style-type: none;">
         <li>Departemen : {{ $datas[0]->departemen }}</li>
         <li>Tanggal Audit : {{ tanggal($datas[0]->tgl_audit) }}</li>
         <li>Auditee : {{ $datas[0]->audite }}</li>
@@ -45,5 +102,5 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> --}}
 </x-hccp-print>
