@@ -98,6 +98,15 @@
         thead th {
             text-transform: capitalize;
         }
+
+        .table-judul th,
+        .table-judul td {
+            padding: 2px;
+            font-size: 12px;
+            border: 1px solid black;
+
+
+        }
     </style>
 
 </head>
@@ -105,7 +114,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 mt-2">
+            {{-- <div class="col-2 mt-2">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
@@ -117,78 +126,121 @@
                     SERTA PEMBERSIHAN BAHAN BAKU
                 </p>
                 <p class="cop_bawah text-center">raw material preparing, handover and cleaning</p>
-            </div>
+            </div> --}}
+            <table class="table-judul">
+                <tr>
+                    <td rowspan="6" class="align-middle text-center">
+                        <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                    </td>
+                    <td colspan="3" class="dhead">
+                        <h4 class="text-center fw-bold"> PT. AGRIKA GATYA ARUM</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="4" class="align-middle">
+                        <h6 class="text-center fw-bold">LAPORAN KESIGAPAN DAN TANGGAP DARURAT</h6>
+                    </td>
+                    <td>
+                        No. Dok
+                    </td>
+                    <td>
+                        FRM.QA.04.01
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Revisi
+                    </td>
+                    <td>
+                        00
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tanggal Efektif
+                    </td>
+                    <td>
+                        {{ tanggal(date('Y-m-d')) }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Halaman
+                    </td>
+                    <td>
+                        1 dari 1
+                    </td>
+                </tr>
+
+
+            </table>
 
 
 
 
-            <div class="col-12">
-                <table class="table-tes">
+            <div class="col-12 mt-2">
+                <table class="table-tes" width="70%">
                     <tr>
-                        <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
-                        <td width="2%">: </td>
-                        <td class="align-middle">&nbsp; {{ tanggal($tanggal) }}</td>
+                        <td>Tanggal</td>
+                        <td class="align-middle"> : {{ tanggal($kesigapan->tgl) }}</td>
+                        <td>Jam</td>
+                        <td> : {{ \Carbon\Carbon::parse($kesigapan->dari_jam)->format('H:i') }} -
+                            {{ \Carbon\Carbon::parse($kesigapan->sampai_jam)->format('H:i') }}</td>
+
                     </tr>
                     <tr>
-                        <td>Nama Petugas Pembagi &nbsp;<br> <span class="fst-italic">Leader name</span> </td>
-                        <td width="2%">:</td>
-
-                        <td class="align-middle"> &nbsp;{{ $pengawas }}</td>
+                        <td>Jenis Insiden</td>
+                        <td class="align-middle"> : {{ ucfirst(strtolower($kesigapan->jenis_insiden)) }}</td>
+                        <td><input type="checkbox" name="" id=""
+                                {{ $kesigapan->kejadian == 'tidak disengaja' ? 'checked' : '' }}> Tidak Disengaja</td>
+                        <td><input type="checkbox" name="" id=""
+                                {{ $kesigapan->kejadian == 'disengaja' ? 'checked' : '' }}> Disengaja</td>
                     </tr>
+                    <tr>
+                        <td>Penyebab</td>
+                        <td class="align-middle"> : {{ ucfirst(strtolower($kesigapan->penyebab)) }}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Akibat</td>
+                        <td class="align-middle"> : {{ ucfirst(strtolower($kesigapan->akibat)) }}</td>
+
+                    </tr>
+
                 </table>
             </div>
-            <div class="col-lg-12">
+            <div class="col-lg-12 mt-2">
 
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="align-middle text-center" rowspan="2">No</th>
-                            <th class="align-middle" rowspan="2">Regu/ <br><span
-                                    class="fst-italic fw-lighter">Team</span></th>
-                            <th class="align-middle" rowspan="2">Nama Operator Cabut<br><span
-                                    class="fst-italic fw-lighter">Operator name</span>
-                            </th>
-                            <th class="align-middle" rowspan="2">Kode Bacth/Lot<br><span
-                                    class="fst-italic fw-lighter">Bacth/Lot code</span></th>
-                            <th class="align-middle" rowspan="2">Jenis<br><span
-                                    class="fst-italic fw-lighter">type</span></th>
-                            <th class="align-middle" rowspan="2">Nomor box</th>
-                            <th class="align-middle text-center" colspan="2">Jumlah <br><span
-                                    class="fst-italic fw-lighter">Quantity</span></th>
-
-
-                            <th class="align-middle " rowspan="2">Keterangan <br><span
-                                    class="fst-italic fw-lighter">Remaks</span></th>
+                            <th class="align-middle" rowspan="2">Lokasi</th>
+                            <th class="align-middle text-center" colspan="2">Korban</th>
+                            <th class="align-middle text-center" colspan="2">Kerugian Material</th>
+                            <th class="align-middle" rowspan="2">Potensi Bahaya Pada Produk</th>
+                            <th class="align-middle" rowspan="2">Tindakan <br> Pengendalian</th>
+                            <th class="align-middle" rowspan="2" width="100px">PIC</th>
 
                         </tr>
                         <tr>
-                            <th class="text-end">Pcs</th>
-                            <th class="text-end">Gr</th>
+                            <th class="">Cedera</th>
+                            <th class="">Meninggal</th>
+                            <th class="">Infrastruktur</th>
+                            <th class="">Produk</th>
                         </tr>
 
                     </thead>
                     <tbody>
                         @foreach ($detail as $d)
-                            @php
-                                $sbw = DB::table('sbw_kotor')
-                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', 'like', '%' . $d['nm_partai'] . '%')
-                                    ->first();
-                            @endphp
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $pengawas }}</td>
-                                <td class="">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
-                                </td>
-                                <td class="">{{ $sbw->nama ?? '-' }}</td>
-                                <td class="">{{ $d['no_box'] }}</td>
-                                <td class="text-end">{{ $d['pcs'] }}</td>
-                                <td class="text-end">{{ $d['gr_awal'] }}</td>
-
-                                <td class="text-center">
-                                    {{-- barang dari {{ $d['tgl'] }} ~ {{ $d['tgl_selesai'] }} --}}
-                                </td>
+                                <td class="text-nowrap align-middle">{{ $d->lokasi }}</td>
+                                <td class="text-nowrap align-middle">{{ $d->cedera }}</td>
+                                <td class="text-nowrap align-middle">{{ $d->meninggal }}</td>
+                                <td class="text-nowrap align-middle">{{ $d->infrastruktur }}</td>
+                                <td class="text-nowrap align-middle">{{ $d->produk }}</td>
+                                <td class="align-middle">{{ $d->potensi_bahaya }}</td>
+                                <td class="align-middle">{{ $d->tindakan }}</td>
+                                <td class="text-nowrap align-middle">{{ $d->pic }}</td>
                             </tr>
                         @endforeach
 
@@ -201,17 +253,21 @@
 
             </div>
             <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
+                <table style="font-size: 11px" width="100%">
                     <thead>
                         <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+                            <th width="33.33%">Dilaporkan Oleh</th>
+                            <th width="33.33%">Diketahui & Disetujui Oleh,</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="height: 80px"></td>
                             <td style="height: 80px"></td>
+                        </tr>
+                        <tr>
+                            <td>FSTL</td>
+                            <td>Direktur</td>
                         </tr>
 
                     </tbody>

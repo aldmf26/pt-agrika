@@ -6,25 +6,25 @@
             ])
 
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
+                    class="fas fa-plus"></i> Add</button>
             <a href="{{ route('hrga5.1.print', ['tahun' => $tahun, 'kategori' => $kategori]) }}" target="_blank"
                 class="btn btn-primary float-end me-2"><i class="fas fa-print"></i>
-                print</a>
+                Print</a>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> view</button>
+                    class="fas fa-calendar"></i> View</button>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="example">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th class="text-center text-nowrap" rowspan="2">No</th>
-                            <th class="text-center text-nowrap" rowspan="2">Nama Sarana dan Prasarana Umum</th>
+                            <th class="text-center text-nowrap" rowspan="2">Nama sarana dan prasarana Umum</th>
                             <th class="text-center text-nowrap" rowspan="2">Jumlah</th>
                             <th class="text-center text-nowrap" rowspan="2">No. Identifikasi</th>
                             <th class="text-center text-nowrap" rowspan="2">Lokasi</th>
-                            <th class="text-center text-nowrap" rowspan="2">Frekuensi Perawatan</th>
-                            <th class="text-center text-nowrap" rowspan="2">Penanggung Jawab</th>
+                            <th class="text-center text-nowrap" rowspan="2">Frekuensi perawatan</th>
+                            <th class="text-center text-nowrap" rowspan="2">Penanggung jawab</th>
                             <th class="text-center text-nowrap" colspan="12">Tahun {{ $tahun }}</th>
                         </tr>
                         <tr>
@@ -36,14 +36,17 @@
                     <tbody>
                         @foreach ($program as $p)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item->nama_item }}
+                                <td style="vertical-align: top !important;">{{ $loop->iteration }}</td>
+                                <td style="vertical-align: top !important;">
+                                    {{ ucfirst(strtolower($p->item->nama_item)) }}</td>
+                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($p->item->jumlah)) }}
                                 </td>
-                                <td>{{ $p->item->jumlah }}</td>
-                                <td>{{ $p->item->no_identifikasi }}</td>
-                                <td class="text-nowrap">{{ $p->item->lokasi->lokasi }}</td>
-                                <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
-                                <td>{{ $p->penanggung_jawab }}</td>
+                                <td style="vertical-align: top !important;">{{ $p->item->no_identifikasi }}</td>
+                                <td style="vertical-align: top !important;" class="text-nowrap">
+                                    {{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
+                                <td style="vertical-align: top !important;">Setiap {{ $p->frekuensi_perawatan }} bulan
+                                </td>
+                                <td style="vertical-align: top !important;">{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)
@@ -147,7 +150,8 @@
 
 
     <form action="" method="get">
-        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">

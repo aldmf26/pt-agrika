@@ -2,18 +2,18 @@
     <div class="card">
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
+                    class="fas fa-plus"></i> Add</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
-                    class="fas fa-calendar"></i> view</button>
+                    class="fas fa-calendar"></i> View</button>
             <a href="{{ route('hrga9.2.print', ['tahun' => $tahun]) }}" target="_blank"
-                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> print</a>
+                class="btn btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
             <h2 class="h6 mb-0">Tahun:{{ $tahun }}</h2>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="example">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th>No</th>
                             <th class="text-nowrap">Nama alat ukur</th>
                             <th class="text-nowrap">Merek</th>
@@ -34,16 +34,16 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ ucfirst(strtolower($j->itemKalibrasi->name)) }}</td>
-                                <td>{{ $j->itemKalibrasi->merk }}</td>
+                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->merk)) }}</td>
                                 <td>{{ $j->itemKalibrasi->nomor_seri }}</td>
-                                <td>{{ $j->itemKalibrasi->lokasi->lokasi ?? '-' }}</td>
+                                <td>{{ ucfirst(strtolower($j->itemKalibrasi->lokasi->lokasi ?? '-')) }}</td>
                                 <td>{{ $j->frekuensi }}</td>
                                 <td>{{ $j->rentang }}</td>
                                 <td>{{ $j->resolusi }}</td>
                                 <td>{{ date('d-m-Y', strtotime($j->tanggal)) }}</td>
                                 <td>{{ $j->standar_nilai }}</td>
                                 <td>{{ $j->aktual_nilai }}</td>
-                                <td>{{ $j->status }}</td>
+                                <td>{{ ucfirst(strtolower($j->status)) }}</td>
                                 <td>{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
                             </tr>
                         @endforeach
@@ -133,17 +133,19 @@
 
 
 
-    {{-- <form action="" method="get">
-        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+    <form action="" method="get">
+        <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="tambahModalLabel">View</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
-                        <select name="tahun" id="" class=" form-control">
+                        <select name="tahun" class="form-control">
                             @foreach ($tahuns as $t)
                                 <option value="{{ $t }}" @selected($tahun == $t)>{{ $t }}
                                 </option>
@@ -157,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </form> --}}
+    </form>
 
     @section('scripts')
         <script>

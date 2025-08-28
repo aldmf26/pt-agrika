@@ -31,6 +31,7 @@ use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro8Totalhasilgrading;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR2SeleksiSupplier;
+use App\Http\Controllers\qa\kesigapantanggapdarurat\KesigapanTanggapDaruratController;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\PenarikanProduk\RecallProdukController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
@@ -301,6 +302,7 @@ Route::controller(AgendadanJadwalTinjauanManajemenController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+        Route::get('/tambah_baris', 'tambah_baris')->name('tambah_baris');
 
         Route::post('/store', 'store')->name('store');
     });
@@ -431,6 +433,17 @@ Route::controller(PUR2SeleksiSupplier::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+    });
+Route::controller(KesigapanTanggapDaruratController::class)
+    ->prefix('qa/kesigapan/kesigapantanggapdarurat')
+    ->name('qa.kesigapan.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
     });
 
 

@@ -75,7 +75,6 @@
             <div class="col-3 ">
                 <p class="cop_text">Dok.No.: FRM.QA.03.03 Rev.00</p>
                 <br>
-                <br>
             </div>
             <div class="col-4"></div>
             <div class="col-10">
@@ -93,24 +92,24 @@
                     <thead>
                         <tr>
                             <th class="text-center dhead">No</th>
-                            <th class="text-center dhead">Agenda</th>
-                            <th class="text-center dhead">Hasil Pembahasan</th>
-                            <th class="text-center dhead">Action Plan</th>
-                            <th class="text-center dhead">PIC</th>
-                            <th class="text-center dhead">Due Date</th>
-                            <th class="text-center dhead">Status</th>
+                            <th class=" dhead">Agenda</th>
+                            <th class=" dhead">Hasil Pembahasan</th>
+                            <th class=" dhead">Action Plan</th>
+                            <th class=" dhead">PIC</th>
+                            <th class=" dhead">Due Date</th>
+                            <th class=" dhead">Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($notulen as $n)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $n->agenda ?? '-' }}</td>
-                                <td>{{ $n->hasil_pembahasan ?? '-' }}</td>
-                                <td>{{ $n->action_plan ?? '-' }}</td>
-                                <td>{{ $n->pic ?? '-' }}</td>
-                                <td>{{ $n->duedate ?? '-' }}</td>
-                                <td>{{ $n->status ?? '-' }}</td>
+                                <td class="align-middle">{{ $loop->iteration }}</td>
+                                <td class="align-middle">{{ $n->agenda ?? '-' }}</td>
+                                <td class="align-middle">{!! nl2br(e($n->hasil_pembahasan ?? '-')) !!}</td>
+                                <td class="align-middle">{{ $n->action_plan ?? '-' }}</td>
+                                <td class="align-middle">{{ $n->pic ?? '-' }}</td>
+                                <td class="align-middle">{{ $n->duedate ?? '-' }}</td>
+                                <td class="align-middle">{{ $n->status ?? '-' }}</td>
                             </tr>
                         @endforeach
 
@@ -118,9 +117,30 @@
                 </table>
             </div>
 
-            <div class="col-5">
+            <div class="col-7">
 
             </div>
+            <div class="col-lg-5">
+                <table class="border-dark table table-bordered" style="font-size: 11px">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="33.33%">Dibuat Oleh</th>
+                            <th class="text-center" width="33.33%">Diketahui Oleh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="height: 80px"></td>
+                            <td style="height: 80px"></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center">FSTL</td>
+                            <td class="text-center">Direktur</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
 
 
         </div>

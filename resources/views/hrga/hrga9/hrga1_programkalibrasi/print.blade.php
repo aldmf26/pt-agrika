@@ -77,7 +77,7 @@
             <div class="col-lg-12">
                 <table class="table table-bordered text-nowrap">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
                             <th rowspan="2" class="align-middle dhead">No</th>
                             <th rowspan="2" class="text-nowrap align-middle dhead">Nama Alat Ukur</th>
                             <th rowspan="2" class="text-nowrap align-middle dhead">Merek</th>

@@ -82,8 +82,8 @@
                 <table>
                     <tr>
                         <td width="20%">Hari / Tanggal</td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ date('l', strtotime($tanggal)) }} / {{ tanggal($tanggal) }}</td>
+
+                        <td> : {{ tanggal($tanggal) }}</td>
                     </tr>
                 </table>
             </div>
@@ -100,7 +100,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pegawai as $p)
+                        @foreach ($agenda as $p)
                             <tr>
                                 <td class="">{{ $loop->iteration }}</td>
                                 <td class="">{{ ucfirst(strtolower($p->nama)) }}</td>

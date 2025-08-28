@@ -4,7 +4,7 @@
 
 
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> add</button>
+                    class="fas fa-plus"></i> Add</button>
 
         </div>
         <div class="card-body">
@@ -30,10 +30,10 @@
                                 <td>{{ $i->lokasi->lantai ?? '-' }}</td>
                                 <td class="text-nowrap">
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#edit"
-                                        data-id="{{ $i->id }}" class="btn btn-sm btn-warning edit">edit</a>
+                                        data-id="{{ $i->id }}" class="btn btn-sm btn-warning edit">Edit</a>
                                     <a onclick="return confirm('Yakin ingin menghapus data ini?')"
                                         href="{{ route('hrga8.0.delete', ['id' => $i->id]) }}"
-                                        class="btn btn-sm btn-danger">delete</a>
+                                        class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -95,8 +95,8 @@
                             <th>No</th>
                             <th>Item</th>
                             <th>Aktivitas</th>
-                            <th>Frekuensi</th>
-                            <th>Dept</th>
+                            <th class="text-nowrap">Frekuensi</th>
+                            <th class="text-nowrap">Dept</th>
                             @for ($i = 1; $i <= 12; $i++)
                                 @php
                                     $tgl = date('M', strtotime($tahun . '-' . $i . '-01'));
@@ -113,8 +113,8 @@
                                     {{ $audit->item }}
                                 </td>
                                 <td>{{ $audit->aktivitas }}</td>
-                                <td>{{ $audit->frek }}</td>
-                                <td>{{ $audit->departemen }}</td>
+                                <td class="text-nowrap">{{ $audit->frek }}</td>
+                                <td class="text-nowrap">{{ $audit->departemen }}</td>
                                 @for ($i = 1; $i <= 12; $i++)
                                     @php
                                         $field = 'bulan_' . $i; // Nama kolom di database
@@ -150,21 +150,20 @@
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+
                             <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 50px"></td>
+                            <td style="height: 50px"></td>
+
                         </tr>
                         <tr>
                             <td class="text-center">[..............................................................]
                             </td>
-                            <td class="text-center">[..............................................................]
-                            </td>
+
                             <td class="text-center">[..............................................................]
                             </td>
                         </tr>

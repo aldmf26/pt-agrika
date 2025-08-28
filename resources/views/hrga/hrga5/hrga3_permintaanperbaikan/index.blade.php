@@ -7,13 +7,14 @@
             <a class="btn btn-primary float-end"
                 href="{{ route('hrga5.3.formPermintaanperbaikan', ['kategori' => $kategori]) }}" target="_blank"><i
                     class="fas fa-plus"></i>
-                add</a>
+                Add</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered" id="example">
                     <thead>
-                        <tr>
+                        <tr style="text-transform: capitalize">
+
                             <th>No</th>
                             <th class="text-nowrap">No Pengajuan</th>
                             <th class="text-nowrap">Nama sarana & prasarana</th>
@@ -28,23 +29,25 @@
                         @foreach ($permintaan as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->invoice_pengajuan }}</td>
-                                <td>{{ $p->item->nama_item }}</td>
-                                <td>{{ $p->item->lokasi->lokasi }}</td>
-                                <td>{{ $p->item->no_identifikasi }}</td>
-                                <td>{{ ucfirst(strtolower($p->diajukan_oleh)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->invoice_pengajuan)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->no_identifikasi)) }}</td>
+                                <td>{{ ucwords($p->diajukan_oleh) }}</td>
                                 <td>{{ ucfirst(strtolower($p->deskripsi_masalah)) }}</td>
                                 <td class="text-nowrap">
+
                                     <a href="{{ route('hrga5.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
-                                        class="btn btn-primary btn-sm" target="_blank"><i class="fas fa-print"></i>
-                                        print</a>
+                                        class="btn btn-primary btn-sm" target="_blank"
+                                        {{ empty($p->verifikasi_user) ? 'hidden' : '' }}><i class="fas fa-print"></i>
+                                        Print</a>
                                     <button type="button" invoice_pengajuan="{{ $p->invoice_pengajuan }}"
                                         detail_perbaikan="{{ $p->detail_perbaikan }}"
                                         verifikasi_user="{{ $p->verifikasi_user }}"
                                         deskripsi_masalah="{{ $p->deskripsi_masalah }}"
                                         class="btn {{ empty($p->verifikasi_user) ? 'btn-primary' : 'btn-success' }}  btn-sm tindakan"
                                         data-bs-toggle="modal" data-bs-target="#tindakan"><i class="fas fa-edit"></i>
-                                        tindakan</button>
+                                        Tindakan</button>
                                 </td>
                             </tr>
                         @endforeach

@@ -38,6 +38,7 @@
             dropdownParent: $('#tambah'), // Ganti dengan ID modal kamu
             width: '100%'
         });
+
     });
 
     function initSelect2() {

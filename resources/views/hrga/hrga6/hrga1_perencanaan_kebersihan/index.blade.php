@@ -3,7 +3,7 @@
         <div class="col-lg-12">
             <div class="float-end">
                 <a href="#" data-bs-target="#tambah" data-bs-toggle="modal" class="btn btn-primary btn-sm"><i
-                        class="fas fa-plus"></i>Data</a>
+                        class="fas fa-plus"></i>Add</a>
                 <a href="{{ route('hrga6.1.print', ['id_lokasi' => $id_lokasi]) }}" target="_blank"
                     class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a>
             </div>
@@ -28,7 +28,7 @@
 
                 <table id="example" class="table table-bordered ">
                     <thead>
-                        <tr>
+                        <tr class="text-nowrap">
                             <th>No</th>
                             <th>Nama Alat/Area</th>
                             <th>Identifikasi Alat/Area</th>
@@ -44,16 +44,20 @@
                     <tbody>
                         @foreach ($datas as $d)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($d->nm_alat)) }}</td>
-                                <td>{{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
-                                <td>{{ ucfirst(strtolower($d->metode)) }}</td>
-                                <td>{{ ucfirst(strtolower($d->penanggung_jawab)) }}</td>
-                                <td>{{ ucfirst(strtolower($d->frekuensi)) }}</td>
-                                <td>{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
-                                <td>{{ ucfirst(strtolower($d->sanitizer)) }}</td>
-                                <td>{{ date('d-m-Y', strtotime($d->tgl)) }}</td>
-                                <td></td>
+                                <td style="vertical-align: top !important;">{{ $loop->iteration }}</td>
+                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($d->nm_alat)) }}</td>
+                                <td style="vertical-align: top !important;">
+                                    {{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
+                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($d->metode)) }}</td>
+                                <td style="vertical-align: top !important;">{{ ucwords($d->penanggung_jawab) }}</td>
+                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($d->frekuensi)) }}
+                                </td>
+                                <td style="vertical-align: top !important;">
+                                    {{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
+                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($d->sanitizer)) }}
+                                </td>
+                                <td style="vertical-align: top !important;">{{ date('d-m-Y', strtotime($d->tgl)) }}</td>
+                                <td style="vertical-align: top !important;"></td>
                             </tr>
                         @endforeach
                     </tbody>

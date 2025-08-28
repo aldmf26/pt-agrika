@@ -101,8 +101,13 @@
             padding: 0.5rem;
             vertical-align: middle;
             text-align: center;
+            font-size: 12px;
             /* white-space: nowrap; */
             /* ⬅️ ini agar tidak membungkus teks */
+        }
+
+        thead th {
+            text-transform: capitalize;
         }
     </style>
 </head>
@@ -188,45 +193,45 @@
                         <tr>
                             <td colspan="3">Nama Sarana/Prasarana Umum</td>
 
-                            <td colspan="5"> : {{ $items->nama_item }}</td>
+                            <td colspan="5"> : {{ ucfirst(strtolower($items->nama_item)) }}</td>
                         </tr>
                         <tr>
                             <td colspan="3">Jumlah</td>
 
-                            <td colspan="2"> : {{ $items->jumlah }}</td>
+                            <td colspan="2"> : {{ ucfirst(strtolower($items->jumlah)) }}</td>
                         </tr>
                         <tr>
                             <td colspan="3">No Identifikasi</td>
 
-                            <td colspan="2"> : {{ $items->no_identifikasi }}</td>
+                            <td colspan="2"> : {{ ucfirst(strtolower($items->no_identifikasi)) }}</td>
                         </tr>
                         <tr>
                             <td colspan="3">Lokasi</td>
 
-                            <td colspan="2"> : {{ $items->lokasi }}</td>
+                            <td colspan="2"> : {{ ucfirst(strtolower($items->lokasi)) }}</td>
                         </tr>
                         <tr>
                             <td colspan="3">Tahun Pemeriksaan</td>
 
-                            <td colspan="2"> : {{ $tahun }}</td>
+                            <td colspan="2"> : {{ ucfirst(strtolower($tahun)) }}</td>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Tanggal</th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Urutan unit / <br>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Tanggal</th>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Urutan unit / <br>
                                 Ruang</th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Perawatan/ <br>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Perawatan/ <br>
                                 Perbaikan</th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap" width="30%">Jenis
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap" width="25%">Jenis
                                 yang dilakukan</th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Kondisi <br>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Kondisi <br>
                                 kebersihan <br>
                                 akhir</th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Kondisi fungsi <br>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Kondisi fungsi <br>
                                 akhir
                             </th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Kesimpulan <br>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Kesimpulan <br>
                                 (Ok/Not OK)</th>
-                            <th class="dhead  align-middle text-center" style="white-space: nowrap">Paraf Pelaksana</th>
+                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Paraf Pelaksana</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -234,25 +239,27 @@
                             <tr class="table-bawah">
                                 <td class="text-start">{{ date('d/m/Y', strtotime($r->tanggal)) }}</td>
                                 @if ($items->jenis_item == 'ac')
-                                    <td class="text-start" style="white-space: normal">{{ $items->no_identifikasi }} -
-                                        {{ $items->lokasi }}</td>
+                                    <td class="text-start" style="white-space: normal">
+                                        {{ ucfirst(strtolower($items->no_identifikasi)) }} -
+                                        {{ ucfirst(strtolower($items->lokasi)) }}</td>
                                 @else
                                     @php
                                         $rincian = DB::table('rincian_ruangan')->where('id', $r->rincian_id)->first();
                                     @endphp
-                                    <td class="text-start" style="white-space: normal">{{ $rincian->nama_rincian }}
+                                    <td class="text-start" style="white-space: normal">
+                                        {{ ucfirst(strtolower($rincian->nama_rincian)) }}
                                     </td>
                                 @endif
 
                                 <td class="text-start">{{ ucfirst(strtolower($r->ket)) }}</td>
                                 <td class="text-start">
-                                    {{ $r->kesimpulan }}
+                                    {{ ucfirst(strtolower($r->kesimpulan)) }}
                                 </td>
                                 <td class="text-start">
                                     {{ $r->ket == 'perawatan' ? 'Bersih ' : 'Kembali bersih' }}
                                 </td>
                                 <td class="text-start" class="text-start" style="white-space: normal">
-                                    {{ $r->fungsi }}
+                                    {{ ucfirst(strtolower($r->fungsi)) }}
                                 </td>
                                 <td class="text-start">
                                     Ok
@@ -295,14 +302,14 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th colspan="2" style="border: none"></th>
-                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            <th colspan="3" style="border: none"></th>
+                            <th class="text-center">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                             <th class="text-center" colspan="2">Diketahui Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th colspan="2" style="border: none"></th>
-                            <td style="height: 80px;" colspan="2" class="align-bottom">[GENERAL MAINTENANCE]</td>
+                            <th colspan="3" style="border: none"></th>
+                            <td style="height: 80px;" class="align-bottom">[GENERAL MAINTENANCE]</td>
                             <td style="height: 80px;" colspan="2" class="align-bottom">[SPV. GA-IR]</td>
                             <td style="height: 80px;" colspan="2" class="align-bottom">[KA.HRGA]</td>
                         </tr>

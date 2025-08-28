@@ -1,58 +1,49 @@
 <x-app-layout :title="$title">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <form action="{{ route('qa.daftar_hadir_tinjauan_manajemen.print') }}" method="GET">
-                        <div class="row">
-                            <div class="col-lg-6">
 
-                                <select name="" id="" class="form-control tgl">
-                                    <option value="">Pilih Tanggal</option>
-                                    @foreach ($agenda as $t)
-                                        <option value="{{ $t->tanggal }}">{{ date('d-m-Y', strtotime($t->tanggal)) }}
-                                        </option>
-                                    @endforeach
-                                </select>
-
-                            </div>
-                            <div class="col-lg-6">
-                                <button type="submit" class="btn btn-primary float-end">Print</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
-                <style>
-                    #loading-spinner {
-                        margin: 20px 0;
-                    }
-                </style>
-                <div id="loading-spinner" style="display:none; text-align:center;">
-                    <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
-                    </div>
-                </div>
-                <div class="card-body" style="display:none;">
-                    <table class="table table-bordered">
+                <div class="card-body">
+                    <table id="example" class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Nama</th>
-                                <th>Bagian</th>
-                                <th>Tanda Tangan</th>
-                                <th>Keterangan</th>
+                                <th class="text-center ">No</th>
+                                <th class="text-nowrap ">Hari / Tanggal</th>
+                                <th class="text-nowrap ">Waktu</th>
+                                <th class="text-nowrap " width="60%">Agenda</th>
+                                <th class="text-nowrap ">PIC</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($pegawai as $p)
+                            @foreach ($agenda as $a)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ ucfirst(strtolower($p->nama)) }}</td>
-                                    <td>{{ $p->posisi }}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="text-nowrap">
+                                        {{ tanggal($a->tanggal) }}</td>
+
+                                    <td class="text-nowrap">{{ date('H:i', strtotime($a->dari_jam)) }} -
+                                        {{ date('H:i', strtotime($a->sampai_jam)) }}</td>
+                                    </td>
+                                    <td>
+                                        @foreach (explode('||', $a->agendas) as $i => $agenda)
+                                            {{ $i + 1 }}. {{ $agenda }} <br>
+                                        @endforeach
+                                    </td>
+                                    <td>{{ $a->pics }}</td>
+                                    <td>
+                                        <a href="{{ route('qa.daftar_hadir_tinjauan_manajemen.print', ['nota_agenda' => $a->nota_agenda, 'tanggal' => $a->tanggal]) }}"
+                                            target="_blank" class="btn btn-sm btn-primary"><i
+                                                class="fas fa-print"></i></a>
+
+                                        {{-- <a href="{{ route('qa.daftar_hadir_tinjauan_manajemen.index', ['tanggal' => $d->tanggal]) }}"
+                                            class="btn btn-sm btn-primary"><i class="fas fa-eye"></i></a> --}}
+                                    </td>
                                 </tr>
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>

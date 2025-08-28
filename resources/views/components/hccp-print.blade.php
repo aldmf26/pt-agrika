@@ -80,6 +80,10 @@
         .head {
             background-color: #D9D9D9 !important;
         }
+
+        thead th {
+            text-transform: capitalize;
+        }
     </style>
 </head>
 

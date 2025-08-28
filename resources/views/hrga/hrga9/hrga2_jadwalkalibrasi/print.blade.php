@@ -75,7 +75,8 @@
                 <p class="cop_text float-end">Dok.No.: FRM.HRGA.09.02, Rev.00</p>
             </div>
             <div class="col-lg-12">
-                <table class="table table-bordered text-nowrap">
+                <p>Tahun : {{ $tahun }}</p>
+                <table class="table table-bordered " style="text-transform: capitalize; font-size: 11px">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -83,14 +84,14 @@
                             <th class="text-nowrap">Merek</th>
                             <th class="text-nowrap">Type / Nomor seri</th>
                             <th class="text-nowrap">Lokasi</th>
-                            <th class="text-nowrap">Frekuensi Kalibrasi</th>
-                            <th class="text-nowrap">Rentang Min-Maks</th>
+                            <th class="text-nowrap">Frekuensi <br> Kalibrasi</th>
+                            <th class="text-nowrap">Rentang Min- <br>Maks</th>
                             <th class="text-nowrap">Resolusi</th>
-                            <th class="text-nowrap">Tanggal Aktual Kalibrasi</th>
-                            <th class="text-nowrap">Standard Nilai koreksi</th>
+                            <th class="text-nowrap">Tanggal Aktual <br> Kalibrasi</th>
+                            <th class="text-nowrap">Standard Nilai <br> koreksi</th>
                             <th class="text-nowrap">Aktual nilai koreksi</th>
                             <th class="text-nowrap">Status</th>
-                            <th class="text-nowrap">Rencana Kalibrasi selanjutnya</th>
+                            <th class="text-nowrap">Rencana Kalibrasi <br> selanjutnya</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,13 +129,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 60px" class="align-bottom text-center">[SPV. GA-IR]</td>
+                            <td style="height: 60px" class="align-bottom text-center">[KA. HRGA]</td>
                         </tr>
-                        <tr>
-                            <td class="text-center">[SPV. GA-IR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
-                        </tr>
+                        {{-- <tr>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                        </tr> --}}
                     </tbody>
                 </table>
             </div>

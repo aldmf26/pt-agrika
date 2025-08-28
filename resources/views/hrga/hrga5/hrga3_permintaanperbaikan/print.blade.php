@@ -12,8 +12,12 @@
 
     <title>{{ $title }}</title>
     <style>
+        * {
+            font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+        }
+
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin: 13px;
@@ -25,7 +29,7 @@
         }
 
         .cop_text {
-            font-size: 10px;
+            font-size: 11px;
             text-align: left;
             font-weight: normal;
             margin-top: 100px;
@@ -65,7 +69,11 @@
         thead,
         tr {
 
-            padding: 4px;
+            padding: 3px;
+        }
+
+        thead th {
+            text-transform: capitalize;
         }
     </style>
 </head>
@@ -95,17 +103,17 @@
                     <tr>
                         <td>Lokasi</td>
                         <td>:</td>
-                        <td>{{ $permintaan->item->lokasi->lokasi }}</td>
+                        <td>{{ ucfirst(strtolower($permintaan->item->lokasi->lokasi)) }}</td>
                     </tr>
                     <tr>
                         <td>No Identifikasi</td>
                         <td>:</td>
-                        <td>{{ $permintaan->item->no_identifikasi }}</td>
+                        <td>{{ ucfirst(strtolower($permintaan->item->no_identifikasi)) }}</td>
                     </tr>
                     <tr>
                         <td>Diajukan oleh Bagian</td>
                         <td>:</td>
-                        <td>{{ ucfirst(strtolower($permintaan->diajukan_oleh)) }}</td>
+                        <td>{{ ucwords($permintaan->diajukan_oleh) }}</td>
                     </tr>
                     <tr>
                         <td class="fw-bold">Deskripsi Masalah</td>
@@ -123,8 +131,8 @@
             </div>
             <div class="col-1"></div>
             <div class="col-1"></div>
-            <div class="col-6 mt-4">Diajukan Oleh,</div>
-            <div class="col-4 mt-4">Diterima Oleh (GA),</div>
+            <div class="col-6 mt-3">Diajukan Oleh,</div>
+            <div class="col-4 mt-3">Diterima Oleh (GA),</div>
             <div class="col-1"></div>
 
             <div class="col-1"></div>
@@ -145,7 +153,7 @@
             <div class="col-1"></div>
 
             <div class="col-1"></div>
-            <div class="col-10 mt-4">
+            <div class="col-10 mt-2">
                 <table width="100%" style="padding: 90px">
                     <tr>
                         <td width="50%" class="fw-bold">Detail Perbaikan yang Dilakukan</td>
@@ -155,7 +163,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            {{ $permintaan->detail_perbaikan ?? '-' }}
+                            {{ ucfirst(strtolower($permintaan->detail_perbaikan)) ?? '-' }}
                         </td>
                     </tr>
                     <tr>
@@ -171,7 +179,7 @@
                     <tr>
                         <td colspan="3"
                             style="height: 90px; border: 1px solid black; border-radius: 10px; vertical-align: middle; text-align: center">
-                            {{ $permintaan->verifikasi_user ?? '-' }}
+                            {{ ucfirst(strtolower($permintaan->verifikasi_user)) ?? '-' }}
                         </td>
                     </tr>
 
@@ -180,7 +188,7 @@
             <div class="col-1"></div>
 
             <div class="col-1"></div>
-            <div class="col-10 mt-4">
+            <div class="col-10 mt-2">
                 <table width="100%" border="1" class=" table table-bordered">
                     <tr>
                         <th class="dhead text-center">Diserahkan oleh (GA),</th>

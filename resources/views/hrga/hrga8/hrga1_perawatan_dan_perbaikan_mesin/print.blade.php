@@ -99,12 +99,12 @@
                         @foreach ($perawatan as $p)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item->lokasi->lantai }}</td>
-                                <td>{{ $p->item->nama_mesin }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->lokasi->lantai)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->nama_mesin)) }}</td>
                                 <td>{{ $p->item->jumlah }}</td>
-                                <td>{{ $p->item->lokasi->lokasi }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
                                 <td>{{ $p->frekuensi_perawatan }} bulan</td>
-                                <td>{{ $p->penanggung_jawab }}</td>
+                                <td>{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)

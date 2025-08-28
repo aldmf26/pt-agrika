@@ -57,6 +57,10 @@
             border-left: 1px solid black;
             padding-left: 6px;
         }
+
+        thead th {
+            text-transform: capitalize;
+        }
     </style>
 </head>
 
@@ -64,7 +68,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
@@ -78,13 +82,14 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center dhead" rowspan="2">No</th>
-                            <th class="text-center dhead" rowspan="2">Nama Sarana dan Prasarana Umum</th>
-                            <th class="text-center dhead" rowspan="2">Jumlah</th>
-                            {{-- <th class="text-center dhead" rowspan="2">No. Identifikasi</th> --}}
-                            <th class="text-center dhead" rowspan="2">Lokasi</th>
-                            <th class="text-center dhead" rowspan="2">Frekuensi Perawatan</th>
-                            <th class="text-center dhead" rowspan="2">Penanggung Jawab</th>
+                            <th class=" dhead align-middle" rowspan="2">No</th>
+                            <th class=" dhead align-middle" rowspan="2">Nama sarana dan prasarana umum
+                            </th>
+                            <th class=" dhead align-middle" rowspan="2">Jumlah</th>
+                            {{-- <th class=" dhead" rowspan="2">No. Identifikasi</th> --}}
+                            <th class=" dhead align-middle" rowspan="2">Lokasi</th>
+                            <th class=" dhead align-middle" rowspan="2">Frekuensi perawatan</th>
+                            <th class=" dhead align-middle" rowspan="2">Penanggung jawab</th>
                             <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
                         </tr>
                         <tr>
@@ -97,13 +102,14 @@
                     <tbody>
                         @foreach ($program as $p)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item->nama_item }}</td>
-                                <td>{{ $p->item->jumlah }}</td>
+                                <td class="align-top">{{ $loop->iteration }}</td>
+                                <td class="align-top">{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
+                                <td class="text-nowrap align-top">{{ ucfirst(strtolower($p->item->jumlah)) }}</td>
                                 {{-- <td>{{ $p->item->no_identifikasi }}</td> --}}
-                                <td>{{ $p->item->lokasi->lokasi }}</td>
-                                <td>Setiap {{ $p->frekuensi_perawatan }} bulan</td>
-                                <td>{{ $p->penanggung_jawab }}</td>
+                                <td class="text-nowrap align-top">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}
+                                </td>
+                                <td class="align-top">Setiap {{ $p->frekuensi_perawatan }} bulan</td>
+                                <td class="align-top">{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
                                     $frekuensi = is_numeric($p->frekuensi_perawatan)

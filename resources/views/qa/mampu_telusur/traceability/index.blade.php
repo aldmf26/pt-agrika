@@ -6,11 +6,11 @@
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">Tanggal</th>
-                        <th class="text-center">Kode Batch</th>
-                        <th class="text-center">Kode</th>
-                        <th class="text-center">Nama rumah walet</th>
-                        <th class="text-center">Grade</th>
+                        <th class="text-start">Tanggal</th>
+                        <th class="text-start">Kode Batch</th>
+                        <th class="text-start">Kode</th>
+                        <th class="text-start">Nama rumah walet</th>
+                        <th class="text-start">Grade</th>
                         <th class="text-center">Aksi</th>
 
 
@@ -24,13 +24,14 @@
                         @endphp
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
-                            <td class="text-center">{{ tanggal($b['tgl']) }}</td>
-                            <td class="text-center">{{ $b['no_invoice'] }}</td>
-                            <td class="text-center">{{ $b['nm_partai'] }}</td>
-                            <td class="text-center">{{ $rumah_walet->nama }}</td>
-                            <td class="text-center">{{ $grade->nama }}</td>
+                            <td class="text-start">{{ tanggal($b['tgl']) }}</td>
+                            <td class="text-start">{{ $b['no_invoice'] }}</td>
+                            <td class="text-start">{{ $b['nm_partai'] }}</td>
+                            <td class="text-start">{{ ucfirst(strtolower($rumah_walet->nama)) }}</td>
+                            <td class="text-start">{{ $grade->nama }}</td>
                             <td class="text-center">
-                                <a href="{{ route('qa.traceability.print', ['nm_partai' => $b['nm_partai']]) }}"
+                                <a target="_blank"
+                                    href="{{ route('qa.traceability.print', ['nm_partai' => $b['nm_partai']]) }}"
                                     class="btn btn-warning btn-sm"> <i class="fas fa-print"></i></a>
                             </td>
 

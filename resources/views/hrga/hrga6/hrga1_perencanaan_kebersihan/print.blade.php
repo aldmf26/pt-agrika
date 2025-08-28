@@ -8,25 +8,25 @@
     <table style="font-size: 13px" id="table1" class="table table-bordered border-dark">
         <thead>
             <tr>
-                <th style="background-color: #D9D9D9">Nama Alat/Area</th>
-                <th style="background-color: #D9D9D9">Identifikasi Alat/Area</th>
-                <th style="background-color: #D9D9D9">Metode Sanitasi</th>
-                <th style="background-color: #D9D9D9">Penanggung Jawab</th>
-                <th style="background-color: #D9D9D9">Frekuensi</th>
-                <th style="background-color: #D9D9D9">Sarana Cleaning</th>
-                <th style="background-color: #D9D9D9">Sanitizer & Pengenceran</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Nama alat/area</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Identifikasi alat/area</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Metode sanitasi</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Penanggung jawab</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Frekuensi</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Sarana cleaning</th>
+                <th class="align-middle" style="background-color: #D9D9D9">Sanitizer & pengenceran</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($datas as $d)
                 <tr>
-                    <td>{{ $d->nm_alat }}</td>
-                    <td>{{ $d->identifikasi_alat }}</td>
-                    <td>{{ $d->metode }}</td>
-                    <td>{{ $d->penanggung_jawab }}</td>
-                    <td>{{ $d->frekuensi }}</td>
-                    <td>{{ $d->sarana_cleaning }}</td>
-                    <td>{{ $d->sanitizer }}</td>
+                    <td class="align-top">{{ $d->nm_alat }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->metode)) }}</td>
+                    <td class="align-top">{{ ucwords($d->penanggung_jawab) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->frekuensi)) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
+                    <td class="align-top">{{ ucfirst(strtolower($d->sanitizer)) }}</td>
                 </tr>
             @endforeach
         </tbody>

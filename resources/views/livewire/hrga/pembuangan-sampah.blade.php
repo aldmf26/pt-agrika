@@ -52,9 +52,9 @@
                         @foreach ($jamList as $index => $jam)
                             <tr>
                                 @if ($index === 0)
-                                    <td class="text-center" rowspan="2">{{ $i }}</td>
+                                    <td class="text-center">{{ $i }}</td>
                                 @endif
-                                <td class="text-center">{{ $jam['time'] }} {{ $jam['label'] }}</td>
+                                <td class="text-center">{{ $jam['time'] }} {{ $jam['label'] }} </td>
                                 <td class="text-center pointer">
                                     <div wire:click='ceklis("{{ $i }}", "{{ $jam['time'] }}")'
                                         class="form-check d-flex justify-content-center">
@@ -62,22 +62,22 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @php
+                                    {{-- @php
                                         $parafData = DB::table($tbl)
                                             ->where('jenis_sampah', $this->pilihanLimbah)
                                             ->where('tgl', "2025-$selectedBulan-$i")
                                             ->where('jam_cek', $jam['time'])
                                             ->value('paraf_petugas');
 
-                                    @endphp
+                                    @endphp --}}
                                     <div class="dropdown dropdown-color-icon" bis_skin_checked="1">
-                                        <button
+                                        {{-- <button
                                             class="btn btn-xs btn-block btn-{{ $parafData ? '' : 'outline-' }}info dropdown-toggle"
                                             type="button" id="dropdownMenuButtonEmoji" data-bs-toggle="dropdown"
                                             aria-haspopup="true" aria-expanded="false">
                                             <span class="me-50">🧑‍🚒</span>
-                                        </button>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonEmoji"
+                                        </button> --}}
+                                        {{-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonEmoji"
                                             bis_skin_checked="1" style="">
                                             @foreach ($adminSanitasi['petugas'] as $d)
                                                 <a wire:click.prevent="tbhParaf('paraf_petugas', '{{ $d->name }}', '{{ "2025-$selectedBulan-$i" }}', '{{ $jam['time'] }}')"
@@ -86,7 +86,7 @@
                                                     {{ $parafData == $d->name ? '☑️' : '' }}
                                                 </a>
                                             @endforeach
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </td>
                                 <td
@@ -110,7 +110,8 @@
                                                         wire:change="saveKeterangan('{{ $i }}', '{{ $jam['time'] }}')"
                                                         wire:model.lazy="keterangan.{{ $i }}.{{ $jam['time'] }}"
                                                         x-show="showEdit" type="text"
-                                                        class="form-control form-control-sm" :value="@js($keterangan)"
+                                                        class="form-control form-control-sm"
+                                                        :value="@js($keterangan)"
                                                         @blur="() => { showEdit = true }">
 
                                                 </div>

@@ -81,6 +81,10 @@
             vertical-align: top;
             border-color: #41464b !important;
         }
+
+        thead th {
+            text-transform: capitalize;
+        }
     </style>
 </head>
 

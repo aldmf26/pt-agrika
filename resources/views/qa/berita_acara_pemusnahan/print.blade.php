@@ -8,29 +8,29 @@
         <div class="col-12">
             <table class="table table-xs table-bordered border-dark">
                 <thead>
-                    <tr> 
-                        <th class="head text-center">NO</th>
-                        <th class="head text-center">Nama Produk</th>
-                        <th class="head text-center">Jumlah</th>
-                        <th class="head text-center">Cakupan Pemusnahan</th>
-                        <th class="head text-center">Alasan Pemusnahan</th>
-                        <th class="head text-center">Tgl Pemusnahan</th>
-                        <th class="head text-center">Paraf Pelaksana</th>
-                        <th class="head text-center">Paraf Saksi</th>
+                    <tr>
+                        <th class=" text-center">NO</th>
+                        <th class=" text-start">Nama Produk</th>
+                        <th class=" text-start">Jumlah</th>
+                        <th class=" text-start">Cakupan Pemusnahan</th>
+                        <th class=" text-start">Alasan Pemusnahan</th>
+                        <th class=" text-start">Tgl Pemusnahan</th>
+                        <th class=" text-start">Paraf Pelaksana</th>
+                        <th class=" text-start">Paraf Saksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($datas as $d)
-                    <tr>
-                        <td align="center">{{ $loop->iteration }}</td>
-                        <td>{{ $d->nama_produk }}</td>
-                        <td>{{ $d->jumlah }}</td>
-                        <td>{{ $d->cakupan }}</td>
-                        <td>{{ $d->alasan }}</td>
-                        <td>{{ tanggal($d->tgl) }}</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                        <tr>
+                            <td align="center">{{ $loop->iteration }}</td>
+                            <td>{{ $d->rwb->grade->nama }}</td>
+                            <td>{{ $d->jumlah_produk }} gram</td>
+                            <td>{{ $d->cakupan_pemusnahan }}</td>
+                            <td>{{ $d->alasan_pemusnahan }}</td>
+                            <td>{{ empty($d->tgl_pemusnahan) ? '-' : tanggal($d->tgl_pemusnahan) }}</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
@@ -42,21 +42,24 @@
 
             </td>
             <td style="width: 40%">
-                <table class="border-dark table table-bordered" style="font-size: 11px">
+                <table class="" style="font-size: 11px; text-align: end; width: 100%">
                     <thead>
                         <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">mengetahui:</th>
+                            <td class="text-center" width="33.33%">Dibuat Oleh:</td>
+                            <td class="text-center" width="33.33%"></td>
+                            <td class="text-center" width="33.33%">Mengetahui:</td>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td style="height: 80px"></td>
                             <td style="height: 80px"></td>
+                            <td style="height: 80px"></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[QC / QA]</td>
-                            <td class="text-center">[FSTL & Director]</td>
+                            <td class="text-center">QC / QA</td>
+                            <td class="text-center">FSTL</td>
+                            <td class="text-center">Director</td>
                         </tr>
                     </tbody>
                 </table>

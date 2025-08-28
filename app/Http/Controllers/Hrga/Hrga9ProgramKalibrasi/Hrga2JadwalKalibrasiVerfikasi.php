@@ -25,6 +25,7 @@ class Hrga2JadwalKalibrasiVerfikasi extends Controller
             'tahun' => $tahun,
             'jadwal' => JadwalKalibrasi::whereYear('tanggal', $tahun)->get(),
             'item' => ItemKalibrasiModel::all(),
+            'tahuns' => hrga9_1KalibrasiModel::select('tahun')->distinct()->pluck('tahun')
         ];
         return view('hrga.hrga9.hrga2_jadwalkalibrasi.index', $data);
     }

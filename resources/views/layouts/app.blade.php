@@ -1,4 +1,4 @@
-@props(['title', 'size' => 'col-lg-12'])
+@props(['title', 'size' => 'col-lg-12', 'container' => 'container'])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +20,7 @@
             @endif
             @include('layouts.template.header')
 
-            <div class="content-wrapper container">
+            <div class="content-wrapper {{ $container }}">
 
                 <div class="page-heading" style="margin-top: -30px">
 
