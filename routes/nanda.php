@@ -445,6 +445,17 @@ Route::controller(KesigapanTanggapDaruratController::class)
         Route::post('/store', 'store')->name('store');
         Route::post('/update', 'update')->name('update');
     });
+Route::controller(KesigapanTanggapDaruratController::class)
+    ->prefix('menu')
+    ->name('menu.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
+    });
 
 
 Route::get('/update-jam-kedatangan', function (Request $request) {

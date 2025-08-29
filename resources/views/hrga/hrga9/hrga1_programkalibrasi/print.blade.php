@@ -78,33 +78,34 @@
                 <table class="table table-bordered text-nowrap">
                     <thead>
                         <tr style="text-transform: capitalize">
-                            <th rowspan="2" class="align-middle dhead">No</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Nama Alat Ukur</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Merek</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Type / Nomor seri</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Lokasi</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Frekuensi kalibrasi</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Rentang Min-Maks</th>
-                            <th rowspan="2" class="text-nowrap align-middle dhead">Resolusi</th>
-                            <th colspan="12" class="text-center dhead">Tahun {{ $tahun }}</th>
+                            <th rowspan="2" class="align-middle ">No</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Nama Alat Ukur</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Merek</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Type / <br> Nomor seri</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Lokasi</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Frekuensi <br> kalibrasi</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Rentang Min- <br>Maks</th>
+                            <th rowspan="2" class="text-nowrap align-middle ">Resolusi</th>
+                            <th colspan="12" class="text-center ">Tahun {{ $tahun }}</th>
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
-                                <th class="dhead">{{ substr($b->nm_bulan, 0, 3) }}</th>
+                                <th class="">{{ substr($b->nm_bulan, 0, 3) }}</th>
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($program as $p)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $p->item_kalibrasi->name }}</td>
-                                <td>{{ $p->item_kalibrasi->merk }}</td>
-                                <td>{{ $p->item_kalibrasi->nomor_seri }}</td>
-                                <td>{{ $p->item_kalibrasi->lokasi->lokasi ?? '-' }}</td>
-                                <td>{{ $p->frekuensi }}</td>
-                                <td>{{ $p->rentang }}</td>
-                                <td>{{ $p->resolusi }}</td>
+                                <td class="text-wrap align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-nowrap align-middle">{{ $p->item_kalibrasi->name }}</td>
+                                <td class="text-wrap align-middle">{{ $p->item_kalibrasi->merk }}</td>
+                                <td class="text-wrap align-middle">{{ $p->item_kalibrasi->nomor_seri }}</td>
+                                <td class="text-wrap align-middle">{{ $p->item_kalibrasi->lokasi->lokasi ?? '-' }}
+                                </td>
+                                <td class="text-wrap align-middle">{{ $p->frekuensi }}</td>
+                                <td class="text-wrap align-middle">{{ $p->rentang }}</td>
+                                <td class="text-wrap align-middle">{{ $p->resolusi }}</td>
                                 @foreach ($bulan as $b)
                                     <td class="{{ $p->bulan == $b->bulan ? 'bg-secondary' : '' }}"></td>
                                 @endforeach
