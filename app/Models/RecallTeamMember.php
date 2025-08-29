@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RecallProduk extends Model
+class RecallTeamMember extends Model
 {
-    //
+    protected $guarded = [];
 }

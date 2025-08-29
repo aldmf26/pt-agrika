@@ -17,6 +17,12 @@
             font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
         }
 
+        body {
+            border: 1px solid black;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
 
         table tr td {
             text-align: left;
