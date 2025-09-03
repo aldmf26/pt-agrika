@@ -16,22 +16,33 @@
                         <th class="">Dibuat Oleh</th>
                         <th class="">Jumlah Tim</th>
                         <th class="">Jumlah Produk</th>
-                        <th class="" width="100">Aksi</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($recalls as $recall)
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ tanggal(date('Y-m-d', strtotime($recall->created_at))) }}</td>
                             <td>{{ $recall->no_nota }}</td>
-                            <td>{{ $recall->skenario_recall }}</td>
+                            <td>{!! $recall->skenario_recall !!}</td>
                             <td>{{ $recall->dibuat_oleh }}</td>
                             <td>{{ $recall->teamMembers->count() }}</td>
                             <td>{{ $recall->products->count() }}</td>
                             <td>
-                                <a target="_blank" href="{{ route('qa.5.1.print', $recall) }}"
-                                    class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print</a>
+                                <div class="d-flex flex-column gap-2">
+                                    <a href="{{ route('qa.5.1.edit', $recall) }}" class="btn btn-sm btn-primary"><i
+                                            class="fas fa-edit"></i> Edit</a>
+
+                                    <a target="_blank" href="{{ route('qa.5.1.print', $recall) }}"
+                                        class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print</a>
+
+                                    <a href="{{ route('qa.5.1.hasil', $recall) }}" class="btn btn-sm btn-info"><i
+                                            class="fas fa-plus"></i> Hasil</a>
+
+                                    <a target="_blank" href="{{ route('qa.5.1.hasil_print', $recall) }}"
+                                        class="btn btn-sm btn-info"><i class="fas fa-print"></i> Print Hasil</a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

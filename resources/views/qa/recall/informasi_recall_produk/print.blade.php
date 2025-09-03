@@ -7,7 +7,7 @@
                 <span><b>Skenario Recall :</b> <br> {!! $datas->skenario_recall !!}</span>
                 <br>
                 <span class="mt-3"><b>Tim Recall :</b> </span>
-                <table class="table border-dark table-bordered">
+                <table class="table table-sm border-dark table-bordered">
                     <thead>
                         <tr>
                             <th width="300">Nama</th>
@@ -27,7 +27,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <table class="table table-bordered border-dark">
+                <table class="table table-sm table-bordered border-dark">
                     <thead>
                         <tr>
                             <th colspan="3" class="text-center">Informasi Produk</th>
