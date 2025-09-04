@@ -2,7 +2,9 @@
     <table>
         <tr>
             <th>Tanggal Update</th>
-            <th>: {{ $datas->last()->updated_at->format('j F Y') }}</th>
+            <th>:
+                {{ date('Y-m-d') }}
+            </th>
         </tr>
         @if ($k == 'sbw')
             <tr>

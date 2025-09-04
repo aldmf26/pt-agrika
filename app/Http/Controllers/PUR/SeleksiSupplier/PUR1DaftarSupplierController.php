@@ -226,13 +226,13 @@ class PUR1DaftarSupplierController extends Controller
     }
     public function print(Request $r)
     {
-        $datas = Suplier::latest()->get();
+        $datas = Suplier::where('kategori', $r->kategori)->latest()->get();
         $data = [
             'title' => 'DAFTAR SUPPLIER & OUTSOURCE TERPILIH',
             'dok' => 'Dok.No.: FRM.PUR.02.01, Rev.00',
             'datas' => $datas,
             'rumah_walet' => DB::table('rumah_walet')->get(),
-            'k' => $r->kategori,
+            'k' => $r->kategori != 'lainnya' ? 'satu' : 'lainnya',
         ];
         return view('pur.seleksi.daftar_supplier.print', $data);
     }

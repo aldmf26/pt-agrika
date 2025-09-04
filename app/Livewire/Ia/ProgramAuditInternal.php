@@ -98,7 +98,6 @@ class ProgramAuditInternal extends Component
             $this->alert('error', 'Departemen sudah ada');
             return;
         }
-
         $this->model::create([
             'departemen' => $this->form['departemen'],
             'audite' => $this->form['audite'],

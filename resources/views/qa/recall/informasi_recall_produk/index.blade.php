@@ -40,7 +40,7 @@
                                     <a href="{{ route('qa.5.1.hasil', $recall) }}" class="btn btn-sm btn-info"><i
                                             class="fas fa-plus"></i> Hasil</a>
 
-                                    <a target="_blank" href="{{ route('qa.5.1.hasil_print', $recall) }}"
+                                    <a target="_blankeni" href="{{ route('qa.5.1.hasil_print', $recall) }}"
                                         class="btn btn-sm btn-info"><i class="fas fa-print"></i> Print Hasil</a>
                                 </div>
                             </td>
