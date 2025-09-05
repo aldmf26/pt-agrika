@@ -31,6 +31,7 @@ class IA2JadwalAuditInternalController extends Controller
 
     public function store(Request $r)
     {
+        dd($r->all());
         try {
             DB::beginTransaction();
             foreach ($r->bagian as $key => $bagian) {
