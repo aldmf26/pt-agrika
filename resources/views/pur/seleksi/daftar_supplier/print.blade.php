@@ -19,14 +19,14 @@
         <table class="table table-xs border-dark table-bordered">
             <thead>
                 <tr>
-                    <th class="head">No</th>
-                    <th class="head text-start">Nama Supplier</th>
-                    <th class="head text-start">Alamat Supplier</th>
-                    <th class="head text-start">Contact Person</th>
-                    <th class="head text-start">No Telp</th>
-                    <th class="head text-start">Jenis Produk / Layanan</th>
-                    <th class="head text-start">Hasil Evaluasi</th>
-                    <th class="head text-start">Keterangan</th>
+                    <th class="head align-middle">No</th>
+                    <th class="head text-start align-middle">Nama Supplier</th>
+                    <th class="head text-start align-middle">Alamat Supplier</th>
+                    <th class="head text-start align-middle">Contact Person</th>
+                    <th class="head text-start align-middle">No Telp</th>
+                    <th class="head text-start align-middle">Jenis Produk / Layanan</th>
+                    <th class="head text-start align-middle">Hasil Evaluasi</th>
+                    <th class="head text-start align-middle">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,14 +50,14 @@
         <table class="table table-xs border-dark table-bordered">
             <thead>
                 <tr>
-                    <th class="head text-center">No</th>
-                    <th class="head text-start">Nama Supplier</th>
-                    <th class="head text-start">Alamat Supplier</th>
+                    <th class="head text-center align-middle">No</th>
+                    <th class="head text-start align-middle">Nama Supplier</th>
+                    <th class="head text-start align-middle">Alamat Supplier</th>
                     <th class="head text-start">Nama Contact Person</th>
                     <th class="head text-start">Nomor Ktp</th>
                     <th class="head text-start">No Telp</th>
                     <th class="head text-start">Hasil Evaluasi Rutin</th>
-                    <th class="head text-start">Keterangan</th>
+                    <th class="head text-start align-middle">Keterangan</th>
                 </tr>
             </thead>
             <tbody>

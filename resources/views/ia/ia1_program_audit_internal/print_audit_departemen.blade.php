@@ -4,7 +4,7 @@
             <tr>
                 <th>Departemen</th>
                 <th>:</th>
-                <th>{{ ucwords(strtolower($departemen)) }}</th>
+                <th>{{ strtoupper($departemen) }}</th>
             </tr>
             <tr>
                 <th>Waktu Audit Internal</th>
