@@ -244,6 +244,7 @@ Route::controller(IA2JadwalAuditInternalController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create/', 'store')->name('store');
         Route::get('/edit/{tgl}', 'edit')->name('edit');
+        Route::post('/edit/{tgl}', 'update')->name('update');
         Route::get('/print/{tgl}', 'print')->name('print');
     });
 

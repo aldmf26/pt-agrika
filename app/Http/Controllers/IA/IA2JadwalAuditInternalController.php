@@ -81,6 +81,47 @@ class IA2JadwalAuditInternalController extends Controller
 
         return view('ia.ia2_jadwal_audit_internal.edit', $data);
     }
+
+    public function update(Request $r, $tgl)
+    {
+        try {
+            DB::beginTransaction();
+            // Hapus data lama untuk tanggal tersebut
+            JadwalAuditInternal::where('tgl', $tgl)->delete();
+
+            foreach ($r->bagian as $key => $bagian) {
+                // Skip jika key adalah lunch break (7)
+                if ($key == 7) continue;
+
+                // Skip jika semua field kosong
+                if (
+                    empty($bagian) &&
+                    empty($r->proses[$key]) &&
+                    empty($r->auditor[$key]) &&
+                    empty($r->auditee[$key])
+                ) {
+                    continue;
+                }
+
+                JadwalAuditInternal::create([
+                    'tgl' => $r->tgl,
+                    'waktu' => $r->waktu[$key],
+                    'bagian' => $bagian,
+                    'proses' => $r->proses[$key],
+                    'auditor' => $r->auditor[$key],
+                    'audite' => $r->auditee[$key],
+                    'admin' => auth()->user()->name
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('ia.2.index')->with('sukses', 'Data berhasil diupdate');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+dsa
     public function print($tgl)
     {
         $data = [
