@@ -66,7 +66,7 @@ class IA2JadwalAuditInternalController extends Controller
             return redirect()->route('ia.2.index')->with('sukses', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Data berhasil disimpan');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function edit($tgl)
