@@ -47,9 +47,12 @@ class IA2JadwalAuditInternalController extends Controller
                 ) {
                     continue;
                 }
-                $cek = JadwalAuditInternal::where('tgl', $r->tgl)->first();
+                $cek = JadwalAuditInternal::where('tgl', $r->tgl)
+                    ->where('waktu', $r->waktu[$key])
+                    ->first();
+
                 if ($cek) {
-                    return redirect()->back()->with('error', 'Tanggal <strong>' . $r->tgl . '</strong> sudah ada');
+                    continue; // lewati slot ini, jangan hentikan semua insert
                 }
 
                 JadwalAuditInternal::create([
