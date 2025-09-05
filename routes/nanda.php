@@ -18,6 +18,7 @@ use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga2CeklisPerawat
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPerbaikanMesin;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PPC\Gudang_FG\FG2CheklistKendaraanController;
 use App\Http\Controllers\Produksi\Pro10PenimbanganHasilProduksi;
 use App\Http\Controllers\Produksi\Pro11FormPengemasanAkhirController;
@@ -445,12 +446,12 @@ Route::controller(KesigapanTanggapDaruratController::class)
         Route::post('/store', 'store')->name('store');
         Route::post('/update', 'update')->name('update');
     });
-Route::controller(KesigapanTanggapDaruratController::class)
+Route::controller(MenuController::class)
     ->prefix('menu')
     ->name('menu.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::get('/create', 'create')->name('create');
+        Route::post('/upload', 'upload')->name('upload');
         Route::get('/edit', 'edit')->name('edit');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');

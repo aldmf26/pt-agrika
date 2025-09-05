@@ -28,7 +28,7 @@
                             <td class="text-start">{{ $b['no_invoice'] }}</td>
                             <td class="text-start">{{ $b['nm_partai'] }}</td>
                             <td class="text-start">{{ ucfirst(strtolower($rumah_walet->nama)) }}</td>
-                            <td class="text-start">{{ $grade->nama }}</td>
+                            <td class="text-start">{{ $grade->nama ?? 'belum' }}</td>
                             <td class="text-center">
                                 <a target="_blank"
                                     href="{{ route('qa.traceability.print', ['nm_partai' => $b['nm_partai']]) }}"

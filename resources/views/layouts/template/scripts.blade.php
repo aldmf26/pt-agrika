@@ -27,11 +27,20 @@
         "autoWidth": true,
         "paging": false,
     });
+    $('#tableSave').DataTable({
+        "searching": true,
+
+        scrollCollapse: true,
+        "autoWidth": true,
+        "paging": true,
+        "stateSave": true
+    });
     $("#example").dataTable({
         columnDefs: [{
             "defaultContent": "-",
             "targets": "_all"
-        }]
+        }],
+
     });
     $(document).ready(function() {
         $('.select2').select2({
