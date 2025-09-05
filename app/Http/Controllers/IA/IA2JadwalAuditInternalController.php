@@ -123,10 +123,12 @@ class IA2JadwalAuditInternalController extends Controller
     }
     public function print($tgl)
     {
+        $datas = JadwalAuditInternal::where('tgl', $tgl)->orderBy('waktu', 'asc')->get();
         $data = [
             'title' => 'JADWAL AUDIT INTERNAL',
             'dok' => 'Dok.No.: FRM.AI.01.02, Rev.00',
-            'tgl' => $tgl
+            'tgl' => $tgl,
+            'datas' => $datas
         ];
 
         return view('ia.ia2_jadwal_audit_internal.print', $data);
