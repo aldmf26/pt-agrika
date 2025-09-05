@@ -43,8 +43,8 @@
                     <td>{{ $d->supplier->nama_supplier }}</td>
                     <td>{{ $d->no_kendaraan }}</td>
                     <td>{{ $d->pengemudi }}</td>
-                    <td>{{ $d->jumlah_barang }}</td>
-                    <td>{{ $d->jumlah_sampel }}</td>
+                    <td>{{ number_format($d->jumlah_barang, 0) }}</td>
+                    <td>{{ number_format($d->jumlah_sampel, 0) }}</td>
                     <td>{{ $d->keputusan }}</td>
                     <td>
                         @can('presiden')

@@ -34,7 +34,7 @@
                             <td>{{ $no++ }}</td>
                             <td align="right">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                             <td>{{ ucwords($d->status) }}</td>
-                            <td>{{ $d->divisi->divisi }}</td>
+                            <td>{{ optional($d->divisi)->divisi }}</td>
                             <td>{{ $d->jumlah }} Orang</td>
                             <td>{{ $d->alasan_penambahan }}</td>
                             <td>{{ $d->diajukan_oleh }}</td>
