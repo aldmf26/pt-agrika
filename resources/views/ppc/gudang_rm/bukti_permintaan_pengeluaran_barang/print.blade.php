@@ -29,8 +29,8 @@
                     <th class="text-center align-middle" rowspan="2">Status <br> Ok/Tidak Ok</th>
                 </tr>
                 <tr>
-                    <th class="text-center">Diminta (Pcs/Gr)</th>
-                    <th class="text-center">Diterima (Pcs/Gr)</th>
+                    <th class="text-end">Diminta (Pcs/Gr)</th>
+                    <th class="text-end">Diterima (Pcs/Gr)</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,10 +39,10 @@
                         <tr>
                             <td align="center">{{ $loop->iteration }}</td>
                             <td>{{ $d->barang->nama_barang ?? '' }}</td>
-                            <td align="right">
+                            <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                             </td>
-                            <td align="right">
+                            <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                             </td>
                             <td>{{ $d->no_lot }}</td>
@@ -60,10 +60,10 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $sbw->nama ?? $d['nm_partai'] }}</td>
-                            <td class="text-center">{{ number_format($d['pcs'], 0) }} Pcs /
+                            <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr
                             </td>
-                            <td class="text-center">{{ number_format($d['pcs'], 0) }} Pcs /
+                            <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr
                             </td>
                             <td class="text-center">{{ $sbw->no_invoice }}</td>
