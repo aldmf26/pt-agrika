@@ -24,13 +24,21 @@ class AuditWizard extends Component
     public $headings, $namaBulan, $tanggalValue;
     public $hasilChecklist = [];
 
+    public function alert($type, $message)
+    {
+        $this->dispatch('showAlert', [
+            'type' => $type,
+            'message' => $message
+        ]);
+    }
+
     public function mount()
     {
         $this->namaBulan = DB::table('bulan')->where('bulan', $this->bulan)->first()->nm_bulan;
         $this->tanggalValue = ProgramAuditInternal::find($this->id)->created_at->format('d');
         $headings = Heading::groupBy('departemen')->pluck('departemen')->toArray();
         if (!in_array($this->departemen, $headings)) {
-            $this->redirectWithAlert('error', 'Departemen tidak cocok', route('ia.1.index'));
+            $this->alert('error', 'Departemen tidak cocok', route('ia.1.index'));
             return;
         }
 
