@@ -38,7 +38,11 @@
                         <td>{{ $d->contact_person }}</td>
                         <td>{{ $d->no_telp }}</td>
                         <td>
-                            ini produk nya
+                            <ul style="list-style-type: none; padding: 0; margin: 0">
+                                @foreach ($d->barang as $index => $b)
+                                    <li>{{ $index + 1 }}. {{ $b->nama_barang }}</li>
+                                @endforeach
+                            </ul>
                         </td>
                         <td>{{ $d->hasil_evaluasi }}</td>
                         <td>{{ $d->ket }}</td>

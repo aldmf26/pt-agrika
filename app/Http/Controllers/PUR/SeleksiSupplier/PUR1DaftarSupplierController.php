@@ -226,7 +226,7 @@ class PUR1DaftarSupplierController extends Controller
     }
     public function print(Request $r)
     {
-        $datas = Suplier::where('kategori', $r->kategori)->latest()->get();
+        $datas = Suplier::with('barang')->where('kategori', $r->kategori)->latest()->get();
         $data = [
             'title' => 'DAFTAR SUPPLIER & OUTSOURCE TERPILIH',
             'dok' => 'Dok.No.: FRM.PUR.02.01, Rev.00',
