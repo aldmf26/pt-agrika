@@ -40,9 +40,9 @@ class IA2JadwalAuditInternalController extends Controller
                 // Skip jika semua field kosong
                 if (
                     empty($bagian) &&
-                    empty($request->proses[$key]) &&
-                    empty($request->auditor[$key]) &&
-                    empty($request->auditee[$key])
+                    empty($r->proses[$key]) &&
+                    empty($r->auditor[$key]) &&
+                    empty($r->auditee[$key])
                 ) {
                     continue;
                 }
