@@ -20,7 +20,7 @@
             ]);
         @endphp
 
-        <form action="" method="post">
+        <form action="{{ route('ia.2.update', $tgl) }}" method="post">
             @csrf
             <div class="row">
                 <div class="col-4">

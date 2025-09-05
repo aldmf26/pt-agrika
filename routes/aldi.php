@@ -244,6 +244,7 @@ Route::controller(IA2JadwalAuditInternalController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create/', 'store')->name('store');
         Route::get('/edit/{tgl}', 'edit')->name('edit');
+        Route::post('/edit/{tgl}', 'update')->name('update');
         Route::get('/print/{tgl}', 'print')->name('print');
     });
 
@@ -477,6 +478,11 @@ Route::controller(InformasiRecallProdukController::class)
         Route::get('/create', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/{id}', 'print')->name('print');
+        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::post('/edit/{id}', 'update')->name('update');
+        Route::get('/hasil/{id}', 'hasil')->name('hasil');
+        Route::post('/hasil/{id}', 'store_hasil')->name('store_hasil');
+        Route::get('/hasil_print/{id}', 'hasil_print')->name('hasil_print');
     });
 
 Route::controller(HasilAnalisaProsesRecallController::class)

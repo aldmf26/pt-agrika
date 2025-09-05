@@ -21,6 +21,7 @@ class AuditChecklistSeeder extends Seeder
         Pertanyaan::truncate();
         HasilChecklist::truncate();
         
+        $this->hrga();
         $this->bk();
         $this->cabut();
         $this->cetak();
@@ -29,7 +30,6 @@ class AuditChecklistSeeder extends Seeder
         $this->purchasing();
         $this->it();
         $this->ekspedisi();
-        $this->hrga();
     }
 
     public function cabut(): void

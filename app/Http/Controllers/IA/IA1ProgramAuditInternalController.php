@@ -48,7 +48,7 @@ class IA1ProgramAuditInternalController extends Controller
         $departemen = $r->departemen;
         $bulan = $r->bulan;
         $tahun = $r->tahun;
-        $program = ProgramAuditInternal::find($r->id)->first();
+        $program = ProgramAuditInternal::where('id', $r->id)->first();
         $headings = Heading::with('subHeadings.pertanyaan')->where('departemen', $departemen)->get();
 
         $hasilChecklist = [];

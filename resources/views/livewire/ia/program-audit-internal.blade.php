@@ -50,7 +50,7 @@
             </div>
             <div class="col-2">
                 <label for="">Auditee :</label>
-                <select wire:model="form.audite" class="form-control selectAudtor">
+                <select wire:model="form.audite" class="form-control">
                     <option value="">Pilih Auditee</option>
                     @foreach ($user as $u)
                         <option value="{{ $u->nama }}">{{ $u->nama }}</option>
@@ -60,7 +60,7 @@
             </div>
             <div class="col-2">
                 <label for="">Auditor :</label>
-                <select wire:model="form.auditor" class="form-control selectAudtor">
+                <select wire:model="form.auditor" class="form-control">
                     <option value="">Pilih Auditee</option>
                     @foreach ($user as $u)
                         <option value="{{ $u->nama }}">{{ $u->nama }}</option>
@@ -151,7 +151,7 @@
 
     @section('scripts')
         <script>
-            $(document).ready(function () {
+            $(document).ready(function() {
                 setTimeout(function() {
                     $('.selectAudtor').select2();
                 }, 500);
@@ -159,7 +159,6 @@
         </script>
     @endsection
     <script>
-
         document.addEventListener('click', (event) => {
             // Periksa apakah kita mengklik di luar context menu
             const clickedOnMenu = event.target.closest('.context-menu') !== null;

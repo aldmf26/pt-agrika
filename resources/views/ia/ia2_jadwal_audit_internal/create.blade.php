@@ -1,10 +1,4 @@
 <x-app-layout :title="$title">
-    @if (session()->has('error'))
-        <div class="alert alert-danger">
-            <i class="bi bi-exclamation-triangle"></i> {{ session('error') }}
-        </div>
-    @endif
-
     <div class="container mt-4">
         @php
             $jam = collect([

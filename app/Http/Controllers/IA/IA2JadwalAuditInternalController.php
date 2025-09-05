@@ -40,15 +40,18 @@ class IA2JadwalAuditInternalController extends Controller
                 // Skip jika semua field kosong
                 if (
                     empty($bagian) &&
-                    empty($request->proses[$key]) &&
-                    empty($request->auditor[$key]) &&
-                    empty($request->auditee[$key])
+                    empty($r->proses[$key]) &&
+                    empty($r->auditor[$key]) &&
+                    empty($r->auditee[$key])
                 ) {
                     continue;
                 }
-                $cek = JadwalAuditInternal::where('tgl', $r->tgl)->first();
+                $cek = JadwalAuditInternal::where('tgl', $r->tgl)
+                    ->where('waktu', $r->waktu[$key])
+                    ->first();
+
                 if ($cek) {
-                    return redirect()->back()->with('error', 'Tanggal <strong>' . $r->tgl . '</strong> sudah ada');
+                    continue; // lewati slot ini, jangan hentikan semua insert
                 }
 
                 JadwalAuditInternal::create([
@@ -66,7 +69,7 @@ class IA2JadwalAuditInternalController extends Controller
             return redirect()->route('ia.2.index')->with('sukses', 'Data berhasil disimpan');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Data berhasil disimpan');
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function edit($tgl)
@@ -78,12 +81,54 @@ class IA2JadwalAuditInternalController extends Controller
 
         return view('ia.ia2_jadwal_audit_internal.edit', $data);
     }
+
+    public function update(Request $r, $tgl)
+    {
+        try {
+            DB::beginTransaction();
+            // Hapus data lama untuk tanggal tersebut
+            JadwalAuditInternal::where('tgl', $tgl)->delete();
+
+            foreach ($r->bagian as $key => $bagian) {
+                // Skip jika key adalah lunch break (7)
+                if ($key == 7) continue;
+
+                // Skip jika semua field kosong
+                if (
+                    empty($bagian) &&
+                    empty($r->proses[$key]) &&
+                    empty($r->auditor[$key]) &&
+                    empty($r->auditee[$key])
+                ) {
+                    continue;
+                }
+
+                JadwalAuditInternal::create([
+                    'tgl' => $r->tgl,
+                    'waktu' => $r->waktu[$key],
+                    'bagian' => $bagian,
+                    'proses' => $r->proses[$key],
+                    'auditor' => $r->auditor[$key],
+                    'audite' => $r->auditee[$key],
+                    'admin' => auth()->user()->name
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->route('ia.2.index')->with('sukses', 'Data berhasil diupdate');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
     public function print($tgl)
     {
+        $datas = JadwalAuditInternal::where('tgl', $tgl)->orderBy('waktu', 'asc')->get();
         $data = [
             'title' => 'JADWAL AUDIT INTERNAL',
             'dok' => 'Dok.No.: FRM.AI.01.02, Rev.00',
-            'tgl' => $tgl
+            'tgl' => $tgl,
+            'datas' => $datas
         ];
 
         return view('ia.ia2_jadwal_audit_internal.print', $data);
