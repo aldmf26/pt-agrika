@@ -11,14 +11,14 @@
                 <thead>
                     <tr>
                         <th class="text-center">#</th>
-                        <th class="text-center">Tanggal</th>
+                        <th class="text-start">Tanggal</th>
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($datas as $d)
                         <tr>
-                            <td align="center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ tanggal($d->tgl) }}</td>
                             <td align="right">
                                 <a href="{{ route('ia.2.edit', $d->tgl) }}" class="btn btn-sm btn-primary"><i

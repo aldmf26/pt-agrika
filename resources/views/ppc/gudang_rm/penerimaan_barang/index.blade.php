@@ -28,7 +28,7 @@
                 <th>Pengemudi</th>
                 <th>Jumlah Barang</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th width="100">Aksi</th>
             </tr>
         </thead>
         <tbody>
