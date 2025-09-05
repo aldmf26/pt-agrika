@@ -37,7 +37,7 @@
                 @if ($k == 'satu')
                     @foreach ($buktis as $d)
                         <tr>
-                            <td align="center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $d->barang->nama_barang ?? '' }}</td>
                             <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
@@ -58,7 +58,7 @@
                                 ->first();
                         @endphp
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $sbw->nama ?? $d['nm_partai'] }}</td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr
