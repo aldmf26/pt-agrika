@@ -209,7 +209,7 @@
                                     <td class="text-end">
                                         {{ number_format($b['gr_awal'], 0) }}
                                     </td>
-                                    <td>{{ tanggal($b['tgl_terima']) }}</td>
+                                    <td>{{ tanggal($b['tgl_terima'] ?? '-') }}</td>
                                     <td class="text-center">{{ number_format($b['pcs_awal'], 0) }} /
                                         {{ number_format($b['gr_awal'], 0) }}
                                     </td>
@@ -219,9 +219,11 @@
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir'], 0) }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah']) }}
+                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah'] ?? '-') }}
                                     </td>
-                                    <td class="text-center">{{ tanggal($b['tgl_selesai_ctk']) }}</td>
+                                    <td class="text-center">
+                                        {{ $b['pcs_awal_ctk'] == 0 ? '-' : tanggal($b['tgl_selesai_ctk']) }}
+                                    </td>
 
                                     <td class="text-center">
                                         {{ number_format($b['pcs_awal_ctk'], 0) }} /

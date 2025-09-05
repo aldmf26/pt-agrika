@@ -1,9 +1,9 @@
-<x-app-layout :title="$title">
+<x-app-layout :title="$title" :kategori="$kategori">
     <ul class="nav nav-pills float-start">
 
         <li class="nav-item">
             <a class="nav-link  {{ $kategori == 'terjadwal' ? 'active' : '' }}" aria-current="page"
-                href="{{ route('hrga7.1.index', ['kategori' => 'terjadwal']) }}">Terjadwal</a>
+                href="{{ route('hrga7.1.index', ['kategori' => 'terjadwal']) }}">Terjadwal </a>
 
         </li>
         <li class="nav-item">

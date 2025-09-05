@@ -34,23 +34,23 @@
 
     :root {
         /* Primary */
-        --bs-primary: #FFCA43;
+        --bs-primary: #d2b052;
         --bs-primary-rgb: 67, 94, 190;
 
         /* Secondary */
-        --bs-secondary: #5766eb;
+        --bs-secondary: #9e7e5f;
         --bs-secondary-rgb: 108, 117, 125;
 
         /* Success */
-        --bs-success: #198754;
+        --bs-success: #be9854;
         --bs-success-rgb: 25, 135, 84;
 
         /* Info */
-        --bs-info: #0dcaf0;
+        --bs-info: #be9d63;
         --bs-info-rgb: 13, 202, 240;
 
         /* Warning */
-        --bs-warning: #ffc107;
+        --bs-warning: #dbbc85;
         --bs-warning-rgb: 255, 193, 7;
 
         /* Danger */
@@ -79,24 +79,34 @@
     .btn-primary {
         background-color: var(--bs-primary) !important;
         border-color: var(--bs-primary) !important;
-        color: black !important;
+        color: var(--bs-light) !important;
+
     }
 
     .btn-outline-primary:hover {
         background-color: var(--bs-primary) !important;
         border-color: var(--bs-primary) !important;
-        color: black !important;
+        color: var(--bs-light) !important;
+        color: var(--bs-light) !important;
     }
 
 
     .btn-secondary {
         background-color: var(--bs-secondary) !important;
         border-color: var(--bs-secondary) !important;
+        color: var(--bs-light) !important;
     }
 
     .btn-success {
         background-color: var(--bs-success) !important;
         border-color: var(--bs-success) !important;
+        color: var(--bs-light) !important;
+    }
+
+    .btn-info {
+        background-color: var(--bs-info) !important;
+        border-color: var(--bs-info) !important;
+        color: var(--bs-light) !important;
     }
 
     /* Text colors */

@@ -1,4 +1,4 @@
-@props(['title', 'size' => 'col-lg-12', 'container' => 'container'])
+@props(['title', 'size' => 'col-lg-12', 'container' => 'container', 'kategori' => ''])
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +23,8 @@
             <div class="content-wrapper {{ $container }}">
 
                 <div class="page-heading" style="margin-top: -30px">
+                    <i class="fas fa-info float-end " style="cursor: pointer" data-bs-toggle="modal"
+                        data-bs-target="#contoh"></i>
 
                     @if (count(request()->segments()) != 1)
                         <nav aria-label="breadcrumb " style="margin-top: -25px; font-size: 15px;">
@@ -40,10 +42,11 @@
                         </nav>
                     @endif
 
-                    <h5>{{ ucwords(strtolower($title)) }}</h5>
+                    <h5>{{ ucwords(strtolower($title)) }} </h5>
 
                 </div>
                 <div class="page-content" style="margin-top: -30px">
+
                     <x-alert />
                     <div class="row">
                         <div class="{{ $size }}">
@@ -58,6 +61,64 @@
 
                     </div>
 
+                </div>
+            </div>
+            <style>
+                .modal-xlplus {
+                    max-width: 90% !important;
+                }
+            </style>
+            <div class="modal fade" id="contoh" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="tambahModalLabel">Contoh Data</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        @php
+
+                            if (empty($kategori)) {
+                                $menu_contoh = DB::table('contoh_image')
+                                    ->join('menus', 'menus.id', '=', 'contoh_image.id_menu')
+                                    ->where('link', request()->route()->getName())
+                                    ->select('contoh_image.*')
+                                    ->get();
+                            } else {
+                                $menu_contoh = DB::table('contoh_image')
+                                    ->join('menus', 'menus.id', '=', 'contoh_image.id_menu')
+                                    ->where('link', request()->route()->getName())
+                                    ->where('judul', $kategori)
+                                    ->select('contoh_image.*')
+                                    ->get();
+                            }
+
+                        @endphp
+                        <div class="modal-body">
+
+                            @if (empty($menu_contoh))
+                            @else
+                                <div class="row">
+                                    @foreach ($menu_contoh as $item)
+                                        <div class="col-lg-12">
+                                            <img src="{{ asset('contoh/' . $item->contoh) }}" alt="Gambar"
+                                                class="img-fluid" style="width: 100%;">
+                                            <hr style="border: 1px solid black">
+                                        </div>
+                                    @endforeach
+                                </div>
+
+
+                            @endif
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+
+                        </div>
+                    </div>
                 </div>
             </div>
 
