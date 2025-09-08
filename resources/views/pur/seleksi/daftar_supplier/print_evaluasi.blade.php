@@ -25,11 +25,11 @@
         $komunikasi = $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->whereNotNull('alasan')->first();
 
         $totalPenilaian =
-            $kuantitas->avg('penilaian') +
-            $waktu->avg('penilaian') +
-            $kualitas->avg('penilaian') +
-            $harga->penilaian +
-            $komunikasi->penilaian;
+            ($kuantitas->avg('penilaian') ?? 100) +
+            ($waktu->avg('penilaian') ?? 100) +
+            ($kualitas->avg('penilaian') ?? 100) +
+            ($harga ? $harga->penilaian : 100) +
+            ($komunikasi ? $komunikasi->penilaian : 100);
 
         $rataRata = $totalPenilaian / 5;
     @endphp
@@ -41,7 +41,7 @@
                     <th>No</th>
                     <th>Kriteria</th>
                     <th>Keterangan</th>
-                    <th>Hasil Penilaian</th>
+                    <th class="text-end">Hasil Penilaian</th>
                 </tr>
                 <tr>
                     <td>1</td>
@@ -50,7 +50,7 @@
                         Jumlah pengiriman dengan kuantitas yang tidak sesuai: <br>
                         <x-evaluasi-detail :datas="$kuantitas" />
                     </td>
-                    <td align="center">{{ number_format($kuantitas->avg('penilaian'), 0) }}</td>
+                    <td class="text-end">{{ number_format($kuantitas->avg('penilaian') ?? 100, 0) }}</td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -60,7 +60,7 @@
                         <x-evaluasi-detail :datas="$waktu" />
 
                     </td>
-                    <td align="center">{{ number_format($waktu->avg('penilaian'), 0) }}</td>
+                    <td class="text-end">{{ number_format($waktu->avg('penilaian') ?? 100, 0) }}</td>
                 </tr>
                 <tr>
                     <td>3</td>
@@ -70,27 +70,27 @@
                         <x-evaluasi-detail :datas="$kualitas" />
 
                     </td>
-                    <td align="center">{{ number_format($kualitas->avg('penilaian'), 0) }}</td>
+                    <td class="text-end">{{ number_format($kualitas->avg('penilaian') ?? 100, 0) }}</td>
                 </tr>
                 <tr>
                     <td>4</td>
                     <td>Harga Produk/Jasa</td>
                     <td>{{ $harga->alasan }}</td>
-                    <td align="center">{{ number_format($harga->penilaian, 0) }}</td>
+                    <td class="text-end">{{ number_format($harga->penilaian ?? 100, 0) }}</td>
                 </tr>
                 <tr>
                     <td>5</td>
                     <td>Kemudahan Komunikasi</td>
                     <td>{{ $komunikasi->alasan }}</td>
-                    <td align="center">{{ number_format($komunikasi->penilaian, 0) }}</td>
+                    <td class="text-end">{{ number_format($komunikasi->penilaian ?? 100, 0) }}</td>
                 </tr>
                 <tr>
                     <td colspan="3" align="right">Total</td>
-                    <td align="center">{{ number_format($totalPenilaian, 0) }}</td>
+                    <td class="text-end">{{ number_format($totalPenilaian, 0) }}</td>
                 </tr>
                 <tr>
                     <td colspan="3" align="right">Rata-rata</td>
-                    <td align="center">{{ number_format($rataRata, 0) }}</td>
+                    <td class="text-end">{{ number_format($rataRata, 0) }}</td>
                 </tr>
             </table>
         </div>

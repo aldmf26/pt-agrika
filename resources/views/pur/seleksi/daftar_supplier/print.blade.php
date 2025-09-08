@@ -25,7 +25,7 @@
                     <th class="head text-start align-middle">Contact Person</th>
                     <th class="head text-start align-middle">No Telp</th>
                     <th class="head text-start align-middle">Jenis Produk / Layanan</th>
-                    <th class="head text-start align-middle">Hasil Evaluasi</th>
+                    <th class="head text-end align-middle">Hasil Evaluasi</th>
                     <th class="head text-start align-middle">Keterangan</th>
                 </tr>
             </thead>
@@ -44,7 +44,9 @@
                                 @endforeach
                             </ul>
                         </td>
-                        <td>{{ $d->hasil_evaluasi }}</td>
+
+
+                        <td class="text-end">{{ $d->hasil_evaluasi ?? 0 }}</td>
                         <td>{{ $d->ket }}</td>
                     </tr>
                 @endforeach

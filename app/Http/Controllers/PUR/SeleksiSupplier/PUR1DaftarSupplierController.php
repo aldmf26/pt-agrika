@@ -75,6 +75,7 @@ class PUR1DaftarSupplierController extends Controller
 
     public function evaluasi_update(Request $r, $id)
     {
+
         try {
             DB::beginTransaction();
             $evaluasi =  Evaluasi::updateOrCreate(
@@ -100,7 +101,7 @@ class PUR1DaftarSupplierController extends Controller
                 'jenis_kriteria' => 'komunikasi',
                 'tanggal_ketidaksesuaian' => now(),
                 'alasan' => $r->harga_keterangan ?? null,
-                'penilaian' => $r->harga_penilaian ?? 0,
+                'penilaian' => $r->komunikasi_penilaian ?? 0,
             ]);
 
             $kuantitas = collect($r->kuantitas_tanggal)->map(function ($tanggal, $index) use ($r) {
@@ -131,6 +132,26 @@ class PUR1DaftarSupplierController extends Controller
             });
 
             $evaluasi->detail()->createMany($kuantitas->merge($waktu)->merge($kualitas)->toArray());
+
+            // 🔹 Hitung total setelah semua detail tersimpan
+            $evaluasi->load('detail'); // refresh relasi
+
+            $kuantitas = $evaluasi->detail->where('jenis_kriteria', 'kuantitas')->whereNotNull('alasan');
+            $waktu = $evaluasi->detail->where('jenis_kriteria', 'waktu')->whereNotNull('alasan');
+            $kualitas = $evaluasi->detail->where('jenis_kriteria', 'kualitas')->whereNotNull('alasan');
+            $harga = $evaluasi->detail->where('jenis_kriteria', 'harga')->first();
+            $komunikasi = $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first();
+
+            $totalPenilaian =
+                ($kuantitas->avg('penilaian') ?? 100) +
+                ($waktu->avg('penilaian') ?? 100) +
+                ($kualitas->avg('penilaian') ?? 100) +
+                ($harga ? $harga->penilaian : 100) +
+                ($komunikasi ? $komunikasi->penilaian : 100);
+
+            Suplier::find($id)->update([
+                'hasil_evaluasi' => $totalPenilaian,
+            ]);
 
             DB::commit();
             return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Evaluasi Supplier berhasil ditambahkan');
@@ -226,7 +247,7 @@ class PUR1DaftarSupplierController extends Controller
     }
     public function print(Request $r)
     {
-        $datas = Suplier::with('barang')->where('kategori', $r->kategori)->latest()->get();
+        $datas = Suplier::with('barang', 'evaluasi')->where('kategori', $r->kategori)->latest()->get();
         $data = [
             'title' => 'DAFTAR SUPPLIER & OUTSOURCE TERPILIH',
             'dok' => 'Dok.No.: FRM.PUR.02.01, Rev.00',
