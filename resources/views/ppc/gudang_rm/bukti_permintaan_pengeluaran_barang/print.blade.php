@@ -1,5 +1,5 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table>
+    <table class="table-xs">
         <tr>
             <td>Tanggal Pemohon</td>
             <td>:</td>
@@ -85,7 +85,7 @@
                 pakai.</small>
             <br><br>
             <small class="fw-bold ">Permintaan diterima Warehouse Material:</small>
-            <table>
+            <table class="table-xs">
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
@@ -99,7 +99,7 @@
 
             <br>
             <small class="fw-bold mt-2">Penyerahan Barang kepada Pengguna:</small>
-            <table>
+            <table class="table-xs">
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>

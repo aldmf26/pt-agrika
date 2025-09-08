@@ -14,13 +14,20 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="">Nama Pemohon</label>
-                                <input type="nama" name="nama" class="form-control">
+                                <select name="nama" id="" class="select2pemohon pemohon">
+                                    <option value="">-- Pilih Pemohon --</option>
+                                    @foreach ($user as $p)
+                                        <option data-departemen="{{ $p->divisi->divisi }}" value="{{ $p->nama }}">
+                                            {{ $p->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="">departemen</label>
-                                <input type="text" name="departemen" class="form-control">
+                                <input type="text" readonly name="departemen" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -28,13 +35,27 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="">Penerima Warehouse Material</label>
-                                <input name="penerima_wm" type="text" class="form-control">
+                                <select name="penerima_wm" id="" class="select2pemohon">
+                                    <option value="">-- Pilih Pemohon --</option>
+                                    @foreach ($user as $p)
+                                        <option data-departemen="{{ $p->divisi->divisi }}" value="{{ $p->nama }}">
+                                            {{ $p->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="">Penerima Produksi</label>
-                                <input name="penerima_pr" type="text" class="form-control">
+                                <label for=""><br>&nbsp;Penerima Produksi </label>
+                                <select name="penerima_pr" id="" class="select2pemohon">
+                                    <option value="">-- Pilih Pemohon --</option>
+                                    @foreach ($user as $p)
+                                        <option data-departemen="{{ $p->divisi->divisi }}" value="{{ $p->nama }}">
+                                            {{ $p->nama }}
+                                        </option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -137,6 +158,16 @@
 
     @section('scripts')
         <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $('.select2pemohon').select2();
+
+                    $('.pemohon').on('change', function() {
+                        var departemen = $(this).find(':selected').data('departemen');
+                        $('input[name="departemen"]').val(departemen);
+                    });
+                }, 100);
+            });
             document.addEventListener('alpine:init', () => {
                 Alpine.data('alpineFunc', () => ({
                     rows: [],

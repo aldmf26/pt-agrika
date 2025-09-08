@@ -88,11 +88,7 @@ class PUR1PurchaseRequestController extends Controller
         $kategori = request()->kategori ?? 'barang';
 
 
-        if ($kategori == 'barang') {
-            $datas = PurchaseRequest::latest()->get();
-        } else {
-            $datas = $this->singkron();
-        }
+        $datas = $kategori == 'barang' ? PurchaseRequest::latest()->get() : $this->singkron();
         $data = [
 
             'title' => 'PUR 1 Purchase Request',
