@@ -239,14 +239,14 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="8"></th>
+                            <th style="border: none; text-align: start" colspan="7"></th>
                             <th class="text-center" colspan="3">Dibuat Oleh:</th>
-                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                            <th class="text-center" colspan="3">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="8"></th>
+                            <th style="border: none" colspan="7"></th>
                             <td colspan="3" style="height: 80px"></td>
-                            <td colspan="2" style="height: 80px"></td>
+                            <td colspan="3" style="height: 80px"></td>
                         </tr>
 
                     </tfoot>
