@@ -183,10 +183,13 @@
                             <th colspan="2" class="text-center ">Berat Kering <br> <span
                                     class="fst-italic fw-lighter">Qty for moulding
                             </th>
-                            <th colspan="2" class="text-center ">Berat Hasil <br> <span
+                            <th colspan="2" class="text-center ">Berat Hasil drying 2 <br> <span
                                     class="fst-italic fw-lighter">Result qty</th>
                             <th rowspan="2" class="text-end align-middle">Hcr <br> <span
                                     class="fst-italic fw-lighter">(gr)</th>
+                            <th rowspan="2" class="text-end align-middle">%Susut <br> (Min <br> susut 0- <br> 3%)
+                            </th>
+                            <th rowspan="2" class="text-end align-middle">Ok / Not <br> ok </th>
                             <th rowspan="2" class="text-start align-middle">Keterangan <br> <span
                                     class="fst-italic fw-lighter">Remarks</th>
                         </tr>
@@ -217,6 +220,15 @@
                                 <td class="text-end ">{{ $c['pcs_akhir'] }}</td>
                                 <td class="text-end ">{{ $c['gr_akhir'] }}</td>
                                 <td class="text-end ">0</td>
+                                <td class="text-end ">
+                                    {{ number_format((1 - $c['gr_akhir'] / $c['gr_awal_ctk']) * 100, 0) }}
+                                </td>
+                                <td>
+                                    @php
+                                        $susut = (1 - $c['gr_akhir'] / $c['gr_awal_ctk']) * 100;
+                                    @endphp
+                                    {{ $susut < 3 ? 'OK' : 'Not OK' }}
+                                </td>
                                 <td class="text-center "></td>
                             </tr>
                         @endforeach
