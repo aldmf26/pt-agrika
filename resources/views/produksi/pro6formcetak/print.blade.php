@@ -223,7 +223,7 @@
                                 <td class="text-end ">
                                     {{ number_format((1 - $c['gr_akhir'] / $c['gr_awal_ctk']) * 100, 0) }}
                                 </td>
-                                <td>
+                                <td class="text-start">
                                     @php
                                         $susut = (1 - $c['gr_akhir'] / $c['gr_awal_ctk']) * 100;
                                     @endphp
