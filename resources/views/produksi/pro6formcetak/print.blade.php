@@ -189,7 +189,7 @@
                                     class="fst-italic fw-lighter">(gr)</th>
                             <th rowspan="2" class="text-end align-middle">%Susut <br> (Min <br> susut 0- <br> 3%)
                             </th>
-                            <th rowspan="2" class="text-end align-middle">Ok / Not <br> ok </th>
+                            <th rowspan="2" class="text-start align-middle">Ok / Not <br> ok </th>
                             <th rowspan="2" class="text-start align-middle">Keterangan <br> <span
                                     class="fst-italic fw-lighter">Remarks</th>
                         </tr>
@@ -235,16 +235,16 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="20">&nbsp;</th>
+                            <th colspan="22">&nbsp;</th>
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="6"></th>
+                            <th style="border: none; text-align: start" colspan="8"></th>
                             <th class="text-center" colspan="3">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="6"></th>
+                            <th style="border: none" colspan="8"></th>
                             <td colspan="3" style="height: 80px"></td>
                             <td colspan="2" style="height: 80px"></td>
                         </tr>
