@@ -94,7 +94,7 @@ class PUR2PurchaseOrderController extends Controller
         } else {
             $datas = $this->singkron();
         }
-        
+
         $data = [
             'title' => 'PUR 2 Purchase Order',
             'datas' => $datas,
@@ -224,7 +224,7 @@ class PUR2PurchaseOrderController extends Controller
             ->get();
 
         $data = [
-            'title' => 'PURCHASE REQUEST',
+            'title' => 'PURCHASE ORDER',
             'dok' => 'Dok.No.: FRM.PUR.01.01, Rev.00',
             'datas' => $datas,
             'no_po' => $no_po,
