@@ -59,7 +59,7 @@
         <tr>
             <td>Jumlah Sbw Kotor (Gr)</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['gr_awal'], 0) }} gr</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['gr_awal'], 0) }} GR</td>
         </tr>
         <tr>
             <td></td>
@@ -98,7 +98,7 @@
         <tr>
             <td>Jumlah Pcs</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['pcs_awal'], 0) }} pcs
+            <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['pcs_awal'], 0) }} PCS
             </td>
         </tr>
         <tr>

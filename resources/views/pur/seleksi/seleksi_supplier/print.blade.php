@@ -28,7 +28,7 @@
         }
     </style>
     <br>
-    <table>
+    <table class="table-xs">
         <tr>
             <th>Nama Suplier</th>
             <th>: {{ $nama }}</th>
@@ -46,7 +46,7 @@
     </table>
 
     <br>
-    <table class="produk-table">
+    <table class="table-xs produk-table">
         <tr>
             <th class="dhead" colspan="2">INFORMASI PRODUK</th>
         </tr>
@@ -78,7 +78,7 @@
         </tr>
     </table>
     <br>
-    <table class="produk-table">
+    <table class="table-xs produk-table">
         <tr>
             <th class="dhead" colspan="2">INFORMASI MANAJEMEN</th>
         </tr>

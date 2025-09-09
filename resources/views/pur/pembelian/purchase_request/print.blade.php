@@ -4,8 +4,6 @@
             table {
                 font-family: 'arial'
             }
-
-            
         </style>
         <div class="row">
             <div class="col-12">
@@ -62,7 +60,7 @@
                     </tr>
                     @foreach ($datas->item as $d)
                         <tr>
-                            <td class="text-end">{{ $d->jumlah }}</td>
+                            <td class="text-end">{{ number_format($d->jumlah, 0) }} {{ $d->barang->satuan }}</td>
                             <td align="start">{{ ucfirst($d->item_spesifikasi) }}</td>
                             <td align="start">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                         </tr>

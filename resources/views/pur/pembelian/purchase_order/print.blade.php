@@ -36,7 +36,7 @@
                 </tr>
                 @foreach ($datas->item as $d)
                     <tr>
-                        <td class="text-end">{{ $d->jumlah }}</td>
+                        <td class="text-end">{{ number_format($d->jumlah, 0) }} {{ $d->barang->satuan }}</td>
                         <td align="center">{{ $d->item_spesifikasi }}</td>
                         <td class="text-end">{{ number_format($d->harga_po, 0) }}</td>
                     </tr>
