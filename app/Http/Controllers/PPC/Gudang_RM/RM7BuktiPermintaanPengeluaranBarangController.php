@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PPC\Gudang_RM;
 
 use App\Http\Controllers\Controller;
 use App\Models\BuktiPermintaanPengeluaranBarang;
+use App\Models\DataPegawai;
 use App\Models\LabelIdentitasBahan;
 use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
@@ -76,10 +77,11 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
                 ]
             ]));
         }
-
+        $user = DataPegawai::karyawan()->get();
         $data = [
             'title' => 'Tambah Bukti Permintaan Pengeluaran Barang',
             'labels' => $labels->values(), // reset keys
+            'user' => $user,
         ];
 
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.create', $data);

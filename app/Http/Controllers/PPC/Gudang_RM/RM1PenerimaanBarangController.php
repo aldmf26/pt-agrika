@@ -98,8 +98,6 @@ class RM1PenerimaanBarangController extends Controller
         $penerimaan = PenerimaanHeader::with(['barang', 'supplier', 'kriteria'])
             ->findOrFail($id);
 
-
-
         $data = [
             'title' => 'PENERIMAAN BARANG',
             'dok' => 'Dok.No.: FRM.WH.02.01, Rev.01',

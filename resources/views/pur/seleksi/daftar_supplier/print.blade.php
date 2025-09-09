@@ -25,7 +25,7 @@
                     <th class="head text-start align-middle">Contact Person</th>
                     <th class="head text-start align-middle">No Telp</th>
                     <th class="head text-start align-middle">Jenis Produk / Layanan</th>
-                    <th class="head text-start align-middle">Hasil Evaluasi</th>
+                    <th class="head text-end align-middle">Hasil Evaluasi</th>
                     <th class="head text-start align-middle">Keterangan</th>
                 </tr>
             </thead>
@@ -38,9 +38,15 @@
                         <td>{{ $d->contact_person }}</td>
                         <td>{{ $d->no_telp }}</td>
                         <td>
-                            ini produk nya
+                            <ul style="list-style-type: none; padding: 0; margin: 0">
+                                @foreach ($d->barang as $index => $b)
+                                    <li>{{ $index + 1 }}. {{ $b->nama_barang }}</li>
+                                @endforeach
+                            </ul>
                         </td>
-                        <td>{{ $d->hasil_evaluasi }}</td>
+
+
+                        <td class="text-end">{{ $d->hasil_evaluasi ?? 0 }}</td>
                         <td>{{ $d->ket }}</td>
                     </tr>
                 @endforeach

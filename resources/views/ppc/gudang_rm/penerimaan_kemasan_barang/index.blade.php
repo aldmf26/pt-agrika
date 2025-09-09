@@ -29,7 +29,7 @@
                 <th>Jumlah Barang</th>
                 <th>Jumlah Sampel</th>
                 <th>Status</th>
-                <th>Aksi</th>
+                <th width="100">Aksi</th>
             </tr>
         </thead>
         <tbody>

@@ -4,6 +4,8 @@
             table {
                 font-family: 'arial'
             }
+
+            
         </style>
         <div class="row">
             <div class="col-12">

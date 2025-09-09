@@ -1,5 +1,5 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table>
+    <table class="table-xs">
         <tr>
             <td>Tanggal Pemohon</td>
             <td>:</td>
@@ -37,7 +37,7 @@
                 @if ($k == 'satu')
                     @foreach ($buktis as $d)
                         <tr>
-                            <td align="center">{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $d->barang->nama_barang ?? '' }}</td>
                             <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
@@ -58,7 +58,7 @@
                                 ->first();
                         @endphp
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
+                            <td class="text-center">{{ $loop->iteration }}</td>
                             <td>{{ $sbw->nama ?? $d['nm_partai'] }}</td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr
@@ -85,7 +85,7 @@
                 pakai.</small>
             <br><br>
             <small class="fw-bold ">Permintaan diterima Warehouse Material:</small>
-            <table>
+            <table class="table-xs">
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>
@@ -99,7 +99,7 @@
 
             <br>
             <small class="fw-bold mt-2">Penyerahan Barang kepada Pengguna:</small>
-            <table>
+            <table class="table-xs">
                 <tr>
                     <td>Tanggal</td>
                     <td>:</td>

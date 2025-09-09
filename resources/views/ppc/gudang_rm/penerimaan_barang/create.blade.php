@@ -28,8 +28,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tanggal Penerimaan</label>
-                                    <input type="date" x-model="item.tgl_penerimaan" name="tgl_penerimaan[]"
-                                        class="form-control" required>
+                                    <input type="date" @change="updateExpiredDate(index)"
+                                        x-model="item.tgl_penerimaan" name="tgl_penerimaan[]" class="form-control"
+                                        required>
 
                                 </div>
                             </div>
@@ -106,9 +107,7 @@
                 Alpine.data('alpineFunc', () => ({
                     rows: [],
                     tgl: "{{ date('Y-m-d') }}",
-                    tgl_penerimaan: "{{ date('Y-m-d') }}",
-                    tgl_expired: new Date(new Date("{{ date('Y-m-d') }}").setFullYear(new Date(
-                        "{{ date('Y-m-d') }}").getFullYear() + 2)).toISOString().slice(0, 10),
+
                     selectedPo: '',
                     items: [],
                     allPo: @json($po),
@@ -117,9 +116,12 @@
                         console.log(selected);
                         if (selected && selected.purchase_request?.item) {
                             this.items = selected.purchase_request.item.map(it => {
-                                const today = new Date().toISOString().slice(0, 10);
-                                const expired = new Date(new Date().setFullYear(new Date()
-                                    .getFullYear() + 2)).toISOString().slice(0, 10);
+                                const tglPenerimaan = it.tgl_dibutuhkan || new Date().toISOString()
+                                    .slice(0, 10);
+                                // Menghitung expired 2 tahun dari tgl_dibutuhkan
+                                const expiredDate = new Date(it.tgl_dibutuhkan || new Date());
+                                expiredDate.setFullYear(expiredDate.getFullYear() + 2);
+                                const expired = expiredDate.toISOString().slice(0, 10);
 
                                 return {
                                     id: it.id,
@@ -127,7 +129,7 @@
                                     kode: it.barang?.kode_barang ?? 'Tidak ditemukan',
                                     id_barang: it.barang?.id ?? null,
                                     jumlah: it.jumlah,
-                                    tgl_penerimaan: today,
+                                    tgl_penerimaan: tglPenerimaan,
                                     tgl_expired: expired,
                                     no_kendaraan: '',
                                     pengemudi: '',
@@ -139,6 +141,14 @@
                             });
                         } else {
                             this.items = [];
+                        }
+                    },
+                    updateExpiredDate(index) {
+                        const item = this.items[index];
+                        if (item.tgl_penerimaan) {
+                            const expiredDate = new Date(item.tgl_penerimaan);
+                            expiredDate.setFullYear(expiredDate.getFullYear() + 2);
+                            item.tgl_expired = expiredDate.toISOString().slice(0, 10);
                         }
                     }
 

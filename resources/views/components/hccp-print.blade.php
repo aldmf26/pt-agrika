@@ -33,6 +33,10 @@
             text-align: left;
         }
 
+        .table-xs {
+            font-size: 12px;
+        }
+
         thead th {
             text-transform: capitalize;
         }
