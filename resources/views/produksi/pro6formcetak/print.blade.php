@@ -153,7 +153,7 @@
                                 <p class="cop_judul mt-3">FORM CETAK</p>
                                 <p class="cop_bawah text-center">Moulding results</p>
                             </th>
-                            <th class="align-top text-end text-nowrap">
+                            <th class="align-top text-end text-nowrap" colspan="2">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.06,
                                     Rev 00</p>
                             </th>
