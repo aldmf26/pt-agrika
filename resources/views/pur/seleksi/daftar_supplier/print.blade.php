@@ -1,32 +1,29 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table>
+    <table class="table-xs">
         <tr>
             <th>Tanggal Update</th>
             <th>:
                 {{ date('Y-m-d') }}
             </th>
         </tr>
-        @if ($k == 'sbw')
-            <tr>
-                <th>Jenis Supplier</th>
-                <th>: Supplier Material SBW</th>
-            </tr>
-        @endif
-
+        <tr>
+            <th>Jenis Supplier</th>
+            <th>: {{ $jenis_supplier }}</th>
+        </tr>
     </table>
 
     @if ($k == 'satu')
         <table class="table table-xs border-dark table-bordered">
             <thead>
                 <tr>
-                    <th class="head align-middle">No</th>
-                    <th class="head text-start align-middle">Nama Supplier</th>
-                    <th class="head text-start align-middle">Alamat Supplier</th>
-                    <th class="head text-start align-middle">Contact Person</th>
-                    <th class="head text-start align-middle">No Telp</th>
-                    <th class="head text-start align-middle">Jenis Produk / Layanan</th>
-                    <th class="head text-end align-middle">Hasil Evaluasi</th>
-                    <th class="head text-start align-middle">Keterangan</th>
+                    <th class="head text-center align-middle">No</th>
+                    <th class="head text-center align-middle">Nama Supplier</th>
+                    <th class="head text-center align-middle">Alamat Supplier</th>
+                    <th class="head text-center align-middle">Contact Person</th>
+                    <th class="head text-center align-middle">Nomor Telpon</th>
+                    <th class="head text-center align-middle">Jenis Produk / Layanan</th>
+                    <th class="head text-center align-middle">Hasil Evaluasi</th>
+                    <th class="head text-center align-middle">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
@@ -57,19 +54,19 @@
             <thead>
                 <tr>
                     <th class="head text-center align-middle">No</th>
-                    <th class="head text-start align-middle">Nama Supplier</th>
-                    <th class="head text-start align-middle">Alamat Supplier</th>
-                    <th class="head text-start">Nama Contact Person</th>
-                    <th class="head text-start">Nomor Ktp</th>
-                    <th class="head text-start">No Telp</th>
-                    <th class="head text-start">Hasil Evaluasi Rutin</th>
-                    <th class="head text-start align-middle">Keterangan</th>
+                    <th class="head text-center align-middle">Nama Supplier</th>
+                    <th class="head text-center align-middle">Alamat Supplier</th>
+                    <th class="head text-center align-middle">Contact Person</th>
+                    <th class="head text-center align-middle">Nomor Telpon</th>
+                    <th class="head text-center align-middle">Jenis Produk / Layanan</th>
+                    <th class="head text-center align-middle">Hasil Evaluasi</th>
+                    <th class="head text-center align-middle">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($rumah_walet as $d)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td class="text-center">{{ $loop->iteration }}</td>
                         <td>{{ $d->nama }}</td>
                         <td>{{ $d->alamat }}</td>
                         <td></td>
@@ -77,7 +74,6 @@
                         <td></td>
                         <td></td>
                         <td></td>
-
                     </tr>
                 @endforeach
             </tbody>
