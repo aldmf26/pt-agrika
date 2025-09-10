@@ -89,7 +89,7 @@
                     </tr>
 
                     <tr>
-                        <th class="text-center" width="33.33%"><span style="opacity: 0.5;">(Ttd dan Nama)</span></th>
+                        <th class="text-center" width="33.33%"><span style="opacity: 0.5;">(Ttd & Nama)</span></th>
                     </tr>
                 </tbody>
             </table>
