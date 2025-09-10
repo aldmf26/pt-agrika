@@ -209,7 +209,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">(Dokter Hewan)</td>
+                        <td class="text-center">(DOKTER HEWAN)</td>
                     </tr>
                 </tbody>
             </table>

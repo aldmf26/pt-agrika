@@ -163,7 +163,7 @@
                             </th>
                             <th class="align-top text-end text-nowrap">
                                 <p class="float-end me-2 fw-normal" style="font-size: 14px; ">No Dok :
-                                    FRM.PRO.01.03, Rev 00</p>
+                                    FRM.PROS.01.03, Rev 00</p>
                             </th>
 
                         </tr>
@@ -174,50 +174,50 @@
                         </tr>
 
                         <tr class="table-bawah">
-                            <th class=" align-middle" rowspan="3">No</th>
-                            <th rowspan="3" class=" align-middle text-start">Nama <br>Operator Cuci & <br> Cabut
+                            <th class=" align-middle text-center" rowspan="3">No</th>
+                            <th rowspan="3" class=" align-middle text-center">Nama <br>Operator Cuci & <br> Cabut
                                 <br><span class="fst-italic fw-lighter">Wash & removal Operator <br> name</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-start">Kode Batch/Lot <br> <span
+                            <th rowspan="3" class=" align-middle text-center">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code</span> </th>
-                            <th rowspan="3" class=" align-middle text-start">No Box</th>
+                            <th rowspan="3" class=" align-middle text-center">No Box</th>
 
-                            <th rowspan="3" class=" align-middle text-start">Jenis<br> <span
+                            <th rowspan="3" class=" align-middle text-center">Jenis<br> <span
                                     class="fst-italic fw-lighter">
                                     type</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-start">Tanggal <br> terima</th>
+                            <th rowspan="3" class=" align-middle text-center">Tanggal <br> terima</th>
                             <th class="text-center" colspan="2">Jumlah <br> diserahkan <br>
                                 <span class="fst-italic fw-lighter">Quantity</span>
                             </th>
                             <th class="text-center" colspan="2">Kembali <br> <span
                                     class="fst-italic fw-lighter">Retur</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-start">Tanggal <br> selesai</th>
+                            <th rowspan="3" class=" align-middle text-center">Tanggal <br> selesai</th>
                             <th class="text-center" colspan="4">Hasil Pencabutan & Drying
                                 <br> <span class="fst-italic fw-lighter">Inspection results</span>
                             </th>
-                            <th rowspan="3" class=" align-middle text-start">Waktu <br> mulai <br> drying</th>
-                            <th rowspan="3" class=" align-middle text-start">Waktu <br> selesai <br> drying</th>
-                            <th rowspan="3" class=" align-middle text-end">% Susut <br> (min susut <br> 30%)</th>
-                            <th rowspan="3" class=" align-middle text-start">Ok/ <br> Not Ok</th>
-                            <th rowspan="3" class=" align-middle text-start">Keterangan<br> <span
+                            <th rowspan="3" class=" align-middle text-center">Waktu <br> mulai <br> drying</th>
+                            <th rowspan="3" class=" align-middle text-center">Waktu <br> selesai <br> drying</th>
+                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (min susut <br> 30%)</th>
+                            <th rowspan="3" class=" align-middle text-center">Ok/ <br> Not Ok</th>
+                            <th rowspan="3" class=" align-middle text-center">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
                             </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th rowspan="2" class="text-end align-middle">Pcs</th>
-                            <th rowspan="2" class="text-end align-middle">Gr</th>
-                            <th rowspan="2" class="text-end align-middle">Pcs</th>
-                            <th rowspan="2" class="text-end align-middle">Gr</th>
+                            <th rowspan="2" class="text-center align-middle">Pcs</th>
+                            <th rowspan="2" class="text-center align-middle">Gr</th>
+                            <th rowspan="2" class="text-center align-middle">Pcs</th>
+                            <th rowspan="2" class="text-center align-middle">Gr</th>
                             <th colspan="2" class="text-center align-middle">Ok</th>
                             <th colspan="2" class="text-center align-middle">Not Ok</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gr</th>
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gr</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -230,17 +230,17 @@
                                     ->first();
                             @endphp
                             <tr class="table-bawah">
-                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
-                                <td class="text-start">{{ $sbw->no_invoice }}</td>
-                                <td class="text-start">{{ $c['no_box'] }}</td>
+                                <td class="text-end">{{ $sbw->no_invoice }}</td>
+                                <td class="text-end">{{ $c['no_box'] }}</td>
                                 <td class="text-start">{{ $sbw->nama }}</td>
-                                <td class="text-start">{{ tanggal($c['tgl']) }}</td>
+                                <td class="text-end">{{ tanggal($c['tgl']) }}</td>
                                 <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
                                 <td class="text-end">0</td>
                                 <td class="text-end">0</td>
-                                <td class="text-start">{{ tanggal($c['tgl']) }}</td>
+                                <td class="text-end">{{ tanggal($c['tgl']) }}</td>
                                 @php
 
                                     $gr_akhir = $c['pcs'] == 0 ? $c['gr_akhir'] : $c['gr_akhir'] / $c['pcs'];
@@ -253,8 +253,8 @@
 
                                 <td class="text-end">{{ number_format($c['pcs_not_ok'], 0) }}</td>
                                 <td class="text-end">{{ number_format($gr_not_ok, 0) }}</td>
-                                <td class="text-start">17:00</td>
-                                <td class="text-start">05:00</td>
+                                <td class="text-end">17:00</td>
+                                <td class="text-end">05:00</td>
                                 <td class="text-end">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
                                     %
                                 </td>
@@ -268,7 +268,12 @@
                                         Not ok
                                     @endif
                                 </td>
-                                <td></td>
+                                <td class="text-start">
+                                    @if ($susut < 30)
+                                    @else
+                                        Susut melebihi batas standar
+                                    @endif
+                                </td>
 
                             </tr>
                         @endforeach
@@ -285,8 +290,19 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="15"></th>
-                            <td colspan="3" style="height: 80px"></td>
-                            <td colspan="2" style="height: 80px"></td>
+                            <td colspan="3" style="height: 80px" class="text-center align-middle"><span
+                                    style="opacity: 0.5;">(ttd dan nama)</span></td>
+                            <td colspan="2" style="height: 80px" class="text-center align-middle"><span
+                                    style="opacity: 0.5;">(ttd dan nama)</span></td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="15"></th>
+                            <td class="text-center align-middle">
+                                (Staff Cabut)
+                            </td>
+                            <td class="text-center align-middle">
+                                (KA.Cabut)
+                            </td>
                         </tr>
 
                     </tfoot>
