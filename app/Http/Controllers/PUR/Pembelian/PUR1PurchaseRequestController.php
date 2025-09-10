@@ -227,7 +227,7 @@ class PUR1PurchaseRequestController extends Controller
 
         $data = [
             'title' => 'PURCHASE REQUEST',
-            'dok' => 'Dok.No.: FRM.PURS.1.1, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.01.01, Rev.00',
             'kategori' => 'sbw',
             'datas' => $datas,
             'no_pr' => $no_pr,

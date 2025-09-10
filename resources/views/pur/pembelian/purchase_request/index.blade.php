@@ -34,7 +34,7 @@
                         <td>BK</td>
                         <td>Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yang tersedia dan target
                             produksi</td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-xs btn-primary"
                                 href="{{ route('pur.pembelian.1.print_sbw', [
                                     'no_pr' => $d->no_pr,

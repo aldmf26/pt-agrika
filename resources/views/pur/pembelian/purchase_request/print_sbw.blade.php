@@ -12,7 +12,7 @@
                     <tr>
                         <th width="150" class="head">Dimintai oleh</td>
                         <td>{{ Auth::user()->name }}</td>
-                        <th width="150" class="head">No PR</td>
+                        <th width="150" class="head">*No PR</td>
                         <td>{{ $no_pr }}</td>
                     </tr>
                     <tr>
@@ -44,8 +44,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yang tersedia dan target
-                            produksi
+                            Untuk memenuhi kebutuhan proses produksi cabut.
                         </td>
                     </tr>
                 </table>
@@ -55,15 +54,17 @@
                 <span class="float-start" for="">Detail Permintaan</span>
                 <table class="table table-xs table-bordered border-dark">
                     <tr>
-                        <th class="head text-end">Jumlah</th>
-                        <th class="head text-start">Item dan Spesifikasi</th>
-                        <th class="head text-end">Tanggal Dibutuhkan</th>
+                        <th class="head text-center">Jumlah</th>
+                        <th class="head text-center">Item</th>
+                        <th class="head text-center">Spesifikasi</th>
+                        <th class="head text-center">Tanggal Dibutuhkan</th>
                     </tr>
                     @foreach ($items as $d)
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                                 {{ number_format($d->jumlah_kg) }} KG</td>
                             <td align="center">{{ ucfirst($d->nama) }}</td>
+                            <td align="center">-</td>
                             <td class="text-end">{{ tanggal($datas->tgl) }}</td>
                         </tr>
                     @endforeach

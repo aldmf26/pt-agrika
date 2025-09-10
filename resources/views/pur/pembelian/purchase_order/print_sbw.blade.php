@@ -15,7 +15,7 @@
 
                 <table style="width: 100%">
                     <tr>
-                        <td><strong>No PO</strong></td>
+                        <td><strong>*No PO</strong></td>
                         <td>:</td>
                         <td>{{ $no_po }}</td>
                     </tr>
@@ -48,21 +48,21 @@
             </span>
             <table class="table table-xs table-bordered border-dark">
                 <tr>
-                    <th class="head text-end">Jumlah</th>
+                    <th class="head text-center">Jumlah</th>
                     <th class="head text-center">Item dan Spesifikasi</th>
-                    <th class="head text-end">Harga</th>
+                    <th class="head text-center">Harga</th>
                 </tr>
                 @foreach ($items as $d)
                     <tr>
                         <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                             {{ number_format($d->jumlah_kg) }} GR</td>
                         <td align="center">{{ ucfirst($d->nama) }}</td>
-                        <td class="text-end">0</td>
+                        <td class="text-end">1</td>
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan="2" class="head text-end">Total Harga</td>
-                    <td class="text-end">{{ number_format(0, 0) }}</td>
+                    <td class="text-end">{{ number_format(1, 0) }}</td>
                 </tr>
             </table>
         </div>
@@ -71,8 +71,8 @@
             <strong>Barang/Jasa di atas harap dikirimkan ke Alamat sebagai berikut :</strong>
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
-            <br>
-            PIC: Sinta
+            <div class="mt-2" />
+            <span>PIC: Tasya Salsabila</span>
             <br>
             Telp: 08
             <br>
