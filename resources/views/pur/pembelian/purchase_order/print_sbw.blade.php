@@ -81,14 +81,14 @@
             <span>
                 <span style="left: -80px !important; position: relative;">
                     Dibuat oleh :
-                    <x-ttd />
+                    <x-ttd jabatan="staff purchasing" />
                 </span>
                 <br>
             </span>
             <span><span>Di setujui oleh :</span>
                 <br>
                 <span>
-                    <x-ttd-ketua userId="468" />
+                    <x-ttd-ketua jabatan="purchasing" userId="468" />
                 </span>
                 <span style="font-size:10px">Sertakan cap perusahaan</span>
 
