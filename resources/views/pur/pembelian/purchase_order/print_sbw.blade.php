@@ -6,16 +6,7 @@
                 font-family: 'arial'
             }
         </style>
-        <span class="float-end" style="font-size: 9px; bottom: 36px !important">Format nomor PO : PO/Urutan/
-            Bulan /
-            tahun
-            (ex :
-            PO/01/VI/2025)
-            <span class="ms-2">* :
-                Diisi oleh
-                bagian purchasing</span>
-        </span>
-        <br />
+
         <div class="d-flex justify-content-between">
             <div>
                 <strong>To:</strong> {{ $datas->supplier }}<br>
@@ -33,14 +24,28 @@
                         <td style="width: 10px">:</td>
                         <td>{{ tanggal($datas->tgl) }}</td>
                     </tr>
-
+                    <tr>
+                        <td class="text-start" colspan="3" style="width: 100px"><span style="font-size: 11px;"
+                                class="ms-2">* :
+                                Diisi oleh
+                                bagian purchasing</span></td>
+                    </tr>
                 </table>
+
             </div>
         </div>
         <br>
 
         <div>
+            <span class="float-start" style="font-size: 9px;">Format
+                nomor PO :
+                PO/Urutan/
+                Bulan
+                / tahun
+                (ex :
+                PO/01/VI/2025)
 
+            </span>
             <table class="table table-xs table-bordered border-dark">
                 <tr>
                     <th class="head text-end">Jumlah</th>
