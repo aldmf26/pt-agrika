@@ -92,7 +92,7 @@
                         Dibuat oleh :
                         <br>
                         <span style="left: -80px !important; position: relative;">
-                            <x-ttd jabatan="staff purchasing" />
+                            <x-ttd jabatan="bk" />
                         </span>
                         <br>
                     </span>
