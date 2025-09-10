@@ -51,7 +51,7 @@
             <td>Pengemudi</td>
             <td>:</td>
             <td colspan="2" style="border-bottom: 1px solid black">
-                {{ empty($penerimaan->driver) ? $penerimaan->pengemudi : $penerimaan->driver }}</td>
+                Bpk. {{ empty($penerimaan->driver) ? $penerimaan->pengemudi : $penerimaan->driver }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -157,7 +157,7 @@
     </table>
 
     <p>Keputusan: <br>
-    <div class="ms-5">
+    <div class="ms-5" style="font-size: 9px">
         <input readonly type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
         <br>
         <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Diterima
@@ -180,16 +180,16 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
-                            Nama
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">ttd &
+                            nama
                         </td>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
-                            Nama
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">ttd &
+                            nama
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">[ADM. GUDANG]</td>
-                        <td class="text-center">[KA. GUDANG]</td>
+                        <td class="text-center">(ADM. GUDANG)</td>
+                        <td class="text-center">(KA. GUDANG)</td>
 
                     </tr>
                 </tbody>
@@ -204,12 +204,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
-                            Nama
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">ttd &
+                            nama
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">[Dokter Hewan]</td>
+                        <td class="text-center">(Dokter Hewan)</td>
                     </tr>
                 </tbody>
             </table>

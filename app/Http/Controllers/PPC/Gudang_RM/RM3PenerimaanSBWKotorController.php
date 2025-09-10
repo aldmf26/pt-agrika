@@ -73,7 +73,7 @@ class RM3PenerimaanSBWKotorController extends Controller
 
         $data = [
             'title' => 'PENERIMAAN SBW KOTOR',
-            'dok' => 'Dok.No.: FRM.WH.02.03, Rev.00',
+            'dok' => 'Dok.No.: FRM.PPCS.01.03, Rev.00',
             'penerimaan' => $penerimaan,
             'kriteria' => DB::table('kriteria_sbw_kotor')->get(),
             'acuan' => $bk['data']

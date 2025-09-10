@@ -94,11 +94,11 @@
                 <button class="btn btn-primary mt-2 float-end" onclick="window.print()">Print</button>
             </div>
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">{{ $title }}</p>
+                    <p class="cop_judul">{{ $title }} </p>
                 </div>
             </div>
             <div class="col-3">
@@ -106,7 +106,9 @@
             </div>
         </div>
         <div class="header-info">
-            <p style="font-size: 8px;">BERI TANDA V UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA X UNTUK TIAP KOLOM
+            <p style="font-size: 8px;">BERI TANDA (&#10004;) UNTUK TIAP KOLOM YANG SESUAI STANDAR DAN TANDA (&#10008;)
+                UNTUK
+                TIAP KOLOM
                 YANG
                 TIDAK SESUAI STANDAR</p>
 
@@ -124,47 +126,51 @@
                     @endphp
 
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">{{ date('d/m/Y', strtotime($c->tgl)) }}
+                        <td class="align-middle" width="8%" colspan="2">{{ tanggal($c->tgl) }}
                         </td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2"></td>
+                        <td class="align-middle" width="8%" colspan="2"></td>
                     @endfor
                 </tr>
                 <tr>
                     <td colspan="2">Jam Kedatangan</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">
+                        <td class="align-middle" width="8%" colspan="2">
                             <input type="time" name="jam_kedatangan[]"
                                 value="{{ $c->jam_kedatangan == '00:00:00' || empty($c->jam_kedatangan) ? '15:00' : $c->jam_kedatangan }}"
                                 class="form-control input jam_kedatangan" partai="{{ $c->nm_partai }}">
 
-                            <span class="print jam_update"
-                                data-partai="{{ $c->nm_partai }}">{{ $c->jam_kedatangan == '00:00:00' || empty($c->jam_kedatangan) ? '15:00' : $c->jam_kedatangan }}</span>
+                            <span class="print jam_update" data-partai="{{ $c->nm_partai }}">
+                                {{ $c->jam_kedatangan == '00:00:00' || empty($c->jam_kedatangan)
+                                    ? date('h:i A', strtotime('15:00:00'))
+                                    : date('h:i A', strtotime($c->jam_kedatangan)) }}
+                            </span>
+
                         </td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2"></td>
+                        <td class="align-middle" width="8%" colspan="2"></td>
                     @endfor
                 </tr>
 
                 <tr>
                     <td colspan="2">Kendaraan (Internal / Eksternal)</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">Eksternal</td>
+                        <td class="align-middle" width="8%" colspan="2">Eksternal</td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2"></td>
+                        <td class="align-middle" width="8%" colspan="2"></td>
                     @endfor
 
                 </tr>
                 <tr>
                     <td colspan="2">Nomor Kendaraan</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">
+                        <td class="align-middle" width="8%" colspan="2">
                             <input type="text"
                                 value="{{ empty($c->no_kndraan_new) ? $c->no_kendaraan : $c->no_kndraan_new }}"
                                 class="form-control input no_kendaraan" partai="{{ $c->nm_partai }}">
@@ -184,29 +190,29 @@
                 <tr>
                     <td colspan="2">Nama Suplier</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">{{ $c->nama_suplier }}</td>
+                        <td class="align-middle" width="8%" colspan="2">{{ $c->nama_suplier }}</td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2"></td>
+                        <td class="align-middle" width="8%" colspan="2"></td>
                     @endfor
 
                 </tr>
                 <tr>
                     <td colspan="2">Nama Ekspedisi</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">{{ $c->nama_suplier }}</td>
+                        <td class="align-middle" width="8%" colspan="2">{{ $c->nama_suplier }}</td>
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2"></td>
+                        <td class="align-middle" width="8%" colspan="2"></td>
                     @endfor
 
                 </tr>
                 <tr>
                     <td colspan="2">Nama Pengemudi</td>
                     @foreach ($checklist as $c)
-                        <td class="text-center" width="8%" colspan="2">
+                        <td class="align-middle" width="8%" colspan="2">
                             <input type="text" value="{{ empty($c->driver) ? $c->pengemudi : $c->driver }}"
                                 class="form-control input driver" partai="{{ $c->nm_partai }}">
 
@@ -219,7 +225,7 @@
                     @endforeach
 
                     @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                        <td class="text-center" width="8%" colspan="2"></td>
+                        <td class="align-middle" width="8%" colspan="2"></td>
                     @endfor
 
                 </tr>
@@ -245,8 +251,8 @@
                         <td class="text-center">{{ $loop->iteration }}</td>
                         <td class=" text-nowrap">{{ $k->kondisi }}</td>
                         @foreach ($checklist as $c)
-                            <td class="text-center">v</td>
-                            <td class="text-center">v</td>
+                            <td class="text-center">&#10004;</td>
+                            <td class="text-center">&#10004;</td>
                         @endforeach
 
                         @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
@@ -271,7 +277,12 @@
                 <tr>
                     <td></td>
                     <th>Paraf Pemeriksa</th>
-                    @for ($i = 0; $i < $maxKolom; $i++)
+                    @foreach ($checklist as $c)
+                        <td class="text-center"></td>
+                        <td class="text-center"></td>
+                    @endforeach
+
+                    @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
                         <td class="text-center"></td>
                         <td class="text-center"></td>
                     @endfor
@@ -283,8 +294,8 @@
 
         <span style="font-size: 7px">
             NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
-            TANDA <b>V</b>
-            DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
+            TANDA <b>(&#10004;)</b>
+            DAN TANDA <b>(&#10008;)</b> JIKA KENDARAAN TERNYATA TIDAK
             DAPAT DIPAKAI / DITOLAK
             LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
         </span>
@@ -309,11 +320,13 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="height: 50px"></td>
+                                    <td style="height: 50px" class="align-middle text-center">
+                                        <span style="opacity: 0.5;">(ttd dan nama)</span>
+                                    </td>
 
                                 </tr>
                                 <tr>
-                                    <td class="text-center">[ KA. GUDANG]</td>
+                                    <td class="text-center">( KA. GUDANG )</td>
 
                                 </tr>
                             </tbody>

@@ -37,14 +37,14 @@
             <thead>
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
-                    <th class="text-end align-middle" rowspan="2">Tanggal Panen</th>
-                    <th class="text-end align-middle" rowspan="2">Berat Panen (gr)</th>
+                    <th class="text-center align-middle" rowspan="2">Tanggal Panen</th>
+                    <th class="text-center align-middle" rowspan="2">Berat Panen (gr)</th>
                     <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
-                    <th class="text-start align-middle" rowspan="2">Keterangan</th>
+                    <th class="text-center align-middle" rowspan="2">Keterangan</th>
                 </tr>
                 <tr>
-                    <th class="text-end">Tanggal Kirim</th>
-                    <th class="text-end">Berat Kirim (IKPH)</th>
+                    <th class="text-center">Tanggal Kirim</th>
+                    <th class="text-center">Berat Kirim (IKPH) (Gr)</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +53,7 @@
                         $tgl_plus1hari = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
                     @endphp
                     <tr>
-                        <td class="text-start">{{ $loop->iteration }}</td>
+                        <td class="text-end">{{ $loop->iteration }}</td>
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
                         <td class="text-end">{{ tanggal($tgl_plus1hari) }}</td>
@@ -74,18 +74,22 @@
                 <thead>
 
                     <tr>
-                        <th class="text-center" width="33.33%">Rumah Walet</th>
+                        <th class="text-center" width="33.33%">
+                            Pemilik/Penanggungjawab
+                            <br>
+                            Rumah Walet
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td style="height: 80px; " class="align-middle text-center">
-                            <span style="opacity: 0.5;">(ttd dan nama)</span>
+
                         </td>
                     </tr>
 
                     <tr>
-                        <th class="text-center" width="33.33%">Pemilik/Penanggungjawab</th>
+                        <th class="text-center" width="33.33%"><span style="opacity: 0.5;">(ttd dan nama)</span></th>
                     </tr>
                 </tbody>
             </table>

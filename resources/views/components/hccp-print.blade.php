@@ -109,7 +109,7 @@
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid align-middle">
         <div class="row">
             <div class="col-3 mt-4">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
@@ -123,7 +123,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <p class="cop_text text-sm" style="font-size: 11px">{{ $dok }}</p>
+                <p class="cop_text text-sm" style="font-size: 11px;white-space: nowrap">{{ $dok }}</p>
             </div>
         </div>
         {{ $slot }}

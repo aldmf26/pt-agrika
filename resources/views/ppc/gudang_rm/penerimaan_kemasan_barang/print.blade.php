@@ -31,7 +31,7 @@
         <tr>
             <td>Pengemudi</td>
             <td>:</td>
-            <td>{{ $penerimaan->pengemudi }}</td>
+            <td>Bpk. {{ $penerimaan->pengemudi }}</td>
         </tr>
         <tr>
             <td>&nbsp;</td>
@@ -116,8 +116,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">[ADM. GUDANG]</td>
-                        <td class="text-center">[KA. GUDANG]</td>
+                        <td class="text-center">(ADM. GUDANG)</td>
+                        <td class="text-center">(KA. GUDANG)</td>
                     </tr>
                 </tbody>
             </table>
