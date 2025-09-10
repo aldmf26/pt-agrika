@@ -14,7 +14,7 @@
         <div style="position: relative; opacity: 0.5;font-size: 9px">ttd + nama</div>
         <span style="font-size: 12px">{{ \App\Models\User::find($userId)->name }}</span>
         <br>
-        <span class="text-sm">({{ strtoupper($jabatan) }})</span>
+        <span style="font-size: 12px">({{ strtoupper($jabatan) }})</span>
     </div>
 
     <div>

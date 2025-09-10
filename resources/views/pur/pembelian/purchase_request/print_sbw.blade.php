@@ -30,7 +30,7 @@
                     Bulan
                     / tahun
                     (ex :
-                    PR/01/VI/2025)
+                    PR/1/VI/2025)
                     <span class="ms-2">* :
                         Diisi oleh
                         bagian purchasing</span>

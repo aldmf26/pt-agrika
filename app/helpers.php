@@ -10,18 +10,18 @@ if (!function_exists('tanggal')) {
         $bln  = $date[1];
 
         $bulanArray = [
-            '01' => 'Januari',
-            '02' => 'Februari',
-            '03' => 'Maret',
-            '04' => 'April',
+            '01' => 'Jan',
+            '02' => 'Feb',
+            '03' => 'Mar',
+            '04' => 'Apr',
             '05' => 'Mei',
-            '06' => 'Juni',
-            '07' => 'Juli',
-            '08' => 'Agustus',
-            '09' => 'September',
-            '10' => 'Oktober',
-            '11' => 'November',
-            '12' => 'Desember',
+            '06' => 'Jun',
+            '07' => 'Jul',
+            '08' => 'Agust',
+            '09' => 'Sept',
+            '10' => 'Okt',
+            '11' => 'Nov',
+            '12' => 'Des',
         ];
 
         $bulan = $bulanArray[$bln] ?? '';
