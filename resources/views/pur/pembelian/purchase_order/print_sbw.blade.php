@@ -82,23 +82,28 @@
 
         <br>
 
-        <div class="d-flex justify-content-between">
-            <span>
-                <span style="left: -80px !important; position: relative;">
-                    Dibuat oleh :
-                    <x-ttd jabatan="staff purchasing" />
-                </span>
-                <br>
-            </span>
-            <span><span>Di setujui oleh :</span>
-                <br>
-                <span>
-                    <x-ttd-ketua jabatan="purchasing" userId="468" />
-                </span>
-                <span style="font-size:10px">Sertakan cap perusahaan</span>
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between">
+                    <span>
+                        Dibuat oleh :
+                        <br>
+                        <span style="left: -80px !important; position: relative;">
+                            <x-ttd jabatan="staff purchasing" />
+                        </span>
+                        <br>
+                    </span>
 
-                <br>
-            </span>
+                    <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
+                        <br>
+                        <span>
+                            <x-ttd-ketua jabatan="purchasing" userId="468" />
+                        </span>
+                        <br>
+                    </span>
+                </div>
+
+            </div>
         </div>
     </center>
 </x-hccp-print>
