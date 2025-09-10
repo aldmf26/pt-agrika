@@ -274,12 +274,38 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="9"></th>
+                            <th style="border: none; text-align: start" rowspan="2" colspan="2">
+                                <span class="fst-underline"> Standart Suhu Pemanasan</span> <br>
+                                <span class="fw-light">Mangkok/Segitiga/Oval/Sudut</span> <br>
+                                <span class="fw-light">Patahan</span> <br>
+                                <span class="fw-light">Kaki</span> <br>
+                                <span class="fw-light">Hancuran</span> <br> <br>
+                                <span class="fst-underline"> Standart Suhu T-venting</span> <br>
+                                <span class="fst-underline"> Standart Waktu T-venting</span> <br>
+
+
+                            </th>
+                            <th style="border: none; text-align: start" rowspan="2" colspan="2  ">
+                                <span class="fst-underline"> </span> <br>
+                                <span class="fw-light">: 80,4°C selama 30 detik</span> <br>
+                                <span class="fw-light">: 92.6 °C selama 1 menit 27 detik</span> <br>
+                                <span class="fw-light">: 85.1 oC selama 1 menit 48 detik</span> <br>
+                                <span class="fw-light">: 92.9°C selama 50 detik</span> <br> <br>
+
+                                <span class="fw-light">: 57.1 °C</span> <br>
+                                <span class="fw-light">: 1 menit 3 detik</span> <br>
+
+
+                            </th>
+                            <th style="border: none; text-align: start" rowspan="2" colspan="5">
+
+
+                            </th>
                             <th class="text-center" colspan="2">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="9"></th>
+
                             <td colspan="2" style="height: 80px" class="text-center align-bottom">KA. STEAM</td>
                             <td colspan="2" style="height: 80px" class="text-center align-bottom">QC</td>
                         </tr>

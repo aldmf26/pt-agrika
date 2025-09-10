@@ -240,8 +240,8 @@
                                 <td class="text-end align-middle">{{ number_format($i['pcs'], 0) }}</td>
                                 <td class="text-end align-middle">{{ number_format($i['gr'], 0) }}</td>
 
-                                <td class="text-start align-middle">
-                                    {{ $i['grade'] }}
+                                <td class="text-start align-middle ">
+                                    {{ strtoupper($i['grade']) }}
                                 </td>
                                 <td class="text-end align-middle">
                                     {{ number_format($i['pcs'], 0) }}
