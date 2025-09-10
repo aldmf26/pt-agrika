@@ -9,8 +9,7 @@
     </div>
     <div style="margin-top: -10px;">
         <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
-        <span style="font-size: 12px">{{ Auth::user()->name }}</span>
-        <br>
-        <span style="font-size: 12px">({{ strtoupper($jabatan) }})</span>
+        <div style="font-size: 12px">{{ Auth::user()->name }}</div>
+        <div style="font-size: 12px">({{ strtoupper($jabatan) }})</div>
     </div>
 </div>

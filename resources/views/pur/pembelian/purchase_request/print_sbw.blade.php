@@ -70,7 +70,7 @@
                     @endforeach
                 </table>
             </div>
-            <div class="col-12 mb-5">
+            <div class="col-12 mb-5" style="font-size: 12px;">
                 Diterima oleh Purchasing: <br>
                 <table>
                     <tr>
