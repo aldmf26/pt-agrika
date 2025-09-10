@@ -48,9 +48,9 @@
             </span>
             <table class="table table-xs table-bordered border-dark">
                 <tr>
-                    <th class="head text-end">Jumlah</th>
+                    <th class="head text-center">Jumlah</th>
                     <th class="head text-center">Item dan Spesifikasi</th>
-                    <th class="head text-end">Harga</th>
+                    <th class="head text-center">Harga</th>
                 </tr>
                 @foreach ($items as $d)
                     <tr>
