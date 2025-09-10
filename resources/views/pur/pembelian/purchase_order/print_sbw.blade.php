@@ -90,7 +90,8 @@
                 </span>
                 <br>
             </span>
-            <span><span>Di setujui oleh :</span>
+            <span>
+                <span>Di setujui oleh :</span>
                 <br>
                 <span>
                     <x-ttd-ketua jabatan="purchasing" userId="468" />
