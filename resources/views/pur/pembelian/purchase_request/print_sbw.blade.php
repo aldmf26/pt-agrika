@@ -16,16 +16,6 @@
                         bagian purchasing</span>
                 </span>
                 <table class="table-xs table table-bordered border-dark">
-                    {{-- <tr>
-                        <th width="150" class="head">No Pr</td>
-                        <td>{{ $datas->no_pr }}</td>
-                    </tr>
-                    <tr>
-                        <th width="150" class="head">Tanggal</td>
-                        <td>
-                            {{ tanggal($datas->tgl) }}
-                        </td>
-                    </tr> --}}
                     <tr>
                         <th width="150" class="head">Dimintai oleh</td>
                         <td>{{ Auth::user()->name }}</td>
@@ -118,6 +108,11 @@
 
             </div>
         </div>
+        <div class="row">
 
-        </center>
+        </div>
+
+    </div>
+
+    </center>
 </x-hccp-print>

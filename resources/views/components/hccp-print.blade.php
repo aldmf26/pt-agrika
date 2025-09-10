@@ -94,6 +94,20 @@
         thead th {
             text-transform: capitalize;
         }
+
+        @media print {
+            .signature-bottom {
+                position: fixed;
+                bottom: 1cm;
+                left: 1cm;
+                right: 1cm;
+                background: white;
+            }
+
+            .content-with-bottom-signature {
+                padding-bottom: 120px;
+            }
+        }
     </style>
 </head>
 
