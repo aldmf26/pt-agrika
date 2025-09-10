@@ -320,8 +320,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="height: 50px" class="align-middle text-center">
-                                        <span style="opacity: 0.5;">(ttd dan nama)</span>
+                                    <td style="height: 45px" class="align-middle text-center">
+                                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
                                     </td>
 
                                 </tr>
