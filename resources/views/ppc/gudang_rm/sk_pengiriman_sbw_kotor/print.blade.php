@@ -3,7 +3,7 @@
         <tr>
             <td class="align-middle text-start">Nama/ No. Registrasi Rumah Walet </td>
             <td class="align-middle text-start"> : </td>
-            <td class="align-middle text-start">&nbsp;{{ $rumah_walet->nama }} / {{ $rumah_walet->no_reg }}</td>
+            <td class="align-middle text-start">&nbsp;{{ ucwords($rumah_walet->nama) }} / {{ $rumah_walet->no_reg }}</td>
         </tr>
         <tr>
             <td class="align-middle text-start">Alamat Rumah Walet</td>
@@ -38,13 +38,13 @@
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
                     <th class="text-center align-middle" rowspan="2">Tanggal Panen</th>
-                    <th class="text-center align-middle" rowspan="2">Berat Panen (gr)</th>
+                    <th class="text-center align-middle" rowspan="2">Berat Panen <br> (gr)</th>
                     <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
                     <th class="text-center align-middle" rowspan="2">Keterangan</th>
                 </tr>
                 <tr>
                     <th class="text-center">Tanggal Kirim</th>
-                    <th class="text-center">Berat Kirim (IKPH) (Gr)</th>
+                    <th class="text-center">Berat Kirim (IKPH) <br> (Gr)</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,7 +89,7 @@
                     </tr>
 
                     <tr>
-                        <th class="text-center" width="33.33%"><span style="opacity: 0.5;">(ttd dan nama)</span></th>
+                        <th class="text-center" width="33.33%"><span style="opacity: 0.5;">(Ttd dan Nama)</span></th>
                     </tr>
                 </tbody>
             </table>

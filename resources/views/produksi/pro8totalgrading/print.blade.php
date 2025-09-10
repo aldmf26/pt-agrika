@@ -158,7 +158,7 @@
                                 <p class="cop_bawah text-center">Final grading results</p>
                             </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.08,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PROS.01.05,
                                     Rev 00</p>
                             </th>
 
@@ -172,22 +172,22 @@
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-start align-middle">Jenis Material<br><span
+                            <th rowspan="2" class="text-center align-middle">Jenis Material<br><span
                                     class="fst-italic fw-lighter">Material Type<span></th>
-                            <th rowspan="2" class="text-start align-middle">Kode Batch<br><span
+                            <th rowspan="2" class="text-center align-middle">Kode Batch<br><span
                                     class="fst-italic fw-lighter">Batch
                                     code<span></th>
                             <th colspan="2" class="text-center align-middle">Jumlah</th>
-                            <th rowspan="2" class="text-start align-middle">Jenis Produk<br><span
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
-                            <th rowspan="2" class="text-end align-middle">Jumlah <br> Box</th>
+                            <th rowspan="2" class="text-center align-middle">Jumlah <br> Box</th>
                             <th rowspan="2" class="text-start align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span>
                             </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gram</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gram</th>
                         </tr>
 
                     </thead>
@@ -211,9 +211,9 @@
                                 $prevInvoice = $currentInvoice;
                             @endphp
                             <tr class="table-bawah {{ $borderClass }}">
-                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-end align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-start align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
-                                <td class="text-start align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-end align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td class="text-end align-middle">{{ $g['pcs'] }}</td>
                                 <td class="text-end align-middle">{{ $g['gr'] }}</td>
                                 <td class="text-start align-middle">{{ $g['grade'] }}</td>

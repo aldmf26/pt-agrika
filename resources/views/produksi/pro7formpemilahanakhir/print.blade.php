@@ -264,7 +264,9 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="7"></th>
-                            <td style="height: 40px" colspan="2"></td>
+                            <td style="height: 40px" colspan="2">
+                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                            </td>
 
                         </tr>
                         <tr class="table-bawah">
