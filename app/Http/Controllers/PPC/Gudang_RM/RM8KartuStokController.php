@@ -63,6 +63,7 @@ class RM8KartuStokController extends Controller
                 'jumlah' => $m->jumlah_barang,
                 'jenis' => 'masuk',
                 'kode_lot' => $m->kode_lot,
+                'satuan' => $m->barang->satuan
             ];
         }
 
@@ -73,6 +74,7 @@ class RM8KartuStokController extends Controller
                 'jumlah' => $k->pcs,
                 'jenis' => 'keluar',
                 'kode_lot' => $k->no_lot,
+                'satuan' => $k->barang->satuan
             ];
         }
 
@@ -84,7 +86,7 @@ class RM8KartuStokController extends Controller
 
         // Kirim ke view
         $data = [
-            'title' => 'KARTU STOK MATERIAL ' . strtoupper($kategori),
+            'title' => 'KARTU STOK MATERIAL ',
             'dok' => 'Dok.No.: FRM.PPCS.01.04, Rev.00',
             'transaksi' => $transaksiGabung,
             'barang' => Barang::find($r->id),

@@ -1,4 +1,4 @@
-<x-hccp-print :title="$title" :dok="$dok">
+<x-hccp-print :title="$title" :kategori="$kategori" :dok="$dok">
 
     <table width="100%">
         <tr>
@@ -38,9 +38,9 @@
                     @endphp
                     <tr>
                         <td class="text-end">{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
-                        <td class="text-end">{{ number_format($masuk, 0) }}</td>
-                        <td class="text-end">{{ number_format($keluar, 0) }}</td>
-                        <td class="text-end">{{ number_format($saldo, 0) }}</td>
+                        <td class="text-end">{{ number_format($masuk, 0) }} {{ $t['satuan'] }}</td>
+                        <td class="text-end">{{ number_format($keluar, 0) }} {{ $t['satuan'] }}</td>
+                        <td class="text-end">{{ number_format($saldo, 0) }} {{ $t['satuan'] }}</td>
                         <td class="text-end">{{ $t['kode_lot'] }}</td>
                         <td></td>
                     </tr>
