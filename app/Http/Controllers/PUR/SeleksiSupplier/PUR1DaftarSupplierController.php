@@ -258,11 +258,12 @@ class PUR1DaftarSupplierController extends Controller
         $nomor = $kode[$r->kategori] ?? 'PURS';
 
         $data = [
-            'title' => 'DAFTAR SUPPLIER & OUTSOURCE TERPILIH',
+            'title' => "DAFTAR SUPPLIER " . strtoupper($r->kategori == 'lainnya' ? 'SBW' : $r->kategori),
             'dok' => "Dok.No.: FRM.$nomor.1.3, Rev.00",
             'datas' => $datas,
             'rumah_walet' => DB::table('rumah_walet')->get(),
             'k' => $r->kategori != 'lainnya' ? 'satu' : 'lainnya',
+            'jenis_supplier' => $r->kategori != 'lainnya' ? ucfirst($r->kategori) : 'Supplier Material SBW',
         ];
         return view('pur.seleksi.daftar_supplier.print', $data);
     }
