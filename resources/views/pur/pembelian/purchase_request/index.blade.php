@@ -19,7 +19,7 @@
                 <th class="text-end">Tanggal</th>
                 <th>Diminta Oleh</th>
                 <th>Posisi</th>
-                <th>Alasan Permintaan</th>
+                <th width="200">Alasan Permintaan</th>
                 <td class="text-center">Aksi</td>
             </tr>
         </thead>

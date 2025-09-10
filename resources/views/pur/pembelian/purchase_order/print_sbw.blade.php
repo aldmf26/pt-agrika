@@ -1,40 +1,46 @@
-<x-hccp-print :title="$title" :dok="$dok">
-    <center>
+<x-hccp-print :title="$title" :dok="$dok" :kategori="$kategori">
+    <center class="container-sm">
+
         <style>
             table {
                 font-family: 'arial'
             }
         </style>
+        <span class="float-end" style="font-size: 9px; bottom: 36px !important">Format nomor PO : PO/Urutan/
+            Bulan /
+            tahun
+            (ex :
+            PO/01/VI/2025)
+            <span class="ms-2">* :
+                Diisi oleh
+                bagian purchasing</span>
+        </span>
+        <br />
         <div class="d-flex justify-content-between">
             <div>
                 <strong>To:</strong> {{ $datas->supplier }}<br>
             </div>
             <div>
+
                 <table style="width: 100%">
-                    <tr>
-                        <td style="width: 100px"><strong>Tanggal</strong></td>
-                        <td style="width: 10px">:</td>
-                        <td>{{ tanggal($datas->tgl) }}</td>
-                    </tr>
                     <tr>
                         <td><strong>No PO</strong></td>
                         <td>:</td>
                         <td>{{ $no_po }}</td>
                     </tr>
+                    <tr>
+                        <td style="width: 100px"><strong>Tanggal</strong></td>
+                        <td style="width: 10px">:</td>
+                        <td>{{ tanggal($datas->tgl) }}</td>
+                    </tr>
+
                 </table>
             </div>
         </div>
         <br>
 
         <div>
-            <span class="float-start" style="font-size: 9px; bottom: 36px !important">Format nomor PO : PO/Urutan/ Bulan /
-                tahun
-                (ex :
-                PR/01/VI/2025)
-                <span class="ms-2">* :
-                    Diisi oleh
-                    bagian purchasing</span>
-            </span>
+
             <table class="table table-xs table-bordered border-dark">
                 <tr>
                     <th class="head text-end">Jumlah</th>

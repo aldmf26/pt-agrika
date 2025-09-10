@@ -235,6 +235,7 @@ class PUR2PurchaseOrderController extends Controller
             'title' => 'PURCHASE ORDER',
             'dok' => 'Dok.No.: FRM.PUR.01.01, Rev.00',
             'datas' => $datas,
+            'kategori' => 'sbw',
             'no_po' => $no_po,
             'items' => $items,
         ];
