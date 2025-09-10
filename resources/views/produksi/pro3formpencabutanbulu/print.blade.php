@@ -297,11 +297,11 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="15"></th>
-                            <td class="text-center align-middle">
-                                (Staff Cabut)
+                            <td colspan="3" class="text-center align-middle">
+                                (STAFF CABUT)
                             </td>
-                            <td class="text-center align-middle">
-                                (KA.Cabut)
+                            <td colspan="2" class="text-center align-middle">
+                                (KA.CABUT)
                             </td>
                         </tr>
 
