@@ -188,7 +188,7 @@
                                 <br> <span class="fst-italic"> Batch/Lot code </span>
                             </td>
 
-                            <td class="align-middle" colspan="2"> : {{ $kode_lot }}</td>
+                            <td class="align-middle" colspan="3"> : {{ $kode_lot }}</td>
 
 
 
@@ -208,7 +208,7 @@
                             <td colspan="2">Jenis Material
                                 <br> <span class="fst-italic"> Material type </span>
                             </td>
-                            <td class="align-middle" colspan="2"> : {{ $grade }}</td>
+                            <td class="align-middle" colspan="3"> : {{ $grade }}</td>
 
 
                             <td class="table-bawah2">{{ number_format($pcsNotOkeY, 0) }}</td>
@@ -224,6 +224,7 @@
                                     class="fst-italic fw-lighter">Product condition<span>
                             </th>
                             <th rowspan="3" class="text-end align-middle" width="2%">Jumlah Box</th>
+                            <th rowspan="3" class="text-start align-middle" width="2%">Box <br> Grading</th>
                             <th rowspan="3" class="text-start align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span></th>
                         </tr>
@@ -248,25 +249,26 @@
                                 <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
                                 <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
                                 <td class="text-end">{{ $g['box'] }}</td>
+                                <td class="text-start">{{ $g['box_pengiriman'] }}</td>
                                 <td class="text-center"></td>
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="8">&nbsp;</th>
+                            <th colspan="9">&nbsp;</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="6"></th>
+                            <th style="border: none" colspan="7"></th>
                             <th class="text-center" colspan="2">Dibuat Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="6"></th>
+                            <th style="border: none" colspan="7"></th>
                             <td style="height: 40px" colspan="2"></td>
 
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="6"></th>
+                            <th style="border: none" colspan="7"></th>
                             <td class="text-center" colspan="2">KA. GRADING</td>
 
                         </tr>
