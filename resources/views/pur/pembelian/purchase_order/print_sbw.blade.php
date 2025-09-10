@@ -57,12 +57,18 @@
                         <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                             {{ number_format($d->jumlah_kg) }} GR</td>
                         <td align="center">{{ ucfirst($d->nama) }}</td>
-                        <td class="text-end">Rp. 1</td>
+                        <td class="d-flex justify-content-between">
+                            <div>Rp. </div>
+                            <div>1</div>
+                        </td>
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan="2" class="head text-end">Total Harga</td>
-                    <td class="text-end">Rp. {{ number_format(1, 0) }}</td>
+                    <td class="d-flex justify-content-between">
+                        <div>Rp. </div>
+                        <div>1</div>
+                    </td>
                 </tr>
             </table>
         </div>
