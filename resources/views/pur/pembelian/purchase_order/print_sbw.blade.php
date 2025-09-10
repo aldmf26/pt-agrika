@@ -1,39 +1,50 @@
-<x-hccp-print :title="$title" :dok="$dok">
-    <center>
+<x-hccp-print :title="$title" :dok="$dok" :kategori="$kategori">
+    <center class="container-sm">
+
         <style>
             table {
                 font-family: 'arial'
             }
         </style>
+
         <div class="d-flex justify-content-between">
             <div>
                 <strong>To:</strong> {{ $datas->supplier }}<br>
             </div>
             <div>
+
                 <table style="width: 100%">
+                    <tr>
+                        <td><strong>No PO</strong></td>
+                        <td>:</td>
+                        <td>{{ $no_po }}</td>
+                    </tr>
                     <tr>
                         <td style="width: 100px"><strong>Tanggal</strong></td>
                         <td style="width: 10px">:</td>
                         <td>{{ tanggal($datas->tgl) }}</td>
                     </tr>
                     <tr>
-                        <td><strong>No PO</strong></td>
-                        <td>:</td>
-                        <td>{{ $no_po }}</td>
+                        <td class="text-start" colspan="3" style="width: 100px"><span style="font-size: 11px;"
+                                class="ms-2">* :
+                                Diisi oleh
+                                bagian purchasing</span></td>
                     </tr>
                 </table>
+
             </div>
         </div>
         <br>
 
         <div>
-            <span class="float-start" style="font-size: 9px; bottom: 36px !important">Format nomor PO : PO/Urutan/ Bulan /
-                tahun
+            <span class="float-start" style="font-size: 9px;">Format
+                nomor PO :
+                PO/Urutan/
+                Bulan
+                / tahun
                 (ex :
-                PR/01/VI/2025)
-                <span class="ms-2">* :
-                    Diisi oleh
-                    bagian purchasing</span>
+                PO/01/VI/2025)
+
             </span>
             <table class="table table-xs table-bordered border-dark">
                 <tr>
@@ -50,7 +61,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="2" class="head text-end">Total harga</td>
+                    <td colspan="2" class="head text-end">Total Harga</td>
                     <td class="text-end">{{ number_format(0, 0) }}</td>
                 </tr>
             </table>
@@ -66,7 +77,7 @@
             Telp: 08
             <br>
             Estimasi Kedatangan Barang:
-            {{ tanggal(date('Y-m-d', strtotime('+' . rand(1, 3) . ' days', strtotime($datas->tgl)))) }}
+            {{ tanggal(date('Y-m-d', strtotime('+2 days', strtotime($datas->tgl)))) }}
         </div>
 
         <br>
@@ -75,14 +86,14 @@
             <span>
                 <span style="left: -80px !important; position: relative;">
                     Dibuat oleh :
-                    <x-ttd />
+                    <x-ttd jabatan="staff purchasing" />
                 </span>
                 <br>
             </span>
             <span><span>Di setujui oleh :</span>
                 <br>
                 <span>
-                    <x-ttd-ketua userId="468" />
+                    <x-ttd-ketua jabatan="purchasing" userId="468" />
                 </span>
                 <span style="font-size:10px">Sertakan cap perusahaan</span>
 

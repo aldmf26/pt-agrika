@@ -54,10 +54,8 @@
         }
 
         .cop_text {
-            text-align: left;
             font-weight: normal;
             margin-top: 90px;
-
         }
 
         .dhead {

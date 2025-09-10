@@ -37,7 +37,7 @@
                         <td>{{ $d->alamat_pengiriman }}</td>
                         <td>Sinta</td>
                         <td class="text-start">08</td>
-                        <td>{{ tanggal(date('Y-m-d', strtotime('+' . rand(1, 3) . ' days', strtotime($d->tgl)))) }}
+                        <td>{{ tanggal(date('Y-m-d', strtotime('+2 days', strtotime($d->tgl)))) }}
                         </td>
                         <td>
 

@@ -7,14 +7,7 @@
         </style>
         <div class="row">
             <div class="col-12">
-                <span class="float-end" style="font-size: 9px; bottom: 36px !important">Format nomor PR : PR/Urutan/ Bulan
-                    / tahun
-                    (ex :
-                    PR/01/VI/2025)
-                    <span class="ms-2">* :
-                        Diisi oleh
-                        bagian purchasing</span>
-                </span>
+
                 <table class="table-xs table table-bordered border-dark">
                     <tr>
                         <th width="150" class="head">Dimintai oleh</td>
@@ -31,6 +24,17 @@
                         </td>
                     </tr>
                 </table>
+                <span class="float-start" style="position: relative;font-size: 9px; top: -16px !important">Format
+                    nomor PR :
+                    PR/Urutan/
+                    Bulan
+                    / tahun
+                    (ex :
+                    PR/01/VI/2025)
+                    <span class="ms-2">* :
+                        Diisi oleh
+                        bagian purchasing</span>
+                </span>
             </div>
 
             <div class="col-12">
@@ -92,7 +96,7 @@
                         Dibuat oleh :
                         <br>
                         <span style="left: -80px !important; position: relative;">
-                            <x-ttd />
+                            <x-ttd jabatan="bk" />
                         </span>
                         <br>
                     </span>
@@ -100,7 +104,7 @@
                     <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
                         <br>
                         <span>
-                            <x-ttd-ketua userId="468" />
+                            <x-ttd-ketua jabatan="purchasing" userId="468" />
                         </span>
                         <br>
                     </span>

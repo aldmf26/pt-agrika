@@ -101,7 +101,7 @@
                         Dibuat oleh :
                         <br>
                         <span style="left: -80px !important; position: relative;">
-                            <x-ttd />
+                            <x-ttd jabatan="{{DataPegawai::where('nama', $datas->diminta_oleh)->first()->posisi2)}}" />
                         </span>
                         <br>
                     </span>
