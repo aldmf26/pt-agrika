@@ -1,4 +1,4 @@
-@props(['width' => '250'])
+@props(['width' => '250', 'jabatan' => null])
 <div class="text-center">
     <div>
         @if (empty(Auth::user()->ttd))
@@ -7,7 +7,9 @@
             <img src="{{ Storage::url(Auth::user()->ttd->link) }}" width="{{ $width }}" alt="">
         @endif
     </div>
-    <div>
-        <span class="text-sm">( {{ Auth::user()->name }} )</span>
+    <div style="margin-top: -10px;">
+        <span style="font-size: 12px">{{ Auth::user()->name }}</span>
+        <br>
+        <span class="text-sm">({{ strtoupper($jabatan) }})</span>
     </div>
 </div>

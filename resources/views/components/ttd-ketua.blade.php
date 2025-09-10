@@ -1,4 +1,4 @@
-@props(['userId', 'width' => '250'])
+@props(['userId', 'width' => '250', 'jabatan' => null])
 <div class="text-center">
     <div>
         @php
@@ -10,7 +10,12 @@
             <img src="{{ Storage::url($ttd->link) }}" width="{{ $width }}" alt="">
         @endif
     </div>
+    <div style="margin-top: -10px;">
+        <span style="font-size: 12px">{{ \App\Models\User::find($userId)->name }}</span>
+        <br>
+        <span class="text-sm">({{ strtoupper($jabatan) }})</span>
+    </div>
+
     <div>
-        <span class="text-sm">( {{ \App\Models\User::find($userId)->name }} )</span>
     </div>
 </div>

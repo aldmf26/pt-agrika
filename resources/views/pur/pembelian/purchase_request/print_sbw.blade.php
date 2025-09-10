@@ -92,7 +92,7 @@
                         Dibuat oleh :
                         <br>
                         <span style="left: -80px !important; position: relative;">
-                            <x-ttd />
+                            <x-ttd jabatan="staff purchasing" />
                         </span>
                         <br>
                     </span>
@@ -100,7 +100,7 @@
                     <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
                         <br>
                         <span>
-                            <x-ttd-ketua userId="468" />
+                            <x-ttd-ketua jabatan="purchasing" userId="468" />
                         </span>
                         <br>
                     </span>

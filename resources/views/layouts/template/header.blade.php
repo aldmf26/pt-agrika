@@ -123,18 +123,13 @@
                                         <li class="submenu-item {{ $adaSub ? '' : 'has-sub' }}">
                                             @if ($adaSub)
                                                 @php
-                                                    // Cek link
-                                                    if ($submenu->link == 'tidak' || empty($submenu->link)) {
-                                                        $url = '#';
+                                                    // Cek subtitle untuk kategori
+                                                    if (!empty($submenu->subtitle)) {
+                                                        $url = route($submenu->link, [
+                                                            'kategori' => $submenu->subtitle,
+                                                        ]);
                                                     } else {
-                                                        // Cek subtitle untuk kategori
-                                                        if (!empty($submenu->subtitle)) {
-                                                            $url = route($submenu->link, [
-                                                                'kategori' => $submenu->subtitle,
-                                                            ]);
-                                                        } else {
-                                                            $url = route($submenu->link);
-                                                        }
+                                                        $url = route($submenu->link);
                                                     }
                                                 @endphp
                                                 <a wire:navigate href="{{ $url }}" class="submenu-link">
