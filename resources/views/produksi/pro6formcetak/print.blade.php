@@ -153,7 +153,7 @@
                                 <p class="cop_judul mt-3">FORM CETAK</p>
                                 <p class="cop_bawah text-center">Moulding results</p>
                             </th>
-                            <th class="align-top text-end text-nowrap">
+                            <th class="align-top text-end text-nowrap" colspan="2">
                                 <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.06,
                                     Rev 00</p>
                             </th>
@@ -183,10 +183,13 @@
                             <th colspan="2" class="text-center ">Berat Kering <br> <span
                                     class="fst-italic fw-lighter">Qty for moulding
                             </th>
-                            <th colspan="2" class="text-center ">Berat Hasil <br> <span
+                            <th colspan="2" class="text-center ">Berat Hasil drying 2 <br> <span
                                     class="fst-italic fw-lighter">Result qty</th>
                             <th rowspan="2" class="text-end align-middle">Hcr <br> <span
                                     class="fst-italic fw-lighter">(gr)</th>
+                            <th rowspan="2" class="text-end align-middle">%Susut <br> (Min <br> susut 0- <br> 3%)
+                            </th>
+                            <th rowspan="2" class="text-start align-middle">Ok / Not <br> ok </th>
                             <th rowspan="2" class="text-start align-middle">Keterangan <br> <span
                                     class="fst-italic fw-lighter">Remarks</th>
                         </tr>
@@ -217,22 +220,31 @@
                                 <td class="text-end ">{{ $c['pcs_akhir'] }}</td>
                                 <td class="text-end ">{{ $c['gr_akhir'] }}</td>
                                 <td class="text-end ">0</td>
+                                <td class="text-end ">
+                                    {{ number_format((1 - $c['gr_akhir'] / $c['gr_awal_ctk']) * 100, 0) }}
+                                </td>
+                                <td class="text-start">
+                                    @php
+                                        $susut = (1 - $c['gr_akhir'] / $c['gr_awal_ctk']) * 100;
+                                    @endphp
+                                    {{ $susut < 3 ? 'OK' : 'Not OK' }}
+                                </td>
                                 <td class="text-center "></td>
                             </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="20">&nbsp;</th>
+                            <th colspan="22">&nbsp;</th>
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="6"></th>
+                            <th style="border: none; text-align: start" colspan="8"></th>
                             <th class="text-center" colspan="3">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="6"></th>
+                            <th style="border: none" colspan="8"></th>
                             <td colspan="3" style="height: 80px"></td>
                             <td colspan="2" style="height: 80px"></td>
                         </tr>
