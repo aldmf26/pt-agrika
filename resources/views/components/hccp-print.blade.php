@@ -54,7 +54,6 @@
         }
 
         .cop_text {
-            font-size: 12px;
             text-align: left;
             font-weight: normal;
             margin-top: 100px;
@@ -126,7 +125,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <p class="cop_text text-sm" style="font-size: 12px">{{ $dok }}</p>
+                <p class="cop_text text-sm" style="font-size: 11px">{{ $dok }}</p>
             </div>
         </div>
         {{ $slot }}
