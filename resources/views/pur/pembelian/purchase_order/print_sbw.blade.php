@@ -15,7 +15,7 @@
 
                 <table style="width: 100%">
                     <tr>
-                        <td><strong>No PO</strong></td>
+                        <td><strong>*No PO</strong></td>
                         <td>:</td>
                         <td>{{ $no_po }}</td>
                     </tr>
@@ -71,8 +71,8 @@
             <strong>Barang/Jasa di atas harap dikirimkan ke Alamat sebagai berikut :</strong>
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
-            <br>
-            PIC: Sinta
+            <div class="mt-2" />
+            <span>PIC: Tasya Salsabila</span>
             <br>
             Telp: 08
             <br>

@@ -12,7 +12,7 @@
                     <tr>
                         <th width="150" class="head">Dimintai oleh</td>
                         <td>{{ Auth::user()->name }}</td>
-                        <th width="150" class="head">No PR</td>
+                        <th width="150" class="head">*No PR</td>
                         <td>{{ $no_pr }}</td>
                     </tr>
                     <tr>
@@ -44,8 +44,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yang tersedia dan target
-                            produksi
+                            Untuk memenuhi kebutuhan proses produksi cabut.
                         </td>
                     </tr>
                 </table>
