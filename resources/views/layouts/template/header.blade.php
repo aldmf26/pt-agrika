@@ -1,14 +1,8 @@
 <header class="mb-5">
-
     <div class="header-top">
         <div class="container ">
             <div class="logo d-flex align-items-center">
-                {{-- <img src="{{ asset('assets/compiled/png/logo.png') }}" alt="Logo" style="height: 80px !important;"> --}}
-                <a href="index.html">
-                    {{-- <img src="" alt="Logo"
-                        style="height: 80px !important;"> --}}
-                    PT AGRIKA GATYA ARUM
-                </a>
+                <a href="index.html">PT AGRIKA GATYA ARUM</a>
                 @livewire('notes')
             </div>
             <div class="header-top-right">
@@ -23,9 +17,9 @@
                         </div>
                         <div class="text">
                             <h6 class="mb-0 text-gray-600">{{ Auth::user()->name }}</h6>
-                            {{-- <p class="mb-0 text-sm text-success">{{ ucwords(auth()->user()->roles[0]->name) }}</p> --}}
                         </div>
                     </a>
+
                     <style>
                         .dropdownAldi {
                             position: absolute;
@@ -65,7 +59,6 @@
                         .dropdownAldi li button:hover {
                             color: #007bff;
                             cursor: pointer;
-
                         }
 
                         .dropdownAldi li hr {
@@ -74,12 +67,11 @@
                             border-top: 1px solid #e0e0e0;
                         }
                     </style>
+
                     <div x-show="open" class="position-absolute">
                         <ul class="dropdownAldi" aria-labelledby="topbarUserDropdown">
                             <a class="" href="#">
-                                <li>
-                                    {{ Auth::user()->name }}
-                                </li>
+                                <li>{{ Auth::user()->name }}</li>
                             </a>
                             <hr class="">
                             <li>
@@ -91,25 +83,23 @@
                         </ul>
                     </div>
                 </div>
-                <!-- Burger button responsive -->
+
                 <a href="#" class="burger-btn d-block d-xl-none">
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </div>
         </div>
     </div>
+
     <nav class="main-navbar bg-secondary">
         <div class="container">
             @php
                 use App\Models\Menu;
                 $getRouteName = Route::currentRouteName();
-
-                // Ambil menu utama (tanpa parent_id)
                 $menus = Menu::whereNull('parent_id')->with('children')->orderBy('order')->get();
             @endphp
 
             <ul>
-
                 <li class="menu-item {{ $getRouteName == 'dashboard.index' ? 'active' : '' }}">
                     <a wire:navigate href="{{ route('dashboard.index') }}" class='menu-link'>
                         <span><i class="bi bi-grid-fill"></i> Dashboard</span>
@@ -129,20 +119,59 @@
                                         @php
                                             $adaSub = $submenu->children->isEmpty();
                                         @endphp
-                                        {{-- jika li ini dihapus tidak ada jarak jauh itu --}}
+
                                         <li class="submenu-item {{ $adaSub ? '' : 'has-sub' }}">
-                                            <a wire:navigate
-                                                href="{{ $adaSub ? ($submenu->link == 'tidak' ? route($submenu->link, ['q' => $submenu->title]) : route($submenu->link)) : '#' }}"
-                                                class="submenu-link">{{ ucwords(strtolower($submenu->title)) }}
-                                            </a>
+                                            @if ($adaSub)
+                                                @php
+                                                    // Cek link
+                                                    if ($submenu->link == 'tidak' || empty($submenu->link)) {
+                                                        $url = '#';
+                                                    } else {
+                                                        // Cek subtitle untuk kategori
+                                                        if (!empty($submenu->subtitle)) {
+                                                            $url = route($submenu->link, [
+                                                                'kategori' => $submenu->subtitle,
+                                                            ]);
+                                                        } else {
+                                                            $url = route($submenu->link);
+                                                        }
+                                                    }
+                                                @endphp
+                                                <a wire:navigate href="{{ $url }}" class="submenu-link">
+                                                    {{ strtoupper($submenu->title) }}
+                                                </a>
+                                            @else
+                                                <a href="#" class="submenu-link">
+                                                    {{ strtoupper($submenu->title) }}
+                                                </a>
+                                            @endif
 
                                             @if (!$adaSub)
                                                 <ul class="subsubmenu">
                                                     @foreach ($submenu->children as $subsubmenu)
+                                                        @php
+                                                            // Cek link untuk subsubmenu
+                                                            if (
+                                                                $subsubmenu->link == 'tidak' ||
+                                                                empty($subsubmenu->link)
+                                                            ) {
+                                                                $subUrl = '#';
+                                                            } else {
+                                                                // Cek subtitle untuk kategori
+                                                                if (!empty($subsubmenu->subtitle)) {
+                                                                    $subUrl = route($subsubmenu->link, [
+                                                                        'kategori' => $subsubmenu->subtitle,
+                                                                    ]);
+                                                                } else {
+                                                                    $subUrl = route($subsubmenu->link);
+                                                                }
+                                                            }
+                                                        @endphp
                                                         <li class="submenu-item">
-                                                            <a wire:navigate
-                                                                href="{{ $subsubmenu->link == 'tidak' ? route($subsubmenu->link, ['q' => $submenu->title]) : route($subsubmenu->link) }}"
-                                                                class="subsubmenu-link">{{ ucwords(strtolower($subsubmenu->title)) }}</a>
+                                                            <a wire:navigate href="{{ $subUrl }}"
+                                                                class="subsubmenu-link">
+                                                                {{ ucwords(strtolower($subsubmenu->title)) }}
+                                                            </a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -157,5 +186,4 @@
             </ul>
         </div>
     </nav>
-
 </header>
