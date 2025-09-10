@@ -128,8 +128,8 @@ class RM6CeklistKendaraanController extends Controller
 
 
         $data = [
-            'title' => 'CHECKLIST KENDARAAN UNTUK SARANG BURUNG WALET',
-            'dok' => 'Dok.No.: FRM.WH.02.06, Rev.00',
+            'title' => 'CHECKLIST KENDARAAN SBW',
+            'dok' => 'Dok.No.: FRM.PPCS.01.02, Rev.00',
             'checklist' => $checklist,
             'kondisi' => $kondisi,
             // 'details' => $details

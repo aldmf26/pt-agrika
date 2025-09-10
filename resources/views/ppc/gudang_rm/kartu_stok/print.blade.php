@@ -13,10 +13,10 @@
     <table width="100%" class="border-dark table table-xs table-bordered">
         <thead>
             <tr>
-                <th class="text-end">Tanggal</th>
-                <th class="text-end">Stok Masuk {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
-                <th class="text-end">Stok Keluar {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
-                <th class="text-end">Stok Akhir {{ $kategori == 'sbw' ? '(gram)' : '' }}</th>
+                <th class="text-center">Tanggal</th>
+                <th class="text-center">Stok Masuk {{ $kategori == 'sbw' ? '(Gr)' : '' }}</th>
+                <th class="text-center">Stok Keluar {{ $kategori == 'sbw' ? '(Gr)' : '' }}</th>
+                <th class="text-center">Stok Akhir {{ $kategori == 'sbw' ? '(Gr)' : '' }}</th>
                 <th class="text-center">Kode Lot</th>
                 <th class="text-center">Ttd</th>
             </tr>
@@ -41,7 +41,7 @@
                         <td class="text-end">{{ number_format($masuk, 0) }}</td>
                         <td class="text-end">{{ number_format($keluar, 0) }}</td>
                         <td class="text-end">{{ number_format($saldo, 0) }}</td>
-                        <td>{{ $t['kode_lot'] }}</td>
+                        <td class="text-end">{{ $t['kode_lot'] }}</td>
                         <td></td>
                     </tr>
                 @endforeach
@@ -58,7 +58,7 @@
                         <td class="text-end">{{ $s['ket'] == 'masuk' ? number_format($s['gr'], 0) : 0 }}</td>
                         <td class="text-end">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }}</td>
                         <td class="text-end">{{ number_format($saldo2, 0) }}</td>
-                        <td class="text-center">{{ $s['no_invoice'] }}</td>
+                        <td class="text-end">{{ $s['no_invoice'] }}</td>
                         <td></td>
                     </tr>
                 @endforeach
@@ -82,10 +82,12 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5">ttd & nama</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="text-center">[KA.GUDANG]</td>
+                            <td class="text-center">(KA.GUDANG)</td>
                         </tr>
                     </tbody>
                 </table>
