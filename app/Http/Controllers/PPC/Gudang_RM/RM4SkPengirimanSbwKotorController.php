@@ -34,13 +34,14 @@ class RM4SkPengirimanSbwKotorController extends Controller
     {
         $sk = DB::table('sbw_kotor')
             ->where('sbw_kotor.rwb_id', $id)
+            ->whereYear('sbw_kotor.tgl', date('Y'))
             ->groupBy('sbw_kotor.tgl')
             ->orderBy('sbw_kotor.tgl', 'asc')
             ->select('tgl', DB::raw('SUM(kg) as kg'))
             ->get();
         $data = [
             'title' => 'SURAT KETERANGAN PENGIRIMAN SBW KOTOR DARI RUMAH WALET',
-            'dok' => 'Dok.No.: FRM.WH.02.04, Rev.01',
+            'dok' => 'Dok.No.: FRM.PPCS.01.01, Rev.00',
             'sk' => $sk,
             'rumah_walet' => DB::table('rumah_walet')->where('id', $id)->first()
         ];
