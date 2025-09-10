@@ -32,7 +32,8 @@
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>Sinta</td>
                         <td>BK</td>
-                        <td>-</td>
+                        <td>Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yangtersedia dan target
+                            produksi</td>
                         <td>
                             <a class="btn btn-xs btn-primary"
                                 href="{{ route('pur.pembelian.1.print_sbw', [
