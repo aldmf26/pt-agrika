@@ -144,7 +144,7 @@
                                     <td>
                                         @if ($d->kategori == 'Baku')
                                             @php
-                                                $tgl_sbw = date('Y-m-d', strtotime('+1 day', strtotime($d->tgl)));
+                                                $tgl_sbw = date('Y-m-d', strtotime($d->tgl));
                                             @endphp
                                             {{ tanggal($tgl_sbw) }}
                                         @elseif($d->kategori == 'barang')
@@ -181,14 +181,14 @@
                             </table>
                             <table class="signature-table">
                                 <tr>
-                                    <td>KA. Gudang</td>
-                                    <td>QC Incoming</td>
-                                    <td>Status</td>
+                                    <td>KA. GUDANG</td>
+                                    <td>QC INCOMING</td>
+                                    <td>STATUS</td>
                                 </tr>
                                 <tr>
                                     <td></td> <!-- Untuk tanda tangan -->
                                     <td></td>
-                                    <td></td>
+                                    <td>PASS</td>
                                 </tr>
                             </table>
                         </div>

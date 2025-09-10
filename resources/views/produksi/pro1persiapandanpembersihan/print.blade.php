@@ -110,7 +110,7 @@
             </div>
             <div class="col-6"></div>
             <div class="col-4 ">
-                <p class="mt-2" style="font-size: 10px">No Dok : FRM.PRO.01.01, Rev 00</p>
+                <p class="mt-2" style="font-size: 10px">No Dok : FRM.PROS.01.01, Rev 00</p>
             </div>
             <div class="col-12 ">
                 <p class="cop_judul">FORM PERSIAPAN DAN FORM SERAH TERIMA <br>
@@ -143,27 +143,27 @@
                     <thead>
                         <tr>
                             <th class="align-middle text-center" rowspan="2">No</th>
-                            <th class="align-middle" rowspan="2">Regu/ <br><span
+                            <th class="align-middle text-center" rowspan="2">Regu/ <br><span
                                     class="fst-italic fw-lighter">Team</span></th>
-                            <th class="align-middle" rowspan="2">Nama Operator Cabut<br><span
+                            <th class="align-middle text-center" rowspan="2">Nama Operator Cabut<br><span
                                     class="fst-italic fw-lighter">Operator name</span>
                             </th>
-                            <th class="align-middle" rowspan="2">Kode Bacth/Lot<br><span
+                            <th class="align-middle text-center" rowspan="2">Kode Bacth/Lot<br><span
                                     class="fst-italic fw-lighter">Bacth/Lot code</span></th>
-                            <th class="align-middle" rowspan="2">Jenis<br><span
+                            <th class="align-middle text-center" rowspan="2">Jenis<br><span
                                     class="fst-italic fw-lighter">type</span></th>
-                            <th class="align-middle" rowspan="2">Nomor box</th>
+                            <th class="align-middle text-center" rowspan="2">Nomor box</th>
                             <th class="align-middle text-center" colspan="2">Jumlah <br><span
                                     class="fst-italic fw-lighter">Quantity</span></th>
 
 
-                            <th class="align-middle " rowspan="2">Keterangan <br><span
+                            <th class="align-middle text-center" rowspan="2">Keterangan <br><span
                                     class="fst-italic fw-lighter">Remaks</span></th>
 
                         </tr>
                         <tr>
-                            <th class="text-end">Pcs</th>
-                            <th class="text-end">Gr</th>
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gr</th>
                         </tr>
 
                     </thead>
@@ -176,13 +176,13 @@
                                     ->first();
                             @endphp
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $pengawas }}</td>
-                                <td class="">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
+                                <td class="text-end">{{ $loop->iteration }}</td>
+                                <td class="text-start">{{ $pengawas }}</td>
+                                <td class="text-start">{{ ucwords(strtolower($d['nama'])) }}</td>
+                                <td class="text-start">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
                                 </td>
-                                <td class="">{{ $sbw->nama ?? '-' }}</td>
-                                <td class="">{{ $d['no_box'] }}</td>
+                                <td class="text-start">{{ $sbw->nama ?? '-' }}</td>
+                                <td class="text-end">{{ $d['no_box'] }}</td>
                                 <td class="text-end">{{ $d['pcs'] }}</td>
                                 <td class="text-end">{{ $d['gr_awal'] }}</td>
 
@@ -210,8 +210,20 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">
+                                (Staff Cabut)
+                            </td>
+                            <td class="text-center align-middle">
+                                (KA.Cabut)
+                            </td>
                         </tr>
 
                     </tbody>
