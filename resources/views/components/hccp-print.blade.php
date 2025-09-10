@@ -1,4 +1,4 @@
-@props(['title', 'dok'])
+@props(['title' => null, 'dok' => null, 'kategori' => null])
 <!doctype html>
 <html lang="en">
 
@@ -105,7 +105,10 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">{{ $title }}</p>
+                    <p class="cop_judul">{{ $title }} @if ($kategori)
+                            {{ strtoupper($kategori) }}
+                        @endif
+                    </p>
                 </div>
             </div>
             <div class="col-3">

@@ -1,4 +1,4 @@
-<x-hccp-print :title="$title" :dok="$dok">
+<x-hccp-print :title="$title" :dok="$dok" :kategori="$kategori">
     <div class="container-sm">
         <style>
             table {
