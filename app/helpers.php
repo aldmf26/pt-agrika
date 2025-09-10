@@ -14,14 +14,14 @@ if (!function_exists('tanggal')) {
             '02' => 'Feb',
             '03' => 'Mar',
             '04' => 'Apr',
-            '05' => 'Mei',
+            '05' => 'May',
             '06' => 'Jun',
             '07' => 'Jul',
-            '08' => 'Agust',
-            '09' => 'Sept',
-            '10' => 'Okt',
+            '08' => 'Aug',
+            '09' => 'Sep',
+            '10' => 'Oct',
             '11' => 'Nov',
-            '12' => 'Des',
+            '12' => 'Dec',
         ];
 
         $bulan = $bulanArray[$bln] ?? '';
