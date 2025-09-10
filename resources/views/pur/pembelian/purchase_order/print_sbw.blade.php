@@ -9,7 +9,7 @@
 
         <div class="d-flex justify-content-between">
             <div>
-                <strong>To:</strong> {{ $datas->supplier }}<br>
+                <strong>To:</strong> {{ ucwwords($datas->supplier) }}<br>
             </div>
             <div>
 
@@ -43,7 +43,7 @@
                 Bulan
                 / tahun
                 (ex :
-                PO/01/VI/2025)
+                PO/1/VI/2025)
 
             </span>
             <table class="table table-xs table-bordered border-dark">
@@ -73,7 +73,7 @@
             </table>
         </div>
 
-        <div class="text-start">
+        <div class="text-start" style="font-size: 12px;">
             <strong>Barang/Jasa di atas harap dikirimkan ke Alamat sebagai berikut :</strong>
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
