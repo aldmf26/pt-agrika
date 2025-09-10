@@ -56,7 +56,7 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="2" class="head text-end">Total harga</td>
+                    <td colspan="2" class="head text-end">Total Harga</td>
                     <td class="text-end">{{ number_format(0, 0) }}</td>
                 </tr>
             </table>
