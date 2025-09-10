@@ -265,10 +265,10 @@
                         </tr>
                         <tr>
                             <td class="text-center align-middle">
-                                (Staff Cabut)
+                                (STAFF CABUT)
                             </td>
                             <td class="text-center align-middle">
-                                (KA.Cabut)
+                                (KA. CABUT)
                             </td>
                         </tr>
 
