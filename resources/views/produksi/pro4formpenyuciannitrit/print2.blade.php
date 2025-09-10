@@ -141,8 +141,7 @@
                     </tr>
                 </table>
             </div> --}}
-            <div class="col-lg-12 ">
-
+            <div class="col-lg-12 mb-3">
                 <table class=" " style="font-size: 11px" width="100%">
                     <thead>
 
@@ -242,24 +241,38 @@
 
 
                     </tbody>
-                    <tfoot>
+
+
+                </table>
+            </div>
+            <div class="col-7"></div>
+            <div class="col-5">
+                <table class="table table-bordered" style="font-size: 11px">
+                    <thead>
                         <tr>
-                            <th colspan="20">&nbsp;</th>
+                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                         </tr>
-                        <tr class="table-bawah">
-
-                            <th style="border: none" colspan="6"></th>
-                            <th class="text-center" colspan="3">Dibuat Oleh:</th>
-                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                            </td>
                         </tr>
-                        <tr class="table-bawah">
-                            <th style="border: none" colspan="6"></th>
-                            <td colspan="3" style="height: 80px"></td>
-                            <td colspan="2" style="height: 80px"></td>
+                        <tr>
+                            <td class="text-center align-middle">
+                                (Staff Cabut)
+                            </td>
+                            <td class="text-center align-middle">
+                                (KA.Cabut)
+                            </td>
                         </tr>
 
-                    </tfoot>
-
+                    </tbody>
                 </table>
             </div>
 
