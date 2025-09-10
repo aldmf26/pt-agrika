@@ -65,7 +65,7 @@
                     @endforeach
                 </table>
             </div>
-            <div class="col-12">
+            <div class="col-12 mb-5">
                 Diterima oleh Purchasing: <br>
                 <table>
                     <tr>
