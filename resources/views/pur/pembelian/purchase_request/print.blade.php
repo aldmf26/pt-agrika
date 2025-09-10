@@ -62,15 +62,37 @@
                     <tr>
                         <th class="head text-end">Jumlah</th>
                         <th class="head text-start">Item dan Spesifikasi</th>
-                        <th class="head text-start">Tanggal Dibutuhkan</th>
+                        <th class="head text-end">Tanggal Dibutuhkan</th>
                     </tr>
                     @foreach ($datas->item as $d)
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah, 0) }} {{ $d->barang->satuan }}</td>
                             <td align="start">{{ ucfirst($d->item_spesifikasi) }}</td>
-                            <td align="start">{{ tanggal($d->tgl_dibutuhkan) }}</td>
+                            <td class="text-end">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                         </tr>
                     @endforeach
+                </table>
+            </div>
+
+            <div class="col-12 mb-5">
+                Diterima oleh Purchasing: <br>
+                <table>
+                    <tr>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td>Tasya Salsabila</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal</td>
+                        <td>:</td>
+                        <td> {{ tanggal(date('Y-m-d', strtotime('-7 days', strtotime($datas->tgl)))) }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tanda Tangan</td>
+                        <td>:</td>
+                        <td></td>
+                    </tr>
                 </table>
             </div>
             <div class="col-12">
@@ -95,23 +117,6 @@
 
             </div>
         </div>
-        Diterima oleh Purchasing: <br>
-        <table>
-            <tr>
-                <td>Nama</td>
-                <td>:</td>
-                <td>Tasya Salsabila</td>
-            </tr>
-            <tr>
-                <td>Tanggal</td>
-                <td>:</td>
-                <td>{{ tanggal($datas->tgl) }}</td>
-            </tr>
-            <tr>
-                <td>Tanda Tangan</td>
-                <td>:</td>
-                <td></td>
-            </tr>
-        </table>
+        
         </center>
 </x-hccp-print>

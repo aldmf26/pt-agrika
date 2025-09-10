@@ -32,7 +32,7 @@
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>Sinta</td>
                         <td>BK</td>
-                        <td>Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yangtersedia dan target
+                        <td>Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yang tersedia dan target
                             produksi</td>
                         <td>
                             <a class="btn btn-xs btn-primary"

@@ -40,7 +40,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yangtersedia dan target
+                            Untuk memenuhi kebutuhan proses cetak, sesuai dengan jumlah team yang tersedia dan target
                             produksi
                         </td>
                     </tr>
@@ -107,12 +107,8 @@
                 </div>
 
             </div>
-        </div>
-        <div class="row">
 
         </div>
 
-    </div>
-
-    </center>
+        </center>
 </x-hccp-print>
