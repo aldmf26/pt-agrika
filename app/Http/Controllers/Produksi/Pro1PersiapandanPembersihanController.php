@@ -21,9 +21,6 @@ class Pro1PersiapandanPembersihanController extends Controller
             $bk = Http::get("https://sarang.ptagafood.com/api/apihasap?id_pengawas=$id_pengawas");
             $bk = json_decode($bk, TRUE);
         }
-
-
-
         $data = [
             'title' => 'Persiapan dan pembersihan',
             'bk' => $bk['data']
