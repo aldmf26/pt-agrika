@@ -8,6 +8,7 @@ use App\Models\DataPegawai;
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -43,7 +44,7 @@ class PUR1PurchaseRequestController extends Controller
         if ($lastNoPr) {
             $parts = explode('/', $lastNoPr);
             if (isset($parts[1])) {
-                $lastNumber = (int) $parts[1];
+                $lastNumber = $parts[1];
             }
         }
 
@@ -70,12 +71,15 @@ class PUR1PurchaseRequestController extends Controller
             12 => 'XII'
         ];
 
-        $bulan = $bulanRomawi[date('n')];
-        $tahun = date('Y');
-
         // Generate nomor PR sesuai ASC
         foreach ($dataAsc as $i => $item) {
             $noUrut = $lastNumber + ($i + 1);
+
+            // Ambil bulan dan tahun dari tanggal data, bukan tanggal sekarang
+            $tanggalData = Carbon::parse($item->tgl);
+            $bulan = $bulanRomawi[$tanggalData->month];
+            $tahun = $tanggalData->year;
+
             $item->no_pr = "PR/{$noUrut}/{$bulan}/{$tahun}";
         }
 
@@ -88,7 +92,7 @@ class PUR1PurchaseRequestController extends Controller
         $kategori = request()->kategori ?? 'barang';
 
 
-        $datas = $kategori == 'barang' ? PurchaseRequest::latest()->get() : $this->singkron();
+        $datas = $kategori == 'lainnya' ? $this->singkron() : PurchaseRequest::where('departemen', $kategori)->latest()->get();
         $data = [
 
             'title' => 'PUR 1 Purchase Request',
@@ -122,10 +126,10 @@ class PUR1PurchaseRequestController extends Controller
         $lastRequest = PurchaseRequest::latest()->first();
 
         if ($lastRequest) {
-            $lastNo = (int) substr($lastRequest->no_pr, 3, 2);
-            $newNo = str_pad($lastNo + 1, 2, '0', STR_PAD_LEFT);
+            $lastNo = (int) substr($lastRequest->no_pr, 3, 1);
+            $newNo = str_pad($lastNo + 1, 1, '0', STR_PAD_LEFT);
         } else {
-            $newNo = '01';
+            $newNo = '1';
         }
 
         $romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
@@ -164,10 +168,10 @@ class PUR1PurchaseRequestController extends Controller
 
             DB::commit();
 
-            return redirect()->route('pur.pembelian.1.index')->with('sukses', 'Purchase Request berhasil ditambahkan');
+            return redirect()->route('pur.pembelian.1.index', ['kategori' => $r->kategori])->with('sukses', 'Purchase Request berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('pur.pembelian.1.create')->with('error', $e->getMessage());
+            return redirect()->route('pur.pembelian.1.create', ['kategori' => $r->kategori])->with('error', $e->getMessage());
         }
     }
 
@@ -223,7 +227,8 @@ class PUR1PurchaseRequestController extends Controller
 
         $data = [
             'title' => 'PURCHASE REQUEST',
-            'dok' => 'Dok.No.: FRM.PUR.01.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.1.1, Rev.00',
+            'kategori' => 'sbw',
             'datas' => $datas,
             'no_pr' => $no_pr,
             'items' => $items,

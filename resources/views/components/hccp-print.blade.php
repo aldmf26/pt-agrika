@@ -1,4 +1,4 @@
-@props(['title', 'dok'])
+@props(['title' => null, 'dok' => null, 'kategori' => null])
 <!doctype html>
 <html lang="en">
 
@@ -54,10 +54,9 @@
         }
 
         .cop_text {
-            font-size: 12px;
             text-align: left;
             font-weight: normal;
-            margin-top: 100px;
+            margin-top: 90px;
 
         }
 
@@ -94,6 +93,20 @@
         thead th {
             text-transform: capitalize;
         }
+
+        @media print {
+            .signature-bottom {
+                position: fixed;
+                bottom: 1cm;
+                left: 1cm;
+                right: 1cm;
+                background: white;
+            }
+
+            .content-with-bottom-signature {
+                padding-bottom: 120px;
+            }
+        }
     </style>
 </head>
 
@@ -105,11 +118,14 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">{{ $title }}</p>
+                    <p class="cop_judul">{{ $title }} @if ($kategori)
+                            {{ strtoupper($kategori) }}
+                        @endif
+                    </p>
                 </div>
             </div>
             <div class="col-3">
-                <p class="cop_text text-sm" style="font-size: 12px">{{ $dok }}</p>
+                <p class="cop_text text-sm" style="font-size: 11px">{{ $dok }}</p>
             </div>
         </div>
         {{ $slot }}

@@ -8,6 +8,6 @@
         @endif
     </div>
     <div>
-        <span class="text-sm">{{ Auth::user()->name }}</span>
+        <span class="text-sm">( {{ Auth::user()->name }} )</span>
     </div>
 </div>

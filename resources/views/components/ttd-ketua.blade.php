@@ -11,6 +11,6 @@
         @endif
     </div>
     <div>
-        <span class="text-sm">{{ \App\Models\User::find($userId)->name }}</span>
+        <span class="text-sm">( {{ \App\Models\User::find($userId)->name }} )</span>
     </div>
 </div>
