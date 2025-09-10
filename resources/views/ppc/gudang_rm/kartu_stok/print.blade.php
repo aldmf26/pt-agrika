@@ -1,24 +1,24 @@
 <x-hccp-print :title="$title" :kategori="$kategori" :dok="$dok">
 
-    <table width="100%">
+    <table class="table-xs" style="font-size: 12px">
         <tr>
-            <th width="20%">Nama Material</th>
-            <td width="50%">: {{ $kategori == 'sbw' ? $nm_barang : strtoupper($barang->nama_barang) }}</td>
+            <th width="5%">Nama Material</th>
+            <td width="30%">: {{ $kategori == 'sbw' ? $nm_barang : strtoupper($barang->nama_barang) }}</td>
         </tr>
         <tr>
             <th>PIC</th>
             <td>: {{ $kategori != 'sbw' ? 'Ratna,Sinta' : 'Sinta' }}</td>
         </tr>
     </table>
-    <table width="100%" class="border-dark table table-xs table-bordered">
+    <table width="100%" class="mt-3 border-dark table table-xs table-bordered">
         <thead>
             <tr>
                 <th class="text-center">Tanggal</th>
-                <th class="text-center">Stok Masuk {{ $kategori == 'sbw' ? '(Gr)' : '' }}</th>
-                <th class="text-center">Stok Keluar {{ $kategori == 'sbw' ? '(Gr)' : '' }}</th>
-                <th class="text-center">Stok Akhir {{ $kategori == 'sbw' ? '(Gr)' : '' }}</th>
+                <th class="text-center">Stok Masuk</th>
+                <th class="text-center">Stok Keluar</th>
+                <th class="text-center">Stok Akhir</th>
                 <th class="text-center">Kode Lot</th>
-                <th class="text-center">Ttd</th>
+                <th class="text-center" width="90">Ttd</th>
             </tr>
         </thead>
         <tbody>
@@ -38,9 +38,12 @@
                     @endphp
                     <tr>
                         <td class="text-end">{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
-                        <td class="text-end">{{ number_format($masuk, 0) }} {{ $t['satuan'] }}</td>
-                        <td class="text-end">{{ number_format($keluar, 0) }} {{ $t['satuan'] }}</td>
-                        <td class="text-end">{{ number_format($saldo, 0) }} {{ $t['satuan'] }}</td>
+                        <td class="text-end">{{ number_format($masuk, 0) }}
+                            {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
+                        <td class="text-end">{{ number_format($keluar, 0) }}
+                            {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
+                        <td class="text-end">{{ number_format($saldo, 0) }}
+                            {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
                         <td class="text-end">{{ $t['kode_lot'] }}</td>
                         <td></td>
                     </tr>
@@ -55,9 +58,9 @@
                     @endphp
                     <tr>
                         <td class="text-end">{{ tanggal($s['tgl']) }} </td>
-                        <td class="text-end">{{ $s['ket'] == 'masuk' ? number_format($s['gr'], 0) : 0 }}</td>
-                        <td class="text-end">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }}</td>
-                        <td class="text-end">{{ number_format($saldo2, 0) }}</td>
+                        <td class="text-end">{{ $s['ket'] == 'masuk' ? number_format($s['gr'], 0) : 0 }} GR</td>
+                        <td class="text-end">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }} GR</td>
+                        <td class="text-end">{{ number_format($saldo2, 0) }} GR</td>
                         <td class="text-end">{{ $s['no_invoice'] }}</td>
                         <td></td>
                     </tr>
@@ -69,7 +72,7 @@
 
     <table width="100%">
         <tr>
-            <td width="40%">
+            <td width="40%" style="font-size: 11px">
                 <p>Note:</p>
                 * Coret yang tidak perlu
             </td>
@@ -83,11 +86,11 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5">ttd & nama</span>
+                                <span style="opacity: 0.5">Ttd & Nama</span>
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">(KA.GUDANG)</td>
+                            <td class="text-center">(KA. GUDANG)</td>
                         </tr>
                     </tbody>
                 </table>
