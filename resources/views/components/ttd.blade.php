@@ -8,7 +8,7 @@
         @endif
     </div>
     <div style="margin-top: -10px;">
-        <div style="position: relative; opacity: 0.5">ttd + nama</div>
+        <div style="position: relative; opacity: 0.5; font-size: 9px">ttd + nama</div>
         <span style="font-size: 12px">{{ Auth::user()->name }}</span>
         <br>
         <span class="text-sm">({{ strtoupper($jabatan) }})</span>
