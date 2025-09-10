@@ -154,7 +154,7 @@
                                 <p class="cop_bawah text-center">Material cleaning and washing CCP 1</p>
                             </th>
                             <th class="align-top text-end text-nowrap">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.04,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PROS.01.03,
                                     Rev.00</p>
                             </th>
 
@@ -231,12 +231,12 @@
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
 
 
-                                <td class="">{{ $startTime->format('H:i') }}</td>
-                                <td class="">{{ $endTime->format('H:i') }}</td>
-                                <td class="">{{ $diffInMinutes }} menit</td>
-                                <td class="">30</td>
-                                <td class="">{{ $nama_regu }}</td>
-                                <td class=""></td>
+                                <td class="text-end">{{ $startTime->format('H:i') }}</td>
+                                <td class="text-end">{{ $endTime->format('H:i') }}</td>
+                                <td class="text-end">{{ $diffInMinutes }} menit</td>
+                                <td class="text-end">30</td>
+                                <td>{{ $nama_regu }}</td>
+                                <td class="text-end"></td>
                             </tr>
                         @endforeach
 
