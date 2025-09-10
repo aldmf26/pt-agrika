@@ -37,13 +37,13 @@
             <thead>
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
-                    <th class="text-start align-middle" rowspan="2">Tanggal Panen</th>
+                    <th class="text-end align-middle" rowspan="2">Tanggal Panen</th>
                     <th class="text-end align-middle" rowspan="2">Berat Panen (gr)</th>
-                    <th class="text-start align-middle" colspan="2">Pengiriman ke IKPH</th>
+                    <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
                     <th class="text-start align-middle" rowspan="2">Keterangan</th>
                 </tr>
                 <tr>
-                    <th class="text-start">Tanggal Kirim</th>
+                    <th class="text-end">Tanggal Kirim</th>
                     <th class="text-end">Berat Kirim (IKPH)</th>
                 </tr>
             </thead>
@@ -54,9 +54,9 @@
                     @endphp
                     <tr>
                         <td class="text-start">{{ $loop->iteration }}</td>
-                        <td class="text-start">{{ tanggal($d->tgl) }}</td>
+                        <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
-                        <td class="text-start">{{ tanggal($tgl_plus1hari) }}</td>
+                        <td class="text-end">{{ tanggal($tgl_plus1hari) }}</td>
                         <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
                         <td class="text-start"></td>
                     </tr>
@@ -72,19 +72,20 @@
         <div class="col-4">
             <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
-                    <tr>
-                        <th class="text-center" width="33.33%">Pemilik/Penanggungjawab</th>
-                    </tr>
+
                     <tr>
                         <th class="text-center" width="33.33%">Rumah Walet</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px; " class="align-middle text-center">
+                            <span style="opacity: 0.5;">(ttd dan nama)</span>
+                        </td>
                     </tr>
+
                     <tr>
-                        <td class="text-center">[Ttd dan Nama]</td>
+                        <th class="text-center" width="33.33%">Pemilik/Penanggungjawab</th>
                     </tr>
                 </tbody>
             </table>
