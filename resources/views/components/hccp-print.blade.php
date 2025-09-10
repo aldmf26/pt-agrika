@@ -56,7 +56,7 @@
         .cop_text {
             text-align: left;
             font-weight: normal;
-            margin-top: 100px;
+            margin-top: 80px;
 
         }
 
