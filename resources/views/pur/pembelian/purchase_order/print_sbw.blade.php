@@ -72,7 +72,7 @@
             Telp: 08
             <br>
             Estimasi Kedatangan Barang:
-            {{ tanggal(date('Y-m-d', strtotime('+2 days', strtotime($d->tgl)))) }}
+            {{ tanggal(date('Y-m-d', strtotime('+2 days', strtotime($datas->tgl)))) }}
         </div>
 
         <br>
