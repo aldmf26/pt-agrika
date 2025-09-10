@@ -1,21 +1,12 @@
 <x-app-layout :title="$title">
     <div class="d-flex justify-content-between gap-2">
         <nav>
-            <ul class="nav nav-pills float-start">
-                <li class="nav-item">
-                    <a wire:navigate class="nav-link {{ $kategori == 'barang' ? 'active' : '' }}"
-                        href="{{ route('pur.pembelian.1.index', ['kategori' => 'barang']) }}">Barang & kategori
-                        kemasan</a>
-                </li>
-                <li class="nav-item">
-                    <a wire:navigate class="nav-link {{ $kategori == 'lainnya' ? 'active' : '' }}"
-                        href="{{ route('pur.pembelian.1.index', ['kategori' => 'lainnya']) }}">Sbw</a>
-                </li>
-            </ul>
+            <x-nav-link route="pur.pembelian.1.index" />
         </nav>
-
+        <br>
         <div>
-            <a href="{{ route('pur.pembelian.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+            <a href="{{ route('pur.pembelian.1.create', ['kategori' => $kategori]) }}" class="btn btn-sm btn-primary"><i
+                    class="fas fa-plus"></i>
                 Purchase Request</a>
         </div>
     </div>

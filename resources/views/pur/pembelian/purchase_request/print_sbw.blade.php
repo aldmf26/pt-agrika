@@ -34,7 +34,13 @@
                     </tr>
                 </table>
             </div>
-
+<span style="font-size: 9px; bottom: 36px !important">Format nomor PR : PR/Urutan/ Bulan / tahun
+                (ex :
+                PR/01/VI/2025)
+                <span class="ms-2">* :
+                    Diisi oleh
+                    bagian purchasing</span>
+            </span>
             <div class="col-12">
                 <table class="table-xs table table-bordered border-dark">
                     <tr>

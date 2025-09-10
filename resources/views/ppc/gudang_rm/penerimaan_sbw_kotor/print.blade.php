@@ -88,8 +88,6 @@
 
                     Alasan : kadar air masih tinggi saat dipanen hingga muat pengiriman
 
-
-
                 </td>
 
             </tr>

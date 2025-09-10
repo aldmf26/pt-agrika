@@ -8,6 +8,7 @@ use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseRequestItem;
 use App\Models\Suplier;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
@@ -71,12 +72,14 @@ class PUR2PurchaseOrderController extends Controller
             12 => 'XII'
         ];
 
-        $bulan = $bulanRomawi[date('n')];
-        $tahun = date('Y');
-
-        // Generate nomor PR sesuai ASC
         foreach ($dataAsc as $i => $item) {
             $noUrut = $lastNumber + ($i + 1);
+
+            // Ambil bulan dan tahun dari tanggal data, bukan tanggal sekarang
+            $tanggalData = Carbon::parse($item->tgl);
+            $bulan = $bulanRomawi[$tanggalData->month];
+            $tahun = $tanggalData->year;
+
             $item->no_po = "PO/{$noUrut}/{$bulan}/{$tahun}";
         }
 
@@ -89,8 +92,13 @@ class PUR2PurchaseOrderController extends Controller
     {
         $kategori = $r->kategori ?? 'barang';
 
-        if ($kategori == 'barang') {
-            $datas = PurchaseOrder::with('item')->latest()->get();
+        if ($kategori != 'lainnya') {
+            $datas = PurchaseOrder::with('item')
+                ->whereHas('purchaseRequest', function ($q) use ($kategori) {
+                    $q->where('departemen', $kategori);
+                })
+                ->latest()
+                ->get();
         } else {
             $datas = $this->singkron();
         }
@@ -174,10 +182,10 @@ class PUR2PurchaseOrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('pur.pembelian.2.index')->with('sukses', 'Purchase Order berhasil ditambahkan');
+            return redirect()->route('pur.pembelian.2.index', ['kategori' => strtolower($r->kategori)])->with('sukses', 'Purchase Order berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('pur.pembelian.2.create')->with('error', $e->getMessage());
+            return redirect()->route('pur.pembelian.2.create', ['kategori' => strtolower($r->kategori)])->with('error', $e->getMessage());
         }
     }
 

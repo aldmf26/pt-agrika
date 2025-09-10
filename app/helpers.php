@@ -66,9 +66,9 @@ if (!function_exists('jenisProduk')) {
     function jenisProduk()
     {
         return [
+            'lainnya' => 'Sbw',
             'barang' => 'Barang',
             'kemasan' => 'Kemasan',
-            'lainnya' => 'Sbw',
             'jasa' => 'Jasa',
         ];
     }
