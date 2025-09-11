@@ -1,5 +1,4 @@
 <x-hccp-print :title="$title" :kategori="$kategori" :dok="$dok">
-
     <table class="table-xs" style="font-size: 12px">
         <tr>
             <th width="5%">Nama Material</th>
@@ -13,12 +12,21 @@
     <table width="100%" class="mt-3 border-dark table table-xs table-bordered">
         <thead>
             <tr>
-                <th class="text-center">Tanggal</th>
-                <th class="text-center">Stok Masuk</th>
-                <th class="text-center">Stok Keluar</th>
-                <th class="text-center">Stok Akhir</th>
-                <th class="text-center">Kode Lot</th>
-                <th class="text-center" width="90">Ttd</th>
+                <th class="text-center align-middle">Tanggal</th>
+                <th class="text-center align-middle">Stok Masuk @if ($kategori == 'sbw')
+                        <br> (GR)
+                    @endif
+                </th>
+                <th class="text-center align-middle">Stok Keluar @if ($kategori == 'sbw')
+                        <br> (GR)
+                    @endif
+                </th>
+                <th class="text-center align-middle">Stok Akhir @if ($kategori == 'sbw')
+                        <br> (GR)
+                    @endif
+                </th>
+                <th class="text-center align-middle">Kode Lot</th>
+                <th class="text-center align-middle" width="100">Ttd</th>
             </tr>
         </thead>
         <tbody>

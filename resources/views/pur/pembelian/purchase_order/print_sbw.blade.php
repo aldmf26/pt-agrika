@@ -41,7 +41,7 @@
                 nomor PO :
                 PO/Urutan/
                 Bulan
-                / tahun
+                / Tahun
                 (ex :
                 PO/1/VI/2025)
 
@@ -89,26 +89,34 @@
         <br>
 
         <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <span>
-                        Dibuat oleh :
-                        <br>
-                        <span style="left: -80px !important; position: relative;">
-                            <x-ttd jabatan="staff purchasing" />
-                        </span>
-                        <br>
-                    </span>
-
-                    <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
-                        <br>
-                        <span>
-                            <x-ttd-ketua jabatan="purchasing" userId="468" />
-                        </span>
-                        <br>
-                    </span>
-                </div>
-
+            <div class="col-6"></div>
+            <div class="col-6">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                            <th class="text-center" width="33.33%">Disetujui Oleh:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">
+                                (STAFF PURCHASING)
+                            </td>
+                            <td class="text-center align-middle">
+                                (KA. PURCHASING)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </center>

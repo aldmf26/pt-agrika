@@ -76,7 +76,7 @@
                     @foreach ($rumah_walet as $r)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $r->nama }}</td>
+                            <td>{{ ucwords($r->nama) }}</td>
                             <td>{{ $r->alamat }}</td>
                             <td></td>
                             <td></td>

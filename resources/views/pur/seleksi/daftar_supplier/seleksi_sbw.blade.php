@@ -1,4 +1,4 @@
-<x-hccp-print title="SELEKSI SUPPLIER MATERIAL/KEMASAN/BARANG/JASA" :dok="$dok">
+<x-hccp-print title="SELEKSI SUPPLIER MATERIAL" :dok="$dok">
     <div class="row">
         <div class="col-6">
             <table style="font-size: 11px">
@@ -55,10 +55,10 @@
         <tr>
             <th>Sistem Manajemen yang telah diterapkan di Perusahaan Anda:</th>
             <td>
-                <p><input type="checkbox"> HACCP</p>
+                <p><input type="checkbox" checked> HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
                 <p><input type="checkbox"> GMP</p>
                 <p><input type="checkbox"> Lainnya (sebutkan)………</p>
-                <p><input type="checkbox" checked> Belum ada</p>
+                <p><input type="checkbox" checked> Belum ada (Sedang menunggu sertifikat HACCP dari pabrik)</p>
                 <p>(bila ada harap melampirkan sertifikat)</p>
             </td>
         </tr>
@@ -77,7 +77,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                Lama jatuh tempo yang diijinkan: Langsung
+                Lama jatuh tempo yang diijinkan: 3 Bulan / 90 Hari
             </td>
         </tr>
     </table>
@@ -127,7 +127,8 @@
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
-                1.
+                1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
+                2. SBW sesuai dengan kadar nitrite maksimal 50 mg/l(ppm)
             </td>
         </tr>
         <tr>
@@ -149,7 +150,7 @@
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
-                1.
+                1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
             </td>
         </tr>
         <tr>
@@ -171,7 +172,8 @@
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
-                1.
+                1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
+                2. SBW sesuai dengan kadar nitrite maksimal 50 mg/l(ppm) sesuaiyang dilaporkan bagian lab
             </td>
         </tr>
         <tr>
@@ -200,19 +202,25 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px">
+                            <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
+                        </td>
+                        <td style="height: 80px">
+                            <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
+                        </td>
+                        <td style="height: 80px">
+                            <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-center">
-                            [ KA.purchasing]
+                            (KA. Purchasing)
                         </td>
                         <td class="text-center">
-                            [ FSTL]
+                            (FSTL)
                         </td>
                         <td class="text-center">
-                            [ DIREKTUR]
+                            (DIREKTUR)
                         </td>
 
                     </tr>
