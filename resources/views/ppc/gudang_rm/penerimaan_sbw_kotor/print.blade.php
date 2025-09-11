@@ -11,7 +11,7 @@
         <tr>
             <td>Jenis SBW Kotor</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ ucwords($penerimaan->nama) }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ strtoupper($penerimaan->nama) }}</td>
         </tr>
         <tr>
             <td>No Lot SBW</td>
