@@ -11,7 +11,7 @@
         <tr>
             <td>Jenis SBW Kotor</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->nama }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ ucwords($penerimaan->nama) }}</td>
         </tr>
         <tr>
             <td>No Lot SBW</td>
@@ -31,13 +31,13 @@
                 @php
                     $tgl_terima = date('Y-m-d', strtotime($penerimaan->tgl . ' +1 day'));
                 @endphp
-                {{ tanggal($tgl_terima) }}</td>
+                {{ tanggal($penerimaan->tgl) }}</td>
 
         </tr>
         <tr>
             <td>Nama Rumah Walet</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ $penerimaan->rumah_walet }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ ucwords($penerimaan->rumah_walet) }}</td>
         </tr>
 
         <tr>
@@ -51,13 +51,14 @@
             <td>Pengemudi</td>
             <td>:</td>
             <td colspan="2" style="border-bottom: 1px solid black">
-                Bpk. {{ empty($penerimaan->driver) ? $penerimaan->pengemudi : $penerimaan->driver }}</td>
+                Bpk. {{ empty($penerimaan->driver) ? ucwords($penerimaan->pengemudi) : ucwords($penerimaan->driver) }}
+            </td>
         </tr>
         <tr>
             <td>&nbsp;</td>
         </tr>
         <tr>
-            <td>Jumlah Sbw Kotor (Gr)</td>
+            <td>Jumlah Sbw Kotor (GR)</td>
             <td>:</td>
             <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['gr_awal'], 0) }} GR</td>
         </tr>
@@ -70,15 +71,15 @@
             @endphp
             <td style="border-bottom: 1px solid black"><input type="checkbox"
                     {{ $kg_bk != $penerimaan_kg ? 'checked' : '' }} name="" id=""> <span
-                    style="font-size: 11px" class="align-middle">Berbeda dengan
-                    surat keterangan</span>
+                    style="font-size: 11px" class="align-middle">Berbeda Dengan
+                    Surat Keterangan</span>
 
             </td>
             <td style="border-bottom: 1px solid black">&nbsp;<input type="checkbox"
                     {{ $kg_bk == $penerimaan_kg ? 'checked' : '' }} name="" id=""> <span
-                    style="font-size: 11px" class="align-middle">Tidak berbeda dengan
-                    surat
-                    keterangan</span></td>
+                    style="font-size: 11px" class="align-middle">Tidak Berbeda Dengan
+                    Surat
+                    Keterangan</span></td>
         </tr>
         @if ($kg_bk != $penerimaan_kg)
             <tr>
@@ -86,7 +87,7 @@
                 <td></td>
                 <td style="font-size: 11px;border-bottom: 1px solid black" colspan="2">
 
-                    Alasan : kadar air masih tinggi saat dipanen hingga muat pengiriman
+                    Alasan : Kadar Air Masih Tinggi Saat Dipanen Hingga Muat Pengiriman
 
                 </td>
 
@@ -94,7 +95,7 @@
         @else
         @endif
         <tr>
-            <td>Jumlah Pcs</td>
+            <td>Jumlah (PCS)</td>
             <td>:</td>
             <td colspan="2" style="border-bottom: 1px solid black">{{ number_format($acuan['pcs_awal'], 0) }} PCS
             </td>
@@ -116,7 +117,7 @@
             <td>Jumlah Sample</td>
             <td>:</td>
             <td>
-                {{ $kg < 20000 ? '1,000 gr / @ 1 box' : '20,000 gr / @ ' . number_format($jumlahBox) . ' box' }}
+                {{ $kg < 20000 ? '1,000 GR / @ 1 BOX' : '20,000 GR / @ ' . number_format($jumlahBox) . ' BOX' }}
             </td>
         </tr>
 
@@ -144,7 +145,7 @@
 
             @foreach ($kriteria as $k)
                 <tr>
-                    <td class="text-start">{{ $k->kriteria }}</td>
+                    <td class="text-start">{{ ucwords($k->kriteria) }}</td>
                     @for ($i = $start; $i <= $end; $i++)
                         <td class="text-center">
                             {{-- Hanya centang sesuai jumlah box asli --}}
@@ -156,12 +157,12 @@
         @endfor
     </table>
 
-    <p>Keputusan: <br>
+    <p style="font-size: 11px">Keputusan: <br>
     <div class="ms-5" style="font-size: 9px">
         <input readonly type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
         <br>
         <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Diterima
-        dengan catatan .....
+        Dengan Catatan .....
         <br>
         <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
         <br>
@@ -169,33 +170,39 @@
     </p>
 
     <div class="row">
-        <div class="col-8">
+        <div class="col-12">
             <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
                         <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
 
+                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">ttd &
-                            nama
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">ttd &
-                            nama
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="text-center">(ADM. GUDANG)</td>
                         <td class="text-center">(KA. GUDANG)</td>
-
+                        <td class="text-center">(DOKTER HEWAN)</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-4">
+        {{-- <div class="col-4">
             <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
                     <tr>
@@ -204,8 +211,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">ttd &
-                            nama
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
+                            Nama
                         </td>
                     </tr>
                     <tr>
@@ -213,7 +220,7 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </div> --}}
 
     </div>
 

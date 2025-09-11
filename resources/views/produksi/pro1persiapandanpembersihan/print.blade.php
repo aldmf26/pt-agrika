@@ -110,13 +110,13 @@
             </div>
             <div class="col-6"></div>
             <div class="col-4 ">
-                <p class="mt-2" style="font-size: 10px">No Dok : FRM.PROS.01.01, Rev 00</p>
+                <p class="mt-2" style="font-size: 10px">Dok.No.: FRM.PROS.01.01, Rev 00</p>
             </div>
             <div class="col-12 ">
                 <p class="cop_judul">FORM PERSIAPAN DAN FORM SERAH TERIMA <br>
                     SERTA PEMBERSIHAN BAHAN BAKU
                 </p>
-                <p class="cop_bawah text-center">raw material preparing, handover and cleaning</p>
+                <p class="cop_bawah text-center">Raw Material Preparing, Handover & Cleaning</p>
             </div>
 
 
@@ -125,12 +125,12 @@
             <div class="col-12">
                 <table class="table-tes">
                     <tr>
-                        <td>Hari/Tanggal <br> <span class="fst-italic">date</span> &nbsp;</td>
+                        <td>Hari/Tanggal <br> <span class="fst-italic">Date</span> &nbsp;</td>
                         <td width="2%">: </td>
                         <td class="align-middle">&nbsp; {{ tanggal($tanggal) }}</td>
                     </tr>
                     <tr>
-                        <td>Nama Petugas Pembagi &nbsp;<br> <span class="fst-italic">Leader name</span> </td>
+                        <td>Nama Petugas Pembagi &nbsp;<br> <span class="fst-italic">Leader Name</span> </td>
                         <td width="2%">:</td>
 
                         <td class="align-middle"> &nbsp;{{ $pengawas }}</td>
@@ -158,7 +158,7 @@
 
 
                             <th class="align-middle text-center" rowspan="2">Keterangan <br><span
-                                    class="fst-italic fw-lighter">Remaks</span></th>
+                                    class="fst-italic fw-lighter">Remarks</span></th>
 
                         </tr>
                         <tr>
@@ -211,10 +211,10 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
                             </td>
                         </tr>
                         <tr>

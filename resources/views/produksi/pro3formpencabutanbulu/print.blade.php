@@ -162,8 +162,8 @@
                                 <p class="cop_bawah text-center">Feather removal and Drying 1 Report</p>
                             </th>
                             <th class="align-top text-end text-nowrap">
-                                <p class="float-end me-2 fw-normal" style="font-size: 14px; ">No Dok :
-                                    FRM.PROS.01.03, Rev 00</p>
+                                <p class="float-end me-2 fw-normal" style="font-size: 14px; ">Dok.No.:
+                                    FRM.PROS.01.02, Rev 00</p>
                             </th>
 
                         </tr>
@@ -206,18 +206,18 @@
                             </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th rowspan="2" class="text-center align-middle">Pcs</th>
-                            <th rowspan="2" class="text-center align-middle">Gr</th>
-                            <th rowspan="2" class="text-center align-middle">Pcs</th>
-                            <th rowspan="2" class="text-center align-middle">Gr</th>
+                            <th rowspan="2" class="text-center align-middle">PCS</th>
+                            <th rowspan="2" class="text-center align-middle">GR</th>
+                            <th rowspan="2" class="text-center align-middle">PCS</th>
+                            <th rowspan="2" class="text-center align-middle">GR</th>
                             <th colspan="2" class="text-center align-middle">Ok</th>
                             <th colspan="2" class="text-center align-middle">Not Ok</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
-                            <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-center align-middle">PCS</th>
+                            <th class="text-center align-middle">GR</th>
+                            <th class="text-center align-middle">PCS</th>
+                            <th class="text-center align-middle">GR</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -265,13 +265,13 @@
                                     @if ($susut < 30)
                                         OK
                                     @else
-                                        Not ok
+                                        Not Ok
                                     @endif
                                 </td>
                                 <td class="text-start">
                                     @if ($susut < 30)
                                     @else
-                                        Susut melebihi batas standar
+                                        Susut Melebihi Batas Standar
                                     @endif
                                 </td>
 
@@ -291,9 +291,9 @@
                         <tr class="table-bawah">
                             <th style="border: none" colspan="15"></th>
                             <td colspan="3" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(ttd dan nama)</span></td>
+                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
                             <td colspan="2" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(ttd dan nama)</span></td>
+                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="15"></th>
@@ -301,7 +301,7 @@
                                 (STAFF CABUT)
                             </td>
                             <td colspan="2" class="text-center align-middle">
-                                (KA.CABUT)
+                                (KA. CABUT)
                             </td>
                         </tr>
 
