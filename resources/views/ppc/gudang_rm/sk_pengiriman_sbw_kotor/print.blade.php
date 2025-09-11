@@ -8,7 +8,7 @@
         <tr>
             <td class="align-middle text-start">Alamat Rumah Walet</td>
             <td class="align-middle text-start"> : </td>
-            <td class="align-middle text-start">&nbsp;{{ $rumah_walet->alamat }}</td>
+            <td class="align-middle text-start">&nbsp;{{ ucwords($rumah_walet->alamat) }}</td>
         </tr>
 
         <tr>
@@ -24,7 +24,7 @@
         <tr>
             <td class="align-middle text-start">Alamat IKPH</td>
             <td class="align-middle text-start"> : </td>
-            <td class="align-middle text-start">&nbsp;Jl. Teluk tiram darat no 5B Rt 26 / RW 002 Telawang, Banjarmasin
+            <td class="align-middle text-start">&nbsp;Jl. Teluk Tiram Darat No 5B Rt 26 / RW 002 Telawang, Banjarmasin
                 Barat, Kota
                 Banjarmasin, Kalimantan Selatan</td>
         </tr>
@@ -38,13 +38,13 @@
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
                     <th class="text-center align-middle" rowspan="2">Tanggal Panen</th>
-                    <th class="text-center align-middle" rowspan="2">Berat Panen <br> (gr)</th>
+                    <th class="text-center align-middle" rowspan="2">Berat Panen <br> (GR)</th>
                     <th class="text-center align-middle" colspan="2">Pengiriman ke IKPH</th>
                     <th class="text-center align-middle" rowspan="2">Keterangan</th>
                 </tr>
                 <tr>
-                    <th class="text-center">Tanggal Kirim</th>
-                    <th class="text-center">Berat Kirim (IKPH) <br> (Gr)</th>
+                    <th class="text-center align-top">Tanggal Kirim</th>
+                    <th class="text-center align-middle">Berat Kirim (IKPH) <br> (GR)</th>
                 </tr>
             </thead>
             <tbody>
@@ -55,9 +55,9 @@
                     <tr>
                         <td class="text-end">{{ $loop->iteration }}</td>
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
-                        <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
+                        <td class="text-end" align="right">{{ number_format($d->kg, 0) }} GR</td>
                         <td class="text-end">{{ tanggal($tgl_plus1hari) }}</td>
-                        <td class="text-end" align="right">{{ number_format($d->kg, 0) }} gr</td>
+                        <td class="text-end" align="right">{{ number_format($d->kg, 0) }} GR</td>
                         <td class="text-start"></td>
                     </tr>
                 @endforeach

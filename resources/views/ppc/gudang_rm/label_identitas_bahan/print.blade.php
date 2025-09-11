@@ -127,14 +127,14 @@
                                         {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
                                     </td>
                                     <td>:</td>
-                                    <th>{{ $d->kategori == 'Baku' ? $d->grade : $d->barang->nama_barang }}</th>
+                                    <th>{{ $d->kategori == 'Baku' ? ucwords($d->grade) : $d->barang->nama_barang }}</th>
                                 </tr>
                                 <tr>
                                     <td>
                                         Nama Produsen
                                     </td>
                                     <td>:</td>
-                                    <td>{{ $d->kategori == 'Baku' ? $d->rumah_walet : $d->supplier->nama_supplier }}
+                                    <td>{{ $d->kategori == 'Baku' ? ucwords($d->rumah_walet) : $d->supplier->nama_supplier }}
                                     </td>
                                 </tr>
 
@@ -188,7 +188,11 @@
                                 <tr>
                                     <td></td> <!-- Untuk tanda tangan -->
                                     <td></td>
-                                    <td>PASS</td>
+                                    <td>
+                                        PASS / REJECT <br>
+
+                                        <span style="font-size: 5px">(Coret Yang Tidak Perlu)</span>
+                                    </td>
                                 </tr>
                             </table>
                         </div>
