@@ -155,17 +155,17 @@
                                     alt=""></th>
                             <th colspan="5" class="text-center">
                                 <p class="cop_judul mt-3 ">FORM TOTAL HASIL PEMILAHAN AKHIR</p>
-                                <p class="cop_bawah text-center">Final grading results</p>
+                                <p class="cop_bawah text-center">Final Grading Results</p>
                             </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PROS.01.05,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.PROS.01.06,
                                     Rev 00</p>
                             </th>
 
                         </tr>
 
                         <tr>
-                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span>
+                            <td>Hari / Tanggal <br> <span class="fst-italic">Date</span>
                             </td>
 
                             <td style="padding: 8px;" class="align-middle"> : {{ tanggal($tgl) }}</td>
@@ -181,13 +181,13 @@
                             <th rowspan="2" class="text-center align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
                             <th rowspan="2" class="text-center align-middle">Jumlah <br> Box</th>
-                            <th rowspan="2" class="text-start align-middle">Keterangan<br><span
+                            <th rowspan="2" class="text-center align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span>
                             </th>
                         </tr>
                         <tr class="table-bawah">
                             <th class="text-center align-middle">Pcs</th>
-                            <th class="text-center align-middle">Gram</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
 
                     </thead>
@@ -212,11 +212,12 @@
                             @endphp
                             <tr class="table-bawah {{ $borderClass }}">
                                 <td class="text-end align-middle">{{ $loop->iteration }}</td>
-                                <td class="text-start align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-start align-middle">{!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
+                                </td>
                                 <td class="text-end align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td class="text-end align-middle">{{ $g['pcs'] }}</td>
                                 <td class="text-end align-middle">{{ $g['gr'] }}</td>
-                                <td class="text-start align-middle">{{ $g['grade'] }}</td>
+                                <td class="text-start align-middle">{{ strtoupper($g['grade']) }}</td>
                                 <td class="text-end align-middle">{{ $g['box'] }}</td>
                                 <td class="text-center align-middle"></td>
                             </tr>
@@ -227,15 +228,23 @@
                             <th colspan="20">&nbsp;</th>
                         </tr>
                         <tr class="table-bawah">
-
-                            <th style="border: none; text-align: start" colspan="5"></th>
+                            <th style="border: none; text-align: start" colspan="4"></th>
                             <th class="text-center" colspan="2">Dibuat Oleh:</th>
-                            <th class="text-center">Diperiksa Oleh:</th>
+                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="5"></th>
-                            <td colspan="2" style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <th style="border: none" colspan="4"></th>
+                            <td colspan="2" style="height: 80px">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 80px" colspan="2"><span style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="4"></th>
+                            <td colspan="2">
+                                (STAFF PACKING & GUDANG FG)
+                            </td>
+                            <td colspan="2">(KA. PACKING & GUDANG FG)</td>
                         </tr>
                     </tfoot>
 

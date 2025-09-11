@@ -105,7 +105,7 @@
             <div class="col-10">
                 <table>
                     <tr>
-                        <td width="20%">Hari / Tanggal <br> <span class="fst-italic">date</span></td>
+                        <td width="20%">Hari / Tanggal <br> <span class="fst-italic">Date</span></td>
                         <td class="align-middle"> &nbsp; : {{ tanggal($tgl) }}</td>
                         <td>&nbsp;</td>
                         <td class="align-middle">Regu</td>

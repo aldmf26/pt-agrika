@@ -68,7 +68,7 @@
             border: 1px solid black;
             text-align: center;
             height: 35px;
-            font-size: 8px;
+            font-size: 9px;
         }
 
         .ms-4 {
@@ -110,18 +110,22 @@
                         <!-- Label pertama -->
                         <div class="label mt-1">
                             <div class="header">
-                                <div class="d-flex justify-content-between">
-                                    <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo">
-                                    <p style="font-size: 8px">PT. AGRIKA GATYA ARUM</p>
-                                    <div></div>
-                                </div>
+                                <div class="d-flex align-items-start">
+                                    <!-- Logo kiri -->
+                                    <img src="{{ asset('img/logo.jpeg') }}" class="logo" alt="Logo"
+                                        style="height:40px;">
 
-                                <p class="text-center ms-4" style="font-size: 8px">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;<strong><u>Identitas
-                                            Bahan
-                                            {{ ucwords($d->kategori) }}</u></strong></p>
+                                    <!-- Teks kanan -->
+                                    <div class="flex-grow-1 text-center">
+                                        <p style="font-size: 9px; margin:0;">PT. AGRIKA GATYA ARUM</p>
+                                        <p style="font-size: 9px; margin:0;">
+                                            <strong><u>Identitas Bahan {{ ucwords($d->kategori) }}</u></strong>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                            <table style="font-size: 8px; text-align: left">
+
+                            <table style="font-size: 9px; text-align: left">
                                 <tr>
                                     <td>Nama
                                         {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
@@ -181,9 +185,9 @@
                             </table>
                             <table class="signature-table">
                                 <tr>
-                                    <td>KA. GUDANG</td>
-                                    <td>QC INCOMING</td>
-                                    <td>STATUS</td>
+                                    <td width="30%">KA. GUDANG BAHAN BAKU</td>
+                                    <td width="30%">KA. QC</td>
+                                    <td width="30%">STATUS</td>
                                 </tr>
                                 <tr>
                                     <td></td> <!-- Untuk tanda tangan -->
@@ -191,7 +195,7 @@
                                     <td>
                                         PASS / REJECT <br>
 
-                                        <span style="font-size: 5px">(Coret Yang Tidak Perlu)</span>
+                                        <span style="font-size: 8px">(Coret Yang Tidak Perlu)</span>
                                     </td>
                                 </tr>
                             </table>

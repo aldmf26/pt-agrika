@@ -115,7 +115,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ tanggal($b['tgl']) }}</td>
-                                <td>{{ $b['tipe'] }}</td>
+                                <td>{{ strtoupper($b['tipe']) }}</td>
                                 <td>{{ $b['nm_partai'] }}</td>
                                 <td>{{ $b['no_box'] }}</td>
                                 <td class="text-end">{{ $b['pcs_awal'] }}</td>

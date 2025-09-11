@@ -143,7 +143,7 @@
                 </table>
             </div> --}}
             <div class="col-lg-12">
-
+                <br>
                 <table style="font-size: 11px" width="100%">
                     <thead>
                         <tr>
@@ -154,13 +154,13 @@
                                 <p class="cop_bawah text-center">Moulding results</p>
                             </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PROS.01.04,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.PROS.01.04,
                                     Rev 00</p>
                             </th>
 
                         </tr>
                         <tr>
-                            <td>Hari / Tanggal <br> <span class="fst-italic">date</span></td>
+                            <td>Hari / Tanggal <br> <span class="fst-italic">Date</span></td>
                             <td class="align-middle">&nbsp; : {{ tanggal($tgl) }}</td>
                         </tr>
                         <tr>
@@ -186,7 +186,7 @@
                             <th colspan="2" class="text-center ">Berat Hasil drying 2 <br> <span
                                     class="fst-italic fw-lighter">Result qty</th>
                             <th rowspan="2" class="text-center align-middle">Hcr <br> <span
-                                    class="fst-italic fw-lighter">(gr)</th>
+                                    class="fst-italic fw-lighter">(Gr)</th>
                             <th rowspan="2" class="text-center align-middle">%Susut <br> (Min <br> susut 0- <br> 3%)
                             </th>
                             <th rowspan="2" class="text-center align-middle">Ok / Not <br> ok </th>
@@ -214,7 +214,7 @@
                                 <td class="text-start ">{{ ucwords(strtolower($c['nama'])) }}</td>
                                 <td class="text-end ">{{ $sbw->no_invoice ?? $c['nm_partai'] }}</td>
                                 <td class="text-end ">{{ $c['no_box'] }} </td>
-                                <td class="text-start ">{{ ucwords(strtolower($sbw->nama ?? '-')) }} </td>
+                                <td class="text-start ">{{ strtoupper($sbw->nama ?? '-') }} </td>
                                 <td class="text-end ">{{ $c['pcs_awal_ctk'] }}</td>
                                 <td class="text-end ">{{ $c['gr_awal_ctk'] }}</td>
                                 <td class="text-end ">{{ $c['pcs_akhir'] }}</td>
@@ -246,17 +246,17 @@
                         <tr class="table-bawah">
                             <th style="border: none" colspan="8"></th>
                             <td colspan="3" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(ttd dan nama)</span></td>
+                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
                             <td colspan="2" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(ttd dan nama)</span></td>
+                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="8"></th>
                             <td colspan="3" class="text-center align-middle">
-                                (STAFF CABUT)
+                                (STAFF CETAK)
                             </td>
                             <td colspan="2" class="text-center align-middle">
-                                (KA.CABUT)
+                                (KA.CETAK)
                             </td>
                         </tr>
 

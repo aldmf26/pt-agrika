@@ -153,13 +153,13 @@
                                 <p class="cop_bawah text-center">Material cleaning and washing CCP 1</p>
                             </th>
                             <th class="align-top text-end text-nowrap">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PROS.01.03,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.PROS.01.03,
                                     Rev.00</p>
                             </th>
 
                         </tr>
                         <tr>
-                            <td>Hari/Tanggal &nbsp;<br> <span class="fst-italic">date</span> </td>
+                            <td>Hari/Tanggal &nbsp;<br> <span class="fst-italic">Date</span> </td>
                             <td class="align-middle"> &nbsp;:{{ tanggal($tgl) }}</td>
                             <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
                             <td class="align-middle" colspan="3"> &nbsp;:{{ $nama_regu }}</td>
@@ -167,34 +167,34 @@
 
                         <tr class="table-bawah">
                             <th class="text-center align-middle" rowspan="2">No</th>
-                            <th class=" align-middle" rowspan="2">Nama Operator Cabut <br> <span
+                            <th class=" align-middle text-center" rowspan="2">Nama Operator Cabut <br> <span
                                     class="fst-italic fw-lighter">Operator
                                     name</span></th>
-                            <th class=" align-middle" rowspan="2">Kode Batch/Lot <br> <span
+                            <th class=" align-middle text-center" rowspan="2">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot
                                     code</span></th>
-                            <th class=" align-middle" rowspan="2">No Box</th>
+                            <th class=" align-middle text-center" rowspan="2">No Box</th>
                             <th class="text-center  " colspan="2">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</span>
                             </th>
-                            <th class="text-center" colspan="2">Jam Cuci <br> <span
+                            <th class="text-center " colspan="2">Jam Cuci <br> <span
                                     class="fst-italic fw-lighter">Washing
                                     time</span></th>
-                            <th class=" align-middle" rowspan="2">Total Waktu <br> <span
+                            <th class=" align-middle text-center" rowspan="2">Total Waktu <br> <span
                                     class="fst-italic fw-lighter">Time</span></th>
-                            <th class=" align-middle" rowspan="2">Waktu Cuci Per Pcs <br> <span
+                            <th class=" align-middle text-center" rowspan="2">Waktu Cuci Per Pcs <br> <span
                                     class="fst-italic fw-lighter">(30 detik/s)</span></th>
-                            <th class=" align-middle" rowspan="2">Nama Operator Pencucian <br> CCP 1<br>
+                            <th class=" align-middle text-center" rowspan="2">Nama Operator Pencucian <br> CCP 1<br>
                                 <span class="fst-italic fw-lighter">Cleaner name CCP 1</span>
                             </th>
-                            <th class=" align-middle" rowspan="2">Keterangan<br> <span
+                            <th class=" align-middle text-center" rowspan="2">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remaks</span></th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-end">Pcs</th>
-                            <th class="text-end">Gr</th>
-                            <th class="">Awal/Mulai</th>
-                            <th class="">Akhir/Stop</th>
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gr</th>
+                            <th class="text-center">Awal/Mulai</th>
+                            <th class="text-center">Akhir/Stop</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -222,10 +222,10 @@
                                     ->first();
                             @endphp
                             <tr class="table-bawah">
-                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
-                                <td class="">{{ $sbw->no_invoice }}</td>
-                                <td class="">{{ $c['no_box'] }}</td>
+                                <td class="text-end">{{ $sbw->no_invoice }}</td>
+                                <td class="text-end">{{ $c['no_box'] }}</td>
                                 <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
 
@@ -257,10 +257,10 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
                             </td>
                         </tr>
                         <tr>
