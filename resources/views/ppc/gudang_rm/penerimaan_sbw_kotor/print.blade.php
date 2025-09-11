@@ -195,8 +195,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">(ADM. GUDANG)</td>
-                        <td class="text-center">(KA. GUDANG)</td>
+                        <td class="text-center">(STAFF GUDANG BAHAN BAKU)</td>
+                        <td class="text-center">(KA. GUDANG BAHAN BAKU)</td>
                         <td class="text-center">(DOKTER HEWAN)</td>
                     </tr>
                 </tbody>
