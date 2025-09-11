@@ -3,7 +3,7 @@
         <tr>
             <th>Tanggal Update</th>
             <th>:
-                {{ date('Y-m-d') }}
+                {{ tanggal(date('Y-m-d')) }}
             </th>
         </tr>
         <tr>
@@ -22,14 +22,14 @@
                     <th class="head text-center align-middle">Contact Person</th>
                     <th class="head text-center align-middle">Nomor Telpon</th>
                     <th class="head text-center align-middle">Jenis Produk / Layanan</th>
-                    <th class="head text-center align-middle">Hasil Evaluasi</th>
+                    <th class="head text-center align-middle">Hasil Evaluasi Rutin</th>
                     <th class="head text-center align-middle">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($datas as $d)
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td class="text-end">{{ $loop->iteration }}</td>
                         <td>{{ $d->nama_supplier }}</td>
                         <td>{{ $d->alamat }}</td>
                         <td>{{ $d->contact_person }}</td>
@@ -59,19 +59,19 @@
                     <th class="head text-center align-middle">Contact Person</th>
                     <th class="head text-center align-middle">Nomor Telpon</th>
                     <th class="head text-center align-middle">Jenis Produk / Layanan</th>
-                    <th class="head text-center align-middle">Hasil Evaluasi</th>
+                    <th class="head text-center align-middle">Hasil Evaluasi Rutin</th>
                     <th class="head text-center align-middle">Keterangan</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($rumah_walet as $d)
                     <tr>
-                        <td class="text-center">{{ $loop->iteration }}</td>
+                        <td class="text-end">{{ $loop->iteration }}</td>
                         <td>{{ ucwords($d->nama) }}</td>
                         <td>{{ $d->alamat }}</td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td>SBW Kotor</td>
                         <td class="text-end">100</td>
                         <td></td>
                     </tr>

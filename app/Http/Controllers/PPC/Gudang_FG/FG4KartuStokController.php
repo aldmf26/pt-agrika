@@ -27,7 +27,7 @@ class FG4KartuStokController extends Controller
         $kartu = json_decode($kartu, TRUE);
         $data = [
             'title' => 'KARTU STOK PRODUK JADI',
-            'dok' => 'Dok.No.: FRM.WH.04.04, Rev.00',
+            'dok' => 'Dok.No.: FRM.WHS.03.02, Rev.00',
             'kartu' => $kartu['data'],
             'grade' => $r->grade
 
