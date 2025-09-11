@@ -50,7 +50,7 @@
             </tbody>
         </table>
     @else
-        <table class="table table-xs border-dark table-bordered">
+        <table class="table table-xs border-dark table-bordered mt-2">
             <thead>
                 <tr>
                     <th class="head text-center align-middle">No</th>
@@ -67,12 +67,12 @@
                 @foreach ($rumah_walet as $d)
                     <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
-                        <td>{{ $d->nama }}</td>
+                        <td>{{ ucwords($d->nama) }}</td>
                         <td>{{ $d->alamat }}</td>
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td class="text-end">100</td>
                         <td></td>
                     </tr>
                 @endforeach
@@ -81,26 +81,30 @@
     @endif
     <div class="row">
         <div class="col-6"></div>
-        <div class="col-2"></div>
-        <div class="col-4">
-            <table class="table table-bordered border-white" style="font-size: 11px">
+        <div class="col-6">
+            <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+                        <th class="text-center" width="33.33%">Disetujui Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-center">
+                        <td class="text-center align-middle">
+                            (STAFF PURCHASING)
                         </td>
-                        <td class="text-center">
+                        <td class="text-center align-middle">
+                            (KA. PURCHASING)
                         </td>
-
                     </tr>
                 </tbody>
             </table>

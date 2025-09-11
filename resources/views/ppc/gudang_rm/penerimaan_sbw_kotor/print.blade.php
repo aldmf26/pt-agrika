@@ -11,7 +11,7 @@
         <tr>
             <td>Jenis SBW Kotor</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ ucwords($penerimaan->nama) }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ strtoupper($penerimaan->nama) }}</td>
         </tr>
         <tr>
             <td>No Lot SBW</td>
@@ -195,8 +195,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">(ADM. GUDANG)</td>
-                        <td class="text-center">(KA. GUDANG)</td>
+                        <td class="text-center">(STAFF GUDANG BAHAN BAKU)</td>
+                        <td class="text-center">(KA. GUDANG BAHAN BAKU)</td>
                         <td class="text-center">(DOKTER HEWAN)</td>
                     </tr>
                 </tbody>
