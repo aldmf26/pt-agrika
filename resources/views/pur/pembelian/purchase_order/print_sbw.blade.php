@@ -9,7 +9,7 @@
 
         <div class="d-flex justify-content-between">
             <div>
-                <strong>To:</strong> {{ ucwwords($datas->supplier) }}<br>
+                <strong>To:</strong> {{ ucwords($datas->supplier) }}<br>
             </div>
             <div>
 
