@@ -191,8 +191,8 @@
                                     class="fst-italic fw-lighter">Remaks</span></th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center">PCS</th>
-                            <th class="text-center">GR</th>
+                            <th class="text-center">Pcs</th>
+                            <th class="text-center">Gr</th>
                             <th class="text-center">Awal/Mulai</th>
                             <th class="text-center">Akhir/Stop</th>
                         </tr>

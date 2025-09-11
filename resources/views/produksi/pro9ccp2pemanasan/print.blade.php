@@ -98,7 +98,7 @@
         .table-bawah th,
         .table-bawah td {
             border: 1px solid black;
-            padding: 0.1rem;
+            padding: 0.2rem 0.3rem;
             vertical-align: middle;
             text-align: center;
             white-space: nowrap;
@@ -153,59 +153,60 @@
                                 <p class="cop_bawah text-center">Steaming CCP 2</p>
                             </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.09,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.PROS.01.07,
                                     Rev 00</p>
                             </th>
 
                         </tr>
 
                         <tr>
-                            <td>Tanggal <br> <span class="fst-italic">date</span></td>
+                            <td>Tanggal <br> <span class="fst-italic">Date</span></td>
                             <td colspan="2"> : {{ tanggal($tgl) }}</td>
 
-                            <td colspan="2">Suhu ruang<br> <span class="fst-italic">Room temperature</span></td>
+                            <td colspan="2">Suhu ruang<br> <span class="fst-italic">Room Temperature</span></td>
                             <td colspan="3"> : {{ empty($header->suhu_ruang) ? '28.6' : $header->suhu_ruang }} °C
                             </td>
 
-                            <td colspan="2">Mesin Pemanas <br> <span class="fst-italic">Steamer type</span></td>
-                            <td colspan="3"> : Sistem Retort - Pemanasan Uap bertingkat</td>
+                            <td colspan="2">Mesin Pemanas <br> <span class="fst-italic">Steamer Type</span></td>
+                            <td colspan="3"> : Sistem Retort - Pemanasan Uap Bertingkat</td>
                         </tr>
                         <tr>
-                            <td>Suhu sarang walet awal <br> <span class="fst-italic">Material
-                                    temperature</span></td>
+                            <td>Suhu Sarang Walet Awal <br> <span class="fst-italic">Material
+                                    Temperature</span></td>
                             <td colspan="2"> : {{ empty($header->suhu_sbw_awal) ? '23.6' : $header->suhu_sbw_awal }}
                                 °C</td>
 
-                            <td colspan="2">Penambahan air <br> <span class="fst-italic">Adding water
-                                    temperature</span></td>
+                            <td colspan="2">Penambahan air <br> <span class="fst-italic">Adding Water
+                                </span></td>
                             <td colspan="3"> : Otomatis </td>
 
                             <td colspan="5"></td>
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">Urutan <br> Pemanasan <br> <span
-                                    class="fst-italic fw-lighter">Heating number</span></th>
-                            <th rowspan="2" class="text-end align-middle">Nampan <br> <span
+                                    class="fst-italic fw-lighter">Heating Number</span></th>
+                            <th rowspan="2" class="text-center align-middle">Nampan <br> <span
                                     class="fst-italic fw-lighter">Tray</th>
-                            <th rowspan="2" class="text-start align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
-                            <th rowspan="2" class="text-start align-middle">Jenis <br> <span
+                            <th rowspan="2" class="text-center align-middle">Jenis <br> <span
                                     class="fst-italic fw-lighter">Type</th>
-                            <th rowspan="2" class="text-start align-middle">Waktu <br> mulai <br> Steam</th>
+                            <th rowspan="2" class="text-center align-middle">Waktu <br> Mulai <br> Steam</th>
                             <th colspan="2" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</th>
-                            <th rowspan="2" class="text-end align-middle">T<sub>venting</sub> (°C)</th>
-                            <th rowspan="2" class="text-end align-middle">T<sub>venting</sub> (mnt) </th>
-                            <th rowspan="2" class="text-end align-middle">T<sub>tot</sub> (°C) </th>
-                            <th rowspan="2" class="text-end align-middle">T<sub>tot</sub> (mnt) </th>
-                            <th rowspan="2" class="text-start align-middle">Petugas <br> pengecekan <br> (paraf)
+                            <th rowspan="2" class="text-center align-middle">T<sub>Venting</sub> (°C)</th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>Venting</sub> (Mnt) </th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>Tot</sub> (°C) </th>
+                            <th rowspan="2" class="text-center align-middle">T<sub>Tot</sub> (Mnt) </th>
+                            <th rowspan="2" class="text-center align-middle">Petugas <br> Pengecekan <br> (Paraf)
                             </th>
-                            <th rowspan="2" class="text-start align-middle">Keterangan </th>
+                            <th rowspan="2" class="text-center align-middle">Keterangan <br> <span
+                                    class="fst-italic fw-lighter">Remarks</span> </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gr</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -240,25 +241,28 @@
 
                             @endphp
                             <tr class="table-bawah">
-                                <td>{{ ceil(($index + 1) / 6) }}</td>
+                                <td class="text-end">{{ ceil(($index + 1) / 6) }}</td>
                                 <td class="text-end">{{ ($index % 6) + 1 }}</td>
-                                <td class="text-start">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                 <td class="text-start">
-                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
+                                    {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
+
                                 </td>
-                                <td class="text-start">{{ empty($isi->waktu_mulai) ? $time : $isi->waktu_mulai }}</td>
+                                <td class="text-end">
+                                    {{ empty($isi->waktu_mulai) ? date('h:i A', strtotime($time)) : date('h:i A', strtotime($isi->waktu_mulai)) }}
+                                </td>
                                 <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
                                 <td class="text-end">{{ empty($isi->tventing_c) ? 60.5 : $isi->tventing_c }} </td>
                                 <td class="text-end">{{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }}
-                                    menit {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} detik</td>
+                                    Menit {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik</td>
                                 <td class="text-end">{{ empty($isi->ttot_c) ? 80.4 : $isi->ttot_c }} </td>
                                 <td class="text-end">
                                     @if (!empty($isi->ttot_menit) && $isi->ttot_menit > 0)
-                                        {{ $isi->ttot_menit }} menit
+                                        {{ $isi->ttot_menit }} Menit
                                     @endif
 
-                                    {{ empty($isi->ttot_detik) ? 35 : $isi->ttot_detik }} detik
+                                    {{ empty($isi->ttot_detik) ? 35 : $isi->ttot_detik }} Detik
                                 </td>
                                 <td></td>
                                 <td></td>
@@ -274,7 +278,7 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" rowspan="2" colspan="2">
+                            <th style="border: none; text-align: start" rowspan="3" colspan="2">
                                 <span class="fst-underline"> Standart Suhu Pemanasan</span> <br>
                                 <span class="fw-light">Mangkok/Segitiga/Oval/Sudut</span> <br>
                                 <span class="fw-light">Patahan</span> <br>
@@ -285,29 +289,34 @@
 
 
                             </th>
-                            <th style="border: none; text-align: start" rowspan="2" colspan="2  ">
+                            <th style="border: none; text-align: start" rowspan="3" colspan="2  ">
                                 <span class="fst-underline"> </span> <br>
-                                <span class="fw-light">: 80,4°C selama 30 detik</span> <br>
-                                <span class="fw-light">: 92.6 °C selama 1 menit 27 detik</span> <br>
-                                <span class="fw-light">: 85.1 oC selama 1 menit 48 detik</span> <br>
-                                <span class="fw-light">: 92.9°C selama 50 detik</span> <br> <br>
+                                <span class="fw-light">: 80,4 °C Selama 30 Detik</span> <br>
+                                <span class="fw-light">: 92.6 °C Selama 1 Menit 27 Detik</span> <br>
+                                <span class="fw-light">: 85.1 °C Selama 1 Menit 48 Detik</span> <br>
+                                <span class="fw-light">: 92.9 °C Selama 50 Detik</span> <br> <br>
 
                                 <span class="fw-light">: 57.1 °C</span> <br>
-                                <span class="fw-light">: 1 menit 3 detik</span> <br>
+                                <span class="fw-light">: 1 Menit 3 Detik</span> <br>
 
 
                             </th>
-                            <th style="border: none; text-align: start" rowspan="2" colspan="5">
-
-
+                            <th style="border: none; text-align: start" rowspan="3" colspan="4">
                             </th>
-                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            <th class="text-center" colspan="3">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
 
-                            <td colspan="2" style="height: 80px" class="text-center align-bottom">KA. STEAM</td>
-                            <td colspan="2" style="height: 80px" class="text-center align-bottom">QC</td>
+                            <td colspan="3" style="height: 80px" class="text-center align-middle"><span
+                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                            <td colspan="2" style="height: 80px" class="text-center align-middle"><span
+                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                        </tr>
+                        <tr class="table-bawah">
+
+                            <td colspan="3" class="text-center align-bottom">(KA. STEAM)</td>
+                            <td colspan="2" class="text-center align-bottom">(KA. QC)</td>
                         </tr>
 
                     </tfoot>

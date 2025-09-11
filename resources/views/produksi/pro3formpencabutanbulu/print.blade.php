@@ -206,18 +206,18 @@
                             </th>
                         </tr>
                         <tr class="table-bawah">
-                            <th rowspan="2" class="text-center align-middle">PCS</th>
-                            <th rowspan="2" class="text-center align-middle">GR</th>
-                            <th rowspan="2" class="text-center align-middle">PCS</th>
-                            <th rowspan="2" class="text-center align-middle">GR</th>
+                            <th rowspan="2" class="text-center align-middle">Pcs</th>
+                            <th rowspan="2" class="text-center align-middle">Gr</th>
+                            <th rowspan="2" class="text-center align-middle">Pcs</th>
+                            <th rowspan="2" class="text-center align-middle">Gr</th>
                             <th colspan="2" class="text-center align-middle">Ok</th>
                             <th colspan="2" class="text-center align-middle">Not Ok</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center align-middle">PCS</th>
-                            <th class="text-center align-middle">GR</th>
-                            <th class="text-center align-middle">PCS</th>
-                            <th class="text-center align-middle">GR</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -234,7 +234,7 @@
                                 <td class="text-start">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
                                 <td class="text-end">{{ $sbw->no_invoice }}</td>
                                 <td class="text-end">{{ $c['no_box'] }}</td>
-                                <td class="text-start">{{ $sbw->nama }}</td>
+                                <td class="text-start">{{ strtoupper($sbw->nama) }}</td>
                                 <td class="text-end">{{ tanggal($c['tgl']) }}</td>
                                 <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>

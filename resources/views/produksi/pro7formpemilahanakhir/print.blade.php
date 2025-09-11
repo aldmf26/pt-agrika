@@ -164,38 +164,38 @@
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
-                            <th colspan="5"></th>
+                            <th colspan="6"></th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">No Dok : FRM.PRO.01.07,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.PROS.01.05,
                                     Rev 00</p>
                             </th>
 
                         </tr>
                         <tr>
-                            <th colspan="8" class="text-center">
+                            <th colspan="9" class="text-center">
                                 <p class="cop_judul">FORM HARIAN PEMILAHAN AKHIR</p>
-                                <p class="cop_bawah text-center">Daily final grading</p>
+                                <p class="cop_bawah text-center">Daily Final Grading</p>
                             </th>
                         </tr>
                         <tr>
-                            <td colspan="2">Hari / Tanggal <br> <span class="fst-italic">date</span>
+                            <td colspan="2">Hari / Tanggal <br> <span class="fst-italic">Date</span>
                             </td>
                             <td colspan="2" class="align-middle"> : {{ tanggal($tgl) }}</td>
 
                         </tr>
                         <tr>
                             <td colspan="2">Kode Batch/Lot
-                                <br> <span class="fst-italic"> Batch/Lot code </span>
+                                <br> <span class="fst-italic"> Batch/Lot Code </span>
                             </td>
 
                             <td class="align-middle" colspan="3"> : {{ $kode_lot }}</td>
 
 
 
-                            <td class="table-bawah2">Pcs Ok</td>
-                            <td class="table-bawah2">Gram Ok</td>
-                            <td class="table-bawah2">Pcs Not Oke</td>
-                            <td class="table-bawah2">Gr Not Oke</td>
+                            <th class="table-bawah2">Pcs Ok</th>
+                            <th class="table-bawah2">Gr Ok</th>
+                            <th class="table-bawah2">Pcs Not Ok</th>
+                            <th class="table-bawah2">Gr Not Ok</th>
                         </tr>
                         <tr>
                             @php
@@ -206,26 +206,26 @@
                                 $grNotOkeY = collect($grading)->where('not_oke', 'T')->sum('gr');
                             @endphp
                             <td colspan="2">Jenis Material
-                                <br> <span class="fst-italic"> Material type </span>
+                                <br> <span class="fst-italic"> Material Type </span>
                             </td>
-                            <td class="align-middle" colspan="3"> : {{ $grade }}</td>
+                            <td class="align-middle" colspan="3"> : {{ strtoupper($grade) }}</td>
 
 
-                            <td class="table-bawah2">{{ number_format($pcsNotOkeY, 0) }}</td>
-                            <td class="table-bawah2">{{ number_format($grNotOkeY, 0) }}</td>
-                            <td class="table-bawah2">{{ number_format($pcsNotOkeT, 0) }}</td>
-                            <td class="table-bawah2">{{ number_format($grNotOkeT, 0) }}</td>
+                            <td class="table-bawah2 text-end">{{ number_format($pcsNotOkeY, 0) }}</td>
+                            <td class="table-bawah2 text-end">{{ number_format($grNotOkeY, 0) }}</td>
+                            <td class="table-bawah2 text-end">{{ number_format($pcsNotOkeT, 0) }}</td>
+                            <td class="table-bawah2 text-end">{{ number_format($grNotOkeT, 0) }}</td>
                         </tr>
                         <tr class="table-bawah">
                             <th rowspan="3" width="1%" class="text-center align-middle">No</th>
-                            <th rowspan="3" class="text-start align-middle">Jenis Produk<br><span
+                            <th rowspan="3" class="text-center align-middle">Jenis Produk<br><span
                                     class="fst-italic fw-lighter">Grade<span></th>
                             <th colspan="4" class="text-center align-middle">Kondisi Produk<br><span
                                     class="fst-italic fw-lighter">Product condition<span>
                             </th>
-                            <th rowspan="3" class="text-end align-middle" width="2%">Jumlah Box</th>
-                            <th rowspan="3" class="text-start align-middle" width="2%">Box <br> Grading</th>
-                            <th rowspan="3" class="text-start align-middle">Keterangan<br><span
+                            <th rowspan="3" class="text-center align-middle" width="2%">Jumlah Box</th>
+                            <th rowspan="3" class="text-center align-middle" width="2%">Box <br> Grading</th>
+                            <th rowspan="3" class="text-center align-middle">Keterangan<br><span
                                     class="fst-italic fw-lighter">Remarks<span></th>
                         </tr>
                         <tr class="table-bawah">
@@ -233,23 +233,23 @@
                             <th class="text-center" colspan="2">Not Ok</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-end" width="12%">Pcs</th>
-                            <th class="text-end" width="12%">Gram</th>
-                            <th class="text-end" width="12%">Pcs</th>
-                            <th class="text-end" width="12%">Gram</th>
+                            <th class="text-center" width="12%">Pcs</th>
+                            <th class="text-center" width="12%">Gr</th>
+                            <th class="text-center" width="12%">Pcs</th>
+                            <th class="text-center" width="12%">Gr</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($grading as $g)
                             <tr class="table-bawah">
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-start">{{ $g['grade'] }}</td>
+                                <td class="text-end">{{ $loop->iteration }}</td>
+                                <td class="text-start">{{ strtoupper($g['grade']) }}</td>
                                 <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : $g['pcs'] }}</td>
                                 <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : $g['gr'] }}</td>
                                 <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
                                 <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
                                 <td class="text-end">{{ $g['box'] }}</td>
-                                <td class="text-start">{{ $g['box_pengiriman'] }}</td>
+                                <td class="text-end">{{ $g['box_pengiriman'] }}</td>
                                 <td class="text-center"></td>
                             </tr>
                         @endforeach
@@ -264,14 +264,14 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="7"></th>
-                            <td style="height: 40px" colspan="2">
-                                <span style="opacity: 0.5;">(ttd dan nama)</span>
+                            <td style="height: 50px" colspan="2">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
                             </td>
 
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="7"></th>
-                            <td class="text-center" colspan="2">KA. GRADING</td>
+                            <td class="text-center" colspan="2">(KA. PACKING & GUDANG FG)</td>
 
                         </tr>
                     </tfoot>
