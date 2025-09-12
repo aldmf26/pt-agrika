@@ -1,6 +1,6 @@
-<x-hccp-print title="SELEKSI SUPPLIER MATERIAL" :dok="$dok">
+<x-hccp-print title="SELEKSI SUPPLIER MATERIAL SBW" :dok="$dok">
     <div class="row">
-        <div class="col-6">
+        <div class="col-12">
             <table style="font-size: 11px">
                 <tr>
                     <th width="150">Nama Supplier</th>
@@ -20,10 +20,10 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">INFORMASI PRODUK</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Produk</th>
         </tr>
         <tr>
-            <th>Material/Kemasan/Barang/Jasa yang ditawarkan</th>
+            <th>Material yang ditawarkan</th>
             <td>
                 1. SBW Kotor
             </td>
@@ -31,7 +31,9 @@
         <tr>
             <th>Spesifikasi</th>
             <td>
-                1.
+                1. Tidak Ada Jamur Pink <br>
+                2. Tidak Boleh Ada Batu
+
             </td>
         </tr>
         <tr>
@@ -50,7 +52,7 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">INFORMASI MANAJEMEN</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
         </tr>
         <tr>
             <th>Sistem Manajemen yang telah diterapkan di Perusahaan Anda:</th>
@@ -58,7 +60,7 @@
                 <p><input type="checkbox" checked> HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
                 <p><input type="checkbox"> GMP</p>
                 <p><input type="checkbox"> Lainnya (sebutkan)………</p>
-                <p><input type="checkbox" checked> Belum ada (Sedang menunggu sertifikat HACCP dari pabrik)</p>
+                <p><input type="checkbox"> Belum ada</p>
                 <p>(bila ada harap melampirkan sertifikat)</p>
             </td>
         </tr>
@@ -73,21 +75,21 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">SISTEM PEMBAYARAN</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sistem Pembayaran</th>
         </tr>
         <tr>
             <td colspan="2">
-                Lama jatuh tempo yang diijinkan: 3 Bulan / 90 Hari
+                Lama jatuh tempo yang di izinkan: 3 Bulan / 90 Hari
             </td>
         </tr>
     </table>
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">SAMPEL</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sampel</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : TIDAK TERSEDIA SAMPLE<br>
+            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : Tidak Tersedia Sampel<br>
                 a.
             </td>
         </tr>
@@ -118,9 +120,13 @@
         </tr>
     </table>
 </x-hccp-print>
-
-<x-hccp-print title="SELEKSI SUPPLIER/OUTSOURCE" :dok="$dok">
-    <p>Lembar Pemeriksaan (Bila ada sampel yang disertakan)</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<x-hccp-print title="SELEKSI SUPPLIER MATERIAL SBW" :dok="$dok">
+    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada sampel yang disertakan)</p>
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
             <th class="fw-bold bg-info">Departemen Lab</th>
@@ -128,7 +134,7 @@
         <tr>
             <td>Hasil Pemeriksaan : <br>
                 1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
-                2. SBW sesuai dengan kadar nitrite maksimal 50 mg/l(ppm)
+                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm)
             </td>
         </tr>
         <tr>
@@ -173,7 +179,7 @@
         <tr>
             <td>Hasil Pemeriksaan : <br>
                 1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
-                2. SBW sesuai dengan kadar nitrite maksimal 50 mg/l(ppm) sesuaiyang dilaporkan bagian lab
+                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm) sesuaiyang dilaporkan bagian lab
             </td>
         </tr>
         <tr>
@@ -190,8 +196,8 @@
     </table>
 
     <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6">
+        <div class="col-3"></div>
+        <div class="col-9">
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
@@ -202,27 +208,26 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px">
-                            <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
-                        <td style="height: 80px">
-                            <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
-                        <td style="height: 80px">
-                            <div style="position: relative; opacity: 0.5; font-size: 9px">Ttd & Nama</div>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">
-                            (KA. Purchasing)
+                        <td class="text-center align-middle">
+                            (KA. GUDANG BAHAN BAKU)
                         </td>
-                        <td class="text-center">
-                            (FSTL)
+                        <td class="text-center align-middle">
+                            (KA. LAB)
                         </td>
-                        <td class="text-center">
-                            (DIREKTUR)
+                        <td class="text-center align-middle">
+                            (DIREKTUR UTAMA)
                         </td>
-
                     </tr>
                 </tbody>
             </table>

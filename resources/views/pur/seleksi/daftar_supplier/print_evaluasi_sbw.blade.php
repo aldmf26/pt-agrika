@@ -1,41 +1,47 @@
-<x-hccp-print :title="$title" :dok="$dok">
+<x-hccp-print title="EVALUASI SUPPLIER MATERIAL SBW" :dok="$dok">
     <table class="table-xs">
         <tr>
-            <th>Tagngal</th>
+            <th width="230">Tanggal</th>
             <th>:</th>
             <td>{{ tanggal(date('Y-m-d')) }}</td>
         </tr>
         <tr>
-            <th width="130">Nama Supplier</th>
+            <th width="230">Nama Supplier</th>
             <th>:</th>
-            <td>{{ $supplier->nama_supplier }}</td>
+            <td>{{ ucwords($supplier->nama) }}</td>
         </tr>
         <tr>
-            <th width="130">Jenis Supply</th>
+            <th width="230">Jenis Supply</th>
             <th>:</th>
-            <td>{{ $supplier->produsen ?? '' }}</td>
+            <td>SBW Kotor</td>
         </tr>
         <tr>
             <td colspan="3"></td>
         </tr>
         <tr>
-            <th width="130">Periode Evaluasi</th>
+            <td colspan="3"></td>
+        </tr>
+        <tr>
+            <th width="230">Periode Evaluasi</th>
             <th>:</th>
             <td>Semester I / Semester II</td>
         </tr>
         <tr>
-            <th width="130">&nbsp;</th>
+            <th width="230">&nbsp;</th>
             <th>&nbsp;</th>
             <td style="font-size: 9px">*Coret salah satu</td>
         </tr>
     </table>
-    @php
-        $kuantitas = $evaluasi->detail->where('jenis_kriteria', 'kuantitas')->whereNotNull('alasan');
-        $waktu = $evaluasi->detail->where('jenis_kriteria', 'waktu')->whereNotNull('alasan');
-        $kualitas = $evaluasi->detail->where('jenis_kriteria', 'kualitas')->whereNotNull('alasan');
 
-        $harga = $evaluasi->detail->where('jenis_kriteria', 'harga')->whereNotNull('alasan')->first();
-        $komunikasi = $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->whereNotNull('alasan')->first();
+    @php
+        $evaluasiDetail = $evaluasi ? $evaluasi->detail : collect([]);
+
+        $kuantitas = $evaluasiDetail->where('jenis_kriteria', 'kuantitas')->whereNotNull('alasan');
+        $waktu = $evaluasiDetail->where('jenis_kriteria', 'waktu')->whereNotNull('alasan');
+        $kualitas = $evaluasiDetail->where('jenis_kriteria', 'kualitas')->whereNotNull('alasan');
+
+        $harga = $evaluasiDetail->where('jenis_kriteria', 'harga')->whereNotNull('alasan')->first();
+        $komunikasi = $evaluasiDetail->where('jenis_kriteria', 'komunikasi')->whereNotNull('alasan')->first();
 
         $totalPenilaian =
             ($kuantitas->avg('penilaian') ?? 100) +
@@ -50,7 +56,7 @@
         <thead>
             <tr>
                 <th class="head text-center">Kriteria Evaluasi:</th>
-                <th class="head text-center">Hasil Peniliaan</th>
+                <th class="head text-center">Hasil Penilaian</th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +70,12 @@
                 <td>
                     Jumlah pengiriman dengan kuantitas yang tidak sesuai:
                     <x-evaluasi-detail :datas="$kuantitas" />
+                    <div>a.</div>
+                    <div>b.</div>
+                    <div>c.</div>
+                    <div>d.</div>
+                    <div>e.</div>
+
                 </td>
             </tr>
 
@@ -77,6 +89,11 @@
                 <td>
                     Jumlah pengiriman dengan waktu pengiriman yang tidak sesuai:
                     <x-evaluasi-detail :datas="$waktu" />
+                    <div>a.</div>
+                    <div>b.</div>
+                    <div>c.</div>
+                    <div>d.</div>
+                    <div>e.</div>
                 </td>
             </tr>
 
@@ -91,6 +108,11 @@
                 <td>
                     Jumlah pengiriman dengan kualitas yang tidak sesuai:
                     <x-evaluasi-detail :datas="$kualitas" />
+                    <div>a.</div>
+                    <div>b.</div>
+                    <div>c.</div>
+                    <div>d.</div>
+                    <div>e.</div>
                 </td>
             </tr>
 
@@ -145,7 +167,7 @@
                 <div>&nbsp; 60 Tidak Mudah</div>
 
                 <p class="mt-2">Bila nilai rata-rata lebih kecil dari 75, maka Purchasing harus menghubungi
-                    Supplier/Outsource untuk
+                    Supplier untuk
                     melakukan tindakan perbaikan.</p>
             </div>
         </div>
@@ -172,7 +194,7 @@
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            (STAFF PURCHASING)
+                            (KA. GUDANG BAHAN BAKU)
                         </td>
                         <td class="text-center align-middle">
                             (KA. PURCHASING)
@@ -182,4 +204,5 @@
             </table>
         </div>
     </div>
+
 </x-hccp-print>

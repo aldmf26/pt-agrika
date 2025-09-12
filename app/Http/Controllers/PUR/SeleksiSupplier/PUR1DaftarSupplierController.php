@@ -43,7 +43,7 @@ class PUR1DaftarSupplierController extends Controller
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
-            'dok' => 'Dok.No.: FRM.PUR.02.02, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.01.04, Rev.00',
         ];
         return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
@@ -72,6 +72,7 @@ class PUR1DaftarSupplierController extends Controller
 
         return view('pur.seleksi.daftar_supplier.evaluasi', $data);
     }
+
 
     public function evaluasi_update(Request $r, $id)
     {
@@ -173,6 +174,17 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.print_evaluasi', $data);
     }
 
+    public function evaluasi_print_sbw(RumahWalet $supplier)
+    {
+        $data = [
+            'title' => 'EVALUASI SUPPLIER/OUTSOURCE',
+            'dok' => 'Dok.No.: FRM.PURS.01.05, Rev.00',
+            'supplier' => $supplier,
+            'evaluasi' => Evaluasi::where('supplier_id', $supplier->id)->latest()->first(),
+        ];
+        return view('pur.seleksi.daftar_supplier.print_evaluasi_sbw', $data);
+    }
+
     public function edit($id)
     {
         $data = [
@@ -258,9 +270,10 @@ class PUR1DaftarSupplierController extends Controller
         $nomor = $kode[$r->kategori] ?? 'PURS';
 
         $data = [
-            'title' => "DAFTAR SUPPLIER " . strtoupper($r->kategori == 'lainnya' ? 'SBW' : $r->kategori),
-            'dok' => "Dok.No.: FRM.$nomor.1.3, Rev.00",
+            'title' => "DAFTAR SUPPLIER " . strtoupper($r->kategori == 'lainnya' ? 'MATERIAL SBW' : $r->kategori),
+            'dok' => "Dok.No.: FRM.$nomor.01.03, Rev.00",
             'datas' => $datas,
+            'kategori' => $r->kategori,
             'rumah_walet' => DB::table('rumah_walet')->get(),
             'k' => $r->kategori != 'lainnya' ? 'satu' : 'lainnya',
             'jenis_supplier' => $r->kategori != 'lainnya' ? ucfirst($r->kategori) : 'Supplier Material SBW',

@@ -32,10 +32,6 @@ class Suplier extends Model
         return ucfirst($value);
     }
 
-    public function getAlamatAttribute($value)
-    {
-        return ucwords($value);
-    }
 
     public function barang()
     {
