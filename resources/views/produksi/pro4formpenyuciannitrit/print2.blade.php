@@ -188,7 +188,7 @@
                                 <span class="fst-italic fw-lighter">Cleaner name CCP 1</span>
                             </th>
                             <th class=" align-middle text-center" rowspan="2">Keterangan<br> <span
-                                    class="fst-italic fw-lighter">Remaks</span></th>
+                                    class="fst-italic fw-lighter">Remarks</span></th>
                         </tr>
                         <tr class="table-bawah">
                             <th class="text-center">Pcs</th>
@@ -230,8 +230,8 @@
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
 
 
-                                <td class="text-end">{{ $startTime->format('H:i') }}</td>
-                                <td class="text-end">{{ $endTime->format('H:i') }}</td>
+                                <td class="text-end">{{ $startTime->format('h:i A') }}</td>
+                                <td class="text-end">{{ $endTime->format('h:i A') }}</td>
                                 <td class="text-end">{{ $diffInMinutes }} menit</td>
                                 <td class="text-end">30</td>
                                 <td>{{ $nama_regu }}</td>

@@ -85,7 +85,7 @@ class FG1DeliveryOrderController extends Controller
         $delivery = json_decode($delivery, TRUE);
         $data = [
             'title' => 'Delivery Order',
-            'dok' => 'Dok.No.: FRM.WH.04.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.WHS.03.03, Rev.00',
             // 'datas' => $datas,
             'profil' => $profil,
             'tgl' => $r->tgl,

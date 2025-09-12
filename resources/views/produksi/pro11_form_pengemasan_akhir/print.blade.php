@@ -13,18 +13,11 @@
     <title>{{ $title }}</title>
     <style>
         .cop_judul {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             text-align: center;
             margin-bottom: 4px;
-            /* Atur jarak bawah paragraf pertama */
 
-        }
-
-        .cop_bawah {
-            margin-top: 0;
-            /* Hilangkan jarak atas paragraf kedua */
-            font-style: italic;
         }
 
         .shapes {
@@ -66,6 +59,14 @@
             padding-left: 6px;
         }
 
+        .cop_bawah {
+            margin-top: 0;
+            /* Hilangkan jarak atas paragraf kedua */
+            font-style: italic;
+            font-size: 10px;
+            font-weight: normal
+        }
+
         .table {
             --bs-table-bg: transparent;
             --bs-table-accent-bg: transparent;
@@ -82,8 +83,34 @@
             border-color: #41464b !important;
         }
 
-        thead th {
-            text-transform: capitalize;
+        .table th,
+        .table td {
+
+            font-size: 10px;
+        }
+
+        .table-tes th,
+        .table-tes td {
+
+            font-size: 10px;
+        }
+
+        .table-bawah th,
+        .table-bawah td {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
+            /* ⬅️ ini agar tidak membungkus teks */
+        }
+
+        .table-bawah2 {
+            border: 1px solid black;
+            padding: 0.5rem;
+            vertical-align: middle;
+            text-align: center;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -91,74 +118,91 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-2 mt-2">
+            {{-- <div class="col-2 mt-2">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6"></div>
             <div class="col-4 ">
-                <p class="mt-2">No Dok : FRM.PRO.01.11, Rev 00</p>
+                <p class="mt-2">Dok.No.: FRM.PROS.01.09, Rev 00</p>
             </div>
 
             <div class="col-12 ">
                 <p class="cop_judul">FORM PENGEMASAN AKHIR </p>
                 <p class="cop_bawah text-center">Packing</p>
-            </div>
+            </div> --}}
 
-            <div class="col-6">
+            {{-- <div class="col-6">
                 <table width="100%">
-                    <tr style="font-size: 12px">
-                        <td>Hari/Tanggal</td>
-                        <td width='2%'>:</td>
-                        <td>{{ tanggal($tgl) }}</td>
-                    </tr>
+                    
                 </table>
-            </div>
+            </div> --}}
             <div class="col-lg-12">
 
                 <br>
-                <table class="table table-bordered" style="font-size: 11px">
+                <table width="100%" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th rowspan="2" class="text-center align-middle">No</th>
-                            <th rowspan="2" class="text-start align-middle">Jenis material<br>
-                                <span class="fst-italic fw-lighter">Material Type</span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle">Kode Batch/Lot<br>
-                                <span class="fst-italic fw-lighter">Batch/Lot code</span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle">Jenis Produk<br>
-                                <span class="fst-italic fw-lighter">Grade</span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle">Jenis Kemasan <br>
-                                <span class="fst-italic fw-lighter">Packaging Type</span>
-                            </th>
-                            <th rowspan="2" class="text-end align-middle">Jumlah Per Jenis Kemasan <br>
-                                <span class="fst-italic fw-lighter">Total Packing type</span>
-                            </th>
-                            <th colspan="2" class="text-center align-middle">Jumlah<br>
-                                <span class="fst-italic fw-lighter">Quantity</span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle">Tgl/ <br> bln/<br> thn <br>
-                                Produksi
-                                (Steaming) <br>
-                                <span class="fst-italic fw-lighter">steaming production date </span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle">No Batch Kemasan <br>
-                                <span class="fst-italic fw-lighter">Packaging batch no</span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle" width="10%">Barcode
-                                <br>
-                                <span class="fst-italic fw-lighter">Barcode</span>
-                            </th>
-                            <th rowspan="2" class="text-start align-middle">Keterangan
-                                <br>
-                                <span class="fst-italic fw-lighter">Remaks</span>
+                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
+                                    alt=""></th>
+                            <th colspan="9"></th>
+                            <th class="align-top text-end text-nowrap" colspan="2">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.PROS.01.09,
+                                    Rev 00</p>
                             </th>
 
                         </tr>
                         <tr>
-                            <th class="text-end align-middle">Pcs</th>
-                            <th class="text-end align-middle">Gr</th>
+                            <th colspan="12" class="text-center">
+                                <p class="cop_judul">FORM PENGEMASAN AKHIR</p>
+                                <p class="cop_bawah text-center">Packing</p>
+                            </th>
+                        </tr>
+                        <tr style="font-size: 12px">
+                            <td>Hari/Tanggal</td>
+
+                            <td>: {{ tanggal($tgl) }}</td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th rowspan="2" class="text-center align-middle">No</th>
+                            <th rowspan="2" class="text-center align-middle">Jenis material<br>
+                                <span class="fst-italic fw-lighter">Material Type</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot<br>
+                                <span class="fst-italic fw-lighter">Batch/Lot Code</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk<br>
+                                <span class="fst-italic fw-lighter">Grade</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Kemasan <br>
+                                <span class="fst-italic fw-lighter">Packaging Type</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Jumlah Per Jenis Kemasan <br>
+                                <span class="fst-italic fw-lighter">Total Packing / Type</span>
+                            </th>
+                            <th colspan="2" class="text-center align-middle">Jumlah<br>
+                                <span class="fst-italic fw-lighter">Quantity</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Tgl/Bln/Thn <br>
+                                Produksi
+                                (Steaming) <br>
+                                <span class="fst-italic fw-lighter">Steaming Production Date </span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">No Batch Kemasan <br>
+                                <span class="fst-italic fw-lighter">Packaging Batch No</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle" width="10%">Barcode
+                                <br>
+                                <span class="fst-italic fw-lighter">Barcode</span>
+                            </th>
+                            <th rowspan="2" class="text-center align-middle">Keterangan
+                                <br>
+                                <span class="fst-italic fw-lighter">Remarks</span>
+                            </th>
+
+                        </tr>
+                        <tr class="table-bawah">
+                            <th class="text-center align-middle">Pcs</th>
+                            <th class="text-center align-middle">Gr</th>
                         </tr>
 
                     </thead>
@@ -174,39 +218,94 @@
                                     ->get();
 
                             @endphp
-                            <tr>
-                                <td class="text-center align-middle">{{ $loop->iteration }}</td>
+                            <tr class="table-bawah">
+                                <td class="text-end align-middle">{{ $loop->iteration }}</td>
                                 <td class="text-start align-middle">
-                                    {!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}
+                                    {!! $sbwList->pluck('nama')->map(fn($n) => strtoupper($n))->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td class="text-start align-middle text-nowrap">
+                                <td class="text-end align-middle text-nowrap">
                                     {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
-                                <td class="text-start align-middle">{{ $p['grade'] }}</td>
-                                <td class="text-start align-middle">
-                                    {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7,7 cm)' }}
+                                <td class="text-start align-middle">{{ strtoupper($p['grade']) }}</td>
+                                <td class="text-end align-middle ">
+                                    {{ $p['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 CM)' : 'Plastik Mika (21,8 x 16,8 x 7,7 CM)' }}
                                 </td>
-                                <td class="text-end align-middle">1</td>
+                                <td class="text-end align-middle text-nowrap">
+                                    @php
+                                        // Ubah string jadi array berdasarkan <br>
+                                        $lines = explode('<br>', $p['detail_partai']);
+                                        $summary = [];
 
-                                <td class="text-end align-middle">{{ number_format($p['pcs'], 0) }}</td>
-                                <td class="text-end align-middle">{{ number_format($p['gr'], 0) }}</td>
-                                <td class="text-start align-middle">
-                                    {{ date('d/m/Y', strtotime('-1 day', strtotime($tgl))) }}</td>
-                                <td class="text-start align-middle">
+                                        foreach ($lines as $line) {
+                                            // Pecah jadi [nama_partai, pcs, gr]
+                                            // Contoh: "BJM 1219 : 10 pcs / 15 gr"
+                                            if (
+                                                preg_match(
+                                                    '/^(.*?)\s*:\s*(\d+)\s*pcs\s*\/\s*(\d+)\s*gr$/',
+                                                    trim($line),
+                                                    $matches,
+                                                )
+                                            ) {
+                                                $nm = $matches[1];
+                                                $pcs = (int) $matches[2];
+                                                $gr = (int) $matches[3];
+
+                                                if (!isset($summary[$nm])) {
+                                                    $summary[$nm] = ['pcs' => 0, 'gr' => 0];
+                                                }
+                                                $summary[$nm]['pcs'] += $pcs;
+                                                $summary[$nm]['gr'] += $gr;
+                                            }
+                                        }
+                                    @endphp
+                                    @foreach ($summary as $nm => $val)
+                                        {{ $val['pcs'] }} PCS / {{ $val['gr'] }} GR <br>
+                                    @endforeach
+                                </td>
+
+                                <td class="text-end align-middle">{{ number_format($p['total_pcs'], 0) }}</td>
+                                <td class="text-end align-middle">{{ number_format($p['total_gr'], 0) }}</td>
+                                <td class="text-end align-middle">
+                                    {{ tanggal($tgl) }}</td>
+                                <td class="text-end align-middle text-nowrap">
                                     {{ $p['grade'] == 'sbt' ? '02-07-2025-01-07-27' : '02-07-2025-02-07-27' }}
                                 </td>
-                                <td class="text-start align-middle">
-                                    <div style="height: 60px; display: flex; align-items: center; ">
-                                        {{ $p['no_barcode'] }}
-                                    </div>
+                                <td class="text-end align-middle">
+                                    {{ $p['no_barcode'] }}
                                 </td>
                                 <td class="text-start"></td>
                             </tr>
                         @endforeach
                     </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="12">&nbsp;</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="8"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="8"></th>
+                            <td style="height: 50px" colspan="2">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 50px" colspan="2">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+
+                        </tr>
+                        <tr class="table-bawah">
+                            <th style="border: none" colspan="8"></th>
+                            <td class="text-center" colspan="2">(STAFF PACKING & GUDANG FG)</td>
+                            <td class="text-center" colspan="2">(KA. PACKING & GUDANG FG)</td>
+
+                        </tr>
+                    </tfoot>
 
                 </table>
             </div>
-            <div class="col-7">
+            {{-- <div class="col-7">
 
 
             </div>
@@ -226,7 +325,7 @@
 
                     </tbody>
                 </table>
-            </div>
+            </div> --}}
 
 
         </div>
@@ -238,9 +337,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    {{-- <script>
+    <script>
         window.print();
-    </script> --}}
+    </script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

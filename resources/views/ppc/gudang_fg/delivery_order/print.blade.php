@@ -1,16 +1,17 @@
 <x-hccp-print :title="$title" :dok="$dok">
     <span>PT. Agrika Gatya Arum</span>
-    <p>MHMR+733, Antasan Besar, Kec Banjarmasin Tengah, Kota Banjarmasin, Kalimantan Selatan</p>
+    <p>Jl. Teluk Tiram Darat No.5b Rt.26 Rw.002, Desa/Kelurahan Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin,
+        Provinsi Kalimantan Selatan Kode Pos : 70112 </p>
 
 
     <div class="row">
         <div class="col-6">
-            <strong>To:</strong> Hingke Java edible birdnest <br>
-            Alamat = Unit B5/F HkyeBn <br>
-            group center 13 -15 <br>
-            Shing wan road <br>
-            Tai wai new territories <br>
-            Hongkong
+            <strong>To:</strong> Hingkee Java Edible Birdnest Co LTD <br>
+            Unit B5/F Hkjebn Group Center <br>
+            13-15 Shing Wan Road
+            <br>
+            Tai Wai New Territories <br>
+            Hong Kong
         </div>
         <div class="col-2"></div>
         <div class="col-4 ">
@@ -36,7 +37,7 @@
                 @endphp
                 <tr>
                     <td><strong>Order No</strong></td>
-                    <td>:{{ $no_nota }}|{{ $bulanRomawi[$bulan] }}|{{ $tahun }}</td>
+                    <td>:{{ $no_nota }}/{{ $bulanRomawi[$bulan] }}/{{ $tahun }}</td>
                 </tr>
                 <tr>
                     <td><strong>Tanggal</strong></td>
@@ -50,8 +51,11 @@
                     <td colspan="2">&nbsp;</td>
                 </tr>
                 <tr>
+                    @php
+                        $tgl_terima = date('Y-m-d', strtotime($tgl . ' +2 day'));
+                    @endphp
                     <td><strong>ETD</strong></td>
-                    <td>: </td>
+                    <td>: {{ tanggal($tgl_terima) }}</td>
                 </tr>
             </table>
 
@@ -74,16 +78,16 @@
         <thead>
             <tr>
                 <th class="text-center align-middle" rowspan="2">No</th>
-                <th class=" align-middle" rowspan="2">Nama Produk</th>
-                <th class=" align-middle" rowspan="2">Kode</th>
-                <th class=" align-middle" rowspan="2">Batch Produk</th>
-                <th class=" align-middle" rowspan="2">Jenis Kemasan</th>
+                <th class="text-center align-middle" rowspan="2">Nama Produk</th>
+                <th class="text-center align-middle" rowspan="2">Kode</th>
+                <th class="text-center align-middle" rowspan="2">Batch Produk</th>
+                <th class="text-center align-middle" rowspan="2">Jenis Kemasan</th>
                 <th class="text-center align-middle" colspan="2">Jumlah</th>
-                <th class=" align-middle" rowspan="2">CoA*</th>
+                <th class="text-center align-middle" rowspan="2">CoA*</th>
             </tr>
             <tr>
-                <th class="text-end align-middle">Pcs</th>
-                <th class="text-end align-middle">Gram</th>
+                <th class="text-center align-middle">Pcs</th>
+                <th class="text-center align-middle">Gr</th>
             </tr>
         </thead>
         <tbody>
@@ -99,10 +103,11 @@
 
                 @endphp
                 <tr>
-                    <td class="text-center align-middle">{{ $loop->iteration }}</td>
-                    <td class=" align-middle">{!! $sbwList->pluck('nama')->unique()->implode(', <br>') ?: '-' !!}</td>
-                    <td class=" align-middle">{{ $d['grade'] }}</td>
-                    <td class=" align-middle text-nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                    <td class="text-end align-middle">{{ $loop->iteration }}</td>
+                    <td class="text-start align-middle">{!! $sbwList->pluck('nama')->map(fn($n) => strtoupper($n))->unique()->implode(', <br>') ?: '-' !!}
+                    </td>
+                    <td class=" align-middle">{{ strtoupper($d['grade']) }}</td>
+                    <td class="text-end align-middle text-nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                     <td class=" align-middle">
                         {{ $d['grade'] == 'sbt' ? 'Plastik Mika (21,8 x 16,8 x 10 cm)' : 'Plastik Mika (21,8 x 16,8 x 7,7 cm)' }}
                     </td>
@@ -122,17 +127,30 @@
     </table>
 
 
-
-    <div class="row mb-4 mt-5">
-        <div class="col-md-4">
-            Dibuat oleh,
-            <br>
-            <br>
-            <br>
-            {{ auth()->user()->name }}
+    <div class="row">
+        <div class="col-8">
+            <p style="font-size: 7px">*Disertai CoA Ya (Y) atau Tidak (T)</p>
         </div>
+        <div class="col-4">
+            <table class="table table-bordered" style="font-size: 11px">
+                <tr>
+                    <th class="text-center align-middle">Dibuat Oleh :</th>
+                </tr>
+                <tr>
+                    <td style="height: 80px" class="text-center align-middle">
+                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="text-center align-middle">
+                        (STAFF PACKING & GUDANG FG)
+                    </td>
+                </tr>
 
+            </table>
+        </div>
     </div>
+
 
 
 

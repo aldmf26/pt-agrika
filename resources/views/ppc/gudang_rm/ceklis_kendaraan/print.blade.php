@@ -126,7 +126,7 @@
                     @endphp
 
                     @foreach ($checklist as $c)
-                        <td class="align-middle" width="8%" colspan="2">{{ tanggal($c->tgl) }}
+                        <td class="text-endalign-middle" width="8%" colspan="2">{{ tanggal($c->tgl) }}
                         </td>
                     @endforeach
 
@@ -137,7 +137,7 @@
                 <tr>
                     <td colspan="2">Jam Kedatangan</td>
                     @foreach ($checklist as $c)
-                        <td class="align-middle" width="8%" colspan="2">
+                        <td class="text-end align-middle" width="8%" colspan="2">
                             <input type="time" name="jam_kedatangan[]"
                                 value="{{ $c->jam_kedatangan == '00:00:00' || empty($c->jam_kedatangan) ? '15:00' : $c->jam_kedatangan }}"
                                 class="form-control input jam_kedatangan" partai="{{ $c->nm_partai }}">

@@ -74,7 +74,9 @@
         }
     </style>
     <div class="row">
-        <p style="font-size: 10px;">BERI TANDA V UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA X UNTUK TIAP KOLOM
+        <p style="font-size: 10px;">BERI TANDA (&#10004;) UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA (&#10008;)
+            UNTUK TIAP
+            KOLOM
             YANG
             TIDAK SESUAI STANDAR</p>
         <div class="header-info col-lg-6
@@ -107,7 +109,7 @@
             @endphp
 
             @foreach ($checklist as $c)
-                <td class="text-center" width="8%" colspan="2">{{ date('d/m/Y', strtotime($c['tgl'])) }}
+                <td class="text-end align-middle" width="8%" colspan="2">{{ tanggal($c['tgl']) }}
                 </td>
             @endforeach
 
@@ -121,7 +123,7 @@
 
 
             @foreach ($checklist as $c)
-                <td class="text-center" width="8%" colspan="2">14:00 Wita</td>
+                <td class="text-end align-middle" width="8%" colspan="2">02:00 PM</td>
             @endforeach
 
             @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
@@ -133,7 +135,7 @@
 
 
             @foreach ($checklist as $c)
-                <td class="text-center" width="8%" colspan="2">HK</td>
+                <td class="text-start align-middle" width="8%" colspan="2">HK</td>
             @endforeach
 
             @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
@@ -165,8 +167,8 @@
                 <td class="text-center">{{ $loop->iteration }}</td>
                 <td class=" text-nowrap">{{ $k->kondisi }}</td>
                 @foreach ($checklist as $c)
-                    <td class="text-center">v</td>
-                    <td class="text-center">v</td>
+                    <td class="text-center">&#10004;</td>
+                    <td class="text-center">&#10004;</td>
                 @endforeach
 
                 @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
@@ -204,8 +206,8 @@
 
     <span style="font-size: 7px">
         NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
-        TANDA <b>V</b>
-        DAN TANDA <b>X</b> JIKA KENDARAAN TERNYATA TIDAK
+        TANDA <b>(&#10004;)</b>
+        DAN TANDA <b>(&#10008;)</b> JIKA KENDARAAN TERNYATA TIDAK
         DAPAT DIPAKAI / DITOLAK
         LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
     </span>
@@ -230,11 +232,13 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="height: 50px"></td>
+                                <td style="height: 45px" class="align-middle text-center">
+                                    <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                </td>
 
                             </tr>
                             <tr>
-                                <td class="text-center">[KA. PENGIRIMAN]</td>
+                                <td class="text-center">(KA. EKSPEDISI & EKSPORT)</td>
 
                             </tr>
                         </tbody>

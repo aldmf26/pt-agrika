@@ -253,8 +253,13 @@
 
                                 <td class="text-end">{{ number_format($c['pcs_not_ok'], 0) }}</td>
                                 <td class="text-end">{{ number_format($gr_not_ok, 0) }}</td>
-                                <td class="text-end">17:00</td>
-                                <td class="text-end">05:00</td>
+                                <td class="text-end">
+                                    {{ date('h:i A', strtotime('17:00')) }}
+                                </td>
+                                <td class="text-end">
+                                    {{ date('h:i A', strtotime('05:00')) }}
+                                </td>
+
                                 <td class="text-end">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
                                     %
                                 </td>
