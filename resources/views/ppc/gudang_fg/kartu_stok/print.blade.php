@@ -26,7 +26,7 @@
             <th class="text-center" colspan="2">Stok Masuk</th>
             <th class="text-center" colspan="2">Stok Keluar</th>
             <th class="text-center" colspan="2">Stok Akhir</th>
-            <th class="text-center align-middle" rowspan="2">Kode batch produk</th>
+            <th class="text-center align-middle" rowspan="2">Kode Batch Produk</th>
             <th class="text-center align-middle" rowspan="2" width="100">Ttd</th>
         </tr>
         <tr>
