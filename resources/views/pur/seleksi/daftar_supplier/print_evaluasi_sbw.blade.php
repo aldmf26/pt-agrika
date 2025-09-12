@@ -56,7 +56,7 @@
         <thead>
             <tr>
                 <th class="head text-center">Kriteria Evaluasi:</th>
-                <th class="head text-center">Hasil Peniliaan</th>
+                <th class="head text-center">Hasil Penilaian</th>
             </tr>
         </thead>
         <tbody>

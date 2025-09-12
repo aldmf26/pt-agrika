@@ -273,6 +273,7 @@ class PUR1DaftarSupplierController extends Controller
             'title' => "DAFTAR SUPPLIER " . strtoupper($r->kategori == 'lainnya' ? 'MATERIAL SBW' : $r->kategori),
             'dok' => "Dok.No.: FRM.$nomor.01.03, Rev.00",
             'datas' => $datas,
+            'kategori' => $r->kategori,
             'rumah_walet' => DB::table('rumah_walet')->get(),
             'k' => $r->kategori != 'lainnya' ? 'satu' : 'lainnya',
             'jenis_supplier' => $r->kategori != 'lainnya' ? ucfirst($r->kategori) : 'Supplier Material SBW',

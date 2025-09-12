@@ -20,7 +20,7 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">INFORMASI PRODUK</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Produk</th>
         </tr>
         <tr>
             <th>Material yang ditawarkan</th>
@@ -52,7 +52,7 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">INFORMASI MANAJEMEN</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
         </tr>
         <tr>
             <th>Sistem Manajemen yang telah diterapkan di Perusahaan Anda:</th>
@@ -75,21 +75,21 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">SISTEM PEMBAYARAN</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sistem Pembayaran</th>
         </tr>
         <tr>
             <td colspan="2">
-                Lama jatuh tempo yang diijinkan: 3 Bulan / 90 Hari
+                Lama jatuh tempo yang di izinkan: 3 Bulan / 90 Hari
             </td>
         </tr>
     </table>
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">SAMPEL</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sampel</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : TIDAK TERSEDIA SAMPLE<br>
+            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : Tidak Tersedia Sampel<br>
                 a.
             </td>
         </tr>
@@ -134,7 +134,7 @@
         <tr>
             <td>Hasil Pemeriksaan : <br>
                 1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
-                2. SBW sesuai dengan kadar nitrite maksimal 50 mg / l(ppm)
+                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm)
             </td>
         </tr>
         <tr>
@@ -179,7 +179,7 @@
         <tr>
             <td>Hasil Pemeriksaan : <br>
                 1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
-                2. SBW sesuai dengan kadar nitrite maksimal 50 mg/l(ppm) sesuaiyang dilaporkan bagian lab
+                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm) sesuaiyang dilaporkan bagian lab
             </td>
         </tr>
         <tr>

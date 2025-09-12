@@ -100,7 +100,16 @@
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            (STAFF PURCHASING)
+                            @php
+                                $jabatans = [
+                                    'barang' => 'STAFF PURCHASING',
+                                    'lainnya' => 'KA. GUDANG BAHAN BAKU',
+                                    'kemasan' => 'KA. PACKING & GUDANG FG',
+                                    'jasa' => 'FSTL',
+                                ];
+                                $jabatan = $jabatans[$kategori];
+                            @endphp
+                            ({{ $jabatan }})
                         </td>
                         <td class="text-center align-middle">
                             (KA. PURCHASING)
