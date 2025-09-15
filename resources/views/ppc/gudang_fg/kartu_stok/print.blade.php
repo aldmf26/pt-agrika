@@ -62,7 +62,7 @@
                 <td class="text-end align-middle">{{ $d['ket'] == 'keluar' ? number_format($d['gr']) : '0' }}</td>
                 <td class="text-end align-middle">{{ number_format($saldo_pcs, 0) }}</td>
                 <td class="text-end align-middle">{{ number_format($saldo_gr, 0) }}</td>
-                <td class="">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                 <td></td>
             </tr>
         @endforeach

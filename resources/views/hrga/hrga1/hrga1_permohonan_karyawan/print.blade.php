@@ -13,8 +13,9 @@
                     <tr>
                         <td>Status Posisi</td>
                         <td>:</td>
-                        <td>⬜</td>
-                        <td width="90%">Karyawan Tetap ⬛ Karyawan Kontrak</td>
+                        <td><input type="checkbox" name="" id=""></td>
+                        <td width="90%">Karyawan Tetap <input type="checkbox" name="" id="" checked>
+                            Karyawan Kontrak</td>
                     </tr>
                     <tr>
                         <td>Jabatan</td>
@@ -170,7 +171,7 @@
         <div class="row mt-4">
             <div class="col-5">
                 <span style="font-size: 12px; font-weight: bold; font-style: italic;">Diisi Oleh (KA. HRGA)</span> <br>
-                <span style="font-size: 12px;  font-style: italic;">Disetujui/ Ditangguhkan/
+                <span style="font-size: 12px;  font-style: italic;">Disetujui /
                     Ditolak*</span> <br>
                 <span style="font-size: 12px;  font-style: italic;">* Coret Salah Satu</span>
             </div>

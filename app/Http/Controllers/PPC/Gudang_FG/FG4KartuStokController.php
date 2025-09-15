@@ -26,7 +26,7 @@ class FG4KartuStokController extends Controller
         $kartu = Http::get("https://sarang.ptagafood.com/api/apihasap/stok_produk_jadi_detail?grade=$r->grade");
         $kartu = json_decode($kartu, TRUE);
         $data = [
-            'title' => 'KARTU STOK PRODUK JADI',
+            'title' => 'KARTU STOK PRODUK JADI (FINISHED GOODS)',
             'dok' => 'Dok.No.: FRM.WHS.03.02, Rev.00',
             'kartu' => $kartu['data'],
             'grade' => $r->grade

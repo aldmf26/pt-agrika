@@ -27,7 +27,7 @@
                 <tr>
                     <td>Posisi &nbsp;</td>
                     <td>:</td>
-                    <td>&nbsp;{{ ucwords($pegawai->posisi) ?? 'Staff cabut' }}</td>
+                    <td>&nbsp; {{ ucwords($pegawai->posisi) ?? 'Staff cabut' }}</td>
                 </tr>
             </table>
         </div>
@@ -73,10 +73,10 @@
 
         </div>
         <div class="col-4">
-            <span>⬛Dilanjutkan </span>
+            <span><input type="checkbox" name="" id="" checked> Dilanjutkan </span>
 
         </div>
-        <div class="col-4">⬜Ditolak</div>
+        <div class="col-4"><input type="checkbox" name="" id=""> Ditolak</div>
         <div class="col-12">
             &nbsp;
         </div>
