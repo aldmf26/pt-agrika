@@ -84,15 +84,32 @@ class RM8KartuStokController extends Controller
         $sbw = Http::get("https://sarang.ptagafood.com/api/apihasap/stok_grade_detail?id=$r->id");
         $sbw = json_decode($sbw, TRUE);
 
+        $jabatans = [
+            'barang' => 'STAFF PURCHASING',
+            'sbw' => 'KA. GUDANG BAHAN BAKU',
+            'kemasan' => 'KA. PACKING & GUDANG FG',
+            'jasa' => 'FSTL',
+        ];
+        $ttdJabatan = $jabatans[strtolower($kategori)] ?? 'STAFF PURCHASING';
+
+        $kodes = [
+            'barang' => 'PPCB',
+            'sbw' => 'PPCS',
+            'kemasan' => 'PPCK',
+            'jasa' => 'PPCJ',
+        ];
+        $kode = $kodes[strtolower($kategori)] ?? 'PPCB';
+
         // Kirim ke view
         $data = [
             'title' => 'KARTU STOK MATERIAL ',
-            'dok' => 'Dok.No.: FRM.PPCS.01.04, Rev.00',
+            'dok' => "Dok.No.: FRM.{$kode}.01.02, Rev.00",
             'transaksi' => $transaksiGabung,
             'barang' => Barang::find($r->id),
             'kategori' => $kategori,
             'nm_barang' => $r->nm_barang ?? '-',
             'sbw' => $sbw['data'],
+            'ttdJabatan' => $ttdJabatan,
         ];
         return view('ppc.gudang_rm.kartu_stok.print', $data);
     }

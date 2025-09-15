@@ -24,18 +24,14 @@
         <tr>
             <td>Nama Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->barang->nama_barang }}</td>
+            <td>{{ strtoupper($penerimaan->barang->nama_barang) }}</td>
         </tr>
         <tr>
             <td>Kode Barang</td>
             <td>:</td>
             <td>{{ $penerimaan->kode_lot }}</td>
         </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
+
         <tr>
             <td>Tanggal Penerimaan</td>
             <td>:</td>
@@ -56,18 +52,14 @@
             <td>:</td>
             <td>{{ $penerimaan->pengemudi }}</td>
         </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-        </tr>
+
         <tr>
             <td>Jumlah Barang</td>
             <td>:</td>
             <td>{{ number_format($penerimaan->jumlah_barang, 0) }} PCS</td>
         </tr>
         <tr>
-            <td>Jumlah Sampel</td>
+            <td>Jumlah Sample</td>
             <td>:</td>
             @php
                 $sampel = $penerimaan->jumlah_barang > 5 ? 5 : $penerimaan->jumlah_barang;
@@ -91,7 +83,7 @@
         $column_chunks = collect($all_columns)->chunk(10);
     @endphp
 
-    <table class="mt-4 table table-xs table-bordered">
+    <table class="mt-4 table table-xs table-bordered border-dark">
         <thead>
             <tr>
                 <th></th>
@@ -109,7 +101,7 @@
 
                 @foreach ($kriterias as $kriteria)
                     <tr>
-                        <th>{{ ucfirst($kriteria) }}</th>
+                        <td>{{ ucfirst($kriteria) }}</td>
                         @foreach ($chunk as $nomor_kolom)
                             <td class="text-center">
                                 {{-- Tampilkan centang hanya jika nomor kolom <= jumlah sampel --}}
@@ -132,10 +124,10 @@
             @endforeach
         </tbody>
     </table>
-    <div class="row">
+    <div class="row table-xs">
         <div class="col-4">
             <p>Keputusan: <br>
-            <div class="ms-2" style="font-size: 11px">
+            <div class="ms-2">
                 <input @checked($penerimaan->status_penerimaan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
                 Diterima
                 <br>
@@ -170,7 +162,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">(STAFF GUDANG BAHAN BAKU)</td>
+                        <td class="text-center">(STAFF PURCHASING)</td>
                         <td class="text-center">(KA. PURCHASING)</td>
                     </tr>
                 </tbody>

@@ -15,7 +15,6 @@
             <td>:</td>
             <td>{{ $k == 'satu' ? $buktis[0]->departemen : 'Cabut' }}</td>
         </tr>
-
     </table>
 
     <div class="row mt-4">
@@ -23,21 +22,21 @@
             <thead>
                 <tr>
                     <th class="text-center align-middle" rowspan="2">No</th>
-                    <th class="text-start align-middle" rowspan="2">Nama Jenis Produk</th>
+                    <th class="text-center align-middle" rowspan="2">Nama Jenis Produk</th>
                     <th class="text-center align-middle" colspan="2">Jumlah</th>
-                    <th class="text-start align-middle" rowspan="2">Kode Lot</th>
-                    <th class="text-start align-middle" rowspan="2">Status <br> Ok/Tidak Ok</th>
+                    <th class="text-center align-middle" rowspan="2">Kode Lot</th>
+                    <th class="text-center align-middle" rowspan="2">Status <br> Ok/Tidak Ok</th>
                 </tr>
                 <tr>
-                    <th class="text-end">Diminta (Pcs/Gr)</th>
-                    <th class="text-end">Diterima (Pcs/Gr)</th>
+                    <th class="text-center">Diminta (Pcs/Gr)</th>
+                    <th class="text-center">Diterima (Pcs/Gr)</th>
                 </tr>
             </thead>
             <tbody>
                 @if ($k == 'satu')
                     @foreach ($buktis as $d)
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-end">{{ $loop->iteration }}</td>
                             <td>{{ $d->barang->nama_barang ?? '' }}</td>
                             <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
@@ -58,7 +57,7 @@
                                 ->first();
                         @endphp
                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
+                            <td class="text-end">{{ $loop->iteration }}</td>
                             <td>{{ $sbw->nama ?? $d['nm_partai'] }}</td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr

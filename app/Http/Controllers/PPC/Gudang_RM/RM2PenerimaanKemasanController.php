@@ -99,7 +99,7 @@ class RM2PenerimaanKemasanController extends Controller
             ->findOrFail($id);
         $data = [
             'title' => 'PENERIMAAN KEMASAN',
-            'dok' => 'Dok.No.: FRM.WH.02.02, Rev.01',
+            'dok' => 'Dok.No.: FRM.PPCK.01.01, Rev.01',
             'penerimaan' => $penerimaan
         ];
         return view('ppc.gudang_rm.penerimaan_kemasan_barang.print', $data);

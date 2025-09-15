@@ -1,6 +1,6 @@
-<x-hccp-print title="SELEKSI SUPPLIER " :kategori="$kategori" :dok="$dok">
+<x-hccp-print title="SELEKSI SUPPLIER MATERIAL" :kategori="$kategori" :dok="$dok">
     <div class="row">
-        <div class="col-6">
+        <div class="col-7">
             <table style="font-size: 11px">
                 <tr>
                     <th width="150">Nama Supplier</th>
@@ -127,7 +127,7 @@
     <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada Sample yang disertakan)</p>
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="fw-bold bg-info">Departemen Lab</th>
+            <th class="fw-bold bg-info text-center">Departemen Lab</th>
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
@@ -149,7 +149,7 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="fw-bold bg-info">Departemen Penerimaan</th>
+            <th class="fw-bold bg-info text-center">Departemen Penerimaan</th>
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
@@ -171,7 +171,7 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="fw-bold bg-info">Dokter Hewan</th>
+            <th class="fw-bold bg-info text-center">Dokter Hewan</th>
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
@@ -196,10 +196,10 @@
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
-                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        <th class="text-center" width="33.33%">Dilaporkan Oleh:</th>
-                        <th class="text-center" width="11.11%">Ditinjau Oleh:</th>
-                        <th class="text-center" width="33.33%">Disetujui Oleh:</th>
+                        <th class="text-center" width="25%">Diperiksa Oleh:</th>
+                        <th class="text-center" width="25%">Dilaporkan Oleh:</th>
+                        <th class="text-center" width="25%">Ditinjau Oleh:</th>
+                        <th class="text-center" width="25%">Disetujui Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>

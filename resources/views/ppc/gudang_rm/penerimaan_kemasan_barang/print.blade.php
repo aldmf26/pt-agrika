@@ -3,16 +3,14 @@
         <tr>
             <td>Nama Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->barang->nama_barang }}</td>
+            <td>{{ strtoupper($penerimaan->barang->nama_barang) }}</td>
         </tr>
         <tr>
             <td>Kode Barang</td>
             <td>:</td>
             <td>{{ $penerimaan->kode_lot }}</td>
         </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
+
         <tr>
             <td>Tanggal Penerimaan</td>
             <td>:</td>
@@ -31,15 +29,12 @@
         <tr>
             <td>Pengemudi</td>
             <td>:</td>
-            <td>Bpk. {{ $penerimaan->pengemudi }}</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
+            <td>{{ $penerimaan->pengemudi }}</td>
         </tr>
         <tr>
             <td>Jumlah Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->jumlah_barang }}</td>
+            <td>{{ $penerimaan->jumlah_barang }} PCS</td>
         </tr>
         <tr>
             <td>Jumlah Sampel</td>
@@ -52,7 +47,12 @@
     </table>
 
     @php
-        $kriterias = collect(['Warna Termasuk Hasil Print Kemasan', 'Kondisi Kemasan', 'Ukuran Kemasan', 'Kriteria Penerimaan']);
+        $kriterias = collect([
+            'Warna Termasuk Hasil Print Kemasan',
+            'Kondisi Kemasan',
+            'Ukuran Kemasan',
+            'Kriteria Penerimaan',
+        ]);
 
         // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
         // $jumlah_sampel = $penerimaan->jumlah_sampel;
@@ -67,7 +67,7 @@
         // Chunk kolom menjadi grup per 10 kolom untuk tampilan yang lebih baik
         $column_chunks = collect($all_columns)->chunk(10);
     @endphp
-    <table class="mt-4 table table-xs table-bordered w-full">
+    <table class="mt-4 table table-xs table-bordered border-dark">
         <thead>
             <tr>
                 <th></th>
@@ -85,7 +85,7 @@
 
                 @foreach ($kriterias as $kriteria)
                     <tr>
-                        <th>{{ ucfirst($kriteria) }}</th>
+                        <td>{{ ucfirst($kriteria) }}</td>
                         @foreach ($chunk as $nomor_kolom)
                             <td class="text-center">
                                 {{-- Tampilkan centang hanya jika nomor kolom <= jumlah sampel --}}
@@ -109,41 +109,45 @@
         </tbody>
     </table>
 
-    <div class="row">
+    <div class="row table-xs">
         <div class="col-4">
-            <p>Keputusan: <br>
-            <div class="ms-2" style="font-size: 11px">
-                <input @checked($penerimaan->keputusan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
-                Diterima
-                <br>
-                <input @checked($penerimaan->keputusan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required>
-                Ditolak
-                <br>
-                <input @checked(str_contains($penerimaan->keputusan, 'Catatan')) type="checkbox" name="keputusan" value="Diterima dengan Catatan"
-                    required> {{ $penerimaan->keputusan }}
+            <div>
+                <div>Keputusan:</div> <br>
+                <div class="ms-2">
+                    <input @checked($penerimaan->keputusan == 'Diterima') type="checkbox" name="keputusan" value="Diterima" required>
+                    Diterima
+                    <br>
+                    <input @checked($penerimaan->keputusan == 'Ditolak') type="checkbox" name="keputusan" value="Ditolak" required>
+                    Ditolak
+                    <br>
+                    <input @checked(str_contains($penerimaan->keputusan, 'Catatan')) type="checkbox" name="keputusan" value="Diterima dengan Catatan"
+                        required> {{ $penerimaan->keputusan }}
+                </div>
             </div>
-            </p>
         </div>
-        <div class="col-8">
-            <table>
+    </div>
+    <div class="row">
+        <div class="col-5"></div>
+        <div class="col-7">
+            <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
                     <tr>
-                        <th class="text-center" style="width: 50%;">Dibuat Oleh:</th>
-                        <th class="text-center" style="width: 50%;">Diperiksa Oleh:</th>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
-                            <x-ttd />
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
-                        <td>
-                            {{-- jika ada ttd kepala gudang bisa tambahkan x-ttd2 --}}
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">(ADM. GUDANG)</td>
-                        <td class="text-center">(KA. GUDANG)</td>
+                        <td class="text-center">(STAFF PURCHASING)</td>
+                        <td class="text-center">(KA. PURCHASING)</td>
                     </tr>
                 </tbody>
             </table>
