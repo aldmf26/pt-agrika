@@ -1,4 +1,4 @@
-<x-hccp-print :title="$title" :dok="$dok">
+<x-hccp-print :title="$title" :kategori="$supplier->produsen" :dok="$dok">
     <table class="table-xs">
         <tr>
             <th>Tagngal</th>
@@ -49,8 +49,8 @@
     <table class="table table-xs table-sm table-bordered border-dark mt-2">
         <thead>
             <tr>
-                <th class="head text-center">Kriteria Evaluasi:</th>
-                <th class="head text-center">Hasil Peniliaan</th>
+                <th class="head text-center align-middle">Kriteria Evaluasi:</th>
+                <th class="head text-center align-middle">Hasil Peniliaan</th>
             </tr>
         </thead>
         <tbody>

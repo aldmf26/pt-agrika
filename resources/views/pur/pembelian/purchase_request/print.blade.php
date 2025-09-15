@@ -7,13 +7,7 @@
         </style>
         <div class="row">
             <div class="col-12">
-                <span style="font-size: 9px; bottom: 36px !important">Format nomor PR : PR/Urutan/ Bulan / tahun
-                    (ex :
-                    PR/01/VI/2025)
-                    <span class="ms-2">* :
-                        Diisi oleh
-                        bagian purchasing</span>
-                </span>
+
                 <table class="table-xs table table-bordered border-dark">
                     {{-- <tr>
                         <th width="150" class="head">No Pr</td>
@@ -25,21 +19,35 @@
                             {{ tanggal($datas->tgl) }}
                         </td>
                     </tr> --}}
+                    @php
+                        $jabatan = strtoupper($datas->posisi);
+                    @endphp
                     <tr>
-                        <th width="150" class="head">Dimintai oleh</td>
+                        <th width="150" class="head">Diajukan oleh</td>
                         <td>{{ $datas->diminta_oleh }}</td>
-                        <th width="150" class="head">No PR</td>
+                        <th width="150" class="head">*No PR</td>
                         <td>{{ $datas->no_pr }}</td>
                     </tr>
                     <tr>
                         <th width="150" class="head">Posisi</td>
-                        <td>{{ $datas->posisi }}</td>
+                        <td>{{ $jabatan }}</td>
                         <th width="150" class="head">Tanggal</td>
                         <td>
                             {{ tanggal($datas->tgl) }}
                         </td>
                     </tr>
                 </table>
+                <span class="float-start" style="position: relative;font-size: 9px; top: -16px !important">Format
+                    nomor PR :
+                    PR/Urutan/
+                    Bulan
+                    / Tahun
+                    (ex :
+                    PR/1/VI/2025)
+                    <span class="ms-2">* :
+                        Diisi oleh
+                        bagian purchasing</span>
+                </span>
             </div>
 
 
@@ -57,24 +65,26 @@
             </div>
 
             <div class="col-12">
-                <span class="float-start" for="">Detail Permintaan</span>
+                <span class="float-start" for="" style="font-size: 12px;">Detail Permintaan</span>
                 <table class="table table-xs table-bordered border-dark">
                     <tr>
-                        <th class="head text-end">Jumlah</th>
-                        <th class="head text-start">Item dan Spesifikasi</th>
-                        <th class="head text-end">Tanggal Dibutuhkan</th>
+                        <th class="head text-center">Jumlah</th>
+                        <th class="head text-center">Item</th>
+                        <th class="head text-center">Spesifikasi</th>
+                        <th class="head text-center">Tanggal Dibutuhkan</th>
                     </tr>
                     @foreach ($datas->item as $d)
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah, 0) }} {{ $d->barang->satuan }}</td>
-                            <td align="start">{{ ucfirst($d->item_spesifikasi) }}</td>
+                            <td align="start">{{ ucwords($d->item_spesifikasi) }}</td>
+                            <td align="start">{{ ucwords($d->barang->spek) }}</td>
                             <td class="text-end">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                         </tr>
                     @endforeach
                 </table>
             </div>
-
-            <div class="col-12 mb-5">
+            {{-- 
+            <div class="col-12 mb-5" style="font-size: 12px;">
                 Diterima oleh Purchasing: <br>
                 <table>
                     <tr>
@@ -85,7 +95,7 @@
                     <tr>
                         <td>Tanggal</td>
                         <td>:</td>
-                        <td> {{ tanggal(date('Y-m-d', strtotime('-7 days', strtotime($datas->tgl)))) }}
+                        <td> {{ tanggal($datas->tgl) }}
                         </td>
                     </tr>
                     <tr>
@@ -94,27 +104,42 @@
                         <td></td>
                     </tr>
                 </table>
-            </div>
-            <div class="col-12">
-                <div class="d-flex justify-content-between">
-                    <span>
-                        Dibuat oleh :
-                        <br>
-                        <span style="left: -80px !important; position: relative;">
-                            <x-ttd jabatan="staff purchasing" />
-                        </span>
-                        <br>
-                    </span>
-
-                    <span><span style="right: -80px !important; position: relative;">Di setujui oleh :</span>
-                        <br>
-                        <span>
-                            <x-ttd-ketua userId="468" />
-                        </span>
-                        <br>
-                    </span>
-                </div>
-
+            </div> --}}
+            <div class="col-3"></div>
+            <div class="col-9">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="33.33%">Diajukan Oleh:</th>
+                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                            <th class="text-center" width="33.33%">Disetujui Oleh:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-center align-middle">
+                                ({{ $jabatan }})
+                            </td>
+                            <td class="text-center align-middle">
+                                (STAFF PURCHASING)
+                            </td>
+                            <td class="text-center align-middle">
+                                (KA. PURCHASING)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 

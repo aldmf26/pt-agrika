@@ -12,7 +12,7 @@ class Suplier extends Model
 
     public function getNamaSupplierAttribute($value)
     {
-        return strtoupper($value);
+        return ucwords(strtolower($value));
     }
 
     public function getKategoriAttribute($value)

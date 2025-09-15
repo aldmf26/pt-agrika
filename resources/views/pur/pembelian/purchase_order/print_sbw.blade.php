@@ -74,7 +74,7 @@
         </div>
 
         <div class="text-start" style="font-size: 12px;">
-            <strong>Barang/Jasa di atas harap dikirimkan ke Alamat sebagai berikut :</strong>
+            <strong>Barang di atas harap dikirimkan ke alamat sebagai berikut :</strong>
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
             <div class="mt-2" />
