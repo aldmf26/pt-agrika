@@ -122,31 +122,32 @@
         </tbody>
     </table>
 
-    <div class="row mt-4">
+    <div class="row mt-2">
         <div class="col-12" style="font-size: 10px">
             <b>Note:</b>
             <div style="font-style: italic;">
-                <div>Untuk kriteria penilaian ketidasesuaian (No 1 sampai dengan 3) sebagai berikut:</div>
+                <div><b>Untuk kriteria penilaian ketidasesuaian (No 1 sampai dengan 3) sebagai berikut:</b></div>
                 <div>&nbsp; 90 satu kali ketidaksesuaian</div>
                 <div>&nbsp; 80 dua sampai tiga kali ketidaksesuaian</div>
                 <div>&nbsp; 70 empat sampai lima kali ketidaksesuaian</div>
                 <div>&nbsp; 60 lebih dari lima kali ketidaksesuaian</div>
 
-                <div>Untuk kriteria penilaian harga (No 4) sebagai berikut:</div>
+                <div class="mt-1"><b>Untuk kriteria penilaian harga (No 4) sebagai berikut: </b></div>
                 <div>&nbsp; 90 Sangat Kompetitif</div>
                 <div>&nbsp; 80 Kompetitif</div>
                 <div>&nbsp; 70 Cukup Kompetitif</div>
                 <div>&nbsp; 60 Tidak Kompetitif</div>
 
-                <div>Untuk kriteria penilaian kemudahan komunikasi (No 5) sebagai berikut:</div>
+                <div class="mt-1"><b>Untuk kriteria penilaian kemudahan komunikasi (No 5) sebagai berikut: </b></div>
                 <div>&nbsp; 90 Sangat Mudah</div>
                 <div>&nbsp; 80 Mudah</div>
                 <div>&nbsp; 70 Cukup Mudah</div>
                 <div>&nbsp; 60 Tidak Mudah</div>
 
-                <p class="mt-2">Bila nilai rata-rata lebih kecil dari 75, maka Purchasing harus menghubungi
-                    Supplier/Outsource untuk
-                    melakukan tindakan perbaikan.</p>
+                <p style="font-size: 11px" class="mt-1"><b>Bila nilai rata-rata lebih kecil dari 75, maka Purchasing
+                        harus menghubungi
+                        Supplier untuk
+                        melakukan tindakan perbaikan.</b></p>
             </div>
         </div>
     </div>
