@@ -46,7 +46,8 @@ class DataPegawai extends Component
 
     public function print()
     {
-        $query = ModelsDataPegawai::with('divisi');
+        $query = ModelsDataPegawai::with('divisi')
+            ->orderBy('tgl_masuk', 'asc');
 
         if (!empty($this->cekPegawai)) {
             $query->whereIn('id', $this->cekPegawai);

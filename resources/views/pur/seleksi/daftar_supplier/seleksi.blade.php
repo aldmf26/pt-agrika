@@ -88,17 +88,17 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">Sampel</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sample</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : Tidak Tersedia Sample<br>
+            <td colspan="2">Jenis Sample yang diberikan (jumlah) : Tidak Tersedia Sample<br>
                 a.
             </td>
         </tr>
         <tr>
             <td>
 
-                Sampel diserahkan oleh,
+                Sample diserahkan oleh,
 
 
 
@@ -109,7 +109,7 @@
                 ________________________
             </td>
             <td>
-                Sampel diterima oleh,
+                Sample diterima oleh,
 
 
 
@@ -124,7 +124,7 @@
 </x-hccp-print>
 
 <x-hccp-print title="SELEKSI SUPPLIER " :kategori="$kategori" :dok="$dok">
-    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada sampel yang disertakan)</p>
+    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada Sample yang disertakan)</p>
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
             <th class="fw-bold bg-info">Departemen Lab</th>
@@ -184,32 +184,44 @@
                 Pengujian
             </td>
         </tr>
-        <tr>
+        {{-- <tr>
             <td>
-                Diperiksa Oleh: Drh Edy <span class="ms-5"> Ttd:</span>
+                Diperiksa Oleh: Drh. Edy <span class="ms-5"> Ttd:</span>
             </td>
-        </tr>
+        </tr> --}}
     </table>
 
     <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6">
+        <div class="col-12">
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
+                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                         <th class="text-center" width="33.33%">Dilaporkan Oleh:</th>
-                        <th class="text-center" width="33.33%">Ditinjau Oleh:</th>
+                        <th class="text-center" width="11.11%">Ditinjau Oleh:</th>
                         <th class="text-center" width="33.33%">Disetujui Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-center">
+                        <td class="text-center align-middle">
+                            (DOKTER HEWAN)
+                        </td>
+                        <td class="text-center align-middle">
                             (KA. PURCHASING)
                         </td>
                         <td class="text-center align-middle">
@@ -218,7 +230,6 @@
                         <td class="text-center align-middle">
                             (DIREKTUR UTAMA)
                         </td>
-
                     </tr>
                 </tbody>
             </table>
