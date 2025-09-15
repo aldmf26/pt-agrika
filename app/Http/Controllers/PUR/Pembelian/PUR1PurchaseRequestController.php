@@ -188,13 +188,20 @@ class PUR1PurchaseRequestController extends Controller
     {
         $datas = PurchaseRequest::where('id', $id)->with('item')->first();
         $departemen = $datas->departemen;
-        $kode = $departemen == 'BARANG' ? 'PURB' : 'PURS';
-
+        $kode = $departemen == 'BARANG' ? 'PURB' : 'PURK';
+        $jabatans = [
+            'barang' => 'STAFF PURCHASING',
+            'lainnya' => 'KA. GUDANG BAHAN BAKU',
+            'kemasan' => 'KA. PACKING & GUDANG FG',
+            'jasa' => 'FSTL',
+        ];
+        $jabatan = $jabatans[strtolower($departemen)];
         $data = [
             'title' => 'PURCHASE REQUEST ' . $departemen,
             'dok' => "Dok.No.: FRM.$kode.01.01, Rev.00",
             'datas' => $datas,
-            'kategori' => strtolower($departemen),
+            'jabatan' => $jabatan,
+            'kategori' => $departemen,
         ];
         return view('pur.pembelian.purchase_request.print', $data);
     }

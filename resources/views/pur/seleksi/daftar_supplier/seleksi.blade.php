@@ -1,4 +1,4 @@
-<x-hccp-print title="SELEKSI SUPPLIER MATERIAL/KEMASAN/BARANG/JASA" :dok="$dok">
+<x-hccp-print title="SELEKSI SUPPLIER " :kategori="$kategori" :dok="$dok">
     <div class="row">
         <div class="col-6">
             <table style="font-size: 11px">
@@ -12,7 +12,7 @@
                 </tr>
                 <tr>
                     <th width="150">Alamat</th>
-                    <td>: {{ $supplier->alamat }}</td>
+                    <td>: {{ ucwords($supplier->alamat) }}</td>
                 </tr>
             </table>
         </div>
@@ -20,13 +20,13 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">INFORMASI PRODUK</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Produk</th>
         </tr>
         <tr>
-            <th>Material/Kemasan/Barang/Jasa yang ditawarkan</th>
+            <th>Barang yang ditawarkan</th>
             <td>
                 @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ $item->nama_barang }}<br>
+                    {{ $loop->iteration }}. {{ ucwords($item->nama_barang) }}<br>
                 @endforeach
             </td>
         </tr>
@@ -34,7 +34,7 @@
             <th>Spesifikasi</th>
             <td>
                 @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ $item->nama_barang }} : {{ $item->spek ?? '-' }}<br>
+                    {{ $loop->iteration }}. {{ ucwords($item->nama_barang) }} : {{ $item->spek ?? '-' }}<br>
                 @endforeach
             </td>
         </tr>
@@ -54,12 +54,12 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">INFORMASI MANAJEMEN</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
         </tr>
         <tr>
             <th>Sistem Manajemen yang telah diterapkan di Perusahaan Anda:</th>
             <td>
-                <p><input type="checkbox"> HACCP</p>
+                <p><input type="checkbox" checked> HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
                 <p><input type="checkbox"> GMP</p>
                 <p><input type="checkbox"> Lainnya (sebutkan)………</p>
                 <p><input type="checkbox" checked> Belum ada</p>
@@ -77,7 +77,7 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">SISTEM PEMBAYARAN</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sistem Pembayaran</th>
         </tr>
         <tr>
             <td colspan="2">
@@ -88,10 +88,10 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th colspan="2" class="text-center fw-bold bg-info">SAMPEL</th>
+            <th colspan="2" class="text-center fw-bold bg-info">Sampel</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : TIDAK TERSEDIA SAMPLE<br>
+            <td colspan="2">Jenis Sampel yang diberikan (jumlah) : Tidak Tersedia Sample<br>
                 a.
             </td>
         </tr>
@@ -123,8 +123,8 @@
     </table>
 </x-hccp-print>
 
-<x-hccp-print title="SELEKSI SUPPLIER/OUTSOURCE" :dok="$dok">
-    <p>Lembar Pemeriksaan (Bila ada sampel yang disertakan)</p>
+<x-hccp-print title="SELEKSI SUPPLIER " :kategori="$kategori" :dok="$dok">
+    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada sampel yang disertakan)</p>
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
             <th class="fw-bold bg-info">Departemen Lab</th>
@@ -210,13 +210,13 @@
                     </tr>
                     <tr>
                         <td class="text-center">
-                            [ KA.purchasing]
+                            (KA. PURCHASING)
                         </td>
-                        <td class="text-center">
-                            [ FSTL]
+                        <td class="text-center align-middle">
+                            (KA. LAB)
                         </td>
-                        <td class="text-center">
-                            [ DIREKTUR]
+                        <td class="text-center align-middle">
+                            (DIREKTUR UTAMA)
                         </td>
 
                     </tr>

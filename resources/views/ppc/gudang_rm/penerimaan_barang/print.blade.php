@@ -20,7 +20,7 @@
         }
     </style>
 
-    <table>
+    <table class="table-xs">
         <tr>
             <td>Nama Barang</td>
             <td>:</td>
@@ -64,52 +64,72 @@
         <tr>
             <td>Jumlah Barang</td>
             <td>:</td>
-            <td>{{ $penerimaan->jumlah_barang }} PCS</td>
+            <td>{{ number_format($penerimaan->jumlah_barang, 0) }} PCS</td>
+        </tr>
+        <tr>
+            <td>Jumlah Sampel</td>
+            <td>:</td>
+            @php
+                $sampel = $penerimaan->jumlah_barang > 5 ? 5 : $penerimaan->jumlah_barang;
+            @endphp
+            <td>{{ number_format($sampel, 0) }} PCS</td>
         </tr>
     </table>
+    @php
+        $kriterias = collect(['Keutuhan Barang', 'Kesesuaian Jumlah', 'Kesesuaian Kondisi (tebal, warnanya, dll)']);
 
+        // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
+        $jumlah_sampel = $sampel;
+
+        // Total kolom yang akan ditampilkan
+        $total_kolom = 20;
+
+        // Buat array untuk semua kolom (1-20)
+        $all_columns = range(1, $total_kolom);
+
+        // Chunk kolom menjadi grup per 10 kolom untuk tampilan yang lebih baik
+        $column_chunks = collect($all_columns)->chunk(10);
+    @endphp
 
     <table class="mt-4 table table-xs table-bordered">
         <thead>
             <tr>
                 <th></th>
-                <th colspan="10">KODE BARANG : {{ $penerimaan->kode_lot }}</th>
-            </tr>
-            <tr>
-                <th>Kriteria Penerimaan </th>
-                @for ($i = 1; $i < 4; $i++)
-                    <th class="text-center">{{ $i }}</th>
-                @endfor
+                <th colspan="{{ $total_kolom }}">KODE BARANG : {{ $penerimaan->kode_lot }}</th>
             </tr>
         </thead>
         <tbody>
-            {{-- @foreach ($penerimaan->kriteria as $kriteria)
+            @foreach ($column_chunks as $chunk)
                 <tr>
-                    <th>{{ ucfirst($kriteria->kriteria) }}
-                        {{ $kriteria->kriteria == 'quantity' ? '(jumlah)' : '(kebersihan)' }}</th>
-                    <td class="text-center">{!! $kriteria->check_1 ? '√' : '' !!}</td>
-                    <td class="text-center">{!! $kriteria->check_2 ? '√' : '' !!}</td>
-                    <td class="text-center">{!! $kriteria->check_3 ? '√' : '' !!}</td>
+                    <th>Kriteria Penerimaan</th>
+                    @foreach ($chunk as $nomor_kolom)
+                        <th class="text-center">{{ $nomor_kolom }}</th>
+                    @endforeach
                 </tr>
-            @endforeach --}}
-            <tr>
-                <th>Keutuhan barang</th>
-                <td class="text-center">√</td>
-                <td class="text-center">√</td>
-                <td class="text-center"></td>
-            </tr>
-            <tr>
-                <th>Kesesuaian jumlah</th>
-                <td class="text-center">√</td>
-                <td class="text-center">√</td>
-                <td class="text-center"></td>
-            </tr>
-            <tr>
-                <th>Kesesuaian kondisi (tebal, warnanya, dll)</th>
-                <td class="text-center">√</td>
-                <td class="text-center">√</td>
-                <td class="text-center"></td>
-            </tr>
+
+                @foreach ($kriterias as $kriteria)
+                    <tr>
+                        <th>{{ ucfirst($kriteria) }}</th>
+                        @foreach ($chunk as $nomor_kolom)
+                            <td class="text-center">
+                                {{-- Tampilkan centang hanya jika nomor kolom <= jumlah sampel --}}
+                                @if ($nomor_kolom <= $jumlah_sampel)
+                                    √
+                                @else
+                                    {{-- Kolom kosong untuk nomor > jumlah sampel --}}
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+
+                {{-- Tambahkan separator row jika bukan chunk terakhir --}}
+                @if (!$loop->last)
+                    <tr>
+                        <td colspan="{{ count($chunk) + 1 }}"></td>
+                    </tr>
+                @endif
+            @endforeach
         </tbody>
     </table>
     <div class="row">
@@ -127,26 +147,31 @@
             </div>
             </p>
         </div>
-        <div class="col-8">
-            <table>
+
+    </div>
+    <div class="row">
+        <div class="col-5"></div>
+
+        <div class="col-7">
+            <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
                     <tr>
-                        <th class="text-center" style="width: 50%;">Dibuat Oleh:</th>
-                        <th class="text-center" style="width: 50%;">Diperiksa Oleh:</th>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>
-                            <x-ttd />
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
-                        <td>
-                            {{-- jika ada ttd kepala gudang bisa tambahkan x-ttd2 --}}
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span>
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-center">[ADM. GUDANG]</td>
-                        <td class="text-center">[KA. GUDANG]</td>
+                        <td class="text-center">(STAFF GUDANG BAHAN BAKU)</td>
+                        <td class="text-center">(KA. PURCHASING)</td>
                     </tr>
                 </tbody>
             </table>

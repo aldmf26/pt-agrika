@@ -10,14 +10,14 @@
 
                 <table class="table-xs table table-bordered border-dark">
                     <tr>
-                        <th width="150" class="head">Dimintai oleh</td>
-                        <td>{{ Auth::user()->name }}</td>
+                        <th width="150" class="head">Diajukan oleh</td>
+                        <td>Sinta</td>
                         <th width="150" class="head">*No PR</td>
                         <td>{{ $no_pr }}</td>
                     </tr>
                     <tr>
                         <th width="150" class="head">Posisi</td>
-                        <td>BK</td>
+                        <td>KA. GUDANG BAHAN BAKU</td>
                         <th width="150" class="head">Tanggal</td>
                         <td>
                             {{ tanggal(date('Y-m-d', strtotime('-7 days', strtotime($datas->tgl)))) }}
@@ -51,7 +51,7 @@
             </div>
 
             <div class="col-12">
-                <span class="float-start" for="">Detail Permintaan</span>
+                <span class="float-start" for="" style="font-size: 12px;">Detail Permintaan</span>
                 <table class="table table-xs table-bordered border-dark">
                     <tr>
                         <th class="head text-center">Jumlah</th>
@@ -70,7 +70,7 @@
                     @endforeach
                 </table>
             </div>
-            <div class="col-12 mb-5" style="font-size: 12px;">
+            {{-- <div class="col-12 mb-5" style="font-size: 12px;">
                 Diterima oleh Purchasing: <br>
                 <table>
                     <tr>
@@ -90,12 +90,13 @@
                         <td></td>
                     </tr>
                 </table>
-            </div>
-            <div class="col-6"></div>
-            <div class="col-6">
+            </div> --}}
+            <div class="col-3"></div>
+            <div class="col-9">
                 <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
+                            <th class="text-center" width="33.33%">Diajukan Oleh:</th>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
                             <th class="text-center" width="33.33%">Disetujui Oleh:</th>
                         </tr>
@@ -108,10 +109,16 @@
                             <td style="height: 80px" class="text-center align-middle">
                                 <span style="opacity: 0.5;">(Ttd & Nama)</span>
                             </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center align-middle">
                                 (KA. GUDANG BAHAN BAKU)
+                            </td>
+                            <td class="text-center align-middle">
+                                (STAFF PURCHASING)
                             </td>
                             <td class="text-center align-middle">
                                 (KA. PURCHASING)

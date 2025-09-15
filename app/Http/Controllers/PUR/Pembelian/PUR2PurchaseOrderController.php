@@ -191,10 +191,20 @@ class PUR2PurchaseOrderController extends Controller
 
     public function print($id)
     {
-        $datas = PurchaseOrder::where('id', $id)->with('item')->first();
+        $datas = PurchaseOrder::with('purchaseRequest')->where('id', $id)->with('item')->first();
+        $departemen = $datas->purchaseRequest->departemen;
+        $kode = $departemen == 'BARANG' ? 'PURB' : 'PURK';
+        $jabatans = [
+            'barang' => 'STAFF PURCHASING',
+            'lainnya' => 'KA. GUDANG BAHAN BAKU',
+            'kemasan' => 'KA. PACKING & GUDANG FG',
+            'jasa' => 'FSTL',
+        ];
+        $jabatan = $jabatans[strtolower($departemen)];
         $data = [
             'title' => 'PURCHASE ORDER',
-            'dok' => 'Dok.No.: FRM.PUR.01.02, Rev.00',
+            'dok' => "Dok.No.: FRM.{$kode}.01.02, Rev.00",
+            'kategori' => $departemen,
             'datas' => $datas
         ];
         return view('pur.pembelian.purchase_order.print', $data);

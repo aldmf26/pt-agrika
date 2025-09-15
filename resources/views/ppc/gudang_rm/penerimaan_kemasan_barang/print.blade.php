@@ -1,5 +1,5 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table>
+    <table class="table-xs">
         <tr>
             <td>Nama Barang</td>
             <td>:</td>
@@ -44,41 +44,67 @@
         <tr>
             <td>Jumlah Sampel</td>
             <td>:</td>
-            <td>{{ $penerimaan->jumlah_sampel }}</td>
+            @php
+                $sampel = $penerimaan->jumlah_barang > 5 ? 5 : $penerimaan->jumlah_barang;
+            @endphp
+            <td>{{ number_format($sampel, 0) }} PCS</td>
         </tr>
     </table>
 
     @php
-        $kriterias = collect(['Warna termasuk hasil print kemasan', 'Kondisi Kemasan', 'Ukuran Kemasan']);
+        $kriterias = collect(['Warna Termasuk Hasil Print Kemasan', 'Kondisi Kemasan', 'Ukuran Kemasan', 'Kriteria Penerimaan']);
 
-        $jumlah_sampel = $penerimaan->jumlah_sampel;
-        $chunk_size = 5;
-        $sampel_chunks = collect(range(1, $jumlah_sampel))->chunk($chunk_size);
+        // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
+        // $jumlah_sampel = $penerimaan->jumlah_sampel;
+        $jumlah_sampel = $sampel;
+
+        // Total kolom yang akan ditampilkan
+        $total_kolom = 20;
+
+        // Buat array untuk semua kolom (1-20)
+        $all_columns = range(1, $total_kolom);
+
+        // Chunk kolom menjadi grup per 10 kolom untuk tampilan yang lebih baik
+        $column_chunks = collect($all_columns)->chunk(10);
     @endphp
-
     <table class="mt-4 table table-xs table-bordered w-full">
         <thead>
             <tr>
                 <th></th>
-                <th colspan="{{ $jumlah_sampel }}">KODE LOT : {{ $penerimaan->kode_lot }}</th>
+                <th colspan="{{ $total_kolom }}">KODE LOT : {{ $penerimaan->kode_lot }}</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($sampel_chunks as $chunk)
+            @foreach ($column_chunks as $chunk)
                 <tr>
                     <th>Kriteria Penerimaan</th>
-                    @foreach ($chunk as $sampel)
-                        <th class="text-center">{{ $sampel }}</th>
+                    @foreach ($chunk as $nomor_kolom)
+                        <th class="text-center">{{ $nomor_kolom }}</th>
                     @endforeach
                 </tr>
+
                 @foreach ($kriterias as $kriteria)
                     <tr>
                         <th>{{ ucfirst($kriteria) }}</th>
-                        @foreach ($chunk as $sampel)
-                            <td class="text-center">√</td>
+                        @foreach ($chunk as $nomor_kolom)
+                            <td class="text-center">
+                                {{-- Tampilkan centang hanya jika nomor kolom <= jumlah sampel --}}
+                                @if ($nomor_kolom <= $jumlah_sampel)
+                                    √
+                                @else
+                                    {{-- Kolom kosong untuk nomor > jumlah sampel --}}
+                                @endif
+                            </td>
                         @endforeach
                     </tr>
                 @endforeach
+
+                {{-- Tambahkan separator row jika bukan chunk terakhir --}}
+                @if (!$loop->last)
+                    <tr>
+                        <td colspan="{{ count($chunk) + 1 }}"></td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

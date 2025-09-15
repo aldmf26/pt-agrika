@@ -30,10 +30,18 @@ class PUR1DaftarSupplierController extends Controller
 
     public function seleksi(Suplier $supplier)
     {
+        $kode = [
+            'lainnya' => 'PURS',
+            'barang' => 'PURB',
+            'kemasan' => 'PURK',
+            'jasa' => 'PURJ',
+        ];
+        $nomor = $kode[strtolower($supplier->kategori)] ?? 'PURS';
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
-            'dok' => 'Dok.No.: FRM.PUR.02.02, Rev.00',
+            'kategori' => $supplier->kategori,
+            'dok' => "Dok.No.: FRM.{$nomor}.02.02, Rev.00",
         ];
         return view('pur.seleksi.daftar_supplier.seleksi', $data);
     }
@@ -165,9 +173,19 @@ class PUR1DaftarSupplierController extends Controller
     public function evaluasi_print(Evaluasi $evaluasi)
     {
         $supplier = Suplier::find($evaluasi->supplier_id)->first();
+
+        $kodes = [
+            'lainnya' => 'PURS',
+            'barang' => 'PURB',
+            'kemasan' => 'PURK',
+            'jasa' => 'PURJ',
+        ];
+
+        $nomor = $kodes[strtolower($supplier->kategori)] ?? 'PURS';
+
         $data = [
-            'title' => 'EVALUASI SUPPLIER/OUTSOURCE',
-            'dok' => 'Dok.No.: FRM.PUR.03.01, Rev.00',
+            'title' => 'EVALUASI SUPPLIER',
+            'dok' => "Dok.No.: FRM.{$nomor}.01.05, Rev.00",
             'evaluasi' => $evaluasi,
             'supplier' => $supplier
         ];
