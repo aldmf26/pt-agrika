@@ -1,4 +1,22 @@
 <x-hccp-print :title="$title" :dok="$dok">
+
+    <style>
+        .table {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #41464b !important;
+        }
+    </style>
     <span>PT. Agrika Gatya Arum</span>
     <p>Jl. Teluk Tiram Darat No.5b Rt.26 Rw.002, Desa/Kelurahan Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin,
         Provinsi Kalimantan Selatan Kode Pos : 70112 </p>
@@ -6,12 +24,34 @@
 
     <div class="row">
         <div class="col-6">
-            <strong>To:</strong> Hingkee Java Edible Birdnest Co LTD <br>
+            <table width="100%">
+                <tr>
+                    <td width="5%"><strong>To:</strong> </td>
+                    <td>Hingkee Java Edible Birdnest Co LTD</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Unit B5/F Hkjebn Group Center</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>13-15 Shing Wan Road</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Tai Wai New Territories</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Hong Kong</td>
+                </tr>
+            </table>
+            {{-- <strong>To:</strong> Hingkee Java Edible Birdnest Co LTD <br>
             Unit B5/F Hkjebn Group Center <br>
             13-15 Shing Wan Road
             <br>
             Tai Wai New Territories <br>
-            Hong Kong
+            Hong Kong --}}
         </div>
         <div class="col-2"></div>
         <div class="col-4 ">
@@ -72,7 +112,7 @@
     </div>
 
 
-    <p>Bersama ini kami kirimkan</p>
+    <p>Bersama ini kami kirimkan :</p>
 
     <table class="table table-bordered">
         <thead>

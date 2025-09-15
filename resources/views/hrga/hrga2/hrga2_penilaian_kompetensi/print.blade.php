@@ -9,19 +9,19 @@
             <div class="col-lg-4">
                 <table class="table">
                     <tr>
-                        <th>Nama</th>
-                        <th>:</th>
-                        <th>{{ $karyawan->nama }}</th>
+                        <td>Nama</td>
+                        <td>:</td>
+                        <td>{{ ucwords($karyawan->nama) }}</td>
                     </tr>
                     <tr>
-                        <th>Div / Dept</th>
+                        <td>Div / Dept</td>
                         <th>:</th>
-                        <td>{{ $karyawan->divisi }}</td>
+                        <td>{{ ucwords($karyawan->divisi) }}</td>
                     </tr>
                     <tr>
-                        <th>Jabatan</th>
+                        <td>Jabatan</td>
                         <th>:</th>
-                        <td>{{ $karyawan->posisi }}</td>
+                        <td>{{ ucwords($karyawan->posisi) }}</td>
                     </tr>
 
                 </table>
@@ -30,26 +30,26 @@
             <div class="col-lg-4">
                 <table class="table">
                     <tr>
-                        <th>Tgl Masuk Kerja</th>
-                        <th>:</th>
-                        <th>{{ tanggal($karyawan->tgl_masuk) }}</th>
+                        <td>Tgl Masuk Kerja</td>
+                        <td>:</td>
+                        <td>{{ tanggal($karyawan->tgl_masuk) }}</td>
                     </tr>
                     <tr>
-                        <th>Tgl berakhirnya masa percobaan</th>
-                        <th>:</th>
+                        <td>Tgl Berakhirnya Masa Percobaan</td>
+                        <td>:</td>
                         <td>
-                            @if ($karyawan->status_karyawan != 'Karyawan Tetap')
-                                {{ $karyawan->status_karyawan }} bulan, berakhir tanggal
-                                {{ tanggal(date('Y-m-d', strtotime('+' . $karyawan->status_karyawan . ' month', strtotime($karyawan->tgl_masuk)))) }}
-                            @else
-                                {{ $karyawan->status_karyawan }}
-                            @endif
+                            @php
+                                $tgl = new DateTime($karyawan->tgl_masuk);
+                                $tgl->modify('+3 month');
+
+                            @endphp
+                            {{ tanggal($tgl->format('Y-m-d')) }}
                         </td>
                     </tr>
                     <tr>
-                        <th>Status</th>
+                        <td>Status</td>
                         <th>:</th>
-                        <td>{{ $karyawan->jenis_kelamin }}</td>
+                        <td>{{ ucwords($karyawan->status) }} </td>
                     </tr>
 
                 </table>
@@ -63,28 +63,28 @@
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
-                            <th class="text-start">Standard Kompetensi</th>
+                            <th class="text-center">Standard Kompetensi</th>
                             <th class="text-center">Aktual</th>
-                            <th class="text-start">Tidak Lanjut</th>
+                            <th class="text-center">Tidak Lanjut</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="text-center">1</td>
-                            <td align="left">Menguasai pekerjaan di divisinya</td>
+                            <td class="text-end">1</td>
+                            <td align="left">Menguasai Pekerjaan Di Divisinya</td>
                             <td class="text-center">√</td>
                             <td align="left">
                             </td>
                         </tr>
                         <tr>
-                            <td class="text-center">2</td>
-                            <td align="left">Tidak pernah melakukan kecerobohan dalam pekerjaannya</td>
+                            <td class="text-end">2</td>
+                            <td align="left">Tidak Pernah Melakukan Kecerobohan Dalam Pekerjaannya</td>
                             <td class="text-center">√</td>
                             <td></td>
                         </tr>
                         <tr>
-                            <td class="text-center">3</td>
-                            <td align="left">Telah mendapat training HACCP, GMP, CCP</td>
+                            <td class="text-end">3</td>
+                            <td align="left">Telah Mendapat Training HACCP, GMP, CCP</td>
                             <td class="text-center">√</td>
                             <td></td>
                         </tr>
@@ -100,7 +100,7 @@
                     <th class="dhead text-center align-middle" rowspan="3">No</th>
                     <th class="dhead text-center align-middle" rowspan="3">Keterangan</th>
                     <th class="dhead text-center" colspan="24">Bulan</th>
-                    <th class="dhead align-middle" rowspan="3" colspan="2">Total</th>
+                    <th class="dhead align-middle text-center" rowspan="3" colspan="2">Total</th>
                 </tr>
                 <tr>
                     <!-- Angka bulan -->
@@ -151,31 +151,31 @@
                     <td class="text-center">1</td>
                     <td align="left">Terlambat</td>
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
+                        <td class="text-end">0</td>
+                        <td class="text-end">0</td>
                     @endfor
-                    <td class="text-center">-</td>
-                    <td class="text-center">-</td>
+                    <td class="text-end">0</td>
+                    <td class="text-end">0</td>
                 </tr>
                 <tr>
                     <td class="text-center">2</td>
                     <td align="left">Sakit</td>
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
+                        <td class="text-end">0</td>
+                        <td class="text-end">0</td>
                     @endfor
-                    <td class="text-center">-</td>
-                    <td class="text-center">-</td>
+                    <td class="text-end">0</td>
+                    <td class="text-end">0</td>
                 </tr>
                 <tr>
                     <td class="text-center">3</td>
                     <td align="left">Tanpa Keterangan</td>
                     @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="text-center">-</td>
-                        <td class="text-center">-</td>
+                        <td class="text-end">0</td>
+                        <td class="text-end">0</td>
                     @endfor
-                    <td class="text-center">-</td>
-                    <td class="text-center">-</td>
+                    <td class="text-end">0</td>
+                    <td class="text-end">0</td>
                 </tr>
                 <tr>
                     <td class="text-center">4</td>
@@ -194,37 +194,95 @@
                                             ? 0
                                             : 26 - $absen['total_per_bulan'][$bulan]);
                             @endphp
-                            <td class="text-center">{{ $absenCabut == 0 ? '-' : $absenCabut }}</td>
+                            <td class="text-end">{{ $absenCabut == 0 ? '0' : $absenCabut }}</td>
                             </td>
-                            <td class="text-center">-</td>
+                            <td class="text-end">{{ $absenCabut == 0 ? '0' : number_format($absenCabut * 480, 0) }}
+                            </td>
                             @php
                                 $grandTotal += $absenCabut;
                             @endphp
                         @else
-                            <td class="text-center">
-                                {{ $absen['total_per_bulan'][$bulan] == 0 ? '-' : $absen['total_per_bulan'][$bulan] }}
+                            <td class="text-end">
+                                {{ $absen['total_per_bulan'][$bulan] == 0 ? '0' : $absen['total_per_bulan'][$bulan] }}
                             </td>
-                            <td class="text-center">-</td>
+                            <td class="text-end">
+                                {{ $absen['total_per_bulan'][$bulan] == 0 ? '0' : number_format($absen['total_per_bulan'][$bulan] * 480, 0) }}
+                            </td>
                             @php
                                 $grandTotal += $absen['total_per_bulan'][$bulan];
                             @endphp
                         @endif
                     @endfor
-                    <td class="text-center">{{ $grandTotal }}</td>
-                    <td class="text-center">-</td>
+                    <td class="text-end">{{ $grandTotal }}</td>
+                    <td class="text-end">{{ number_format($grandTotal * 480, 0) }}</td>
                 </tr>
             </tbody>
             <tfoot class="">
                 <tr>
-                    <th colspan="2">Grand Total</th>
-                    <th class="text-center" colspan="24">{{ $grandTotal }}</th>
-                    <th class="text-center">-</th>
-                    <th class="text-center">-</th>
+                    <th colspan="6" class="text-center">Penilaian :</th>
+                    <th colspan="20" class="text-center">Grand Total</th>
+                    <th class="text-center">{{ $grandTotal }}</th>
+                    <th class="text-center">{{ number_format($grandTotal * 480, 0) }}</th>
+                </tr>
+                <tr>
+                    <th colspan="6">
+                        <table width='100%'>
+                            <tr>
+                                <td>Baik Sekali</td>
+                                <td>= Grand Total < 3 Hari</td>
+                            </tr>
+                            <tr>
+                                <td>Baik </td>
+                                <td>= Grand Total 4 - 7 Hari</td>
+                            </tr>
+                            <tr>
+                                <td>Cukup </td>
+                                <td>= Grand Total 8 - 12 Hari </td>
+                            </tr>
+                            <tr>
+                                <td>Kurang </td>
+                                <td>= Grand Total > 12 Hari </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">Note : 1 Hari = 8 Jam </td>
+
+                            </tr>
+                        </table>
+                    </th>
+                    <td colspan="22" class="align-middle">
+                        @php
+                            if ($grandTotal < 3) {
+                                $nilai = 'Baik Sekali';
+                            } elseif ($grandTotal >= 3 && $grandTotal <= 7) {
+                                $nilai = 'Baik';
+                            } elseif ($grandTotal > 7 && $grandTotal <= 12) {
+                                $nilai = 'Cukup';
+                            } else {
+                                $nilai = 'Kurang';
+                            }
+
+                            $opsi = ['Baik Sekali', 'Baik', 'Cukup', 'Kurang'];
+                        @endphp
+
+                        Nilai Catatan Kehadiran :
+                        @foreach ($opsi as $o)
+                            @if ($o === $nilai)
+                                {{ $o }}
+                            @else
+                                <s>{{ $o }}</s>
+                            @endif
+
+                            @if (!$loop->last)
+                                /
+                            @endif
+                        @endforeach
+
+                    </td>
                 </tr>
             </tfoot>
         </table>
 
-        <div class="d-flex mt-4">
+        {{-- <div class="d-flex mt-4">
             <div>
                 <p><strong>Penilaian:</strong></p>
                 <ul>
@@ -249,7 +307,7 @@
                         @endif
                     </b></span>
             </div>
-        </div>
+        </div> --}}
     </x-hccp-print>
 </div>
 
@@ -278,14 +336,14 @@
                             <tr>
                                 <th class="text-center">No</th>
                                 <th class="text-center">Parameter</th>
-                                <th class="text-end">Nilai</th>
+                                <th class="text-center">Nilai</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($parameters as $index => $param)
                                 <tr>
-                                    <td class="text-center">{{ $index + 1 }}</td>
-                                    <td>{{ $param[0] }}</td>
+                                    <td class="text-end">{{ $index + 1 }}</td>
+                                    <td>{{ ucwords($param[0]) }}</td>
                                     <td class="text-end">{{ $param[1] }}</td>
                                 </tr>
                             @endforeach
@@ -351,33 +409,35 @@
 
             </div>
             <div class="row mt-5">
-                <div class="col-3 text-center">
-                    <span>Dibuat Oleh,
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        [ Head ]
-                    </span>
-                </div>
                 <div class="col-3"></div>
-                <div class="col-3 text-center">
-                    <span>Diketahui Oleh,
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        [KA.HRGA]
-                    </span>
-                </div>
-                <div class="col-3 text-center">
-                    <span>Diketahui Oleh,,
-                        <br>
-                        <br>
-                        <br>
-                        <br>
-                        [DIREKTUR]
-                    </span>
+                <div class="col-9">
+                    <table class="table table-bordered border-dark" style="font-size: 12px">
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                                <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                                <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="height: 70px" class="align-middle text-center">
+                                    <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                </td>
+                                <td style="height: 70px" class="align-middle text-center">
+                                    <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                </td>
+                                <td style="height: 70px" class="align-middle text-center">
+                                    <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center">(KA. HRGA)</td>
+                                <td class="text-center">(KA. HRGA)</td>
+                                <td class="text-center">(KA. HRGA)</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -390,7 +450,8 @@
                     0,
                 ) }}
             </p>
-            <p>Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya. Ybs bisa dilanjut kontrak /
+            <p style="text-transform: capitalize">Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya.
+                Ybs bisa dilanjut kontrak /
                 kerjasama dengan <br> perusahaan. Dipertimbangkan. . . . . . . </p>
         </div>
 
