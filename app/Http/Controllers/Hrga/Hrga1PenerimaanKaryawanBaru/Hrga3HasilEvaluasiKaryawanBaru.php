@@ -33,7 +33,7 @@ class Hrga3HasilEvaluasiKaryawanBaru extends Controller
 
         $data = [
             'title' => 'HASIL EVALUASI KARYAWAN BARU',
-            'dok' => 'Dok.No.: FRM.HRGA.01.03, Rev.00',
+            'dok' => 'Dok.No.: FRM.HRGA.01.04, Rev.00',
             'pegawai' => $pegawai
         ];
         return view('hrga.hrga1.hrga3_hasil_evaluasi_karyawan_baru.print', $data);

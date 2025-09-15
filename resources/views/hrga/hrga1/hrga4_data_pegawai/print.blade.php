@@ -1,56 +1,60 @@
 <x-hccp-print :title="$title" :dok="$dok">
 
-    <span>Update : {{ date('d-m-Y') }}</span>
-    <table cellpadding="6" class="border-dark table-bordered">
-        <thead>
-            <tr style="font-size: 12px" class="text-center align-middle">
-                <th class="head">No</th>
-                <th class="head">Divisi</th>
-                <th class="head text-start">Nama</th>
-                <th class="head">Nomor Ktp (Nik)</th>
-                <th class="head">Posisi</th>
-                <th class="head">Jenis Kelamin</th>
-                <th class="head" width="10%">Tanggal Lahir</th>
-                <th class="head">Status <br> <span style="font-size: 10px">(Tetap / <br> Kontrak / <br>
-                        Borongan)</span></th>
-                <th class="head" width="10%">Tanggal Masuk</th>
-                <th class="head">Keterangan</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($datas as $d)
-                <tr style="font-size: 13px" class="text-center align-middle">
-                    <td>{{ $loop->iteration }}</td>
-                    <td align="left">{{ $d->divisi->divisi ?? 'Cabut Bulu' }}</td>
-                    <td align="left">{{ $d->nama ?? '' }}</td>
-                    <td>{{ $d->nik ?? '' }}</td>
-                    <td>{{ $d->posisi ?? '' }}</td>
-                    <td>{{ $d->jenis_kelamin }}</td>
-                    <td>{{ $d->tgl_lahir ? ddmmyyy($d->tgl_lahir) : '' }}</td>
-                    <td>{{ $d->status ?? '' }}</td>
-                    <td>{{ $d->tgl_masuk ? ddmmyyy($d->tgl_masuk) : '' }}</td>
-                    <td>{{ $d->deleted_at == null ? '-' : ddmmyyy($d->deleted_at) }}</td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+    <span>Update : {{ tanggal(date('Y-m-d')) }}</span>
     <div class="row">
+        <div class="col-12">
+            <table class="table border-dark table-bordered">
+                <thead>
+                    <tr style="font-size: 12px" class="text-center align-middle">
+                        <th class="text-center">No</th>
+                        <th class="text-center">Divisi</th>
+                        <th class="text-center ">Nama</th>
+                        <th class="text-center">Nomor Ktp (Nik)</th>
+                        <th class="text-center">Posisi</th>
+                        <th class="text-center">Jenis Kelamin</th>
+                        <th class="text-center" width="10%">Tanggal Lahir</th>
+                        <th class="text-center">Status (Tetap / Kontrak / <br>
+                            Borongan)</th>
+                        <th class="text-center" width="10%">Tanggal Masuk</th>
+                        <th class="text-center">Keterangan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($datas as $d)
+                        <tr style="font-size: 13px" class="text-center align-middle">
+                            <td class="text-end">{{ $loop->iteration }}</td>
+                            <td class="text-start">{{ $d->divisi->divisi ?? 'Cabut Bulu' }}</td>
+                            <td class="text-start">{{ ucwords($d->nama) ?? '' }}</td>
+                            <td class="text-end">{{ $d->nik ?? '' }}</td>
+                            <td>{{ ucwords($d->posisi) ?? '' }}</td>
+                            <td>{{ ucwords($d->jenis_kelamin) }}</td>
+                            <td class="text-end">{{ tanggal($d->tgl_lahir) ? tanggal($d->tgl_lahir) : '' }}</td>
+                            <td>{{ ucwords($d->status) ?? '' }}</td>
+                            <td class="text-end">{{ tanggal($d->tgl_masuk) ? tanggal($d->tgl_masuk) : '' }}</td>
+                            <td>{{ $d->deleted_at == null ? '-' : tanggal($d->deleted_at) }}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <br>
+        </div>
         <div class="col-7"></div>
         <div class="col-3"></div>
         <div class="col-2">
             <table class="table table-bordered border-dark" style="font-size: 12px">
                 <thead>
                     <tr>
-                        <th class="text-center" width="33.33%">Disetujui Oleh</th>
+                        <th class="text-center" width="33.33%">Disetujui Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
+                        <td style="height: 70px" class="align-middle text-center">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-center">[KA. HRGA]</td>
+                        <td class="text-center">(KA. HRGA)</td>
                     </tr>
                 </tbody>
             </table>

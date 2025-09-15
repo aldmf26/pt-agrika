@@ -74,30 +74,35 @@
         }
     </style>
     <div class="row">
-        <p style="font-size: 10px;">BERI TANDA (&#10004;) UNTUK TIAP KOLOM YANG SESUAI STANDARD DAN TANDA (&#10008;)
-            UNTUK TIAP
-            KOLOM
-            YANG
-            TIDAK SESUAI STANDAR</p>
-        <div class="header-info col-lg-6
-        ">
+
+        <div class="header-info col-lg-12">
 
             <table style="font-size: 10px">
                 <tr>
-                    <td>Kendaraan Milik </td>
+                    <td colspan="2">BERI TANDA (&#10004;) UNTUK TIAP KOLOM YANG SESUAI STANDAR DAN TANDA (&#10008;)
+                        UNTUK TIAP
+                        KOLOM
+                        YANG
+                        TIDAK SESUAI STANDAR</td>
+                </tr>
+                <tr>
+                    <td width="15%">Kendaraan Milik </td>
                     <td>: Internal / <span class="text-decoration-line-through">Ekspedisi</span></td>
-                    <td></td>
-                    <td></td>
+
                 </tr>
                 <tr>
                     <td>Nomor Kendaraan </td>
                     <td>: DA 1850 I</td>
+
+                </tr>
+                <tr>
                     <td>Pengemudi</td>
                     <td>: Maulidan</td>
                 </tr>
 
             </table>
         </div>
+
 
     </div>
     <table class="table table-bordered">
@@ -186,23 +191,22 @@
             @endforeach
 
             @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
-                <td class="text-center"></td>
+                <td class="text-center" colspan="2"></td>
             @endfor
 
         </tr>
         <tr>
             <td></td>
-            <th>Paraf Pemeriksa</th>
+            <th class="align-middle" style="font-size: 12px !important">Paraf Pemeriksa</th>
             @for ($i = 0; $i < $maxKolom; $i++)
-                <td class="text-center"></td>
-                <td class="text-center"></td>
+                <td class="text-center" style="height: 30px"></td>
+                <td class="text-center" style="height: 30px"></td>
             @endfor
 
         </tr>
 
 
     </table>
-
 
     <span style="font-size: 7px">
         NOTE : JIKA KONDISI KENDARAAN MEMENUHI SEMUA KETENTUAN TERSEBUT DIATAS DAN KEPUTUSANNYA DIPAKAI MAKA BERIKAN
@@ -211,7 +215,6 @@
         DAPAT DIPAKAI / DITOLAK
         LIHAT DETAIL KETERANGAN SETIAP KETENTUAN KONDISI KENDARAAN
     </span>
-
     <div>
         <table width="100%">
             <tr>

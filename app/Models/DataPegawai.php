@@ -124,6 +124,7 @@ class DataPegawai extends Model
                     a.karyawan_id_dari_api as id_karyawan,
                     a.tgl_masuk,
                     b.divisi,
+                    a.status,
                     CASE 
                         WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) 
                         THEN '1'
