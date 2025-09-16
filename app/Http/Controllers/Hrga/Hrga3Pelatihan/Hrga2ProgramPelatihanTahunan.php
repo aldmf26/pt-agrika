@@ -40,7 +40,8 @@ class Hrga2ProgramPelatihanTahunan extends Controller
     public function print(Request $r)
     {
         $data = [
-            'title' => 'Informasi Tawaran Pelatihan',
+            'title' => 'PROGRAM PELATIHAN TAHUNAN',
+            'dok' => 'Dok.No.: FRM.HRGA.03.03, Rev.00',
             'program' => ProgramPelatihanTahunan::whereYear('tgl_rencana', $r->tahun)->get(),
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $r->tahun,
