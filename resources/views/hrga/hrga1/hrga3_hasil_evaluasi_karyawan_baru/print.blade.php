@@ -7,7 +7,7 @@
                     <tr>
                         <td>Nama Calon Karyawan</td>
                         <td>&nbsp;:&nbsp;</td>
-                        <td>{{ $pegawai->nama }}</td>
+                        <td>{{ ucwords($pegawai->nama) }}</td>
                     </tr>
                     <tr>
                         <td>Usia</td>
@@ -22,16 +22,16 @@
                     <tr>
                         <td>Posisi</td>
                         <td>&nbsp;:&nbsp;</td>
-                        <td>{{ $pegawai->posisi }}</td>
+                        <td>{{ ucfirst(strtolower($pegawai->posisi)) }}</td>
                     </tr>
                     <tr>
                         <td>Periode Masa Percobaan</td>
                         <td>&nbsp;:&nbsp;</td>
                         <td>{{ $pegawai->penilaiankaryawan->periode ?? 1 }} Bulan</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td><span style="font-size: 12px"><em>* Coret Yang Tidak Sesuai</em></span></td>
-                    </tr>
+                    </tr> --}}
                 </table>
                 <br>
                 <table class="table table-bordered border-dark">
@@ -45,30 +45,30 @@
                     </tr>
                     <tr>
                         <td>Pendidikan</td>
-                        <td>{{ ucwords($pegawai->penilaiankaryawan->pendidikan_standar ?? 'N/A') }}</td>
-                        <td>{{ ucwords($pegawai->penilaiankaryawan->pendidikan_hasil ?? 'N/A') }}</td>
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->pendidikan_standar ?? 'N/A') }}</td>
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->pendidikan_hasil ?? 'N/A') }}</td>
                     </tr>
                     <tr>
                         <td>Pengalaman</td>
-                        <td>{{ ucwords(optional($pegawai->penilaiankaryawan)->pengalaman_standar ?? 'N/A') }}</td>
-                        <td>{{ ucwords(optional($pegawai->penilaiankaryawan)->pengalaman_hasil ?? 'N/A') }}</td>
+                        <td>{{ ucfirst(optional($pegawai->penilaiankaryawan)->pengalaman_standar ?? 'N/A') }}</td>
+                        <td>{{ ucfirst(optional($pegawai->penilaiankaryawan)->pengalaman_hasil ?? 'N/A') }}</td>
 
                     </tr>
                     <tr>
                         <td>Pelatihan</td>
-                        <td>{{ ucwords($pegawai->penilaiankaryawan->pelatihan_standar ?? 'N/A') }}</td>
-                        <td>{{ ucwords($pegawai->penilaiankaryawan->pelatihan_hasil ?? 'N/A') }}</td>
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->pelatihan_standar ?? 'N/A') }}</td>
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->pelatihan_hasil ?? 'N/A') }}</td>
                     </tr>
                     <tr>
-                        <td>Ketrampilan</td>
-                        <td>{{ ucwords($pegawai->penilaiankaryawan->ketrampilan_standar ?? 'Teliti, Cepat') }}</td>
-                        <td>{{ ucwords($pegawai->penilaiankaryawan->ketrampilan_hasil ?? 'Teliti, Cepat') }}</td>
+                        <td>Keterampilan</td>
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->ketrampilan_standar ?? 'Teliti, cepat') }}</td>
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->ketrampilan_hasil ?? 'Teliti, cepat') }}</td>
                     </tr>
-                    <tr style="text-transform: capitalize">
+                    <tr>
                         <td>Kompetensi Inti</td>
-                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti_standar ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->kompetensi_inti_standar) ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
                         </td>
-                        <td>{{ $pegawai->penilaiankaryawan->kompetensi_inti_hasil ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        <td>{{ ucfirst($pegawai->penilaiankaryawan->kompetensi_inti_hasil) ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
                         </td>
                     </tr>
                 </table>
@@ -81,15 +81,15 @@
                 <table class="table table-borderless">
                     <tr style="font-size: 12px">
                         <td class="fw-bold text-decoration-underline">Keputusan:</td>
-                        <td><input type="checkbox" name="" id="" checked> Lulus Masa Percobaan <br>
-                            <input type="checkbox" name="" id=""> Tidak Lulus Masa Percobaan
+                        <td><input type="checkbox" name="" id="" checked> Lulus masa percobaan <br>
+                            <input type="checkbox" name="" id=""> Tidak lulus masa percobaan
                         </td>
                     </tr>
                 </table>
 
                 <span class="fw-bold text-decoration-underline" style="font-size: 12px">Keterangan:</span>
-                <span style="font-size: 12px">Karyawan Dilanjut Kontrak &
-                    Diikutkan MCU Tahun Ini / Depan</span>
+                <span style="font-size: 12px">Karyawan dilanjut kontrak &
+                    diikutkan MCU tahun ini / depan</span>
             </div>
         </div>
         <div class="row mt-5">

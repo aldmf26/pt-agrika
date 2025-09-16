@@ -15,15 +15,15 @@
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Tempat</td>
-                    <td colspan="4">{{ ucwords($jadwal->tempat) }}</td>
+                    <td colspan="4">{{ ucfirst($jadwal->tempat) }}</td>
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Narasumber</td>
-                    <td colspan="4">{{ ucwords($jadwal->narasumber) }}</td>
+                    <td colspan="4">{{ ucfirst($jadwal->narasumber) }}</td>
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Kisaran Materi</td>
-                    <td colspan="4">{{ ucwords($jadwal->kisaran_materi) }}</td>
+                    <td colspan="4">{{ ucfirst(strtolower($jadwal->kisaran_materi)) }}</td>
                 </tr>
             </table>
         </div>
@@ -36,7 +36,7 @@
                             Nama Peserta Pelatihan <br> yang Diusulkan
                         </th>
                         <th class="text-center dhead align-middle">
-                            Bagian/ <br> Sub. Bagian
+                            Div / Dept
                         </th>
                         <th class="text-center dhead align-middle">
                             Konfirmasi/ <br> Keterangan
@@ -68,7 +68,7 @@
 
         </div>
         <div class="col-9">
-            <p>Banjarmasin , {{ date('d-m-Y') }}</p>
+            <p>Banjarmasin , {{ tanggal(date('Y-m-d')) }}</p>
             <br>
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>

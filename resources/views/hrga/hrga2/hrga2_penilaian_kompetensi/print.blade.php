@@ -11,7 +11,7 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td>{{ ucwords($karyawan->nama) }}</td>
+                        <td>{{ ucwords(strtolower($karyawan->nama)) }}</td>
                     </tr>
                     <tr>
                         <td>Div / Dept</td>
@@ -71,20 +71,20 @@
                     <tbody>
                         <tr>
                             <td class="text-end">1</td>
-                            <td align="left">Menguasai Pekerjaan Di Divisinya</td>
+                            <td align="left">Menguasai pekerjaan di divisinya</td>
                             <td class="text-center">√</td>
                             <td align="left">
                             </td>
                         </tr>
                         <tr>
                             <td class="text-end">2</td>
-                            <td align="left">Tidak Pernah Melakukan Kecerobohan Dalam Pekerjaannya</td>
+                            <td align="left">Tidak pernah melakukan kecerobohan dalam pekerjaannya</td>
                             <td class="text-center">√</td>
                             <td></td>
                         </tr>
                         <tr>
                             <td class="text-end">3</td>
-                            <td align="left">Telah Mendapat Training HACCP, GMP, CCP</td>
+                            <td align="left">Telah mendapat training HACCP, GMP, CCP</td>
                             <td class="text-center">√</td>
                             <td></td>
                         </tr>
@@ -265,7 +265,7 @@
                             $opsi = ['Baik Sekali', 'Baik', 'Cukup', 'Kurang'];
                         @endphp
 
-                        Nilai Catatan Kehadiran :
+                        Nilai catatan kehadiran :
                         @foreach ($opsi as $o)
                             @if ($o === $nilai)
                                 {{ $o }}
@@ -320,16 +320,16 @@
 
         <table width="100%">
             <tr>
-                <td width="13%">1. Surat Peringatan I, Karena</td>
-                <td>Tidak Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+                <td width="13%">1. Surat peringatan I, karena</td>
+                <td>tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
             </tr>
             <tr>
-                <td>2. Surat Peringatan II, Karena</td>
-                <td>Tidak Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+                <td>2. Surat peringatan II, karena</td>
+                <td>tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
             </tr>
             <tr>
-                <td>3. Surat Peringatan III, Karena</td>
-                <td>Tidak Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+                <td>3. Surat peringatan III, karena</td>
+                <td>tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
             </tr>
         </table>
 
@@ -430,9 +430,22 @@
                     0,
                 ) }}
             </p>
-            <p style="text-transform: capitalize">Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya.
+            <table width="100%">
+                <tr>
+
+                    <td>Kesimpulan :</td>
+                    <td>Ybs dinilai cakap / baik dalam menjalankan performanya.
+                        Ybs bisa dilanjut kontrak /
+                        kerjasama dengan</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>perusahaan. Dipertimbangkan untuk mendapatkan kontrak yang panjang</td>
+                </tr>
+            </table>
+            {{-- <p>Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya.
                 Ybs bisa dilanjut kontrak /
-                kerjasama dengan <br> perusahaan. Dipertimbangkan Untuk Mendapatkan Kontrak Yang Panjang</p>
+                kerjasama dengan <br> perusahaan. Dipertimbangkan untuk mendapatkan kontrak yang panjang</p> --}}
         </div>
         <div class="col-lg-12">
             <div class="row mt-5">

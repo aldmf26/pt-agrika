@@ -62,7 +62,7 @@ class Hrga2PenilaianKompetensi extends Controller
 
         $data = [
             'title' => 'LEMBAR PENILAIAN KOMPETENSI KARYAWAN',
-            'dok' => 'Dok.No.: FRM.HRGA.02.02, Rev.00',
+            'dok' => 'Dok.No.: FRM.HRGA.02.01, Rev.00',
             'karyawan' => $datas,
             'absen' => $dataPegawai,
             'divisi_id' => $divisi_id,

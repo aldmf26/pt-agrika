@@ -44,7 +44,7 @@ class Hrga4JadwalDanInformasiPelatihan extends Controller
     public function print(Request $r)
     {
         $data = [
-            'title' => 'JADWAL DAN INFORMASI PELATIHAN',
+            'title' => 'JADWAL & INFORMASI PELATIHAN',
             'dok' => 'Dok.No.: FRM.HRGA.03.02, Rev.00',
             'jadwal' => JadwalInformasiPelatihan::where('nota_pelatihan', $r->nota_pelatihan)->first(),
             'jadwal_detail' => JadwalInformasiPelatihan::where('nota_pelatihan', $r->nota_pelatihan)->get(),

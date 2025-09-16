@@ -131,7 +131,8 @@
                                         {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
                                     </td>
                                     <td>:</td>
-                                    <th>{{ $d->kategori == 'Baku' ? ucwords($d->grade) : $d->barang->nama_barang }}</th>
+                                    <th>{{ $d->kategori == 'Baku' ? ucfirst(strtolower($d->grade)) : $d->barang->nama_barang }}
+                                    </th>
                                 </tr>
                                 <tr>
                                     <td>
@@ -195,7 +196,7 @@
                                     <td>
                                         PASS / REJECT <br>
 
-                                        <span style="font-size: 8px">(Coret Yang Tidak Perlu)</span>
+                                        <span style="font-size: 8px">(Coret yang tidak perlu)</span>
                                     </td>
                                 </tr>
                             </table>

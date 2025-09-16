@@ -27,7 +27,7 @@
                 <tr>
                     <td>Posisi &nbsp;</td>
                     <td>:</td>
-                    <td>&nbsp; {{ ucwords($pegawai->posisi) ?? 'Staff cabut' }}</td>
+                    <td>&nbsp; {{ ucfirst(strtolower($pegawai->posisi)) ?? 'Staff cabut' }}</td>
                 </tr>
             </table>
         </div>
@@ -50,12 +50,12 @@
                             <br>
                             @if ($pegawai->hasilWawancara)
                                 {{-- {{ ucwords($pegawai->hasilWawancara->kesimpulan) ?? '' }} --}}
-                                {!! nl2br(e(ucwords($pegawai->hasilWawancara->kesimpulan) ?? '-')) !!}
+                                {!! nl2br(e($pegawai->hasilWawancara->kesimpulan ?? '-')) !!}
                             @else
                                 {{-- - Ybs memahami cara kerja {{ $pegawai->posisi }}
                                 <br> --}}
                                 @if ($pegawai->posisi == 'Staf Cabut')
-                                    {!! nl2br(e(ucwords($cth_wawancara->wawancara) ?? '-')) !!}
+                                    {!! nl2br(e($cth_wawancara->wawancara ?? '-')) !!}
                                 @endif
                                 {{-- - Ybs Tidak neko-neko, Terlihat teliti dan tidak mudah bosan --}}
                             @endif
