@@ -1,12 +1,13 @@
 <x-hccp-print :title="$title" :kategori="$kategori" :dok="$dok">
-    <table class="table-xs" style="font-size: 12px">
+    <table class="table-xs">
         <tr>
             <th width="5%">Nama Material</th>
-            <td width="30%">: {{ $kategori == 'sbw' ? $nm_barang : strtoupper($barang->nama_barang) }}</td>
+            <td width="30%">: {{ $kategori == 'sbw' ? strtoupper($nm_barang) : strtoupper($barang->nama_barang) }}
+            </td>
         </tr>
         <tr>
             <th>PIC</th>
-            <td>: {{ $kategori != 'sbw' ? 'Ratna,Sinta' : 'Sinta' }}</td>
+            <td>: {{ $kategori != 'sbw' ? 'Tasya Salsabila' : 'Sinta' }}</td>
         </tr>
     </table>
     <table width="100%" class="mt-3 border-dark table table-xs table-bordered">
@@ -45,7 +46,7 @@
                         }
                     @endphp
                     <tr>
-                        <td class="text-end">{{ \Carbon\Carbon::parse($t['tgl'])->format('d-M-y') }}</td>
+                        <td class="text-end">{{ tanggal(\Carbon\Carbon::parse($t['tgl'])->format('Y-m-d')) }}</td>
                         <td class="text-end">{{ number_format($masuk, 0) }}
                             {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
                         <td class="text-end">{{ number_format($keluar, 0) }}
@@ -78,32 +79,28 @@
         </tbody>
     </table>
 
-    <table width="100%">
-        <tr>
-            <td width="40%" style="font-size: 11px">
-                <p>Note:</p>
-                * Coret yang tidak perlu
-            </td>
-            <td style="width: 10%">
-                <table class="border-dark table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5">Ttd & Nama</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">(KA. GUDANG)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
-
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <table class="table table-xs table-bordered border-dark">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-center align-middle">
+                            ({{ $ttdJabatan }})
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </x-hccp-print>

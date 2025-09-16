@@ -100,7 +100,7 @@ class RM1PenerimaanBarangController extends Controller
 
         $data = [
             'title' => 'PENERIMAAN BARANG',
-            'dok' => 'Dok.No.: FRM.WH.02.01, Rev.01',
+            'dok' => 'Dok.No.: FRM.PPCB.01.01, Rev.01',
             'penerimaan' => $penerimaan
         ];
         return view('ppc.gudang_rm.penerimaan_barang.print', $data);

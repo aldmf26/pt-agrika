@@ -124,37 +124,62 @@
     </table>
 
 
-    <table class="mt-2 table table-xs table-bordered">
-        <tr>
-            <th></th>
-            <th colspan="{{ $maxPerRow }}">No Reg Rumah Walet :</th>
-        </tr>
+    @php
+        $kriterias = collect(['Warna', 'Kondisi (bulu Berat & Ringan, Bebas Jamur)', 'Grade', 'Kadar Air']);
 
-        @for ($baris = 0; $baris < $jumlahBaris; $baris++)
-            @php
-                $start = $baris * $maxPerRow + 1;
-                $end = min(($baris + 1) * $maxPerRow, $totalBoxDisplay);
-            @endphp
+        // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
+        $jumlah_sampel = $jumlahBox;
 
+        // Total kolom yang akan ditampilkan
+        $total_kolom = 20;
+
+        // Buat array untuk semua kolom (1-20)
+        $all_columns = range(1, $total_kolom);
+
+        // Chunk kolom menjadi grup per 10 kolom untuk tampilan yang lebih baik
+        $column_chunks = collect($all_columns)->chunk(10);
+    @endphp
+
+    <table class="mt-4 table table-xs table-bordered border-dark">
+        <thead>
             <tr>
-                <th class="text-start">Kriteria Penerimaan</th>
-                @for ($i = $start; $i <= $end; $i++)
-                    <th class="text-center">{{ $i }}</th>
-                @endfor
+                <th></th>
+                <th colspan="{{ $total_kolom }}">No Reg Rumah Walet : {{ $penerimaan->no_invoice }}</th>
             </tr>
-
-            @foreach ($kriteria as $k)
+        </thead>
+        <tbody>
+            @foreach ($column_chunks as $chunk)
                 <tr>
-                    <td class="text-start">{{ ucwords($k->kriteria) }}</td>
-                    @for ($i = $start; $i <= $end; $i++)
-                        <td class="text-center">
-                            {{-- Hanya centang sesuai jumlah box asli --}}
-                            {!! $i <= $jumlahBox ? '&#10004;' : '&nbsp;' !!}
-                        </td>
-                    @endfor
+                    <th>Kriteria Penerimaan</th>
+                    @foreach ($chunk as $nomor_kolom)
+                        <th class="text-center">{{ $nomor_kolom }}</th>
+                    @endforeach
                 </tr>
+
+                @foreach ($kriterias as $kriteria)
+                    <tr>
+                        <td>{{ ucfirst($kriteria) }}</td>
+                        @foreach ($chunk as $nomor_kolom)
+                            <td class="text-center">
+                                {{-- Tampilkan centang hanya jika nomor kolom <= jumlah sampel --}}
+                                @if ($nomor_kolom <= $jumlah_sampel)
+                                    √
+                                @else
+                                    {{-- Kolom kosong untuk nomor > jumlah sampel --}}
+                                @endif
+                            </td>
+                        @endforeach
+                    </tr>
+                @endforeach
+
+                {{-- Tambahkan separator row jika bukan chunk terakhir --}}
+                @if (!$loop->last)
+                    <tr>
+                        <td colspan="{{ count($chunk) + 1 }}"></td>
+                    </tr>
+                @endif
             @endforeach
-        @endfor
+        </tbody>
     </table>
 
     <p style="font-size: 11px">Keputusan: <br>
