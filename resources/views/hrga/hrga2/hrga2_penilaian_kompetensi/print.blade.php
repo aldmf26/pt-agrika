@@ -59,7 +59,7 @@
         <span>I. Penilaian Kompetensi</span>
         <div class="row">
             <div class="col-7">
-                <table class="table table-bordered text-center align-middle">
+                <table class="table table-bordered text-center border-dark align-middle">
                     <thead>
                         <tr>
                             <th class="text-center">No</th>
@@ -244,7 +244,8 @@
                                 <td>= Grand Total > 12 Hari </td>
                             </tr>
                             <tr>
-                                <td colspan="2">Note : 1 Hari = 8 Jam </td>
+                                <td>Note</td>
+                                <td>= 1 Hari = 8 Jam</td>
 
                             </tr>
                         </table>
@@ -310,20 +311,30 @@
         </div> --}}
     </x-hccp-print>
 </div>
-
+<br>
 <x-hccp-print :title="$title" :dok="$dok">
     <h6>III. SURAT PERINGATAN YANG DITERIMA</h6>
     <hr />
 
     <ol style="line-height: 2">
-        <li>1. Surat Peringatan I, karena Tidak
-            Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</li>
 
-        <li>2. Surat Peringatan II, karena Tidak
-            Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</li>
+        <table width="100%">
+            <tr>
+                <td width="13%">1. Surat Peringatan I, Karena</td>
+                <td>Tidak Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+            </tr>
+            <tr>
+                <td>2. Surat Peringatan II, Karena</td>
+                <td>Tidak Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+            </tr>
+            <tr>
+                <td>3. Surat Peringatan III, Karena</td>
+                <td>Tidak Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+            </tr>
+        </table>
 
-        <li>3. Surat Peringatan III, karena Tidak
-            Pernah……………………………………………………………………………………………………………………………………………………………………………………………….</li>
+
+
     </ol>
 
     <div class="row">
@@ -408,6 +419,22 @@
                 </div>
 
             </div>
+
+        </div>
+        <div class="col-7">
+            <h6 class="mb-5">V. REKOMENDASI</h6>
+            <p>Aktual Nilai :
+                {{ number_format(
+                    collect($parameters)->filter(fn($param) => is_numeric($param[1]))->sum(fn($param) => $param[1]) /
+                        collect($parameters)->filter(fn($param) => is_numeric($param[1]))->count(),
+                    0,
+                ) }}
+            </p>
+            <p style="text-transform: capitalize">Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya.
+                Ybs bisa dilanjut kontrak /
+                kerjasama dengan <br> perusahaan. Dipertimbangkan Untuk Mendapatkan Kontrak Yang Panjang</p>
+        </div>
+        <div class="col-lg-12">
             <div class="row mt-5">
                 <div class="col-3"></div>
                 <div class="col-9">
@@ -432,27 +459,14 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td class="text-center">(STAFF HRGA)</td>
                                 <td class="text-center">(KA. HRGA)</td>
-                                <td class="text-center">(KA. HRGA)</td>
-                                <td class="text-center">(KA. HRGA)</td>
+                                <td class="text-center">(OPERATIONAL MANAGER)</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="col-7">
-            <h6 class="mb-5">V. REKOMENDASI</h6>
-            <p>Aktual Nilai :
-                {{ number_format(
-                    collect($parameters)->filter(fn($param) => is_numeric($param[1]))->sum(fn($param) => $param[1]) /
-                        collect($parameters)->filter(fn($param) => is_numeric($param[1]))->count(),
-                    0,
-                ) }}
-            </p>
-            <p style="text-transform: capitalize">Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya.
-                Ybs bisa dilanjut kontrak /
-                kerjasama dengan <br> perusahaan. Dipertimbangkan. . . . . . . </p>
         </div>
 
     </div>

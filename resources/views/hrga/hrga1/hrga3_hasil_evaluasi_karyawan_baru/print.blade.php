@@ -81,7 +81,9 @@
                 <table class="table table-borderless">
                     <tr style="font-size: 12px">
                         <td class="fw-bold text-decoration-underline">Keputusan:</td>
-                        <td>⬛Lulus Masa Percobaan <br> ⬜Tidak Lulus Masa Percobaan</td>
+                        <td><input type="checkbox" name="" id="" checked> Lulus Masa Percobaan <br>
+                            <input type="checkbox" name="" id=""> Tidak Lulus Masa Percobaan
+                        </td>
                     </tr>
                 </table>
 

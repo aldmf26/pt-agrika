@@ -20,7 +20,8 @@ class Hrga6EvaluasiPelatihan extends Controller
     public function print(Request $r)
     {
         $data = [
-            'title' => 'Evaluasi Pelatihan',
+            'title' => 'EVALUASI PELATIHAN',
+            'dok' => 'Dok.No.: FRM.HRGA.03.06, Rev.00',
             'evaluasi_detail' => JadwalInformasiPelatihan::where('id', $r->id_evaluasi)->first(),
         ];
         return view('hrga.hrga3.hrga6evaluasipelatihan.print', $data);

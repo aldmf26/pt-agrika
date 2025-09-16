@@ -1,195 +1,99 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-    <title>{{ $title }}</title>
-    <style>
-        .cop_judul {
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            margin: 15px;
-        }
-
-        .shapes {
-            border: 1px solid black;
-            border-radius: 10px;
-        }
-
-        .cop_text {
-            font-size: 12px;
-            text-align: left;
-            font-weight: normal;
-            margin-top: 100px;
-
-        }
-
-        .dhead {
-            background-color: #C0C0C0 !important;
-        }
-
-        .bg-black {
-            background-color: black !important;
-        }
-
-        .border_atas {
-            border-top: 1px solid black;
-        }
-
-        .border_bawah {
-            border-bottom: 1px solid black;
-        }
-
-        .border_kanan {
-            border-right: 1px solid black;
-            padding-right: 6px;
-        }
-
-        .border_kiri {
-            border-left: 1px solid black;
-            padding-left: 6px;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
-            </div>
-            <div class="col-6 mt-4">
-                <div class="shapes">
-                    <p class="cop_judul">JADWAL DAN INFORMASI PELATIHAN</p>
-                </div>
-            </div>
-            <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.HRGA.03.04, Rev.00</p>
-            </div>
-            <div class="col-12">
-                <table class="table table-bordered" with="100%">
+<x-hccp-print :title="$title" :dok="$dok">
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered border-dark" with="100%">
+                <tr>
+                    <td width="20%" class="dhead p-2 fw-bold">Tema Pelatihan</td>
+                    <td colspan="4">{{ $jadwal->tema_pelatihan }}</td>
+                </tr>
+                <tr>
+                    <td width="20%" class="dhead p-2 fw-bold">Hari/Tanggal</td>
+                    <td>{{ tanggal($jadwal->tanggal) }}
+                    </td>
+                    <td width="20%" class="dhead p-2 fw-bold">Waktu</td>
+                    <td>{{ date('h:i A', strtotime($jadwal->waktu)) }} - 12:00 PM</td>
+                </tr>
+                <tr>
+                    <td width="20%" class="dhead p-2 fw-bold">Tempat</td>
+                    <td colspan="4">{{ ucwords($jadwal->tempat) }}</td>
+                </tr>
+                <tr>
+                    <td width="20%" class="dhead p-2 fw-bold">Narasumber</td>
+                    <td colspan="4">{{ ucwords($jadwal->narasumber) }}</td>
+                </tr>
+                <tr>
+                    <td width="20%" class="dhead p-2 fw-bold">Kisaran Materi</td>
+                    <td colspan="4">{{ ucwords($jadwal->kisaran_materi) }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-12 mt-4">
+            <table class="table table-bordered border-dark">
+                <thead>
                     <tr>
-                        <td width="20%" class="dhead p-2">Tema Pelatihan</td>
-                        <td colspan="4">{{ $jadwal->tema_pelatihan }}</td>
+                        <th class="text-center dhead align-middle">No</th>
+                        <th class="text-center dhead align-middle">
+                            Nama Peserta Pelatihan <br> yang Diusulkan
+                        </th>
+                        <th class="text-center dhead align-middle">
+                            Bagian/ <br> Sub. Bagian
+                        </th>
+                        <th class="text-center dhead align-middle">
+                            Konfirmasi/ <br> Keterangan
+                        </th>
                     </tr>
-                    <tr>
-                        <td width="20%" class="dhead p-2">Hari/Tanggal</td>
-                        <td>{{ tanggal($jadwal->tanggal) }}
-                        </td>
-                        <td width="20%" class="dhead p-2">Waktu</td>
-                        <td>{{ $jadwal->waktu }}</td>
-                    </tr>
-                    <tr>
-                        <td width="20%" class="dhead p-2">Tempat</td>
-                        <td colspan="4">{{ $jadwal->tempat }}</td>
-                    </tr>
-                    <tr>
-                        <td width="20%" class="dhead p-2">Narasumber</td>
-                        <td colspan="4">{{ $jadwal->narasumber }}</td>
-                    </tr>
-                    <tr>
-                        <td width="20%" class="dhead p-2">Kisaran Materi</td>
-                        <td colspan="4">{{ $jadwal->kisaran_materi }}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-12 mt-4">
-                <table class="table table-bordered">
-                    <thead>
+                </thead>
+                <tbody>
+                    @foreach ($jadwal_detail as $j)
                         <tr>
-                            <th class="text-center dhead align-middle">No</th>
-                            <th class="text-start dhead align-middle">
-                                Nama Peserta Pelatihan <br> yang Diusulkan
-                            </th>
-                            <th class="text-start dhead align-middle">
-                                Bagian/ <br> Sub. Bagian
-                            </th>
-                            <th class="text-start dhead align-middle">
-                                Konfirmasi/ <br> Keterangan
-                            </th>
+                            <td class="text-end">{{ $loop->iteration }}</td>
+                            <td class="text-start">{{ ucwords(strtolower($j->data_pegawai->nama)) }}</td>
+                            <td class="text-start">
+                                {{ $j->data_pegawai->divisi->divisi == 'Cabut' ? 'Cabut Bulu' : ucwords($j->data_pegawai->divisi->divisi) }}
+                            </td>
+                            <td class="text-start">{{ $j->konfirmasi_keterangan }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($jadwal_detail as $j)
-                            <tr>
-                                <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-start">{{ ucwords(strtolower($j->data_pegawai->nama)) }}</td>
-                                <td class="text-start">{{ $j->data_pegawai->divisi->divisi }}</td>
-                                <td class="text-start">{{ $j->konfirmasi_keterangan }}</td>
-                            </tr>
-                        @endforeach
+                    @endforeach
 
-                    </tbody>
-                </table>
-
-            </div>
-            <div class="col-6">
-                <p class="ms-3">Penyelenggara : </p>
-                <p class="ms-3"><input type="checkbox" name="" id=""
-                        {{ $jadwal->penyelenggara == 'internal' ? 'checked' : '' }}> Internal</p>
-                <p class="ms-3"><input type="checkbox" name="" id=""
-                        {{ $jadwal->penyelenggara == 'eksternal' ? 'checked' : '' }}> Eksternal</p>
-
-            </div>
-            <div class="col-6">
-                <p>Banjarmasin , {{ date('d-m-Y') }}</p>
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                            <th class="text-center" width="33.33%">Diketahui Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                        </tr>
-                        <tr>
-                            <td class="text-center">[SPV. HR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
-                            <td class="text-center">[ DIREKTUR. ]</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-
-
+                </tbody>
+            </table>
 
         </div>
+        <div class="col-3">
+            <p class="ms-3">Penyelenggara : </p>
+            <p class="ms-3"><input type="checkbox" name="" id=""
+                    {{ $jadwal->penyelenggara == 'internal' ? 'checked' : '' }}> Internal</p>
+            <p class="ms-3"><input type="checkbox" name="" id=""
+                    {{ $jadwal->penyelenggara == 'eksternal' ? 'checked' : '' }}> Eksternal</p>
+
+        </div>
+        <div class="col-9">
+            <p>Banjarmasin , {{ date('d-m-Y') }}</p>
+            <br>
+            <table class="table table-bordered border-dark" style="font-size: 11px">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">(STAFF HRGA)</td>
+                        <td class="text-center">(KA. HRGA)</td>
+                        <td class="text-center">(OPERASIONAL MANAGER)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <script>
-        window.print();
-    </script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
-    </script>
-    -->
-</body>
-
-</html>
+</x-hccp-print>
