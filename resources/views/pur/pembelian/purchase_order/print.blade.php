@@ -34,8 +34,7 @@
         <br>
 
         <div>
-            <span class="float-start" style="font-size: 9px;"">Format nomor PO : PO/Urutan/ Bulan /
-                Tahun
+            <span class="float-start" style="font-size: 9px;"">Format nomor PO : PO/Urutan/Bulan/Tahun
                 (ex :
                 PO/1/VI/2025)
 
@@ -50,8 +49,8 @@
                 @foreach ($datas->item as $d)
                     <tr>
                         <td class="text-end">{{ number_format($d->jumlah, 0) }} {{ $d->barang->satuan }}</td>
-                        <td align="center">{{ ucwords($d->item_spesifikasi) }}</td>
-                        <td align="center">{{ ucwords($d->barang->spek) }}</td>
+                        <td align="center">{{ ucfirst($d->item_spesifikasi) }}</td>
+                        <td align="center">{{ ucfirst($d->barang->spek) }}</td>
                         <td class="text-end d-flex justify-content-between">
                             <div>Rp. </div>
                             <div>{{ number_format($d->harga_po, 0) }}</div>
@@ -77,7 +76,7 @@
             <br>
             Telp: {{ $datas->telp }}
             <br>
-            Estimasi Kedatangan Barang: {{ tanggal($datas->estimasi_kedatangan) }}
+            Estimasi kedatangan barang: {{ tanggal($datas->estimasi_kedatangan) }}
         </div>
     </center>
     <div class="row">

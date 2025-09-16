@@ -41,7 +41,7 @@ class PUR1DaftarSupplierController extends Controller
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
             'kategori' => $supplier->kategori,
-            'dok' => "Dok.No.: FRM.{$nomor}.02.02, Rev.00",
+            'dok' => "Dok.No.: FRM.{$nomor}.01.04, Rev.00",
         ];
         return view('pur.seleksi.daftar_supplier.seleksi', $data);
     }
@@ -172,8 +172,7 @@ class PUR1DaftarSupplierController extends Controller
 
     public function evaluasi_print(Evaluasi $evaluasi)
     {
-        $supplier = Suplier::find($evaluasi->supplier_id)->first();
-
+        $supplier = Suplier::where('id', $evaluasi->supplier_id)->first();
         $kodes = [
             'lainnya' => 'PURS',
             'barang' => 'PURB',

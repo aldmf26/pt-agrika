@@ -26,9 +26,7 @@
                 </table>
                 <span class="float-start" style="position: relative;font-size: 9px; top: -16px !important">Format
                     nomor PR :
-                    PR/Urutan/
-                    Bulan
-                    / Tahun
+                    PR/Urutan/Bulan/Tahun
                     (ex :
                     PR/1/VI/2025)
                     <span class="ms-2">* :
@@ -63,7 +61,7 @@
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                                 {{ number_format($d->jumlah_kg) }} KG</td>
-                            <td align="center">{{ ucfirst($d->nama) }}</td>
+                            <td align="center">{{ ucfirst(strtolower($d->nama)) }}</td>
                             <td align="center">-</td>
                             <td class="text-end">{{ tanggal($datas->tgl) }}</td>
                         </tr>

@@ -1,4 +1,4 @@
-<x-hccp-print :title="$title" :dok="$dok">
+<x-hccp-print :title="$title" :kategori="$kategori == 'lainnya' ? 'SBW' : $kategori" :dok="$dok">
     <table class="table-xs">
         <tr>
             <td>Tanggal Pemohon</td>
@@ -13,7 +13,7 @@
         <tr>
             <td>Departemen</td>
             <td>:</td>
-            <td>{{ $k == 'satu' ? $buktis[0]->departemen : 'Cabut' }}</td>
+            <td>{{ $kategori == 'satu' ? $buktis[0]->departemen : 'Cabut Bulu' }}</td>
         </tr>
     </table>
 
@@ -33,19 +33,19 @@
                 </tr>
             </thead>
             <tbody>
-                @if ($k == 'satu')
+                @if ($kategori != 'lainnya')
                     @foreach ($buktis as $d)
                         <tr>
                             <td class="text-end">{{ $loop->iteration }}</td>
-                            <td>{{ $d->barang->nama_barang ?? '' }}</td>
+                            <td>{{ ucfirst($d->barang->nama_barang ?? '') }}</td>
                             <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                             </td>
                             <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                             </td>
-                            <td>{{ $d->no_lot }}</td>
-                            <td align="center">{{ $d->status }}</td>
+                            <td class="text-end">{{ $d->no_lot }}</td>
+                            <td>{{ $d->status }}</td>
                         </tr>
                     @endforeach
                 @else
@@ -58,31 +58,30 @@
                         @endphp
                         <tr>
                             <td class="text-end">{{ $loop->iteration }}</td>
-                            <td>{{ $sbw->nama ?? $d['nm_partai'] }}</td>
+                            <td>{{ ucfirst($sbw->nama ?? $d['nm_partai']) }}</td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr
                             </td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
                                 {{ number_format($d['gr'], 0) }} Gr
                             </td>
-                            <td class="text-center">{{ $sbw->no_invoice }}</td>
-                            <td class="text-center">Ok</td>
-
+                            <td class="text-end">{{ $sbw->no_invoice }}</td>
+                            <td>Ok</td>
                         </tr>
                     @endforeach
                 @endif
 
             </tbody>
         </table>
-        <div style="font-size: 12px; margin-top: -10px;">
-            <small class="fw-bold">OK : Material / Barang yang diminta dan diterima dalam kondisi baik dan layak
+        <div style="font-size: 10px; margin-top: -10px;">
+            <small class="fw-bold">OK : material / barang yang diminta dan diterima dalam kondisi baik dan layak
                 pakai.</small>
             <br>
-            <small class="fw-bold mb-3">TIDAK OK : Material / Barang yang diminta dan diterima dalam kondisi tidak baik
+            <small class="fw-bold mb-3">TIDAK OK : material / barang yang diminta dan diterima dalam kondisi tidak baik
                 dan
                 tidak layak
                 pakai.</small>
-            <br><br>
+            {{-- <br><br>
             <small class="fw-bold ">Permintaan diterima Warehouse Material:</small>
             <table class="table-xs">
                 <tr>
@@ -93,7 +92,7 @@
                 <tr>
                     <td>Nama Penerima</td>
                     <td>:</td>
-                    <td class="fw-bold">{{ $k == 'satu' ? $buktis[0]->penerima_wr : 'Sinta' }}</td>
+                    <td class="fw-bold">{{ $kategori == 'satu' ? $buktis[0]->penerima_wr : 'Sinta' }}</td>
             </table>
 
             <br>
@@ -108,54 +107,12 @@
                     <td>Nama Penerima</td>
                     <td>:</td>
                     <td class="fw-bold">{{ ucwords($nama) }}</td>
-            </table>
+            </table> --}}
         </div>
     </div>
 
-    {{-- <div class="row">
 
-        <div class="col-6">
-            <span class="text-xs">Permintaan diterima Warehouse Material:</span>
-            <div class="mb-3">
-                <table class="table table-xs table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Nama Penerima</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td x-text="tgl">{{ tanggal($buktis[0]->tgl) }}</td>
-                            <td>
-                                {{ $buktis[0]->penerima_wm }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <span class="text-xs">Penyerahan Barang kepada Produksi:</span>
-            <div class="mb-3">
-                <table class="table table-xs table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Nama Penerima</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td x-text="tgl">{{ tanggal($buktis[0]->tgl) }}</td>
-                            <td>
-                                {{ $buktis[0]->penerima_pr }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> --}}
-    <div class="row">
+    <div class="row d-none">
         <div class="col-3 d-flex justify-content-end flex-column align-items-end mb-3" style="margin-right: -15px">
             <span>Nama</span>
             <span>Tanggal</span>
@@ -209,6 +166,48 @@
                         <div class=""></div>
                     </td>
                 </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-2"></div>
+        <div class="col-10">
+            <table class="table table-xs table-bordered border-dark">
+                <thead>
+                    <tr>
+                        <th class="text-center align-middle" width="33.33%">Pemohon Oleh:</th>
+                        <th class="text-center align-middle" width="33.33%">Diterima Warehouse Material:</th>
+                        <th class="text-center align-middle" width="33.33%">Diterima Pengguna:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        @php
+                            $ttdJabatan = $kategori == 'lainnya' ? 'KA. GUDANG BAHAN BAKU' : 'KA. PURCHASING';
+                            $pengawas = $kategori == 'lainnya' ? 'PENGAWAS' : 'KA. PACKING & GUDANG FG';
+                        @endphp
+                        <td class="text-center align-middle">
+                            ({{ $pengawas }})
+                        </td>
+                        <td class="text-center align-middle">
+                            ({{ $ttdJabatan }})
+                        </td>
+                        <td class="text-center align-middle">
+                            ({{ $pengawas }})
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
