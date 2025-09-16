@@ -1,4 +1,4 @@
-<x-hccp-print :title="$title" :kategori="$supplier->produsen" :dok="$dok">
+<x-hccp-print :title="$title" :kategori="$supplier->kategori" :dok="$dok">
     <table class="table-xs">
         <tr>
             <th>Tagngal</th>
@@ -13,7 +13,7 @@
         <tr>
             <th width="130">Jenis Supply</th>
             <th>:</th>
-            <td>{{ $supplier->produsen ?? '' }}</td>
+            <td>{{ $supplier->kategori ?? '' }}</td>
         </tr>
         <tr>
             <td colspan="3"></td>

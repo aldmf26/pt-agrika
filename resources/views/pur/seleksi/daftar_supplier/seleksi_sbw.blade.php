@@ -31,13 +31,13 @@
         <tr>
             <th>Spesifikasi</th>
             <td>
-                1. Tidak Ada Jamur Pink <br>
-                2. Tidak Boleh Ada Batu
+                1. Tidak ada jamur pink <br>
+                2. Tidak boleh ada batu
 
             </td>
         </tr>
         <tr>
-            <th>Nomor Reg RW</th>
+            <th>Nomor Reg RWB</th>
             <td>
                 <input type="checkbox" checked> Ada (lampirkan)
                 <input type="checkbox"> Tidak Ada
@@ -55,7 +55,7 @@
             <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
         </tr>
         <tr>
-            <th>Sistem Manajemen yang telah diterapkan di Perusahaan Anda:</th>
+            <th>Sistem Manajemen yang telah diterapkan di perusahaan anda:</th>
             <td>
                 <p><input type="checkbox" checked> HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
                 <p><input type="checkbox"> GMP</p>
@@ -89,7 +89,7 @@
             <th colspan="2" class="text-center fw-bold bg-info">Sample</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sample yang diberikan (jumlah) : Tidak Tersedia Sample<br>
+            <td colspan="2">Jenis sample yang diberikan (jumlah) : tidak tersedia sample<br>
                 a.
             </td>
         </tr>
@@ -126,7 +126,7 @@
 <br>
 <br>
 <x-hccp-print title="SELEKSI SUPPLIER MATERIAL SBW" :dok="$dok">
-    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada Sample yang disertakan)</p>
+    <p style="font-size: 10px">Lembar pemeriksaan (bila ada sample yang disertakan)</p>
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
             <th class="fw-bold bg-info">Departemen Lab</th>
@@ -179,7 +179,7 @@
         <tr>
             <td>Hasil Pemeriksaan : <br>
                 1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
-                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm) sesuaiyang dilaporkan bagian lab
+                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm) sesuai yang dilaporkan bagian lab
             </td>
         </tr>
         <tr>

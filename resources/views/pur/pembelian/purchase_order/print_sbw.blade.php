@@ -39,9 +39,7 @@
         <div>
             <span class="float-start" style="font-size: 9px;">Format
                 nomor PO :
-                PO/Urutan/
-                Bulan
-                / Tahun
+                PO/Urutan/Bulan/Tahun
                 (ex :
                 PO/1/VI/2025)
 
@@ -49,14 +47,14 @@
             <table class="table table-xs table-bordered border-dark">
                 <tr>
                     <th class="head text-center">Jumlah</th>
-                    <th class="head text-center">Item dan Spesifikasi</th>
+                    <th class="head text-center">Item & Spesifikasi</th>
                     <th class="head text-center">Harga</th>
                 </tr>
                 @foreach ($items as $d)
                     <tr>
                         <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                             {{ number_format($d->jumlah_kg) }} GR</td>
-                        <td align="center">{{ ucfirst($d->nama) }}</td>
+                        <td align="center">{{ ucfirst(strtolower($d->nama)) }}</td>
                         <td class="d-flex justify-content-between">
                             <div>Rp. </div>
                             <div>1</div>

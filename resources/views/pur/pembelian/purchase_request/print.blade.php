@@ -39,9 +39,7 @@
                 </table>
                 <span class="float-start" style="position: relative;font-size: 9px; top: -16px !important">Format
                     nomor PR :
-                    PR/Urutan/
-                    Bulan
-                    / Tahun
+                    PR/Urutan/Bulan/Tahun
                     (ex :
                     PR/1/VI/2025)
                     <span class="ms-2">* :
@@ -76,8 +74,8 @@
                     @foreach ($datas->item as $d)
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah, 0) }} {{ $d->barang->satuan }}</td>
-                            <td align="start">{{ ucwords($d->item_spesifikasi) }}</td>
-                            <td align="start">{{ ucwords($d->barang->spek) }}</td>
+                            <td align="start">{{ ucfirst($d->item_spesifikasi) }}</td>
+                            <td align="start">{{ ucfirst($d->barang->spek) }}</td>
                             <td class="text-end">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                         </tr>
                     @endforeach

@@ -135,16 +135,22 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
         $bukti2 = Http::get("https://sarang.ptagafood.com/api/apihasap/detailBuktiPermintaan?id_penerima=$r->id_penerima&tanggal=$r->tgl");
         $bukti2 = json_decode($bukti2, TRUE);
 
+        $kodes = [
+            'lainnya' => 'PPCS',
+            'barang' => 'PPCB',
+            'kemasan' => 'PPCK',
+        ];
+        $kode = $kodes[$r->k] ?? 'PPCS';
+
         $data = [
-            'title' => 'BUKTI PERMINTAAN PENGELUARAN BARANG',
-            'dok' => 'Dok.No.: FRM.WH.03.01, Rev.00',
+            'title' => 'BUKTI PERMINTAAN PENGELUARAN',
+            'dok' => "Dok.No.: FRM.{$kode}.01.016 Rev.00",
             'buktis' => $bukti,
             'buktis2' => $bukti2['data'],
-            'k' => $r->k ?? 'satu',
+            'kategori' => $r->k,
             'nama' => $r->nama,
             'tgl' => $r->tgl,
             'departemen' => $r->departemen,
-
         ];
 
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.print', $data);

@@ -12,7 +12,7 @@
                 </tr>
                 <tr>
                     <th width="150">Alamat</th>
-                    <td>: {{ ucwords($supplier->alamat) }}</td>
+                    <td>: {{ $supplier->alamat }}</td>
                 </tr>
             </table>
         </div>
@@ -26,7 +26,7 @@
             <th>Barang yang ditawarkan</th>
             <td>
                 @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ ucwords($item->nama_barang) }}<br>
+                    {{ $loop->iteration }}. {{ ucfirst($item->nama_barang) }}<br>
                 @endforeach
             </td>
         </tr>
@@ -34,15 +34,15 @@
             <th>Spesifikasi</th>
             <td>
                 @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ ucwords($item->nama_barang) }} : {{ $item->spek ?? '-' }}<br>
+                    {{ $loop->iteration }}. {{ ucfirst($item->nama_barang) }} : {{ $item->spek ?? '-' }}<br>
                 @endforeach
             </td>
         </tr>
         <tr>
-            <th>Nomor Reg RW</th>
+            <th>Nomor Reg RWB</th>
             <td>
                 <input type="checkbox"> Ada (lampirkan)
-                <input type="checkbox"> Tidak Ada
+                <input type="checkbox"> Tidak ada
                 <input type="checkbox" checked> Tidak relevan
             </td>
         </tr>
@@ -57,19 +57,19 @@
             <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
         </tr>
         <tr>
-            <th>Sistem Manajemen yang telah diterapkan di Perusahaan Anda:</th>
+            <th>Sistem manajemen yang telah diterapkan di perusahaan anda:</th>
             <td>
                 <p><input type="checkbox" checked> HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
                 <p><input type="checkbox"> GMP</p>
                 <p><input type="checkbox"> Lainnya (sebutkan)………</p>
                 <p><input type="checkbox" checked> Belum ada</p>
-                <p>(bila ada harap melampirkan sertifikat)</p>
+                <p>(Bila ada harap melampirkan sertifikat)</p>
             </td>
         </tr>
         <tr>
             <th>Profil Perusahaan</th>
             <td class="d-flex gap-2">
-                <input type="checkbox"> Ada (Lampirkan)
+                <input type="checkbox"> Ada (lampirkan)
                 <input class="ms-2" type="checkbox" checked> Tidak Ada
             </td>
         </tr>
@@ -81,7 +81,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                Lama jatuh tempo yang diijinkan: Langsung
+                Lama jatuh tempo yang diijinkan: langsung
             </td>
         </tr>
     </table>
@@ -91,7 +91,7 @@
             <th colspan="2" class="text-center fw-bold bg-info">Sample</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis Sample yang diberikan (jumlah) : Tidak Tersedia Sample<br>
+            <td colspan="2">Jenis sample yang diberikan (jumlah) : tidak tersedia sample<br>
                 a.
             </td>
         </tr>
@@ -124,7 +124,7 @@
 </x-hccp-print>
 
 <x-hccp-print title="SELEKSI SUPPLIER " :kategori="$kategori" :dok="$dok">
-    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada Sample yang disertakan)</p>
+    <p style="font-size: 10px">Lembar Pemeriksaan (Bila ada sample yang disertakan)</p>
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
             <th class="fw-bold bg-info text-center">Departemen Lab</th>

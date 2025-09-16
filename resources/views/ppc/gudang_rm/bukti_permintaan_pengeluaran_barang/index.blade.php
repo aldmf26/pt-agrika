@@ -48,6 +48,7 @@
                                         'nama' => $item->nama,
                                         'tgl' => $item->tgl,
                                         'departemen' => $item->departemen,
+                                        'k' => $kategori,
                                     ];
                                 @endphp
                                 <a class="btn btn-xs float-end btn-primary"
