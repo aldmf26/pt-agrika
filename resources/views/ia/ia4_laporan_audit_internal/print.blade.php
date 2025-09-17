@@ -1,23 +1,23 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table class="table table-bordered border-dark">
+    <table class="table table-bordered border-dark table-xs">
         <thead>
             <tr>
                 <th class="text-center align-middle">No</th>
-                <th class="text-left align-middle">Tanggal</th>
-                <th class=" align-middle">Urutan finding</th>
-                <th class=" align-middle">Divisi</th>
-                <th class=" align-middle">Auditee</th>
-                <th class=" align-middle">Finding</th>
-                <th class=" align-middle">Tindakan perbaikan <br> dan pencegahan</th>
-                <th class=" align-middle">PIC</th>
-                <th class=" align-middle">Completion date</th>
-                <th class=" align-middle">Status</th>
+                <th class="text-center align-middle">Tanggal</th>
+                <th class="text-center align-middle">Urutan finding</th>
+                <th class="text-center align-middle">Divisi</th>
+                <th class="text-center align-middle">Auditee</th>
+                <th class="text-center align-middle">Finding</th>
+                <th class="text-center align-middle">Tindakan perbaikan <br> dan pencegahan</th>
+                <th class="text-center align-middle">PIC</th>
+                <th class="text-center align-middle">Completion date</th>
+                <th class="text-center align-middle">Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($laporan as $r)
                 <tr>
-                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-end">{{ $loop->iteration }}</td>
                     <td>{{ tanggal($r->tgl_audit) }}</td>
                     <td class="text-center">{{ $r->urutan }}</td>
                     <td>{{ $r->divisi }}</td>
@@ -50,7 +50,7 @@
                         <td style="height: 80px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center">[Auditor / Operational Director]</td>
+                        <td class="text-center">(Auditor / Operational Director)</td>
                     </tr>
                 </tbody>
             </table>

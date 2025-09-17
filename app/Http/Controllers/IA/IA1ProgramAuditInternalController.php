@@ -25,7 +25,7 @@ class IA1ProgramAuditInternalController extends Controller
 
         $datas = [
             'title' => 'PROGRAM AUDIT INTERNAL',
-            'dok' => 'Dok.No.: FRM.AI.01.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.IA.01.01, Rev.00',
             'tahun' => $r->tahun,
             'datas' => $datas
         ];
@@ -70,7 +70,7 @@ class IA1ProgramAuditInternalController extends Controller
 
         $datas = [
             'title' => 'CEKLIS AUDIT INTERNAL',
-            'dok' => 'FRM.AI.01.03, Rev.00',
+            'dok' => 'FRM.IA.01.03, Rev.00',
             'tahun' => $tahun,
             'bulan' => $bulan,
             'departemen' => $departemen,

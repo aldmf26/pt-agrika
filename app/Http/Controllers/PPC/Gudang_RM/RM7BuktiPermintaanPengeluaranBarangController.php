@@ -142,9 +142,11 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
         ];
         $kode = $kodes[$r->k] ?? 'PPCS';
 
+        $nomor = $kode == 'PPCS' ? '06' : '04';
+
         $data = [
             'title' => 'BUKTI PERMINTAAN PENGELUARAN',
-            'dok' => "Dok.No.: FRM.{$kode}.01.016 Rev.00",
+            'dok' => "Dok.No.: FRM.{$kode}.01.{$nomor} Rev.00",
             'buktis' => $bukti,
             'buktis2' => $bukti2['data'],
             'kategori' => $r->k,
