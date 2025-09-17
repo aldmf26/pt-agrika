@@ -45,4 +45,9 @@ class PenangananProdukTidakSesuai extends Model
     {
         return $this->belongsTo(SbwKotorModel::class, 'nama_produk', 'id');
     }
+
+    public function beritaAcara()
+    {
+        return $this->hasOne(BeritaAcaraPemusnahan::class, 'penanganan_id', 'id');
+    }
 }

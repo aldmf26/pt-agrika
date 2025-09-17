@@ -94,7 +94,7 @@ class IA4LaporanAuditInternalController extends Controller
         $laporan = LaporanAuditInternal::get();
         $data = [
             'title' => 'SUMMARY & LOGSHEET FINDING AUDIT INTERNAL',
-            'dok' => 'Dok.No.: FRM.AI.01.04, Rev.00',
+            'dok' => 'Dok.No.: FRM.IA.01.04, Rev.00',
             'laporan' => $laporan
         ];
 

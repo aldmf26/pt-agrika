@@ -11,7 +11,10 @@ class QA2BeritaAcaraPemusnahanProdukController extends Controller
 {
     public function index()
     {
-        $penangan = PenangananProdukTidakSesuai::where('status', 'reject')->orderBy('id', 'desc')->get();
+        $penangan = PenangananProdukTidakSesuai::where('status', 'reject')
+            ->with('beritaAcara') // Tambahkan relasi
+            ->orderBy('id', 'desc')
+            ->get();
         $data = [
             'title' => 'berita acara pemusnahan',
             'penanganan' => $penangan
@@ -21,16 +24,30 @@ class QA2BeritaAcaraPemusnahanProdukController extends Controller
 
     public function edit(Request $r)
     {
-        $data = [
-            'cakupan_pemusnahan' => $r->cakupan,
-            'alasan_pemusnahan' => $r->alasan,
-            'tgl_pemusnahan' => $r->tgl_pemusnahan,
-        ];
-        PenangananProdukTidakSesuai::where('id', $r->id)->update($data);
+        // Cek apakah sudah ada data untuk produk ini
+        $beritaAcara = BeritaAcaraPemusnahan::where('penanganan_id', $r->id)->first();
 
-        return redirect()->back()->with('sukses', 'Data Berhasil Disimpan');
+        if ($beritaAcara) {
+            // Update jika sudah ada
+            $beritaAcara->update([
+                'cakupan' => $r->cakupan,
+                'alasan' => $r->alasan,
+                'tgl' => $r->tgl_pemusnahan,
+            ]);
+            $message = 'Data Berhasil Diupdate';
+        } else {
+            // Create baru jika belum ada
+            BeritaAcaraPemusnahan::create([
+                'penanganan_id' => $r->id,
+                'cakupan' => $r->cakupan,
+                'alasan' => $r->alasan,
+                'tgl' => $r->tgl_pemusnahan,
+            ]);
+            $message = 'Data Berhasil Disimpan';
+        }
+
+        return redirect()->back()->with('sukses', $message);
     }
-
     public function create()
     {
         $data = [
@@ -54,9 +71,13 @@ class QA2BeritaAcaraPemusnahanProdukController extends Controller
 
     public function print()
     {
-        $penangan = PenangananProdukTidakSesuai::where('status', 'reject')->orderBy('id', 'desc')->get();
+        $penangan = PenangananProdukTidakSesuai::where('status', 'reject')
+            ->with('beritaAcara') // Tambahkan relasi
+            ->orderBy('id', 'desc')
+            ->get();
+
         $data = [
-            'title' => 'PENANGANAN PRODUK TIDAK SESUAI  ',
+            'title' => 'BERITA ACARA PEMUSNAHAN PRODUK',
             'dok' => 'Dok.No.:FRM.QA.02.02 , Rev.00',
             'datas' => $penangan
         ];

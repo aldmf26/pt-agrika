@@ -126,7 +126,7 @@ class IA2JadwalAuditInternalController extends Controller
         $datas = JadwalAuditInternal::where('tgl', $tgl)->orderBy('waktu', 'asc')->get();
         $data = [
             'title' => 'JADWAL AUDIT INTERNAL',
-            'dok' => 'Dok.No.: FRM.AI.01.02, Rev.00',
+            'dok' => 'Dok.No.: FRM.IA.01.02, Rev.00',
             'tgl' => $tgl,
             'datas' => $datas
         ];
