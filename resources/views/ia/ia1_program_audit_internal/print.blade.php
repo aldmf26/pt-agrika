@@ -13,13 +13,13 @@
             @endfor {{ $tahun }}</h6>
     </div>
 
-    <table class="mt-4 table table-bordered border-dark table-striped">
+    <table class="mt-4 table table-bordered table-xs border-dark table-striped">
         <thead>
             <tr>
-                <th>No</th>
-                <th>Departemen</th>
-                <th>Auditee</th>
-                <th>Auditor</th>
+                <th class="text-center">No</th>
+                <th class="text-center">Departemen</th>
+                <th class="text-center">Auditee</th>
+                <th class="text-center">Auditor</th>
                 <th colspan="13" class="text-center">Bulan</th>
             </tr>
             <tr>
@@ -32,7 +32,7 @@
         <tbody>
             @foreach ($datas as $key => $audit)
                 <tr>
-                    <td>{{ $key + 1 }}</td>
+                    <td class="text-end">{{ $key + 1 }}</td>
                     <td>{{ $audit->departemen }}</td>
                     <td>{{ $audit->audite }}</td>
                     <td>{{ $audit->auditor }}</td>
@@ -61,7 +61,7 @@
         </tbody>
     </table>
     <div class="row">
-        <div class="col-4">
+        <div class="col-4 table-xs">
             <span>Note : </span>
             <br>
             <span>- Standar HACCP dilakukan audit tahunan</span>
@@ -81,7 +81,7 @@
                         <td style="height: 80px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center">[LEAD AUDITOR]</td>
+                        <td class="text-center">(LEAD AUDITOR)</td>
                         {{-- <td class="text-center">[FSTL]</td> --}}
                     </tr>
                 </tbody>

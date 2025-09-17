@@ -20,8 +20,7 @@ class AuditChecklistSeeder extends Seeder
         SubHeading::truncate();
         Pertanyaan::truncate();
         HasilChecklist::truncate();
-        
-        $this->hrga();
+
         $this->bk();
         $this->cabut();
         $this->cetak();
@@ -30,6 +29,7 @@ class AuditChecklistSeeder extends Seeder
         $this->purchasing();
         $this->it();
         $this->ekspedisi();
+        $this->hrga();
     }
 
     public function cabut(): void
@@ -41,7 +41,8 @@ class AuditChecklistSeeder extends Seeder
                 'teks' => 'Proses Produksi Cabut bulu dikendalian sesuai dengan instruksi kerja yang berlaku',
                 'nomor_urutan' => 1
             ],
-            [                'teks' => 'Proses cabut bulu dilakukan dengan menggunakan peralatan yang benar yang dalam keadaan baik',
+            [
+                'teks' => 'Proses cabut bulu dilakukan dengan menggunakan peralatan yang benar yang dalam keadaan baik',
                 'nomor_urutan' => 2
             ],
             [
@@ -64,7 +65,7 @@ class AuditChecklistSeeder extends Seeder
         $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
     }
 
-    public function cetak(): void 
+    public function cetak(): void
     {
         $hrgaA = $this->createHeading('cetak', 'A. Menejemen Pengendalian Proses');
         $subHrgaA = $this->createSubHeading($hrgaA->id, '');
@@ -97,7 +98,7 @@ class AuditChecklistSeeder extends Seeder
         $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
     }
 
-    public function steam(): void 
+    public function steam(): void
     {
         $hrgaA = $this->createHeading('steam', 'A. Menejemen Pengendalian Proses');
         $subHrgaA = $this->createSubHeading($hrgaA->id, '');
@@ -122,7 +123,7 @@ class AuditChecklistSeeder extends Seeder
         $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
     }
 
-    public function it(): void 
+    public function it(): void
     {
         $hrgaA = $this->createHeading('it', 'A. Manajemen Pengendalian Proses');
         $subHrgaA = $this->createSubHeading($hrgaA->id, '');
@@ -147,7 +148,7 @@ class AuditChecklistSeeder extends Seeder
         $this->createPertanyaan($pertanyaanSDM, $subHrgaA);
     }
 
-    public function ekspedisi(): void 
+    public function ekspedisi(): void
     {
         $hrgaA = $this->createHeading('ekspedisi', 'A. Manajemen Pengendalian Proses');
         $subHrgaA = $this->createSubHeading($hrgaA->id, '');

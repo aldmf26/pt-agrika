@@ -11,9 +11,14 @@
             <td>{{ $nama }}</td>
         </tr>
         <tr>
+            @php
+                $ttdJabatan = $kategori == 'lainnya' ? 'KA. GUDANG BAHAN BAKU' : 'KA. PURCHASING';
+                $pengawas = $kategori == 'barang' ? 'PENGAWAS' : 'KA. PACKING & GUDANG FG';
+            @endphp
+
             <td>Departemen</td>
             <td>:</td>
-            <td>{{ $kategori == 'satu' ? $buktis[0]->departemen : 'Cabut Bulu' }}</td>
+            <td>{{ $pengawas }}</td>
         </tr>
     </table>
 
@@ -37,7 +42,7 @@
                     @foreach ($buktis as $d)
                         <tr>
                             <td class="text-end">{{ $loop->iteration }}</td>
-                            <td>{{ ucfirst($d->barang->nama_barang ?? '') }}</td>
+                            <td>{{ ucfirst(strtolower($d->barang->nama_barang ?? '')) }}</td>
                             <td class="text-end">
                                 {{ $d->pcs }} {{ $d->barang->satuan ?? '' }}
                             </td>
@@ -58,12 +63,12 @@
                         @endphp
                         <tr>
                             <td class="text-end">{{ $loop->iteration }}</td>
-                            <td>{{ ucfirst($sbw->nama ?? $d['nm_partai']) }}</td>
+                            <td>{{ ucfirst(strtolower($sbw->nama ?? $d['nm_partai'])) }}</td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
-                                {{ number_format($d['gr'], 0) }} Gr
+                                {{ number_format($d['gr'], 0) }} GR
                             </td>
                             <td class="text-end">{{ number_format($d['pcs'], 0) }} Pcs /
-                                {{ number_format($d['gr'], 0) }} Gr
+                                {{ number_format($d['gr'], 0) }} GR
                             </td>
                             <td class="text-end">{{ $sbw->no_invoice }}</td>
                             <td>Ok</td>
@@ -74,13 +79,19 @@
             </tbody>
         </table>
         <div style="font-size: 10px; margin-top: -10px;">
-            <small class="fw-bold">OK : material / barang yang diminta dan diterima dalam kondisi baik dan layak
-                pakai.</small>
-            <br>
-            <small class="fw-bold mb-3">TIDAK OK : material / barang yang diminta dan diterima dalam kondisi tidak baik
-                dan
-                tidak layak
-                pakai.</small>
+            <table class="fw-bold">
+                <tr>
+                    <td>OK</td>
+                    <td>:</td>
+                    <td>material / barang yang diminta dan diterima dalam kondisi baik dan layak pakai.</td>
+                </tr>
+                <tr>
+                    <td>TIDAK OK</td>
+                    <td>:</td>
+                    <td>material / barang yang diminta dan diterima dalam kondisi tidak baik dan tidak layak
+                        pakai.</td>
+                </tr>
+            </table>
             {{-- <br><br>
             <small class="fw-bold ">Permintaan diterima Warehouse Material:</small>
             <table class="table-xs">
@@ -193,10 +204,7 @@
                         </td>
                     </tr>
                     <tr>
-                        @php
-                            $ttdJabatan = $kategori == 'lainnya' ? 'KA. GUDANG BAHAN BAKU' : 'KA. PURCHASING';
-                            $pengawas = $kategori == 'lainnya' ? 'PENGAWAS' : 'KA. PACKING & GUDANG FG';
-                        @endphp
+
                         <td class="text-center align-middle">
                             ({{ $pengawas }})
                         </td>
