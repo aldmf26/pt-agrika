@@ -51,7 +51,9 @@
                 </tr>
                 <tr>
                     <td colspan="10" class="text-center ">
-                        {{ ucfirst(strtolower($evaluasi_detail->kisaran_materi)) }}
+                        {{-- {{ ucfirst(strtolower($evaluasi_detail->kisaran_materi)) }} --}}
+                        Memastikan karyawan dapat memahami & melakukan kegiatan cuci nitrite & steaming dengan baik &
+                        benar
                     </td>
                 </tr>
             </table>
@@ -87,10 +89,10 @@
                     </tr>
                     <tr>
                         <td>3</td>
-                        <td>Melapor jika ketemu masalah terkait {{ strtolower($evaluasi_detail->tema_pelatihan) }}
+                        <td>Melapor jika ada masalah terkait {{ strtolower($evaluasi_detail->tema_pelatihan) }}
                         </td>
                         <td class="text-end">1</td>
-                        <td class="text-start">Melapor jika ketemu masalah terkait
+                        <td class="text-start">Melapor jika ada masalah terkait
                             {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
                     </tr>
                 </tbody>

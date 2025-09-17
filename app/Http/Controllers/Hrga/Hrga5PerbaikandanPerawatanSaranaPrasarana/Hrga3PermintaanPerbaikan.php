@@ -108,7 +108,8 @@ class Hrga3PermintaanPerbaikan extends Controller
     {
 
         $data = [
-            'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
+            'title' => 'PERMINTAAN PERBAIKAN SARANA & PRASARANA UMUM',
+            'dok' => 'Dok.No.:FRM.HRGA.05.03, Rev.00',
             'permintaan' => PermintaanPerbaikanSaranaPrasana::where('invoice_pengajuan', $r->invoice_pengajuan)->first(),
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.print', $data);
