@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-12" style="text-transform: capitalize;">
+            <div class="col-12">
                 Bersama ini kami mohon bantuannya untuk menyediakan tenaga kerja dengan kualifikasi sebagai berikut:
             </div>
         </div>
@@ -13,15 +13,15 @@
                     <tr>
                         <td>Status Posisi</td>
                         <td>:</td>
-                        <td><input type="checkbox" name="" id=""></td>
-                        <td width="90%">Karyawan Tetap <input type="checkbox" name="" id="" checked>
-                            Karyawan Kontrak</td>
+                        <td>&nbsp;<input type="checkbox" name="" id=""></td>
+                        <td width="90%">Karyawan tetap <input type="checkbox" name="" id="" checked>
+                            Karyawan kontrak</td>
                     </tr>
                     <tr>
                         <td>Jabatan</td>
                         <td>:</td>
 
-                        <td colspan="2"> &nbsp;{{ $datas->divisi->divisi ?? '' }}</td>
+                        <td colspan="2"> &nbsp;{{ $datas->jabatan ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Jumlah</td>
@@ -33,7 +33,7 @@
                         <td width="25%">Alasan Penambahan</td>
                         <td>:</td>
 
-                        <td colspan="2">&nbsp;{{ ucwords($datas->alasan_penambahan) }}</td>
+                        <td colspan="2">&nbsp;{{ ucfirst($datas->alasan_penambahan) }}</td>
                     </tr>
                     <tr>
                         <td colspan="4">&nbsp;</td>
@@ -49,33 +49,33 @@
                     <tr>
                         <td>2. Jenis Kelamin</td>
                         <td>:</td>
-                        <td colspan="2">&nbsp;{{ ucwords($datas->jenis_kelamin) }}</td>
+                        <td colspan="2">&nbsp;{{ ucfirst($datas->jenis_kelamin) }}</td>
                     </tr>
                     <tr>
                         <td>3. Pendidikan</td>
                         <td>:</td>
-                        <td colspan="2">&nbsp;{{ ucwords($datas->pendidikan) }}</td>
+                        <td colspan="2">&nbsp;{{ ucfirst($datas->pendidikan) }}</td>
                     </tr>
                     <tr>
                         <td>4. Pengalaman</td>
                         <td>:</td>
-                        <td colspan="2">&nbsp;{{ ucwords($datas->pengalaman) ?? 'Tidak Perlu' }}</td>
+                        <td colspan="2">&nbsp;{{ ucfirst($datas->pengalaman) ?? 'Tidak Perlu' }}</td>
                     </tr>
                     <tr>
                         <td>5. Pelatihan</td>
                         <td>:</td>
-                        <td colspan="2">&nbsp;{{ ucwords($datas->pelatihan) }}</td>
+                        <td colspan="2">&nbsp;{{ ucfirst($datas->pelatihan) }}</td>
                     </tr>
                     <tr>
                         <td>6. Mental/Sikap</td>
                         <td>:</td>
-                        <td colspan="2">&nbsp;{{ ucwords($datas->mental) }}</td>
+                        <td colspan="2">&nbsp;{{ ucfirst($datas->mental) }}</td>
                     </tr>
                     <tr>
                         <td width="25%">7. Uraian Kerja</td>
                         <td>:</td>
                         <td colspan="2">
-                            &nbsp;{{ ucwords($datas->uraian_kerja) ?? ucwords($datas->divisi->uraian_kerja) }}
+                            &nbsp;{{ ucfirst($datas->uraian_kerja) ?? ucfirst($datas->divisi->uraian_kerja) }}
                         </td>
                     </tr>
                     <tr>
@@ -173,7 +173,7 @@
                 <span style="font-size: 12px; font-weight: bold; font-style: italic;">Diisi Oleh (KA. HRGA)</span> <br>
                 <span style="font-size: 12px;  font-style: italic;">Disetujui /
                     Ditolak*</span> <br>
-                <span style="font-size: 12px;  font-style: italic;">* Coret Salah Satu</span>
+                <span style="font-size: 12px;  font-style: italic;">* Coret salah satu</span>
             </div>
             <div class="col-7">
                 <table class="border-dark table table-bordered" style="font-size: 11px">

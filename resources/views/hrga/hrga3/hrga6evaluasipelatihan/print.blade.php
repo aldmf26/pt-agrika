@@ -1,7 +1,7 @@
 <x-hccp-print :title="$title" :dok="$dok">
     <div class="row">
         <div class="col-lg-12">
-            <table width="100%" style="font-size: 11px">
+            <table width="100%" style="font-size: 10px">
                 <tr>
                     <th colspan="10" class="dhead" style="height: 6px"></th>
                 </tr>
@@ -16,7 +16,7 @@
 
                     <td class="">Training</td>
                     <td class="">:</td>
-                    <td class="border_kanan">{{ ucwords(strtolower($evaluasi_detail->tema_pelatihan)) }}</td>
+                    <td class="border_kanan">{{ ucfirst(strtolower($evaluasi_detail->tema_pelatihan)) }}</td>
 
                     <td rowspan="2" width="33%" class="border_kanan border_kiri border_bawah">
                         Periode Evaluasi :
@@ -32,7 +32,7 @@
                 <tr>
                     <td class="border_kiri border_bawah">Jabatan</td>
                     <td class="border_bawah">:</td>
-                    <td class="border_bawah">{{ ucwords(strtolower($evaluasi_detail->data_pegawai->status)) }}</td>
+                    <td class="border_bawah">{{ ucwords(strtolower($evaluasi_detail->data_pegawai->posisi)) }}</td>
 
                     <td class="border_bawah"></td>
                     <td class="border_bawah"></td>
@@ -40,34 +40,34 @@
 
                     <td class="border_bawah ">Tanggal</td>
                     <td class="border_bawah ">:</td>
-                    <td class="border_bawah border_kanan">{{ $evaluasi_detail->tanggal }}</td>
+                    <td class="border_bawah border_kanan">{{ tanggal($evaluasi_detail->tanggal) }}</td>
                 </tr>
 
             </table>
-            <br>
-            <table width="100%" style="font-size: 11px" class="table">
+
+            <table width="100%" style="font-size: 10px" class="table table-bordered border-dark ">
                 <tr>
-                    <th colspan="10" class="dhead text-center" style="height: 6px">TUJUAN PELATIHAN</th>
+                    <th colspan="10" class="dhead text-center" style="height: 6px">Tujuan Pelatihan</th>
                 </tr>
                 <tr>
                     <td colspan="10" class="text-center ">
-                        {{ $evaluasi_detail->kisaran_materi }}
+                        {{ ucfirst(strtolower($evaluasi_detail->kisaran_materi)) }}
                     </td>
                 </tr>
             </table>
 
-            <table width="100%" style="font-size: 11px" class="table table-bordered">
+            <table width="100%" style="font-size: 10px" class="table table-bordered border-dark">
                 <thead>
 
                     <tr>
-                        <th class="dhead text-center">NO.</th>
-                        <th class="dhead text-center">RENCANA KERJA SETELAH MENGIKUTI PELATIHAN <br>
-                            (diisi oleh peserta training)
+                        <th class="dhead text-center align-middle">No</th>
+                        <th class="dhead text-center align-middle">Rencana Kerja Setelah Mengikuti Pelatihan <br>
+                            (Diisi Oleh Peserta Training)
                         </th>
-                        <th class="dhead text-center">Target Realisasi <br> (bulan)</th>
-                        <th class="dhead text-center">
-                            REALISASI RENCANA KERJA SETELAH MENGIKUTI PELATIHAN <br>
-                            (diisi oleh atasan)
+                        <th class="dhead text-center align-middle">Target Realisasi <br> (Bulan)</th>
+                        <th class="dhead text-center align-middle">
+                            Realisasi Rencana Kerja Setelah Mengikuti Pelatihan <br>
+                            (Diisi Oleh Atasan)
                         </th>
                     </tr>
                 </thead>
@@ -75,22 +75,22 @@
                     <tr>
                         <td>1</td>
                         <td>Memahami {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">Memahami {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
+                        <td class="text-end">1</td>
+                        <td class="text-start">Memahami {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
                     </tr>
                     <tr>
                         <td>2</td>
                         <td>Melakukan kegiatan {{ strtolower($evaluasi_detail->tema_pelatihan) }} dengan benar</td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">Melakukan kegiatan
+                        <td class="text-end">1</td>
+                        <td class="text-start">Melakukan kegiatan
                             {{ strtolower($evaluasi_detail->tema_pelatihan) }} dengan benar</td>
                     </tr>
                     <tr>
                         <td>3</td>
                         <td>Melapor jika ketemu masalah terkait {{ strtolower($evaluasi_detail->tema_pelatihan) }}
                         </td>
-                        <td class="text-center">1</td>
-                        <td class="text-center">Melapor jika ketemu masalah terkait
+                        <td class="text-end">1</td>
+                        <td class="text-start">Melapor jika ketemu masalah terkait
                             {{ strtolower($evaluasi_detail->tema_pelatihan) }}</td>
                     </tr>
                 </tbody>
@@ -99,25 +99,36 @@
 
         </div>
         <div class="col-6">
-            <table class="table table-bordered" with="100%" style="font-size: 11px">
+            <table class="table table-bordered border-dark" with="100%" style="font-size: 10px ">
                 <tr>
-                    <th class="dhead text-center">KETERANGAN</th>
+                    <th class="dhead text-center">Keterangan</th>
 
                 </tr>
                 <tr>
                     <td style="height: 47px"></td>
                 </tr>
+                <tr>
+                    @php
+                        $tgl = date('Y-m-d', strtotime($evaluasi_detail->tanggal . ' +3 days'));
+
+                    @endphp
+                    <td>Note : Evaluasi pelatihan (3) ini harus dikembalikan ke
+                        Ka.
+                        {{ $evaluasi_detail->data_pegawai->divisi->divisi }} setelah mendapat hasil <br>
+                        evaluasi dari pimpinan masing-masing, selambat-lambatnya tanggal: {{ tanggal($tgl) }}
+                    </td>
+                </tr>
 
             </table>
-            <table class="table table-bordered" with="100%" style="font-size: 11px">
+            <table class="table table-bordered border-dark" with="100%" style="font-size: 10px">
                 <tr>
-                    <th class="dhead text-center" colspan="2">KOMENTAR ATASAN TERHADAP HASIL EVALUASI [Di-isi
-                        oleh Pimpinan
-                        Peserta Training]</th>
+                    <th class="dhead text-center" colspan="2">Komentar Atasan Terhadap Hasil Evaluasi (Diisi
+                        Oleh Pimpinan
+                        Peserta Training)</th>
 
                 </tr>
                 <tr>
-                    <td>Tgl. Review : {{ date('dmy', strtotime($evaluasi_detail->tanggal)) }}</td>
+                    <td>Tgl. Review : {{ tanggal($evaluasi_detail->tanggal) }}</td>
                     <td>
                         <input type="checkbox" name="" id="" checked> 1 (Satu) Bulan
                         <input type="checkbox" name="" id=""> 3 (Tiga) Bulan
@@ -125,7 +136,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Dievaluasi oleh: Kepala Div</td>
+                    <td>Dievaluasi oleh: Ka. {{ $evaluasi_detail->data_pegawai->divisi->divisi }}</td>
                     <td>
                         Kesimpulan:
                         <br>
@@ -146,10 +157,10 @@
             </table>
         </div>
         <div class="col-6">
-            <table class="table table-bordered" with="100%" style="font-size: 11px">
+            <table class="table table-bordered border-dark" with="100%" style="font-size: 10px">
                 <tr>
-                    <th class="dhead text-center">IDE KREATIF [ Tuangkan Ide Kreatif Anda Sehubungan dengan
-                        Pekerjaan Anda ]</th>
+                    <th class="dhead text-center">Ide Kreatif (Tuangkan Ide Kreatif Anda Sehubungan Dengan
+                        Pekerjaan Anda)</th>
 
                 </tr>
                 <tr>
@@ -157,7 +168,7 @@
                 </tr>
 
             </table>
-            <table class="table table-bordered" style="font-size: 11px">
+            <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
@@ -167,14 +178,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 75px"></td>
-                        <td style="height: 75px"></td>
-                        <td style="height: 75px"></td>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
                     </tr>
                     <tr>
-                        <td class="text-center">[SPV. HR]</td>
-                        <td class="text-center">[KA. HRGA]</td>
-                        <td class="text-center">[ DIREKTUR. ]</td>
+                        <td class="text-center">(STAFF HRGA)</td>
+                        <td class="text-center">(KA. HRGA)</td>
+                        <td class="text-center">(OPERASIONAL MANAGER)</td>
                     </tr>
                 </tbody>
             </table>

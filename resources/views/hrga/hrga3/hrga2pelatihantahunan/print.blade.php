@@ -64,16 +64,19 @@
                     <td>Catatan:</td>
                 </tr>
                 <tr>
-                    <td>1. Materi Pelatihan yang diprogramkan sebagai pelatihan tahunan adalah yang
+                    <td style="padding-left: 12px; text-indent: -10px;">1. Materi Pelatihan yang diprogramkan sebagai
+                        pelatihan tahunan adalah yang
                         lebih terkait kepada peningkatan kompetensi pegawai</td>
                 </tr>
                 <tr>
-                    <td>2. Pelatihan dapat dilakukan oleh pihak Internal PT. AGRIKA GATYA ARUM atau
+                    <td style="padding-left: 12px; text-indent: -10px;">2. Pelatihan dapat dilakukan oleh pihak Internal
+                        PT. AGRIKA GATYA ARUM atau
                         berasal dari luar yang telah diseleksi.
                         ( I = Internal, E = Eksternal )</td>
                 </tr>
                 <tr>
-                    <td>3. Narasumber Internal, dipilih berdasarkan kompetensinya dalam membawakan
+                    <td style="padding-left: 12px; text-indent: -10px;">3. Narasumber Internal, dipilih berdasarkan
+                        kompetensinya dalam membawakan
                         materi pelatihan tersebut atau kesesuaian terkait dengan pekerjaannya dengan nilai kompetensi
                         yang
                         relevan dengan nilai 4 (Skala 0 - 4).</td>

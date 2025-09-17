@@ -2,7 +2,8 @@
     <table class="table-xs">
         <tr>
             <th width="5%">Nama Material</th>
-            <td width="30%">: {{ $kategori == 'sbw' ? strtoupper($nm_barang) : strtoupper($barang->nama_barang) }}
+            <td width="30%">:
+                {{ $kategori == 'sbw' ? ucfirst(strtolower($nm_barang)) : ucfirst(strtolower($barang->nama_barang)) }}
             </td>
         </tr>
         <tr>

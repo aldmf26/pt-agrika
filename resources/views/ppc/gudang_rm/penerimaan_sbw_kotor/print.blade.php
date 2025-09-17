@@ -11,7 +11,7 @@
         <tr>
             <td>Jenis SBW Kotor</td>
             <td>:</td>
-            <td colspan="2" style="border-bottom: 1px solid black">{{ strtoupper($penerimaan->nama) }}</td>
+            <td colspan="2" style="border-bottom: 1px solid black">{{ ucfirst(strtolower($penerimaan->nama)) }}</td>
         </tr>
         <tr>
             <td>No Lot SBW</td>
@@ -71,15 +71,15 @@
             @endphp
             <td style="border-bottom: 1px solid black"><input type="checkbox"
                     {{ $kg_bk != $penerimaan_kg ? 'checked' : '' }} name="" id=""> <span
-                    style="font-size: 11px" class="align-middle">Berbeda Dengan
-                    Surat Keterangan</span>
+                    style="font-size: 11px" class="align-middle">Berbeda dengan
+                    surat keterangan</span>
 
             </td>
             <td style="border-bottom: 1px solid black">&nbsp;<input type="checkbox"
                     {{ $kg_bk == $penerimaan_kg ? 'checked' : '' }} name="" id=""> <span
-                    style="font-size: 11px" class="align-middle">Tidak Berbeda Dengan
-                    Surat
-                    Keterangan</span></td>
+                    style="font-size: 11px" class="align-middle">Tidak berbeda dengan
+                    surat
+                    keterangan</span></td>
         </tr>
         @if ($kg_bk != $penerimaan_kg)
             <tr>
@@ -87,7 +87,7 @@
                 <td></td>
                 <td style="font-size: 11px;border-bottom: 1px solid black" colspan="2">
 
-                    Alasan : Kadar Air Masih Tinggi Saat Dipanen Hingga Muat Pengiriman
+                    Alasan : Kadar air masih tinggi saat dipanen hingga muat pengiriman
 
                 </td>
 
@@ -125,7 +125,7 @@
 
 
     @php
-        $kriterias = collect(['Warna', 'Kondisi (bulu Berat & Ringan, Bebas Jamur)', 'Grade', 'Kadar Air']);
+        $kriterias = collect(['Warna', 'Kondisi (bulu berat & ringan, bebas jamur)', 'Grade', 'Kadar Air']);
 
         // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
         $jumlah_sampel = $jumlahBox;
@@ -187,7 +187,7 @@
         <input readonly type="checkbox" name="keputusan" value="Diterima" required checked> Diterima
         <br>
         <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Diterima
-        Dengan Catatan .....
+        dengan catatan .....
         <br>
         <input readonly type="checkbox" name="keputusan" value="Ditolak" required> Ditolak
         <br>
