@@ -75,22 +75,26 @@
                 <p class="cop_text">Dok.No.: FRM.HRGA.08.01, Rev.00</p>
             </div>
             <div class="col-lg-12">
-                <table class="table table-bordered" style="font-size: 11px; white-space: nowrap;">
+                <table class="table table-bordered border-dark" style="font-size: 11px; white-space: nowrap;">
                     <thead>
                         <tr>
                             <th class="text-center dhead align-middle" rowspan="2">No</th>
-                            <th class=" dhead align-middle" rowspan="2">Lantai</th>
-                            <th class=" dhead align-middle" rowspan="2">Nama Mesin & Peralatan</th>
-                            <th class=" dhead align-middle" rowspan="2">Jumlah</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Lantai</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Nama Mesin & Peralatan</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Jumlah</th>
 
-                            <th class=" dhead align-middle" rowspan="2">Lokasi</th>
-                            <th class=" dhead align-middle" rowspan="2">Frekuensi Perawatan</th>
-                            <th class=" dhead align-middle" rowspan="2">Penanggung <br> Jawab</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Lokasi</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Frekuensi Perawatan</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Penanggung <br> Jawab</th>
                             <th class="text-center dhead align-middle" colspan="12">Tahun {{ $tahun }}</th>
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
-                                <th class="text-center dhead">{{ substr($b->nm_bulan, 0, 3) }}</th>
+                                @php
+                                    $tgl_bulan = $tahun . '-' . $b->bulan . '-01';
+
+                                @endphp
+                                <th class="dhead text-center">{{ date('M', strtotime($tgl_bulan)) }}</th>
                             @endforeach
 
                         </tr>
@@ -98,12 +102,12 @@
                     <tbody>
                         @foreach ($perawatan as $p)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($p->item->lokasi->lantai)) }}</td>
+                                <td class="text-end">{{ $loop->iteration }}</td>
+                                <td class="text-end">{{ ucfirst(strtolower($p->item->lokasi->lantai)) }}</td>
                                 <td>{{ ucfirst(strtolower($p->item->nama_mesin)) }}</td>
-                                <td>{{ $p->item->jumlah }}</td>
+                                <td class="text-end">{{ $p->item->jumlah }}</td>
                                 <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
-                                <td>{{ $p->frekuensi_perawatan }} bulan</td>
+                                <td class="text-end">{{ $p->frekuensi_perawatan }} bulan</td>
                                 <td>{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php
                                     $startDate = \Carbon\Carbon::parse($p->tanggal_mulai);
@@ -132,21 +136,28 @@
 
             </div>
             <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
                             <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[SPV. GA-IR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
+                            <td class="text-center">(STAFF HRGA)</td>
+                            <td class="text-center">(KA. HRGA)</td>
+
                         </tr>
                     </tbody>
                 </table>

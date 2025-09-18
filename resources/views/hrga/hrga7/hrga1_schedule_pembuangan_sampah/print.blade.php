@@ -1,44 +1,50 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    @php
-        // Daftar jenis limbah yang valid
-        $validLimbah = ['Organik', 'Non Organik'];
-    @endphp
 
-    Jenis Limbah:
-    @foreach ($validLimbah as $limbah)
-        @if (strtolower($jenis_limbah) !== strtolower($limbah))
-            <s>{{ $limbah }}</s>
-        @else
-            {{ $limbah }}
-        @endif
-        @if (!$loop->last)
-            /
-        @endif
-    @endforeach
-    <br>
-    Bulan : {{ $nm_bulan }}
+
+
 
 
     <div class="row">
+        @php
+            $validLimbah = ['Organik', 'Non Organik'];
+
+            // Tentukan mana yang harus dicoret berdasarkan kategori
+            $limbahDicoret = strtolower($kategori) === 'terjadwal' ? 'Organik' : 'Non Organik';
+        @endphp
+        <div class="col-lg-12" style="font-size: 11px">
+            Jenis Limbah:
+            @foreach ($validLimbah as $limbah)
+                @if (strtolower($limbah) === strtolower($limbahDicoret))
+                    <s>{{ $limbah }}</s>
+                @else
+                    {{ $limbah }}
+                @endif
+                @if (!$loop->last)
+                    /
+                @endif
+            @endforeach
+            <br>
+            {{-- Bulan : {{ $nm_bulan }} --}}
+        </div>
 
         <div class="col-sm-12 col-lg-12">
             <table class="table table-bordered border-dark table-sm" style="font-size: 10px;">
                 <thead>
                     @if ($kategori == 'terjadwal')
                         <tr>
-                            <th class="text-end align-middle">TANGGAL</th>
-                            <th class=" align-middle">JAM CHECKLIST</th>
-                            <th class=" align-middle">CHECKLIST (✓)</th>
-                            <th class=" align-middle">PARAF <br> PETUGAS</th>
-                            <th class=" align-middle">KETERANGAN</th>
+                            <th class="text-center align-middle">Tanggal</th>
+                            <th class=" align-middle text-center">Jam Checklist</th>
+                            <th class=" align-middle text-center">Checklist (✓)</th>
+                            <th class=" align-middle text-center">Paraf <br> Petugas</th>
+                            <th class=" align-middle text-center">Keterangan</th>
                         </tr>
                     @else
                         <tr>
-                            <th class="text-end align-middle">TANGGAL</th>
-                            <th class=" align-middle">JAM</th>
-                            <th class=" align-middle">BERAT</th>
-                            <th class=" align-middle">PARAF <br> PETUGAS</th>
-                            <th class=" align-middle">KETERANGAN</th>
+                            <th class="align-middle text-center">Tanggal</th>
+                            <th class=" align-middle text-center">Jam</th>
+                            <th class=" align-middle text-center">Berat</th>
+                            <th class=" align-middle text-center">Paraf <br> Petugas</th>
+                            <th class=" align-middle text-center">Keterangan</th>
                         </tr>
                     @endif
 
@@ -47,9 +53,9 @@
                     @foreach ($pembuangan as $p)
                         @if ($kategori == 'terjadwal')
                             <tr>
-                                <td class="text-end">{{ date('d', strtotime($p->tgl)) }}</td>
-                                <td>{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
-                                <td>
+                                <td class="text-end">{{ tanggal($p->tgl) }}</td>
+                                <td class="text-end">{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
+                                <td class="text-center">
                                     @if ($p->tgl <= date('Y-m-d'))
                                         ✓
                                     @else
@@ -60,9 +66,9 @@
                             </tr>
                         @else
                             <tr>
-                                <td class="text-end">{{ date('d', strtotime($p->tgl)) }}</td>
-                                <td>{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
-                                <td>
+                                <td class="text-end">{{ tanggal($p->tgl) }}</td>
+                                <td class="text-end">{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
+                                <td class="text-end">
                                     {{ $p->berat }}
                                 </td>
                                 <td></td>
@@ -76,30 +82,44 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-sm-6 col-lg-4" style="font-size: 9px">
             <span>Ket : </span> <br>
             <span>
                 @if ($kategori == 'terjadwal')
-                    Jika sampah organik / non organik tidak diangkut maka dipastikan tidak tercecer dan mengundang
+                    Jika sampah organik / non organik tidak diangkut maka dipastikan tidak tercecer dan tidak mengundang
                     hama
                 @else
                     Bulu akan dikumpulkan terlebih dahulu, akan dibakar jika sudah benar-benar kering. Pembakaran
-                    dlakukan setiap jam 17.00 wita.
+                    dlakukan setiap jam 05.00 pm.
                 @endif
 
             </span>
         </div>
         <div class="col-sm-6 col-lg-4">
-            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; margin-top: 10px;">
-                <tr>
-                    <td style="border: 1px solid black; text-align: center;">Diperiksa Oleh:</td>
-                    <td style="border: 1px solid black; text-align: center;">Diketahui Oleh:</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; text-align: center; height: 80px; vertical-align: bottom;">[SPV.
-                        GA-IR]</td>
-                    <td style="border: 1px solid black; text-align: center; vertical-align: bottom;">[KA.HRGA]</td>
-                </tr>
+            <table class="table table-bordered border-dark" style="font-size: 11px">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
+                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                &
+                                Nama)</span></td>
+
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                &
+                                Nama)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">(STAFF HRGA)</td>
+                        <td class="text-center">(KA. HRGA)</td>
+
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>

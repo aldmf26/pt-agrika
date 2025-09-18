@@ -42,7 +42,7 @@ class Hrga1SchedulePembuanganSampah extends Controller
         $nm_bulan = DB::table('bulan')->where('id_bulan', $r->bulan)->first();
         $data = [
             'title' => 'SCHEDULE PEMBUANGAN SAMPAH',
-            'dok' => 'FRM.HRGA.07.01, Rev.00',
+            'dok' => 'Dok.No. : FRM.HRGA.07.01, Rev.00',
             'nm_bulan' => $nm_bulan->nm_bulan,
             'kategori' => $r->kategori,
 
