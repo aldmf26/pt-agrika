@@ -61,7 +61,7 @@ class Hrga2CeklistSanitasi extends Controller
             'bulan' => $r->bulan,
             'area' => $area,
             'nm_bulan' => $nm_bulan,
-            
+
         ];
         return view($this->view . '.print', $data);
     }

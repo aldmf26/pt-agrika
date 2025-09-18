@@ -4,29 +4,29 @@
             border-color: black;
         }
     </style>
-    Area concern : Produksi
+    <p style="font-size: 12px">Area Concern : Produksi</p>
     <table style="font-size: 13px" id="table1" class="table table-bordered border-dark">
         <thead>
             <tr>
-                <th class="align-middle" style="background-color: #D9D9D9">Nama alat/area</th>
-                <th class="align-middle" style="background-color: #D9D9D9">Identifikasi alat/area</th>
-                <th class="align-middle" style="background-color: #D9D9D9">Metode sanitasi</th>
-                <th class="align-middle" style="background-color: #D9D9D9">Penanggung jawab</th>
-                <th class="align-middle" style="background-color: #D9D9D9">Frekuensi</th>
-                <th class="align-middle" style="background-color: #D9D9D9">Sarana cleaning</th>
-                <th class="align-middle" style="background-color: #D9D9D9">Sanitizer & pengenceran</th>
+                <th class="align-middle dhead text-nowrap text-center">Nama alat/area</th>
+                <th class="align-middle dhead text-nowrap text-center">Identifikasi alat/area</th>
+                <th class="align-middle dhead text-nowrap text-center">Metode sanitasi</th>
+                <th class="align-middle dhead text-nowrap text-center">Penanggung jawab</th>
+                <th class="align-middle dhead text-nowrap text-center">Frekuensi</th>
+                <th class="align-middle dhead text-nowrap text-center">Sarana cleaning</th>
+                <th class="align-middle dhead text-nowrap text-center">Sanitizer & pengenceran</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($datas as $d)
                 <tr>
                     <td class="align-top">{{ $d->nm_alat }}</td>
-                    <td class="align-top">{{ ucfirst(strtolower($d->identifikasi_alat)) }}</td>
-                    <td class="align-top">{{ ucfirst(strtolower($d->metode)) }}</td>
+                    <td class="align-top">{{ $d->identifikasi_alat }}</td>
+                    <td class="align-top">{{ $d->metode }}</td>
                     <td class="align-top">{{ ucwords($d->penanggung_jawab) }}</td>
-                    <td class="align-top">{{ ucfirst(strtolower($d->frekuensi)) }}</td>
-                    <td class="align-top">{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
-                    <td class="align-top">{{ ucfirst(strtolower($d->sanitizer)) }}</td>
+                    <td class="align-top">{{ $d->frekuensi }}</td>
+                    <td class="align-top">{{ $d->sarana_cleaning }}</td>
+                    <td class="align-top">{{ $d->sanitizer }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -36,16 +36,30 @@
         </div>
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; margin-top: 10px;">
-                <tr>
-                    <td style="border: 1px solid black; text-align: center;">Dibuat Oleh:</td>
-                    <td style="border: 1px solid black; text-align: center;">Diketahui Oleh:</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; text-align: center; height: 80px; vertical-align: bottom;">[SPV.
-                        GA-IR]</td>
-                    <td style="border: 1px solid black; text-align: center; vertical-align: bottom;">[KA.HRGA]</td>
-                </tr>
+            <table class="table table-bordered border-dark" style="font-size: 11px">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
+                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                &
+                                Nama)</span></td>
+
+                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                &
+                                Nama)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">(STAFF HRGA)</td>
+                        <td class="text-center">(KA. HRGA)</td>
+
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
