@@ -117,4 +117,161 @@ class KesigapanTanggapDaruratController extends Controller
         ];
         return view('qa.kesigapantanggapdarurat.print', $data);
     }
+    // ------------------------ tim
+
+    public function tim()
+    {
+        $tim = DB::table('tim_darurat')->orderBy('id', 'desc')->get();
+        $data = [
+            'title' => 'Emergency Preparedness dan Response Team',
+            'tim' => $tim,
+
+        ];
+        return view('qa.kesigapantanggapdarurat.tim.index', $data);
+    }
+
+    public function tim_store(Request $r)
+    {
+        DB::table('tim_darurat')->insert(
+            [
+                'name' => $r->name,
+                'title' => $r->title,
+                'hp' => $r->hp,
+            ]
+        );
+        return redirect()->back()->with('sukses', 'Data Berhasil Disimpan');
+    }
+
+    public function tim_update($id, Request $r)
+    {
+        DB::table('tim_darurat')->where('id', $id)->update(
+            [
+                'name' => $r->name,
+                'title' => $r->title,
+                'hp' => $r->hp,
+            ]
+        );
+        return redirect(route('qa.kesigapan.2.tim'))->with('sukses', 'Data Berhasil Disimpan');
+    }
+
+    public function tim_delete($id)
+    {
+        DB::table('tim_darurat')->where('id', $id)->delete();
+        return redirect()->back()->with('sukses', 'Data Berhasil Dihapus');
+    }
+
+    public function tim_print(Request $r)
+    {
+        $data = [
+            'tim' => DB::table('tim_darurat')->get(),
+        ];
+        return view('qa.kesigapantanggapdarurat.tim_print', $data);
+    }
+
+    // ------------------------ emergency
+
+    public function emergency()
+    {
+        $emergency = DB::table('emergency_darurat')->orderBy('id', 'desc')->get();
+        $data = [
+            'title' => 'Emergency Preparedness dan Response Team',
+            'datas' => $emergency,
+
+        ];
+        return view('qa.kesigapantanggapdarurat.emergency.index', $data);
+    }
+
+    public function emergency_store(Request $r)
+    {
+        DB::table('emergency_darurat')->insert(
+            [
+                'name' => $r->name,
+                'title' => $r->title,
+                'hp' => $r->hp,
+            ]
+        );
+        return redirect()->back()->with('sukses', 'Data Berhasil Disimpan');
+    }
+
+    public function emergency_update($id, Request $r)
+    {
+        DB::table('emergency_darurat')->where('id', $id)->update(
+            [
+                'name' => $r->name,
+                'title' => $r->title,
+                'hp' => $r->hp,
+            ]
+        );
+        return redirect(route('qa.kesigapan.2.emergency'))->with('sukses', 'Data Berhasil Disimpan');
+    }
+
+    public function emergency_delete($id)
+    {
+        DB::table('emergency_darurat')->where('id', $id)->delete();
+        return redirect()->back()->with('sukses', 'Data Berhasil Dihapus');
+    }
+
+    public function emergency_print(Request $r)
+    {
+        $data = [
+            'datas' => DB::table('emergency_darurat')->get(),
+        ];
+        return view('qa.kesigapantanggapdarurat.emergency_print', $data);
+    }
+
+    // ------------------------ contingency
+
+    public function contingency_plan()
+    {
+        $contingency_plan = DB::table('emergency_darurat as a')
+            ->leftJoin('contingency_plan_darurat as b', 'a.id', '=', 'b.cases')
+            ->selectRaw("a.id, a.cases, b.responsibility, b.preparedness, b.response, b.related_documents")
+            ->get();
+        $data = [
+            'title' => 'contingency Plan Situation',
+            'datas' => $contingency_plan,
+
+        ];
+        return view('qa.kesigapantanggapdarurat.contingency_plan.index', $data);
+    }
+
+
+    public function contingency_plan_update($id, Request $r)
+    {
+        $existing = DB::table('contingency_plan_darurat')->where('cases', $id)->first();
+        if ($existing) {
+            DB::table('contingency_plan_darurat')->where('cases', $id)->update(
+                [
+                    'responsibility' => $r->responsibility,
+                    'preparedness' => $r->preparedness,
+                    'response' => $r->response,
+                    'related_documents' => $r->related_documents,
+                ]
+            );
+        } else {
+            DB::table('contingency_plan_darurat')->insert(
+                [
+                    'cases' => $id,
+                    'responsibility' => $r->responsibility,
+                    'preparedness' => $r->preparedness,
+                    'response' => $r->response,
+                    'related_documents' => $r->related_documents,
+                ]
+            );
+        }
+        return redirect()->back()->with('sukses', 'Data Berhasil Disimpan');
+    }
+
+    public function contingency_plan_print(Request $r)
+    {
+        $contingency_plan = DB::table('emergency_darurat as a')
+            ->leftJoin('contingency_plan_darurat as b', 'a.id', '=', 'b.cases')
+            ->selectRaw("a.id, a.cases, b.responsibility, b.preparedness, b.response, b.related_documents")
+            ->get();
+
+        $data = [
+            'datas' => $contingency_plan,
+        ];
+        return view('qa.kesigapantanggapdarurat.contingency_plan_print', $data);
+    }
 }

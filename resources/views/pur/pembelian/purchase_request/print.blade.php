@@ -20,7 +20,7 @@
                         </td>
                     </tr> --}}
                     @php
-                        $jabatan = strtoupper($datas->posisi);
+                        $jabatan = $datas->posisi;
                     @endphp
                     <tr>
                         <th width="150" class="head">Diajukan oleh</td>

@@ -29,6 +29,7 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             })
             ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
             ->groupBy('agendadan_jadwal_tinjauan_manajemens.nota_agenda')
+            ->latest()
             ->get();
 
 
@@ -106,6 +107,7 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
             ->where('agendadan_jadwal_tinjauan_manajemens.tanggal', $r->tanggal)
             ->groupBy('agendadan_jadwal_tinjauan_manajemens.nota_agenda')
+            ->latest()
             ->get();
         $data = [
             'title' => 'Agenda dan Jadwal Tinjauan Manajemen',

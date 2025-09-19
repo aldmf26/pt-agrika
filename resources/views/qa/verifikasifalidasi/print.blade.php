@@ -68,35 +68,32 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">JADWAL VERIFIKASI</p>
+                    <p class="cop_judul">JADWAL UJI LAB</p>
 
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.QA.06.01, Rev.00</p>
+                <p class="cop_text">Dok.No.: FRM.QA.07.01, Rev.00</p>
                 <br>
 
             </div>
             <div class="col-4"></div>
             <div class="col-10">
-                <table>
-                    <tr>
-                        <td width="20%">Tahun</td>
-                        <td width="2%" class="align-middle">: &nbsp;</td>
-                        <td>{{ $tahun }}</td>
-                    </tr>
-                </table>
             </div>
             <div class="col-lg-12">
                 <br>
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered border-dark table-sm" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Item</th>
-                            <th>Aktivitas</th>
-                            <th class="text-nowrap">Frekuensi</th>
-                            <th class="text-nowrap">Dept</th>
+                            <th colspan="5"></th>
+                            <th colspan="12" class="text-center">Tahun {{ $tahun }}</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th class="text-center">Item</th>
+                            <th class="text-center">Aktivitas</th>
+                            <th class="text-nowrap text-center">Frekuensi</th>
+                            <th class="text-nowrap text-center">Dept</th>
                             @for ($i = 1; $i <= 12; $i++)
                                 @php
                                     $tgl = date('M', strtotime($tahun . '-' . $i . '-01'));
@@ -108,9 +105,9 @@
                     <tbody>
                         @foreach ($datas as $key => $audit)
                             <tr>
-                                <td>{{ $key + 1 }}</td>
+                                <td class="text-end">{{ $key + 1 }}</td>
                                 <td>
-                                    {{ $audit->item }}
+                                    {{ ucfirst(strtolower($audit->item)) }}
                                 </td>
                                 <td>{{ $audit->aktivitas }}</td>
                                 <td class="text-nowrap">{{ $audit->frek }}</td>
@@ -142,36 +139,42 @@
                 </table>
             </div>
 
-            <div class="col-6">
 
-            </div>
-            <div class="col-6">
-                <table class="table table-bordered" style="font-size: 11px">
+
+
+        </div>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-
-                            <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                            <th class="text-center" width="25%">Dibuat Oleh:</th>
+                            <th class="text-center" width="25%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 50px"></td>
-                            <td style="height: 50px"></td>
-
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="text-center">[..............................................................]
+
+                            <td class="text-center align-middle">
+                                (FSTL)
+                            </td>
+                            <td class="text-center align-middle">
+                                (DIREKTUR UTAMA)
                             </td>
 
-                            <td class="text-center">[..............................................................]
-                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
-
         </div>
     </div>
 

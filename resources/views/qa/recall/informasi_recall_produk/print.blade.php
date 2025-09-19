@@ -1,6 +1,6 @@
 <x-hccp-print :title="$title" :dok="$dok">
     <div style="font-size: 12px">
-        <span>Berikut ini kami informasikan mengenai perincian produk MOCK recall</span>
+        <span>Berikut ini kami informasikan mengenai perincian produk MOCK Recall</span>
         <br>
         <div class="row">
             <div class="col-10">
@@ -10,14 +10,14 @@
                 <table class="table table-sm border-dark table-bordered">
                     <thead>
                         <tr>
-                            <th width="300">Nama</th>
-                            <th>Tugas & Tanggung Jawab</th>
+                            <th width="300" class="text-center">Nama</th>
+                            <th class="text-center">Tugas & Tanggung Jawab</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($datas->teamMembers as $team)
                             <tr>
-                                <td>{{ ucwords(strtolower($team->nama)) }}</td>
+                                <td>{{ strtoupper($team->nama) }}</td>
                                 <td>{{ $team->tugas }}</td>
                             </tr>
                         @endforeach
@@ -34,17 +34,17 @@
                             <th colspan="3" class="text-center">Informasi Pelanggan / Titik Produk Terakhir</th>
                         </tr>
                         <tr>
-                            <th class="align-middle" width="100">Nama Produk</th>
-                            <th class="align-middle" width="170">Kode Lot</th>
-                            <th class="text-end align-middle">Jumlah Recall</th>
-                            <th width="200" class="align-middle">Nama</th>
-                            <th width="350" class="align-middle">Alamat</th>
-                            <th class="text-end align-middle">Jumlah Didistribusikan</th>
+                            <th class="align-middle text-center" width="100">Nama Produk</th>
+                            <th class="align-middle text-center" width="170">Kode Lot</th>
+                            <th class="text-center align-middle">Jumlah Recall</th>
+                            <th width="200" class="align-middle text-center">Nama</th>
+                            <th width="350" class="align-middle text-center">Alamat</th>
+                            <th class="text-center align-middle">Jumlah Didistribusikan</th>
                         </tr>
                         {{-- <tr style="font-size: 8px">
                             <th></th>
                             <th>Batch Produk</th>
-                            <th>Pack / Kg / Gram</th>
+                            <th>Pack / GR / Gram</th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -53,31 +53,51 @@
                     <tbody>
                         @foreach ($datas->products as $produk)
                             <tr>
-                                <td>{{ $produk->nama }}</td>
-                                <td>{{ $produk->no_lot }}</td>
-                                <td class="text-end">{{ number_format($produk->jumlah_recall / 1000, 0) }} Kg</td>
+                                <td>{{ strtoupper($produk->nama) }}</td>
+                                <td class="text-end">{{ $produk->no_lot }}</td>
+                                <td class="text-end">{{ number_format($produk->jumlah_recall, 0) }} GR</td>
                                 <td>{{ $produk->nama_pelanggan }}</td>
                                 <td>{{ $produk->alamat_pelanggan }}</td>
-                                <td class="text-end">{{ number_format($produk->jumlah_distribusi / 1000, 0) }} Kg</td>
+                                <td class="text-end">{{ number_format($produk->jumlah_distribusi, 0) }} GR</td>
                             </tr>
                         @endforeach
                         <tr>
                             <th colspan="2" class="text-center">Total</th>
-                            <td class="text-end">{{ number_format($datas->products->sum('jumlah_recall') / 1000, 0) }}
-                                Kg</td>
+                            <td class="text-end">{{ number_format($datas->products->sum('jumlah_recall'), 0) }}
+                                GR</td>
                             <td colspan="2"></td>
                             <td class="text-end">
-                                {{ number_format($datas->products->sum('jumlah_distribusi') / 1000, 0) }} Kg</td>
+                                {{ number_format($datas->products->sum('jumlah_distribusi'), 0) }} GR</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-12">
-                <span>Dibuat Oleh : <b>{{ $datas->dibuat_oleh }}</b></span>
-                <br>
-                {{ tanggal(date('Y-m-d', strtotime($datas->created_at))) }}
-                <br>
-                FSTL
+
+        </div>
+        <div class="row">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
+                    <thead>
+                        <tr>
+                            <th class="text-center" width="25%">Dibuat Oleh:</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td class="text-center align-middle">
+                                (FSTL)
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

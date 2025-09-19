@@ -54,7 +54,7 @@
                     <tr>
                         <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                             {{ number_format($d->jumlah_kg) }} GR</td>
-                        <td align="center">{{ ucfirst(strtolower($d->nama)) }}</td>
+                        <td align="center">{{ strtoupper($d->nama) }}</td>
                         <td class="d-flex justify-content-between">
                             <div>Rp. </div>
                             <div>1</div>
@@ -76,10 +76,7 @@
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
             <div class="mt-2" />
-            <span>PIC: Tasya Salsabila</span>
-            <br>
-            Telp: 08
-            <br>
+
             Estimasi Kedatangan Barang:
             {{ tanggal(date('Y-m-d', strtotime('+2 days', strtotime($datas->tgl)))) }}
         </div>

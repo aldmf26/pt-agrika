@@ -138,13 +138,13 @@
                 </tr>
                 <tr>
                     <td rowspan="4" class="align-middle">
-                        <h6 class="text-center fw-bold">LAPORAN KESIGAPAN DAN TANGGAP DARURAT</h6>
+                        <h6 class="text-center fw-bold">LAPORAN KESIGAPAN & TANGGAP DARURAT</h6>
                     </td>
                     <td>
                         No. Dok
                     </td>
                     <td>
-                        FRM.QA.04.01
+                        FRM.QA.05.01
                     </td>
                 </tr>
                 <tr>
@@ -175,26 +175,17 @@
 
             </table>
 
-
-
-
             <div class="col-12 mt-2">
                 <table class="table-tes" width="70%">
                     <tr>
                         <td>Tanggal</td>
                         <td class="align-middle"> : {{ tanggal($kesigapan->tgl) }}</td>
-                        <td>Jam</td>
-                        <td> : {{ \Carbon\Carbon::parse($kesigapan->dari_jam)->format('H:i') }} -
-                            {{ \Carbon\Carbon::parse($kesigapan->sampai_jam)->format('H:i') }}</td>
 
                     </tr>
                     <tr>
                         <td>Jenis Insiden</td>
                         <td class="align-middle"> : {{ ucfirst(strtolower($kesigapan->jenis_insiden)) }}</td>
-                        <td><input type="checkbox" name="" id=""
-                                {{ $kesigapan->kejadian == 'tidak disengaja' ? 'checked' : '' }}> Tidak Disengaja</td>
-                        <td><input type="checkbox" name="" id=""
-                                {{ $kesigapan->kejadian == 'disengaja' ? 'checked' : '' }}> Disengaja</td>
+
                     </tr>
                     <tr>
                         <td>Penyebab</td>
@@ -206,6 +197,22 @@
                         <td class="align-middle"> : {{ ucfirst(strtolower($kesigapan->akibat)) }}</td>
 
                     </tr>
+                    <tr>
+                        <td>Jam</td>
+                        <td> : {{ \Carbon\Carbon::parse($kesigapan->dari_jam)->format('H:i A') }} -
+                            {{ \Carbon\Carbon::parse($kesigapan->sampai_jam)->format('H:i A') }}</td>
+                    </tr>
+                    <tr>
+                        <td>Kejadian</td>
+                        <td>
+                            <input type="checkbox" name="" id=""
+                                {{ $kesigapan->kejadian == 'tidak disengaja' ? 'checked' : '' }}> Tidak Disengaja
+
+                            <input class="ms-3" type="checkbox" name="" id=""
+                                {{ $kesigapan->kejadian == 'disengaja' ? 'checked' : '' }}> Disengaja
+                        </td>
+                        <td></td>
+                    </tr>
 
                 </table>
             </div>
@@ -214,19 +221,19 @@
                 <table class="table table-bordered" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="align-middle" rowspan="2">Lokasi</th>
+                            <th class="align-middle text-center" rowspan="2">Lokasi</th>
                             <th class="align-middle text-center" colspan="2">Korban</th>
                             <th class="align-middle text-center" colspan="2">Kerugian Material</th>
-                            <th class="align-middle" rowspan="2">Potensi Bahaya Pada Produk</th>
-                            <th class="align-middle" rowspan="2">Tindakan <br> Pengendalian</th>
-                            <th class="align-middle" rowspan="2" width="100px">PIC</th>
+                            <th class="align-middle text-center" rowspan="2">Potensi Bahaya Pada Produk</th>
+                            <th class="align-middle text-center" rowspan="2">Tindakan <br> Pengendalian</th>
+                            <th class="align-middle text-center" rowspan="2" width="100px">PIC</th>
 
                         </tr>
                         <tr>
-                            <th class="">Cedera</th>
-                            <th class="">Meninggal</th>
-                            <th class="">Infrastruktur</th>
-                            <th class="">Produk</th>
+                            <th class=" text-center">Cedera</th>
+                            <th class=" text-center">Meninggal</th>
+                            <th class=" text-center">Infrastruktur</th>
+                            <th class=" text-center">Produk</th>
                         </tr>
 
                     </thead>
@@ -249,32 +256,38 @@
 
                 </table>
             </div>
-            <div class="col-7">
 
-            </div>
-            <div class="col-5">
-                <table style="font-size: 11px" width="100%">
+        </div>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="col-6">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th width="33.33%">Dilaporkan Oleh</th>
-                            <th width="33.33%">Diketahui & Disetujui Oleh,</th>
+                            <th class="text-center" width="25%">Dialporkan Oleh:</th>
+                            <th class="text-center" width="25%">Diketahui & Disetujui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td>FSTL</td>
-                            <td>Direktur</td>
+                            <td class="text-center align-middle">
+                                (FSTL)
+                            </td>
+                            <td class="text-center align-middle">
+                                (DIREKTUR UTAMA)
+                            </td>
                         </tr>
-
                     </tbody>
                 </table>
             </div>
-
-
         </div>
     </div>
 
