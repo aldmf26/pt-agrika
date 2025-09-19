@@ -64,7 +64,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-3 mt-4">
-                <img style="width: 150px" src="{{ asset('img/logo.jpeg') }}" alt="">
+                <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
@@ -75,28 +75,36 @@
                 <p class="cop_text">Dok.No.: FRM.HRGA.04.01, Rev.00</p>
             </div>
             <div class="col-lg-8"></div>
-            <div class="col-lg-4">
+            {{-- <div class="col-lg-4">
                 <p class="fw-bold" style="font-size: 11px">Periode : {{ $tahun }}</p>
-            </div>
+            </div> --}}
             <div class="col-lg-12">
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="dhead text-center">No</th>
-                            <th class="dhead text-center">Nama</th>
-                            <th class="dhead text-center">Departemen</th>
-                            @foreach ($bulan as $b)
-                                <th class="dhead text-center">{{ substr($b->nm_bulan, 0, 3) }}</th>
-                            @endforeach
+                            <th class="dhead text-center" rowspan="2">No</th>
+                            <th class="dhead text-center" rowspan="2">Divisi</th>
+                            <th class="dhead text-center" rowspan="2">Nama Karyawan</th>
+                            <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
 
+
+                        </tr>
+                        <tr>
+                            @foreach ($bulan as $b)
+                                @php
+                                    $tgl_bulan = $tahun . '-' . $b->bulan . '-01';
+
+                                @endphp
+                                <th class="dhead text-center">{{ date('M', strtotime($tgl_bulan)) }}</th>
+                            @endforeach
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($jadwal as $j)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $j->data_pegawai->nama }}</td>
                                 <td>{{ $j->data_pegawai->divisi->divisi }}</td>
+                                <td>{{ $j->data_pegawai->nama }}</td>
                                 @foreach ($bulan as $b)
                                     <td class="{{ $b->bulan == $j->bulan ? 'bg-secondary' : '' }}"></td>
                                 @endforeach
@@ -108,28 +116,44 @@
                 </table>
             </div>
             <div class="col-6">
-                <p style="font-size: 11px">Catatan:</p>
-                <p style="font-size: 11px">1. Medical dilakukan oleh vendor eksternal yang ditunjuk perusahaan</p>
+                <table width="100%" style="font-size: 10px">
+                    <tr>
+                        <td>Catatan:</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1. Medical dilakukan oleh vendor eksternal yang ditunjuk perusahaan.</td>
+                        <td></td>
+                    </tr>
+
+                </table>
+
             </div>
             <div class="col-6">
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                            <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
                             <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[SPV. HR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
-                            <td class="text-center">[ DIREKTUR. ]</td>
+                            <td class="text-center">(STAFF HRGA)</td>
+                            <td class="text-center">(KA. HRGA)</td>
+                            <td class="text-center">(OPERASIONAL MANAGER)</td>
                         </tr>
                     </tbody>
                 </table>

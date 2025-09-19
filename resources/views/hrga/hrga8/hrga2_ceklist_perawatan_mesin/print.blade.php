@@ -72,7 +72,7 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-3 mt-4">
+            <div class="col-3 mt-2">
                 <img style="width: 100px" src="{{ asset('img/logo.jpeg') }}" alt="">
             </div>
             <div class="col-6 mt-4">
@@ -81,57 +81,57 @@
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.HRGA.08.02, Rev.00</p>
+                <p class="cop_text text-nowrap">Dok.No.: FRM.HRGA.08.02, Rev.00</p>
             </div>
             <div class="col-4">
                 <table style="font-size: 10px">
                     <tr>
-                        <td>Lantai</td>
+                        <td>Lokasi</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->lokasi->lantai }}</td>
+                        <td>{{ ucwords($mesin->lokasi->lantai) }}</td>
                     </tr>
                     <tr>
                         <td>Nama Mesin / Peralatan</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->nama_mesin }}</td>
+                        <td>{{ ucwords($mesin->nama_mesin) }}</td>
                     </tr>
                     <tr>
                         <td>Jumlah</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->jumlah }}</td>
+                        <td>{{ ucwords($mesin->jumlah) }}</td>
                     </tr>
                     <tr>
                         <td>Lokasi</td>
                         <td width="1%">:</td>
-                        <td>{{ $mesin->lokasi->lokasi }}</td>
+                        <td>{{ ucwords($mesin->lokasi->lokasi) }}</td>
                     </tr>
                     <tr>
                         <td>Frekuensi</td>
                         <td width="1%">:</td>
-                        <td>{{ $perawatan->frekuensi_perawatan }} bulan</td>
+                        <td>{{ ucwords($perawatan->frekuensi_perawatan) }} Bulan</td>
                     </tr>
                     <tr>
                         <td>PIC</td>
                         <td width="1%">:</td>
-                        <td>{{ $perawatan->penanggung_jawab }}</td>
+                        <td>{{ ucwords($perawatan->penanggung_jawab) }}</td>
                     </tr>
 
 
                 </table>
             </div>
             <div class="col-lg-12">
-                <br>
-                <table class="table table-bordered" style="font-size: 11px">
+
+                <table class="table table-bordered" style="font-size: 10px">
                     <thead>
                         <tr style="text-transform: capitalize">
-                            <th class="align-middle">No</th>
-                            <th class="align-middle">Tanggal</th>
-                            <th class="align-middle">Urutan Unit</th>
-                            <th class="align-middle">Kriteria <br> pemeriksaan</th>
-                            <th class="align-middle">Metode</th>
-                            <th class="align-middle">Hasil Pemeriksaan</th>
-                            <th class="align-middle">Status</th>
-                            <th class="align-middle">Keterangan</th>
+                            <th class="align-middle dhead text-center">No</th>
+                            <th class="align-middle dhead text-center">Tanggal</th>
+                            <th class="align-middle dhead text-center">Urutan Unit</th>
+                            <th class="align-middle dhead text-center">Kriteria <br> pemeriksaan</th>
+                            <th class="align-middle dhead text-center">Metode</th>
+                            <th class="align-middle dhead text-center">Hasil Pemeriksaan</th>
+                            <th class="align-middle dhead text-center">Status</th>
+                            <th class="align-middle dhead text-center" width="15%">Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -152,8 +152,8 @@
                         @foreach ($checklist as $c)
                             @php $key = $c->tgl . '-' . $mesin->id; @endphp
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td class="text-nowrap class="align-middle"">{{ tanggal($c->tgl) }}</td>
+                                <td class="align-middle text-end">{{ $loop->iteration }}</td>
+                                <td class="text-nowrap text-end align-middle">{{ tanggal($c->tgl) }}</td>
 
                                 {{-- Cek apakah kombinasi ini sudah dicetak --}}
                                 @if (!in_array($key, $printed))
@@ -176,25 +176,32 @@
 
                 </table>
             </div>
-            <div class="col-7">
+            <div class="col-6">
 
             </div>
-            <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
+            <div class="col-6">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
                             <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[GENERAL MAINTENANCE]</td>
-                            <td class="text-center">[SPV GA-IR]</td>
+                            <td class="text-center">(KA. MAINTENANCE)</td>
+                            <td class="text-center">(KA. HRGA)</td>
+
                         </tr>
                     </tbody>
                 </table>

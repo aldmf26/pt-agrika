@@ -39,10 +39,18 @@ class Hrga1SchedulePembuanganSampah extends Controller
     public function print(Request $r)
     {
         $jenis_limbah = $r->jenis_limbah;
+        if ($r->kategori == 'terjadwal') {
+            $title = 'SCHEDULE PEMBUANGAN SAMPAH  <br> (NON ORGANIK)';
+            $dok = 'Dok.No. : FRM.HRGA.07.01, Rev.00';
+        } else {
+            $title = 'SCHEDULE PEMBUANGAN SAMPAH  (ORGANIK)';
+            $dok = 'Dok.No. : FRM.HRGA.07.02, Rev.00';
+        }
+
         $nm_bulan = DB::table('bulan')->where('id_bulan', $r->bulan)->first();
         $data = [
-            'title' => 'SCHEDULE PEMBUANGAN SAMPAH',
-            'dok' => 'FRM.HRGA.07.01, Rev.00',
+            'title' => $title,
+            'dok' => $dok,
             'nm_bulan' => $nm_bulan->nm_bulan,
             'kategori' => $r->kategori,
 

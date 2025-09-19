@@ -154,7 +154,7 @@ Route::controller(Hrga1PerencanaanKebersihan::class)
     });
 
 Route::controller(Hrga2CeklistSanitasi::class)
-    ->prefix('hrga/6/2-ceklist-sanitasi')
+    ->prefix('hrga/6/update')
     ->name('hrga6.2.')
     ->group(function () {
         Route::get('/', 'index')->name('index');

@@ -68,47 +68,58 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">PROGRAM KALIBRASI SARANA PEMANTAUAN DAN PENGUKURAN</p>
+                    <p class="cop_judul">PROGRAM KALIBRASI SARANA PEMANTAUAN & PENGUKURAN</p>
                 </div>
             </div>
             <div class="col-3 ">
                 <p class="cop_text float-end">Dok.No.: FRM.HRGA.09.01, Rev.00</p>
             </div>
             <div class="col-lg-12">
-                <table class="table table-bordered text-nowrap">
+                <table class="table table-bordered border-dark text-nowrap" style="font-size: 11px">
                     <thead>
                         <tr style="text-transform: capitalize">
-                            <th rowspan="2" class="align-middle ">No</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Nama Alat Ukur</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Merek</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Type / <br> Nomor seri</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Lokasi</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Frekuensi <br> kalibrasi</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Rentang Min- <br>Maks</th>
-                            <th rowspan="2" class="text-nowrap align-middle ">Resolusi</th>
-                            <th colspan="12" class="text-center ">Tahun {{ $tahun }}</th>
+                            <th rowspan="2" class="align-middle  dhead text-end">No</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Nama Alat Ukur</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Merek</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Type / Nomor
+                                seri</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Lokasi</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Frekuensi
+                                kalibrasi</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Rentang Min-Maks
+                            </th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Resolusi</th>
+                            <th colspan="12" class="text-center dhead">Tahun {{ $tahun }}</th>
+                            <th rowspan="2" class="text-nowrap align-middle text-center dhead ">Status Kalibrasi <br>
+                                Terakhir</th>
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
-                                <th class="">{{ substr($b->nm_bulan, 0, 3) }}</th>
+                                @php
+                                    $tgl_bulan = $tahun . '-' . $b->bulan . '-01';
+
+                                @endphp
+                                <th class="dhead text-center">{{ date('M', strtotime($tgl_bulan)) }}</th>
                             @endforeach
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($program as $p)
                             <tr>
-                                <td class="text-wrap align-middle">{{ $loop->iteration }}</td>
+                                <td class="text-wrap align-middle text-end">{{ $loop->iteration }}</td>
                                 <td class="text-nowrap align-middle">{{ $p->item_kalibrasi->name }}</td>
                                 <td class="text-wrap align-middle">{{ $p->item_kalibrasi->merk }}</td>
                                 <td class="text-wrap align-middle">{{ $p->item_kalibrasi->nomor_seri }}</td>
-                                <td class="text-wrap align-middle">{{ $p->item_kalibrasi->lokasi->lokasi ?? '-' }}
+                                <td class="text-nowrap align-middle">
+                                    {{ ucfirst($p->item_kalibrasi->lokasi->lokasi) ?? '-' }}
                                 </td>
-                                <td class="text-wrap align-middle">{{ $p->frekuensi }}</td>
-                                <td class="text-wrap align-middle">{{ $p->rentang }}</td>
-                                <td class="text-wrap align-middle">{{ $p->resolusi }}</td>
+                                <td class="text-wrap align-middle">Setiap tahun</td>
+                                <td class="text-wrap align-middle text-end">{{ $p->rentang }}</td>
+                                <td class="text-wrap align-middle text-end">{{ $p->resolusi }}</td>
                                 @foreach ($bulan as $b)
                                     <td class="{{ $p->bulan == $b->bulan ? 'bg-secondary' : '' }}"></td>
                                 @endforeach
+                                <td class="align-middle">Awal kalibrasi</td>
 
                             </tr>
                         @endforeach
@@ -116,25 +127,32 @@
 
                 </table>
             </div>
-            <div class="col-7">
+            <div class="col-6">
 
             </div>
-            <div class="col-5">
-                <table class="table table-bordered" style="font-size: 11px">
+            <div class="col-6">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
                             <th class="text-center" width="33.33%">Diketahui Oleh:</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+
+                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[SPV. GA-IR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
+                            <td class="text-center">(STAFF HRGA)</td>
+                            <td class="text-center">(KA. HRGA)</td>
+
                         </tr>
                     </tbody>
                 </table>

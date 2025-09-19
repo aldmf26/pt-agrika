@@ -174,19 +174,21 @@
                                 <p class="cop_judul  shapes">RIWAYAT PEMELIHARAAN SARANA & <br> PRASARANA UMUM</p>
                             </th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.:FRM.HRGA.05.02,
-                                    Rev.00</p>
+
                             </th>
 
                         </tr>
-                        {{-- <tr>
+                        <tr>
                             <th colspan="2"></th>
                             <th colspan="4">
-                                <p class="cop_judul  shapes">RIWAYAT PEMELIHARAAN SARANA & <br> PRASARANA UMUM</p>
+
 
                             </th>
-                            <th colspan="2"></th>
-                        </tr> --}}
+                            <th colspan="2">
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.:FRM.HRGA.05.03,
+                                    Rev.00</p>
+                            </th>
+                        </tr>
                         <tr>
                             <th colspan="8">&nbsp;</th>
                         </tr>
@@ -200,11 +202,11 @@
 
                             <td colspan="2"> : {{ ucfirst(strtolower($items->jumlah)) }}</td>
                         </tr>
-                        <tr>
+                        {{-- <tr>
                             <td colspan="3">No Identifikasi</td>
 
                             <td colspan="2"> : {{ ucfirst(strtolower($items->no_identifikasi)) }}</td>
-                        </tr>
+                        </tr> --}}
                         <tr>
                             <td colspan="3">Lokasi</td>
 
@@ -215,29 +217,31 @@
 
                             <td colspan="2"> : {{ ucfirst(strtolower($tahun)) }}</td>
                         </tr>
-                        <tr class="table-bawah">
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Tanggal</th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Urutan unit / <br>
+                        <tr class="table-bawah" style="font-size: 11px">
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Tanggal</th>
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Urutan unit / <br>
                                 Ruang</th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Perawatan/ <br>
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Perawatan/ <br>
                                 Perbaikan</th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap" width="25%">Jenis
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap" width="25%">
+                                Jenis <br>
                                 yang dilakukan</th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Kondisi <br>
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Kondisi <br>
                                 kebersihan <br>
                                 akhir</th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Kondisi fungsi <br>
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Kondisi fungsi <br>
                                 akhir
                             </th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Kesimpulan <br>
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Kesimpulan <br>
                                 (Ok/Not OK)</th>
-                            <th class="dhead text-start  align-middle " style="white-space: nowrap">Paraf Pelaksana</th>
+                            <th class="dhead text-center  align-middle " style="white-space: nowrap">Paraf Pelaksana
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($union as $r)
-                            <tr class="table-bawah">
-                                <td class="text-start">{{ date('d/m/Y', strtotime($r->tanggal)) }}</td>
+                            <tr class="table-bawah" style="font-size: 11px">
+                                <td class="text-end text-nowrap">{{ tanggal($r->tanggal) }}</td>
                                 @if ($items->jenis_item == 'ac')
                                     <td class="text-start" style="white-space: normal">
                                         {{ ucfirst(strtolower($items->no_identifikasi)) }} -
@@ -282,15 +286,18 @@
                                 pengecekan kebersihan kondisi
                                 fisik dari
                                 sarana dan
-                                prasarana umum
+                                prasarana umum.
                             </th>
                         </tr>
                         <tr>
                             <th colspan="8" style="font-size: 9px; font-weight: normal">
                                 2. Untuk pemeriksaan fungsi dari sarana prasarana umum dilakukan dengan cara
-                                menjalangkan fungsi alat
-                                dan menilai apakah alat masih berfungsi dengan normal atau tidak
+                                menjalankan fungsi alat
+                                dan menilai apakah alat masih berfungsi dengan normal atau tidak.
                             </th>
+                        </tr>
+                        <tr>
+                            <th>&nbsp;</th>
                         </tr>
                         <tr>
                             <th colspan="8" style="font-size: 9px; font-weight: normal">
@@ -302,16 +309,31 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th colspan="3" style="border: none"></th>
-                            <th class="text-center">Dibuat Oleh:</th>
+                            <th colspan="2" style="border: none"></th>
+                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                             <th class="text-center" colspan="2">Diketahui Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th colspan="3" style="border: none"></th>
-                            <td style="height: 80px;" class="align-bottom">[GENERAL MAINTENANCE]</td>
-                            <td style="height: 80px;" colspan="2" class="align-bottom">[SPV. GA-IR]</td>
-                            <td style="height: 80px;" colspan="2" class="align-bottom">[KA.HRGA]</td>
+                            <th colspan="2" style="border: none"></th>
+                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <span
+                                    style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <span
+                                    style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <span
+                                    style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                        </tr>
+                        <tr class="table-bawah">
+                            <th colspan="2" style="border: none"></th>
+                            <td colspan="2" class="align-bottom">(KA. MAINTENANCE)</td>
+                            <td colspan="2" class="align-bottom">(STAFF HRGA)</td>
+                            <td colspan="2" class="align-bottom">(KA. HRGA)</td>
                         </tr>
                     </tfoot>
 

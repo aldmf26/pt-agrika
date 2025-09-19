@@ -8,6 +8,7 @@ use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga4JadwalDanInformasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga5DaftarHadirPelatihanController;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga6EvaluasiPelatihan;
 use App\Http\Controllers\Hrga\Hrga4MedicalScreening\Hrga1JadwalMedicalCheckup;
+use App\Http\Controllers\Hrga\Hrga4MedicalScreening\RekapHasilMedicalCheckupCOntroller;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\DaftarSaranaPrasarana;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga1ProgramPerawatanSaranadanPrasaranaUmum;
 use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga2RiwayatPerwatanPerbaikan;
@@ -111,6 +112,14 @@ Route::controller(Hrga1JadwalMedicalCheckup::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
+        Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
+    });
+Route::controller(RekapHasilMedicalCheckupCOntroller::class)
+    ->prefix('hrga/hrga4/hrga4.2_Hasil_medical_checkup')
+    ->name('hrga4.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
     });
@@ -495,6 +504,7 @@ Route::controller(MenuController::class)
         Route::post('/store', 'store')->name('store');
         Route::post('/update', 'update')->name('update');
     });
+
 
 
 Route::get('/update-jam-kedatangan', function (Request $request) {

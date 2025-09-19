@@ -78,7 +78,8 @@
                     <div class="form-group">
                         <select class="choices form-select" name="pic[]" multiple="multiple">
                             @foreach ($pegawai as $p)
-                                <option value="{{ $p->id }}">{{ ucfirst(strtolower($p->nama)) }}</option>
+                                <option value="{{ $p->karyawan_id_dari_api }}">{{ ucfirst(strtolower($p->nama)) }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
