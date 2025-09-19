@@ -61,7 +61,7 @@ class Hrga1PerencanaanKebersihan extends Controller
         $datas = DB::table('hrga6_perencanaan_sanitasi')->where('id_lokasi', $r->id_lokasi)->get();
 
         $data = [
-            'title' => 'PERENCANAAN SANITASI',
+            'title' => 'PERENCANAAN KEBERSIHAN (SANITASI)',
             'area' => $r->area,
             'dok' => 'Dok.No.:FRM.HRGA.06.01, Rev.00',
             'datas' => $datas

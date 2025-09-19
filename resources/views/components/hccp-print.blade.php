@@ -117,7 +117,7 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">{{ $title }} @if ($kategori)
+                    <p class="cop_judul">{!! $title !!} @if ($kategori)
                             {{ strtoupper($kategori) }}
                         @endif
                     </p>

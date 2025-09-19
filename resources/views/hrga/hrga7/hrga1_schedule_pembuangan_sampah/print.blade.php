@@ -5,7 +5,7 @@
 
 
     <div class="row">
-        @php
+        {{-- @php
             $validLimbah = ['Organik', 'Non Organik'];
 
             // Tentukan mana yang harus dicoret berdasarkan kategori
@@ -24,8 +24,8 @@
                 @endif
             @endforeach
             <br>
-            {{-- Bulan : {{ $nm_bulan }} --}}
-        </div>
+
+        </div> --}}
 
         <div class="col-sm-12 col-lg-12">
             <table class="table table-bordered border-dark table-sm" style="font-size: 10px;">
