@@ -77,11 +77,11 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">CEKLIST PERAWATAN MESIN & PERALATAN</p>
+                    <p class="cop_judul">CHEKLIST PERAWATAN MESIN & PERALATAN</p>
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text text-nowrap">Dok.No.: FRM.HRGA.08.02, Rev.00</p>
+                <p class="cop_text text-nowrap">Dok.No.: FRM.HRGA.08.03, Rev.00</p>
             </div>
             <div class="col-4">
                 <table style="font-size: 10px">

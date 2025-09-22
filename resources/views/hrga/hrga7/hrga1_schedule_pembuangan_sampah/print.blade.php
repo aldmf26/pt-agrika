@@ -86,7 +86,7 @@
             <span>Ket : </span> <br>
             <span>
                 @if ($kategori == 'terjadwal')
-                    Jika sampah organik / non organik tidak diangkut maka dipastikan tidak tercecer dan tidak mengundang
+                    Jika sampah non organik tidak diangkut maka dipastikan tidak tercecer dan tidak mengundang
                     hama
                 @else
                     Bulu akan dikumpulkan terlebih dahulu, akan dibakar jika sudah benar-benar kering. Pembakaran

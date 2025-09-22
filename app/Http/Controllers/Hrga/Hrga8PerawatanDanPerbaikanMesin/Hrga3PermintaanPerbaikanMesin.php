@@ -80,7 +80,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
     {
         $data = [
             'title' => 'PERMINTAAN PERBAIKAN MESIN & PERALATAN',
-            'dok' => 'Dok.No.: FRM.HRGA.08.03, Rev.00',
+            'dok' => 'Dok.No.: FRM.HRGA.08.04, Rev.00',
             'permintaan' => PermintaanPerbaikanMesin::where('invoice_pengajuan', $r->invoice_pengajuan)->first(),
         ];
         return view('hrga.hrga8.hrga3_permintaan_perbaikan_mesin.print', $data);
