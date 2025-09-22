@@ -455,6 +455,44 @@ Route::controller(KesigapanTanggapDaruratController::class)
         Route::post('/store', 'store')->name('store');
         Route::post('/update', 'update')->name('update');
     });
+
+Route::controller(KesigapanTanggapDaruratController::class)
+    ->prefix('qa/kesigapan/kesigapantanggapdarurat/tim')
+    ->name('qa.kesigapan.2.')
+    ->group(function () {
+        Route::get('/', 'tim')->name('tim');
+        Route::get('/create', 'tim_create')->name('tim_create');
+        Route::get('/print', 'tim_print')->name('tim_print');
+        Route::post('/store', 'tim_store')->name('tim_store');
+        Route::put('/update/{id}', 'tim_update')->name('tim_update');
+        Route::delete('/delete/{id}', 'tim_delete')->name('tim_delete');
+    });
+
+Route::controller(KesigapanTanggapDaruratController::class)
+    ->prefix('qa/kesigapan/kesigapantanggapdarurat/emergency_situation')
+    ->name('qa.kesigapan.3.')
+    ->group(function () {
+        Route::get('/', 'emergency')->name('emergency');
+        Route::get('/create', 'emergency_create')->name('emergency_create');
+        Route::get('/print', 'emergency_print')->name('emergency_print');
+        Route::post('/store', 'emergency_store')->name('emergency_store');
+        Route::put('/update/{id}', 'emergency_update')->name('emergency_update');
+        Route::delete('/delete/{id}', 'emergency_delete')->name('emergency_delete');
+    });
+
+Route::controller(KesigapanTanggapDaruratController::class)
+    ->prefix('qa/kesigapan/kesigapantanggapdarurat/contingency_plan')
+    ->name('qa.kesigapan.4.')
+    ->group(function () {
+        Route::get('/', 'contingency_plan')->name('contingency_plan');
+        Route::get('/create', 'contingency_plan_create')->name('contingency_plan_create');
+        Route::get('/print', 'contingency_plan_print')->name('contingency_plan_print');
+        Route::post('/store', 'contingency_plan_store')->name('contingency_plan_store');
+        Route::put('/update/{id}', 'contingency_plan_update')->name('contingency_plan_update');
+        Route::delete('/delete/{id}', 'contingency_plan_delete')->name('contingency_plan_delete');
+    });
+
+
 Route::controller(MenuController::class)
     ->prefix('menu')
     ->name('menu.')

@@ -21,7 +21,7 @@ class JadwalVerifikasiController extends Controller
     {
 
         $data = [
-            'title' => 'Jadwal Verifikasi',
+            'title' => 'Jadwal Uji Lab',
             'tahun' => $r->tahun,
             'datas' => JadwalVerifikasi::where('tahun', $r->tahun)
                 ->orderBy('item')

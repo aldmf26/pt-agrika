@@ -17,7 +17,7 @@
                     </tr>
                     <tr>
                         <th width="150" class="head">Posisi</td>
-                        <td>KA. GUDANG BAHAN BAKU</td>
+                        <td>KA. Gudang Bahan Baku</td>
                         <th width="150" class="head">Tanggal</td>
                         <td>
                             {{ tanggal(date('Y-m-d', strtotime('-7 days', strtotime($datas->tgl)))) }}
@@ -61,7 +61,7 @@
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
                                 {{ number_format($d->jumlah_kg) }} KG</td>
-                            <td align="center">{{ ucfirst(strtolower($d->nama)) }}</td>
+                            <td align="center">{{ strtoupper($d->nama) }}</td>
                             <td align="center">-</td>
                             <td class="text-end">{{ tanggal($datas->tgl) }}</td>
                         </tr>

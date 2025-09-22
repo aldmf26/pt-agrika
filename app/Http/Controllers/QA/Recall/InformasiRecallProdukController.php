@@ -185,7 +185,7 @@ class InformasiRecallProdukController extends Controller
     {
         $data  = [
             'title' => 'INFORMASI RECALL PRODUK',
-            'dok' => 'Dok.No.: FRM.QA.05.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.QA.06.01, Rev.00',
             'datas' => $id
         ];
         return view('qa.recall.informasi_recall_produk.print', $data);
@@ -195,7 +195,7 @@ class InformasiRecallProdukController extends Controller
     {
         $data  = [
             'title' => 'HASIL ANALISA PROSES RECALL',
-            'dok' => 'Dok.No.: FRM.QA.05.02, Rev.00',
+            'dok' => 'Dok.No.: FRM.QA.06.02, Rev.00',
             'datas' => $id
         ];
         return view('qa.recall.informasi_recall_produk.print_hasil', $data);
