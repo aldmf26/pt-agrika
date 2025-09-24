@@ -77,7 +77,7 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">CHEKLIST PERAWATAN MESIN & PERALATAN</p>
+                    <p class="cop_judul">CHECKLIST PERAWATAN MESIN & PERALATAN</p>
                 </div>
             </div>
             <div class="col-3 ">

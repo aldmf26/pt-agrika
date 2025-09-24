@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DCR\DaftarIndukDokumenEksternal;
+use App\Http\Controllers\DCR\DaftarIndukDokumenInternal;
 use App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi\Hrga5JadwalGapAnalysis;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga1InformasiTawaranPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga2ProgramPelatihanTahunan;
@@ -503,6 +505,22 @@ Route::controller(MenuController::class)
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
         Route::post('/update', 'update')->name('update');
+    });
+Route::controller(DaftarIndukDokumenInternal::class)
+    ->prefix('dcr/daftar_induk_dokumen_internal')
+    ->name('dcr.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+    });
+Route::controller(DaftarIndukDokumenEksternal::class)
+    ->prefix('dcr/daftar_induk_dokumen_eksternal')
+    ->name('dcr.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
     });
 
 
