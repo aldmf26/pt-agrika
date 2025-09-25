@@ -27,7 +27,7 @@
                         <br> (GR)
                     @endif
                 </th>
-                <th class="text-center align-middle">Kode Lot</th>
+                <th class="text-center align-middle">Kode {{ $kategori == 'sbw' ? 'Lot' : 'Barang'}}</th>
                 <th class="text-center align-middle" width="100">Ttd</th>
             </tr>
         </thead>

@@ -150,7 +150,7 @@
                         Tanggal Efektif
                     </td>
                     <td>
-                        {{ tanggal(date('Y-m-d')) }}
+                        17 Jul 2025
                     </td>
                 </tr>
                 <tr>

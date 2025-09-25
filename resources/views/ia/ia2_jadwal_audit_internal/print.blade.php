@@ -1,5 +1,5 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table>
+    <table class="table-sm">
         <tr>
             <td>Hari</td>
             <td>:</td>
@@ -12,23 +12,21 @@
         </tr>
     </table>
 
-    <table class="mt-3 table table-sm border-dark table-bordered">
+    <table class="mt-3 table table-xs border-dark table-bordered">
         <thead style="background-color: #C0C0C0; text-align: center">
             <tr>
-                <th>Waktu</th>
-                <th>Bagian</th>
-                <th>Proses yang Diaudit</th>
-                <th>Auditor</th>
-                <th>Auditee</th>
+                <th class="text-center">Waktu</th>
+                <th class="text-center">Bagian</th>
+                <th class="text-center" style=" text-transform: none">Proses yang Diaudit</th>
+                <th class="text-center">Auditor</th>
+                <th class="text-center">Auditee</th>
             </tr>
         </thead>
 
         <tbody style="text-align: center">
-
-
             @foreach ($datas as $d)
                 <tr>
-                    <td scope="row" class="text-nowrap">
+                    <td scope="row" class="text-end">
                         {{ $d->waktu }}
                     </td>
                     <td>{{ $d->bagian ?? '' }}</td>
@@ -39,21 +37,27 @@
             @endforeach
         </tbody>
     </table>
-
-    <div class="row">
-        <div class="col-3">
-            <table class="border-dark table table-bordered" style="font-size: 11px">
+    <div class="row mt-2">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <table class="table table-xs table-bordered border-dark">
                 <thead>
                     <tr>
-                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+                        <th class="text-center align-middle" width="33.33%">Dibuat Oleh:</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-center">[LEAD AUDITOR]</td>
+
+
+                        <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
+                                Diisi Oleh User</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>

@@ -160,7 +160,7 @@
                         Tanggal Efektif
                     </td>
                     <td>
-                        {{ tanggal(date('Y-m-d')) }}
+                        {{ tanggal('2025-07-17') }}
                     </td>
                 </tr>
                 <tr>
@@ -184,7 +184,7 @@
                     </tr>
                     <tr>
                         <td>Jenis Insiden</td>
-                        <td class="align-middle"> : {{ ucfirst(strtolower($kesigapan->jenis_insiden)) }}</td>
+                        <td class="align-middle"> : {{ $kesigapan->jenis_insiden }}</td>
 
                     </tr>
                     <tr>
@@ -264,7 +264,7 @@
                 <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="text-center" width="25%">Dialporkan Oleh:</th>
+                            <th class="text-center" width="25%">Dilaporkan Oleh:</th>
                             <th class="text-center" width="25%">Diketahui & Disetujui Oleh:</th>
                         </tr>
                     </thead>

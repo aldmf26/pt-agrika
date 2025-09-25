@@ -107,7 +107,7 @@
                 </li>
 
                 @foreach ($menus as $menu)
-                    <li class="menu-item has-sub">
+                    <li class="menu-item has-sub text-sm">
                         <a href="#" class="menu-link">
                             <span><i class="{{ $menu->icon }}"></i> {{ $menu->title }}</span>
                         </a>

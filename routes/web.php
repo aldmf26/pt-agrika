@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Hrga\Hrga10PenerimaanTamu\Hrga1VisitorHealthForm;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuestionerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,8 @@ Route::get('/tidak', function () {
     return view('tidak', $data);
 })->name('tidak');
 
+Route::get('/questioner', [QuestionerController::class, 'questioner']);
+Route::post('/questioner', [QuestionerController::class, 'questioner_store'])->name('questioner.store');
 Route::get('/tamu', [Hrga1VisitorHealthForm::class, 'tamu']);
 Route::post('/tamu', [Hrga1VisitorHealthForm::class, 'storeTamu'])->name('tamu.store');
 

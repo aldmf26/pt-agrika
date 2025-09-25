@@ -20,10 +20,13 @@
     @php $letter = $letters[$i] ?? chr(97 + $i); @endphp
 
     @if (isset($items[$i]))
-        {{-- Data tersedia --}}
-        {{ $letter }}. Terjadi pada
-        {{ \Carbon\Carbon::parse($items[$i]->tanggal_ketidaksesuaian)->format('d/m/y') }}
-        - karena : {{ $items[$i]->alasan }}
+        
+
+            {{-- Data tersedia --}}
+            {{ $letter }}. <span class="text-danger">Terjadi pada
+            {{ \Carbon\Carbon::parse($items[$i]->tanggal_ketidaksesuaian)->format('d/m/y') }}
+            - karena : {{ $items[$i]->alasan }}
+        </span>
     @else
         {{-- Placeholder kosong --}}
         {{ $letter }}.

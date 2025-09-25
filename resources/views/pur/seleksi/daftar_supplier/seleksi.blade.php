@@ -164,7 +164,7 @@
         </tr>
         <tr>
             <td>
-                Diperiksa Oleh: Sinta <span class="ms-5"> Ttd:</span>
+                Diperiksa Oleh: Gusti Andriy Wijaya <span class="ms-5"> Ttd:</span>
             </td>
         </tr>
     </table>

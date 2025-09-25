@@ -1,15 +1,15 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table class="mt-5">
+    <table class="mt-5 table-xs">
         <tbody>
             <tr>
                 <th>Departemen</th>
                 <th>:</th>
-                <th>{{ strtoupper($departemen) }}</th>
+                <th>{{ ucwords(strtolower($departemen)) }}</th>
             </tr>
             <tr>
                 <th>Waktu Audit Internal</th>
                 <th>:</th>
-                <th>{{ date('d-m-Y', strtotime($program->created_at)) }}</th>
+                <th>{{ tanggal(date('Y-m-d', strtotime($program->created_at))) }}</th>
             </tr>
             <tr>
                 <th>Nama Auditor</th>
@@ -24,17 +24,17 @@
         </tbody>
     </table>
 
-    <table class="table table-bordered border-dark table-sm table-hover">
+    <table class="table table-bordered border-dark table-xs table-hover">
         <thead style="">
             <tr>
-                <th class="align-middle">No</th>
-                <th class="align-middle">Aspek yang Dinilai</th>
-                <th class="align-middle">MIN</th>
-                <th class="align-middle">MAJ</th>
-                <th class="align-middle">SR</th>
-                <th class="align-middle">KT</th>
-                <th class="align-middle">OK</th>
-                <th class="align-middle">Keterangan / <br> Tindakan Koreksi</th>
+                <th class="align-middle text-center">No</th>
+                <th class="align-middle text-center">Aspek yang Dinilai</th>
+                <th class="align-middle text-center">MIN</th>
+                <th class="align-middle text-center">MAJ</th>
+                <th class="align-middle text-center">SR</th>
+                <th class="align-middle text-center">KT</th>
+                <th class="align-middle text-center">OK</th>
+                <th class="align-middle text-center">Keterangan / <br> Tindakan Koreksi</th>
             </tr>
         </thead>
         <tbody>
@@ -52,7 +52,7 @@
                     @endif
                     @foreach ($sub->pertanyaan as $pertanyaan)
                         <tr>
-                            <td class="text-center">{{ $pertanyaan->nomor_urutan }}</td>
+                            <td class="text-end">{{ $pertanyaan->nomor_urutan }}</td>
                             <td>{{ $pertanyaan->teks }}</td>
                             <td class="text-center">
                                 {{ $hasilChecklist[$pertanyaan->id]['min'] ? '√' : '' }}
@@ -92,17 +92,17 @@
     {{-- tambahkan table disini --}}
     <div class="row">
         <div class="col-6">
-            <table class="table table-bordered border-dark table-sm table-hover mt-3">
+            <table class="table table-bordered border-dark table-xs table-hover mt-3">
                 <thead>
                     <tr>
                         <th rowspan="2" class="text-center align-middle">Tingkat</th>
                         <th colspan="4" class="text-center">Jumlah Penyimpangan</th>
                     </tr>
                     <tr>
-                        <th class="text-end">Minor <br> (MIN)</th>
-                        <th class="text-end">Major <br>(MAJ)</th>
-                        <th class="text-end">Serius <br>(SR)</th>
-                        <th class="text-end">Kritis <br> (KT)</th>
+                        <th class="text-center">Minor <br> (MIN)</th>
+                        <th class="text-center">Major <br>(MAJ)</th>
+                        <th class="text-center">Serius <br>(SR)</th>
+                        <th class="text-center">Kritis <br> (KT)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,45 +143,46 @@
                     </tr>
                 </tbody>
             </table>
-            Ket :
-            <table>
+            <span class="table-xs">Ket :</span>
+
+            <table class="table-xs">
                 <tr>
-                    <td class="text-start h6">MIN</td>
+                    <td class="text-start">MIN</td>
                     <td>:</td>
                     <td>Minor</td>
                 </tr>
                 <tr>
-                    <td class="text-start h6">MAJ</td>
+                    <td class="text-start">MAJ</td>
                     <td>:</td>
                     <td>Major</td>
                 </tr>
                 <tr>
-                    <td class="text-start h6">SR</td>
+                    <td class="text-start">SR</td>
                     <td>:</td>
                     <td>Serius</td>
                 </tr>
                 <tr>
-                    <td class="text-start h6">KT</td>
+                    <td class="text-start">KT</td>
                     <td>:</td>
                     <td>Kritis</td>
                 </tr>
                 <tr>
-                    <td class="text-start h6">OK</td>
+                    <td class="text-start">OK</td>
                     <td>:</td>
                     <td>Tidak ada temuan</td>
                 </tr>
                 <tr>
-                    <td class="text-start h6">TB</td>
+                    <td class="text-start">TB</td>
                     <td>:</td>
                     <td>Tidak berlaku</td>
                 </tr>
             </table>
         </div>
         <div class="col-6">
-            <table class="table table-bordered border-dark table-sm table-hover mt-3">
+            <table class="table table-bordered border-dark table-xs table-hover mt-3">
                 <thead>
                     <tr>
-                        <th colspan="2" class="text-center">HASIL DAN PENILAIAN</th>
+                        <th colspan="2" class="text-center" style="text-transform: none">Hasil dan Penilaian</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -240,7 +241,7 @@
                         <td style="height: 80px"></td>
                     </tr>
                     <tr>
-                        <td class="text-center"> (……………………..)</td>
+                        <td class="text-center"> (…………………………)</td>
                     </tr>
                 </tbody>
             </table>
