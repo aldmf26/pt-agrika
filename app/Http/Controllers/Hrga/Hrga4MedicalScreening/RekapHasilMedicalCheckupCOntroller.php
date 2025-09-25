@@ -25,7 +25,7 @@ class RekapHasilMedicalCheckupCOntroller extends Controller
     public function print()
     {
         $data = [
-            'title' => 'REKAP HASIL MEDICAL CHECKUP',
+            'title' => 'REKAP HASIL MEDICAL CHECK UP',
             'dok' => 'Dok.No.: FRM.HRGA.04.02, Rev.00',
             'rekap' => DB::table('hasil_medical_checkup')->get()
         ];

@@ -66,7 +66,7 @@ class Hrga1ProgramKalibrasi extends Controller
             $tahun = $r->tahun;
         }
         $data = [
-            'title' => 'FRM.HRGA.09.01 - PROGRAM KALIBRASI SARANA PEMANTAUAN & PENGUKURAN',
+            'title' => 'FRM.HRGA.09.02 - PROGRAM KALIBRASI SARANA PEMANTAUAN & PENGUKURAN',
             'bulan' => DB::table('bulan')->get(),
             'program' => hrga9_1KalibrasiModel::where('tahun', $tahun)->get(),
             'item' => ItemKalibrasiModel::all(),

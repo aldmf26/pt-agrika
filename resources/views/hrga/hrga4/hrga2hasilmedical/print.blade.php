@@ -61,7 +61,7 @@
         </div>
         <div class="col-6" style="font-size: 10px">
             <p>Catatan :</p>
-            <p>1. Medical dilakukan oleh vendor eksternal yang ditunjuk perusahaan.
+            <p>1. Medical check up dilakukan oleh vendor eksternal yang ditunjuk perusahaan.
             </p>
         </div>
         <div class="col-6">
