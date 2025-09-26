@@ -225,7 +225,7 @@
                             (KA. PURCHASING)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. LAB)
+                            (KA. {{ $kategori == 'jasa' ? 'FSTL' : 'LAB' }})
                         </td>
                         <td class="text-center align-middle">
                             (DIREKTUR UTAMA)
