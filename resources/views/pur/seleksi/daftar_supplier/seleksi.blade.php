@@ -33,9 +33,10 @@
         <tr>
             <th>Spesifikasi</th>
             <td>
-                @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ ucfirst($item->nama_barang) }} : {{ $item->spek ?? '-' }}<br>
-                @endforeach
+                <ol>
+                    <li>{{ ucfirst($item->nama_barang) }} : {{ $item->spek ?? '-' }}</li>
+                </ol>
+
             </td>
         </tr>
         <tr>

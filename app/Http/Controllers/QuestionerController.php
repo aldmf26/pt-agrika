@@ -12,7 +12,25 @@ class QuestionerController extends Controller
     public function index(Request $r)
     {
         $kategori = $r->kategori ?? 'questioner';
-        $pertanyaan = PertanyaanSurvey::get();
+
+        if ($kategori == 'questioner') {
+            $pertanyaan = PertanyaanSurvey::orderBy('no_pertanyaan')->get();
+        } elseif ($kategori == 'survey') {
+            $responden = RespondenSurvey::with('jawaban.pertanyaan')->get();
+            $jawaban = JawabanSurvey::with('pertanyaan')->get();
+        } elseif ($kategori == 'final') {
+            $responden = RespondenSurvey::with('jawaban.pertanyaan')->get();
+            $jawaban = JawabanSurvey::with('pertanyaan')->get();
+            $total_score = $jawaban->avg('nilai') / 5;
+            $grade = $total_score > 0.8 ? 'A' : ($total_score > 0.6 ? 'B' : 'C');
+            $scores = [];
+            foreach (['KOMITMEN MANAGEMENT', 'TEAMWORK', 'PEMBERDAYAAN', 'KONTROL', 'KOORDINASI', 'KONSISTENSI', 'KEPEDULIAN', 'KOMUNIKASI', 'TARGET'] as $dim) {
+                $qNos = Pertanyaan::where('sub_kategori', $dim)->pluck('no_pertanyaan');
+                $scores[$dim] = $jawaban->whereIn('pertanyaan.no_pertanyaan', $qNos)->avg('nilai') / 5;
+            }
+        }
+
+
         $data = [
             'title' => 'Questioner',
             'kategori' => $kategori,
