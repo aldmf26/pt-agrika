@@ -43,7 +43,7 @@ class BeritaAcaraPemusnahanDokumen extends Controller
             'dokumen' => DB::table('berita_acara_pemusnahan as pd')
                 ->leftJoin('daftar_induk_dokumen_internal as did', 'pd.dokumen_id', '=', 'did.id')
                 ->select('pd.*', 'did.judul', 'did.no_dokumen', 'did.rev', 'did.pic', 'did.nama_divisi')
-                ->orderBy('pd.id', 'desc')
+                ->orderBy('pd.id', 'asc')
                 ->get()
         ];
         return view('dcr.berita_acara_pemusnahan.print', $data);
