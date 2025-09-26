@@ -28,7 +28,9 @@
                 <div class="col-2">
                     <div class="form-group">
                         <label for="jumlah">Aksi</label><br>
-                        <button type="button" class="btn btn-xs btn-danger hapusBaris" data-kriteria="{{ $kriteria }}" data-row="{{ $detail->id }}"><i class="fas fa-trash"></i></button>
+                        <button type="button" class="btn btn-xs btn-danger hapusBaris"
+                            data-kriteria="{{ $kriteria }}" data-row="{{ $detail->id }}"><i
+                                class="fas fa-trash"></i></button>
                     </div>
                 </div>
             </div>
@@ -38,8 +40,8 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function () {
-            $('.hapusBaris').click(function () {
+        $(document).ready(function() {
+            $('.hapusBaris').click(function() {
                 var kriteria = $(this).attr('data-kriteria');
                 var id = $(this).attr('data-row');
                 $('#evaluasi_' + kriteria + '_' + id).remove();

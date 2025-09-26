@@ -186,7 +186,8 @@
                             </table>
                             <table class="signature-table">
                                 <tr>
-                                    <td width="30%">KA. GUDANG BAHAN BAKU</td>
+                                    <td width="30%">
+                                        {{ $k == 'lainnya' ? 'KA. GUDANG BAHAN BAKU' : 'KA. PURCHASING' }}</td>
                                     <td width="30%">KA. QC</td>
                                     <td width="30%">STATUS</td>
                                 </tr>

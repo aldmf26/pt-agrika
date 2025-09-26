@@ -42,6 +42,7 @@ use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA1PenangananProdukControl
 use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA2BeritaAcaraPemusnahanProdukController;
 use App\Http\Controllers\QA\Recall\HasilAnalisaProsesRecallController;
 use App\Http\Controllers\QA\Recall\InformasiRecallProdukController;
+use App\Http\Controllers\QuestionerController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -79,6 +80,14 @@ Route::controller(Hrga2HasilWawancara::class)
         Route::get('/print/{pegawai}', 'print')->name('print');
         Route::get('/edit/{pegawai}', 'edit')->name('edit');
         Route::get('/singkron', 'singkron')->name('singkron');
+    });
+
+Route::controller(QuestionerController::class)
+    ->prefix('qa/questioner')
+    ->name('qa.questioner.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/update', 'update')->name('update');
     });
 
 Route::controller(Hrga3HasilEvaluasiKaryawanBaru::class)
