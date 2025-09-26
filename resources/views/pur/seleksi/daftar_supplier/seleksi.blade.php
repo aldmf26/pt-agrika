@@ -225,6 +225,7 @@
                             (KA. PURCHASING)
                         </td>
                         <td class="text-center align-middle">
+                            @dd($kategori)
                             (KA. {{ $kategori == 'jasa' ? 'FSTL' : 'LAB' }})
                         </td>
                         <td class="text-center align-middle">
