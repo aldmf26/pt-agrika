@@ -59,10 +59,12 @@
         <tr>
             <th>Sistem manajemen yang telah diterapkan di perusahaan anda:</th>
             <td>
-                <p><input type="checkbox" checked> HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
+                <p><input type="checkbox" {{ $kategori == 'Jasa' ? '' : 'checked' }}> HACCP (Sedang menunggu sertifikat
+                    HACCP dari pabrik)</p>
                 <p><input type="checkbox"> GMP</p>
-                <p><input type="checkbox"> Lainnya (sebutkan)………</p>
-                <p><input type="checkbox" checked> Belum ada</p>
+                <p><input type="checkbox" {{ $kategori == 'Jasa' ? 'checked' : '' }}>
+                    {{ $kategori == 'Jasa' ? 'Lainnya (sebutkan): ISO 9001' : 'Lainnya (sebutkan)………' }} </p>
+                <p><input type="checkbox"> Belum ada</p>
                 <p>(Bila ada harap melampirkan sertifikat)</p>
             </td>
         </tr>
