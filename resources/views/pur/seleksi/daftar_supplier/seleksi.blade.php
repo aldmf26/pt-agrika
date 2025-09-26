@@ -33,7 +33,7 @@
         <tr>
             <th>Spesifikasi</th>
             <td>
-                <ol style="margin: 0 0 0 0">
+                <ol style="padding-left: -20px; margin:0">
                     <li>{{ ucfirst($item->nama_barang) }} : {{ $item->spek ?? '-' }}</li>
                 </ol>
             </td>
