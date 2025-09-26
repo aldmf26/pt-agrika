@@ -1,7 +1,7 @@
 <x-hccp-print :title="$title" :kategori="$supplier->kategori" :dok="$dok">
     <table class="table-xs">
         <tr>
-            <th>Tagngal</th>
+            <th>Tanggal</th>
             <th>:</th>
             <td>{{ tanggal(date('Y-m-d')) }}</td>
         </tr>
@@ -50,7 +50,7 @@
         <thead>
             <tr>
                 <th class="head text-center align-middle">Kriteria Evaluasi:</th>
-                <th class="head text-center align-middle">Hasil Peniliaan</th>
+                <th class="head text-center align-middle">Hasil Penilaian</th>
             </tr>
         </thead>
         <tbody>

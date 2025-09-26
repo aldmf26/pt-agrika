@@ -10,10 +10,7 @@ class Suplier extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-    public function getNamaSupplierAttribute($value)
-    {
-        return ucwords(strtolower($value));
-    }
+  
 
     public function getKategoriAttribute($value)
     {
