@@ -31,17 +31,17 @@ class PUR1DaftarSupplierController extends Controller
     public function seleksi(Suplier $supplier)
     {
         $kode = [
-            'lainnya' => 'PURS',
-            'barang' => 'PURB',
-            'kemasan' => 'PURK',
-            'jasa' => 'PURJ',
+            'lainnya' => 'PURS.01.04',
+            'barang' => 'PURB.01.04',
+            'kemasan' => 'PURK.01.04',
+            'jasa' => 'PURJ.01.02',
         ];
-        $nomor = $kode[strtolower($supplier->kategori)] ?? 'PURS';
+        $nomor = $kode[strtolower($supplier->kategori)] ?? 'PURS.01.04';
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
             'kategori' => $supplier->kategori,
-            'dok' => "Dok.No.: FRM.{$nomor}.01.04, Rev.00",
+            'dok' => "Dok.No.: FRM.{$nomor}, Rev.00",
         ];
         return view('pur.seleksi.daftar_supplier.seleksi', $data);
     }
@@ -176,17 +176,17 @@ class PUR1DaftarSupplierController extends Controller
     {
         $supplier = Suplier::where('id', $evaluasi->supplier_id)->first();
         $kodes = [
-            'lainnya' => 'PURS',
-            'barang' => 'PURB',
-            'kemasan' => 'PURK',
-            'jasa' => 'PURJ',
+            'lainnya' => 'PURS.01.05',
+            'barang' => 'PURB.01.05',
+            'kemasan' => 'PURK.01.05',
+            'jasa' => 'PURJ.01.03',
         ];
 
-        $nomor = $kodes[strtolower($supplier->kategori)] ?? 'PURS';
+        $nomor = $kodes[strtolower($supplier->kategori)] ?? 'PURS.01.05';
 
         $data = [
             'title' => 'EVALUASI SUPPLIER',
-            'dok' => "Dok.No.: FRM.{$nomor}.01.05, Rev.00",
+            'dok' => "Dok.No.: FRM.{$nomor}, Rev.00",
             'evaluasi' => $evaluasi,
             'supplier' => $supplier
         ];
