@@ -158,8 +158,10 @@ class PUR1DaftarSupplierController extends Controller
                 ($harga ? $harga->penilaian : 100) +
                 ($komunikasi ? $komunikasi->penilaian : 100);
 
+            $rataRata = $totalPenilaian / 5;
+
             Suplier::find($id)->update([
-                'hasil_evaluasi' => $totalPenilaian,
+                'hasil_evaluasi' => $rataRata,
             ]);
 
             DB::commit();
@@ -279,16 +281,16 @@ class PUR1DaftarSupplierController extends Controller
         $datas = Suplier::with('barang', 'evaluasi')->where('kategori', $r->kategori)->latest()->get();
 
         $kode = [
-            'lainnya' => 'PURS',
-            'barang' => 'PURB',
-            'kemasan' => 'PURK',
-            'jasa' => 'PURJ',
+            'lainnya' => 'PURS.01.03',
+            'barang' => 'PURB.01.03',
+            'kemasan' => 'PURK.01.03',
+            'jasa' => 'PURJ.01.01',
         ];
-        $nomor = $kode[$r->kategori] ?? 'PURS';
+        $nomor = $kode[$r->kategori] ?? 'PURS.01.03';
 
         $data = [
             'title' => "DAFTAR SUPPLIER " . strtoupper($r->kategori == 'lainnya' ? 'MATERIAL SBW' : $r->kategori),
-            'dok' => "Dok.No.: FRM.$nomor.01.03, Rev.00",
+            'dok' => "Dok.No.: FRM.$nomor, Rev.00",
             'datas' => $datas,
             'kategori' => $r->kategori,
             'rumah_walet' => DB::table('rumah_walet')->get(),
