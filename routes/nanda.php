@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DCR\DaftarIndukDokumenEksternal;
 use App\Http\Controllers\DCR\DaftarIndukDokumenInternal;
+use App\Http\Controllers\DCR\PermintaanPerubahanDokumen;
 use App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi\Hrga5JadwalGapAnalysis;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga1InformasiTawaranPelatihan;
 use App\Http\Controllers\Hrga\Hrga3Pelatihan\Hrga2ProgramPelatihanTahunan;
@@ -521,6 +522,15 @@ Route::controller(DaftarIndukDokumenEksternal::class)
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+    });
+Route::controller(PermintaanPerubahanDokumen::class)
+    ->prefix('dcr/permintaan_perubahan_dokumen')
+    ->name('dcr.3.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+        Route::get('/getDokumen', 'getDokumen')->name('getDokumen');
     });
 
 

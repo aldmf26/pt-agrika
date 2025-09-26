@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
+use Carbon\Carbon;
 
 class DaftarIndukDokumenEksternal extends Controller
 {
@@ -22,7 +24,7 @@ class DaftarIndukDokumenEksternal extends Controller
         $data = [
             'title' => 'DAFTAR INDUK DOKUMEN EKSTERNAL',
             'dok' => 'Dok.No.: FRM.DCR.01.02, Rev.00',
-            'daftar' => DB::table('daftar_induk_dokumen_eksternal')->orderBy('no_dokumen', 'asc')->get()
+            'daftar' => DB::table('daftar_induk_dokumen_eksternal')->orderBy('id', 'asc')->get()
         ];
 
         return view('dcr.daftar_induk_dokumen_eksternal.print', $data);
@@ -40,7 +42,8 @@ class DaftarIndukDokumenEksternal extends Controller
         $rows = $sheet->toArray();
 
         // hapus data lama
-        DB::table('hasil_medical_checkup')->truncate();
+        DB::table('daftar_induk_dokumen_eksternal')->truncate();
+
 
         foreach ($rows as $index => $row) {
             if ($index <= 0) {
@@ -57,35 +60,23 @@ class DaftarIndukDokumenEksternal extends Controller
                 continue;
             }
 
-            // $tglPemeriksaan = null;
-            // if (!empty($row[3])) {
-            //     if (is_numeric($row[3])) {
-            //         $tglPemeriksaan = ExcelDate::excelToDateTimeObject($row[3])->format('Y-m-d');
-            //     } else {
-            //         $tglPemeriksaan = Carbon::parse($row[3])->format('Y-m-d');
-            //     }
-            // }
-
-            $cek = DB::table('daftar_induk_dokumen_internal')->where('no_dokumen', trim($row[4] ?? ''))->first();
-            if ($cek) {
-                // update
-                DB::table('daftar_induk_dokumen_internal')->where('id', $cek->id)->update([
-                    'nama_divisi' => trim($row[1] ?? ''),
-                    'pic' => trim($row[2] ?? ''),
-                    'judul' => trim($row[3] ?? ''),
-                    'no_dokumen' => trim($row[4] ?? ''),
-                    'updated_at' => now(),
-                ]);
-            } else {
-                DB::table('daftar_induk_dokumen_internal')->insert([
-                    'nama_divisi' => trim($row[1] ?? ''),
-                    'pic' => trim($row[2] ?? ''),
-                    'judul' => trim($row[3] ?? ''),
-                    'no_dokumen' => trim($row[4] ?? ''),
-                    'created_at' => now(),
-                    'updated_at' => now(),
-                ]);
+            $peninjauan = null;
+            if (!empty($row[3])) {
+                if (is_numeric($row[3])) {
+                    $peninjauan = ExcelDate::excelToDateTimeObject($row[3])->format('Y-m-d');
+                } else {
+                    $peninjauan = Carbon::parse($row[3])->format('Y-m-d');
+                }
             }
+
+
+            DB::table('daftar_induk_dokumen_eksternal')->insert([
+                'judul_dokumen' => trim($row[1] ?? ''),
+                'no_dokumen' => trim($row[2] ?? ''),
+                'peninjauan_terakhir' => $peninjauan,
+                'status' => trim($row[4] ?? ''),
+
+            ]);
         }
 
         return redirect()->back()->with('sukses', 'Data berhasil diimport!');
