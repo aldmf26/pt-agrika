@@ -1,7 +1,7 @@
 <x-hccp-print :title="$title" :kategori="$supplier->kategori" :dok="$dok">
     <table class="table-xs">
         <tr>
-            <th>Tagngal</th>
+            <th>Tanggal</th>
             <th>:</th>
             <td>{{ tanggal(date('Y-m-d')) }}</td>
         </tr>
