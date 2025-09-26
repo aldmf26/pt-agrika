@@ -3,7 +3,7 @@
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> import</button>
-            <a href="{{ route('dcr.1.print') }}" target="_blank" class="btn btn-primary float-end me-2"><i
+            <a href="{{ route('dcr.2.print') }}" target="_blank" class="btn btn-primary float-end me-2"><i
                     class="fas fa-print"></i> print</a>
         </div>
         <div class="card-body">
@@ -37,7 +37,7 @@
 
         </div>
     </div>
-    <form action="{{ route('dcr.1.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('dcr.2.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
             <div class="modal-dialog ">

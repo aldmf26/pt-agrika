@@ -43,7 +43,7 @@ class DaftarIndukDokumenInternal extends Controller
         $rows = $sheet->toArray();
 
         // hapus data lama
-        DB::table('hasil_medical_checkup')->truncate();
+
 
         foreach ($rows as $index => $row) {
             if ($index <= 0) {
