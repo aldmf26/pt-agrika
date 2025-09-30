@@ -131,7 +131,7 @@
                                         {{ in_array($d->kategori, ['barang', 'kemasan']) ? 'Barang' : 'Bahan Baku' }}
                                     </td>
                                     <td>:</td>
-                                    <th>{{ $d->kategori == 'Baku' ? ucfirst(strtolower($d->grade)) : $d->barang->nama_barang }}
+                                    <th>{{ $d->kategori == 'Baku' ? ucwords(strtolower($d->grade)) : ucwords($d->barang->nama_barang) }}
                                     </th>
                                 </tr>
                                 <tr>
@@ -188,7 +188,8 @@
                                 <tr>
                                     <td width="30%">
                                         {{ $k == 'lainnya' ? 'KA. GUDANG BAHAN BAKU' : 'KA. PURCHASING' }}</td>
-                                    <td width="30%">KA. QC</td>
+                                    <td width="30%">{{ $k != 'lainnya' ? 'KA. GUDANG BARANG & KEMASAN' : 'KA. QC' }}
+                                    </td>
                                     <td width="30%">STATUS</td>
                                 </tr>
                                 <tr>

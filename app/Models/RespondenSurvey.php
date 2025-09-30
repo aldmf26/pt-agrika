@@ -11,6 +11,6 @@ class RespondenSurvey extends Model
 
     public function jawaban()
     {
-        return $this->hasMany(JawabanSurvey::class);
+        return $this->hasMany(JawabanSurvey::class, 'responden_id');
     }
 }
