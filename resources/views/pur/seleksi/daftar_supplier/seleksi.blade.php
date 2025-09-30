@@ -227,7 +227,18 @@
                             (KA. PURCHASING)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. {{ $kategori == 'Jasa' ? 'FSTL' : 'LAB' }})
+                            @php
+                                if ($kategori == 'Jasa') {
+                                    $ka = 'FSTL';
+                                } elseif ($kategori == 'Kemasan') {
+                                    $ka = 'PACKING & GUDANG FG';
+                                } elseif ($kategori == 'Barang') {
+                                    $ka = 'GUDANG BARANG & KEMASAN';
+                                } else {
+                                    $ka = 'GUDANG BAHAN BAKU';
+                                }
+                            @endphp
+                            (KA. {{ $ka }})
                         </td>
                         <td class="text-center align-middle">
                             (DIREKTUR UTAMA)

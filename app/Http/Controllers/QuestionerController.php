@@ -16,6 +16,7 @@ class QuestionerController extends Controller
         if ($kategori == 'questioner') {
             $pertanyaan = PertanyaanSurvey::orderBy('no_pertanyaan')->get();
         } elseif ($kategori == 'survey') {
+            $pertanyaan = PertanyaanSurvey::orderBy('no_pertanyaan')->get();
             $responden = RespondenSurvey::with('jawaban.pertanyaan')->get();
             $jawaban = JawabanSurvey::with('pertanyaan')->get();
         } elseif ($kategori == 'final') {
@@ -25,7 +26,7 @@ class QuestionerController extends Controller
             $grade = $total_score > 0.8 ? 'A' : ($total_score > 0.6 ? 'B' : 'C');
             $scores = [];
             foreach (['KOMITMEN MANAGEMENT', 'TEAMWORK', 'PEMBERDAYAAN', 'KONTROL', 'KOORDINASI', 'KONSISTENSI', 'KEPEDULIAN', 'KOMUNIKASI', 'TARGET'] as $dim) {
-                $qNos = Pertanyaan::where('sub_kategori', $dim)->pluck('no_pertanyaan');
+                $qNos = PertanyaanSurvey::where('sub_kategori', $dim)->pluck('no_pertanyaan');
                 $scores[$dim] = $jawaban->whereIn('pertanyaan.no_pertanyaan', $qNos)->avg('nilai') / 5;
             }
         }
@@ -34,7 +35,12 @@ class QuestionerController extends Controller
         $data = [
             'title' => 'Questioner',
             'kategori' => $kategori,
-            'pertanyaan' => $pertanyaan,
+            'pertanyaan' => $pertanyaan ?? '',
+            'responden' => $responden ?? '',
+            'jawaban' => $jawaban ?? '',
+            'total_score' => $total_score ?? '',
+            'grade' => $grade ?? '',
+            'scores' => $scores ?? ''
         ];
 
         return view('qa.questioner.index', $data);

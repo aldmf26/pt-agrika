@@ -3,7 +3,7 @@
         <tr>
             <th width="5%">Nama Material</th>
             <td width="30%">:
-                {{ $kategori == 'sbw' ? ucfirst(strtolower($nm_barang)) : ucfirst(strtolower($barang->nama_barang)) }}
+                {{ $kategori == 'sbw' ? ucwords(strtolower($nm_barang)) : ucwords(strtolower($barang->nama_barang)) }}
             </td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
                         <br> (GR)
                     @endif
                 </th>
-                <th class="text-center align-middle">Kode {{ $kategori == 'sbw' ? 'Lot' : 'Barang'}}</th>
+                <th class="text-center align-middle">Kode {{ $kategori == 'sbw' ? 'Lot' : 'Barang' }}</th>
                 <th class="text-center align-middle" width="100">Ttd</th>
             </tr>
         </thead>
