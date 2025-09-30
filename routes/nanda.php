@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DCR\BeritaAcaraPemusnahanDokumen;
+use App\Http\Controllers\DCR\DaftarDistribusiDokumenExternal;
+use App\Http\Controllers\DCR\DaftarDistribusiDokumenInternal;
 use App\Http\Controllers\DCR\DaftarIndukDokumenEksternal;
 use App\Http\Controllers\DCR\DaftarIndukDokumenInternal;
 use App\Http\Controllers\DCR\LaporanKehilanganDokumen;
@@ -533,6 +535,23 @@ Route::controller(PermintaanPerubahanDokumen::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
         Route::get('/getDokumen', 'getDokumen')->name('getDokumen');
+    });
+Route::controller(DaftarDistribusiDokumenInternal::class)
+    ->prefix('dcr/Daftar_distribusi_dokumen_internal')
+    ->name('dcr.4.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/print', 'print')->name('print');
+        Route::get('/getDokumen', 'getDokumen')->name('getDokumen');
+    });
+Route::controller(DaftarDistribusiDokumenExternal::class)
+    ->prefix('dcr/Daftar_distribusi_dokumen_external')
+    ->name('dcr.5.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+
+        Route::get('/print', 'print')->name('print');
     });
 Route::controller(LaporanKehilanganDokumen::class)
     ->prefix('dcr/laporan_kehilangan_dokumen')
