@@ -26,9 +26,10 @@ class IA1ProgramAuditInternalController extends Controller
 
         $datas = [
             'title' => 'PROGRAM AUDIT INTERNAL',
-            'dok' => 'Dok.No.: FRM.IA.01.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.AI.01.01, Rev.00',
             'tahun' => $r->tahun,
-            'datas' => $datas
+            'datas' => $datas,
+            'bulan' => DB::table('bulan')->get(),
         ];
         return view("ia.ia1_program_audit_internal.print", $datas);
     }

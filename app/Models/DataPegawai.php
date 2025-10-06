@@ -21,7 +21,11 @@ class DataPegawai extends Model
 
     public function scopeKaryawan($query)
     {
-        return $query->with('divisi')->whereIn('posisi', ['staf admin', 'fstl', 'it', 'pengawas', 'Staf Grading / Bk', 'staf packing']);
+        return $query->with('divisi')
+            ->whereIn('posisi', ['staf admin', 'fstl', 'it', 'pengawas', 'Staf Grading / Bk', 'staf packing'])
+            ->orWhere('posisi', 'LIKE', '%ka%')
+            ->orWhere('posisi', 'LIKE', '%admin%')
+            ->orderBy('nama', 'ASC');
     }
 
 

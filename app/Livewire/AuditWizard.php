@@ -37,6 +37,20 @@ class AuditWizard extends Component
         $this->namaBulan = DB::table('bulan')->where('bulan', $this->bulan)->first()->nm_bulan;
         $this->tanggalValue = ProgramAuditInternal::find($this->id)->created_at->format('d');
         $headings = Heading::groupBy('departemen')->pluck('departemen')->toArray();
+
+        $ifDepartemen = array(
+            'gudang bahan baku' => 'bk',
+            'production cabut' => 'cabut',
+            'production cetak' => 'cetak',
+            'production steam & packing' => 'steam',
+            'qc, lab / fstl' => 'qa/qc',
+            'purchasing' => 'purchasing',
+            'it' => 'it',
+            'ekspedisi & eksport' => 'ekspedisi',
+            'hrga' => 'hrga',
+        );
+        $this->departemen = $ifDepartemen[strtolower($this->departemen)] ?? $this->departemen;
+
         if (!in_array($this->departemen, $headings)) {
             $this->alert('error', 'Departemen tidak cocok', route('ia.1.index'));
             return;

@@ -6,27 +6,38 @@
     </a>
 </div> --}}
 <x-hccp-print :title="$title" :dok="$dok">
-    <div class="mt-5 d-flex justify-content-between">
-        <h6>Standar: GMP & HACCP</h6>
-        <h6>Tahun: @for ($i = 0; $i < 5; $i++)
+    <div class="table-xs mt-5 d-flex justify-content-between" style="font-weight: bold;">
+        <span>Standar: GMP & HACCP</span>
+        <span>Tahun: @for ($i = 0; $i < 5; $i++)
                 &nbsp;
             @endfor {{ $tahun }}</h6>
     </div>
 
-    <table class="mt-4 table table-bordered table-xs border-dark table-striped">
+    <table class="mt-2 table table-bordered table-xs border-dark table-striped">
         <thead>
             <tr>
                 <th class="text-center">No</th>
                 <th class="text-center">Departemen</th>
                 <th class="text-center">Auditee</th>
                 <th class="text-center">Auditor</th>
-                <th colspan="13" class="text-center">Bulan</th>
+                <th colspan="13" class="text-center">Tahun {{ $tahun }}</th>
             </tr>
-            <tr>
-                <th colspan="4"></th>
+            {{-- <tr>
+            <th colspan="4"></th>
                 @for ($i = 1; $i <= 12; $i++)
                     <th class="text-center">{{ $i }}</th>
                 @endfor
+            </tr> --}}
+            <tr>
+                <th colspan="4"></th>
+
+                @foreach ($bulan as $b)
+                    @php
+                        $tgl_bulan = $tahun . '-' . $b->bulan . '-01';
+
+                    @endphp
+                    <th class="text-center">{{ date('M', strtotime($tgl_bulan)) }}</th>
+                @endforeach
             </tr>
         </thead>
         <tbody>
