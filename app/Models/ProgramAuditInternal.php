@@ -8,10 +8,7 @@ class ProgramAuditInternal extends Model
 {
     protected $guarded = [];
 
-    public function getDepartemenAttribute($value)
-    {
-        return strtoupper($value);
-    }
+
     public function getAuditeAttribute($value)
     {
         return ucwords($value);
