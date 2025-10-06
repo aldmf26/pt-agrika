@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-between mb-2 align-items-center">
 
         <div>
-            <h5 class="fw-bold text-success">Audit : {{ strtoupper($departemen) }} </h5>
+            <h5 class="fw-bold text-success">Audit : {{ strtoupper($departemenAsli) }} </h5>
 
             <div class="input-group mb-3">
                 <label class="input-group-text" for="tanggal">Tanggal</label>

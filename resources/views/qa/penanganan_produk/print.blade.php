@@ -1,67 +1,164 @@
 <x-hccp-print :title="$title" :dok="$dok">
+
     <style>
         table {
-            font-family: 'arial'
+            font-family: 'arial';
+        }
+
+        .form-table {
+            width: 100%;
+            border: 1px solid #000;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .form-table td {
+            padding: 8px 5px;
+            vertical-align: top;
+        }
+
+        .form-table tr {
+            border-bottom: 1px solid #000;
+        }
+
+        .no-col {
+            width: 30px;
+            text-align: center;
+        }
+
+        .label-col {
+            width: 150px;
+        }
+
+        .colon-col {
+            width: 20px;
+        }
+
+        .value-col {
+            border-bottom: 1px solid #000;
+            min-height: 25px;
+        }
+
+        .penanganan-row {
+            vertical-align: top;
+        }
+
+        .penanganan-content {
+            padding: 0;
+        }
+
+        .penanganan-line {
+            border-bottom: 1px solid #000;
+            min-height: 25px;
+            padding: 3px 0;
+            line-height: 1.8;
+        }
+
+        .penanganan-line:last-child {
+            border-bottom: none;
+        }
+
+        .signature-table {
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .signature-table th,
+        .signature-table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .signature-space {
+            height: 80px;
+            vertical-align: middle;
+        }
+
+        .date-text {
+            text-align: right;
+            margin: 10px 0;
+            font-size: 11px;
         }
     </style>
+
     <div class="row">
         <div class="col-12">
-            <table class="table table-xs">
+            <table class="form-table">
+                <!-- Row 1: Tanggal Kejadian -->
                 <tr>
-                    <td class="text-center">1.</td>
-                    <td width="10">Tanggal Kejadian</td>
-                    <td width="5">:</td>
-                    <td>{{ tanggal($datas->tgl_kejadian) }}</td>
+                    <td class="no-col">1.</td>
+                    <td class="label-col">Tanggal Kejadian</td>
+                    <td class="colon-col">:</td>
+                    <td class="value-col">{{ tanggal($datas->tgl_kejadian) }}</td>
                 </tr>
+
+                <!-- Row 2: Sumber/Penyebab -->
                 <tr>
-                    <td class="text-center">2.</td>
-                    <td>Sumber/Penyebab</td>
-                    <td>:</td>
-                    <td>{{ $datas->sumber_penyebab }}</td>
+                    <td class="no-col">2.</td>
+                    <td class="label-col">Sumber/Penyebab</td>
+                    <td class="colon-col">:</td>
+                    <td class="value-col">{{ $datas->sumber_penyebab }}</td>
                 </tr>
+
+                <!-- Row 3: Nama Produk -->
                 <tr>
-                    <td class="text-center">3.</td>
-                    <td>Nama produk</td>
-                    <td>:</td>
-                    <td>{{ ucfirst(strtolower($datas->rwb->grade->nama)) }}</td>
+                    <td class="no-col">3.</td>
+                    <td class="label-col">Nama Produk</td>
+                    <td class="colon-col">:</td>
+                    <td class="value-col">{{ ucfirst(strtolower($datas->rwb->grade->nama)) }}</td>
                 </tr>
+
+                <!-- Row 4: Kode Produksi -->
                 <tr>
-                    <td class="text-center">4.</td>
-                    <td>Kode produksi</td>
-                    <td>:</td>
-                    <td>{{ $datas->kode_produksi }}</td>
+                    <td class="no-col">4.</td>
+                    <td class="label-col">Kode Produksi</td>
+                    <td class="colon-col">:</td>
+                    <td class="value-col">{{ $datas->kode_produksi }}</td>
                 </tr>
+
+                <!-- Row 5: Jumlah Produk -->
                 <tr>
-                    <td class="text-center">5.</td>
-                    <td>Jumlah Produk</td>
-                    <td>:</td>
-                    <td>{{ $datas->jumlah_produk }} GR</td>
+                    <td class="no-col">5.</td>
+                    <td class="label-col">Jumlah Produk</td>
+                    <td class="colon-col">:</td>
+                    <td class="value-col">{{ $datas->jumlah_produk }} GR</td>
                 </tr>
+
+                <!-- Row 6: Status -->
                 <tr>
-                    <td class="text-center">6.</td>
-                    <td>Status</td>
-                    <td>:</td>
-                    <td>{{ $datas->status }}</td>
+                    <td class="no-col">6.</td>
+                    <td class="label-col">Status</td>
+                    <td class="colon-col">:</td>
+                    <td class="value-col">Hold / Reject / Rework</td>
+                    {{-- <td class="value-col">{{ $datas->status }}</td> --}}
                 </tr>
-                <tr>
-                    <td class="text-center">7.</td>
-                    <td>Penanganan</td>
-                    <td>:</td>
-                    <td>
-                        <div>
-                            @foreach (explode("\n", $datas->penanganan) as $index => $line)
-                                <div style="margin-left: 20px; text-indent: -20px;">
-                                    {{ trim($line) }}
-                                </div>
-                            @endforeach
-                        </div>
+
+                <!-- Row 7: Penanganan -->
+                <tr class="penanganan-row">
+                    <td class="no-col">7.</td>
+                    <td class="label-col">Penanganan</td>
+                    <td class="colon-col">:</td>
+                    <td class="penanganan-content">
+                        @php
+                            $lines = explode("\n", $datas->penanganan);
+                            $totalLines = max(count($lines), 10); // Minimal 10 garis
+                        @endphp
+                        @for ($i = 0; $i < $totalLines; $i++)
+                            <div class="penanganan-line">
+                                {{ $i < count($lines) ? trim($lines[$i]) : '' }}&nbsp;
+                            </div>
+                        @endfor
                     </td>
                 </tr>
             </table>
         </div>
-        <span class="text-end">Tanggal : {{ tanggal($datas->created_at) }} </span>
     </div>
-    <div class="row">
+
+    <span class="float-end text-end table-xs">Tanggal : {{ tanggal($datas->created_at) }} </span>
+    <br>
+
+    <div class="mt-2 row">
         <div class="col-6"></div>
         <div class="col-6">
             <table class="table table-bordered border-dark" style="font-size: 11px">

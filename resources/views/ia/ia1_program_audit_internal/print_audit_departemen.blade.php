@@ -120,13 +120,13 @@
                         <td class="text-end">1-2</td>
                         <td class="text-end">0</td>
                     </tr>
-                    <tr>
+                    {{-- <tr>
                         <td>Atau</td>
                         <td class="text-end">tb</td>
                         <td class="text-end">≥ 11</td>
                         <td class="text-end">0</td>
                         <td class="text-end">0</td>
-                    </tr>
+                    </tr> --}}
                     <tr>
                         <td>C (Kurang)</td>
                         <td class="text-end">tb</td>
@@ -228,8 +228,9 @@
             </table>
         </div>
     </div>
+
     <div class="row mt-5">
-        <div class="col-1">
+        <div class="col-2">
             <table class="" style="font-size: 11px">
                 <thead>
                     <tr>
@@ -238,15 +239,18 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-center"> (…………………………)</td>
+                        <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-1">
+        <div class="col-2">
             <table class="" style="font-size: 11px">
                 <thead>
                     <tr>
@@ -255,16 +259,19 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px"></td>
+                        <td style="height: 80px" class="text-center align-middle">
+                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="text-center"> (……………………..)</td>
+                        <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         @for ($i = 0; $i < 10; $i++)
-            <div class="col-1">
+            <div class="col-2">
                 <table class="" style="font-size: 11px">
                     <thead>
                         <tr>
@@ -273,10 +280,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
+                            <td style="height: 80px" class="text-center align-middle">
+                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="text-center"> (……………………..)</td>
+                            <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh
+                                User
+                            </td>
                         </tr>
                     </tbody>
                 </table>

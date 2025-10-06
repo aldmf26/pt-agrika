@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\IA;
 
 use App\Http\Controllers\Controller;
+use App\Models\HasilChecklist;
 use App\Models\Heading;
 use App\Models\ProgramAuditInternal;
 use Illuminate\Http\Request;
@@ -25,9 +26,10 @@ class IA1ProgramAuditInternalController extends Controller
 
         $datas = [
             'title' => 'PROGRAM AUDIT INTERNAL',
-            'dok' => 'Dok.No.: FRM.IA.01.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.AI.01.01, Rev.00',
             'tahun' => $r->tahun,
-            'datas' => $datas
+            'datas' => $datas,
+            'bulan' => DB::table('bulan')->get(),
         ];
         return view("ia.ia1_program_audit_internal.print", $datas);
     }
@@ -55,7 +57,12 @@ class IA1ProgramAuditInternalController extends Controller
         foreach ($headings as $heading) {
             foreach ($heading->subHeadings as $sub) {
                 foreach ($sub->pertanyaan as $pertanyaan) {
-                    $hasil = $pertanyaan->hasilChecklist->first();
+                    // Query hasil checklist dengan filter periode
+                    $hasil = HasilChecklist::where('pertanyaan_id', $pertanyaan->id)
+                        ->whereYear('tanggal_audit', $tahun)
+                        ->whereMonth('tanggal_audit', $bulan)
+                        ->first();
+                    // Jika tidak ada hasil untuk periode ini, set default false/empty
                     $hasilChecklist[$pertanyaan->id] = [
                         'min' => $hasil ? (bool) $hasil->min : false,
                         'maj' => $hasil ? (bool) $hasil->maj : false,

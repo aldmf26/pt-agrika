@@ -14,4 +14,11 @@ class HasilChecklist extends Model
     {
         return $this->belongsTo(Pertanyaan::class);
     }
+
+    public function hasilChecklistByPeriode($bulan, $tahun)
+    {
+        return $this->hasMany(HasilChecklist::class, 'pertanyaan_id')
+            ->whereYear('tanggal_audit', $tahun)
+            ->whereMonth('tanggal_audit', $bulan);
+    }
 }

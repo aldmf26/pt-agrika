@@ -19,7 +19,7 @@ class AuditWizard extends Component
     use WithAlert;
 
     #[Url]
-    public $id, $bulan, $tahun, $departemen;
+    public $id, $bulan, $tahun, $departemen, $departemenAsli;
 
     public $headings, $namaBulan, $tanggalValue;
     public $hasilChecklist = [];
@@ -34,22 +34,43 @@ class AuditWizard extends Component
 
     public function mount()
     {
+        $this->departemenAsli = $this->departemen;
+
         $this->namaBulan = DB::table('bulan')->where('bulan', $this->bulan)->first()->nm_bulan;
         $this->tanggalValue = ProgramAuditInternal::find($this->id)->created_at->format('d');
         $headings = Heading::groupBy('departemen')->pluck('departemen')->toArray();
+
+        $ifDepartemen = array(
+            'gudang bahan baku - ppc' => 'bk',
+            'production cabut' => 'cabut',
+            'production cetak' => 'cetak',
+            'production steam & packing' => 'steam',
+            'qc, lab / fstl' => 'qa/qc',
+            'purchasing' => 'purchasing',
+            'it' => 'it',
+            'ekspedisi & eksport' => 'ekspedisi',
+            'hrga' => 'hrga',
+        );
+        $this->departemen = $ifDepartemen[strtolower($this->departemen)] ?? $this->departemen;
         if (!in_array($this->departemen, $headings)) {
             $this->alert('error', 'Departemen tidak cocok', route('ia.1.index'));
             return;
         }
 
-        $this->headings = Heading::with('subHeadings.pertanyaan.hasilChecklist')
+        $this->headings = Heading::with('subHeadings.pertanyaan')
             ->where('departemen', $this->departemen)
             ->get();
 
+        // Load hasil checklist dengan filter berdasarkan bulan dan tahun
         foreach ($this->headings as $heading) {
             foreach ($heading->subHeadings as $sub) {
                 foreach ($sub->pertanyaan as $pertanyaan) {
-                    $hasil = $pertanyaan->hasilChecklist->first();
+                    // Query hasil checklist dengan filter periode
+                    $hasil = HasilChecklist::where('pertanyaan_id', $pertanyaan->id)
+                        ->whereYear('tanggal_audit', $this->tahun)
+                        ->whereMonth('tanggal_audit', $this->bulan)
+                        ->first();
+                    // Jika tidak ada hasil untuk periode ini, set default false/empty
                     $this->hasilChecklist[$pertanyaan->id] = [
                         'min' => $hasil ? (bool) $hasil->min : false,
                         'maj' => $hasil ? (bool) $hasil->maj : false,
@@ -79,8 +100,18 @@ class AuditWizard extends Component
         // Parse key, contoh: "1.min" atau "1.keterangan"
         [$pertanyaanId, $field] = explode('.', $key);
 
-        // Ambil atau buat record hasil checklist
-        $hasil = HasilChecklist::firstOrNew(['pertanyaan_id' => $pertanyaanId]);
+        // Cari hasil checklist untuk periode ini (bulan & tahun)
+        $hasil = HasilChecklist::where('pertanyaan_id', $pertanyaanId)
+            ->whereYear('tanggal_audit', $this->tahun)
+            ->whereMonth('tanggal_audit', $this->bulan)
+            ->first();
+
+        // Jika tidak ada, buat baru
+        if (!$hasil) {
+            $hasil = new HasilChecklist();
+            $hasil->pertanyaan_id = $pertanyaanId;
+            $hasil->tanggal_audit = $tgl;
+        }
 
         // Update nilai berdasarkan field
         if ($field === 'keterangan') {
@@ -94,8 +125,8 @@ class AuditWizard extends Component
             $hasil->ok = $field === 'ok' ? $value : ($hasil->ok ?? false);
         }
 
-        // Set tanggal audit
-        $hasil->tanggal_audit = now();
+        // Update tanggal audit sesuai dengan periode saat ini
+        $hasil->tanggal_audit = $tgl;
 
         // Simpan ke database
         $hasil->save();

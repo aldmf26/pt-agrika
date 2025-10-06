@@ -14,7 +14,7 @@ class IA4LaporanAuditInternalController extends Controller
         $datas = LaporanAuditInternal::get();
         $data = [
             'title' => 'Summary Logsheet Finding Audit Internal',
-            'datas' => $datas
+            'datas' => $datas,
         ];
 
         return view('ia.ia4_laporan_audit_internal.index', $data);
