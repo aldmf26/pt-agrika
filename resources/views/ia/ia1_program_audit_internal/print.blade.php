@@ -13,7 +13,7 @@
             @endfor {{ $tahun }}</h6>
     </div>
 
-    <table class="mt-2 table table-bordered table-xs border-dark table-striped">
+    <table class="mt-2 table table-bordered table-xs table-sm border-dark">
         <thead>
             <tr>
                 <th class="text-center">No</th>
