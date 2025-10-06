@@ -21,13 +21,13 @@
                 </tr>
                 <tr>
                     <td class="text-center">3.</td>
-                    <td>Nama produk</td>
+                    <td>Nama Produk</td>
                     <td>:</td>
                     <td>{{ ucfirst(strtolower($datas->rwb->grade->nama)) }}</td>
                 </tr>
                 <tr>
                     <td class="text-center">4.</td>
-                    <td>Kode produksi</td>
+                    <td>Kode Produksi</td>
                     <td>:</td>
                     <td>{{ $datas->kode_produksi }}</td>
                 </tr>
@@ -59,7 +59,7 @@
                 </tr>
             </table>
         </div>
-        <span class="text-end">Tanggal : {{ tanggal($datas->created_at) }} </span>
+        <span class="text-end table-xs">Tanggal : {{ tanggal($datas->created_at) }} </span>
     </div>
     <div class="row">
         <div class="col-6"></div>
