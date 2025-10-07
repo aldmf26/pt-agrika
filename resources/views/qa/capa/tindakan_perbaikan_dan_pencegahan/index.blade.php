@@ -66,7 +66,8 @@
                             target="_blank">
                             <i class="fas fa-download"></i> Download
                         </a>
-                        <a href="{{ route('qa.capa.1.destroy', $d->id) }}" class="btn btn-sm btn-danger delete-btn">
+                        <a onclick="return confirm('Yakin ingin menghapus data ini?')"
+                            href="{{ route('qa.capa.1.destroy', $d->id) }}" class="btn btn-sm btn-danger delete-btn">
                             <i class="fas fa-trash"></i> Hapus
                         </a>
                     </td>
@@ -98,9 +99,10 @@
                             if (response.success) {
                                 $('#uploadModal').modal('hide');
                                 $('#excelFile').val(''); // Reset input
-                                table.ajax.reload(null, false); // Reload tanpa reset paging
                                 alertToast('sukses',
                                     'Upload berhasil!'); // Asumsi pakai AlertToast 'sukses',notif
+                                window.location.reload();
+
                             } else {
                                 alertToast('error', 'Upload gagal: ' + (response.message ||
                                     'Coba lagi.'));
@@ -119,30 +121,10 @@
                             submitBtn.prop('disabled', false).text('Upload');
                         }
                     });
+
                 });
 
-                // Handle Delete
-                $(document).on('click', '.delete-btn', function() {
-                    if (confirm('Yakin mau hapus file ini?')) {
-                        let id = $(this).data('id');
-                        $.ajax({
-                            url: "{{ route('qa.capa.1.destroy', ':id') }}".replace(':id', id),
-                            type: 'DELETE',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            success: function(response) {
-                                if (response.success) {
-                                    table.ajax.reload(null, false);
-                                    alertToast('sukses', 'File dihapus!');
-                                }
-                            },
-                            error: function() {
-                                alertToast('error', 'Gagal hapus file.');
-                            }
-                        });
-                    }
-                });
+
             });
         </script>
     @endsection

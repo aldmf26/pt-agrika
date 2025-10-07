@@ -58,8 +58,8 @@ class TindakanPerbaikanDanPencegahanController extends Controller
         if ($file) {
             Storage::delete('public/excel/' . $file->nama_file);
             DB::table('excel_files')->where('id', $id)->delete();
-            return response()->json(['success' => true]);
+            return redirect()->back()->with('sukses', 'File sukses dihapus.');
         }
-        return response()->json(['success' => false, 'message' => 'File tidak ditemukan']);
+        return redirect()->back()->with('error', 'File tidak ditemukan.');
     }
 }
