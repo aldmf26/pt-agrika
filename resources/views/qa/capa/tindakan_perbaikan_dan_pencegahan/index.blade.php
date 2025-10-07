@@ -6,7 +6,19 @@
     </div>
 
     <!-- Modal Upload -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <form id="uploadForm" enctype="multipart/form-data">
+        <x-modal idModal="uploadModal" title="Upload File Excel" size="md">
+            @csrf
+            <div class="mb-3">
+                <label for="excelFile" class="form-label">Pilih File Excel (.xlsx atau .xls)</label>
+                <input type="file" class="form-control" id="excelFile" name="excel_file" accept=".xlsx,.xls"
+                    required>
+                <div class="form-text">Ukuran maksimal 10MB. Hanya file Excel yang valid.</div>
+            </div>
+
+        </x-modal>
+    </form>
+    {{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -30,7 +42,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Tabel Files -->
     <table id="example" class="table table-bordered table-striped">
@@ -39,62 +51,33 @@
                 <th>#</th>
                 <th>Nama File</th>
                 <th>Tanggal Upload</th>
-                <th>Aksi</th>
+                <th class="text-center">Aksi</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+            @foreach ($files as $d)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $d->nama_file }}</td>
+                    <td>{{ tanggal(\Carbon\Carbon::parse($d->created_at)->format('Y-m-d')) }} oleh {{ $d->admin }}
+                    </td>
+                    <td align="right">
+                        <a href="{{ route('qa.capa.1.download', $d->id) }}" class="btn btn-sm btn-success"
+                            target="_blank">
+                            <i class="fas fa-download"></i> Download
+                        </a>
+                        <a href="{{ route('qa.capa.1.destroy', $d->id) }}" class="btn btn-sm btn-danger delete-btn">
+                            <i class="fas fa-trash"></i> Hapus
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
     </table>
 
     @section('scripts')
         <script>
             $(document).ready(function() {
-                // Inisialisasi DataTable
-                let table = $('#example').DataTable({
-                    processing: true,
-                    serverSide: false,
-                    ajax: {
-                        url: '{{ route('qa.capa.1.index') }}',
-                        type: 'GET',
-                        dataSrc: '' // Asumsi response JSON array langsung
-                    },
-                    columns: [{
-                            data: null,
-                            render: function(data, type, row, meta) {
-                                return meta.row + meta.settings._iDisplayStart + 1;
-                            }
-                        },
-                        {
-                            data: 'nama_file'
-                        },
-                        {
-                            data: 'created_at',
-                            render: function(data) {
-                                return new Date(data).toLocaleDateString('id-ID');
-                            }
-                        },
-                        {
-                            data: null,
-                            orderable: false,
-                            searchable: false,
-                            render: function(data, type, row) {
-                                return `
-                                <div class="btn-group btn-group-sm">
-                                    <a href="{{ url('files/download') }}/${row.id}" class="btn btn-success" title="Download">
-                                        <i class="fas fa-download"></i>
-                                    </a>
-                                    <button class="btn btn-danger delete-btn" data-id="${row.id}" title="Hapus">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            `;
-                            }
-                        }
-                    ],
-                    language: {
-                        url: '//cdn.datatables.net/plug-ins/1.13.7/i18n/id.json' // Bahasa Indonesia
-                    }
-                });
-
                 // Handle Upload
                 $('#uploadForm').on('submit', function(e) {
                     e.preventDefault();
@@ -116,10 +99,11 @@
                                 $('#uploadModal').modal('hide');
                                 $('#excelFile').val(''); // Reset input
                                 table.ajax.reload(null, false); // Reload tanpa reset paging
-                                toastr.success(
-                                    'Upload berhasil!'); // Asumsi pakai Toastr untuk notif
+                                alertToast('sukses',
+                                    'Upload berhasil!'); // Asumsi pakai AlertToast 'sukses',notif
                             } else {
-                                toastr.error('Upload gagal: ' + (response.message || 'Coba lagi.'));
+                                alertToast('error', 'Upload gagal: ' + (response.message ||
+                                    'Coba lagi.'));
                             }
                         },
                         error: function(xhr) {
@@ -129,7 +113,7 @@
                             } else {
                                 msg += 'Server error.';
                             }
-                            toastr.error(msg);
+                            alertToast('error', msg);
                         },
                         complete: function() {
                             submitBtn.prop('disabled', false).text('Upload');
@@ -150,11 +134,11 @@
                             success: function(response) {
                                 if (response.success) {
                                     table.ajax.reload(null, false);
-                                    toastr.success('File dihapus!');
+                                    alertToast('sukses', 'File dihapus!');
                                 }
                             },
                             error: function() {
-                                toastr.error('Gagal hapus file.');
+                                alertToast('error', 'Gagal hapus file.');
                             }
                         });
                     }
