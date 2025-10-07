@@ -38,6 +38,7 @@ use App\Http\Controllers\PUR\Evaluasi\PUR1EvaluasiSupplierController;
 use App\Http\Controllers\PUR\Pembelian\PUR1PurchaseRequestController;
 use App\Http\Controllers\PUR\Pembelian\PUR2PurchaseOrderController;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR1DaftarSupplierController;
+use App\Http\Controllers\QA\CAPA\TindakanPerbaikanDanPencegahanController;
 use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA1PenangananProdukController;
 use App\Http\Controllers\QA\PenangananBarangTakSesuai\QA2BeritaAcaraPemusnahanProdukController;
 use App\Http\Controllers\QA\Recall\HasilAnalisaProsesRecallController;
@@ -464,6 +465,15 @@ Route::controller(PUR1EvaluasiSupplierController::class)
         Route::get('/print', 'print')->name('print');
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/update/{id}', 'update')->name('update');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
+    });
+
+Route::controller(TindakanPerbaikanDanPencegahanController::class)
+    ->prefix('qa/capa/tindakan-perbaikan-dan-pencegahan')
+    ->name('qa.capa.1.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
         Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
 

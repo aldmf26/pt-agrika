@@ -130,7 +130,11 @@
                     <td class="no-col">6.</td>
                     <td class="label-col">Status</td>
                     <td class="colon-col">:</td>
-                    <td class="value-col">Hold / Reject / Rework</td>
+                    <td class="value-col">
+                        {!! strtolower($datas->status) != 'hold' ? '<s>Hold</s>' : 'Hold' !!} /
+                        {!! strtolower($datas->status) != 'reject' ? '<s>Reject</s>' : 'Reject' !!} /
+                        {!! strtolower($datas->status) != 'rework' ? '<s>Rework</s>' : 'Rework' !!}
+                    </td>
                     {{-- <td class="value-col">{{ $datas->status }}</td> --}}
                 </tr>
 

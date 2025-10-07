@@ -4,7 +4,7 @@
             <tr>
                 <th>Departemen</th>
                 <th>:</th>
-                <th>{{ ucwords(strtolower($departemen)) }}</th>
+                <th>{{ $departemen }}</th>
             </tr>
             <tr>
                 <th>Waktu Audit Internal</th>
@@ -24,7 +24,7 @@
         </tbody>
     </table>
 
-    <table class="table table-bordered border-dark table-xs table-hover">
+    <table class="table table-bordered border-dark table-xs table-sm table-hover">
         <thead style="">
             <tr>
                 <th class="align-middle text-center">No</th>
@@ -41,13 +41,13 @@
             @foreach ($headings as $heading)
                 <tr>
                     <td></td>
-                    <td colspan="7" class="ms-1 h6">{{ $heading->nama }}</td>
+                    <td colspan="7" class="ms-1"><b>{{ $heading->nama }}</b></td>
                 </tr>
                 @foreach ($heading->subHeadings as $sub)
                     @if ($sub->nama)
                         <tr>
                             <td></td>
-                            <td colspan="7" class="bg-info text-white h6 ms-1">{{ $sub->nama }}</td>
+                            <td colspan="7" class="ms-1"><b>{{ $sub->nama }}</b></td>
                         </tr>
                     @endif
                     @foreach ($sub->pertanyaan as $pertanyaan)
@@ -84,7 +84,7 @@
         </tbody>
     </table>
 
-    <div class="mt-3">
+    <div class="mt-3 table-xs">
         Hasil penilaian digunakan untuk menentukan tingkat kelayakan sarana produksi pangan berdasarkan penyimpangan
         menggunakan standar sebagai berikut :
     </div>
