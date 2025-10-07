@@ -20,9 +20,7 @@
                         <th class="text-center dhead align-middle">Status</th>
                         <th class="text-center dhead align-middle">Tanggal Revisi Selanjutnya</th>
                         <th class="text-center dhead align-middle">Status</th>
-
                     </tr>
-
                 </thead>
                 <tbody>
                     @foreach ($daftar as $d)
@@ -36,8 +34,6 @@
                             <td></td>
                             <td></td>
                             <td></td>
-
-
                         </tr>
                     @endforeach
 

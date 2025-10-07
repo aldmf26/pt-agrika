@@ -13,14 +13,17 @@ class Hrga4CeklistFoothbath extends Controller
 
     public function index(Request $r)
     {
-        $datas = DB::select("SELECT month(a.tgl) as bulan,year(a.tgl) as tahun,b.lokasi,b.id as id_lokasi FROM foothbath_ceklis as a
-        left join lokasi as b on b.id = a.id_lokasi group BY month(a.tgl),b.lokasi");
+        $datas = DB::table('checklis_footbath')->leftJoin('lokasi', 'lokasi.id', '=', 'checklis_footbath.lokasi_id')
+            ->select('checklis_footbath.*', 'lokasi.lokasi')
+            ->get();
 
         $data = [
             'title' => 'Ceklis Foothbath',
             'datas' => $datas,
+            'bulan' => DB::table('bulan')->get(),
+            'lokasi' => DB::table('lokasi')->get(),
         ];
-        return view($this->view.'.index', $data);
+        return view($this->view . '.index', $data);
     }
 
     public function create()
@@ -28,49 +31,55 @@ class Hrga4CeklistFoothbath extends Controller
         $data = [
             'title' => 'Ceklis Foothbath'
         ];
-        return view($this->view.'.create', $data);
+        return view($this->view . '.create', $data);
     }
 
     public function print(Request $r)
     {
-        $datas = DB::table('foothbath_ceklis as a')
-            ->leftJoin('foothbath_template as b', 'b.id', '=', 'a.id_frekuensi')
-            ->where('a.id_lokasi', $r->id_lokasi)
-            ->whereMonth('a.tgl', $r->buloan)
-            ->groupBy('a.id_frekuensi')
-            ->selectRaw('a.id_frekuensi, b.frekuensi,b.item,a.tgl,a.paraf_petugas,a.verifikator, count(a.tgl) as ttl')
-            ->get();
+        $jumlah_hari = cal_days_in_month(CAL_GREGORIAN, $r->bulan, $r->tahun);
 
-        $foothbathTemplate = DB::table('foothbath_template as a')
-            ->selectRaw('a.id, a.item, a.frekuensi, 
-                (SELECT COUNT(*) FROM foothbath_ceklis as b 
-                    WHERE b.id_frekuensi = a.id AND b.status = 1) as ttl_status_1,
-                (SELECT COUNT(*) FROM foothbath_ceklis as b 
-                    WHERE b.id_frekuensi = a.id AND b.status = 2) as ttl_status_2')
-            ->get();
-        $adminSanitasi = DB::table('admin_sanitasi as a')
-            ->join('users as b', 'b.id', '=', 'a.id')
-            ->selectRaw('a.id, b.name, a.posisi')
-            ->get()
-            ->groupBy('posisi');
+        // buat array daftar hari
+        $hari = [];
+        for ($i = 1; $i <= $jumlah_hari; $i++) {
+            $hari[] = [
+                'tanggal' => $i,
+                'hari' => Carbon::create($r->tahun, $r->bulan, $i)->translatedFormat('l'), // Senin, Selasa, dst
+            ];
+        }
 
-
-        $daysInMonth = Carbon::create(2023, $r->bulan)->daysInMonth;
-        $area = DB::table('lokasi')->where('id', $r->id_lokasi)->first()->lokasi;
-        $nm_bulan = DB::table('bulan')->where('id_bulan', $r->bulan)->first()->nm_bulan;
         $data = [
             'title' => 'Footh Bath',
-            'dok' => 'FRM.HRGA.06.04, Rev.01',
-            'itemSanitasi' => $datas,
-            'daysInMonth' => $daysInMonth,
-            'id_lokasi' => $r->id_lokasi,
+            'dok' => 'Dok.No.: FRM.HRGA.06.03, Rev.01',
+            'nm_bulan' => Carbon::createFromFormat('m', $r->bulan)->format('F'),
+            'tahun' => $r->tahun,
             'bulan' => $r->bulan,
-            'area' => $area,
-            'nm_bulan' => $nm_bulan,
-            'foothbathTemplate' => $foothbathTemplate,
-            'adminSanitasi' => $adminSanitasi,
-            'tahun' => $r->tahun
+            'lokasi' => DB::table('lokasi')->where('id', $r->lokasi_id)->first(),
+            'hari' => $hari,
+            'sanitasi' => DB::table('checklis_footbath')
+                ->where('id', $r->id)
+                ->get(),
+
         ];
-        return view($this->view.'.print', $data);
+        return view($this->view . '.print', $data);
+    }
+
+    public function store(Request $r)
+    {
+
+        for ($i = 0; $i < count($r->item); $i++) {
+            DB::table('checklis_footbath')
+                ->where('bulan', $r->bulan[$i])
+                ->where('tahun', date('Y'))
+                ->where('lokasi_id', $r->lokasi_id[$i])
+                ->where('item', $r->item[$i])
+                ->delete();
+            DB::table('checklis_footbath')->insert([
+                'item' => $r->item[$i],
+                'lokasi_id' => $r->lokasi_id[$i],
+                'bulan' => $r->bulan[$i],
+                'tahun' => date('Y'),
+            ]);
+        }
+        return redirect()->route('hrga6.4.index')->with('success', 'Data Berhasil Disimpan');
     }
 }

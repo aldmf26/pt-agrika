@@ -1,98 +1,107 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    Bulan : {{ $nm_bulan }} <br>
-    Area : {{$area}}
-    <table style="font-size: 13px" class="table table-bordered text-center border-dark">
-        <thead class="bg-info text-white">
-            <tr>
-                <th style="background-color: #D9D9D9; color:black;">Item Pembersihan</th>
-                @for ($i = 1; $i <= $daysInMonth; $i++)
-                    <th style="background-color: #D9D9D9; color:black;">{{ $i }}</th>
-                @endfor
-            </tr>
-
-        </thead>
-        <tbody>
-            @foreach ($itemSanitasi as $d)
+    <div class="row">
+        <div class="col-4">
+            <table width="100%" style="font-size: 11px">
                 <tr>
-                    <td>{{ $d->nama_item }}</td>
-                    @for ($i = 1; $i <= $daysInMonth; $i++)
-                        @php
-                            $firstSanitasi = DB::table('sanitasi')
-                                ->where('id_lokasi', $id_lokasi)
-                                ->where('id_item', $d->id_item)
-                                ->whereDay('tgl', $i)
-                                ->first();
-                            $cekSama = empty($firstSanitasi) ? false : true;
-                        @endphp
-                        <td class="pointer">
-                            @if ($cekSama)
-                                V
-                            @endif
-                        </td>
-                    @endfor
+                    <td>Bulan</td>
+                    <td>: {{ $nm_bulan }} {{ $tahun }}</td>
                 </tr>
-            @endforeach
-
-            {{-- ini tambah item pemberrsihan --}}
-                <tr rowspan="2">
-                    <td></td>
+                <tr>
+                    <td>Area</td>
+                    <td>: {{ ucwords($lokasi->lokasi) }}</td>
                 </tr>
-            <tr>    
-                <td>Paraf Petugas</td>
-                @for ($i = 1; $i <= $daysInMonth; $i++)
-                    @php
-                        $cekSamaPetugas = DB::table('sanitasi')
-                            ->where('id_lokasi', $id_lokasi)
-                            ->whereMonth('paraf_petugas', $bulan)
-                            ->whereDay('paraf_petugas', $i)
-                            ->whereNotNull('paraf_petugas')
-                            ->exists();
-                    @endphp
-                    <td class="pointer">
-                        @if ($cekSamaPetugas)
-                            V
-                        @endif
-                    </td>
-                @endfor
-            </tr>
-            <tr>
-                <td>Verifikator</td>
-                @for ($i = 1; $i <= $daysInMonth; $i++)
-                    @php
-                        $cekSamaPetugas = DB::table('sanitasi')
-                            ->where('id_lokasi', $id_lokasi)
-                            ->whereMonth('verifikator', $bulan)
-                            ->whereDay('verifikator', $i)
-                            ->whereNotNull('verifikator')
-                            ->exists();
-                    @endphp
-                    <td class="pointer">
-                        @if ($cekSamaPetugas)
-                            V
-                        @endif
-                        {{-- <input @checked($cekSamaPetugas) class="form-check-input" type="checkbox" /> --}}
-                    </td>
-                @endfor
-            </tr>
 
-        </tbody>
-    </table>
+            </table>
+        </div>
+        <div class="col-12">
+            <table style="font-size: 11px" width="100%" class="table table-bordered text-center border-dark">
+                <thead>
+
+                    <tr>
+                        <th class="dhead text-center">Item Pembersihan</th>
+                        @foreach ($hari as $h)
+                            <th class="dhead text-center">{{ $h['tanggal'] }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach ($sanitasi as $s)
+                        <tr>
+                            <td>{{ ucfirst($s->item) }}</td>
+                            @foreach ($hari as $h)
+                                <td>
+                                    @php
+                                        $tgl =
+                                            $tahun .
+                                            '-' .
+                                            str_pad($bulan, 2, '0', STR_PAD_LEFT) .
+                                            '-' .
+                                            str_pad($h['tanggal'], 2, '0', STR_PAD_LEFT);
+                                    @endphp
+                                    @if ($tgl <= date('Y-m-d'))
+                                        ✓
+                                    @else
+                                    @endif
+                                </td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td colspan="100" style="height: 5px"></td>
+                    </tr>
+                    <tr>
+                        <td>Paraf Petugas</td>
+                        @foreach ($hari as $h)
+                            <td></td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>Verifikator</td>
+                        @foreach ($hari as $h)
+                            <td></td>
+                        @endforeach
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
 
     <div class="row">
         <div class="col-lg-4">
         </div>
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <table style="border: 1px solid black; border-collapse: collapse; width: 100%; margin-top: 10px;">
-                <tr>
-                    <td style="border: 1px solid black; text-align: center;">Diperiksa Oleh:</td>
-                    <td style="border: 1px solid black; text-align: center;">Diketahui Oleh:</td>
-                </tr>
-                <tr>
-                    <td style="border: 1px solid black; text-align: center; height: 80px; vertical-align: bottom;">[SPV.
-                        GA-IR]</td>
-                    <td style="border: 1px solid black; text-align: center; vertical-align: bottom;">[KA.HRGA]</td>
-                </tr>
+            <table class="table table-bordered border-dark" style="font-size: 11px">
+                <thead>
+                    <tr>
+                        <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
+
+                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                &
+                                Nama)</span></td>
+
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                &
+                                Nama)</span></td>
+                    </tr>
+                    <tr>
+                        <td class="text-center">(STAFF HRGA)</td>
+                        <td class="text-center">(KA. HRGA)</td>
+
+                    </tr>
+                </tbody>
             </table>
         </div>
     </div>
