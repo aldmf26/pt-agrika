@@ -174,13 +174,14 @@ Route::controller(Hrga2CeklistSanitasi::class)
     });
 
 Route::controller(Hrga4CeklistFoothbath::class)
-    ->prefix('hrga/6/4-ceklist-foothbath')
+    ->prefix('hrga/6/3-ceklist-foothbath')
     ->name('hrga6.4.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create/', 'create')->name('create');
         Route::get('/add/', 'add')->name('add');
         Route::get('/print', 'print')->name('print');
+        Route::post('/store', 'store')->name('store');
     });
 
 Route::controller(Hrga1SchedulePembuanganSampah::class)

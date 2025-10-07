@@ -4,7 +4,7 @@
             <table width="100%" style="font-size: 11px">
                 <tr>
                     <td>Bulan</td>
-                    <td>: {{ $nm_bulan }} </td>
+                    <td>: {{ $nm_bulan }} {{ $tahun }}</td>
                 </tr>
                 <tr>
                     <td>Area</td>
