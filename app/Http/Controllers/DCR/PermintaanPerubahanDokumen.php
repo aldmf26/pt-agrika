@@ -11,7 +11,7 @@ class PermintaanPerubahanDokumen extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Permintaan Pembuatan & Perubahan Dokumen',
+            'title' => 'Permintaan Pembuatan dan Perubahan Dokumen',
             'daftar' => DB::table('daftar_induk_dokumen_internal')->orderBy('no_dokumen', 'asc')->get(),
             'dokumen' => DB::table('perubahan_dokumen as pd')
                 ->leftJoin('daftar_induk_dokumen_internal as did', 'pd.dokumen_id', '=', 'did.id')
