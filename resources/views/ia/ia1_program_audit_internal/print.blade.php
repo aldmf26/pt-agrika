@@ -8,18 +8,15 @@
 <x-hccp-print :title="$title" :dok="$dok">
     <div class="table-xs mt-5 d-flex justify-content-between" style="font-weight: bold;">
         <span>Standar: GMP & HACCP</span>
-        <span>Tahun: @for ($i = 0; $i < 5; $i++)
-                &nbsp;
-            @endfor {{ $tahun }}</h6>
     </div>
 
     <table class="mt-2 table table-bordered table-xs table-sm border-dark">
         <thead>
             <tr>
-                <th class="text-center">No</th>
-                <th class="text-center">Departemen</th>
-                <th class="text-center">Auditee</th>
-                <th class="text-center">Auditor</th>
+                <th rowspan="2" class="text-center align-middle">No</th>
+                <th rowspan="2" class="text-center align-middle">Departemen</th>
+                <th rowspan="2" class="text-center align-middle">Auditee</th>
+                <th rowspan="2" class="text-center align-middle">Auditor</th>
                 <th colspan="13" class="text-center">Tahun {{ $tahun }}</th>
             </tr>
             {{-- <tr>
@@ -29,7 +26,6 @@
                 @endfor
             </tr> --}}
             <tr>
-                <th colspan="4"></th>
 
                 @foreach ($bulan as $b)
                     @php
@@ -77,26 +73,24 @@
             <br>
             <span>- Standar HACCP dilakukan audit tahunan</span>
         </div>
-        <div class="col-3"></div>
         <div class="col-2"></div>
         <div class="col-3">
-            <table class="table table-bordered border-dark" style="font-size: 11px">
-                <thead>
-                    <tr>
-                        <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                        {{-- <th class="text-center" width="33.33%">Diketahui Oleh:</th> --}}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="height: 80px"></td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">(LEAD AUDITOR)</td>
-                        {{-- <td class="text-center">[FSTL]</td> --}}
-                    </tr>
-                </tbody>
+        </div>
+        <div class="col-3">
+            <table class="table table-bordered border-dark" style="font-size: 12px">
+                <tr>
+
+                    <th class="text-center" width="33.33%">Dibuat Oleh:</th>
+
+                </tr>
+                <tr>
+                    <td style="height: 70px" class="align-middle text-center">
+                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                    </td>
+                </tr>
+                <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
+                        Diisi Oleh User</span>
+                </td>
             </table>
         </div>
-    </div>
 </x-hccp-print>

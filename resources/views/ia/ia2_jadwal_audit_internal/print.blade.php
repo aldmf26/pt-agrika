@@ -1,5 +1,5 @@
 <x-hccp-print :title="$title" :dok="$dok">
-    <table class="table-sm">
+    <table class="table-sm table-xs">
         <tr>
             <td>Hari</td>
             <td>:</td>
@@ -12,7 +12,7 @@
         </tr>
     </table>
 
-    <table class="mt-3 table table-xs border-dark table-bordered">
+    <table class="mt-3 table table-xs table-sm border-dark table-bordered">
         <thead style="background-color: #C0C0C0; text-align: center">
             <tr>
                 <th class="text-center">Waktu</th>
@@ -55,8 +55,7 @@
                     <tr>
 
 
-                        <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
-                                Diisi Oleh User</span>
+                        <td class="text-center">(LEAD AUDITOR) </span>
                         </td>
                     </tr>
                 </tbody>

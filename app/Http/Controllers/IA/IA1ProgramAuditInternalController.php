@@ -26,7 +26,7 @@ class IA1ProgramAuditInternalController extends Controller
 
         $datas = [
             'title' => 'PROGRAM AUDIT INTERNAL',
-            'dok' => 'Dok.No.: FRM.AI.01.01, Rev.00',
+            'dok' => 'Dok.No.: FRM.IA.01.01, Rev.00',
             'tahun' => $r->tahun,
             'datas' => $datas,
             'bulan' => DB::table('bulan')->get(),
@@ -80,7 +80,7 @@ class IA1ProgramAuditInternalController extends Controller
             'dok' => 'FRM.IA.01.03, Rev.00',
             'tahun' => $tahun,
             'bulan' => $bulan,
-            'departemen' => $departemen,
+            'departemen' => $program->departemen,
             'program' => $program,
             'headings' => $headings,
             'hasilChecklist' => $hasilChecklist,
