@@ -74,9 +74,6 @@ class PermintaanPerubahanDokumen extends Controller
                 'detail' => $pengajuan,
             ]);
         }
-
-
-
         return redirect()->back()->with('success', 'Permintaan perubahan dokumen berhasil dikirim');
     }
 }
