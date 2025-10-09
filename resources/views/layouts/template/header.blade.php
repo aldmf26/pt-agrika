@@ -52,7 +52,7 @@
                             width: 100%;
                             text-align: left;
                             cursor: pointer;
-                            font-size: 12px;
+                            font-size: 14px;
                         }
 
                         .dropdownAldi li a:hover,
@@ -112,7 +112,7 @@
                             <span><i class="{{ $menu->icon }}"></i> {{ $menu->title }}</span>
                         </a>
 
-                        <div class="submenu" style="font-size: 13px">
+                        <div class="submenu" style="font-size: 11px">
                             <div class="submenu-group-wrapper">
                                 <ul class="submenu-group">
                                     @foreach ($menu->children as $submenu)
