@@ -52,7 +52,7 @@
                             width: 100%;
                             text-align: left;
                             cursor: pointer;
-                            font-size: 14px;
+                            font-size: 12px;
                         }
 
                         .dropdownAldi li a:hover,
