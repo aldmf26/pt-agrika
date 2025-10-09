@@ -112,7 +112,7 @@
                             <span><i class="{{ $menu->icon }}"></i> {{ $menu->title }}</span>
                         </a>
 
-                        <div class="submenu" style="font-size: 8px">
+                        <div class="submenu" style="font-size: 12px">
                             <div class="submenu-group-wrapper">
                                 <ul class="submenu-group">
                                     @foreach ($menu->children as $submenu)
