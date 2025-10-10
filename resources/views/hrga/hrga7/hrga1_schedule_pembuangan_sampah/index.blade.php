@@ -1,5 +1,5 @@
 <x-app-layout :title="$title" :kategori="$kategori">
-    <ul class="nav nav-pills float-start">
+    {{-- <ul class="nav nav-pills float-start">
 
         <li class="nav-item">
             <a class="nav-link  {{ $kategori == 'terjadwal' ? 'active' : '' }}" aria-current="page"
@@ -12,7 +12,7 @@
 
         </li>
 
-    </ul>
+    </ul> --}}
     <a href="{{ route('hrga7.1.create', ['kategori' => $kategori]) }}" class="btn btn-sm btn-primary float-end"><i
             class="fas fa-plus"></i>
         Add</a>
