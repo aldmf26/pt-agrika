@@ -20,8 +20,6 @@
         <br>
         <br>
         <br>
-
-
         <table id="example" class="table table-bordered">
             <thead>
                 <tr>
