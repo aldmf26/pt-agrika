@@ -7,12 +7,7 @@
     'disabled' => false,
 ])
 
-<style>
-    .modal-scrollable .modal-body {
-        max-height: 80vh;
-        overflow-y: auto;
-    }
-</style>
+
 
 <div x-data="{
     isDisabled: false,
