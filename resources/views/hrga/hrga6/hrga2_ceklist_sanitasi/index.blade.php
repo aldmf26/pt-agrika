@@ -22,7 +22,7 @@
                         @foreach ($datas as $d)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $d->lokasi }}</td>
+                                <td>{{ $d->lokasi }} ({{ $d->lantai }})</td>
                                 <td>{{ $d->bulan }}</td>
                                 <td>{{ $d->tahun }}</td>
 
