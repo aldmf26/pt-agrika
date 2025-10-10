@@ -7,12 +7,17 @@
     'disabled' => false,
 ])
 
-
+<style>
+    .modal-scrollable .modal-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+</style>
 
 <div x-data="{
     isDisabled: false,
 }" {{ $attributes->merge(['id' => $idModal]) }}
-    @if ($disabled) data-bs-backdrop="false" @endif class="modal tambah" role="dialog"
+    @if ($disabled) data-bs-backdrop="false" @endif class="modal tambah modal-scrollable" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog   {{ $size }}" role="document">
         <div class="modal-content">
