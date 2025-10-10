@@ -14,8 +14,7 @@
 
     </ul> --}}
     <a href="{{ route('hrga7.1.create', ['kategori' => $kategori]) }}" class="btn btn-sm btn-primary float-end"><i
-            class="fas fa-plus"></i>
-        Add</a>
+            class="fas fa-plus"></i> Add</a>
     <div>
         <br>
         <br>
