@@ -64,7 +64,8 @@
                     <select name="id_lokasi" class="form-control select2">
                         <option value="">--Pilih Lokasi--</option>
                         @foreach ($lokasi as $l)
-                            <option value="{{ $l->id }}">{{ $l->lokasi }} ({{ $l->lantai }})</option>
+                            <option value="{{ $l->id }}">{{ ucwords($l->lokasi) }} ({{ $l->lantai }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
