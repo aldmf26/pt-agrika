@@ -48,7 +48,7 @@
 
     <form action="{{ route('hrga6.2.store') }}" method="post">
         @csrf
-        <x-modal idModal="tambah" title="Ceklist Sanitasi" size="modal-lg" btnSave="Y">
+        <x-modal idModal="tambah" title="Ceklist Sanitasi" size="modal-lg" btnSave="Y" class="modal-scrollable">
             <div class="row">
                 <div class="col-lg-6">
                     <label for="">Bulan</label>

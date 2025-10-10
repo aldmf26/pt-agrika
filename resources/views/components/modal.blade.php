@@ -7,6 +7,13 @@
     'disabled' => false,
 ])
 
+<style>
+    .modal-scrollable .modal-body {
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+</style>
+
 <div x-data="{
     isDisabled: false,
 }" {{ $attributes->merge(['id' => $idModal]) }}
@@ -35,8 +42,7 @@
                     </button>
                 @endif
                 @if ($btnSave == 'Y')
-                    <button type="submit"
-                        class="float-end btn btn-primary sbutton-save-modal">Save</button>
+                    <button type="submit" class="float-end btn btn-primary sbutton-save-modal">Save</button>
                     <button class="float-end btn btn-primary sbutton-save-modal-loading" type="button" disabled hidden>
                         <span class="spinner-border spinner-border-sm " role="status" aria-hidden="true"></span>
                         Loading...
