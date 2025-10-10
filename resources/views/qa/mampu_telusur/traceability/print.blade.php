@@ -92,71 +92,70 @@
                         style="font-size: 10px; width: max-content; margin:0; border-collapse:collapse;">
                         <thead>
                             <tr>
-                                <th class="text-center align-middle text-nowrap">NO URUT</th>
-                                <th class="text-center align-middle text-nowrap">TGL PANEN</th>
-                                <th class="text-center align-middle text-nowrap">TGL <br> DATANG</th>
-                                <th class="text-center align-middle text-nowrap">NO. REG. <br> RUMAH <br> WALET
+                                <th class="text-center align-middle text-nowrap">No Urut</th>
+                                <th class="text-center align-middle text-nowrap">Tgl Panen</th>
+                                <th class="text-center align-middle text-nowrap">Tgl <br> Datang</th>
+                                <th class="text-center align-middle text-nowrap">No. Reg. <br> Rumah <br> Walet
                                 </th>
-                                <th class="text-center align-middle text-nowrap">NAMA <br> RUMAH <br> WALET</th>
-                                <th class="text-center align-middle text-nowrap">BATCH MATERIAL</th>
-                                <th class="text-center align-middle text-nowrap">BERAT <br> KOTOR <br> RAW (KG)
+                                <th class="text-center align-middle text-nowrap">Nama <br> Rumah <br> Walet</th>
+                                <th class="text-center align-middle text-nowrap">Batch Material</th>
+                                <th class="text-center align-middle text-nowrap">Berat <br> Kotor <br> Raw (Kg)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">BERAT <br> AKHIR <br> GRADING
-                                    <br> RAW
-                                    (KG)
+                                <th class="text-center align-middle text-nowrap">Berat <br> Akhir <br> Grading
+                                    <br> Raw
+                                    (Kg)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">SUSUT <br> SORTIR (KG)</th>
-                                <th class="text-center align-middle text-nowrap">BERAT SAAT <br> PEMBAGIAN <br>
-                                    (Gram)
+                                <th class="text-center align-middle text-nowrap">Susut <br> Sortir (Kg)</th>
+                                <th class="text-center align-middle text-nowrap">Berat Saat <br> Pembagian <br>
+                                    (Gr)
                                 </th>
                                 {{-- cabut --}}
-                                <th class="text-center align-middle text-nowrap">TGL PRODUKSI <br> (PENCABUTAN)
+                                <th class="text-center align-middle text-nowrap">Tgl Produksi <br> (Pencabutan)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">JML KEPING AWAL <br> (pcs &
-                                    gram)</th>
-                                <th class="text-center align-middle text-nowrap">BERAT HASIL <br> CABUT & DRYING
+                                <th class="text-center align-middle text-nowrap">Jml Keping Awal <br> (Pcs &
+                                    Gr)</th>
+                                <th class="text-center align-middle text-nowrap">Berat Hasil <br> Cabut & Drying
                                     <br>
-                                    (pcs / gram)
+                                    (Pcs / Gr)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI DRYING
+                                <th class="text-center align-middle text-nowrap">Tanggal <br> Selesai Drying
                                 </th>
                                 {{-- cetak --}}
-                                <th class="text-center align-middle text-nowrap">TANGGAL <br> SELESAI CETAK</th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING CETAK <br> (pcs &
-                                    gram)
+                                <th class="text-center align-middle text-nowrap">Tanggal <br> Selesai Cetak</th>
+                                <th class="text-center align-middle text-nowrap">Jumlah Keping Cetak <br> (Pcs &
+                                    Gr)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">BERAT HASIL CETAK <br> (pcs &
-                                    gram)
+                                <th class="text-center align-middle text-nowrap">Berat Hasil Cetak <br> (Pcs &
+                                    Gr)
                                 </th>
                                 {{-- grading --}}
-                                <th class="text-center align-middle text-nowrap">TGL FINAL <br> GRADING AKHIR
+                                <th class="text-center align-middle text-nowrap">Tgl Final <br> Grading Akhir
                                 </th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> GRADING
-                                    AKHIR</th>
-                                <th class="text-center align-middle text-nowrap">BERAT AKHIR <br> GRADING <br>
-                                    AKHIR
-                                    (KERING)
+                                <th class="text-center align-middle text-nowrap">Jumlah Keping <br> Grading
+                                    Akhir</th>
+                                <th class="text-center align-middle text-nowrap">Berat Akhir <br> Grading <br>
+                                    Akhir (Kering)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">TANGGAL <br> STEAM</th>
-                                <th class="text-center align-middle text-nowrap">JML KEPING <br> AKHIR (pcsm)
+                                <th class="text-center align-middle text-nowrap">Tanggal <br> Steam</th>
+                                <th class="text-center align-middle text-nowrap">Jml Keping <br> Akhir (Pcs)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">JML BERAT AKHIR <br> (gram)
+                                <th class="text-center align-middle text-nowrap">Jml Berat Akhir <br> (Gr)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">PRESENTASE <br> YIELD (%)</th>
-                                <th class="text-center align-middle text-nowrap">JUMLAH KEPING <br> YANG
-                                    DITERIMA <br>
-                                    GUDANG
+                                <th class="text-center align-middle text-nowrap">Presentase <br> Yield (%)</th>
+                                <th class="text-center align-middle text-nowrap">Jumlah Keping <br> Yang
+                                    Diterima <br>
+                                    Gudang
                                 </th>
                                 {{-- <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
                                 </th> --}}
-                                <th class="text-center align-middle text-nowrap">BERAT MASUK <br> GUDANG <br>
-                                    PRODUK
-                                    JADI
+                                <th class="text-center align-middle text-nowrap">Berat Masuk <br> Gudang <br>
+                                    Produk
+                                    Jadi
                                 </th>
-                                <th class="text-center align-middle text-nowrap" style="border-right: none">TANGGAL
-                                    MASUK <br> GUDANG
-                                    PRODUK <br>
-                                    JADI
+                                <th class="text-center align-middle text-nowrap" style="border-right: none">Tanggal
+                                    Masuk <br> Gudang
+                                    Produk <br>
+                                    Jadi
                                 </th>
                                 {{-- <th class="text-center align-middle text-nowrap">JUMLAH <br> KEPING <br> TERKIRIM
                                 </th>
@@ -180,16 +179,16 @@
                                 @endphp
                                 <tr>
                                     @if ($loop->first == 1)
-                                        <td class="text-center">1</td>
-                                        <td>{{ tanggal($b['tgl_panen']) }}</td>
+                                        <td class="text-end">1</td>
+                                        <td class="text-end">{{ tanggal($b['tgl_panen']) }}</td>
                                         @php
                                             $tgl = date('Y-m-d', strtotime($b['tgl_panen'] . ' + 1 days'));
                                             $rumah_walet = DB::table('rumah_walet')->where('id', $b['rwb_id'])->first();
                                         @endphp
-                                        <td>{{ tanggal($tgl) }}</td>
-                                        <td>{{ $rumah_walet->no_reg }}</td>
+                                        <td class="text-end">{{ empty($tgl) ? '-' : tanggal($tgl) }}</td>
+                                        <td class="text-end">{{ $rumah_walet->no_reg }}</td>
                                         <td>{{ $rumah_walet->nama }}</td>
-                                        <td>{{ $b['no_invoice'] }}</td>
+                                        <td class="text-end">{{ $b['no_invoice'] }}</td>
                                         <td class="text-end">{{ number_format($b['gr_kotor'], 0) }}</td>
                                         <td class="text-end">{{ number_format($b['berat_bersih'], 0) }}</td>
                                         <td class="text-end">
@@ -210,64 +209,64 @@
                                         {{ number_format($b['gr_awal'], 0) }}
                                     </td>
                                     <td>{{ tanggal($b['tgl_terima'] ?? '-') }}</td>
-                                    <td class="text-center">{{ number_format($b['pcs_awal'], 0) }} /
+                                    <td class="text-end">{{ number_format($b['pcs_awal'], 0) }} /
                                         {{ number_format($b['gr_awal'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir'], 0) }}
                                         /
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah'] ?? '-') }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_awal_ctk'] == 0 ? '-' : tanggal($b['tgl_selesai_ctk']) }}
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ number_format($b['pcs_awal_ctk'], 0) }} /
                                         {{ number_format($b['gr_awal_ctk'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
 
                                         {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir_ctk'], 0) }}
                                         /
                                         {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir_ctk'], 0) }}
                                     </td>
                                     {{-- grading --}}
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format(($b['gr_grading'] / $b['gr_awal']) * 100, 0) }}%
                                     </td>
                                     {{-- dsa --}}
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
                                     </td>
                                     @php
                                         $tgl = date('Y-m-d', strtotime($b['tgl_grading'] . ' + 1 days'));
                                     @endphp
-                                    <td class="text-center">
+                                    <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($tgl) }}
                                     </td>
                                     {{-- <td></td>
@@ -310,27 +309,27 @@
                         <thead>
                             <tr>
                                 <th class="text-center align-middle text-nowrap" style="border-left: 1px solid #dee2e6">
-                                    JUMLAH
+                                    Jumlah
                                     <br>
-                                    KEPING <br>
-                                    TERKIRIM
+                                    Keping <br>
+                                    Terkirim
                                 </th>
-                                <th class="text-center align-middle text-nowrap">PRODUK <br> TERKIRIM <br>
-                                    (Gram)
+                                <th class="text-center align-middle text-nowrap">Produk <br> Terkirim <br>
+                                    (Gr)
                                 </th>
-                                <th class="text-center align-middle text-nowrap">TGL <br> PENGIRIMAN</th>
-                                <th class="text-center align-middle text-nowrap">TUJUAN</th>
+                                <th class="text-center align-middle text-nowrap">Tanggal <br> Pengiriman</th>
+                                <th class="text-center align-middle text-nowrap">Tujuan</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($kirim as $k)
                                 <tr>
-                                    <td class="text-center" style="border-left: 1px solid #dee2e6">
+                                    <td class="text-end" style="border-left: 1px solid #dee2e6">
                                         {{ number_format($k['pcs'], 0) }}</td>
-                                    <td class="text-center">{{ number_format($k['gr'], 0) }}</td>
-                                    <td class="text-center">
+                                    <td class="text-end">{{ number_format($k['gr'], 0) }}</td>
+                                    <td class="text-end">
                                         {{ empty($k['tgl_input']) ? '-' : tanggal($k['tgl_input']) }}</td>
-                                    <td class="text-center">{{ $k['tujuan'] }}</td>
+                                    <td class="text-end">{{ $k['tujuan'] }}</td>
                                 </tr>
                             @endforeach
 
