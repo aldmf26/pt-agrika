@@ -16,7 +16,7 @@
                         <th>#</th>
                         <th>No Order</th>
                         <th>Tanggal Order</th>
-                        <th>Pelanggan</th>
+                        <th>Nama Customer</th>
                         <th class="text-end">Ttl Produk</th>
 
                         <th>Aksi</th>
