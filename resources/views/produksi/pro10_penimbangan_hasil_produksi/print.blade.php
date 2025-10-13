@@ -267,7 +267,7 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="5"></th>
+                            <th style="border: none; text-align: start" colspan="3"></th>
                             <th class="text-center" colspan="3">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
