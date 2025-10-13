@@ -87,7 +87,7 @@
                 <td></td>
                 <td style="font-size: 11px;border-bottom: 1px solid black" colspan="2">
 
-                    Alasan : Kadar air masih tinggi saat dipanen hingga muat pengiriman
+                    Alasan : Kadar air masih tinggi saat dipanen hingga muat pengiriman (visual)
 
                 </td>
 
