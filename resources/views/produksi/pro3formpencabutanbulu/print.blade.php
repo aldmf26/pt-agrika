@@ -274,7 +274,7 @@
                                     @endif
                                 </td>
                                 <td class="text-start">
-                                    @if ($susut < 30)
+                                    @if ($susut < 31)
                                     @else
                                         Susut Melebihi Batas Standar
                                     @endif
