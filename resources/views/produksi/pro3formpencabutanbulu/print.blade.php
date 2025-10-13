@@ -276,7 +276,7 @@
                                 <td class="text-start">
                                     @if ($susut < 31)
                                     @else
-                                        Susut Melebihi Batas Standar
+                                        Susut Melebihi Batas Standar Karena Banyak Pasir
                                     @endif
                                 </td>
 
