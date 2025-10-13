@@ -37,7 +37,7 @@
                                 <div class="form-group">
                                     <label>Tanggal Expired</label>
                                     <input type="date" x-model="item.tgl_expired" name="tgl_expired[]"
-                                        class="form-control" required readonly>
+                                        class="form-control" required>
 
                                 </div>
                             </div>
@@ -50,7 +50,6 @@
                                             .kode + '-' + item.tgl_expired.split('-')[1] + '-' + item
                                             .tgl_expired.split('-')[0].slice(-2)"
                                         name="kode_lot[]" class="form-control" readonly>
-
                                 </div>
                             </div>
                             <div class="col-md-3"></div>

@@ -31,14 +31,13 @@
                                     <input type="date" @change="updateExpiredDate(index)"
                                         x-model="item.tgl_penerimaan" name="tgl_penerimaan[]" class="form-control"
                                         required>
-
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tanggal Expired</label>
                                     <input type="date" x-model="item.tgl_expired" name="tgl_expired[]"
-                                        class="form-control" required readonly>
+                                        class="form-control" required>
 
                                 </div>
                             </div>
