@@ -15,7 +15,6 @@
                     required>
                 <div class="form-text">Ukuran maksimal 10MB. Hanya file Excel yang valid.</div>
             </div>
-
         </x-modal>
     </form>
     {{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -91,7 +90,7 @@
                         type: 'POST',
                         data: formData,
                         processData: false,
-                        contentType: false,
+                        contentType: false, 
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
