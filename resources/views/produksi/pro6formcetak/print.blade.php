@@ -187,7 +187,8 @@
                                     class="fst-italic fw-lighter">Result qty</th>
                             <th rowspan="2" class="text-center align-middle">Hcr <br> <span
                                     class="fst-italic fw-lighter">(Gr)</th>
-                            <th rowspan="2" class="text-center align-middle">%Susut <br> (Min <br> susut 0- <br> 3%)
+                            <th rowspan="2" class="text-center align-middle">%Susut <br> (Range <br> susut 0- <br>
+                                3%)
                             </th>
                             <th rowspan="2" class="text-center align-middle">Ok / Not <br> ok </th>
                             <th rowspan="2" class="text-center align-middle">Keterangan <br> <span
