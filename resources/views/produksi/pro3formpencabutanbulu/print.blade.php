@@ -267,10 +267,10 @@
                                     @php
                                         $susut = (1 - $c['gr_akhir'] / $c['gr']) * 100;
                                     @endphp
-                                    @if ($susut < 30)
+                                    @if ($susut < 31)
                                         OK
                                     @else
-                                        Not Ok
+                                        NOT OK
                                     @endif
                                 </td>
                                 <td class="text-start">
