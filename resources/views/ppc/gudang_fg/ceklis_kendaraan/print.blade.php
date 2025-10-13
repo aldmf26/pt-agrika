@@ -140,7 +140,7 @@
 
 
             @foreach ($checklist as $c)
-                <td class="text-start align-middle" width="8%" colspan="2">HK / Garuda Kargo</td>
+                <td class="text-end align-middle" width="8%" colspan="2">HK / Garuda Kargo</td>
             @endforeach
 
             @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
