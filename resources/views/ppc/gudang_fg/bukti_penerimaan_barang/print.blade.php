@@ -175,7 +175,7 @@
                             <th class="text-center align-middle" rowspan="2">Tgl/Bln/Thn <br> Produksi <br>
                                 (Steaming) <br>
                                 Steaming Production <br> Date</th>
-                            <th class="text-center align-middle" rowspan="2">Status <br> Ok/Not Ok</th>
+                            <th class="text-center align-middle" rowspan="2">Status <br> OK/NOT OK</th>
 
                         </tr>
                         <tr class="table-bawah">
@@ -223,7 +223,7 @@
                                     {{ tanggal($tgl) }}
                                 </td>
                                 <td class="text-start align-middle">
-                                    Ok
+                                    OK
                                 </td>
 
                             </tr>
