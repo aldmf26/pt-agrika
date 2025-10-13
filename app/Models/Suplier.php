@@ -10,7 +10,7 @@ class Suplier extends Model
     protected $primaryKey = 'id';
     protected $guarded = [];
 
-  
+
 
     public function getKategoriAttribute($value)
     {
