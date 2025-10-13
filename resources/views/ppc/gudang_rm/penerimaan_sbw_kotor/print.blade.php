@@ -125,7 +125,7 @@
 
 
     @php
-        $kriterias = collect(['Warna', 'Kondisi (bulu berat & ringan, bebas jamur)', 'Grade', 'Kadar Air']);
+        $kriterias = collect(['Warna', 'Kondisi (bulu berat & ringan, bebas jamur)', 'Grade', 'Kadar Air (Visual)']);
 
         // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
         $jumlah_sampel = $jumlahBox;
