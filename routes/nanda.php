@@ -40,7 +40,7 @@ use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro8Totalhasilgrading;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR2SeleksiSupplier;
-use App\Http\Controllers\qa\kesigapantanggapdarurat\KesigapanTanggapDaruratController;
+use App\Http\Controllers\QA\kesigapantanggapdarurat\KesigapanTanggapDaruratController;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\PenarikanProduk\RecallProdukController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
