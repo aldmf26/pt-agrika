@@ -22,7 +22,7 @@
                         @foreach ($datas as $d)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $d->lokasi }}</td>
+                                <td>{{ $d->lokasi }} ({{ $d->lantai }})</td>
                                 <td>{{ $d->bulan }}</td>
                                 <td>{{ $d->tahun }}</td>
 
@@ -64,7 +64,8 @@
                     <select name="id_lokasi" class="form-control select2">
                         <option value="">--Pilih Lokasi--</option>
                         @foreach ($lokasi as $l)
-                            <option value="{{ $l->id }}">{{ $l->lokasi }}</option>
+                            <option value="{{ $l->id }}">{{ ucwords($l->lokasi) }} ({{ $l->lantai }})
+                            </option>
                         @endforeach
                     </select>
                 </div>
