@@ -70,7 +70,7 @@
                         <td>{{ ucwords($d->nama) }}</td>
                         <td>{{ $d->alamat }}</td>
                         <td></td>
-                        <td></td>
+                        <td>{{ $d->no_telp }}</td>
                         <td>SBW Kotor</td>
                         <td class="text-end">100</td>
                         <td></td>
