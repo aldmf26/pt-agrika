@@ -199,7 +199,7 @@
                             </th>
                             <th rowspan="3" class=" align-middle text-center">Waktu <br> mulai <br> drying</th>
                             <th rowspan="3" class=" align-middle text-center">Waktu <br> selesai <br> drying</th>
-                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (min susut <br> 30%)</th>
+                            <th rowspan="3" class=" align-middle text-center">% Susut <br> (max susut <br> 30%)</th>
                             <th rowspan="3" class=" align-middle text-center">Ok/ <br> Not Ok</th>
                             <th rowspan="3" class=" align-middle text-center">Keterangan<br> <span
                                     class="fst-italic fw-lighter">Remarks</span>
