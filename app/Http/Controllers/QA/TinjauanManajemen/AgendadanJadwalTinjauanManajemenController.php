@@ -29,8 +29,9 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             })
             ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
             ->groupBy('agendadan_jadwal_tinjauan_manajemens.nota_agenda')
-            ->orderBy('agendadan_jadwal_tinjauan_manajemens.created_at', 'desc')
+            ->orderBy('agendadan_jadwal_tinjauan_manajemens.created_at', 'desc') // ✅ perbaikan
             ->get();
+
 
 
 
