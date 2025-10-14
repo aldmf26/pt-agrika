@@ -193,7 +193,7 @@
                             (FSTL)
                         </td>
                         <td class="text-center align-middle">
-                            (DIREKTUR UTAMA)
+                            (DIREKTUR)
                         </td>
                     </tr>
                 </tbody>
