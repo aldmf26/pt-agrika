@@ -26,7 +26,7 @@
                             <td>{{ $d->rwb->grade->nama }}</td>
                             <td>{{ $d->jumlah_produk }} GR</td>
                             <td>{{ $d->beritaAcara->cakupan ?? '-' }}</td>
-                            <td>{{ $d->beritaAcara->alasan }}</td>
+                            <td>{{ $d->beritaAcara->alasan ?? '-' }}</td>
                             <td class="text-end">{{ empty($d->beritaAcara->tgl) ? '-' : tanggal($d->beritaAcara->tgl) }}
                             </td>
                             <td></td>
