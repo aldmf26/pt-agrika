@@ -22,9 +22,9 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
         )
             ->leftJoin('daftar_hadir', function ($join) {
                 $join->on(
-                    DB::raw("daftar_hadir.nota_agenda COLLATE utf8mb4_unicode_ci"),
+                    DB::raw("daftar_hadir.nota_agenda"),
                     '=',
-                    DB::raw("agendadan_jadwal_tinjauan_manajemens.nota_agenda COLLATE utf8mb4_unicode_ci")
+                    DB::raw("agendadan_jadwal_tinjauan_manajemens.nota_agenda")
                 );
             })
             ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
