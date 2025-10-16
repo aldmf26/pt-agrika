@@ -39,7 +39,7 @@ class Hrga3UsulandanIdentifikasi extends Controller
         $nota = empty($nota_terakhir->nota_pelatihan) ? 1 : $nota_terakhir->nota_pelatihan + 1;
         for ($i = 0; $i < count($r->id_pegawai); $i++) {
             $data = [
-                'divisi_id' => $r->divisi,
+                'divisi_id' => 0,
                 'data_pegawais_id' => $r->id_pegawai[$i],
                 'pengusul' => $r->pengusul,
                 'tanggal' => $r->tanggal,
