@@ -209,8 +209,8 @@
                                                     <td>{{ $k->divisi->divisi ?? '-' }}</td>
                                                     <td>{{ $k->posisi }}</td>
                                                     <td class="text-center">
-                                                        <input type="checkbox" class="check_item"
-                                                            name="karyawan_id[]" value="{{ $k->id }}">
+                                                        <input type="checkbox" class="check_item" name="id_pegawai[]"
+                                                            value="{{ $k->karyawan_id_dari_api }}" id="">
                                                     </td>
                                                 </tr>
                                             @endforeach
