@@ -113,9 +113,7 @@
             display: none;
         }
 
-        .print-keterangan {
-            display: none;
-        }
+
 
         @media print {
             .no-print {
@@ -126,9 +124,6 @@
                 display: inline !important;
             }
 
-            .print-keterangan {
-                display: inline !important;
-            }
 
             .input {
                 display: none !important;
@@ -301,7 +296,7 @@
                                     <input type="text" class="form-control no-print form-edit" name="keterangan"
                                         data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
                                         value="{{ $edit->keterangan ?? '' }}">
-                                    <span class="print-keterangan">{{ $edit->keterangan ?? '' }}</span>
+                                    <span class="print print-keterangan">{{ $edit->keterangan ?? '' }}</span>
                                 </td>
                             </tr>
                         @endforeach
@@ -384,7 +379,7 @@
             }
 
             // === 🔹 Update span.print (jam mulai) secara real-time ===
-            let spanMulai = row.find('span.print');
+            let spanMulai = row.find('span.print-mulai');
             if (waktu_mulai) {
                 let [jam, menit] = waktu_mulai.split(':').map(Number);
                 let start = new Date(0, 0, 0, jam, menit);
