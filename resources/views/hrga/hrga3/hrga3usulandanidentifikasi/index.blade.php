@@ -31,7 +31,7 @@
                             <td>{{ ucfirst(strtolower($u->data_pegawai->nama)) }}</td>
                             <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
                             <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
-                            <td>{{ $u->divisi->divisi }}</td>
+                            <td>{{ $u->divisi->divisi ?? '-' }}</td>
                             <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                             <td>{{ date('d-m-Y', strtotime($u->tanggal)) }}</td>
                             <td>{{ $u->usulan_waktu }}</td>
