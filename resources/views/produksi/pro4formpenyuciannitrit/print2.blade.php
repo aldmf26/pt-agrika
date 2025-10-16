@@ -194,6 +194,7 @@
                             <th class=" align-middle text-center" rowspan="2">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot
                                     code</span></th>
+                            <th class=" align-middle text-center" rowspan="2">Grade</th>
                             <th class=" align-middle text-center" rowspan="2">No Box</th>
                             <th class="text-center  " colspan="2">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</span>
@@ -275,6 +276,7 @@
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
                                 <td class="text-end">{{ $sbw->no_invoice ?? '-' }}</td>
+                                <td class="text-start">{{ $sbw->nama ?? '-' }}</td>
                                 <td class="text-end">{{ $c['no_box'] }}</td>
                                 <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
