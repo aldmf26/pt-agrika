@@ -189,6 +189,7 @@
                                             <th>Nama</th>
                                             <th>Divisi</th>
                                             <th>Jabatan</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -196,12 +197,15 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    <input type="checkbox" class="check_item" name="karyawan_id[]"
-                                                        value="{{ $k->id }}">
+
                                                     {{ $k->nama }}
                                                 </td>
                                                 <td>{{ $k->divisi->divisi ?? '-' }}</td>
                                                 <td>{{ $k->posisi }}</td>
+                                                <td class="text-center">
+                                                    <input type="checkbox" class="check_item" name="karyawan_id[]"
+                                                        value="{{ $k->id }}">
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
