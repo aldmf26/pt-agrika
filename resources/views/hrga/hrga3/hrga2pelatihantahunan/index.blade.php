@@ -159,6 +159,7 @@
                             <div class="col-lg-3">
                                 <label for="">Tanggal</label>
                                 <input type="date" class="form-control" name="tanggal" id="tgl" readonly>
+                                <input type="hidden" name="Getid" id="Getid">
                             </div>
                             <div class="col-lg-2">
                                 <label for="">Pengusul</label>
