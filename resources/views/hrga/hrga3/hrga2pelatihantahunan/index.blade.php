@@ -182,37 +182,45 @@
                                 <hr>
                             </div>
                             <div class="col-lg-12">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Nama</th>
-                                            <th>Divisi</th>
-                                            <th>Jabatan</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($karyawan as $k)
+                                <div class="row">
+                                    <div class="mb-3">
+                                        <input type="text" id="searchKaryawan" class="form-control"
+                                            placeholder="Cari nama, divisi, atau jabatan..."
+                                            style="max-width: 300px;">
+                                    </div>
+                                    <table class="table table-bordered" id="tableKaryawan">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>
-
-                                                    {{ $k->nama }}
-                                                </td>
-                                                <td>{{ $k->divisi->divisi ?? '-' }}</td>
-                                                <td>{{ $k->posisi }}</td>
-                                                <td class="text-center">
-                                                    <input type="checkbox" class="check_item" name="karyawan_id[]"
-                                                        value="{{ $k->id }}">
-                                                </td>
+                                                <th>No</th>
+                                                <th>Nama</th>
+                                                <th>Divisi</th>
+                                                <th>Jabatan</th>
+                                                <th>Aksi</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($karyawan as $k)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>
+
+                                                        {{ $k->nama }}
+                                                    </td>
+                                                    <td>{{ $k->divisi->divisi ?? '-' }}</td>
+                                                    <td>{{ $k->posisi }}</td>
+                                                    <td class="text-center">
+                                                        <input type="checkbox" class="check_item"
+                                                            name="karyawan_id[]" value="{{ $k->id }}">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
 
 
 
-                                </table>
+                                    </table>
+                                </div>
+
 
 
                             </div>
@@ -302,6 +310,13 @@
                     $('#Getid').val(Getid);
                     $('#usulan').val(usulan);
                     $('#tgl').val(tgl);
+                });
+
+                $('#searchKaryawan').on('keyup', function() {
+                    let value = $(this).val().toLowerCase();
+                    $('#tableKaryawan tbody tr').filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
                 });
             });
         </script>
