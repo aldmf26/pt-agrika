@@ -194,7 +194,10 @@
                             <th class=" align-middle text-center" rowspan="2">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot
                                     code</span></th>
-                            <th class=" align-middle text-center" rowspan="2">Grade</th>
+                            <th rowspan="3" class=" align-middle text-center">Jenis<br> <span
+                                    class="fst-italic fw-lighter">
+                                    type</span>
+                            </th>
                             <th class=" align-middle text-center" rowspan="2">No Box</th>
                             <th class="text-center  " colspan="2">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</span>
