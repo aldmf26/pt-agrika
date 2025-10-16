@@ -155,17 +155,7 @@
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-lg-3">
-                                <label for="">Divisi</label>
-                                <select name="divisi" id="divisi" class="form-control" required>
-                                    <option value="">Pilih Divisi</option>
-                                    @foreach ($divisi as $d)
-                                        <option value="{{ $d->id }}">{{ $d->divisi }}</option>
-                                    @endforeach
-                                </select>
-                                <input type="hidden" name="Getid" id="Getid">
 
-                            </div>
                             <div class="col-lg-3">
                                 <label for="">Tanggal</label>
                                 <input type="date" class="form-control" name="tanggal" id="tgl" readonly>
@@ -191,7 +181,37 @@
                             <div class="col-lg-12">
                                 <hr>
                             </div>
-                            <div id="load_karyawan"></div>
+                            <div class="col-lg-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>Divisi</th>
+                                            <th>Jabatan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($karyawan as $k)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <input type="checkbox" class="check_item" name="karyawan_id[]"
+                                                        value="{{ $k->id }}">
+                                                    {{ $k->nama }}
+                                                </td>
+                                                <td>{{ $k->divisi->divisi ?? '-' }}</td>
+                                                <td>{{ $k->posisi }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
+
+
+                                </table>
+
+
+                            </div>
 
                         </div>
                     </div>
