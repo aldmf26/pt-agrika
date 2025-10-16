@@ -226,6 +226,11 @@
                         @foreach ($pencucian as $c)
                             @php
 
+                                $sbw = DB::table('sbw_kotor')
+                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                    ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
+                                    ->first();
+
                                 $namaAnak = strtolower($c['nm_anak']);
                                 if (!isset($counterNamaAnak[$namaAnak])) {
                                     $counterNamaAnak[$namaAnak] = 0;
