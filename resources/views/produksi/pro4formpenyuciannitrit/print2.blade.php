@@ -108,6 +108,32 @@
         thead th {
             text-transform: capitalize;
         }
+
+        .print {
+            display: none;
+        }
+
+        .print-keterangan {
+            display: none;
+        }
+
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            .print {
+                display: inline !important;
+            }
+
+            .print-keterangan {
+                display: inline !important;
+            }
+
+            .input {
+                display: none !important;
+            }
+        }
     </style>
 
 </head>
@@ -198,6 +224,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <tbody>
+                        @php
+                            use Carbon\Carbon;
+                        @endphp
                         @foreach ($pencucian as $c)
                             @php
 
@@ -207,37 +237,76 @@
                                 }
                                 $counterNamaAnak[$namaAnak]++;
 
-                                $jamMulai = 14 + ($counterNamaAnak[$namaAnak] - 1); // 14 = 14:00
-                                $startTime = \Carbon\Carbon::createFromFormat('H:i', $jamMulai . ':00');
-
                                 $pcs = (int) ($c['pcs'] == 0 ? round($c['gr'] / 6, 0) : $c['pcs']);
 
+                                // ambil edit jika ada (pastikan query sesuai)
+                                $edit = DB::table('form_pros_01_03_edit')
+                                    ->where('no_box', $c['no_box'])
+                                    ->where('tgl', $tgl)
+                                    ->first();
+
+                                // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
+                                // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
+                                $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
+                                $defaultJamMulai = sprintf('%02d:00', $defaultHour); // "14:00"
+
+                                // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
+                                $rawJamMulai =
+                                    $edit && !empty($edit->waktu_mulai) ? $edit->waktu_mulai : $defaultJamMulai;
+
+                                // Gunakan Carbon::parse() agar fleksibel terhadap berbagai format
+                                try {
+                                    $startTime = Carbon::parse($rawJamMulai);
+                                } catch (\Exception $e) {
+                                    // fallback ke default jika parse gagal
+                                    $startTime = Carbon::createFromFormat('H:i', $defaultJamMulai);
+                                }
+
+                                // Hitung endTime: tambah minutes = pcs (sesuai logikamu)
                                 $endTime = $startTime->copy()->addMinutes($pcs);
                                 $diffInMinutes = $startTime->diffInMinutes($endTime);
 
-                                // Ambil data sbw
-                                $sbw = DB::table('sbw_kotor')
-                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
-                                    ->first();
+                                // Untuk output ke value input (format 24h H:i)
+                                $startValue = $startTime->format('H:i'); // dipakai di <input type="time">
+                                $endValue = $endTime->format('H:i');
                             @endphp
+
                             <tr class="table-bawah">
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
-                                <td class="text-end">{{ $sbw->no_invoice }}</td>
+                                <td class="text-end">{{ $sbw->no_invoice ?? '-' }}</td>
                                 <td class="text-end">{{ $c['no_box'] }}</td>
                                 <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>
 
+                                {{-- Jam mulai --}}
+                                <td class="text-center">
+                                    <input type="time" class="form-control no-print form-edit"
+                                        style="font-size: 10px" value="{{ $startTime->format('H:i') }}"
+                                        data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $tgl }}"
+                                        name="waktu_mulai">
+                                    <span class="print print-mulai">{{ $startTime->format('h:i A') }}</span>
+                                </td>
 
-                                <td class="text-end">{{ $startTime->format('h:i A') }}</td>
-                                <td class="text-end">{{ $endTime->format('h:i A') }}</td>
+                                {{-- Jam akhir otomatis --}}
+                                <td class="text-center">
+                                    <span class="print-only">{{ $endTime->format('h:i A') }}</span>
+                                    <input type="hidden" name="waktu_selesai" value="{{ $endTime->format('H:i') }}">
+                                </td>
+
                                 <td class="text-end">{{ $diffInMinutes }} menit</td>
                                 <td class="text-end">30</td>
                                 <td>{{ $nama_regu }}</td>
-                                <td class="text-end"></td>
+                                <td class="text-start">
+                                    <input type="text" class="form-control no-print form-edit" name="keterangan"
+                                        data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
+                                        value="{{ $edit->keterangan ?? '' }}">
+                                    <span class="print-keterangan">{{ $edit->keterangan ?? '' }}</span>
+                                </td>
                             </tr>
                         @endforeach
+                    </tbody>
+
 
 
                     </tbody>
@@ -290,6 +359,85 @@
     <script>
         window.print();
     </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $('.form-edit').on('change', function() {
+            let input = $(this);
+            let no_box = input.data('no_box');
+            let tgl = input.data('tgl');
+            let row = input.closest('tr');
+
+            // ambil semua field di baris itu
+            let waktu_mulai = row.find('input[name="waktu_mulai"]').val();
+            let pcs = parseInt(row.find('td:nth-child(5)').text().replace(/\D/g, '')) || 0;
+            let waktu_selesai_input = row.find('input[name="waktu_selesai"]');
+            let waktu_selesai_print = row.find('.print-only');
+
+            let keterangan = row.find('input[name="keterangan"]').val();
+
+            // === 🔹 update span.print keterangan ===
+            if (input.attr('name') === 'keterangan') {
+                row.find('span.print-keterangan').text(keterangan || '');
+            }
+
+            // === 🔹 Update span.print (jam mulai) secara real-time ===
+            let spanMulai = row.find('span.print');
+            if (waktu_mulai) {
+                let [jam, menit] = waktu_mulai.split(':').map(Number);
+                let start = new Date(0, 0, 0, jam, menit);
+                let ampm = start.getHours() >= 12 ? 'PM' : 'AM';
+                let jam12 = start.getHours() % 12 || 12;
+                jam12 = String(jam12).padStart(2, '0');
+                let formatted = `${jam12}:${String(menit).padStart(2, '0')} ${ampm}`;
+                spanMulai.text(formatted);
+            }
+
+            // === 🔹 Hitung waktu selesai otomatis ===
+            if (waktu_mulai && pcs > 0) {
+                let [jam, menit] = waktu_mulai.split(':').map(Number);
+                let start = new Date(0, 0, 0, jam, menit);
+                start.setMinutes(start.getMinutes() + pcs);
+
+                let hh = String(start.getHours()).padStart(2, '0');
+                let mm = String(start.getMinutes()).padStart(2, '0');
+                let waktu_selesai = `${hh}:${mm}`;
+                waktu_selesai_input.val(waktu_selesai);
+
+                // tampilkan di print-only (AM/PM)
+                let ampm = start.getHours() >= 12 ? 'PM' : 'AM';
+                let jam12 = start.getHours() % 12 || 12;
+                jam12 = String(jam12).padStart(2, '0');
+                waktu_selesai_print.text(`${jam12}:${mm} ${ampm}`);
+            }
+
+            // === 🔹 Simpan ke server via AJAX ===
+            $.ajax({
+                url: "{{ route('produksi.4.edit') }}",
+                method: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    no_box: no_box,
+                    tgl: tgl,
+                    waktu_mulai: waktu_mulai,
+                    waktu_selesai: waktu_selesai_input.val(),
+                    keterangan: keterangan,
+                },
+                success: function(res) {
+                    console.log("Saved", res);
+                    input.css('border', '2px solid green');
+                    setTimeout(() => input.css('border', ''), 1000);
+                },
+                error: function(err) {
+                    console.error(err);
+                    input.css('border', '2px solid red');
+                }
+            });
+        });
+    </script>
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

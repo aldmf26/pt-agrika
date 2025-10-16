@@ -249,6 +249,7 @@ Route::controller(Pro3FormPencabutanBulu::class)
     ->name('produksi.3.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/edit', 'edit')->name('edit');
         Route::get('/print', 'print')->name('print');
     });
 Route::controller(Pro4FormPenyucianNitrit::class)
@@ -257,6 +258,7 @@ Route::controller(Pro4FormPenyucianNitrit::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
+        Route::post('/edit', 'edit')->name('edit');
         Route::get('/print', 'print')->name('print');
     });
 Route::controller(Pro5FormPengeringan::class)

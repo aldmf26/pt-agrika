@@ -116,7 +116,27 @@
         thead th {
             text-transform: capitalize;
         }
+
+        .print {
+            display: none;
+        }
     </style>
+    <style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            .print {
+                display: inline !important;
+            }
+
+            .input {
+                display: none !important;
+            }
+        }
+    </style>
+
 
 </head>
 
@@ -171,6 +191,8 @@
                             <td>Regu &nbsp;<br> <span class="fst-italic">Team</span> </td>
 
                             <td class="align-middle"> &nbsp;:{{ ucwords(strtolower($pengawas)) }}</td>
+                            <td colspan="18"><button class="btn btn-primary float-end no-print"
+                                    onclick="window.print()">Print</button></td>
                         </tr>
 
                         <tr class="table-bawah">
@@ -228,6 +250,12 @@
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
                                     ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
                                     ->first();
+
+                                $edit = DB::table('form_pros_01_02_edit')
+                                    ->where('no_box', $c['no_box'])
+                                    ->where('tgl', $c['tgl'])
+                                    ->first();
+
                             @endphp
                             <tr class="table-bawah">
                                 <td class="text-end">{{ $loop->iteration }}</td>
@@ -254,10 +282,24 @@
                                 <td class="text-end">{{ number_format($c['pcs_not_ok'], 0) }}</td>
                                 <td class="text-end">{{ number_format($gr_not_ok, 0) }}</td>
                                 <td class="text-end">
-                                    {{ date('h:i A', strtotime('17:00')) }}
-                                </td>
+                                    <input type="time" class="form-control no-print form-edit"
+                                        style="font-size: 12px" name="waktu_mulai_drying"
+                                        data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
+                                        value="{{ empty($edit) ? '17:00' : $edit->waktu_mulai_drying }}">
+
+                                    <span class="print">
+                                        {{ $edit && $edit->waktu_mulai_drying ? date('h:i A', strtotime($edit->waktu_mulai_drying)) : '05:00 PM' }}
+                                    </span>
+
+
                                 <td class="text-end">
-                                    {{ date('h:i A', strtotime('05:00')) }}
+                                    <input type="time" class="form-control no-print form-edit"
+                                        style="font-size: 12px" name="waktu_selesai_drying"
+                                        data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
+                                        value="{{ empty($edit) ? '05:00' : $edit->waktu_selesai_drying }}">
+                                    <span class="print">
+                                        {{ $edit && $edit->waktu_selesai_drying ? date('h:i A', strtotime($edit->waktu_selesai_drying)) : '05:00 PM' }}
+                                    </span>
                                 </td>
 
                                 <td class="text-end">{{ number_format((1 - $c['gr_akhir'] / $c['gr']) * 100, 0) }}
@@ -274,9 +316,14 @@
                                     @endif
                                 </td>
                                 <td class="text-start">
-                                    @if ($susut < 31)
-                                    @else
-                                        Susut Melebihi Batas Standar Karena Banyak Pasir
+                                    @if ($susut >= 31)
+                                        <input type="text" class="form-control no-print form-edit"
+                                            style="font-size: 12px" name="keterangan"
+                                            data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
+                                            value="{{ empty($edit) ? 'Susut Melebihi Batas Standar Karena Banyak Pasir' : $edit->keterangan }}">
+                                        <span class="print">
+                                            {{ $edit && $edit->keterangan ? $edit->keterangan : 'Susut melebihi batas standar karena banyak pasir' }}
+                                        </span>
                                     @endif
                                 </td>
 
@@ -326,9 +373,87 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
-    <script>
+    {{-- <script>
         window.print();
+    </script> --}}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // === 1️⃣ Auto save input ke server pakai AJAX ===
+            $('.form-edit').on('change', function() {
+                let input = $(this);
+                let no_box = input.data('no_box');
+                let tgl = input.data('tgl');
+                let row = input.closest('tr');
+
+                // ambil semua field di baris itu
+                let waktu_mulai_drying = row.find('input[name="waktu_mulai_drying"]').val();
+                let waktu_selesai_drying = row.find('input[name="waktu_selesai_drying"]').val();
+                let keterangan = row.find('input[name="keterangan"]').val();
+
+                $.ajax({
+                    url: "{{ route('produksi.3.edit') }}",
+                    method: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        no_box: no_box,
+                        tgl: tgl,
+                        waktu_mulai_drying: waktu_mulai_drying,
+                        waktu_selesai_drying: waktu_selesai_drying,
+                        keterangan: keterangan,
+                    },
+                    success: function(res) {
+                        console.log("Saved", res);
+                        input.css('border', '2px solid green');
+                        setTimeout(() => input.css('border', ''), 1000);
+                    },
+                    error: function(err) {
+                        console.error(err);
+                        input.css('border', '2px solid red');
+                    }
+                });
+            });
+
+            // === 2️⃣ Sembunyikan input saat print, ubah jadi teks ===
+            let replaced = [];
+
+            window.addEventListener("beforeprint", function() {
+                replaced = []; // reset
+                $('.form-edit').each(function() {
+                    let val = $(this).val();
+                    let span = $('<span>')
+                        .text(val || '-')
+                        .attr('class', $(this).attr('class'))
+                        .css({
+                            'font-size': $(this).css('font-size'),
+                            'display': 'inline-block',
+                            'min-width': '70px'
+                        });
+                    $(this).after(span);
+                    replaced.push({
+                        input: $(this),
+                        span: span
+                    });
+                    $(this).hide();
+                });
+            });
+
+            // === 3️⃣ Setelah print, tampilkan kembali inputnya ===
+            window.addEventListener("afterprint", function() {
+                replaced.forEach(function(pair) {
+                    pair.input.show();
+                    pair.span.remove();
+                });
+            });
+
+            // === 4️⃣ Jalankan print otomatis setelah halaman siap ===
+
+        });
     </script>
+
+
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--

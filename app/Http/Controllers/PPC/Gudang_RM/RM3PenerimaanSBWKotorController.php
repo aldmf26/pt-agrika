@@ -65,7 +65,6 @@ class RM3PenerimaanSBWKotorController extends Controller
             ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*', 'data_edit_wh.driver', 'data_edit_wh.no_kendaraan as no_kendaraan_edit')
             ->where('sbw_kotor.id', $r->id)
             ->orderBy('sbw_kotor.tgl', 'desc')
-
             ->first();
 
         $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/detail_bjm_sinta?nm_partai=" . $r->nm_partai);
