@@ -287,7 +287,7 @@
                                         data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
                                         value="{{ empty($edit) ? '17:00' : $edit->waktu_mulai_drying }}">
 
-                                    <span class="print">
+                                    <span class="print print-mulai">
                                         {{ $edit && $edit->waktu_mulai_drying ? date('h:i A', strtotime($edit->waktu_mulai_drying)) : '05:00 PM' }}
                                     </span>
 
@@ -297,7 +297,7 @@
                                         style="font-size: 12px" name="waktu_selesai_drying"
                                         data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
                                         value="{{ empty($edit) ? '05:00' : $edit->waktu_selesai_drying }}">
-                                    <span class="print">
+                                    <span class="print print-selesai">
                                         {{ $edit && $edit->waktu_selesai_drying ? date('h:i A', strtotime($edit->waktu_selesai_drying)) : '05:00 PM' }}
                                     </span>
                                 </td>
@@ -321,7 +321,7 @@
                                             style="font-size: 12px" name="keterangan"
                                             data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
                                             value="{{ empty($edit) ? 'Susut Melebihi Batas Standar Karena Banyak Pasir' : $edit->keterangan }}">
-                                        <span class="print">
+                                        <span class="print print-keterangan">
                                             {{ $edit && $edit->keterangan ? $edit->keterangan : 'Susut melebihi batas standar karena banyak pasir' }}
                                         </span>
                                     @endif
@@ -392,6 +392,30 @@
                 let waktu_mulai_drying = row.find('input[name="waktu_mulai_drying"]').val();
                 let waktu_selesai_drying = row.find('input[name="waktu_selesai_drying"]').val();
                 let keterangan = row.find('input[name="keterangan"]').val();
+
+
+                row.find('span.print-keterangan').text(keterangan || '');
+
+                let spanMulai = row.find('span.print-mulai');
+                if (waktu_mulai_drying) {
+                    let [jam, menit] = waktu_mulai_drying.split(':').map(Number);
+                    let start = new Date(0, 0, 0, jam, menit);
+                    let ampm = start.getHours() >= 12 ? 'PM' : 'AM';
+                    let jam12 = start.getHours() % 12 || 12;
+                    jam12 = String(jam12).padStart(2, '0');
+                    let formatted = `${jam12}:${String(menit).padStart(2, '0')} ${ampm}`;
+                    spanMulai.text(formatted);
+                }
+                let spanSelesai = row.find('span.print-selesai');
+                if (waktu_selesai_drying) {
+                    let [jam, menit] = waktu_selesai_drying.split(':').map(Number);
+                    let start = new Date(0, 0, 0, jam, menit);
+                    let ampm = start.getHours() >= 12 ? 'PM' : 'AM';
+                    let jam12 = start.getHours() % 12 || 12;
+                    jam12 = String(jam12).padStart(2, '0');
+                    let formatted = `${jam12}:${String(menit).padStart(2, '0')} ${ampm}`;
+                    spanSelesai.text(formatted);
+                }
 
                 $.ajax({
                     url: "{{ route('produksi.3.edit') }}",
