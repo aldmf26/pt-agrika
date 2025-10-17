@@ -22,6 +22,8 @@ class ProgramAuditInternal extends Component
 
     public $tahun;
     public $form = [];
+    public $editForm = [];
+    public $editingId = null;
     public $model = ModelsProgramAuditInternal::class;
 
     public function mount()
@@ -113,6 +115,54 @@ class ProgramAuditInternal extends Component
     public function updateTahun($tahun)
     {
         $this->tahun = $tahun;
+    }
+
+    public function edit($id)
+    {
+        $audit = $this->model::find($id);
+        
+        if ($audit) {
+            $this->editingId = $id;
+            $this->editForm = [
+                'departemen' => $audit->departemen,
+                'audite' => $audit->audite,
+                'auditor' => $audit->auditor,
+            ];
+        }
+    }
+
+    public function saveEdit()
+    {
+        $audit = $this->model::find($this->editingId);
+        
+        if ($audit) {
+            // Cek apakah departemen sudah ada (kecuali untuk data yang sedang diedit)
+            $existing = $this->model::where('departemen', $this->editForm['departemen'])
+                ->where('tahun', $this->tahun)
+                ->where('id', '!=', $this->editingId)
+                ->first();
+                
+            if ($existing) {
+                $this->alert('error', 'Departemen sudah ada');
+                return;
+            }
+
+            $audit->update([
+                'departemen' => $this->editForm['departemen'],
+                'audite' => $this->editForm['audite'],
+                'auditor' => $this->editForm['auditor'],
+                'admin' => auth()->user()->name,
+            ]);
+
+            $this->cancelEdit();
+            $this->alert('sukses', 'Data Berhasil diupdate');
+        }
+    }
+
+    public function cancelEdit()
+    {
+        $this->editingId = null;
+        $this->editForm = [];
     }
 
     public function render()

@@ -258,6 +258,7 @@ Route::controller(IA2JadwalAuditInternalController::class)
         Route::get('/edit/{tgl}', 'edit')->name('edit');
         Route::post('/edit/{tgl}', 'update')->name('update');
         Route::get('/print/{tgl}', 'print')->name('print');
+        Route::get('/destroy/{tgl}', 'destroy')->name('destroy');
     });
 
 Route::controller(IA4LaporanAuditInternalController::class)
