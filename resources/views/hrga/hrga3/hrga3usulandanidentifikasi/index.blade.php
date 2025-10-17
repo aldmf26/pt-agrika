@@ -3,18 +3,18 @@
         <div class="card-header">
             {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> Data</button> --}}
-            <button class="btn btn-sm btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print"><i
-                    class="fas fa-print"></i> print</button>
+            {{-- <button class="btn btn-sm btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#print"><i
+                    class="fas fa-print"></i> print</button> --}}
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Nama Calon Peserta yang Diusulkan</th>
-                        <th>NIP</th>
+                        <th>Materi pelatihan</th>
+
                         <th>Pengusul</th>
-                        <th>Divisi</th>
+
                         <th>
                             Usulan Jenis Pelatihan <br>
                             [yang sesuai dengan peningkatan kompetensi]
@@ -22,20 +22,23 @@
                         <th>Tanggal</th>
                         <th>Usulan Waktu <br> Pelaksanaan</th>
                         <th>Alasan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($usulan as $u)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ ucfirst(strtolower($u->data_pegawai->nama)) }}</td>
-                            <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
+                            <td>{{ ucfirst(strtolower($u->pelatihan->materi_pelatihan)) }}</td>
+
                             <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
-                            <td>{{ $u->divisi->divisi }}</td>
+
                             <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                             <td>{{ date('d-m-Y', strtotime($u->tanggal)) }}</td>
                             <td>{{ $u->usulan_waktu }}</td>
                             <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
+                            <td> <a href="{{ route('hrga3.3.print', ['nota_pelatihan' => $u->nota_pelatihan, 'tanggal' => $u->tanggal]) }}"
+                                    class="btn btn-warning"><i class="fas fa-print"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

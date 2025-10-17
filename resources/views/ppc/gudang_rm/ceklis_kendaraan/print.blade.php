@@ -112,10 +112,7 @@
                 YANG
                 TIDAK SESUAI STANDAR</p>
 
-            <p style="font-size: 8px;">Jenis Yang diterima : <span class="">SBW KOTOR</span>/<span
-                    class="text-decoration-line-through">
-                    KEMASAN</span>/<span class="text-decoration-line-through">
-                    BARANG</span></p>
+            <p style="font-size: 8px;">Jenis Yang diterima : <span class="">SBW KOTOR</span></p>
             <table class="table table-bordered">
 
                 <tr>

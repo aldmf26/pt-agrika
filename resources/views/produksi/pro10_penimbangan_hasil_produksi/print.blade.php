@@ -168,7 +168,7 @@
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
 
-                            <th colspan="7">
+                            <th colspan="5">
                                 <p class="cop_judul text-center">FORM PENIMBANGAN HASIL PRODUKSI</p>
                                 <p class="cop_bawah text-center">Production Results</p>
                             </th>
@@ -195,8 +195,8 @@
                             <th rowspan="2" class="text-center align-middle">Kode Batch/Lot
                                 <br> <span class="fst-italic fw-lighter">Batch/Lot Code</span>
                             </th>
-                            <th colspan="2" class="text-center align-middle">Jumlah
-                            </th>
+                            {{-- <th colspan="2" class="text-center align-middle">Jumlah
+                            </th> --}}
                             <th rowspan="2" class="text-center align-middle">Jenis Produk <br> <span
                                     class="fst-italic fw-lighter align-middle">Grade</span></th>
                             <th colspan="3" class="text-center align-middle">Jumlah <br> <span
@@ -206,8 +206,8 @@
 
                         </tr>
                         <tr class="table-bawah">
-                            <th class="text-center">Pcs</th>
-                            <th class="text-center">Gr</th>
+                            {{-- <th class="text-center">Pcs</th>
+                            <th class="text-center">Gr</th> --}}
                             <th class="text-center">Pcs</th>
                             <th class="text-center">Gr</th>
                             <th class="text-center">Box</th>
@@ -238,8 +238,8 @@
                                 <td class="text-end align-middle">
                                     {!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}
                                 </td>
-                                <td class="text-end align-middle">{{ number_format($i['pcs'], 0) }}</td>
-                                <td class="text-end align-middle">{{ number_format($i['gr'], 0) }}</td>
+                                {{-- <td class="text-end align-middle">{{ number_format($i['pcs'], 0) }}</td>
+                                <td class="text-end align-middle">{{ number_format($i['gr'], 0) }}</td> --}}
 
                                 <td class="text-start align-middle ">
                                     {{ strtoupper($i['grade']) }}
@@ -267,19 +267,19 @@
                         </tr>
                         <tr class="table-bawah">
 
-                            <th style="border: none; text-align: start" colspan="5"></th>
+                            <th style="border: none; text-align: start" colspan="3"></th>
                             <th class="text-center" colspan="3">Dibuat Oleh:</th>
                             <th class="text-center" colspan="2">Diperiksa Oleh:</th>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="5"></th>
+                            <th style="border: none" colspan="3"></th>
                             <td colspan="3" style="height: 80px" class="text-center align-middle"><span
                                     style="opacity: 0.5;">(Ttd & Nama)</span></td>
                             <td colspan="2" style="height: 80px" class="text-center align-middle"><span
                                     style="opacity: 0.5;">(Ttd & Nama)</span></td>
                         </tr>
                         <tr class="table-bawah">
-                            <th style="border: none" colspan="5"></th>
+                            <th style="border: none" colspan="3"></th>
                             <td colspan="3" class="text-center align-middle">(KA. PACKING & GUDANG FG)</td>
                             <td colspan="2" class="text-center align-middle">(KA. QC)</td>
                         </tr>

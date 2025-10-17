@@ -40,7 +40,7 @@ use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro8Totalhasilgrading;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR2SeleksiSupplier;
-use App\Http\Controllers\qa\kesigapantanggapdarurat\KesigapanTanggapDaruratController;
+use App\Http\Controllers\QA\kesigapantanggapdarurat\KesigapanTanggapDaruratController;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
 use App\Http\Controllers\QA\PenarikanProduk\RecallProdukController;
 use App\Http\Controllers\QA\TinjauanManajemen\AgendadanJadwalTinjauanManajemenController;
@@ -249,6 +249,7 @@ Route::controller(Pro3FormPencabutanBulu::class)
     ->name('produksi.3.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/edit', 'edit')->name('edit');
         Route::get('/print', 'print')->name('print');
     });
 Route::controller(Pro4FormPenyucianNitrit::class)
@@ -257,6 +258,7 @@ Route::controller(Pro4FormPenyucianNitrit::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
+        Route::post('/edit', 'edit')->name('edit');
         Route::get('/print', 'print')->name('print');
     });
 Route::controller(Pro5FormPengeringan::class)

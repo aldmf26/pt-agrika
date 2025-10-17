@@ -18,7 +18,7 @@ class Hrga4CeklistFoothbath extends Controller
             ->get();
 
         $data = [
-            'title' => 'Ceklis Foothbath',
+            'title' => 'Cheklist Footbath',
             'datas' => $datas,
             'bulan' => DB::table('bulan')->get(),
             'lokasi' => DB::table('lokasi')->get(),

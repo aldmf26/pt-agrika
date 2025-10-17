@@ -75,7 +75,7 @@
                 <p class="cop_text">Dok.No.: FRM.HRGA.03.03, Rev.00</p>
             </div>
             <div class="col-lg-8">
-                <p class="fw-bold" style="font-size: 11px">Bagian : {{ $divisi->divisi }}</p>
+
                 <p class="fw-bold" style="font-size: 11px">Tanggal : {{ tanggal($tanggal) }}</p>
             </div>
             <div class="col-lg-4">
@@ -89,15 +89,13 @@
                             <th class="text-center dhead">No</th>
                             <th class="text-start dhead">Nama Calon Peserta yang Diusulkan</th>
                             <th class="text-center dhead">NIP</th>
+                            <th class="text-center dhead">Divisi</th>
                             <th class="text-center dhead">Pengusul</th>
                             <th class="text-center dhead">Usulan Jenis Pelatihan <br>
                                 [yang sesuai dengan peningkatan kompetensi]</th>
                             <th class="text-center dhead">Usulan Waktu Pelaksanaan</th>
                             <th class="text-center dhead">Alasan</th>
-
                         </tr>
-
-
                     </thead>
                     <tbody>
                         @foreach ($usulan as $u)
@@ -105,6 +103,7 @@
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ ucwords(strtolower($u->data_pegawai->nama)) }}</td>
                                 <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
+                                <td>{{ $u->data_pegawai->divisi->divisi ?? '-' }}</td>
                                 <td>{{ ucwords(strtolower($u->pengusul)) }}</td>
                                 <td>{{ ucwords(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($tanggal)->locale('id')->translatedFormat('F Y') }}</td>

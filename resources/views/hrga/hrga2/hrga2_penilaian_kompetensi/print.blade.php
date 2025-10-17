@@ -118,31 +118,31 @@
                     <th class="dhead text-center" colspan="2">12</th>
                 </tr>
                 <tr>
-                    <!-- Sub-baris untuk Hari dan Menit -->
+                    <!-- Sub-baris untuk Hari dan Jam -->
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                     <th class="dhead text-center">Hari</th>
-                    <th class="dhead text-center">Menit</th>
+                    <th class="dhead text-center">Jam</th>
                 </tr>
             </thead>
             <tbody>
@@ -196,7 +196,7 @@
                             @endphp
                             <td class="text-end">{{ $absenCabut == 0 ? '0' : $absenCabut }}</td>
                             </td>
-                            <td class="text-end">{{ $absenCabut == 0 ? '0' : number_format($absenCabut * 480, 0) }}
+                            <td class="text-end">{{ $absenCabut == 0 ? '0' : number_format($absenCabut * 8, 0) }}
                             </td>
                             @php
                                 $grandTotal += $absenCabut;

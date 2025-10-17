@@ -121,7 +121,9 @@ class RM6CeklistKendaraanController extends Controller
         left join rumah_walet as b on b.id = a.rwb_id
         left join data_edit_wh as c on c.nm_partai = a.nm_partai
         where MONTH(a.tgl) = '$r->bulan' and YEAR(a.tgl)='$r->tahun'
-        group by b.nama, a.tgl;");
+        group by b.nama, a.tgl
+        order by a.tgl ASC
+        ");
 
         $kondisi = DB::table('master_kondisi')->get();
 

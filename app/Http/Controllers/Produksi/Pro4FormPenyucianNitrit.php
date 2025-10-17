@@ -71,4 +71,37 @@ class Pro4FormPenyucianNitrit extends Controller
         ];
         return view('produksi.pro4formpenyuciannitrit.print2', $data);
     }
+
+    public function edit(Request $request)
+    {
+        try {
+            $data = $request->validate([
+                'no_box' => 'required',
+                'tgl' => 'required|date',
+                'waktu_mulai' => 'nullable',
+                // 'waktu_selesai_drying' => 'nullable',
+                'keterangan' => 'nullable|string',
+            ]);
+
+            DB::table('form_pros_01_03_edit')->updateOrInsert(
+                [
+                    'no_box' => $data['no_box'],
+                    'tgl' => $data['tgl'],
+                ],
+                [
+                    'waktu_mulai' => $data['waktu_mulai'],
+                    // 'waktu_selesai_drying' => $data['waktu_selesai_drying'],
+                    'keterangan' => $data['keterangan'],
+
+                ]
+            );
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
 }

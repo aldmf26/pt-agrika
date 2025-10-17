@@ -52,7 +52,7 @@ class Hrga1InformasiTawaranPelatihan extends Controller
         $data = [
             'title' => 'INFORMASI TAWARAN / POTENSI PELATIHAN',
             'dok' => 'Dok.No.: FRM.HRGA.03.01, Rev.00',
-            'informasi' => InformasiTawaranPelatihan::whereBetween('tanggal', [$tgl1, $tgl2])->orderBy('id', 'desc')->get(),
+            'informasi' => InformasiTawaranPelatihan::whereBetween('tanggal', [$tgl1, $tgl2])->orderBy('id', 'asc')->get(),
         ];
         return view('hrga.hrga3.hrga1informasitawaranpelatihan.print', $data);
     }

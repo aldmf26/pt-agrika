@@ -87,7 +87,7 @@
                 <td></td>
                 <td style="font-size: 11px;border-bottom: 1px solid black" colspan="2">
 
-                    Alasan : Kadar air masih tinggi saat dipanen hingga muat pengiriman
+                    Alasan : Kadar air masih tinggi saat dipanen hingga muat pengiriman (visual)
 
                 </td>
 
@@ -125,7 +125,7 @@
 
 
     @php
-        $kriterias = collect(['Warna', 'Kondisi (bulu berat & ringan, bebas jamur)', 'Grade', 'Kadar Air']);
+        $kriterias = collect(['Warna', 'Kondisi (bulu berat & ringan, bebas jamur)', 'Grade', 'Kadar Air (visual)']);
 
         // Jumlah sampel aktual (maksimal 5 atau sesuai jumlah barang)
         $jumlah_sampel = $jumlahBox;

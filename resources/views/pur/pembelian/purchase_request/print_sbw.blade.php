@@ -60,7 +60,7 @@
                     @foreach ($items as $d)
                         <tr>
                             <td class="text-end">{{ number_format($d->jumlah_pcs) }} PCS /
-                                {{ number_format($d->jumlah_kg) }} KG</td>
+                                {{ number_format($d->jumlah_kg) }} GR</td>
                             <td align="center">{{ strtoupper($d->nama) }}</td>
                             <td align="center">-</td>
                             <td class="text-end">{{ tanggal($datas->tgl) }}</td>

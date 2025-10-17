@@ -16,7 +16,7 @@ class Hrga3UsulandanIdentifikasi extends Controller
     {
         $data = [
             'title' => 'Usulan dan Identifikasi kebutuhan pelatihan',
-            'usulan' => usulanDanIdentifikasi::all(),
+            'usulan' => usulanDanIdentifikasi::groupBy('nota_pelatihan')->get(),
             'divisi' => Divisi::all(),
         ];
         return view('hrga.hrga3.hrga3usulandanidentifikasi.index', $data);
@@ -39,7 +39,7 @@ class Hrga3UsulandanIdentifikasi extends Controller
         $nota = empty($nota_terakhir->nota_pelatihan) ? 1 : $nota_terakhir->nota_pelatihan + 1;
         for ($i = 0; $i < count($r->id_pegawai); $i++) {
             $data = [
-                'divisi_id' => $r->divisi,
+                'divisi_id' => 0,
                 'data_pegawais_id' => $r->id_pegawai[$i],
                 'pengusul' => $r->pengusul,
                 'tanggal' => $r->tanggal,
@@ -72,7 +72,7 @@ class Hrga3UsulandanIdentifikasi extends Controller
     {
         $data = [
             'title' => 'Usulan dan Identifikasi kebutuhan pelatihan',
-            'usulan' => usulanDanIdentifikasi::where('divisi_id', $r->divisi)->where('tanggal', $r->tanggal)->get(),
+            'usulan' => usulanDanIdentifikasi::where('nota_pelatihan', $r->nota_pelatihan)->get(),
             'divisi' => Divisi::where('id', $r->divisi)->first(),
             'tanggal' => $r->tanggal
         ];
