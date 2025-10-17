@@ -446,12 +446,25 @@ Route::controller(PUR1DaftarSupplierController::class)
         Route::post('/create', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
         Route::get('/edit/{id}', 'edit')->name('edit');
-        Route::get('/evaluasi/{id}', 'evaluasi')->name('evaluasi');
+
+        Route::get('/evaluasi/', 'evaluasi')->name('evaluasi');
+        Route::get('/evaluasi_sbw/', 'evaluasi_sbw')->name('evaluasi_sbw');
+
         Route::get('/seleksi/{supplier}', 'seleksi')->name('seleksi');
         Route::get('/seleksi_sbw/{supplier}', 'seleksi_sbw')->name('seleksi_sbw');
-        Route::get('/evaluasi_print_sbw/{supplier}', 'evaluasi_print_sbw')->name('evaluasi_print_sbw');
-        Route::post('/evaluasi/{id}', 'evaluasi_update')->name('evaluasi_update');
-        Route::get('/print-evaluasi/{evaluasi}', 'evaluasi_print')->name('evaluasi_print');
+
+        Route::get('/create_seleksi/{supplier}', 'create_seleksi')->name('create_seleksi');
+        Route::post('/create_seleksi/{supplier}', 'store_seleksi')->name('store_seleksi');
+
+        Route::get('/create_seleksi_sbw/{supplier}', 'create_seleksi_sbw')->name('create_seleksi_sbw');
+        Route::post('/create_seleksi_sbw/{supplier}', 'store_seleksi_sbw')->name('store_seleksi_sbw');
+
+        Route::get('/evaluasi_print_sbw/', 'evaluasi_print_sbw')->name('evaluasi_print_sbw');
+        Route::post('/evaluasi/', 'evaluasi_update')->name('evaluasi_update');
+
+        Route::post('/evaluasi_sbw/', 'evaluasi_sbw_update')->name('evaluasi_sbw_update');
+        Route::get('/print-evaluasi/', 'evaluasi_print')->name('evaluasi_print');
+
         Route::post('/update/{id}', 'update')->name('update');
         Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });

@@ -72,7 +72,7 @@
                         <td></td>
                         <td class="text-end">{{ $d->no_telp }}</td>
                         <td>SBW Kotor</td>
-                        <td class="text-end">100</td>
+                        <td class="text-end">{{ $d->hasil_evaluasi ?? 100 }}</td>
                         <td></td>
                     </tr>
                 @endforeach

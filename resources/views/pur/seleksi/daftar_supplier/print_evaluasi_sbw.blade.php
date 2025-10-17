@@ -3,7 +3,7 @@
         <tr>
             <th width="230">Tanggal</th>
             <th>:</th>
-            <td>{{ tanggal(date('Y-m-d')) }}</td>
+            <td>{{ tanggal($evaluasi->tgl) }}</td>
         </tr>
         <tr>
             <th width="230">Nama Supplier</th>
@@ -24,13 +24,13 @@
         <tr>
             <th width="230">Periode Evaluasi</th>
             <th>:</th>
-            <td>Semester I / Semester II</td>
+            <td>Semester {{ $evaluasi->semester == 1 ? 'I' : 'II' }}</td>
         </tr>
-        <tr>
+        {{-- <tr>
             <th width="230">&nbsp;</th>
             <th>&nbsp;</th>
             <td style="font-size: 9px">*Coret salah satu</td>
-        </tr>
+        </tr> --}}
     </table>
 
     @php

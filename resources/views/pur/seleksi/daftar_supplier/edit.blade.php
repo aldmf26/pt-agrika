@@ -2,6 +2,7 @@
     <form action="{{ route('pur.seleksi.1.update', $supplier->id) }}" method="post">
         @csrf
         <div class="row">
+            <input type="hidden" name="kategori" value="{{ $kategori }}">
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Nama Supplier</label>

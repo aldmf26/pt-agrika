@@ -15,6 +15,11 @@ class Evaluasi extends Model
         return $this->belongsTo(Suplier::class, 'supplier_id', 'id');
     }
 
+    public function rumahWalet()
+    {
+        return $this->belongsTo(RumahWalet::class, 'rumah_walet_id', 'id');
+    }
+
     public function detail()
     {
         return $this->hasMany(DetailKetidaksesuaian::class, 'evaluasi_id', 'id');
