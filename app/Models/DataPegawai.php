@@ -81,6 +81,7 @@ class DataPegawai extends Model
                     a.tgl_masuk,
                     a.divisi_id,
                     b.divisi,
+                    a.status,
                     CASE 
                         WHEN a.tgl_masuk >= DATE_SUB(CURDATE(), INTERVAL 1 MONTH) 
                         THEN '1'
