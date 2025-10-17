@@ -3,11 +3,11 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="text-end mb-3">
-                {{-- <a href="{{ route('hrga1.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Tambah
-                    Permintaan</a> --}}
+                <a href="{{ route('hrga1.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Tambah
+                    Permintaan</a>
 
-                <a href="{{ route('hrga1.1.singkron') }}" class="btn btn-info ms-2 btn-sm float-end mb-2"><i
-                        class="fas fa-sync"></i> Sinkron Data</a>
+                {{-- <a href="{{ route('hrga1.1.singkron') }}" class="btn btn-info ms-2 btn-sm float-end mb-2"><i
+                        class="fas fa-sync"></i> Sinkron Data</a> --}}
             </div>
 
         </div>
@@ -39,11 +39,15 @@
                             <td>{{ $d->alasan_penambahan }}</td>
                             <td>{{ $d->diajukan_oleh }}</td>
                             <td>
-                                {{-- <a href="{{ route('hrga1.1.edit', [$d]) }}" class="btn btn-sm btn-primary"><i
-                                        class="fas fa-pen"></i> Edit </a> --}}
+                                <a href="{{ route('hrga1.1.edit', [$d]) }}" class="btn btn-xs btn-primary"><i
+                                        class="fas fa-edit"></i> </a>
+
+                                <a onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                    href="{{ route('hrga1.1.destroy', [$d]) }}" class="btn btn-xs btn-danger"><i
+                                        class="fas fa-trash"></i> </a>
 
                                 <a target="_blank" href="{{ route('hrga1.1.print', [$d]) }}"
-                                    class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print </a>
+                                    class="btn btn-xs btn-primary"><i class="fas fa-print"></i> Print </a>
                             </td>
                         </tr>
                     @endforeach

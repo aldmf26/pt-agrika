@@ -121,6 +121,12 @@ class Hrga1PermohonanKaryawanController extends Controller
         return redirect()->route('hrga1.1.index')->with('sukses', 'Data Berhasil ditambahkan');
     }
 
+    public function destroy(PermohonanKaryawan $permohonan)
+    {
+        $permohonan->delete();
+        return redirect()->route('hrga1.1.index')->with('sukses', 'Data Berhasil dihapus');
+    }
+
     public function print(PermohonanKaryawan $permohonan)
     {
         $data = [
