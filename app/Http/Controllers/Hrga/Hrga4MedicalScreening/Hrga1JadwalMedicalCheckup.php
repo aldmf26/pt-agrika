@@ -38,7 +38,15 @@ class Hrga1JadwalMedicalCheckup extends Controller
 
     public function getPegawai(Request $r)
     {
-        $pegawai = DataPegawai::where('divisi_id', $r->divisi)->get();
+
+        if ($r->divisi == 'All') {
+
+            $pegawai = DataPegawai::get();
+        } else {
+            dd('keisni');
+            $pegawai = DataPegawai::where('divisi_id', $r->divisi)->get();
+        }
+
         return view('hrga.hrga4.hrga1jadwalmedicalcheckup.getpegawai', compact('pegawai'));
     }
 

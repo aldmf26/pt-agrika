@@ -61,6 +61,7 @@
                                 <label for="">Divisi</label>
                                 <select name="divisi" id="divisi" class="form-control" required>
                                     <option value="">Pilih Divisi</option>
+                                    <option value="All">Semua Karyawan</option>
                                     @foreach ($divisi as $d)
                                         <option value="{{ $d->id }}">{{ $d->divisi }}</option>
                                     @endforeach
@@ -195,6 +196,8 @@
             $(document).ready(function() {
                 $('#divisi').change(function() {
                     var divisi = $(this).val();
+
+
 
                     // Panggil AJAX untuk mengambil data pegawai berdasarkan divisi
                     $.ajax({
