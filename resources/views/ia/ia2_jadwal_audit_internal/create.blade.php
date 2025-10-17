@@ -2,21 +2,21 @@
     <div class="container mt-4">
         @php
             $jam = collect([
-                '08.30 - 09.00',
-                '09.00 - 09.30',
-                '09.30 - 10.00',
-                '10.00 - 10.30',
-                '10.30 - 11.00',
-                '11.00 - 11.30',
-                '11.30 - 12.00',
-                '12.00 - 13.00',
-                '13.00 - 13.30',
-                '13.30 - 14.00',
-                '14.00 - 14.30',
-                '14.30 - 15.00',
-                '15.00 - 15.30',
-                '15.30 - 16.00',
-                '16.00 - 16.30',
+                '08.30 AM - 09.00 AM',
+                '09.00 AM - 09.30 AM',
+                '09.30 AM - 10.00 AM',
+                '10.00 AM - 10.30 AM',
+                '10.30 AM - 11.00 AM',
+                '11.00 AM - 11.30 AM',
+                '11.30 AM - 12.00 PM',
+                '12.00 PM - 13.00 PM',
+                '13.00 PM - 13.30 PM',
+                '13.30 PM - 14.00 PM',
+                '14.00 PM - 14.30 PM',
+                '14.30 PM - 15.00 PM',
+                '15.00 PM - 15.30 PM',
+                '15.30 PM - 16.00 PM',
+                '16.00 PM - 16.30 PM',
             ]);
         @endphp
 
@@ -50,8 +50,8 @@
                         @else
                             <tr>
                                 <th scope="row" class="text-nowrap">
-                                    {{ $value }}
-                                    <input type="hidden" value="{{ $value }}" name="waktu[{{ $key }}]">
+                                    <input type="text" class="form-control" value="{{ $value }}"
+                                        name="waktu[{{ $key }}]">
                                 </th>
                                 <td>
                                     <input type="text" class="form-control" id="bagian_{{ $key }}"
@@ -59,8 +59,7 @@
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="proses_{{ $key }}"
-                                        name="proses[{{ $key }}]"
-                                        value="{{ $jadwal[$key]['proses'] ?? '' }}">
+                                        name="proses[{{ $key }}]" value="{{ $jadwal[$key]['proses'] ?? '' }}">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="auditor_{{ $key }}"

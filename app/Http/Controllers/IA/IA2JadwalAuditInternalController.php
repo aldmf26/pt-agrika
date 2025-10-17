@@ -88,7 +88,6 @@ class IA2JadwalAuditInternalController extends Controller
             DB::beginTransaction();
             // Hapus data lama untuk tanggal tersebut
             JadwalAuditInternal::where('tgl', $tgl)->delete();
-
             foreach ($r->bagian as $key => $bagian) {
                 // Skip jika key adalah lunch break (7)
                 if ($key == 7) continue;
@@ -121,6 +120,17 @@ class IA2JadwalAuditInternalController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+    public function destroy($tgl)
+    {
+        try {
+            JadwalAuditInternal::where('tgl', $tgl)->delete();
+            return redirect()->route('ia.2.index')->with('sukses', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
     public function print($tgl)
     {
         $datas = JadwalAuditInternal::where('tgl', $tgl)->orderBy('waktu', 'asc')->get();

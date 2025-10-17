@@ -25,6 +25,10 @@
                                         class="fas fa-edit"></i> Edit</a>
                                 <a href="{{ route('ia.2.print', $d->tgl) }}" class="btn btn-sm btn-primary"><i
                                         class="fas fa-print"></i></a>
+                                <a onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                    href="{{ route('ia.2.destroy', $d->tgl) }}" class="btn btn-sm btn-danger"><i
+                                        class="fas fa-trash"></i></a>
+
                             </td>
                         </tr>
                     @endforeach

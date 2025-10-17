@@ -94,6 +94,7 @@
     </div>
     <br>
     {{-- <span class="text-sm  text-success float-end"><em>*clicik kanan untuk audit</em></span> --}}
+    {{-- Blade View --}}
     <table class="mt-4 table table-bordered border-dark table-striped">
         <thead>
             <tr>
@@ -101,9 +102,11 @@
                 <th>Departemen</th>
                 <th>Auditee</th>
                 <th>Auditor</th>
+                <th>Aksi</th>
                 <th colspan="13" class="text-center">Bulan</th>
             </tr>
             <tr>
+                <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
@@ -118,12 +121,46 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>
-                        {{ $audit->departemen }}
-                        <a class="btn btn-xs btn-danger float-end" wire:click="delete({{ $audit->id }})"
-                            wire:confirm='"Yakin ingin menghapus data ini?"'><i class="fas fa-trash"></i></a>
+                        @if ($editingId == $audit->id)
+                            <select wire:model="editForm.departemen" class="form-control form-control-sm">
+                                <option value="">Pilih Departemen</option>
+                                @foreach ($departemenBk as $dept)
+                                    <option value="{{ $dept }}">{{ strtoupper($dept) }}</option>
+                                @endforeach
+                            </select>
+                        @else
+                            {{ $audit->departemen }}
+                        @endif
                     </td>
-                    <td>{{ $audit->audite }}</td>
-                    <td>{{ $audit->auditor }}</td>
+                    <td>
+                        @if ($editingId == $audit->id)
+                            <input type="text" wire:model="editForm.audite" class="form-control form-control-sm">
+                        @else
+                            {{ $audit->audite }}
+                        @endif
+                    </td>
+                    <td>
+                        @if ($editingId == $audit->id)
+                            <input type="text" wire:model="editForm.auditor" class="form-control form-control-sm">
+                        @else
+                            {{ $audit->auditor }}
+                        @endif
+                    </td>
+                    <td>
+                        @can('presiden')
+                            @if ($editingId == $audit->id)
+                                <button class="btn btn-xs btn-success me-1" wire:click="saveEdit"><i
+                                        class="fas fa-check"></i></button>
+                                <button class="btn btn-xs btn-secondary" wire:click="cancelEdit"><i
+                                        class="fas fa-times"></i></button>
+                            @else
+                                <button class="btn btn-xs btn-primary me-1" wire:click="edit({{ $audit->id }})"><i
+                                        class="fas fa-edit"></i></button>
+                                <button class="btn btn-xs btn-danger" wire:click="delete({{ $audit->id }})"
+                                    wire:confirm="Yakin ingin menghapus data ini?"><i class="fas fa-trash"></i></button>
+                            @endif
+                        @endcan
+                    </td>
                     @for ($i = 1; $i <= 12; $i++)
                         <td onclick="{{ $this->getField($i, $audit->id) ? 'showContextMenu(event, ' . $audit->id . ', ' . $i . ')' : '' }}"
                             @dblclick="$wire.toggleBulan({{ $audit->id }}, {{ $i }}, '{{ $audit->departemen }}', '{{ $audit->audite }}', '{{ $audit->auditor }}')"
@@ -139,7 +176,6 @@
 
                                     <a class="dropdown-item"
                                         href="{{ route('ia.1.audit', ['id' => $audit->id, 'departemen' => strtolower($audit->departemen), 'bulan' => $i, 'tahun' => $tahun]) }}">{{ $this->cekSelesai($audit->departemen, $i) ? 'Edit' : 'Audit' }}</a>
-                                    {{-- <a class="dropdown-item" href="{{$link}}">Audit</a> --}}
                                 </div>
                             </div>
                         </td>
