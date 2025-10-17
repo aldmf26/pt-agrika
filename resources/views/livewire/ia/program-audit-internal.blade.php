@@ -147,17 +147,19 @@
                         @endif
                     </td>
                     <td>
-                        @if ($editingId == $audit->id)
-                            <button class="btn btn-xs btn-success me-1" wire:click="saveEdit"><i
-                                    class="fas fa-check"></i></button>
-                            <button class="btn btn-xs btn-secondary" wire:click="cancelEdit"><i
-                                    class="fas fa-times"></i></button>
-                        @else
-                            <button class="btn btn-xs btn-primary me-1" wire:click="edit({{ $audit->id }})"><i
-                                    class="fas fa-edit"></i></button>
-                            <button class="btn btn-xs btn-danger" wire:click="delete({{ $audit->id }})"
-                                wire:confirm="Yakin ingin menghapus data ini?"><i class="fas fa-trash"></i></button>
-                        @endif
+                        @can('presiden')
+                            @if ($editingId == $audit->id)
+                                <button class="btn btn-xs btn-success me-1" wire:click="saveEdit"><i
+                                        class="fas fa-check"></i></button>
+                                <button class="btn btn-xs btn-secondary" wire:click="cancelEdit"><i
+                                        class="fas fa-times"></i></button>
+                            @else
+                                <button class="btn btn-xs btn-primary me-1" wire:click="edit({{ $audit->id }})"><i
+                                        class="fas fa-edit"></i></button>
+                                <button class="btn btn-xs btn-danger" wire:click="delete({{ $audit->id }})"
+                                    wire:confirm="Yakin ingin menghapus data ini?"><i class="fas fa-trash"></i></button>
+                            @endif
+                        @endcan
                     </td>
                     @for ($i = 1; $i <= 12; $i++)
                         <td onclick="{{ $this->getField($i, $audit->id) ? 'showContextMenu(event, ' . $audit->id . ', ' . $i . ')' : '' }}"
