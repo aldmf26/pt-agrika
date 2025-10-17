@@ -67,12 +67,12 @@
                                 </td>
                                 <td>
 
-                                    <span x-show="!edit">{{ $p->tgl_rencana }}</span>
+                                    <span x-show="!edit">{{ tanggal($p->tgl_rencana) }}</span>
                                     <input type="date" x-show="edit" value="{{ $p->tgl_rencana }}"
                                         class="form-control" name="tgl_rencana[]">
                                 </td>
                                 <td>
-                                    <span x-show="!edit">{{ $p->tgl_realisasi }}</span>
+                                    <span x-show="!edit">{{ tanggal($p->tgl_realisasi) }}</span>
                                     <input type="date" x-show="edit" value="{{ $p->tgl_realisasi }}"
                                         class="form-control" name="tgl_realisasi[]">
                                 </td>
@@ -158,7 +158,7 @@
 
                             <div class="col-lg-3">
                                 <label for="">Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal" id="tgl" readonly>
+                                <input type="date" class="form-control" name="tanggal" id="tgl">
                                 <input type="hidden" name="Getid" id="Getid">
                             </div>
                             <div class="col-lg-2">
@@ -170,13 +170,25 @@
                                 <input type="text" class="form-control" name="usulan_jenis_pelatihan"
                                     id="usulan" readonly>
                             </div>
+                            <div class="col-lg-3">
+                                <label for="">Tampat</label>
+                                <input type="text" class="form-control" name="tempat" id="tempat">
+                            </div>
                             <div class="col-lg-3 mt-2">
-                                <label for="">Usulan waktu</label>
+                                <label for="">Usulan waktu mulai</label>
                                 <input type="time" class="form-control" name="usulan_waktu">
+                            </div>
+                            <div class="col-lg-3 mt-2">
+                                <label for="">Usulan waktu selesai</label>
+                                <input type="time" class="form-control" name="usulan_waktu_selesai">
                             </div>
                             <div class="col-lg-6 m-2">
                                 <label for="">Alasan</label>
                                 <input type="text" class="form-control" name="alasan">
+                            </div>
+                            <div class="col-lg-4 m-2">
+                                <label for="">Tujuan Pelatihan</label>
+                                <input type="text" class="form-control" name="tujuan_pelatihan">
                             </div>
 
                             <div class="col-lg-12">

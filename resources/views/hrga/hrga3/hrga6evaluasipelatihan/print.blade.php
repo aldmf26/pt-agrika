@@ -1,6 +1,12 @@
 <x-hccp-print :title="$title" :dok="$dok">
     <div class="row">
         <div class="col-lg-12">
+            @php
+
+                $evaluasi = DB::table('evaluasi_pelatihan')
+                    ->where('nota_pelatihan', $evaluasi_detail->nota_pelatihan)
+                    ->first();
+            @endphp
             <table width="100%" style="font-size: 10px">
                 <tr>
                     <th colspan="10" class="dhead" style="height: 6px"></th>
@@ -52,8 +58,10 @@
                 <tr>
                     <td colspan="10" class="text-center ">
                         {{-- {{ ucfirst(strtolower($evaluasi_detail->kisaran_materi)) }} --}}
-                        Memastikan karyawan dapat memahami & melakukan kegiatan cuci nitrite & steaming dengan baik &
-                        benar
+                        {{-- Memastikan karyawan dapat memahami & melakukan kegiatan cuci nitrite & steaming dengan baik &
+                        benar --}}
+
+                        {{ $evaluasi->tujuan_pelatihan }}
                     </td>
                 </tr>
             </table>
@@ -115,8 +123,7 @@
 
                     @endphp
                     <td>Note : Evaluasi pelatihan (3) ini harus dikembalikan ke
-                        Ka.
-                        {{ $evaluasi_detail->data_pegawai->divisi->divisi }} setelah mendapat hasil <br>
+                        KA.HRGA setelah mendapat hasil <br>
                         evaluasi dari pimpinan masing-masing, selambat-lambatnya tanggal: {{ tanggal($tgl) }}
                     </td>
                 </tr>
@@ -190,7 +197,7 @@
                     <tr>
                         <td class="text-center">(STAFF HRGA)</td>
                         <td class="text-center">(KA. HRGA)</td>
-                        <td class="text-center">(OPERASIONAL MANAGER)</td>
+                        <td class="text-center">(OPERATIONAL MANAGER)</td>
                     </tr>
                 </tbody>
             </table>

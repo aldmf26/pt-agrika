@@ -37,7 +37,8 @@
                             <td>{{ date('d-m-Y', strtotime($u->tanggal)) }}</td>
                             <td>{{ $u->usulan_waktu }}</td>
                             <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
-                            <td> <a href="{{ route('hrga3.3.print', ['nota_pelatihan' => $u->nota_pelatihan, 'tanggal' => $u->tanggal]) }}"
+                            <td> <a target="_blank"
+                                    href="{{ route('hrga3.3.print', ['nota_pelatihan' => $u->nota_pelatihan, 'tanggal' => $u->tanggal]) }}"
                                     class="btn btn-warning"><i class="fas fa-print"></i></a></td>
                         </tr>
                     @endforeach

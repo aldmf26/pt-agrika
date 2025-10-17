@@ -9,6 +9,7 @@ use App\Models\JadwalInformasiPelatihan;
 use App\Models\ProgramPelatihanTahunan;
 use App\Models\usulanDanIdentifikasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Hrga3UsulandanIdentifikasi extends Controller
 {
@@ -40,6 +41,7 @@ class Hrga3UsulandanIdentifikasi extends Controller
         for ($i = 0; $i < count($r->id_pegawai); $i++) {
             $data = [
                 'divisi_id' => 0,
+                'nota_pelatihan' => $nota,
                 'data_pegawais_id' => $r->id_pegawai[$i],
                 'pengusul' => $r->pengusul,
                 'tanggal' => $r->tanggal,
@@ -55,7 +57,8 @@ class Hrga3UsulandanIdentifikasi extends Controller
                 'tema_pelatihan' => $r->usulan_jenis_pelatihan,
                 'tanggal' => $r->tanggal,
                 'waktu' => $r->usulan_waktu,
-                'tempat' => "Ruang meeting lantai 2",
+                'waktu_selesai' => $r->usulan_waktu_selesai,
+                'tempat' => $r->tempat,
                 'narasumber' => $program->narasumber,
                 'kisaran_materi' => $r->alasan,
                 'penyelenggara' => $program->sumber,
@@ -63,6 +66,12 @@ class Hrga3UsulandanIdentifikasi extends Controller
                 'konfirmasi_keterangan' => 'Hadir'
             ];
             JadwalInformasiPelatihan::insert($data);
+            $data = [
+                'nota_pelatihan' => $nota,
+                'tujuan_pelatihan' => $r->tujuan_pelatihan,
+                'keterangan' => '-',
+            ];
+            DB::table('evaluasi_pelatihan')->insert($data);
         }
 
         return redirect()->route('hrga3.2.index')->with('sukses', 'Data Berhasil Disimpan');

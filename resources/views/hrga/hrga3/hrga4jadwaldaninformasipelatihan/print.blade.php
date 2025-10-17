@@ -11,7 +11,9 @@
                     <td>{{ tanggal($jadwal->tanggal) }}
                     </td>
                     <td width="20%" class="dhead p-2 fw-bold">Waktu</td>
-                    <td>{{ date('h:i A', strtotime($jadwal->waktu)) }} - 12:00 PM</td>
+                    <td>{{ date('h:i A', strtotime($jadwal->waktu)) }} -
+                        {{ date('h:i A', strtotime($jadwal->waktu_selesai)) }}
+                    </td>
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Tempat</td>
@@ -90,7 +92,7 @@
                     <tr>
                         <td class="text-center">(STAFF HRGA)</td>
                         <td class="text-center">(KA. HRGA)</td>
-                        <td class="text-center">(OPERASIONAL MANAGER)</td>
+                        <td class="text-center">(OPERATIONAL MANAGER)</td>
                     </tr>
                 </tbody>
             </table>
