@@ -41,6 +41,14 @@ class TbhBarang extends Component
         $this->reset(['nama_barang', 'kodeBarang', 'satuan', 'spek']);
     }
 
+    public function updateSpek($id, $value)
+    {
+        $barang = Barang::find($id);
+        $barang->spek = $value;
+        $barang->save();
+        $this->pesan = "berhasil update spek";
+    }
+
     public function hapus($id)
     {
         try {

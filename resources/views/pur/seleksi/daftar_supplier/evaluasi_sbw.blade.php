@@ -1,11 +1,11 @@
 <x-app-layout :title="$title">
-    <form action="{{ route('pur.seleksi.1.evaluasi_update') }}" method="post" x-data="{
+    <form action="{{ route('pur.seleksi.1.evaluasi_sbw_update') }}" method="post" x-data="{
         showKuantitas: false,
         showWaktu: false,
         showKualitas: false
     }">
         @csrf
-        <input type="hidden" name="suplier_id" value="{{ $supplier->id }}">
+        <input type="hidden" name="rumah_walet_id" value="{{ $rumahWalet->id }}">
         <div class="row">
             <div class="col-3">
                 <div class="form-group mt-3">
@@ -17,15 +17,15 @@
             <div class="col-3">
                 <div class="form-group mt-3">
                     <label for="nama_supplier_outsource">Nama Supplier/Outsource:</label>
-                    <input readonly type="text" id="nama_supplier_outsource" name="nama_supplier_outsource"
-                        class="form-control" value="{{ $supplier->nama_supplier }}" readonly>
+                    <input type="text" id="nama_supplier_outsource" name="nama_supplier_outsource"
+                        class="form-control" value="{{ $rumahWalet->nama }}" readonly>
                 </div>
             </div>
             <div class="col-1">
                 <div class="form-group mt-3">
                     <label for="periode_evaluasi">Semester:</label>
-                    <input type="number" placeholder="masukan bulan" id="periode_evaluasi" name="semester"
-                        class="form-control" value="{{ $semester ?? '' }}">
+                    <input type="text" placeholder="masukan bulan" readonly id="periode_evaluasi" name="semester"
+                        class="form-control" value="{{ $semester }}">
                 </div>
             </div>
         </div>
@@ -142,15 +142,17 @@
                     placeholder="hasil penilaian" placeholder="Contoh: 90" type="text"
                     name="komunikasi_penilaian" value="" class="form-control">
             </div>
-        </div>
 
-        <div class="row mt-3">
-            <div class="col-12">
-                <button type="submit" class="btn btn-sm btn-primary">Save</button>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-sm btn-primary">Save</button>
+                </div>
             </div>
         </div>
     </form>
+
     @if (isset($evaluasi) && $evaluasi->detail->count() > 0)
+
         @php
             $kuantitas = $evaluasi->detail->where('jenis_kriteria', 'kuantitas')->whereNotNull('alasan');
             $waktu = $evaluasi->detail->where('jenis_kriteria', 'waktu')->whereNotNull('alasan');
@@ -173,7 +175,7 @@
                     <p class="h4">Kriteria Evaluasi:</p>
                     <div>
                         <a target="_blank" class="btn btn-sm btn-primary"
-                            href="{{ route('pur.seleksi.1.evaluasi_print', ['supplier_id' => $supplier->id, 'semester' => $semester]) }}"><i
+                            href="{{ route('pur.seleksi.1.evaluasi_print_sbw', ['rumah_walet_id' => $rumahWalet->id, 'semester' => $semester]) }}"><i
                                 class="fa fa-print"></i>
                             Cetak</a>
                     </div>

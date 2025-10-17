@@ -8,14 +8,15 @@
                     class="fas fa-print"></i>
                 Print</a>
 
-            <a href="{{ route('pur.seleksi.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+            <a href="{{ route('pur.seleksi.1.create', ['kategori' => $kategori]) }}" class="btn btn-sm btn-primary"><i
+                    class="fas fa-plus"></i>
                 Daftar Supplier</a>
 
             @if ($kategori != 'lainnya')
                 <button data-bs-toggle="modal" data-bs-target="#tambah" type="button" class="btn btn-sm btn-primary"><i
                         class="fas fa-plus"></i> Barang </button>
                 <div x-data="{ showProduk: false }">
-                    <x-modal btnSave="T" idModal="tambah" title="Tambah Produk" size="modal-lg">
+                    <x-modal btnSave="T" idModal="tambah" title="Tambah Produk" size="modal-full">
                         @livewire('ppc.tbh-barang', ['kategori' => $kategori])
                     </x-modal>
                 </div>
@@ -48,7 +49,12 @@
                             <td>{{ $d->contact_person }}</td>
                             <td>{{ $d->no_telp }}</td>
                             <td>
-                                @forelse ($d->evaluasi as $evaluasi)
+                                @php
+                                    $evaluasi_s1 = $d->evaluasi()->where('semester', 1)->first();
+                                    $evaluasi_s2 = $d->evaluasi()->where('semester', 2)->first();
+                                @endphp
+
+                                {{-- @forelse ($d->evaluasi as $evaluasi)
                                     <a href="{{ route('pur.seleksi.1.evaluasi', $evaluasi->id) }}"
                                         class="mb-1 btn btn-xs btn-primary">Evaluasi Bulan
                                         {{ $evaluasi->periode_evaluasi }}</a>
@@ -56,7 +62,13 @@
                                     <a href="#addEvaluasi" data-bs-toggle="modal"
                                         @click="idSuplier = {{ $d->id }}" class="mb-1 btn btn-xs btn-info"><i
                                             class="fas fa-plus"></i> Evaluasi</a>
-                                @endforelse
+                                @endforelse --}}
+                                <a href="{{ route('pur.seleksi.1.evaluasi', ['semester' => 1, 'id' => $d->id]) }}"
+                                    class="mb-2 btn btn-xs {{ $evaluasi_s1 ? 'btn-primary' : 'btn-outline-primary' }}">Semester
+                                    I</a>
+                                <a href="{{ route('pur.seleksi.1.evaluasi', ['semester' => 2, 'id' => $d->id]) }}"
+                                    class="btn btn-xs {{ $evaluasi_s2 ? 'btn-primary' : 'btn-outline-primary' }}">Semester
+                                    II</a>
                             </td>
                             <td>
                                 <a href="{{ route('pur.seleksi.1.seleksi', $d) }}" target="_blank"
@@ -74,6 +86,10 @@
                     @endforeach
                 @else
                     @foreach ($rumah_walet as $r)
+                        @php
+                            $evaluasi_s1 = $r->evaluasi()->where('semester', 1)->first();
+                            $evaluasi_s2 = $r->evaluasi()->where('semester', 2)->first();
+                        @endphp
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucwords($r->nama) }}</td>
@@ -81,12 +97,16 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <a href="{{ route('pur.seleksi.1.evaluasi_print_sbw', $r) }}" target="_blank"
-                                    class="mb-1 btn btn-xs btn-info"><i class="fas fa-print"></i> Print</a>
+                                <a href="{{ route('pur.seleksi.1.evaluasi_sbw', ['semester' => 1, 'id' => $r->id]) }}"
+                                    class="mb-2 btn btn-xs {{ $evaluasi_s1 ? 'btn-primary' : 'btn-outline-primary' }}">Semester
+                                    I</a>
+                                <a href="{{ route('pur.seleksi.1.evaluasi_sbw', ['semester' => 2, 'id' => $r->id]) }}"
+                                    class="btn btn-xs {{ $evaluasi_s2 ? 'btn-primary' : 'btn-outline-primary' }}">Semester
+                                    II</a>
                             </td>
                             <td>
-                                <a href="{{ route('pur.seleksi.1.seleksi_sbw', $r) }}" target="_blank"
-                                    class="mb-1 btn btn-xs btn-info"><i class="fas fa-print"></i> Print</a>
+                                <a href="{{ route('pur.seleksi.1.create_seleksi_sbw', $r) }}"
+                                    class="mb-1 btn btn-xs btn-info"><i class="fas fa-plus"></i> Seleksi</a>
                             </td>
                             <td>
                                 <a href="{{ route('pur.seleksi.1.edit', $r->id) }}" class="btn btn-xs btn-primary"><i

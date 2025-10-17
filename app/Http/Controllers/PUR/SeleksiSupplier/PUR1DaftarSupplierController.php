@@ -7,6 +7,7 @@ use App\Models\DetailKetidaksesuaian;
 use App\Models\Evaluasi;
 use App\Models\PurchaseOrder;
 use App\Models\RumahWalet;
+use App\Models\SeleksiSupplier;
 use App\Models\Suplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -46,6 +47,56 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.seleksi', $data);
     }
 
+    public function create_seleksi_sbw(RumahWalet $supplier)
+    {
+        $seleksi = $supplier->seleksi()->latest()->first();
+        $data = [
+            'title' => 'Tambah Seleksi Supplier',
+            'supplier' => $supplier,
+            'seleksi' => $seleksi,
+        ];
+        return view('pur.seleksi.daftar_supplier.create_seleksi_sbw', $data);
+    }
+    public function store_seleksi_sbw(RumahWalet $supplier, Request $r)
+    {
+
+        try {
+            DB::beginTransaction();
+            $data = [
+                'supplier_id' => $supplier->id,
+                'material_ditawarkan' => $r->material_ditawarkan,
+                'reg_rwb' => $r->reg_rwb,
+                'spesifikasi' => $r->spesifikasi,
+                'estimasi_delivery' => $r->estimasi_delivery,
+                'sistem_manajemen' => $r->sistem_manajemen,
+                'manajemen_lainnya' => $r->manajemen_lainnya ?? null,
+                'profil_perusahaan' => $r->profil_perusahaan,
+                'jatuh_tempo' => $r->jatuh_tempo,
+                'sample' => $r->sample,
+                'hasil_pemeriksaan_lab' => $r->hasil_pemeriksaan_lab,
+                'lab_kesimpulan' => $r->lab_kesimpulan,
+                'hasil_pemeriksaan_penerimaan' => $r->hasil_pemeriksaan_penerimaan,
+                'penerimaan_kesimpulan' => $r->penerimaan_kesimpulan,
+                'hasil_pemeriksaan_hewan' => $r->hasil_pemeriksaan_hewan,
+                'hewan_kesimpulan' => $r->hewan_kesimpulan,
+                'admin' => auth()->user()->name,
+                'tgl' => date('Y-m-d'),
+            ];
+
+            $seleksi = SeleksiSupplier::where('supplier_id', $supplier->id)->first();
+            if ($seleksi) {
+                $seleksi->update($data);
+            } else {
+                SeleksiSupplier::create($data);
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            throw $th;
+        }
+        return redirect()->back()->with('sukses', 'Seleksi Supplier berhasil ditambahkan');
+    }
+
     public function seleksi_sbw(RumahWalet $supplier)
     {
         $data = [
@@ -56,45 +107,40 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
 
-    public function create()
+
+
+    public function evaluasi(Request $r)
     {
-        $data = [
-            'title' => 'Tambah Daftar Supplier',
-        ];
+        $supplier_id = $r->id;
+        $semester = $r->semester ?? 1;
+        $supplier = Suplier::where('id', $supplier_id)->first();
+        $evaluasi = Evaluasi::with(['detail', 'supplier'])->where([['supplier_id', $supplier_id], ['semester', $semester]])->first();
+        $detailAda = !empty(optional($evaluasi)->detail);
 
-        return view('pur.seleksi.daftar_supplier.create', $data);
-    }
-
-    public function evaluasi($id)
-    {
-
-        $evaluasi = Evaluasi::with(['detail', 'supplier'])->where('id', $id)->first();
-        $detailAda = !empty($evaluasi->detail);
         $data = [
             'title' => 'Evaluasi Supplier : ',
-
-            'supplier' => $evaluasi->supplier,
+            'semester' => $semester,
+            'supplier' => $supplier,
             'evaluasi' => $evaluasi,
             'detailAda' => $detailAda,
         ];
 
         return view('pur.seleksi.daftar_supplier.evaluasi', $data);
     }
-
-
-    public function evaluasi_update(Request $r, $id)
+    public function evaluasi_update(Request $r)
     {
-
+        $id = $r->suplier_id;
         try {
             DB::beginTransaction();
             $evaluasi =  Evaluasi::updateOrCreate(
                 [
                     'supplier_id' => $id,
-                    'periode_evaluasi' => $r->periode_evaluasi,
+                    'semester' => $r->semester,
                 ],
                 [
                     'supplier_id' => $id,
-                    'periode_evaluasi' => $r->periode_evaluasi,
+                    'semester' => $r->semester,
+                    'tgl' => $r->tgl,
                 ],
             );
             $evaluasi->detail()->delete();
@@ -165,16 +211,20 @@ class PUR1DaftarSupplierController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Evaluasi Supplier berhasil ditambahkan');
+            return redirect()->back()->with('sukses', 'Evaluasi Supplier berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('pur.seleksi.1.index')->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
-    public function evaluasi_print(Evaluasi $evaluasi)
+    public function evaluasi_print(Request $r)
     {
-        $supplier = Suplier::where('id', $evaluasi->supplier_id)->first();
+
+        $supplier_id = $r->supplier_id;
+        $semester = $r->semester ?? 1;
+        $supplier = Suplier::where('id', $supplier_id)->first();
+        $evaluasi = Evaluasi::where([['supplier_id', $supplier_id], ['semester', $semester]])->latest()->first();
         $kodes = [
             'lainnya' => 'PURS.01.05',
             'barang' => 'PURB.01.05',
@@ -193,31 +243,158 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.print_evaluasi', $data);
     }
 
-    public function evaluasi_print_sbw(RumahWalet $supplier)
+    public function evaluasi_sbw(Request $r)
     {
+        $id = $r->id;
+        $semester = $r->semester ?? 1;
+        $rumahWalet = RumahWalet::where('id', $id)->first();
+        $evaluasi = Evaluasi::with(['detail', 'rumahWalet'])->where([['rumah_walet_id', $id], ['semester', $semester]])->first();
+
+        $detailAda = !empty(optional($evaluasi)->detail);
+        $data = [
+            'title' => 'Evaluasi Supplier Sbw',
+            'semester' => $semester,
+            'rumahWalet' => $rumahWalet,
+            'supplier' => optional($evaluasi)->supplier,
+            'evaluasi' => $evaluasi,
+            'detailAda' => $detailAda,
+        ];
+
+        return view('pur.seleksi.daftar_supplier.evaluasi_sbw', $data);
+    }
+
+
+    public function evaluasi_sbw_update(Request $r)
+    {
+        $id = $r->rumah_walet_id;
+        try {
+            DB::beginTransaction();
+            $evaluasi =  Evaluasi::updateOrCreate(
+                [
+                    'rumah_walet_id' => $id,
+                    'semester' => $r->semester,
+                ],
+                [
+                    'rumah_walet_id' => $id,
+                    'semester' => $r->semester,
+                    'tgl' => $r->tgl,
+                ],
+            );
+            $evaluasi->detail()->delete();
+
+            $evaluasi->detail()->create([
+                'jenis_kriteria' => 'harga',
+                'tanggal_ketidaksesuaian' => now(),
+                'alasan' => $r->harga_keterangan ?? null,
+                'penilaian' => $r->harga_penilaian ?? 0,
+            ]);
+
+            $evaluasi->detail()->create([
+                'jenis_kriteria' => 'komunikasi',
+                'tanggal_ketidaksesuaian' => now(),
+                'alasan' => $r->harga_keterangan ?? null,
+                'penilaian' => $r->komunikasi_penilaian ?? 0,
+            ]);
+
+            $kuantitas = collect($r->kuantitas_tanggal)->map(function ($tanggal, $index) use ($r) {
+                return [
+                    'jenis_kriteria' => 'kuantitas',
+                    'tanggal_ketidaksesuaian' => $tanggal,
+                    'alasan' => $r->kuantitas_karena[$index] ?? null,
+                    'penilaian' => $r->kuantitas_penilaian[$index] ?? 0,
+                ];
+            });
+
+            $waktu = collect($r->waktu_tanggal)->map(function ($tanggal, $index) use ($r) {
+                return [
+                    'jenis_kriteria' => 'waktu',
+                    'tanggal_ketidaksesuaian' => $tanggal,
+                    'alasan' => $r->waktu_karena[$index] ?? null,
+                    'penilaian' => $r->waktu_penilaian[$index] ?? 0,
+                ];
+            });
+
+            $kualitas = collect($r->kualitas_tanggal)->map(function ($tanggal, $index) use ($r) {
+                return [
+                    'jenis_kriteria' => 'kualitas',
+                    'tanggal_ketidaksesuaian' => $tanggal,
+                    'alasan' => $r->kualitas_karena[$index] ?? null,
+                    'penilaian' => $r->kualitas_penilaian[$index] ?? 0,
+                ];
+            });
+
+            $evaluasi->detail()->createMany($kuantitas->merge($waktu)->merge($kualitas)->toArray());
+
+            // 🔹 Hitung total setelah semua detail tersimpan
+            $evaluasi->load('detail'); // refresh relasi
+
+            $kuantitas = $evaluasi->detail->where('jenis_kriteria', 'kuantitas')->whereNotNull('alasan');
+            $waktu = $evaluasi->detail->where('jenis_kriteria', 'waktu')->whereNotNull('alasan');
+            $kualitas = $evaluasi->detail->where('jenis_kriteria', 'kualitas')->whereNotNull('alasan');
+            $harga = $evaluasi->detail->where('jenis_kriteria', 'harga')->first();
+            $komunikasi = $evaluasi->detail->where('jenis_kriteria', 'komunikasi')->first();
+
+            $totalPenilaian =
+                ($kuantitas->avg('penilaian') ?? 100) +
+                ($waktu->avg('penilaian') ?? 100) +
+                ($kualitas->avg('penilaian') ?? 100) +
+                ($harga ? $harga->penilaian : 100) +
+                ($komunikasi ? $komunikasi->penilaian : 100);
+
+            $rataRata = $totalPenilaian / 5;
+
+            RumahWalet::find($id)->update([
+                'hasil_evaluasi' => $rataRata,
+            ]);
+
+            DB::commit();
+            return redirect()->back()->with('sukses', 'Evaluasi Supplier berhasil ditambahkan');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+
+
+    public function evaluasi_print_sbw(Request $r)
+    {
+        $rumah_walet_id = $r->rumah_walet_id;
+        $semester = $r->semester ?? 1;
+        $supplier = RumahWalet::where('id', $rumah_walet_id)->first();
         $data = [
             'title' => 'EVALUASI SUPPLIER/OUTSOURCE',
             'dok' => 'Dok.No.: FRM.PURS.01.05, Rev.00',
             'supplier' => $supplier,
-            'evaluasi' => Evaluasi::where('supplier_id', $supplier->id)->latest()->first(),
+            'evaluasi' => Evaluasi::where([['rumah_walet_id', $rumah_walet_id], ['semester', $semester]])->latest()->first(),
         ];
         return view('pur.seleksi.daftar_supplier.print_evaluasi_sbw', $data);
     }
 
-    public function edit($id)
+    public function edit(Request $r, $id)
     {
         $data = [
             'title' => 'Edit Daftar Supplier',
             'supplier' => Suplier::where('id', $id)->first(),
+            'kategori' => $r->kategori ?? 'barang',
         ];
 
         return view('pur.seleksi.daftar_supplier.edit', $data);
     }
 
+    public function create(Request $r)
+    {
+        $data = [
+            'title' => 'Tambah Daftar Supplier',
+            'kategori' => $r->kategori ?? 'barang',
+        ];
+
+        return view('pur.seleksi.daftar_supplier.create', $data);
+    }
+
     public function store(Request $r)
     {
         DB::beginTransaction();
-
         try {
             for ($i = 0; $i < count($r->nama_supplier); $i++) {
                 Suplier::create([
@@ -234,10 +411,10 @@ class PUR1DaftarSupplierController extends Controller
 
             DB::commit();
 
-            return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Seleksi Supplier berhasil ditambahkan');
+            return redirect()->route('pur.seleksi.1.index', ['kategori' => $r->kategori])->with('sukses', 'Seleksi Supplier berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('pur.seleksi.1.create')->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function update(Request $r, $id)
@@ -258,10 +435,10 @@ class PUR1DaftarSupplierController extends Controller
 
             DB::commit();
 
-            return redirect()->route('pur.seleksi.1.index', ['kategori' => $r->jenis_produk])->with('sukses', 'Seleksi Supplier berhasil diupdate');
+            return redirect()->route('pur.seleksi.1.index', ['kategori' => $r->kategori])->with('sukses', 'Seleksi Supplier berhasil diupdate');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('pur.seleksi.1.create')->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function destroy($id)
@@ -269,12 +446,12 @@ class PUR1DaftarSupplierController extends Controller
         $supplier = Suplier::findOrFail($id);
         $check = PurchaseOrder::where('supplier', $supplier->nama_supplier)->first();
         if ($check) {
-            return redirect()->route('pur.seleksi.1.index')->with('error', 'Gagal menghapus, supplier masih digunakan di Purchase Order');
+            return redirect()->back()->with('error', 'Gagal menghapus, supplier masih digunakan di Purchase Order');
         } else {
             $supplier->delete();
         }
 
-        return redirect()->route('pur.seleksi.1.index')->with('sukses', 'Seleksi Supplier berhasil dihapus');
+        return redirect()->back()->with('sukses', 'Seleksi Supplier berhasil dihapus');
     }
     public function print(Request $r)
     {

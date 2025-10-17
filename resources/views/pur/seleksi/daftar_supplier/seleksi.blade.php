@@ -34,7 +34,9 @@
             <th>Spesifikasi</th>
             <td>
                 <ol style="list-style-type: none; padding-left: 0; margin: 0">
-                    <li>{{ ucfirst($item->nama_barang) }} : {{ $item->spek ?? '-' }}</li>
+                    @foreach ($supplier->barang as $item)
+                        <li>{{ $loop->iteration }}. {{ $item->spek ?? '-' }}</li>
+                    @endforeach
                 </ol>
             </td>
         </tr>
@@ -54,7 +56,8 @@
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen
+            </th>
         </tr>
         <tr>
             <th>Sistem manajemen yang telah diterapkan di perusahaan anda:</th>

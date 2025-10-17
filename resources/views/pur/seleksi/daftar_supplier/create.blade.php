@@ -4,8 +4,10 @@
         <x-multiple-input>
             <div class="col-3">
                 <div class="form-group">
+                    <input type="hidden" name="kategori" value="{{ $kategori }}">
                     <label for="">Nama Supplier</label>
-                    <input required type="text" name="nama_supplier[]" placeholder="Nama Supplier" class="form-control">
+                    <input required type="text" name="nama_supplier[]" placeholder="Nama Supplier"
+                        class="form-control">
                 </div>
             </div>
             <div class="col-3">

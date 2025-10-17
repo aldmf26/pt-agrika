@@ -14,7 +14,7 @@
             </div>
             <div style="overflow: auto; height: 300px">
                 @if (!empty($pesan))
-                    <div class="alert alert-danger">{{ $pesan }}</div>
+                    <div class="alert alert-success">{{ $pesan }}</div>
                 @endif
                 <table id="tblInput" class="table table-bordered">
                     <thead>
@@ -25,6 +25,7 @@
                             <th>Satuan</th>
                             <th>Supplier</th>
                             <th>Spesifikasi (untuk seleksi supplier)</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -35,13 +36,17 @@
                                 <td>{{ $d->nama_barang }}</td>
                                 <td>{{ $d->satuan }}</td>
                                 <td>{{ $d->supplier->nama_supplier }}</td>
-                                <td>{{ $d->spek }}</td>
-                                {{-- <td>{{ $d->no_lot }}</td> 
+                                <td>
+                                    <input type="text" class="form-control form-control-sm"
+                                        value="{{ $d->spek }}"
+                                        wire:blur="updateSpek({{ $d->id }}, $event.target.value)"
+                                        placeholder="Ketik spesifikasi...">
+                                </td>
                                 <td>
                                     <button wire:confirm='"Yakin ingin menghapus data ini?"' type="button"
-                                        wire:click="hapus({{ $d->id }})"
-                                        class="btn btn-xs btn-danger">Hapus</button>
-                                </td> --}}
+                                        wire:click="hapus({{ $d->id }})" class="btn btn-xs btn-danger"><i
+                                            class="fas fa-trash"></i></button>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -53,8 +58,6 @@
     <form wire:submit.prevent="store">
         <h6>{{ ucwords($kategori) }}</h6>
         <div class="row">
-
-
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Kode Barang</label>
