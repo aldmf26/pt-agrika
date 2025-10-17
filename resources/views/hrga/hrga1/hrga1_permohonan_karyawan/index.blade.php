@@ -26,12 +26,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $no = 1;
-                    @endphp
                     @foreach ($dataBaru as $d)
                         <tr>
-                            <td>{{ $no++ }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td align="right">{{ tanggal($d->tgl_dibutuhkan) }}</td>
                             <td>{{ ucwords($d->status) }}</td>
                             <td>{{ optional($d->divisi)->divisi ?? 'Cabut' }}</td>
