@@ -32,11 +32,26 @@ class DataPegawai extends Component
     public function updatedSelectAll($value)
     {
         if ($value) {
-            $this->cekPegawai = ModelsDataPegawai::pluck('id')->map(fn($id) => (string) $id)->toArray();
+            $this->cekPegawai = array_unique(array_merge($this->cekPegawai, $this->currentPageIds));
         } else {
-            $this->cekPegawai = [];
+            $this->cekPegawai = array_diff($this->cekPegawai, $this->currentPageIds);
         }
     }
+
+
+    public function updatingPage()
+    {
+        $this->selectAll = false;
+    }
+
+    public function getPageName()
+    {
+        return $this->pageName ?? 'page';
+    }
+
+
+
+
 
     public function sortBy($field)
     {
@@ -63,15 +78,17 @@ class DataPegawai extends Component
         $query = ModelsDataPegawai::with('divisi')
             ->whereAny(['nama', 'nik', 'posisi', 'tgl_masuk'], 'LIKE', "%{$this->search}%");
 
-        // Add sorting
         if ($this->sort && $this->sortDirection) {
             $query->orderBy($this->sort, $this->sortDirection);
         }
 
         $datas = $query->paginate($this->paginate);
-        $data = [
+
+        // Simpan ID halaman aktif supaya updatedSelectAll tahu data mana yang ditampilkan
+        $this->currentPageIds = $datas->getCollection()->pluck('id')->map(fn($id) => (string)$id)->toArray();
+
+        return view('livewire.hrga.hrga4.hrga4-data-pegawai.data-pegawai', [
             'datas' => $datas
-        ];
-        return view('livewire.hrga.hrga4.hrga4-data-pegawai.data-pegawai', $data);
+        ]);
     }
 }

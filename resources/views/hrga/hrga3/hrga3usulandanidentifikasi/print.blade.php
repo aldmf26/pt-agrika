@@ -105,9 +105,9 @@
                                 <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
                                 <td>{{ $u->data_pegawai->divisi->divisi ?? '-' }}</td>
                                 <td>{{ ucwords(strtolower($u->pengusul)) }}</td>
-                                <td>{{ ucwords(strtolower($u->usulan_jenis_pelatihan)) }}</td>
+                                <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
                                 <td>{{ \Carbon\Carbon::parse($tanggal)->locale('id')->translatedFormat('F Y') }}</td>
-                                <td>{{ ucwords(strtolower($u->alasan)) }}</td>
+                                <td>{{ ucfirst(strtolower($u->alasan)) }}</td>
                             </tr>
                         @endforeach
                     </tbody>

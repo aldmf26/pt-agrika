@@ -51,8 +51,11 @@
                         <td>{{ $d->deleted_at == null ? '-' : tanggal($d->deleted_at) }}</td>
                         <td>{{ $d->posisi }}</td>
                         <td align="center">
-                            <input class="pointer form-check-input" type="checkbox" value="{{ $d->id }}"
-                                wire:model.live="cekPegawai">
+                            <input wire:key="checkbox-{{ $d->id }}-{{ $datas->currentPage() }}"
+                                class="pointer form-check-input" type="checkbox" value="{{ $d->id }}"
+                                wire:model.live="cekPegawai" />
+
+
                         </td>
                     </tr>
 
