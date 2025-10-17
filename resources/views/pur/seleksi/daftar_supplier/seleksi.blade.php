@@ -25,57 +25,86 @@
         <tr>
             <th>Barang yang ditawarkan</th>
             <td>
-                @foreach ($supplier->barang as $item)
-                    {{ $loop->iteration }}. {{ ucfirst($item->nama_barang) }}<br>
-                @endforeach
+                @if ($supplier->seleksi && $supplier->seleksi->barang_ditawarkan)
+                    {!! nl2br(e($supplier->seleksi->barang_ditawarkan)) !!}
+                @else
+                    @foreach ($supplier->barang as $item)
+                        {{ $loop->iteration }}. {{ ucfirst($item->nama_barang) }}<br>
+                    @endforeach
+                @endif
             </td>
         </tr>
         <tr>
             <th>Spesifikasi</th>
             <td>
-                <ol style="list-style-type: none; padding-left: 0; margin: 0">
-                    @foreach ($supplier->barang as $item)
-                        <li>{{ $loop->iteration }}. {{ $item->spek ?? '-' }}</li>
-                    @endforeach
-                </ol>
+                @if ($supplier->seleksi && $supplier->seleksi->spesifikasi)
+                    {!! nl2br(e($supplier->seleksi->spesifikasi)) !!}
+                @else
+                    <ol style="list-style-type: none; padding-left: 0; margin: 0">
+                        @foreach ($supplier->barang as $item)
+                            <li>{{ $loop->iteration }}. {{ $item->spek ?? '-' }}</li>
+                        @endforeach
+                    </ol>
+                @endif
             </td>
         </tr>
         <tr>
             <th>Nomor Reg RWB</th>
             <td>
-                <input type="checkbox"> Ada (lampirkan)
-                <input type="checkbox"> Tidak ada
-                <input type="checkbox" checked> Tidak relevan
+                <input type="checkbox"
+                    {{ $supplier->seleksi && $supplier->seleksi->reg_rwb == 'Ada (lampirkan)' ? 'checked' : '' }}> Ada
+                (lampirkan)
+                <input type="checkbox"
+                    {{ $supplier->seleksi && $supplier->seleksi->reg_rwb == 'Tidak ada' ? 'checked' : '' }}> Tidak ada
+                <input type="checkbox"
+                    {{ ($supplier->seleksi && $supplier->seleksi->reg_rwb == 'Tidak relevan') || !$supplier->seleksi ? 'checked' : '' }}>
+                Tidak relevan
             </td>
         </tr>
         <tr>
             <th>Estimasi Delivery (sejak PO diterima)</th>
-            <td>: 1 minggu</td>
+            <td>: {{ $supplier->seleksi->estimasi_delivery ?? '1 minggu' }}</td>
         </tr>
     </table>
 
     <table class="table table-bordered border-dark" style="font-size: 11px">
         <tr>
-            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen
-            </th>
+            <th class="text-center fw-bold bg-info" colspan="2">Informasi Manajemen</th>
         </tr>
         <tr>
             <th>Sistem manajemen yang telah diterapkan di perusahaan anda:</th>
             <td>
-                <p><input type="checkbox" {{ $kategori == 'Jasa' ? '' : 'checked' }}> HACCP (Sedang menunggu sertifikat
-                    HACCP dari pabrik)</p>
-                <p><input type="checkbox"> GMP</p>
-                <p><input type="checkbox" {{ $kategori == 'Jasa' ? 'checked' : '' }}>
-                    {{ $kategori == 'Jasa' ? 'Lainnya (sebutkan): ISO 9001' : 'Lainnya (sebutkan)………' }} </p>
-                <p><input type="checkbox"> Belum ada</p>
+                @php
+                    $defaultSistem =
+                        $kategori == 'Jasa' ? 'Lainnya' : 'HACCP (Sedang menunggu sertifikat HACCP dari pabrik)';
+                    $sistemManajemen = $supplier->seleksi->sistem_manajemen ?? $defaultSistem;
+                @endphp
+                <p><input type="checkbox"
+                        {{ $sistemManajemen == 'HACCP (Sedang menunggu sertifikat HACCP dari pabrik)' ? 'checked' : '' }}>
+                    HACCP (Sedang menunggu sertifikat HACCP dari pabrik)</p>
+                <p><input type="checkbox" {{ $sistemManajemen == 'GMP' ? 'checked' : '' }}> GMP</p>
+                <p><input type="checkbox" {{ $sistemManajemen == 'Lainnya' ? 'checked' : '' }}> Lainnya (sebutkan)
+                    @if ($supplier->seleksi && $supplier->seleksi->manajemen_lainnya)
+                        : {{ $supplier->seleksi->manajemen_lainnya }}
+                    @elseif($kategori == 'Jasa')
+                        : ISO 9001
+                    @else
+                        ………
+                    @endif
+                </p>
+                <p><input type="checkbox" {{ $sistemManajemen == 'Belum ada' ? 'checked' : '' }}> Belum ada</p>
                 <p>(Bila ada harap melampirkan sertifikat)</p>
             </td>
         </tr>
         <tr>
             <th>Profil Perusahaan</th>
             <td class="d-flex gap-2">
-                <input type="checkbox"> Ada (lampirkan)
-                <input class="ms-2" type="checkbox" checked> Tidak Ada
+                <input type="checkbox"
+                    {{ $supplier->seleksi && $supplier->seleksi->profil_perusahaan == 'Ada' ? 'checked' : '' }}> Ada
+                (lampirkan)
+                <input class="ms-2" type="checkbox"
+                    {{ ($supplier->seleksi && $supplier->seleksi->profil_perusahaan == 'Tidak Ada') || !$supplier->seleksi ? 'checked' : '' }}>
+                Tidak Ada
             </td>
         </tr>
     </table>
@@ -86,7 +115,7 @@
         </tr>
         <tr>
             <td colspan="2">
-                Lama jatuh tempo yang diijinkan: langsung
+                Lama jatuh tempo yang diijinkan: {{ $supplier->seleksi->jatuh_tempo ?? 'langsung' }}
             </td>
         </tr>
     </table>
@@ -96,18 +125,12 @@
             <th colspan="2" class="text-center fw-bold bg-info">Sample</th>
         </tr>
         <tr>
-            <td colspan="2">Jenis sample yang diberikan (jumlah) : tidak tersedia sample<br>
-                a.
-            </td>
+            <td colspan="2">{!! nl2br(e($supplier->seleksi->sample ?? "Jenis sample yang diberikan (jumlah) : tidak tersedia sample\na.")) !!}</td>
         </tr>
         <tr>
             <td>
-
                 Sample diserahkan oleh,
-
-
-
-
+                <br>
                 <br>
                 <br>
                 <br>
@@ -115,10 +138,7 @@
             </td>
             <td>
                 Sample diterima oleh,
-
-
-
-
+                <br>
                 <br>
                 <br>
                 <br>
@@ -136,13 +156,17 @@
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
-                1.
+                {!! nl2br(e($supplier->seleksi->hasil_pemeriksaan_lab ?? '1.')) !!}
             </td>
         </tr>
         <tr>
             <td>Kesimpulan
-                : <input type="checkbox" class="ms-5" checked> Lulus Pengujian <input type="checkbox"> Tidak Lulus
-                Pengujian
+                : <input type="checkbox" class="ms-5"
+                    {{ ($supplier->seleksi && $supplier->seleksi->lab_kesimpulan == 'Lulus Pengujian') || !$supplier->seleksi ? 'checked' : '' }}>
+                Lulus Pengujian
+                <input type="checkbox"
+                    {{ $supplier->seleksi && $supplier->seleksi->lab_kesimpulan == 'Tidak Lulus Pengujian' ? 'checked' : '' }}>
+                Tidak Lulus Pengujian
             </td>
         </tr>
         <tr>
@@ -158,13 +182,17 @@
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
-                1.
+                {!! nl2br(e($supplier->seleksi->hasil_pemeriksaan_penerimaan ?? '1.')) !!}
             </td>
         </tr>
         <tr>
             <td>Kesimpulan
-                : <input type="checkbox" class="ms-5" checked> Lulus Pengujian <input type="checkbox"> Tidak Lulus
-                Pengujian
+                : <input type="checkbox" class="ms-5"
+                    {{ ($supplier->seleksi && $supplier->seleksi->penerimaan_kesimpulan == 'Lulus Pengujian') || !$supplier->seleksi ? 'checked' : '' }}>
+                Lulus Pengujian
+                <input type="checkbox"
+                    {{ $supplier->seleksi && $supplier->seleksi->penerimaan_kesimpulan == 'Tidak Lulus Pengujian' ? 'checked' : '' }}>
+                Tidak Lulus Pengujian
             </td>
         </tr>
         <tr>
@@ -180,20 +208,19 @@
         </tr>
         <tr>
             <td>Hasil Pemeriksaan : <br>
-                1.
+                {!! nl2br(e($supplier->seleksi->hasil_pemeriksaan_hewan ?? '1.')) !!}
             </td>
         </tr>
         <tr>
             <td>Kesimpulan
-                : <input type="checkbox" class="ms-5" checked> Lulus Pengujian <input type="checkbox"> Tidak Lulus
-                Pengujian
+                : <input type="checkbox" class="ms-5"
+                    {{ ($supplier->seleksi && $supplier->seleksi->hewan_kesimpulan == 'Lulus Pengujian') || !$supplier->seleksi ? 'checked' : '' }}>
+                Lulus Pengujian
+                <input type="checkbox"
+                    {{ $supplier->seleksi && $supplier->seleksi->hewan_kesimpulan == 'Tidak Lulus Pengujian' ? 'checked' : '' }}>
+                Tidak Lulus Pengujian
             </td>
         </tr>
-        {{-- <tr>
-            <td>
-                Diperiksa Oleh: Drh. Edy <span class="ms-5"> Ttd:</span>
-            </td>
-        </tr> --}}
     </table>
 
     <div class="row">

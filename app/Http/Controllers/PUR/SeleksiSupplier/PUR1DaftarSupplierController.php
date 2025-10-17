@@ -57,6 +57,18 @@ class PUR1DaftarSupplierController extends Controller
         ];
         return view('pur.seleksi.daftar_supplier.create_seleksi_sbw', $data);
     }
+
+    public function create_seleksi(Suplier $supplier)
+    {
+        $seleksi = $supplier->seleksi()->latest()->first();
+        $data = [
+            'title' => 'Tambah Seleksi Supplier',
+            'supplier' => $supplier,
+            'seleksi' => $seleksi,
+        ];
+        return view('pur.seleksi.daftar_supplier.create_seleksi', $data);
+    }
+
     public function store_seleksi_sbw(RumahWalet $supplier, Request $r)
     {
 
@@ -106,8 +118,6 @@ class PUR1DaftarSupplierController extends Controller
         ];
         return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
-
-
 
     public function evaluasi(Request $r)
     {

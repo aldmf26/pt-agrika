@@ -452,8 +452,10 @@ Route::controller(PUR1DaftarSupplierController::class)
 
         Route::get('/seleksi/{supplier}', 'seleksi')->name('seleksi');
         Route::get('/seleksi_sbw/{supplier}', 'seleksi_sbw')->name('seleksi_sbw');
-        
-        Route::get('/seleksi/{supplier}', 'seleksi')->name('seleksi');
+
+        Route::get('/create_seleksi/{supplier}', 'create_seleksi')->name('create_seleksi');
+        Route::post('/create_seleksi/{supplier}', 'store_seleksi')->name('store_seleksi');
+
         Route::get('/create_seleksi_sbw/{supplier}', 'create_seleksi_sbw')->name('create_seleksi_sbw');
         Route::post('/create_seleksi_sbw/{supplier}', 'store_seleksi_sbw')->name('store_seleksi_sbw');
 

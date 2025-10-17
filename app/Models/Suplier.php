@@ -45,4 +45,9 @@ class Suplier extends Model
     {
         return $this->hasMany(Evaluasi::class, 'supplier_id');
     }
+
+    public function seleksi()
+    {
+        return $this->hasOne(SeleksiSupplier::class, 'supplier_id');
+    }
 }

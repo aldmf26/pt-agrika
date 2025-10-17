@@ -71,8 +71,8 @@
                                     II</a>
                             </td>
                             <td>
-                                <a href="{{ route('pur.seleksi.1.seleksi', $d) }}" target="_blank"
-                                    class="mb-1 btn btn-xs btn-info"><i class="fas fa-print"></i> Print</a>
+                                <a href="{{ route('pur.seleksi.1.create_seleksi', $d) }}"
+                                    class="mb-1 btn btn-xs btn-info"><i class="fas fa-plus"></i> Seleksi</a>
                             </td>
                             <td>
                                 <a href="{{ route('pur.seleksi.1.edit', $d->id) }}" class="btn btn-xs btn-primary"><i
