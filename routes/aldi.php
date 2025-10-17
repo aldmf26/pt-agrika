@@ -66,6 +66,7 @@ Route::controller(Hrga1PermohonanKaryawanController::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/print/{permohonan}', 'print')->name('print');
         Route::get('/edit/{permohonan}', 'edit')->name('edit');
+        Route::get('/destroy/{permohonan}', 'destroy')->name('destroy');
         Route::post('/update/{permohonan}', 'update')->name('update');
     });
 
