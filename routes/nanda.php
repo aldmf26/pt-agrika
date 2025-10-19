@@ -24,6 +24,7 @@ use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\daftarMesinControl
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga1ProgramPerawatanMesin;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga2CeklisPerawatanMesin;
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPerbaikanMesin;
+use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga0ItemKalibrasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikasi;
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\MenuController;
@@ -212,6 +213,15 @@ Route::controller(daftarMesinController::class)
         Route::post('/update', 'update')->name('update');
     });
 
+Route::controller(Hrga0ItemKalibrasi::class)
+    ->prefix('hrga/hrga9/hrga9.0_ItemKalibrasi')
+    ->name('hrga9.0.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/store', 'store')->name('store');
+        // Route::get('/itemKalibrasi/{id}', 'itemKalibrasi')->name('itemKalibrasi');
+        // Route::get('/print', 'print')->name('print');
+    });
 Route::controller(Hrga1ProgramKalibrasi::class)
     ->prefix('hrga/hrga9/hrga9.1_Program_Kalibrasi')
     ->name('hrga9.1.')
