@@ -87,7 +87,7 @@ class Hrga3PermintaanPerbaikan extends Controller
                 'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
             ])->post('https://api.fonnte.com/send', [
                 'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
-                'message' => "Diajukan Oleh : $r->diajukan_oleh\nItem/Lokasi : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
+                'message' => "Diajukan Oleh : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
             ]);
         }
 
