@@ -34,7 +34,7 @@
                                     <td>{{ $d->nik }}</td>
                                     <td>{{ umur($d->tgl_lahir) }} Tahun</td>
                                     <td>{{ $d->jenis_kelamin }}</td>
-                                    <td>{{ $d->divisi }}</td>
+                                    <td>{{ $d->divisi->divisi ?? '' }}</td>
                                     <td>{{ $d->posisi ?? '' }}</td>
                                     <td>
                                         {{ $d->tgl_masuk == null ? '-' : tanggal($d->tgl_masuk) }}
@@ -50,11 +50,13 @@
                                     </td>
                                     </td>
                                     <td class="d-flex gap-1">
-                                        {{-- <a target="_blank" href="{{ route('hrga2.2.penilaian', $d->id_karyawan) }}"
-                                        class="btn btn-sm btn-primary">Lihat Penilaian</a> --}}
                                         <a target="_blank"
+                                            href="{{ route('hrga2.2.penilaian', $d->karyawan_id_dari_api) }}"
+                                            class="btn btn-sm btn-primary">Penilaian</a>
+
+                                        {{-- <a target="_blank"
                                             href="{{ route('hrga2.2.print', [$d->id_karyawan, $d->divisi_id]) }}"
-                                            class="btn btn-sm btn-info">Print</a>
+                                            class="btn btn-sm btn-info">Print</a> --}}
                                     </td>
                                 </tr>
                             @endforeach

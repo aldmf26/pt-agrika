@@ -14,7 +14,7 @@ class Hrga2PenilaianKompetensi extends Controller
 {
     public function index()
     {
-        $datas = DataPegawai::hasilEvaluasi('penilaian');
+        $datas = DataPegawai::with('divisi')->orderBy('tgl_masuk', 'desc')->get();
         $data = [
             'title' => 'Hrga 2 penilaian kompetensi',
             'datas' => $datas
@@ -36,7 +36,7 @@ class Hrga2PenilaianKompetensi extends Controller
 
     public function penilaian($id)
     {
-        $datas = DataPegawai::oneHasilEvaluasi($id);
+        $datas = DataPegawai::where('karyawan_id_dari_api', $id)->first();
         $data = [
             'title' => 'Penilaian Kompetensi',
             'karyawan' => $datas
