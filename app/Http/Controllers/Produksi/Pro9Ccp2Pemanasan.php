@@ -71,21 +71,49 @@ class Pro9Ccp2Pemanasan extends Controller
 
     public function get_edit(Request $r)
     {
-        $header = DB::table('header_ccp2')->where('tgl', $r->tgl)->first();
+        $tgl = $r->tgl;
 
+        // Ambil header
+        $header = DB::table('header_ccp2')->where('tgl', $tgl)->first();
 
-        $total = $r->gr;
-        $perUrutan = 6000;
-        $urutanPenuh = intdiv($total, $perUrutan);
-        $sisa = $total % $perUrutan;
-        $totalUrutan = $urutanPenuh + ($sisa > 0 ? 1 : 0);
+        // Ambil data API
+        $response = Http::get("https://sarang.ptagafood.com/api/apihasap/coba_steaming?tgl=$tgl");
+        if ($response->failed()) {
+            return back()->with('error', 'Gagal mengambil data API.');
+        }
 
-        $data = [
+        $pemanasan = json_decode($response->body(), true);
+        if (!isset($pemanasan['data']) || empty($pemanasan['data'])) {
+            return back()->with('error', 'Data kosong.');
+        }
+
+        $dataApi = collect($pemanasan['data']);
+        $grouped = $dataApi->groupBy('kelompok');
+
+        $trayDetail = [];
+        $urutan = 1;
+
+        foreach ($grouped as $kelompok => $items) {
+            $totalBaris = count($items);
+            $jumlahTrayKelompok = ceil($totalBaris / 6); // misal 13 data => 3 urutan
+
+            for ($i = 1; $i <= $jumlahTrayKelompok; $i++) {
+                $trayDetail[] = [
+                    'urutan' => $urutan,
+                    'kelompok' => $kelompok,
+                    'tray_ke' => $i,
+                    'total_baris_kelompok' => $totalBaris,
+                    'total_tray_kelompok' => $jumlahTrayKelompok,
+                ];
+                $urutan++;
+            }
+        }
+
+        return view('produksi.pro9ccp2pemanasan.edit', [
             'header' => $header,
-
-            'totalUrutan' => $totalUrutan,
-            'tgl' => $r->tgl
-        ];
-        return view('produksi.pro9ccp2pemanasan.edit', $data);
+            'tgl' => $tgl,
+            'detailTray' => $trayDetail,
+            'totalUrutan' => count($trayDetail),
+        ]);
     }
 }

@@ -101,7 +101,7 @@
             padding: 0.2rem 0.3rem;
             vertical-align: middle;
             text-align: center;
-            white-space: nowrap;
+            /* white-space: nowrap; */
 
             /* agar teks tidak turun ke bawah */
         }
@@ -122,16 +122,12 @@
             }
 
             /* Biar tabel nggak pecah aneh */
-            table {
+            /* table {
                 page-break-inside: avoid;
-            }
+            } */
 
             /* Kalau mau mulai halaman baru + jarak atas */
-            .page-break {
-                page-break-before: always;
-                padding-top: 20mm;
-                /* jarak dari header halaman */
-            }
+
         }
     </style>
 </head>
@@ -139,16 +135,14 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-lg-12">
-
                 <table width="100%" style="font-size: 11px; ">
                     <thead class="repeat-header">
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
 
-                            <th colspan="10">
+                            <th colspan="11">
                                 <p class="cop_judul text-center">FORM PEMANASAN CCP 2</p>
                                 <p class="cop_bawah text-center">Steaming CCP 2</p>
                             </th>
@@ -168,7 +162,7 @@
                             </td>
 
                             <td colspan="2">Mesin Pemanas <br> <span class="fst-italic">Steamer Type</span></td>
-                            <td colspan="3"> : Sistem Retort - Pemanasan Uap Bertingkat</td>
+                            <td colspan="4"> : Sistem Retort - Pemanasan Uap Bertingkat</td>
                         </tr>
                         <tr>
                             <td>Suhu Sarang Walet Awal <br> <span class="fst-italic">Material
@@ -180,8 +174,17 @@
                                 </span></td>
                             <td colspan="3"> : Otomatis </td>
 
-                            <td colspan="5"></td>
+                            <td colspan="6"></td>
                         </tr>
+                    </thead>
+                </table>
+            </div>
+
+            <div class="col-lg-12">
+
+                <table width="100%" style="font-size: 11px; ">
+                    <thead>
+
                         <tr class="table-bawah">
                             <th rowspan="2" class="text-center align-middle">Urutan <br> Pemanasan <br> <span
                                     class="fst-italic fw-lighter">Heating Number</span></th>
@@ -192,6 +195,7 @@
                             </th>
                             <th rowspan="2" class="text-center align-middle">Jenis <br> <span
                                     class="fst-italic fw-lighter">Type</th>
+                            <th rowspan="2" class="text-center align-middle" width="10%">Grade bahan jadi</th>
                             <th rowspan="2" class="text-center align-middle">Waktu <br> Mulai <br> Steam</th>
                             <th colspan="2" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</th>
@@ -210,117 +214,172 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pemanasan as $index => $p)
+                        @php
+                            $groupedPemanasan = collect($pemanasan)->groupBy('kelompok');
+                            $startTime = \Carbon\Carbon::createFromTime(9, 0);
+                            $trayNumber = 0;
+                        @endphp
+
+                        @foreach ($groupedPemanasan as $kelompok => $items)
                             @php
-                                $rawPartai = $p['nm_partai'];
-                                $cleaned = str_replace("'", '', $rawPartai); // hilangkan tanda kutip
-                                $partaiArray = array_map('trim', explode(',', $cleaned));
-                                $sbwList = DB::table('sbw_kotor')
-                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->whereIn('nm_partai', $partaiArray)
-                                    ->get();
+                                // Hitung total tray yang dibutuhkan untuk kelompok ini
+                                $totalTrayKelompok = ceil($items->count() / 6);
 
-                                $startTime = \Carbon\Carbon::createFromTime(9, 0); // 09:00
-                                $groupNumber = ceil(($index + 1) / 6);
-                                $time = $startTime
-                                    ->copy()
-                                    ->addMinutes(15 * ($groupNumber - 1))
-                                    ->format('H:i');
+                                // Naikkan nomor tray mulai dari yang terakhir
+                                $trayAwal = $trayNumber + 1;
+                                $trayAkhir = $trayNumber + $totalTrayKelompok;
+                                $trayNumber = $trayAkhir;
 
+                                $indexDalamKelompok = 0;
                             @endphp
-                            @if ($index > 0 && $index % 6 == 0)
-                                <tr class="table-bawah">
-                                    <td colspan="13">&nbsp;</td>
-                                </tr>
-                            @endif
-                            @php
-                                $isi = DB::table('isi_ccp2')
-                                    ->where('tgl', $tgl)
-                                    ->where('urutan', ceil(($index + 1) / 6))
-                                    ->first();
 
-                            @endphp
-                            <tr class="table-bawah">
-                                <td class="text-end">{{ ceil(($index + 1) / 6) }}</td>
-                                <td class="text-end">{{ ($index % 6) + 1 }}</td>
-                                <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
-                                <td class="text-start">
-                                    {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
-
+                            <tr>
+                                <td colspan="14" class="fw-bold text-center bg-light">
+                                    {{-- KELOMPOK {{ $trayAwal }}–{{ $trayAkhir }} ({{ strtoupper($kelompok) }}) --}}
+                                    &nbsp;
                                 </td>
-                                <td class="text-end">
-                                    {{ empty($isi->waktu_mulai) ? date('h:i A', strtotime($time)) : date('h:i A', strtotime($isi->waktu_mulai)) }}
-                                </td>
-                                <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
-                                <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
-                                <td class="text-end">{{ empty($isi->tventing_c) ? 60.5 : $isi->tventing_c }} </td>
-                                <td class="text-end">{{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }}
-                                    Menit {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik</td>
-                                <td class="text-end">{{ empty($isi->ttot_c) ? 80.4 : $isi->ttot_c }} </td>
-                                <td class="text-end">
-                                    @if (!empty($isi->ttot_menit) && $isi->ttot_menit > 0)
-                                        {{ $isi->ttot_menit }} Menit
-                                    @endif
-
-                                    {{ empty($isi->ttot_detik) ? 35 : $isi->ttot_detik }} Detik
-                                </td>
-                                <td></td>
-                                <td></td>
                             </tr>
+
+                            @foreach ($items->values() as $i => $p)
+                                @php
+                                    $indexDalamKelompok++;
+
+                                    // Hitung tray keberapa dalam kelompok ini
+                                    $trayKe = $trayAwal + floor(($indexDalamKelompok - 1) / 6);
+
+                                    // Urutan dalam tray (1–6)
+                                    $urutanDalamTray = (($indexDalamKelompok - 1) % 6) + 1;
+
+                                    $rawPartai = $p['nm_partai'];
+                                    $cleaned = str_replace("'", '', $rawPartai);
+                                    $partaiArray = array_map('trim', explode(',', $cleaned));
+
+                                    $sbwList = DB::table('sbw_kotor')
+                                        ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                        ->whereIn('nm_partai', $partaiArray)
+                                        ->get();
+
+                                    $time = $startTime
+                                        ->copy()
+                                        ->addMinutes(15 * ($trayKe - 1))
+                                        ->format('H:i');
+
+                                    $isi = DB::table('isi_ccp2')->where('tgl', $tgl)->where('urutan', $trayKe)->first();
+                                @endphp
+
+                                {{-- Garis pemisah tiap 6 data --}}
+                                @if ($indexDalamKelompok > 1 && ($indexDalamKelompok - 1) % 6 == 0)
+                                    <tr class="table-bawah">
+                                        <td colspan="13">&nbsp;</td>
+                                    </tr>
+                                @endif
+
+                                <tr class="table-bawah">
+                                    {{-- Nomor Tray --}}
+                                    <td class="text-end">{{ $trayKe }}</td>
+
+                                    {{-- Urutan dalam tray (1–6) --}}
+                                    <td class="text-end">{{ $urutanDalamTray }}</td>
+
+                                    <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                    <td class="text-start">
+                                        {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
+                                    </td>
+                                    <td class="text-start" width="5%">
+                                        {{ $p['grade'] }}
+                                    </td>
+                                    <td class="text-end">
+                                        {{ empty($isi->waktu_mulai) ? date('h:i A', strtotime($time)) : date('h:i A', strtotime($isi->waktu_mulai)) }}
+                                    </td>
+                                    <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
+                                    <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
+                                    <td class="text-end">{{ empty($isi->tventing_c) ? 57.1 : $isi->tventing_c }}</td>
+                                    <td class="text-end">
+                                        {{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }} Menit
+                                        {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik
+                                    </td>
+                                    @php
+                                        if ($p['kelompok'] == '1') {
+                                            $suhu = '80.4';
+                                            $menit = '30 detik';
+                                        } elseif ($p['kelompok'] == '2') {
+                                            $suhu = '92.6';
+                                            $menit = '1 menit 27 detik';
+                                        } elseif ($p['kelompok'] == '3') {
+                                            $suhu = '85.1';
+                                            $menit = '1 menit 48 detik';
+                                        } else {
+                                            $suhu = '92.9';
+                                            $menit = '50 detik';
+                                        }
+                                    @endphp
+                                    <td class="text-end">{{ empty($isi->ttot_c) ? $suhu : $isi->ttot_c }}</td>
+                                    <td class="text-end">
+                                        @if (!empty($isi->ttot_menit) && $isi->ttot_menit > 0)
+                                            {{ $isi->ttot_menit }} Menit
+                                        @endif
+                                        {{ empty($isi->ttot_detik) ? $menit : $isi->ttot_detik }}
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
                         @endforeach
 
 
 
+
+
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="13">&nbsp;</th>
-                        </tr>
-                        <tr class="table-bawah">
-
-                            <th style="border: none; text-align: start" rowspan="3" colspan="2">
-                                <span class="fst-underline"> Standart Suhu Pemanasan</span> <br>
-                                <span class="fw-light">Mangkok/Segitiga/Oval/Sudut</span> <br>
-                                <span class="fw-light">Patahan</span> <br>
-                                <span class="fw-light">Kaki</span> <br>
-                                <span class="fw-light">Hancuran</span> <br> <br>
-                                <span class="fst-underline"> Standart Suhu T-venting</span> <br>
-                                <span class="fst-underline"> Standart Waktu T-venting</span> <br>
 
 
-                            </th>
-                            <th style="border: none; text-align: start" rowspan="3" colspan="2  ">
-                                <span class="fst-underline"> </span> <br>
-                                <span class="fw-light">: 80,4 °C Selama 30 Detik</span> <br>
-                                <span class="fw-light">: 92.6 °C Selama 1 Menit 27 Detik</span> <br>
-                                <span class="fw-light">: 85.1 °C Selama 1 Menit 48 Detik</span> <br>
-                                <span class="fw-light">: 92.9 °C Selama 50 Detik</span> <br> <br>
+                </table>
+                <table width="100%" style="font-size: 11px; ">
+                    <tr>
+                        <th colspan="13">&nbsp;</th>
+                    </tr>
+                    <tr class="table-bawah">
 
-                                <span class="fw-light">: 57.1 °C</span> <br>
-                                <span class="fw-light">: 1 Menit 3 Detik</span> <br>
+                        <th style="border: none; text-align: start" rowspan="3" colspan="2">
+                            <span class="fst-underline"> Standart Suhu Pemanasan</span> <br>
+                            <span class="fw-light">Mangkok/Segitiga/Oval/Sudut</span> <br>
+                            <span class="fw-light">Patahan</span> <br>
+                            <span class="fw-light">Kaki</span> <br>
+                            <span class="fw-light">Hancuran</span> <br> <br>
+                            <span class="fst-underline"> Standart Suhu T-venting</span> <br>
+                            <span class="fst-underline"> Standart Waktu T-venting</span> <br>
 
 
-                            </th>
-                            <th style="border: none; text-align: start" rowspan="3" colspan="4">
-                            </th>
-                            <th class="text-center" colspan="3">Dibuat Oleh:</th>
-                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
-                        </tr>
-                        <tr class="table-bawah">
+                        </th>
+                        <th style="border: none; text-align: start" rowspan="3" colspan="2  ">
+                            <span class="fst-underline"> </span> <br>
+                            <span class="fw-light">: 80,4 °C Selama 30 Detik</span> <br>
+                            <span class="fw-light">: 92.6 °C Selama 1 Menit 27 Detik</span> <br>
+                            <span class="fw-light">: 85.1 °C Selama 1 Menit 48 Detik</span> <br>
+                            <span class="fw-light">: 92.9 °C Selama 50 Detik</span> <br> <br>
 
-                            <td colspan="3" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
-                            <td colspan="2" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
-                        </tr>
-                        <tr class="table-bawah">
+                            <span class="fw-light">: 57.1 °C</span> <br>
+                            <span class="fw-light">: 1 Menit 3 Detik</span> <br>
 
-                            <td colspan="3" class="text-center align-bottom">(KA. STEAM)</td>
-                            <td colspan="2" class="text-center align-bottom">(KA. QC)</td>
-                        </tr>
 
-                    </tfoot>
+                        </th>
+                        <th style="border: none; text-align: start" rowspan="3" colspan="4">
+                        </th>
+                        <th class="text-center" colspan="3">Dibuat Oleh:</th>
+                        <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                    </tr>
+                    <tr class="table-bawah">
 
+                        <td colspan="3" style="height: 80px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                        <td colspan="2" style="height: 80px" class="text-center align-middle"><span
+                                style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                    </tr>
+                    <tr class="table-bawah">
+
+                        <td colspan="3" class="text-center align-bottom">(KA. STEAM)</td>
+                        <td colspan="2" class="text-center align-bottom">(KA. QC)</td>
+                    </tr>
                 </table>
             </div>
 

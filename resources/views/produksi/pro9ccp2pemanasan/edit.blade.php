@@ -19,10 +19,11 @@
     </div>
 
 </div>
-<table width="100%" class="table table-bordered">
+<table class="table table-bordered">
     <thead>
         <tr>
             <th class="text-nowrap" rowspan="2" class="align-middle">Urutan</th>
+            <th class="text-nowrap" rowspan="2" class="align-middle">Grade</th>
             <th class="text-nowrap" rowspan="2" class="align-middle">Waktu mulai steam</th>
             <th class="text-nowrap" rowspan="2" class="align-middle">T<sub>venting</sub> (°C)</th>
             <th class="text-nowrap" colspan="2">T<sub>venting</sub> (mnt)</th>
@@ -37,74 +38,71 @@
         </tr>
     </thead>
     <tbody>
-        @for ($i = 0; $i < $totalUrutan; $i++)
+        @php
+
+            $startTime = \Carbon\Carbon::createFromTime(9, 0);
+
+        @endphp
+        @foreach ($detailTray as $tray)
             @php
-                $isi = DB::table('isi_ccp2')
-                    ->where('tgl', $tgl)
-                    ->where('urutan', $i + 1)
-                    ->first();
+
+                if ($tray['kelompok'] == '1') {
+                    $nama = 'Mangkok/Segitiga/Oval/Sudut';
+                    $suhu = '80.4';
+                    $menit = 0;
+                    $detik = 30;
+                } elseif ($tray['kelompok'] == '2') {
+                    $nama = 'Patahan';
+                    $suhu = '92.6';
+                    $menit = 1;
+                    $detik = 27;
+                } elseif ($tray['kelompok'] == '3') {
+                    $nama = 'Kaki';
+                    $suhu = '85.1';
+                    $menit = 1;
+                    $detik = 48;
+                } else {
+                    $nama = 'Hancuran';
+                    $suhu = '92.9';
+                    $menit = 0;
+                    $detik = 50;
+                }
+
+                $trayKe = $tray['urutan'];
+                $time = $startTime
+                    ->copy()
+                    ->addMinutes(15 * ($trayKe - 1))
+                    ->format('H:i');
+
+                $isi = DB::table('isi_ccp2')->where('tgl', $tgl)->where('urutan', $trayKe)->first();
             @endphp
             <tr>
-                <td>{{ $i + 1 }}
-                    <input type="hidden" name="urutan[]" value="{{ $i + 1 }}">
+                <td>
+                    {{ $tray['urutan'] }}
+                    <input type="hidden" name="urutan[]" value="{{ $tray['urutan'] }}">
                 </td>
-                <td><input type="time" class="form-control" name="waktu_mulai[]"
-                        value="{{ empty($isi->waktu_mulai) ? '09:00' : $isi->waktu_mulai }}"></td>
+
+                <td>{{ $nama }}</td>
+                {{-- <td>Ke-{{ $tray['tray_ke'] }} dari {{ $tray['total_tray_kelompok'] }}</td> --}}
+                <td><input type="time" name="waktu_mulai[]"
+                        value="{{ empty($isi->waktu_mulai) ? $time : $isi->waktu_mulai }}" class="form-control"></td>
                 <td><input type="text" class="form-control" name="tventing_c[]"
-                        value="{{ empty($isi->tventing) ? 60.5 : $isi->tventing }}">
+                        value="{{ empty($isi->tventing_c) ? 57.1 : $isi->tventing_c }}">
                 </td>
                 <td><input type="number" class="form-control" name="tventing_menit[]"
                         value="{{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }}"></td>
                 <td><input type="number" class="form-control" name="tventing_detik[]"
                         value="{{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }}"></td>
                 <td><input type="text" class="form-control" name="ttot_c[]"
-                        value="{{ empty($isi->ttot) ? 80.4 : $isi->ttot }}"></td>
+                        value="{{ empty($isi->ttot_c) ? $suhu : $isi->ttot_c }}">
+
+
+                </td>
                 <td><input type="number" class="form-control" name="ttot_menit[]"
-                        value="{{ empty($isi->ttot_menit) ? 0 : $isi->ttot_menit }}"></td>
+                        value="{{ empty($isi->ttot_menit) ? $menit : $isi->ttot_menit }}"></td>
                 <td><input type="number" class="form-control" name="ttot_detik[]"
-                        value="{{ empty($isi->ttot_detik) ? 35 : $isi->ttot_detik }}"></td>
+                        value="{{ empty($isi->ttot_detik) ? $detik : $isi->ttot_detik }}"></td>
             </tr>
-        @endfor
+        @endforeach
     </tbody>
-
 </table>
-{{-- @for ($i = 0; $i < $totalUrutan; $i++)
-    <div class="row">
-        <div class="col-lg-2 mb-2">
-            <label for="">Waktu mulai steam</label>
-            <input type="hidden" name="urutan">
-            <input type="time" class="form-control" name="waktu_mulai_steam">
-        </div>
-        <div class="col-lg-2 mb-2">
-            <label for="">T<sub>venting</sub> (°C)</label>
-            <input type="text" class="form-control" name="waktu_mulai_steam">
-        </div>
-
-        <div class="col-lg-3 mb-2">
-            <label for="" class="text-center">T<sub>venting</sub> (mnt)</label>
-            <table>
-                <tr>
-                    <td class="text-nowrap">Menit : </td>
-                    <td><input type="number" class="form-control"></td>
-                    <td class="text-nowrap">Detik : </td>
-                    <td><input type="number" class="form-control"></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col-lg-1 mb-2">
-            <label for="">T<sub>tot</sub> (°C)</label>
-            <input type="text" class="form-control" name="waktu_mulai_steam">
-        </div>
-        <div class="col-lg-3 mb-2">
-            <label for="" class="text-center">T<sub>tot</sub> (mnt)</label>
-            <table>
-                <tr>
-                    <td class="text-nowrap">Menit : </td>
-                    <td><input type="number" class="form-control"></td>
-                    <td class="text-nowrap">Detik : </td>
-                    <td><input type="number" class="form-control"></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-@endfor --}}
