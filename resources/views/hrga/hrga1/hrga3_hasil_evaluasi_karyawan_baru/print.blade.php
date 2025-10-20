@@ -3,7 +3,7 @@
         <div class="row">
 
             <div class="col-12">
-                <table>
+                <table class="table-xs">
                     <tr>
                         <td>Nama Calon Karyawan</td>
                         <td>&nbsp;:&nbsp;</td>
@@ -34,7 +34,7 @@
                     </tr> --}}
                 </table>
                 <br>
-                <table class="table table-bordered border-dark">
+                <table class="table table-bordered border-dark table-xs">
                     <tr>
                         <th colspan="3" class="text-center head">PENILAIAN KARYAWAN</th>
                     </tr>
@@ -79,7 +79,7 @@
 
             <div class="col-12">
                 <table class="table table-borderless">
-                    <tr style="font-size: 12px">
+                    <tr style="font-size: 11px">
                         <td class="fw-bold text-decoration-underline">Keputusan:</td>
                         <td><input type="checkbox" name="" id="" checked> Lulus masa percobaan <br>
                             <input type="checkbox" name="" id=""> Tidak lulus masa percobaan
@@ -87,15 +87,15 @@
                     </tr>
                 </table>
 
-                <span class="fw-bold text-decoration-underline" style="font-size: 12px">Keterangan:</span>
-                <span style="font-size: 12px">Karyawan dilanjut kontrak &
+                <span class="fw-bold text-decoration-underline" style="font-size: 11px">Keterangan:</span>
+                <span style="font-size: 11px">Karyawan dilanjut kontrak &
                     diikutkan MCU tahun ini / depan</span>
             </div>
         </div>
         <div class="row mt-5">
             <div class="col-6"></div>
             <div class="col-6 text-center">
-                <table class="table table-bordered border-dark" style="font-size: 12px">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center">Dibuat Oleh:</th>
