@@ -98,9 +98,13 @@
                                                     <div class="form-group mb-3">
                                                         <label class="form-label">Barang yang ditawarkan</label>
                                                         <textarea name="material_ditawarkan" class="form-control" rows="5">
+@if ($supplier->kategori != 'Jasa')
 @foreach ($supplier->barang as $index => $barang)
 {{ $index + 1 }}. {{ $barang->nama_barang }}
 @endforeach
+@else
+{{ $seleksi->material_ditawarkan ?? 'Jasa ' . $supplier->nama_supplier }}
+@endif
 </textarea>
                                                     </div>
 
@@ -137,9 +141,13 @@
                                                     <div class="form-group mb-3">
                                                         <label class="form-label">Spesifikasi</label>
                                                         <textarea name="spesifikasi" class="form-control" rows="5">
+@if ($supplier->kategori != 'Jasa')
 @foreach ($supplier->barang as $index => $barang)
 {{ $index + 1 }}. {{ $barang->spek }}
 @endforeach
+@else
+{{ $seleksi->spesifikasi ?? '' }}
+@endif
 </textarea>
                                                     </div>
 

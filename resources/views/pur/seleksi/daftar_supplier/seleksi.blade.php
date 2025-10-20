@@ -25,6 +25,9 @@
         <tr>
             <th>Barang yang ditawarkan</th>
             <td>
+                @if ($supplier->kategori == 'Jasa')
+                    {!! nl2br(e($supplier->seleksi->material_ditawarkan)) !!}
+                @endif
                 @if ($supplier->seleksi && $supplier->seleksi->barang_ditawarkan)
                     {!! nl2br(e($supplier->seleksi->barang_ditawarkan)) !!}
                 @else
