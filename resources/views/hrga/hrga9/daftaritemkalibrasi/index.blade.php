@@ -33,7 +33,7 @@
                                     <a href="#" data-bs-toggle="modal" data-bs-target="#edit"
                                         data-id="{{ $i->id }}" class="btn btn-sm btn-warning edit">Edit</a>
                                     <a onclick="return confirm('Yakin ingin menghapus data ini?')"
-                                        href="{{ route('hrga8.0.delete', ['id' => $i->id]) }}"
+                                        href="{{ route('hrga9.0.delete', ['id' => $i->id]) }}"
                                         class="btn btn-sm btn-danger">Delete</a>
                                 </td>
                             </tr>

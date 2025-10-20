@@ -32,4 +32,15 @@ class Hrga0ItemKalibrasi extends Controller
 
         return redirect()->route('hrga9.0.index')->with('sukses', 'Data sarana dan prasarana berhasil disimpan.');
     }
+
+    public function delete(Request $request)
+    {
+        $item = ItemKalibrasiModel::find($request->id);
+        if ($item) {
+            $item->delete();
+            return redirect()->route('hrga9.0.index')->with('sukses', 'Data sarana dan prasarana berhasil dihapus.');
+        } else {
+            return redirect()->route('hrga9.0.index')->with('error', 'Data sarana dan prasarana gagal dihapus.');
+        }
+    }
 }

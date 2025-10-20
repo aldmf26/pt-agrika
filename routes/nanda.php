@@ -219,6 +219,7 @@ Route::controller(Hrga0ItemKalibrasi::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
+        Route::get('/delete', 'delete')->name('delete');
         // Route::get('/itemKalibrasi/{id}', 'itemKalibrasi')->name('itemKalibrasi');
         // Route::get('/print', 'print')->name('print');
     });
