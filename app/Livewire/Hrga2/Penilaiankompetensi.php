@@ -198,6 +198,7 @@ class Penilaiankompetensi extends Component
     {
         // Hitung total parameter
         $this->totalParameter = array_sum($this->parameter);
+        $totalParameter = count($this->parameter);
 
         // Hitung total SP
         $this->totalSP = 0;
@@ -206,7 +207,7 @@ class Penilaiankompetensi extends Component
         if (trim($this->spKeterangan['sp_3']) !== '') $this->totalSP += 40;
 
         // Nilai akhir
-        $this->totalNilai = $this->totalParameter - $this->totalSP;
+        $this->totalNilai = ($this->totalParameter - $this->totalSP) / $totalParameter;
 
         // Kategori
         if ($this->totalNilai >= 86 && $this->totalNilai <= 100) {
@@ -476,7 +477,7 @@ class Penilaiankompetensi extends Component
         }
 
         $this->showSaved = true;
-        $this->dispatch('notify-saved', message: 'Parameter penilaian tersimpan!');
+        $this->alert('sukses', 'Parameter penilaian tersimpan otomatis!');
     }
 
     public function toggleEditSp($level)

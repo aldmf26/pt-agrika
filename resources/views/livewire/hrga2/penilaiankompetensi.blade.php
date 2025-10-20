@@ -292,7 +292,7 @@
                             </div>
                         </div>
 
-                        <div class="card">
+                        <div class="card d-none">
                             <div class="card-header bg-danger text-white">
                                 <strong>Total Nilai - SP</strong>
                             </div>
