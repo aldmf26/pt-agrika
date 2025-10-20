@@ -41,6 +41,10 @@ class Penilaiankompetensi extends Component
     public $totalParameter = 0;
     public $totalSP = 0;
 
+    // EDIT: Property untuk debounce auto-save rekomendasi (hindari spam)
+    protected $lastRekomendasiSave = 0;
+    protected $rekomendasiDebounceMs = 2000; // Delay 2 detik
+
     public $showSaved = false;
 
     protected $masterKompetensi = [
@@ -187,6 +191,8 @@ class Penilaiankompetensi extends Component
                 Log::info('No parameter data loaded for karyawan_id: ' . $this->karyawan->id);
             }
 
+            // Load rekomendasi (EDIT: Load dari DB, kalau kosong generate default)
+            $this->rekomendasi = $penilaian->rekomendasi ?? $this->generateRekomendasi();
             $this->hitungTotal();
         } else {
             // DEBUG: Log kalau nggak ada penilaian sama sekali
@@ -197,9 +203,10 @@ class Penilaiankompetensi extends Component
     public function hitungTotal()
     {
         // Hitung total parameter
-        $this->totalParameter = array_sum($this->parameter);
-        $totalParameter = count($this->parameter);
-
+        $totalParameter = count(array_filter($this->parameter, function ($v) {
+            return $v !== 0;
+        }));
+        $this->totalParameter = $totalParameter > 0 ? array_sum($this->parameter) : 0;
         // Hitung total SP
         $this->totalSP = 0;
         if (trim($this->spKeterangan['sp_1']) !== '') $this->totalSP += 10;
@@ -233,7 +240,7 @@ class Penilaiankompetensi extends Component
             'Kurang' => 'Performa kurang memuaskan. Perlu evaluasi lebih lanjut dan perbaikan.'
         ];
 
-        $this->rekomendasi = $rekomendasi[$this->kategoriNilai] ?? '';
+        $this->rekomendasi = $this->rekomendasi ?? $rekomendasi[$this->kategoriNilai];
     }
 
     public function getTotalKehadiranHari($keterangan = null)
@@ -324,6 +331,11 @@ class Penilaiankompetensi extends Component
         // Tambahan baru: Auto-save SP saat jumlah berubah (sudah ada autoSaveSp() dari sebelumnya)
         if (str_starts_with($propertyName, 'sp.sp_')) {
             $this->autoSaveSp();
+        }
+
+        // Tambahan baru: Auto-save rekomendasi saat ketik
+        if ($propertyName === 'rekomendasi') {
+            $this->autoSaveRekomendasi();
         }
     }
 
@@ -478,6 +490,31 @@ class Penilaiankompetensi extends Component
 
         $this->showSaved = true;
         $this->alert('sukses', 'Parameter penilaian tersimpan otomatis!');
+    }
+
+    // EDIT: Method baru - auto-save rekomendasi saat ketik (dengan debounce)
+    public function autoSaveRekomendasi()
+    {
+        // Debounce: Skip kalau kurang dari 2 detik sejak save terakhir
+        $now = now()->timestamp * 1000; // Milidetik
+        if ($now - $this->lastRekomendasiSave < $this->rekomendasiDebounceMs) {
+            return;
+        }
+        $this->lastRekomendasiSave = $now;
+
+        if (!$this->karyawan || !$this->penilaian_id) {
+            return;
+        }
+
+        // Update rekomendasi di parent (status draft)
+        SumPenilaianKompetensi::where('id', $this->penilaian_id)
+            ->update([
+                'rekomendasi' => $this->rekomendasi,
+                'status' => 'draft'
+            ]);
+
+        $this->showSaved = true;
+        $this->alert('sukses', 'Rekomendasi tersimpan otomatis!');
     }
 
     public function toggleEditSp($level)

@@ -332,25 +332,27 @@
                             <div class="col-md-6">
                                 <label class="form-label"><strong>Aktual Nilai:</strong></label>
                                 <div class="alert alert-info mb-0">
-                                    <h5 class="mb-0 text-white">{{ $totalNilai }}</h5>
+                                    <h5 class="mb-0 text-white">{{ number_format($totalNilai, 1) }}</h5>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label"><strong>Kesimpulan:</strong></label>
                                 <div
                                     class="alert 
-                                    {{ $kategoriNilai == 'Baik Sekali' ? 'alert-success' : '' }}
-                                    {{ $kategoriNilai == 'Baik' ? 'alert-primary' : '' }}
-                                    {{ $kategoriNilai == 'Cukup' ? 'alert-warning' : '' }}
-                                    {{ $kategoriNilai == 'Kurang' ? 'alert-danger' : '' }}
-                                    mb-0">
+                        {{ $kategoriNilai == 'Baik Sekali' ? 'alert-success' : '' }}
+                        {{ $kategoriNilai == 'Baik' ? 'alert-primary' : '' }}
+                        {{ $kategoriNilai == 'Cukup' ? 'alert-warning' : '' }}
+                        {{ $kategoriNilai == 'Kurang' ? 'alert-danger' : '' }}
+                        mb-0">
                                     <h5 class="mb-0 text-white">{{ $kategoriNilai }}</h5>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <label class="form-label"><strong>Rekomendasi:</strong></label>
-                            <textarea wire:model.live="rekomendasi" class="form-control" rows="4"></textarea>
+                            {{-- EDIT: Ganti ke blur biar save saat keluar field --}}
+                            <textarea wire:model.blur="rekomendasi" class="form-control" rows="4"
+                                placeholder="Rekomendasi akan auto-generate berdasarkan kategori, edit manual jika perlu..."></textarea>
                         </div>
                     </div>
                 </div>
