@@ -109,6 +109,46 @@ class PUR1DaftarSupplierController extends Controller
         return redirect()->back()->with('sukses', 'Seleksi Supplier berhasil ditambahkan');
     }
 
+    public function store_seleksi(Suplier $supplier, Request $r)
+    {
+
+        try {
+            DB::beginTransaction();
+            $data = [
+                'supplier_id' => $supplier->id,
+                'material_ditawarkan' => $r->material_ditawarkan,
+                'reg_rwb' => $r->reg_rwb,
+                'spesifikasi' => $r->spesifikasi,
+                'estimasi_delivery' => $r->estimasi_delivery,
+                'sistem_manajemen' => $r->sistem_manajemen,
+                'manajemen_lainnya' => $r->manajemen_lainnya ?? null,
+                'profil_perusahaan' => $r->profil_perusahaan,
+                'jatuh_tempo' => $r->jatuh_tempo,
+                'sample' => $r->sample,
+                'hasil_pemeriksaan_lab' => $r->hasil_pemeriksaan_lab,
+                'lab_kesimpulan' => $r->lab_kesimpulan,
+                'hasil_pemeriksaan_penerimaan' => $r->hasil_pemeriksaan_penerimaan,
+                'penerimaan_kesimpulan' => $r->penerimaan_kesimpulan,
+                'hasil_pemeriksaan_hewan' => $r->hasil_pemeriksaan_hewan,
+                'hewan_kesimpulan' => $r->hewan_kesimpulan,
+                'admin' => auth()->user()->name,
+                'tgl' => date('Y-m-d'),
+            ];
+
+            $seleksi = SeleksiSupplier::where('supplier_id', $supplier->id)->first();
+            if ($seleksi) {
+                $seleksi->update($data);
+            } else {
+                SeleksiSupplier::create($data);
+            }
+            DB::commit();
+        } catch (\Throwable $th) {
+            DB::rollback();
+            throw $th;
+        }
+        return redirect()->back()->with('sukses', 'Seleksi Supplier berhasil ditambahkan');
+    }
+
     public function seleksi_sbw(RumahWalet $supplier)
     {
         $data = [

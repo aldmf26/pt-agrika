@@ -1,5 +1,5 @@
 <x-app-layout :title="$title">
-    <form action="{{ route('pur.seleksi.1.store_seleksi_sbw', $supplier) }}" method="post">
+    <form action="{{ route('pur.seleksi.1.store_seleksi', $supplier) }}" method="post">
         @csrf
         <div class="row">
             <div class="col-12">
@@ -17,7 +17,6 @@
                             <th>Nama Supplier</th>
                             <th>Alamat</th>
                         </tr>
-
                     </thead>
                     <tbody>
                         <tr>
