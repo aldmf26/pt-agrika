@@ -29,11 +29,12 @@ class Hrga3PermintaanPerbaikan extends Controller
 
     public function formPermintaanperbaikan(Request $r)
     {
+        $kategori = empty($r->kategori) ? 'ruangan' : $r->kategori;
         $data = [
             'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
             'lokasi' => LokasiModel::all(),
-            'item' => ItemPerawatan::where('jenis_item', $r->kategori)->get(),
-            'kategori' => $r->kategori ?? 'ruangan',
+            'item' => ItemPerawatan::where('jenis_item', $kategori)->get(),
+            'kategori' => $kategori
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.form_permintaanperbaikan', $data);
     }
