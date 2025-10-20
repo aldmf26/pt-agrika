@@ -41,6 +41,7 @@ class Hrga1PermohonanKaryawanController extends Controller
 
         return redirect()->route('hrga1.1.index')->with('sukses', 'Data Berhasil disinkronkan');
     }
+    
     public function index()
     {
         $bulan = dataDariBulan()['bulan'];

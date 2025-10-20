@@ -3,7 +3,7 @@
     <div class="row">
         {{-- <div class="col-1"></div> --}}
         <div class="col-12">
-            <table>
+            <table class="table-xs">
                 <tr>
                     <td>Nama Calon Karyawan &nbsp;</td>
                     <td>:</td>
@@ -68,19 +68,19 @@
 
 
         </div>
-        <div class="col-4">
+        <div class="col-4" style="font-size: 11px">
             <span>Keputusan : </span>
 
         </div>
-        <div class="col-4">
+        <div class="col-4" style="font-size: 11px">
             <span><input type="checkbox" name="" id="" checked> Dilanjutkan </span>
 
         </div>
-        <div class="col-4"><input type="checkbox" name="" id=""> Ditolak</div>
+        <div class="col-4" style="font-size: 11px"><input type="checkbox" name="" id=""> Ditolak</div>
         <div class="col-12">
             &nbsp;
         </div>
-        <div class="col-4"><span>Pewawancara : </span></div>
+        <div class="col-4 table-xs"><span>Pewawancara : </span></div>
         <div class="col-8">
             <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
