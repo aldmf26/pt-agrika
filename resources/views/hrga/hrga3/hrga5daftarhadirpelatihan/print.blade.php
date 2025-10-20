@@ -36,9 +36,9 @@
                     <th class="text-center dhead align-middle">
                         NIK
                     </th>
-                    <th class="text-center dhead align-middle">
+                    {{-- <th class="text-center dhead align-middle">
                         Div / Dept
-                    </th>
+                    </th> --}}
                     <th class="text-center dhead align-middle">
                         Jabatan
                     </th>
@@ -51,7 +51,7 @@
                         <td class="text-end">{{ $loop->iteration }}</td>
                         <td class="text-start">{{ $j->data_pegawai->nama }}</td>
                         <td class="text-start">{{ $j->data_pegawai->nik }}</td>
-                        <td class="text-start">{{ $j->data_pegawai->divisi->divisi }}</td>
+                        {{-- <td class="text-start">{{ $j->data_pegawai->divisi->divisi }}</td> --}}
                         <td class="text-start">{{ $j->data_pegawai->posisi }}</td>
                         <td></td>
                     </tr>
