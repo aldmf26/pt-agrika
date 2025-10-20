@@ -94,7 +94,7 @@ class Hrga3PermintaanPerbaikan extends Controller
 
 
 
-        return redirect()->route('hrga5.3.sukses')->with('sukses', 'Permintaan perbaikan berhasil diajukan');
+        return redirect()->route('hrga5.3.sukses', ['invoice_pengajuan' => $no_invoice])->with('sukses', 'Permintaan perbaikan berhasil diajukan');
     }
     public function sukses(Request $r)
     {
