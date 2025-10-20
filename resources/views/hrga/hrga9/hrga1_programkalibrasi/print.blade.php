@@ -107,11 +107,11 @@
                         @foreach ($program as $p)
                             <tr>
                                 <td class="text-wrap align-middle text-end">{{ $loop->iteration }}</td>
-                                <td class="text-nowrap align-middle">{{ $p->item_kalibrasi->name }}</td>
-                                <td class="text-wrap align-middle">{{ $p->item_kalibrasi->merk }}</td>
+                                <td class="text-nowrap align-middle">{{ ucfirst($p->item_kalibrasi->name) }}</td>
+                                <td class="text-wrap align-middle">{{ ucfirst($p->item_kalibrasi->merk) }}</td>
                                 <td class="text-wrap align-middle">{{ $p->item_kalibrasi->nomor_seri }}</td>
                                 <td class="text-nowrap align-middle">
-                                    {{ ucfirst($p->item_kalibrasi->lokasi->lokasi) ?? '-' }}
+                                    {{ ucfirst($p->item_kalibrasi->lokasi->lokasi ?? '-') }}
                                 </td>
                                 <td class="text-wrap align-middle">Setiap tahun</td>
                                 <td class="text-wrap align-middle text-end">{{ $p->rentang }}</td>
