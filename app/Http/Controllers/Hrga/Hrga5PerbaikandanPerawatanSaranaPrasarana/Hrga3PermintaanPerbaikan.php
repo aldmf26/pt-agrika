@@ -29,11 +29,12 @@ class Hrga3PermintaanPerbaikan extends Controller
 
     public function formPermintaanperbaikan(Request $r)
     {
+        $kategori = empty($r->kategori) ? 'ruangan' : $r->kategori;
         $data = [
             'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
             'lokasi' => LokasiModel::all(),
-            'item' => ItemPerawatan::where('jenis_item', $r->kategori)->get(),
-            'kategori' => $r->kategori
+            'item' => ItemPerawatan::where('jenis_item', $kategori)->get(),
+            'kategori' => $kategori
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.form_permintaanperbaikan', $data);
     }
@@ -78,7 +79,7 @@ class Hrga3PermintaanPerbaikan extends Controller
             $response = Http::withHeaders([
                 'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
             ])->post('https://api.fonnte.com/send', [
-                'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
+                'target'  => '120363420677213972@g.us', // Gunakan group_id dari form
                 'message' => "Diajukan Oleh : $r->diajukan_oleh\nItem : $rincian->nama_rincian \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
             ]);
         } else {
@@ -86,14 +87,14 @@ class Hrga3PermintaanPerbaikan extends Controller
             $response = Http::withHeaders([
                 'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
             ])->post('https://api.fonnte.com/send', [
-                'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
+                'target'  => '120363420677213972@g.us', // Gunakan group_id dari form
                 'message' => "Diajukan Oleh : $r->diajukan_oleh\nItem : $item->nama_item $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_sarana/$imageName",
             ]);
         }
 
 
 
-        return redirect()->route('hrga5.3.index')->with('sukses', 'Permintaan perbaikan berhasil diajukan');
+        return redirect()->route('hrga5.3.sukses', ['invoice_pengajuan' => $no_invoice])->with('sukses', 'Permintaan perbaikan berhasil diajukan');
     }
     public function sukses(Request $r)
     {

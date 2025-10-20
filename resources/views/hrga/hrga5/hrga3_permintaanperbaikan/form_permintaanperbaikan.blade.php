@@ -56,6 +56,28 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        @php
+                            $url = 'hrga5.3.formPermintaanperbaikan';
+                        @endphp
+                        <div class="col-lg-12">
+                            <ul class="nav nav-pills float-start">
+
+                                <li class="nav-item">
+                                    <a class="nav-link  {{ $kategori == 'ruangan' ? 'active' : '' }}"
+                                        aria-current="page"
+                                        href="{{ route($url, ['kategori' => 'ruangan']) }}">Ruangan</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  {{ $kategori == 'ac' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route($url, ['kategori' => 'ac']) }}">AC</a>
+
+                                </li>
+
+                            </ul>
+                        </div>
+
+
                         {{-- <div class="col-12">
                             <label for="">Lokasi</label>
                             <select name="" id="" class="select2 form-control lokasi">
