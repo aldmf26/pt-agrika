@@ -122,8 +122,6 @@
                         </div>
                         <div id="load_baris"></div>
 
-
-                        <!-- Tambah Baris -->
                         <div class="col-lg-12 mt-3">
                             <button type="button" class="btn btn-block btn-warning btn-sm tambah-baris">
                                 + Tambah Baris
