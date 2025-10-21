@@ -124,4 +124,17 @@
             @endfor
         </tr>
     </table>
+
+    <form action="" method="post">
+        @csrf
+        <div class="form-group">
+            <label for="comments">Kesimpulan :</label>
+            <input type="hidden" name="kategori" value="survey">
+            @php
+                $kesimpulan = DB::table('kesimpulan_survey')->first()->kesimpulan ?? '';
+            @endphp
+            <textarea class="form-control" id="comments" name="kesimpulan" rows="3">{{ $kesimpulan }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+    </form>
 </div>
