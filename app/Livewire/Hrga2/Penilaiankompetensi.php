@@ -107,7 +107,7 @@ class Penilaiankompetensi extends Component
         if (!$this->karyawan) return;
 
         $penilaian = SumPenilaianKompetensi::with(['kompetensi', 'kehadiran', 'parameter', 'suratPeringatan'])
-            ->where('karyawan_id', $this->karyawan->id) // Cek: Apakah ini match kolom DB? Kalau nggak, ganti ke 'data_pegawai_id' atau sesuai
+            ->where('karyawan_id', $this->karyawan->karyawan_id_dari_api) // Cek: Apakah ini match kolom DB? Kalau nggak, ganti ke 'data_pegawai_id' atau sesuai
             ->where('tahun', $this->tahun)
             ->first();
 
@@ -133,7 +133,7 @@ class Penilaiankompetensi extends Component
                 }
             } else {
                 // DEBUG: Log kalau nggak ada data (cek di storage/logs/laravel.log)
-                Log::info('No kompetensi data loaded for karyawan_id: ' . $this->karyawan->id . ', tahun: ' . $this->tahun);
+                Log::info('No kompetensi data loaded for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api . ', tahun: ' . $this->tahun);
             }
 
             if ($penilaian->kehadiran && $penilaian->kehadiran->count() > 0) {
@@ -152,7 +152,7 @@ class Penilaiankompetensi extends Component
                     }
                 }
             } else {
-                Log::info('No kehadiran data loaded for karyawan_id: ' . $this->karyawan->id);
+                Log::info('No kehadiran data loaded for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api);
             }
 
             // Load parameter
@@ -188,7 +188,7 @@ class Penilaiankompetensi extends Component
                     }
                 }
             } else {
-                Log::info('No parameter data loaded for karyawan_id: ' . $this->karyawan->id);
+                Log::info('No parameter data loaded for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api);
             }
 
             // Load rekomendasi (EDIT: Load dari DB, kalau kosong generate default)
@@ -196,7 +196,7 @@ class Penilaiankompetensi extends Component
             $this->hitungTotal();
         } else {
             // DEBUG: Log kalau nggak ada penilaian sama sekali
-            Log::info('No penilaian found for karyawan_id: ' . $this->karyawan->id . ', tahun: ' . $this->tahun);
+            Log::info('No penilaian found for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api . ', tahun: ' . $this->tahun);
         }
     }
 
@@ -214,7 +214,7 @@ class Penilaiankompetensi extends Component
         if (trim($this->spKeterangan['sp_3']) !== '') $this->totalSP += 40;
 
         // Nilai akhir
-        $this->totalNilai = ($this->totalParameter - $this->totalSP) / $totalParameter;
+        $this->totalNilai = $totalParameter > 0 ? ($this->totalParameter - $this->totalSP) / $totalParameter : 0;
 
         // Kategori
         if ($this->totalNilai >= 86 && $this->totalNilai <= 100) {
@@ -353,7 +353,7 @@ class Penilaiankompetensi extends Component
         // Create or update penilaian utama (status 'draft' untuk auto-save)
         $penilaian = SumPenilaianKompetensi::updateOrCreate(
             [
-                'karyawan_id' => $this->karyawan->id,
+                'karyawan_id' => $this->karyawan->karyawan_id_dari_api,
                 'tahun' => $this->tahun
             ],
             [
@@ -400,7 +400,7 @@ class Penilaiankompetensi extends Component
         // Create or update penilaian utama (status 'draft' untuk auto-save, kalau belum ada)
         $penilaian = SumPenilaianKompetensi::firstOrCreate( // Gunakan firstOrCreate biar aman kalau belum ada
             [
-                'karyawan_id' => $this->karyawan->id,
+                'karyawan_id' => $this->karyawan->karyawan_id_dari_api,
                 'tahun' => $this->tahun
             ],
             [

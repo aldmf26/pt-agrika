@@ -13,7 +13,7 @@ class SumPenilaianKompetensi extends Model
     // Relationships
     public function karyawan()
     {
-        return $this->belongsTo(DataPegawai::class, 'karyawan_id');
+        return $this->belongsTo(DataPegawai::class, 'karyawan_id', 'karyawan_id_dari_api');
     }
 
     public function kompetensi()

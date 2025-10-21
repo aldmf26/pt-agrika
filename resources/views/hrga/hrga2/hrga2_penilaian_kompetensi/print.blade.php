@@ -11,19 +11,18 @@
                     <tr>
                         <td>Nama</td>
                         <td>:</td>
-                        <td>{{ ucwords(strtolower($karyawan->nama)) }}</td>
+                        <td>{{ $datas->nama_karyawan }}</td>
                     </tr>
                     <tr>
                         <td>Div / Dept</td>
                         <th>:</th>
-                        <td>{{ ucwords($karyawan->divisi) }}</td>
+                        <td>{{ $datas->departemen }}</td>
                     </tr>
                     <tr>
                         <td>Jabatan</td>
                         <th>:</th>
-                        <td>{{ ucwords($karyawan->posisi) }}</td>
+                        <td>{{ $datas->karyawan->posisi }}</td>
                     </tr>
-
                 </table>
             </div>
             <div class="col-lg-4"></div>
@@ -32,14 +31,14 @@
                     <tr>
                         <td>Tgl Masuk Kerja</td>
                         <td>:</td>
-                        <td>{{ tanggal($karyawan->tgl_masuk) }}</td>
+                        <td>{{ tanggal($datas->karyawan->tgl_masuk) }}</td>
                     </tr>
                     <tr>
                         <td>Tgl Berakhirnya Masa Percobaan</td>
                         <td>:</td>
                         <td>
                             @php
-                                $tgl = new DateTime($karyawan->tgl_masuk);
+                                $tgl = new DateTime($datas->karyawan->tgl_masuk);
                                 $tgl->modify('+3 month');
 
                             @endphp
@@ -49,7 +48,7 @@
                     <tr>
                         <td>Status</td>
                         <th>:</th>
-                        <td>{{ ucwords($karyawan->status) }} </td>
+                        <td>{{ ucwords($datas->karyawan->status) }} </td>
                     </tr>
 
                 </table>
@@ -283,32 +282,7 @@
             </tfoot>
         </table>
 
-        {{-- <div class="d-flex mt-4">
-            <div>
-                <p><strong>Penilaian:</strong></p>
-                <ul>
-                    <li>Baik Sekali = Grand Total < 3 hari</li>
-                    <li>Baik = Grand Total 4 - 7 hari</li>
-                    <li>Cukup = Grand Total 8 - 12 hari</li>
-                    <li>Kurang = Grand Total > 12 hari</li>
-                </ul>
-                <p><strong>Catatan:</strong> 1 hari = 8 jam</p>
-            </div>
-            <div class="m-auto">
-                NILAI CATATAN KEHADIRAN :
-                <span><b>
-                        @if ($grandTotal < 3)
-                            Baik Sekali
-                        @elseif($grandTotal >= 3 && $grandTotal <= 7)
-                            Baik
-                        @elseif($grandTotal > 7 && $grandTotal <= 12)
-                            Cukup
-                        @else
-                            Kurang
-                        @endif
-                    </b></span>
-            </div>
-        </div> --}}
+
     </x-hccp-print>
 </div>
 <br>

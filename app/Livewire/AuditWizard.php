@@ -48,7 +48,7 @@ class AuditWizard extends Component
             'qc, lab / fstl' => 'qa/qc',
             'purchasing' => 'purchasing',
             'it' => 'it',
-            'ekspedisi & eksport' => 'ekspedisi',
+            'ekspedisi & eksport - ppc' => 'ekspedisi',
             'hrga' => 'hrga',
         );
         $this->departemen = $ifDepartemen[strtolower($this->departemen)] ?? $this->departemen;

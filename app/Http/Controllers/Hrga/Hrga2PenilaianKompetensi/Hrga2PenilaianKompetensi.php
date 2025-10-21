@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hrga\Hrga2PenilaianKompetensi;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
+use App\Models\SumPenilaianKompetensi;
 use App\Services\DataPegawaiService;
 use Dflydev\DotAccessData\Data;
 use Illuminate\Http\Request;
@@ -44,30 +45,15 @@ class Hrga2PenilaianKompetensi extends Controller
         return view('hrga.hrga2.hrga2_penilaian_kompetensi.penilaian', $data);
     }
 
-    public function print($id, $divisi_id)
+    public function print($id)
     {
-        if ($divisi_id == 10 || $divisi_id == 4) {
-            $nama = DataPegawai::where('karyawan_id_dari_api', $id)->first()->nama;
-            $url = "https://absensi.ptagafood.com/api/absen/$nama";
-        } else {
-            $url = "https://sarang.ptagafood.com/api/data-pegawai/$id";
-        }
-
-        $response = Http::get($url);
-
-        $dataPegawai = $response->json();
-        $datas = DataPegawai::oneHasilEvaluasi($id);
-
-        $saveJson = $this->savePenilaianJson($id, $divisi_id);
+        $datas = SumPenilaianKompetensi::with(['kompetensi', 'kehadiran', 'parameter', 'suratPeringatan'])->find($id)->first();
 
         $data = [
             'title' => 'LEMBAR PENILAIAN KOMPETENSI KARYAWAN',
             'dok' => 'Dok.No.: FRM.HRGA.02.01, Rev.00',
             'karyawan' => $datas,
-            'absen' => $dataPegawai,
-            'divisi_id' => $divisi_id,
-            'parameters' => $saveJson['parameters'],
-            'total' => $saveJson['total'],
+            'datas' => $datas,
         ];
         return view('hrga.hrga2.hrga2_penilaian_kompetensi.print', $data);
     }
