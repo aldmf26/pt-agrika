@@ -26,6 +26,7 @@
                             <th class="text-center text-nowrap" rowspan="2">Frekuensi perawatan</th>
                             <th class="text-center text-nowrap" rowspan="2">Penanggung jawab</th>
                             <th class="text-center text-nowrap" colspan="12">Tahun {{ $tahun }}</th>
+                            <th class="text-center text-nowrap" rowspan="2">Aksi</th>
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
@@ -63,9 +64,18 @@
                                 @foreach ($bulan as $index => $b)
                                     <td class="{{ in_array($index + 1, $bulanPerawatan) ? 'bg-primary' : '' }}"></td>
                                 @endforeach
-
+                                <td>
+                                    <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                        data-bs-target="#editModal{{ $p->id }}">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
 
                             </tr>
+                            @include('hrga.hrga5.hrga1_programperawatansarana._modal_edit', [
+                                'p' => $p,
+                                'items' => $item,
+                            ])
                         @endforeach
 
                     </tbody>
@@ -81,9 +91,16 @@
     </style>
 
     <!-- FORM -->
+    <style>
+        .modal-scrollable .modal-body {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
     <form action="{{ route('hrga5.1.store') }}" method="post">
         @csrf
-        <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal modal-scrollable fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-xlplus">
                 <div class="modal-content">
                     <div class="modal-header">

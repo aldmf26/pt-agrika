@@ -150,6 +150,7 @@ Route::controller(Hrga1ProgramPerawatanSaranadanPrasaranaUmum::class)
         Route::get('/get_item', 'get_item')->name('get_item');
         Route::get('/get_merk', 'get_merk')->name('get_merk');
         Route::post('/store', 'store')->name('store');
+        Route::post('/update/{id}', 'update')->name('update');
         Route::get('/print', 'print')->name('print');
         Route::get('/copy', 'copy')->name('copy');
     });

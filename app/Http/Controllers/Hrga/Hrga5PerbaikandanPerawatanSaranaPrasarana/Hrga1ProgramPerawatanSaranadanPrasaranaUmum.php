@@ -167,6 +167,67 @@ class Hrga1ProgramPerawatanSaranadanPrasaranaUmum extends Controller
         return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
+    public function update(Request $r, $id)
+    {
+        $r->validate([
+            'item_id' => 'required',
+            'frekuensi_perawatan' => 'required',
+            'penanggung_jawab' => 'required',
+            'tanggal_mulai' => 'required',
+        ]);
+
+        // Ambil program lama
+        $program = ProgramPerawatanSaranaPrasarana::findOrFail($id);
+
+        // Update data utama
+        $program->update([
+            'item_id' => $r->item_id,
+            'frekuensi_perawatan' => $r->frekuensi_perawatan,
+            'penanggung_jawab' => $r->penanggung_jawab,
+            'tanggal_mulai' => $r->tanggal_mulai,
+        ]);
+
+        // Hapus jadwal perawatan lama
+        $tahun = date('Y', strtotime($r->tanggal_mulai));
+        PerawatanModel::where('item_id', $r->item_id)->whereYear('tgl', $tahun)->delete();
+
+        // Hitung ulang jadwal baru
+        $total = floor(12 / $r->frekuensi_perawatan);
+
+        for ($j = 0; $j < $total; $j++) {
+            $item = ItemPerawatan::find($r->item_id);
+
+            $tgl = date('Y-m-d', strtotime($r->tanggal_mulai . ' + ' . ($j * $r->frekuensi_perawatan) . ' month'));
+
+            if ($item->jenis_item == 'ruangan') {
+                $rincian = DB::table('rincian_ruangan')->where('item_id', $r->item_id)->get();
+
+                foreach ($rincian as $k) {
+                    $data = [
+                        'item_id' => $r->item_id,
+                        'rincian_id' => $k->id,
+                        'tgl' => $tgl,
+                        'kesimpulan' => 'Meninjau kebersihan dan keadaan dinding, lantai, langit-langit',
+                        'fungsi' => 'Dinding, lantai, langit-langit :tidak menimbulkan kontaminan',
+                    ];
+                    PerawatanModel::create($data);
+                }
+            } else {
+                $data = [
+                    'item_id' => $r->item_id,
+                    'rincian_id' => 0,
+                    'tgl' => $tgl,
+                    'kesimpulan' => 'Pembersihan AC',
+                    'fungsi' => 'Normal setelah dibersihkan, mencapai suhu yang diinginkan',
+                ];
+                PerawatanModel::create($data);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil diperbarui');
+    }
+
+
     public function print(Request $r)
     {
         $kategori = $r->kategori ?? 'ruangan';
