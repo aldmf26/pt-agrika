@@ -19,12 +19,11 @@ class DataPegawai extends Model
         return $query->with('divisi')->where('posisi', 'LIKE', '%Admin%');
     }
 
-    public function scopeKaryawan($query)
+    public function scopeKaryawanAudit($query)
     {
         return $query->with('divisi')
-            ->whereIn('posisi', ['staf admin', 'fstl', 'it', 'pengawas', 'Staf Grading / Bk', 'staf packing'])
-            ->orWhere('posisi', 'LIKE', '%ka%')
-            ->orWhere('posisi', 'LIKE', '%admin%')
+            ->whereNotIn('divisi_id', [16, 17, 18, 8])
+            ->where('posisi', 'NOT LIKE', '%Staff%')
             ->orderBy('nama', 'ASC');
     }
 

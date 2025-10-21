@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\IA;
 
 use App\Http\Controllers\Controller;
+use App\Models\DataPegawai;
 use App\Models\JadwalAuditInternal;
+use App\Models\ProgramAuditInternal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,9 +24,14 @@ class IA2JadwalAuditInternalController extends Controller
 
     public function create()
     {
+        $bagian = ProgramAuditInternal::where('tahun', date('Y'))->get()->pluck('departemen');
+        $pegawai = DataPegawai::karyawanAudit()->get()->pluck('nama');
         $data = [
             'title' => 'Tambah Jadwal Audit Internal',
+            'bagian' => $bagian,
+            'pegawai' => $pegawai
         ];
+
 
         return view('ia.ia2_jadwal_audit_internal.create', $data);
     }
@@ -74,9 +81,13 @@ class IA2JadwalAuditInternalController extends Controller
     }
     public function edit($tgl)
     {
+        $bagian = ProgramAuditInternal::where('tahun', date('Y'))->get()->pluck('departemen');
+        $pegawai = DataPegawai::karyawanAudit()->get()->pluck('nama');
         $data = [
             'title' => 'Edit Jadwal Audit Internal',
-            'tgl' => $tgl
+            'tgl' => $tgl,
+            'bagian' => $bagian,
+            'pegawai' => $pegawai,
         ];
 
         return view('ia.ia2_jadwal_audit_internal.edit', $data);

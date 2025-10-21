@@ -59,20 +59,48 @@
                                         name="waktu[{{ $key }}]">
                                 </th>
                                 <td>
-                                    <input type="text" class="form-control" id="bagian_{{ $key }}"
-                                        name="bagian[{{ $key }}]" value="{{ $getJadwal->bagian ?? '' }}">
+                                    <select name="bagian[{{ $key }}]" class="select2audit" id="">
+                                        <option value="">-- Pilih Bagian --</option>
+                                        @foreach ($bagian as $b)
+                                            <option value="{{ $b }}"
+                                                {{ isset($getJadwal) && $getJadwal->bagian == $b ? 'selected' : '' }}>
+                                                {{ $b }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    {{-- <input type="text" class="form-control" id="bagian_{{ $key }}"
+                                        name="bagian[{{ $key }}]" value="{{ $getJadwal->bagian ?? '' }}"> --}}
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" id="proses_{{ $key }}"
                                         name="proses[{{ $key }}]" value="{{ $getJadwal->proses ?? '' }}">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="auditor_{{ $key }}"
-                                        name="auditor[{{ $key }}]" value="{{ $getJadwal->auditor ?? '' }}">
+                                    <select name="auditor[{{ $key }}]" class="select2audit" id="">
+                                        <option value="">-- Pilih Auditor --</option>
+                                        @foreach ($pegawai as $a)
+                                            <option value="{{ $a }}"
+                                                {{ isset($getJadwal) && $getJadwal->auditor == $a ? 'selected' : '' }}>
+                                                {{ $a }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    {{-- <input type="text" class="form-control" id="auditor_{{ $key }}"
+                                        name="auditor[{{ $key }}]" value="{{ $getJadwal->auditor ?? '' }}"> --}}
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="auditee_{{ $key }}"
-                                        name="auditee[{{ $key }}]" value="{{ $getJadwal->audite ?? '' }}">
+
+                                    <select name="auditee[{{ $key }}]" class="select2audit" id="">
+                                        <option value="">-- Pilih Auditee --</option>
+                                        @foreach ($pegawai as $at)
+                                            <option value="{{ $at }}"
+                                                {{ isset($getJadwal) && $getJadwal->audite == $at ? 'selected' : '' }}>
+                                                {{ $at }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    {{-- <input type="text" class="form-control" id="auditee_{{ $key }}"
+                                        name="auditee[{{ $key }}]" value="{{ $getJadwal->audite ?? '' }}"> --}}
                                 </td>
                             </tr>
                         @endif
@@ -82,5 +110,17 @@
             <button type="submit" class="btn btn-primary float-end">Save</button>
         </form>
     </div>
+
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $('.select2audit').select2({
+                        width: '100%'
+                    });
+                }, 100);
+            });
+        </script>
+    @endsection
 
 </x-app-layout>
