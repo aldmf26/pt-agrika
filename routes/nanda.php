@@ -159,6 +159,8 @@ Route::controller(Hrga2RiwayatPerwatanPerbaikan::class)
     ->name('hrga5.2.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
         Route::get('/print', 'print')->name('print');
     });
 Route::controller(Hrga3PermintaanPerbaikan::class)
