@@ -12,18 +12,26 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
 {
     public function index(Request $r)
     {
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'Permintaan Perbaikan Mesin' : 'Permintaan Perbaikan Software dan Hardware';
         $data = [
-            'title' => 'Form Permintaan Perbaikan Mesin',
-            'permintaan' => PermintaanPerbaikanMesin::orderBy('id', 'desc')->get(),
+            'title' => $title,
+            'permintaan' => PermintaanPerbaikanMesin::whereHas('item_mesin', function ($query) use ($kategori) {
+                $query->where('kategori', $kategori);
+            })->orderBy('id', 'desc')->get(),
+            'kategori' => $kategori,
         ];
         return view('hrga.hrga8.hrga3_permintaan_perbaikan_mesin.index', $data);
     }
 
     public function formpengajuan(Request $r)
     {
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'Form Permintaan Perbaikan Mesin' : 'Form Permintaan Perbaikan Software dan Hardware';
         $data = [
-            'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
-            'mesin' => ItemMesin::all(),
+            'title' => $title,
+            'mesin' => ItemMesin::where('kategori', $kategori)->get(),
+            'kategori' => $kategori,
         ];
         return view('hrga.hrga8.hrga3_permintaan_perbaikan_mesin.pengajuan', $data);
     }
@@ -51,7 +59,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
         PermintaanPerbaikanMesin::create($data);
 
         $item = ItemMesin::find($r->item_id);
-        $lokasi = $item->lokasi->lokasi . " Lantai (" . $item->lokasi->lantai . ")";
+        $lokasi = empty($item->lokasi->lokasi) ? '-' : $item->lokasi->lokasi . " Lantai (" . $item->lokasi->lantai . ")";
 
         if ($r->hasFile('image')) {
             $image = $r->file('image');
@@ -63,25 +71,31 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
             'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
         ])->post('https://api.fonnte.com/send', [
             'target'  => '628115015154-1613433640@g.us', // Gunakan group_id dari form
-            'message' => "Pelapor : $r->diajukan_oleh\nNama Mesin : $item->nama_mesin $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_mesin/$imageName",
+            'message' => "Pelapor : $r->diajukan_oleh\nNama Item : $item->nama_mesin $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_mesin/$imageName",
         ]);
-        return redirect()->route('hrga8.3.sukses', ['invoice_pengajuan' => $no_invoice]);
+        return redirect()->route('hrga8.3.sukses', ['invoice_pengajuan' => $no_invoice, 'kategori' => $r->kategori])->with('sukses', 'Pengajuan Berhasil dikirim');
     }
     public function sukses(Request $r)
     {
         $data = [
             'title' => 'Form Permintaan Perbaikan Sarana dan Prasarana Umum',
             'invoice_pengajuan' => $r->invoice_pengajuan,
+            'kategori' => $r->kategori ?? 'mesin',
+
         ];
         return view('hrga.hrga8.hrga3_permintaan_perbaikan_mesin.sukses', $data);
     }
 
     public function print(Request $r)
     {
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'PERMINTAAN PERBAIKAN MESIN & PERALATAN' : 'PERMINTAAN PERBAIKAN SOFTWARE & HARDWARE PROSES PRODUKSI';
+        $dokumen = $kategori == 'mesin' ? 'Dok.No.: FRM.HRGA.08.04, Rev.00' : 'Dok.No.: FRM.IT.01.03, Rev.00';
         $data = [
-            'title' => 'PERMINTAAN PERBAIKAN MESIN & PERALATAN',
-            'dok' => 'Dok.No.: FRM.HRGA.08.04, Rev.00',
+            'title' => $title,
+            'dok' => $dokumen,
             'permintaan' => PermintaanPerbaikanMesin::where('invoice_pengajuan', $r->invoice_pengajuan)->first(),
+            'kategori' => $r->kategori ?? 'mesin',
         ];
         return view('hrga.hrga8.hrga3_permintaan_perbaikan_mesin.print', $data);
     }

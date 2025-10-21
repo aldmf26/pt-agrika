@@ -12,9 +12,14 @@ class Hrga2CeklisPerawatanMesin extends Controller
 {
     public function index(Request $r)
     {
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'CHECKLIST PERAWATAN MESIN PROSES PRODUKSI' : 'CHECKLIST PERAWATAN SOFTWARE dan HARDWARE PROSES PRODUKSI';
         $data = [
-            'title' => 'Checklist perawatan mesin',
-            'checklist' => checklistPerawatanMesin::groupBy('item_mesin_id')->get(),
+            'title' => $title,
+            'checklist' => checklistPerawatanMesin::whereHas('item', function ($query) use ($kategori) {
+                $query->where('kategori', $kategori);
+            })->groupBy('item_mesin_id')->get(),
+            'kategori' => $kategori,
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.index', $data);
     }
@@ -57,10 +62,13 @@ class Hrga2CeklisPerawatanMesin extends Controller
     public function print(Request $r)
     {
         $minDate = checklistPerawatanMesin::min('tgl');
-
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'CHECKLIST PERAWATAN MESIN & PERALATAN' : 'CHECKLIST PERAWATAN SOFTWARE & HARDWARE PROSES PRODUKSI';
+        $no_dokumen = $kategori == 'mesin' ? 'Dok.No.: FRM.HRGA.08.02, Rev.00' : 'Dok.No.: FRM.IT.01.02, Rev.00';
 
         $data = [
-            'title' => 'Checklist perawatan mesin',
+            'title' => $title,
+            'no_dokumen' => $no_dokumen,
             'mesin' => ItemMesin::where('id', $r->id)->first(),
             'perawatan' => ProgramPerawatanMesin::where('item_mesin_id', $r->id)
                 ->latest()
@@ -73,7 +81,8 @@ class Hrga2CeklisPerawatanMesin extends Controller
             'checklist2' => checklistPerawatanMesin::where('item_mesin_id', $r->id)->whereMonth('tgl', $r->bulan)->whereYear('tgl', $r->tahun)->orderBy('id', 'asc')->first(),
             'bulan' => $r->bulan,
             'tahun' => $r->tahun,
-            'id' => $r->id
+            'id' => $r->id,
+            'kategori' => $kategori,
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.print', $data);
     }

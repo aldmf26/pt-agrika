@@ -52,13 +52,14 @@
             @csrf
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title text-center"> PERMINTAAN PERBAIKAN MESIN PROSES PRODUKSI
+                    <h5 class="title text-center"> {{ $title }}
                     </h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
 
                         <div class="col-12 mt-2">
+                            <input type="hidden" name="kategori" value="{{ $kategori }}">
                             <label for="">Nama Mesin</label>
                             <select name="item_id" id="" class="select2 item">
                                 <option value="">-Pilih Mesin-</option>

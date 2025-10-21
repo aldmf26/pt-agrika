@@ -10,12 +10,15 @@ use Illuminate\Support\Facades\DB;
 
 class daftarMesinController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'Daftar Mesin Proeses Produksi' : 'Daftar Item It';
         $data = [
-            'title' => 'Daftar Mesin  Proeses Produksi',
+            'title' => $title,
             'lokasi' => LokasiModel::all(),
-            'item' => ItemMesin::orderby('id', 'desc')->get(),
+            'item' => ItemMesin::where('kategori', $kategori)->orderby('id', 'desc')->get(),
+            'kategori' => $kategori,
 
         ];
         return view('hrga.hrga8.daftarmesin.index', $data);
@@ -28,6 +31,7 @@ class daftarMesinController extends Controller
             'lokasi_id' => $request->lokasi_id,
             'nama_mesin' => $request->nama_mesin,
             'jumlah' => $request->jumlah,
+            'kategori' => $request->kategori,
 
         ]);
 
@@ -35,13 +39,14 @@ class daftarMesinController extends Controller
             $data = [
                 'item_mesin_id' => $item_id,
                 'kriteria' => $request->kriteria[$i],
+                'metode' => $request->metode[$i],
             ];
             DB::table('kriteria_pemeriksaan')->insert($data);
         }
 
 
 
-        return redirect()->route('hrga8.0.index')->with('sukses', 'Data sarana dan prasarana berhasil disimpan.');
+        return redirect()->route('hrga8.0.index', ['kategori' => $request->kategori])->with('sukses', 'Data sarana dan prasarana berhasil disimpan.');
     }
 
 
@@ -78,6 +83,7 @@ class daftarMesinController extends Controller
             'lokasi_id' => $request->lokasi_id,
             'nama_mesin' => $request->nama_mesin,
             'jumlah' => $request->jumlah,
+            'kategori' => $request->kategori,
 
         ]);
         for ($i = 0; $i < count($request->kriteria); $i++) {
@@ -91,10 +97,11 @@ class daftarMesinController extends Controller
                 $data = [
                     'item_mesin_id' => $request->id,
                     'kriteria' => $request->kriteria[$i],
+                    'metode' => $request->metode[$i],
                 ];
                 DB::table('kriteria_pemeriksaan')->where('id', $request->kriteria_id[$i])->update($data);
             }
         }
-        return redirect()->route('hrga8.0.index')->with('sukses', 'Data sarana dan prasarana berhasil diupdate.');
+        return redirect()->route('hrga8.0.index', ['kategori' => $request->kategori])->with('sukses', 'Data sarana dan prasarana berhasil diupdate.');
     }
 }

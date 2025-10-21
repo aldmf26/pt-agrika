@@ -18,12 +18,21 @@ class Hrga1ProgramPerawatanMesin extends Controller
         } else {
             $tahun = $r->tahun;
         }
+        $kategori = $r->kategori ?? 'mesin';
+
         $data = [
             'title' => 'Program perawatan mesin',
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $tahun,
-            'item' => ItemMesin::all(),
-            'perawatan' => ProgramPerawatanMesin::whereYear('tanggal_mulai', $tahun)->orderBy('id', 'desc')->get(),
+            'item' => ItemMesin::where('kategori', $kategori)->get(),
+            'perawatan' => ProgramPerawatanMesin::whereYear('tanggal_mulai', $tahun)
+                ->whereHas('item', function ($query) use ($kategori) {
+                    $query->where('kategori', $kategori);
+                })
+                ->orderBy('id', 'desc')
+                ->get(),
+            'kategori' => $kategori,
+
         ];
         return view('hrga.hrga8.hrga1_perawatan_dan_perbaikan_mesin.index', $data);
     }
@@ -59,7 +68,7 @@ class Hrga1ProgramPerawatanMesin extends Controller
         }
 
 
-        return redirect()->route('hrga8.1.index')->with('sukses', 'Data Berhasil Disimpan');
+        return redirect()->route('hrga8.1.index', ['kategori' => $r->kategori])->with('sukses', 'Data Berhasil Disimpan');
     }
 
     public function print(Request $r)
@@ -69,12 +78,22 @@ class Hrga1ProgramPerawatanMesin extends Controller
         } else {
             $tahun = $r->tahun;
         }
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'PROGRAM PERAWATAN MESIN PROSES PRODUKSI' : 'PROGRAM PERAWATAN SOFTWARE & HARDWARE PROSES PRODUKSI';
+        $no_dokumen = $kategori == 'mesin' ? 'Dok.No.: FRM.HRGA.08.01, Rev.00' : 'Dok.No.: FRM.IT.01.01, Rev.00';
         $data = [
-            'title' => 'Program Perawatan Mesin',
+            'title' => $title,
             'bulan' => DB::table('bulan')->get(),
+            'no_dokumen' => $no_dokumen,
             'tahun' => $tahun,
-            'item' => ItemMesin::all(),
-            'perawatan' => ProgramPerawatanMesin::whereYear('tanggal_mulai', $tahun)->orderBy('id', 'desc')->get(),
+            'item' => ItemMesin::where('kategori', $r->kategori)->get(),
+            'perawatan' => ProgramPerawatanMesin::whereYear('tanggal_mulai', $tahun)
+                ->whereHas('item', function ($query) use ($kategori) {
+                    $query->where('kategori', $kategori);
+                })
+                ->orderBy('id', 'desc')
+                ->get(),
+
         ];
         return view('hrga.hrga8.hrga1_perawatan_dan_perbaikan_mesin.print', $data);
     }

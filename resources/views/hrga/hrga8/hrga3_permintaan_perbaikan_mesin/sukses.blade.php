@@ -24,8 +24,8 @@
                 <h1 class="text-center text-success mt-4">Data berhasil diajukan</h1>
             </div>
             <div class="col-lg-12 text-center mt-4">
-                <a href="{{ route('hrga8.3.print', ['invoice_pengajuan' => $invoice_pengajuan]) }}" target="_blank"
-                    class="btn btn-success"><i class="fas fa-print"></i> Print
+                <a href="{{ route('hrga8.3.print', ['invoice_pengajuan' => $invoice_pengajuan, 'kategori' => $kategori]) }}"
+                    target="_blank" class="btn btn-success"><i class="fas fa-print"></i> Print
                     Pengajuan</a>
             </div>
         </div>

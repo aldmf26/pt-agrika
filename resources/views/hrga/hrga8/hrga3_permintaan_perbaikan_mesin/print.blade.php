@@ -11,7 +11,7 @@
                 <tr>
                     <td>Lokasi</td>
                     <td>:</td>
-                    <td>{{ $permintaan->item_mesin->lokasi->lokasi }}</td>
+                    <td>{{ $permintaan->item_mesin->lokasi->lokasi ?? '-' }}</td>
                 </tr>
                 {{-- <tr>
                         <td>No Mesin</td>
@@ -67,7 +67,10 @@
                     <tr>
                         <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User
                         </td>
-                        <td class="text-center" colspan="2">(KA. MAINTENANCE)</td>
+                        @php
+                            $ttd = $permintaan->item_mesin->kategori == 'mesin' ? 'KA. MAINTENANCE' : 'Ka. IT';
+                        @endphp
+                        <td class="text-center" colspan="2">({{ $ttd }})</td>
                     </tr>
                     <tr>
                         <td class="text-start" width="4%" style="border-right:none">Tanggal </td>
@@ -151,26 +154,29 @@
 
                 </tr>
                 <tr>
-                    <td class="text-center" colspan="2">(KA. MAINTENANCE)</td>
+                    <td class="text-center" colspan="2">({{ $ttd }})</td>
                     <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User</td>
                 </tr>
+                @php
+                    $update = date('Y-m-d', strtotime($permintaan->updated_at));
+                @endphp
                 <tr>
                     <td class="text-start" width="4%" style="border-right:none">Tanggal </td>
-                    <td style="border-left:none">: {{ tanggal($permintaan->tanggal) }}</td>
+                    <td style="border-left:none">: {{ tanggal($update) }}</td>
                     <td class="text-start" width="4%" style="border-right:none">Tanggal </td>
-                    <td style="border-left:none">: {{ tanggal($permintaan->tanggal) }}</td>
+                    <td style="border-left:none">: {{ tanggal($update) }}</td>
                 </tr>
                 <tr>
                     <td class="text-start" style="border-right:none">Pukul
                     </td>
                     <td class="text-start" style="border-left:none">
-                        : {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('h:i A') }}
+                        : {{ date('h:i A', strtotime($permintaan->updated_at)) }}
 
                     </td>
                     <td class="text-start" style="border-right:none">Pukul
                     </td>
                     <td class="text-start" style="border-left:none">
-                        : {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('h:i A') }}
+                        : {{ date('h:i A', strtotime($permintaan->updated_at)) }}
 
                     </td>
                 </tr>

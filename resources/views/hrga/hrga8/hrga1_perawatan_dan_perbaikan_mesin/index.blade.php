@@ -3,16 +3,16 @@
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> Add</button>
-            <a href="{{ route('hrga8.1.print') }}" target="_blank" class="btn  btn-primary float-end me-2"><i
-                    class="fas fa-print"></i> Print</a>
+            <a href="{{ route('hrga8.1.print', ['kategori' => $kategori]) }}" target="_blank"
+                class="btn  btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
         </div>
-        <div class="card-body">
+        <div class="card-body table-responsive">
             <table class="table table-bordered" id="example">
                 <thead>
                     <tr style="text-transform: capitalize">
                         <th class=" dhead" rowspan="2">No</th>
                         <th class=" dhead" rowspan="2">Lantai</th>
-                        <th class=" dhead" rowspan="2">Nama mesin & peralatan</th>
+                        <th class=" dhead" rowspan="2">Nama item</th>
                         <th class=" dhead" rowspan="2">Jumlah</th>
                         <th class=" dhead" rowspan="2">Lokasi</th>
                         <th class=" dhead" rowspan="2">Frekuensi perawatan</th>
@@ -21,7 +21,11 @@
                     </tr>
                     <tr>
                         @foreach ($bulan as $b)
-                            <th class="text-center dhead">{{ $b->bulan }}</th>
+                            @php
+                                $tgl_bulan = $tahun . '-' . $b->bulan . '-01';
+
+                            @endphp
+                            <th class="dhead text-center">{{ date('M', strtotime($tgl_bulan)) }}</th>
                         @endforeach
                     </tr>
                 </thead>
@@ -29,10 +33,10 @@
                     @foreach ($perawatan as $p)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ ucfirst(strtolower($p->item->lokasi->lantai)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->item->lokasi->lantai ?? '-')) }}</td>
                             <td>{{ ucfirst(strtolower($p->item->nama_mesin)) }}</td>
                             <td>{{ $p->item->jumlah }}</td>
-                            <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi ?? '-')) }}</td>
                             <td>{{ $p->frekuensi_perawatan }} bulan</td>
                             <td>{{ ucwords($p->penanggung_jawab) }}</td>
                             @php
@@ -46,38 +50,7 @@
                                 }
                             @endphp
                             @foreach ($bulan as $index => $b)
-                                @php
-                                    $tugas = App\Models\checklistPerawatanMesin::where('item_mesin_id', $p->id)
-                                        ->whereMonth('tgl', $index + 1)
-                                        ->whereYear('tgl', $tahun)
-                                        ->groupBy('item_mesin_id')
-                                        ->first();
-                                @endphp
-                                <td class="bg-primary text-center">
-
-
-
-                                </td>
-
-                                {{-- @if (in_array($index + 1, $bulanPerawatan))
-                                    @if (empty($tugas->tgl))
-                                        <td class="bg-primary text-center" onclick="toggleLink(this)">
-
-                                            <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1, 'tahun' => $tahun]) }}"
-                                                class="btn btn-success">checklist</a>
-
-                                        </td>
-                                    @else
-                                        <td class="bg-success text-center" onclick="toggleLink(this)">
-
-                                            <a href="{{ route('hrga8.2.add', ['id' => $p->id, 'bulan' => $index + 1, 'tahun' => $tahun]) }}"
-                                                class="btn btn-primary">edit</a>
-
-                                        </td>
-                                    @endif
-                                @else
-                                    <td class=""></td>
-                                @endif --}}
+                                <td class="{{ in_array($index + 1, $bulanPerawatan) ? 'bg-primary' : '' }}"></td>
                             @endforeach
                         </tr>
                     @endforeach
@@ -114,11 +87,12 @@
 
                         <div class="row mb-2">
                             <div class="col-lg-3">
+                                <input type="hidden"name="kategori" value="{{ $kategori }}">
                                 <select class="form-control select2" name="item_mesin_id[]">
                                     <option value="">Pilih mesin</option>
                                     @foreach ($item as $i)
                                         <option value="{{ $i->id }}">{{ $i->nama_mesin }} -
-                                            {{ $i->lokasi->lokasi }}
+                                            {{ $i->lokasi->lokasi ?? '-' }}
                                         </option>
 
                                         </option>

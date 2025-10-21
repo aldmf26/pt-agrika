@@ -68,11 +68,11 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">PROGRAM PERAWATAN MESIN PROSES PRODUKSI</p>
+                    <p class="cop_judul">{{ $title }}</p>
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text">Dok.No.: FRM.HRGA.08.02, Rev.00</p>
+                <p class="cop_text">{{ $no_dokumen }}</p>
             </div>
             <div class="col-lg-12">
                 <table class="table table-bordered border-dark" style="font-size: 11px; white-space: nowrap;">
@@ -80,7 +80,7 @@
                         <tr>
                             <th class="text-center dhead align-middle" rowspan="2">No</th>
                             <th class=" dhead text-center align-middle" rowspan="2">Lantai</th>
-                            <th class=" dhead text-center align-middle" rowspan="2">Nama Mesin & Peralatan</th>
+                            <th class=" dhead text-center align-middle" rowspan="2">Nama Item</th>
                             <th class=" dhead text-center align-middle" rowspan="2">Jumlah</th>
 
                             <th class=" dhead text-center align-middle" rowspan="2">Lokasi</th>
@@ -92,7 +92,6 @@
                             @foreach ($bulan as $b)
                                 @php
                                     $tgl_bulan = $tahun . '-' . $b->bulan . '-01';
-
                                 @endphp
                                 <th class="dhead text-center">{{ date('M', strtotime($tgl_bulan)) }}</th>
                             @endforeach
@@ -103,10 +102,10 @@
                         @foreach ($perawatan as $p)
                             <tr>
                                 <td class="text-end">{{ $loop->iteration }}</td>
-                                <td class="text-end">{{ ucfirst(strtolower($p->item->lokasi->lantai)) }}</td>
+                                <td class="text-end">{{ ucfirst(strtolower($p->item->lokasi->lantai ?? '-')) }}</td>
                                 <td>{{ ucfirst(strtolower($p->item->nama_mesin)) }}</td>
                                 <td class="text-end">{{ $p->item->jumlah }}</td>
-                                <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}</td>
+                                <td>{{ ucfirst(strtolower($p->item->lokasi->lokasi ?? '-')) }}</td>
                                 <td class="text-end">{{ $p->frekuensi_perawatan }} bulan</td>
                                 <td>{{ ucwords($p->penanggung_jawab) }}</td>
                                 @php

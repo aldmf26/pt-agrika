@@ -77,18 +77,18 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">CHECKLIST PERAWATAN MESIN & PERALATAN</p>
+                    <p class="cop_judul">{{ $title }}</p>
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text text-nowrap">Dok.No.: FRM.HRGA.08.03, Rev.00</p>
+                <p class="cop_text text-nowrap">{{ $no_dokumen }}</p>
             </div>
             <div class="col-4">
                 <table style="font-size: 10px">
                     <tr>
                         <td>Lokasi</td>
                         <td width="1%">:</td>
-                        <td>{{ ucwords($mesin->lokasi->lantai) }}</td>
+                        <td>{{ ucwords($mesin->lokasi->lantai ?? '-') }}</td>
                     </tr>
                     <tr>
                         <td>Nama Mesin / Peralatan</td>
@@ -103,7 +103,7 @@
                     <tr>
                         <td>Lokasi</td>
                         <td width="1%">:</td>
-                        <td>{{ ucwords($mesin->lokasi->lokasi) }}</td>
+                        <td>{{ ucwords($mesin->lokasi->lokasi ?? '-') }}</td>
                     </tr>
                     <tr>
                         <td>Frekuensi</td>
@@ -159,13 +159,13 @@
                                 @if (!in_array($key, $printed))
                                     <td class="align-middle" rowspan="{{ $grouped[$key] }}">
                                         {{ $mesin->nama_mesin }}
-                                        {{ empty($mesin->jumlah) ? 1 : '1 sampai ' . $mesin->jumlah }}
+                                        {{ empty($mesin->jumlah) || $mesin->jumlah == 1 ? '' : '1 sampai ' . $mesin->jumlah }}
                                     </td>
                                     @php $printed[] = $key; @endphp
                                 @endif
 
                                 <td class="align-middle">{{ $c->kriteria->kriteria }}</td>
-                                <td class="align-middle">{{ $c->metode }}</td>
+                                <td class="align-middle">{{ $c->kriteria->metode }}</td>
                                 <td class="align-middle">{{ $c->hasil_pemeriksaan }}</td>
                                 <td class="align-middle">{{ $c->status }}</td>
                                 <td class="align-middle">{{ $c->keterangan }}</td>
@@ -198,8 +198,11 @@
                                     &
                                     Nama)</span></td>
                         </tr>
+                        @php
+                            $ttd = $kategori == 'it' ? 'KA. IT' : 'KA. MAINTENANCE';
+                        @endphp
                         <tr>
-                            <td class="text-center">(KA. MAINTENANCE)</td>
+                            <td class="text-center">({{ $ttd }})</td>
                             <td class="text-center">(KA. HRGA)</td>
 
                         </tr>
