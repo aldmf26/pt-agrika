@@ -28,7 +28,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>P-{{ $d['no_nota'] }}</td>
                             <td>{{ tanggal($d['tgl']) }}</td>
-                            <td>{{ $d['tujuan'] }}</td>
+                            <td>HK</td>
                             <td class="text-end">
                                 {{ $d['ttl_box'] }} Box
                             </td>
