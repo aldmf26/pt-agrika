@@ -406,9 +406,9 @@
             <table width="60%">
                 <tr>
                     <td width="60">Kesimpulan :</td>
-                    <td>{!! !empty($datas->rekomendasi)
+                    <td>{{ $datas->kategori_nilai }}. {!! !empty($datas->rekomendasi)
                         ? $datas->rekomendasi
-                        : "<span class='text-danger fst-italic'>kesimpulan belum diisi</span>" !!}
+                        : "<span class='text-danger fst-italic'>rekomendasi belum diisi</span>" !!}
                     </td>
                 </tr>
             </table>

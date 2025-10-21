@@ -349,7 +349,7 @@
                             </div>
                         </div>
                         <div>
-                            <label class="form-label"><strong>Kesimpulan:</strong></label>
+                            <label class="form-label"><strong>Rekomendasi:</strong></label>
                             {{-- EDIT: Ganti ke blur biar save saat keluar field --}}
                             <textarea wire:model.blur="rekomendasi" class="form-control" rows="4"
                                 placeholder="Rekomendasi akan auto-generate berdasarkan kategori, edit manual jika perlu..."></textarea>

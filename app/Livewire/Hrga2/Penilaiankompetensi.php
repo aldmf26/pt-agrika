@@ -240,7 +240,7 @@ class Penilaiankompetensi extends Component
             'Kurang' => 'Performa kurang memuaskan. Perlu evaluasi lebih lanjut dan perbaikan.'
         ];
 
-        $this->rekomendasi = $this->rekomendasi ?? $rekomendasi[$this->kategoriNilai];
+        // $this->rekomendasi = !empty($this->rekomandasi) ? $this->rekomendasi : $rekomendasi[$this->kategoriNilai];
     }
 
     public function getTotalKehadiranHari($keterangan = null)

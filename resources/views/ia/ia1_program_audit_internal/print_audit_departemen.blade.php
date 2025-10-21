@@ -120,13 +120,13 @@
                         <td class="text-end">1-2</td>
                         <td class="text-end">0</td>
                     </tr>
-                    {{-- <tr>
+                    <tr>
                         <td>Atau</td>
                         <td class="text-end">tb</td>
                         <td class="text-end">≥ 11</td>
                         <td class="text-end">0</td>
                         <td class="text-end">0</td>
-                    </tr> --}}
+                    </tr>
                     <tr>
                         <td>C (Kurang)</td>
                         <td class="text-end">tb</td>
