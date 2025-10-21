@@ -26,7 +26,12 @@
                 <div class="col-md-2 col-sm-4">
                     <div>
                         <label for="divisi" class="form-label">divisi</label>
-                        <input type="text" class="form-control" id="divisi" name="divisi" required>
+                        <select name="divisi" class="selectAudtor" id="">
+                            <option value="">Pilih Divisi</option>
+                            @foreach ($divisi as $d)
+                                <option value="{{ $d->divisi }}">{{ $d->divisi }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
@@ -47,10 +52,16 @@
                     </div>
                 </div>
 
-                <div class="col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-6">
                     <div class="">
-                        <label for="tindakan" class="form-label">Tindak Perbaikan dan Pencegahan</label>
-                        <textarea rows="10" class="form-control" id="tindakan" name="tindakan" required></textarea>
+                        <label for="tindakan" class="form-label">Tindak Perbaikan</label>
+                        <textarea rows="10" class="form-control" id="tindakan" name="perbaikan" required></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <div class="">
+                        <label for="tindakan" class="form-label">Tindak Pencegahan</label>
+                        <textarea rows="10" class="form-control" id="tindakan" name="pencegahan" required></textarea>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">

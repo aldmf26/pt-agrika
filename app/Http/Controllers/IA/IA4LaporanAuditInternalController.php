@@ -4,6 +4,7 @@ namespace App\Http\Controllers\IA;
 
 use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
+use App\Models\Divisi;
 use App\Models\LaporanAuditInternal;
 use Illuminate\Http\Request;
 
@@ -24,10 +25,12 @@ class IA4LaporanAuditInternalController extends Controller
     {
         $user = DataPegawai::karyawan()->get();
         $urutan = LaporanAuditInternal::latest()->count() + 1;
+        $divisi = Divisi::get();
         $data = [
             'title' => 'Tambah Laporan Audit Internal',
             'urutan' => $urutan,
             'user' => $user,
+            'divisi' => $divisi,
         ];
 
         return view('ia.ia4_laporan_audit_internal.create', $data);
@@ -36,12 +39,13 @@ class IA4LaporanAuditInternalController extends Controller
     public function store(Request $r)
     {
         $urutan = LaporanAuditInternal::latest()->count() + 1;
+        $tindakan = "Perbaikan : $r->perbaikan" . "\n\n" . "Pencegahan : $r->pencegahan";
         LaporanAuditInternal::create(
             [
                 'urutan' => $urutan,
                 'divisi' => $r->divisi,
                 'tgl_audit' => $r->tgl_audit,
-                'tindakan' => $r->tindakan,
+                'tindakan' => $tindakan,
                 'finding' => $r->finding,
                 'audite' => $r->audite,
                 'pic' => $r->pic,
@@ -67,10 +71,12 @@ class IA4LaporanAuditInternalController extends Controller
 
     public function update(Request $r, LaporanAuditInternal $laporan)
     {
+        $tindakan = "Perbaikan : $r->perbaikan" . "\n\n" . "Pencegahan : $r->pencegahan";
+
         $laporan->update([
             'divisi' => $r->divisi,
             'tgl_audit' => $r->tgl_audit,
-            'tindakan' => $r->tindakan,
+            'tindakan' => $tindakan,
             'finding' => $r->finding,
             'audite' => $r->audite,
             'pic' => $r->pic,
