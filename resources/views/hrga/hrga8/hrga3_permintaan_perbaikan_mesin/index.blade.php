@@ -1,7 +1,8 @@
 <x-app-layout :title="$title">
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('hrga8.3.formpengajuan') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i>
+            <a href="{{ route('hrga8.3.formpengajuan', ['kategori' => $kategori]) }}" class="btn btn-primary float-end"><i
+                    class="fas fa-plus"></i>
                 Add</a>
         </div>
         <div class="card-body">
@@ -9,9 +10,9 @@
                 <thead>
                     <tr style="text-transform: capitalize">
                         <th>#</th>
-                        <th>Nama Mesin</th>
+                        <th>Nama Item</th>
                         <th>Lokasi</th>
-                        <th>No Mesin</th>
+                        <th>No Item</th>
                         <th>Deadline</th>
                         <th>Diajukan oleh</th>
                         <th>Deskripsi Masalah</th>
@@ -23,14 +24,14 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucfirst(strtolower($p->item_mesin->nama_mesin)) }}</td>
-                            <td>{{ ucfirst(strtolower($p->item_mesin->lokasi->lokasi)) }}</td>
+                            <td>{{ ucfirst(strtolower($p->item_mesin->lokasi->lokasi ?? '-')) }}</td>
                             <td>{{ ucfirst(strtolower($p->item_mesin->no_identifikasi)) }}</td>
                             <td>{{ tanggal($p->deadline) }}</td>
                             <td>{{ ucfirst(strtolower($p->diajukan_oleh)) }}</td>
                             <td>{{ ucfirst(strtolower($p->deskripsi_masalah)) }}</td>
                             <td>
                                 <a target="_blank"
-                                    href="{{ route('hrga8.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan]) }}"
+                                    href="{{ route('hrga8.3.print', ['invoice_pengajuan' => $p->invoice_pengajuan, 'kategori' => $kategori]) }}"
                                     class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a>
                                 <button type="button" invoice_pengajuan="{{ $p->invoice_pengajuan }}"
                                     detail_perbaikan="{{ $p->detail_perbaikan }}"

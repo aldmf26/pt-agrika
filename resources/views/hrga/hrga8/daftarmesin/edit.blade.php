@@ -42,6 +42,10 @@
         <label>Kriteria Pemeriksaaan</label>
 
     </div>
+    <div class="col-lg-4 mt-2 ">
+        <label>Metode</label>
+
+    </div>
 </div>
 @foreach ($kriteria as $r)
     <div class="col-lg-12 ">
@@ -51,6 +55,12 @@
                 <input type="hidden" name="kriteria_id[]" value="{{ $r->id }}">
                 <input type="text" class="form-control" name="kriteria[]" value="{{ $r->kriteria }}"
                     placeholder="Rincian Item" required>
+
+            </div>
+            <div class="col-lg-4 mt-2">
+
+                <input type="text" class="form-control" name="metode[]" value="{{ $r->metode }}"
+                    placeholder="Metode" required>
 
             </div>
         </div>
@@ -64,6 +74,10 @@
                 <div class="col-lg-4 mt-2">
 
                     <input type="text" class="form-control" name="kriteria[]" x-model="item.rincian">
+                </div>
+                <div class="col-lg-4 mt-2">
+
+                    <input type="text" class="form-control" name="metode[]" x-model="item.metode">
                 </div>
             </div>
         </div>

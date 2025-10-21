@@ -65,7 +65,7 @@
                     <div class="modal-body">
                         <!-- Header Baris -->
                         <div class="row fw-bold mb-2">
-                            <div class="col-lg-4">Nama Mesin</div>
+                            <div class="col-lg-4">Nama Item</div>
                             {{-- <div class="col-lg-2">No identifikasi</div> --}}
                             <div class="col-lg-4">Jumlah</div>
                             <div class="col-lg-4">Lokasi</div>
@@ -78,6 +78,8 @@
                             <div class="col-lg-4">
                                 <input type="text" class="form-control" name="nama_mesin" placeholder="Nama Mesin"
                                     required>
+                                <input type="text" class="form-control" name="kategori" value="{{ $kategori }}"
+                                    hidden>
                             </div>
                             {{-- <div class="col-lg-2">
                                 <input type="text" class="form-control" name="no_identifikasi"
@@ -102,6 +104,10 @@
                                 <label>Kriteria Pemeriksaaan</label>
 
                             </div>
+                            <div class="col-lg-4 mt-2 ruangan">
+                                <label>Metode</label>
+
+                            </div>
 
 
 
@@ -115,6 +121,11 @@
 
                                             <input type="text" class="form-control" name="kriteria[]"
                                                 x-model="item.rincian">
+                                        </div>
+                                        <div class="col-lg-4 mt-2">
+
+                                            <input type="text" class="form-control" name="metode[]"
+                                                x-model="item.metode">
                                         </div>
                                     </div>
                                 </div>
@@ -145,10 +156,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="tambahModalLabel">Tambah Data</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">
+                        <input type="hidden" name="kategori" value="{{ $kategori }}">
                         <div id="load_data"></div>
                     </div>
 

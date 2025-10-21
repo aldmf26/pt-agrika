@@ -4,7 +4,7 @@
             <option value="">Pilih mesin</option>
             @foreach ($item as $i)
                 <option value="{{ $i->id }}">{{ $i->nama_mesin }} -
-                    {{ $i->lokasi->lokasi }}
+                    {{ $i->lokasi->lokasi ?? '-' }}
 
                 </option>
             @endforeach
