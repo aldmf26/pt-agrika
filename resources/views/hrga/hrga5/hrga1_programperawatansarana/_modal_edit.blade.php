@@ -18,7 +18,8 @@
                                 @foreach ($items as $item)
                                     <option value="{{ $item->id }}"
                                         {{ $item->id == $p->item_id ? 'selected' : '' }}>
-                                        {{ $item->nama_item }} - {{ $item->no_identifikasi }} - {{ $item->lokasi }}
+                                        {{ $item->nama_item }} - {{ $item->no_identifikasi }} -
+                                        {{ $item->lokasi->lokasi }}
                                     </option>
                                 @endforeach
                             </select>
