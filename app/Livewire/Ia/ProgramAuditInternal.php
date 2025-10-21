@@ -59,7 +59,9 @@ class ProgramAuditInternal extends Component
 
     public function toggleBulan($auditId, $bulan, $departemen, $audite, $auditor)
     {
-
+        if (!auth()->user()->hasRole('presiden')) {
+            $this->alert('error', 'Anda tidak memiliki akses untuk mengubah data ini.');
+        }
         $kolomBulan = "bulan_$bulan";
         $audit = $this->model::where('id', $auditId)->where('tahun', $this->tahun)->first();
         if (!$audit) {
