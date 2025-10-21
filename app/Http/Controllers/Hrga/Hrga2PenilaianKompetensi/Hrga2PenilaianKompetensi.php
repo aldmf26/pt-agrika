@@ -47,7 +47,10 @@ class Hrga2PenilaianKompetensi extends Controller
 
     public function print($id)
     {
-        $datas = SumPenilaianKompetensi::with(['kompetensi', 'kehadiran', 'parameter', 'suratPeringatan'])->find($id)->first();
+        $datas = SumPenilaianKompetensi::with(['kompetensi', 'kehadiran', 'parameter', 'suratPeringatan'])->where('id', $id)->first();
+        if (count($datas->parameter) < 1) {
+            return redirect()->back()->with('error', 'Data penilaian kompetensi tidak lengkap. Silakan lengkapi data terlebih dahulu.');
+        }
 
         $data = [
             'title' => 'LEMBAR PENILAIAN KOMPETENSI KARYAWAN',
@@ -56,47 +59,5 @@ class Hrga2PenilaianKompetensi extends Controller
             'datas' => $datas,
         ];
         return view('hrga.hrga2.hrga2_penilaian_kompetensi.print', $data);
-    }
-
-    public function savePenilaianJson($id, $divisi_id)
-    {
-        // Path ke file JSON
-        $file = 'penilaian/penilaian.json';
-
-        // Baca file JSON atau buat array kosong jika belum ada
-        $penilaianData = Storage::exists($file) ? json_decode(Storage::get($file), true) : [];
-        // Cek apakah ID karyawan sudah ada di JSON
-        if (!isset($penilaianData[$id])) {
-            // Generate nilai acak jika belum ada
-            $penilaianData[$id] = [
-                ['Disiplin', rand(85, 95)],
-                ['Sikap Kerja', rand(80, 90)],
-                ['Kerjasama', rand(80, 90)],
-                ['Tanggung jawab', rand(85, 95)],
-                ['Kesopanan', rand(85, 95)],
-                ['Kejujuran', rand(90, 100)],
-                ['Kerapian', rand(80, 90)],
-                ['Inisiatif', rand(80, 90)],
-                ['Pengetahuan', rand(85, 95)],
-                ['Keahlian', rand(85, 95)],
-                ['Leadership', $divisi_id == 1 ? 'N/A' : rand(80, 90)],
-                ['Manajerial', $divisi_id == 1 ? 'N/A' : rand(80, 90)],
-            ];
-            // Simpan kembali ke file JSON
-            Storage::put($file, json_encode($penilaianData, JSON_PRETTY_PRINT));
-        }
-
-        // Ambil data penilaian untuk ID karyawan
-        $parameters = $penilaianData[$id];
-
-        // Hitung total
-        $total = collect($parameters)
-            ->filter(fn($param) => is_numeric($param[1]))
-            ->sum(fn($param) => $param[1]);
-
-        return [
-            'parameters' => $parameters,
-            'total' => $total,
-        ];
     }
 }

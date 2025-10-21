@@ -68,25 +68,28 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td class="text-end">1</td>
-                            <td align="left">Menguasai pekerjaan di divisinya</td>
-                            <td class="text-center">√</td>
-                            <td align="left">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="text-end">2</td>
-                            <td align="left">Tidak pernah melakukan kecerobohan dalam pekerjaannya</td>
-                            <td class="text-center">√</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="text-end">3</td>
-                            <td align="left">Telah mendapat training HACCP, GMP, CCP</td>
-                            <td class="text-center">√</td>
-                            <td></td>
-                        </tr>
+                        @php
+                            $masterKompetensi = [
+                                1 => 'Menguasai pekerjaan di divisinya',
+                                2 => 'Tidak pernah melakukan kecerobohan dalam pekerjaannya',
+                                3 => 'Telah mendapat training HACCP, GMP, CCP',
+                            ];
+                            $kompetensiData = $datas->kompetensi->keyBy('kompetensi') ?? collect();
+                        @endphp
+                        @foreach ($masterKompetensi as $no => $komp)
+                            @php
+                                $kompData = $kompetensiData->get(
+                                    $komp,
+                                    (object) ['aktual' => false, 'tidak_lanjut' => false],
+                                );
+                            @endphp
+                            <tr>
+                                <td class="text-end">{{ $no }}</td>
+                                <td align="left">{{ $komp }}</td>
+                                <td class="text-center">{{ $kompData->aktual ? '√' : '' }}</td>
+                                <td class="text-center">{{ $kompData->tidak_lanjut ? '√' : '' }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -145,83 +148,53 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Data rows -->
-                <tr>
-                    <td class="text-center">1</td>
-                    <td align="left">Terlambat</td>
-                    @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="text-end">0</td>
-                        <td class="text-end">0</td>
-                    @endfor
-                    <td class="text-end">0</td>
-                    <td class="text-end">0</td>
-                </tr>
-                <tr>
-                    <td class="text-center">2</td>
-                    <td align="left">Sakit</td>
-                    @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="text-end">0</td>
-                        <td class="text-end">0</td>
-                    @endfor
-                    <td class="text-end">0</td>
-                    <td class="text-end">0</td>
-                </tr>
-                <tr>
-                    <td class="text-center">3</td>
-                    <td align="left">Tanpa Keterangan</td>
-                    @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        <td class="text-end">0</td>
-                        <td class="text-end">0</td>
-                    @endfor
-                    <td class="text-end">0</td>
-                    <td class="text-end">0</td>
-                </tr>
-                <tr>
-                    <td class="text-center">4</td>
-                    <td align="left">Izin</td>
-                    @php
-                        $grandTotal = 0;
-                        $cekCabut = ['Staf Cabut', 'Staf Molding/perapian'];
-                    @endphp
-                    @for ($bulan = 1; $bulan <= 12; $bulan++)
-                        @if (in_array($karyawan->posisi, $cekCabut))
+                @php
+                    $keteranganKehadiran = ['Terlambat', 'Sakit', 'Tanpa Keterangan', 'Izin'];
+                    $kehadiranData = $datas->kehadiran->groupBy('keterangan') ?? collect();
+                    $grandTotalHari = 0;
+                    $cekCabut = ['Staf Cabut', 'Staf Molding/perapian'];
+                @endphp
+                @foreach ($keteranganKehadiran as $index => $ket)
+                    <tr>
+                        <td class="text-center">{{ $index + 1 }}</td>
+                        <td align="left">{{ $ket }}</td>
+                        @php $totalHariKet = 0; @endphp
+                        @for ($bulan = 1; $bulan <= 12; $bulan++)
                             @php
-                                $absenCabut =
-                                    $absen['total_per_bulan'][$bulan] > 26
-                                        ? 0
-                                        : ($absen['total_per_bulan'][$bulan] == 0
+                                $hadir =
+                                    $kehadiranData->get($ket, collect())->firstWhere('bulan', $bulan) ??
+                                    (object) ['hari' => 0, 'jam' => 0];
+                                $hariValue = $hadir->hari ?? 0;
+                                $jamValue = $hadir->jam ?? 0;
+                                if (in_array($datas->karyawan->posisi ?? '', $cekCabut)) {
+                                    $absenCabut =
+                                        ($absen['total_per_bulan'][$bulan] ?? 0) > 26
                                             ? 0
-                                            : 26 - $absen['total_per_bulan'][$bulan]);
+                                            : (($absen['total_per_bulan'][$bulan] ?? 0) == 0
+                                                ? 0
+                                                : 26 - ($absen['total_per_bulan'][$bulan] ?? 0));
+                                    $hariValue = $absenCabut == 0 ? 0 : $absenCabut;
+                                    $jamValue = $absenCabut == 0 ? 0 : number_format($absenCabut * 8, 0);
+                                    $totalHariKet += $absenCabut;
+                                } else {
+                                    $totalHariKet += $hariValue;
+                                }
                             @endphp
-                            <td class="text-end">{{ $absenCabut == 0 ? '0' : $absenCabut }}</td>
-                            </td>
-                            <td class="text-end">{{ $absenCabut == 0 ? '0' : number_format($absenCabut * 8, 0) }}
-                            </td>
-                            @php
-                                $grandTotal += $absenCabut;
-                            @endphp
-                        @else
-                            <td class="text-end">
-                                {{ $absen['total_per_bulan'][$bulan] == 0 ? '0' : $absen['total_per_bulan'][$bulan] }}
-                            </td>
-                            <td class="text-end">
-                                {{ $absen['total_per_bulan'][$bulan] == 0 ? '0' : number_format($absen['total_per_bulan'][$bulan] * 480, 0) }}
-                            </td>
-                            @php
-                                $grandTotal += $absen['total_per_bulan'][$bulan];
-                            @endphp
-                        @endif
-                    @endfor
-                    <td class="text-end">{{ $grandTotal }}</td>
-                    <td class="text-end">{{ number_format($grandTotal * 480, 0) }}</td>
-                </tr>
+                            <td class="text-end">{{ $hariValue }}</td>
+                            <td class="text-end">{{ $jamValue }}</td>
+                        @endfor
+                        <td class="text-end">{{ $totalHariKet }}</td>
+                        <td class="text-end">{{ number_format($totalHariKet * 8, 0) }}</td>
+                    </tr>
+                    @php $grandTotalHari += $totalHariKet; @endphp
+                @endforeach
             </tbody>
             <tfoot class="">
                 <tr>
                     <th colspan="6" class="text-center">Penilaian :</th>
                     <th colspan="20" class="text-center">Grand Total</th>
-                    <th class="text-center">{{ $grandTotal }}</th>
-                    <th class="text-center">{{ number_format($grandTotal * 480, 0) }}</th>
+                    <th class="text-center">{{ $grandTotalHari }}</th>
+                    <th class="text-center">{{ number_format($grandTotalHari * 8, 0) }}</th>
                 </tr>
                 <tr>
                     <th colspan="6">
@@ -251,11 +224,11 @@
                     </th>
                     <td colspan="22" class="align-middle">
                         @php
-                            if ($grandTotal < 3) {
+                            if ($grandTotalHari < 3) {
                                 $nilai = 'Baik Sekali';
-                            } elseif ($grandTotal >= 3 && $grandTotal <= 7) {
+                            } elseif ($grandTotalHari >= 3 && $grandTotalHari <= 7) {
                                 $nilai = 'Baik';
-                            } elseif ($grandTotal > 7 && $grandTotal <= 12) {
+                            } elseif ($grandTotalHari > 7 && $grandTotalHari <= 12) {
                                 $nilai = 'Cukup';
                             } else {
                                 $nilai = 'Kurang';
@@ -292,18 +265,29 @@
 
     <ol style="line-height: 2">
 
+        @php
+            $keterangans = $datas->suratPeringatan
+                ? array_map('trim', explode('; ', $datas->suratPeringatan->keterangan ?? ''))
+                : [];
+        @endphp
         <table width="100%">
             <tr>
-                <td width="13%">1. Surat peringatan I, karena</td>
-                <td>tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+                <td width="140">1. Surat peringatan I, karena</td>
+                <td width="20">:</td>
+                <td>{{ !empty($keterangans[0]) ? $keterangans[0] : 'tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….' }}
+                </td>
             </tr>
             <tr>
                 <td>2. Surat peringatan II, karena</td>
-                <td>tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+                <td>:</td>
+                <td>{{ !empty($keterangans[1]) ? $keterangans[1] : 'tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….' }}
+                </td>
             </tr>
             <tr>
                 <td>3. Surat peringatan III, karena</td>
-                <td>tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….</td>
+                <td>:</td>
+                <td>{{ !empty($keterangans[2]) ? $keterangans[2] : 'tidak pernah……………………………………………………………………………………………………………………………………………………………………………………………….' }}
+                </td>
             </tr>
         </table>
 
@@ -325,6 +309,11 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $parameters =
+                                    $datas->parameter->map(fn($p) => [$p->parameter, $p->nilai])->toArray() ?? [];
+                                $total = array_sum(array_column($parameters, 1));
+                            @endphp
                             @foreach ($parameters as $index => $param)
                                 <tr>
                                     <td class="text-end">{{ $index + 1 }}</td>
@@ -397,24 +386,30 @@
         </div>
         <div class="col-7">
             <h6 class="mb-5">V. REKOMENDASI</h6>
-            <p>Aktual Nilai :
-                {{ number_format(
-                    collect($parameters)->filter(fn($param) => is_numeric($param[1]))->sum(fn($param) => $param[1]) /
-                        collect($parameters)->filter(fn($param) => is_numeric($param[1]))->count(),
-                    0,
-                ) }}
-            </p>
-            <table width="100%">
-                <tr>
+            @php
+                $totalParameter = count(
+                    array_filter($parameters, function ($v) {
+                        return $v !== 0;
+                    }),
+                );
 
-                    <td>Kesimpulan :</td>
-                    <td>Ybs dinilai cakap / baik dalam menjalankan performanya.
-                        Ybs bisa dilanjut kontrak /
-                        kerjasama dengan</td>
-                </tr>
+                $totalSp1 = !empty($keterangans[0]) ? 10 : 0;
+                $totalSp2 = !empty($keterangans[1]) ? 20 : 0;
+                $totalSp3 = !empty($keterangans[2]) ? 40 : 0;
+                $totalSp = $totalSp1 + $totalSp2 + $totalSp3;
+
+                $aktual = ($total - $totalSp) / $totalParameter;
+            @endphp
+            <p>Aktual Nilai :
+                <b>{{ number_format($aktual ?? 0, 1) }}</b>
+            </p>
+            <table width="60%">
                 <tr>
-                    <td></td>
-                    <td>perusahaan. Dipertimbangkan untuk mendapatkan kontrak yang panjang</td>
+                    <td width="60">Kesimpulan :</td>
+                    <td>{!! !empty($datas->rekomendasi)
+                        ? $datas->rekomendasi
+                        : "<span class='text-danger fst-italic'>kesimpulan belum diisi</span>" !!}
+                    </td>
                 </tr>
             </table>
             {{-- <p>Kesimpulan : Ybs dinilai cakap / baik dalam menjalankan performanya.
