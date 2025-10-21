@@ -227,8 +227,8 @@
                                     value="1">
                             </td>
                             <td>
-                                <input type="text" class="form-control"
-                                    wire:model.change="hasilChecklist.{{ $pertanyaan->id }}.keterangan">
+                                <textarea class="form-control" rows="3"
+                                    wire:model.change="hasilChecklist.{{ $pertanyaan->id }}.keterangan"></textarea>
                             </td>
                         </tr>
                     @endforeach
