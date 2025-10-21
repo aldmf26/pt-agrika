@@ -14,12 +14,12 @@
 
                         <div class="col-md-6">
                             <label for="item_id{{ $p->id }}" class="form-label">Item</label>
-                            <select name="item_id" id="item_id{{ $p->id }}" class="form-select" required>
+                            <select name="item_id" id="item_id{{ $p->id }}" class=" select5" required>
                                 @foreach ($items as $item)
                                     <option value="{{ $item->id }}"
                                         {{ $item->id == $p->item_id ? 'selected' : '' }}>
                                         {{ $item->nama_item }} - {{ $item->no_identifikasi }} -
-                                        {{ $item->lokasi->lokasi }}
+                                        {{ $item->lokasi->lokasi ?? '-' }}
                                     </option>
                                 @endforeach
                             </select>
@@ -54,3 +54,14 @@
         </div>
     </div>
 </div>
+
+@section('scripts')
+    <script>
+        $('.modal').on('shown.bs.modal', function() {
+            $(this).find('.select5').select2({
+                dropdownParent: $(this),
+                width: '100%'
+            });
+        });
+    </script>
+@endsection
