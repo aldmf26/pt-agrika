@@ -20,7 +20,7 @@
                         <th class="text-center">PIC</th>
                         <th class="text-center">Completion Date</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center">Aksi</th>
+                        <th class="text-center" width="120">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
