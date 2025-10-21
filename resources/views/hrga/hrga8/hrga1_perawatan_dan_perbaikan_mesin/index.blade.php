@@ -146,7 +146,7 @@
                 count = 0;
                 $(document).on('click', '.tambah-baris', function() {
                     count++;
-                    var = kategori = '{{ $kategori }}';
+                    var kategori = '{{ $kategori }}';
 
                     $.ajax({
                         type: "get",
