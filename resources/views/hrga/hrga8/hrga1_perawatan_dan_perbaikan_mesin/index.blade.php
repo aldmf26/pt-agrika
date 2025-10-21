@@ -146,12 +146,14 @@
                 count = 0;
                 $(document).on('click', '.tambah-baris', function() {
                     count++;
+                    var kategori = '{{ $kategori }}';
 
                     $.ajax({
                         type: "get",
                         url: "{{ route('hrga8.1.load_baris') }}",
                         data: {
                             count: count,
+                            kategori: kategori
 
                         },
                         success: function(response) {

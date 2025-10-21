@@ -100,8 +100,8 @@ class Hrga1ProgramPerawatanMesin extends Controller
 
     public function load_baris(Request $r)
     {
-
-        $item = ItemMesin::all();
+        $kategori = $r->kategori;
+        $item = ItemMesin::where('kategori', $kategori)->get();
 
         $data = [
             'item' => $item,

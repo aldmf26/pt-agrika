@@ -108,49 +108,7 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
             ->where('item_id', $r->id)
             ->whereYear('tanggal', $r->tahun);
         $union = $perawatan->unionAll($perbaikan)->get();
-        // } else {
-        //     $items = LokasiModel::select(
-        //         'lokasi as nama_item',
-        //         DB::raw('"kosong" as merek'),
-        //         DB::raw('"kosong" as no_identifikasi'),
-        //         'lokasi as lokasi'
-        //     )
-        //         ->where('id', $r->id)
-        //         ->first();
 
-
-        //     $perawatan = PerawatanModel::join('item_perawatan', 'perawatan.item_id', '=', 'item_perawatan.id')
-        //         ->select(
-        //             'perawatan.id',
-        //             'item_perawatan.nama_item',
-        //             'item_perawatan.lokasi_id',
-        //             'perawatan.item_id',
-        //             'perawatan.tgl as tanggal',
-        //             DB::raw('"perawatan" as ket') // String literal untuk jenis data
-        //         )
-        //         ->where('item_perawatan.lokasi_id', $r->id)
-        //         ->where('item_perawatan.jenis_item', 'gabung')
-        //         ->whereYear('perawatan.tgl', $r->tahun);
-
-        //     // Query Perbaikan
-        //     $perbaikan = PermintaanPerbaikanSaranaPrasana::join('item_perawatan', 'permintaan_perbaikan_sarana_prasana.item_id', '=', 'item_perawatan.id')
-        //         ->select(
-        //             'permintaan_perbaikan_sarana_prasana.id',
-        //             'item_perawatan.nama_item',
-        //             'item_perawatan.lokasi_id',
-        //             'permintaan_perbaikan_sarana_prasana.item_id',
-        //             'permintaan_perbaikan_sarana_prasana.tanggal',
-        //             DB::raw('"perbaikan" as ket') // String literal untuk jenis data
-        //         )
-        //         ->where('item_perawatan.lokasi_id', $r->id)
-        //         ->where('item_perawatan.jenis_item', 'gabung')
-        //         ->whereYear('permintaan_perbaikan_sarana_prasana.tanggal', $r->tahun);
-
-        //     // Union All kedua query
-        //     $union = $perawatan->unionAll($perbaikan)
-        //         ->orderBy('tanggal', 'asc') // Urutkan hasil berdasarkan kolom tanggal
-        //         ->get();
-        // }
 
 
         $data = [
@@ -162,5 +120,48 @@ class Hrga2RiwayatPerwatanPerbaikan extends Controller
 
         ];
         return view('hrga.hrga5.hrga2_riwayatperbaikan.print', $data);
+    }
+    public function edit(Request $r)
+    {
+        $items = ItemPerawatan::join('lokasi', 'item_perawatan.lokasi_id', '=', 'lokasi.id')->select('nama_item as nama_item', 'jumlah as jumlah', 'no_identifikasi', 'lokasi.lokasi', 'jenis_item')->where('item_perawatan.id', $r->id)->first();
+        $perawatan = PerawatanModel::select(
+            'id',
+            'item_id',
+            'rincian_id',
+            'tgl as tanggal',
+            'kesimpulan',
+            'fungsi',
+            DB::raw('"perawatan" as ket')
+        )
+            ->where('item_id', $r->id)
+            ->whereBetween('tgl', [$r->tahun . '-01-01', now()])
+            ->whereYear('tgl', $r->tahun);
+
+
+        $union = $perawatan->get();
+
+
+
+        $data = [
+            'title' => 'Riwayat Perbaikan dan Perawatan Sarana dan Prasarana Umum',
+            'items' => $items,
+            'tahun' => $r->tahun,
+            'union' =>  $union,
+            'jenis' => $r->jenis
+
+        ];
+        return view('hrga.hrga5.hrga2_riwayatperbaikan.edit', $data);
+    }
+
+    public function update(Request $r)
+    {
+        for ($i = 0; $i < count($r->id); $i++) {
+            PerawatanModel::where('id', $r->id[$i])->update([
+                'kesimpulan' => $r->kesimpulan[$i],
+                'fungsi' => $r->fungsi[$i],
+            ]);
+        }
+
+        return redirect()->route('hrga5.2.index', ['kategori' => $r->jenis, 'tahun' => $r->tahun])->with('success', 'Data berhasil diupdate');
     }
 }

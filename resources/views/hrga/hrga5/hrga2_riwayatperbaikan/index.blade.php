@@ -35,6 +35,10 @@
                                     <a target="_blank"
                                         href="{{ route('hrga5.2.print', ['id' => $id, 'jenis' => $jenis, 'tahun' => $tahun]) }}"
                                         class="btn btn-sm btn-warning"><i class="fas fa-print"></i> Print</a>
+
+                                    <a href="{{ route('hrga5.2.edit', ['id' => $id, 'jenis' => $jenis, 'tahun' => $tahun]) }}"
+                                        class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>
+                                        Edit</a>
                                 </td>
                             </tr>
                         @endforeach
