@@ -89,6 +89,7 @@ Route::controller(QuestionerController::class)
     ->name('qa.questioner.')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
         Route::get('/update', 'update')->name('update');
     });
 

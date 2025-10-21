@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\JawabanSurvey;
+use App\Models\KesimpulanSurvey;
 use App\Models\PertanyaanSurvey;
 use App\Models\RespondenSurvey;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionerController extends Controller
 {
@@ -44,6 +46,18 @@ class QuestionerController extends Controller
         ];
 
         return view('qa.questioner.index', $data);
+    }
+
+    public function store(Request $request)
+    {
+        KesimpulanSurvey::where('tgl', date('Y-m-d'))->delete();
+        KesimpulanSurvey::create([
+            'tgl' => date('Y-m-d'),
+            'kesimpulan' => $request->kesimpulan,
+            'admin' => auth()->user()->name,
+        ]);
+
+        return redirect()->route('qa.questioner.index', ['kategori' => 'survey'])->with('sukses', 'Kesimpulan berhasil disimpan!')->with('category', 'survey');
     }
     public function questioner()
     {
