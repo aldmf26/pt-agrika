@@ -22,8 +22,7 @@ class DataPegawai extends Model
     public function scopeKaryawanAudit($query)
     {
         return $query->with('divisi')
-            ->whereNotIn('divisi_id', [16, 17, 18, 8])
-            ->where('posisi', 'NOT LIKE', '%Staff%')
+            ->where('posisi', 'LIKE', '%Kepala%')
             ->orderBy('nama', 'ASC');
     }
 
