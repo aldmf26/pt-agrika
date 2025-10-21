@@ -19,7 +19,7 @@ class DataPegawai extends Model
         return $query->with('divisi')->where('posisi', 'LIKE', '%Admin%');
     }
 
-    public function scopeKaryawanAudit($query)
+    public function scopeKaryawan($query)
     {
         return $query->with('divisi')
             ->where('posisi', 'LIKE', '%Kepala%')

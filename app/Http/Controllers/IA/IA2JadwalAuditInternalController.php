@@ -25,7 +25,7 @@ class IA2JadwalAuditInternalController extends Controller
     public function create()
     {
         $bagian = ProgramAuditInternal::where('tahun', date('Y'))->get()->pluck('departemen');
-        $pegawai = DataPegawai::karyawanAudit()->get()->pluck('nama');
+        $pegawai = DataPegawai::karyawan()->get()->pluck('nama');
         $data = [
             'title' => 'Tambah Jadwal Audit Internal',
             'bagian' => $bagian,
@@ -82,7 +82,7 @@ class IA2JadwalAuditInternalController extends Controller
     public function edit($tgl)
     {
         $bagian = ProgramAuditInternal::where('tahun', date('Y'))->get()->pluck('departemen');
-        $pegawai = DataPegawai::karyawanAudit()->get()->pluck('nama');
+        $pegawai = DataPegawai::karyawan()->get()->pluck('nama');
         $data = [
             'title' => 'Edit Jadwal Audit Internal',
             'tgl' => $tgl,
