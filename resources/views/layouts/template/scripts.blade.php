@@ -96,12 +96,12 @@
             Toastify({
                 text: pesan,
                 duration: 3000,
-                position: "center",
+                position: "right",
                 style: {
                     background: bg,
                     color: "#7F8B8B",
-                    fontSize: "15px", // Menyesuaikan ukuran teks
-                    padding: "15px", // Menyesuaikan jarak padding
+                    fontSize: "12px", // Menyesuaikan ukuran teks
+                    padding: "12px", // Menyesuaikan jarak padding
                     borderRadius: "10px" // Menambahkan sudut elemen
                 },
                 close: true,

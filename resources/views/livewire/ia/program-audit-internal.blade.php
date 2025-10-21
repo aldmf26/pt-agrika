@@ -121,16 +121,8 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>
-                        @if ($editingId == $audit->id)
-                            <select wire:model="editForm.departemen" class="form-control form-control-sm">
-                                <option value="">Pilih Departemen</option>
-                                @foreach ($departemenBk as $dept)
-                                    <option value="{{ $dept }}">{{ strtoupper($dept) }}</option>
-                                @endforeach
-                            </select>
-                        @else
-                            {{ $audit->departemen }}
-                        @endif
+
+                        {{ $audit->departemen }}
                     </td>
                     <td>
                         @if ($editingId == $audit->id)

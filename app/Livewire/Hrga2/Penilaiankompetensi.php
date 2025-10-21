@@ -41,6 +41,10 @@ class Penilaiankompetensi extends Component
     public $totalParameter = 0;
     public $totalSP = 0;
 
+    // EDIT: Property untuk debounce auto-save rekomendasi (hindari spam)
+    protected $lastRekomendasiSave = 0;
+    protected $rekomendasiDebounceMs = 2000; // Delay 2 detik
+
     public $showSaved = false;
 
     protected $masterKompetensi = [
@@ -103,7 +107,7 @@ class Penilaiankompetensi extends Component
         if (!$this->karyawan) return;
 
         $penilaian = SumPenilaianKompetensi::with(['kompetensi', 'kehadiran', 'parameter', 'suratPeringatan'])
-            ->where('karyawan_id', $this->karyawan->id) // Cek: Apakah ini match kolom DB? Kalau nggak, ganti ke 'data_pegawai_id' atau sesuai
+            ->where('karyawan_id', $this->karyawan->karyawan_id_dari_api) // Cek: Apakah ini match kolom DB? Kalau nggak, ganti ke 'data_pegawai_id' atau sesuai
             ->where('tahun', $this->tahun)
             ->first();
 
@@ -129,7 +133,7 @@ class Penilaiankompetensi extends Component
                 }
             } else {
                 // DEBUG: Log kalau nggak ada data (cek di storage/logs/laravel.log)
-                Log::info('No kompetensi data loaded for karyawan_id: ' . $this->karyawan->id . ', tahun: ' . $this->tahun);
+                Log::info('No kompetensi data loaded for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api . ', tahun: ' . $this->tahun);
             }
 
             if ($penilaian->kehadiran && $penilaian->kehadiran->count() > 0) {
@@ -148,7 +152,7 @@ class Penilaiankompetensi extends Component
                     }
                 }
             } else {
-                Log::info('No kehadiran data loaded for karyawan_id: ' . $this->karyawan->id);
+                Log::info('No kehadiran data loaded for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api);
             }
 
             // Load parameter
@@ -184,22 +188,25 @@ class Penilaiankompetensi extends Component
                     }
                 }
             } else {
-                Log::info('No parameter data loaded for karyawan_id: ' . $this->karyawan->id);
+                Log::info('No parameter data loaded for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api);
             }
 
+            // Load rekomendasi (EDIT: Load dari DB, kalau kosong generate default)
+            $this->rekomendasi = $penilaian->rekomendasi ?? $this->generateRekomendasi();
             $this->hitungTotal();
         } else {
             // DEBUG: Log kalau nggak ada penilaian sama sekali
-            Log::info('No penilaian found for karyawan_id: ' . $this->karyawan->id . ', tahun: ' . $this->tahun);
+            Log::info('No penilaian found for karyawan_id: ' . $this->karyawan->karyawan_id_dari_api . ', tahun: ' . $this->tahun);
         }
     }
 
     public function hitungTotal()
     {
         // Hitung total parameter
-        $this->totalParameter = array_sum($this->parameter);
-        $totalParameter = count($this->parameter);
-
+        $totalParameter = count(array_filter($this->parameter, function ($v) {
+            return $v !== 0;
+        }));
+        $this->totalParameter = $totalParameter > 0 ? array_sum($this->parameter) : 0;
         // Hitung total SP
         $this->totalSP = 0;
         if (trim($this->spKeterangan['sp_1']) !== '') $this->totalSP += 10;
@@ -207,7 +214,7 @@ class Penilaiankompetensi extends Component
         if (trim($this->spKeterangan['sp_3']) !== '') $this->totalSP += 40;
 
         // Nilai akhir
-        $this->totalNilai = ($this->totalParameter - $this->totalSP) / $totalParameter;
+        $this->totalNilai = $totalParameter > 0 ? ($this->totalParameter - $this->totalSP) / $totalParameter : 0;
 
         // Kategori
         if ($this->totalNilai >= 86 && $this->totalNilai <= 100) {
@@ -233,7 +240,7 @@ class Penilaiankompetensi extends Component
             'Kurang' => 'Performa kurang memuaskan. Perlu evaluasi lebih lanjut dan perbaikan.'
         ];
 
-        $this->rekomendasi = $rekomendasi[$this->kategoriNilai] ?? '';
+        // $this->rekomendasi = !empty($this->rekomandasi) ? $this->rekomendasi : $rekomendasi[$this->kategoriNilai];
     }
 
     public function getTotalKehadiranHari($keterangan = null)
@@ -325,6 +332,11 @@ class Penilaiankompetensi extends Component
         if (str_starts_with($propertyName, 'sp.sp_')) {
             $this->autoSaveSp();
         }
+
+        // Tambahan baru: Auto-save rekomendasi saat ketik
+        if ($propertyName === 'rekomendasi') {
+            $this->autoSaveRekomendasi();
+        }
     }
 
     // EDIT: Method baru - auto-save khusus kompetensi saat checkbox berubah
@@ -341,7 +353,7 @@ class Penilaiankompetensi extends Component
         // Create or update penilaian utama (status 'draft' untuk auto-save)
         $penilaian = SumPenilaianKompetensi::updateOrCreate(
             [
-                'karyawan_id' => $this->karyawan->id,
+                'karyawan_id' => $this->karyawan->karyawan_id_dari_api,
                 'tahun' => $this->tahun
             ],
             [
@@ -388,7 +400,7 @@ class Penilaiankompetensi extends Component
         // Create or update penilaian utama (status 'draft' untuk auto-save, kalau belum ada)
         $penilaian = SumPenilaianKompetensi::firstOrCreate( // Gunakan firstOrCreate biar aman kalau belum ada
             [
-                'karyawan_id' => $this->karyawan->id,
+                'karyawan_id' => $this->karyawan->karyawan_id_dari_api,
                 'tahun' => $this->tahun
             ],
             [
@@ -478,6 +490,31 @@ class Penilaiankompetensi extends Component
 
         $this->showSaved = true;
         $this->alert('sukses', 'Parameter penilaian tersimpan otomatis!');
+    }
+
+    // EDIT: Method baru - auto-save rekomendasi saat ketik (dengan debounce)
+    public function autoSaveRekomendasi()
+    {
+        // Debounce: Skip kalau kurang dari 2 detik sejak save terakhir
+        $now = now()->timestamp * 1000; // Milidetik
+        if ($now - $this->lastRekomendasiSave < $this->rekomendasiDebounceMs) {
+            return;
+        }
+        $this->lastRekomendasiSave = $now;
+
+        if (!$this->karyawan || !$this->penilaian_id) {
+            return;
+        }
+
+        // Update rekomendasi di parent (status draft)
+        SumPenilaianKompetensi::where('id', $this->penilaian_id)
+            ->update([
+                'rekomendasi' => $this->rekomendasi,
+                'status' => 'draft'
+            ]);
+
+        $this->showSaved = true;
+        $this->alert('sukses', 'Rekomendasi tersimpan otomatis!');
     }
 
     public function toggleEditSp($level)
