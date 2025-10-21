@@ -3,6 +3,7 @@
 namespace App\Livewire\Ia;
 
 use App\Models\DataPegawai;
+use App\Models\Divisi;
 use App\Models\Notif;
 use App\Models\ProgramAuditInternal as ModelsProgramAuditInternal;
 use App\Models\User;
@@ -92,7 +93,7 @@ class ProgramAuditInternal extends Component
 
     public function add()
     {
-
+        dd($this->form);
         $existing = $this->model::where('departemen', $this->form['departemen'])
             ->where('tahun', $this->tahun)
             ->first();
@@ -120,7 +121,7 @@ class ProgramAuditInternal extends Component
     public function edit($id)
     {
         $audit = $this->model::find($id);
-        
+
         if ($audit) {
             $this->editingId = $id;
             $this->editForm = [
@@ -134,14 +135,14 @@ class ProgramAuditInternal extends Component
     public function saveEdit()
     {
         $audit = $this->model::find($this->editingId);
-        
+
         if ($audit) {
             // Cek apakah departemen sudah ada (kecuali untuk data yang sedang diedit)
             $existing = $this->model::where('departemen', $this->editForm['departemen'])
                 ->where('tahun', $this->tahun)
                 ->where('id', '!=', $this->editingId)
                 ->first();
-                
+
             if ($existing) {
                 $this->alert('error', 'Departemen sudah ada');
                 return;
@@ -167,7 +168,7 @@ class ProgramAuditInternal extends Component
 
     public function render()
     {
-        $departemenBk = ['bk', 'cabut', 'cetak', 'steamer', 'packing', 'hrga', 'purchasing', 'qa'];
+        $departemenBk = Divisi::get()->pluck('divisi');
         $user = DataPegawai::karyawan()->get();
 
         $data = [

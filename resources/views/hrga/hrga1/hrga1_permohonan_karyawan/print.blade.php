@@ -21,7 +21,7 @@
                         <td>Jabatan</td>
                         <td>:</td>
 
-                        <td colspan="2"> &nbsp;{{ $datas->jabatan ?? '' }}</td>
+                        <td colspan="2"> &nbsp;{{ $datas->divisi->divisi ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Jumlah</td>
