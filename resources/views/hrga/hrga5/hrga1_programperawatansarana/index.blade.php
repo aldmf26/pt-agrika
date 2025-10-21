@@ -81,9 +81,16 @@
     </style>
 
     <!-- FORM -->
+    <style>
+        .modal-scrollable .modal-body {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+    </style>
     <form action="{{ route('hrga5.1.store') }}" method="post">
         @csrf
-        <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal modal-scrollable fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-xlplus">
                 <div class="modal-content">
                     <div class="modal-header">
