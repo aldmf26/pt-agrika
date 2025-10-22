@@ -17,6 +17,6 @@ class usulanDanIdentifikasi extends Model
     }
     public function pelatihan()
     {
-        return $this->belongsTo(ProgramPelatihanTahunan::class, 'nota_pelatihan');
+        return $this->belongsTo(ProgramPelatihanTahunan::class, 'nota_pelatihan', 'nota_pelatihan');
     }
 }
