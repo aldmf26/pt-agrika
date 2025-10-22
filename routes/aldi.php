@@ -448,7 +448,7 @@ Route::controller(PUR1DaftarSupplierController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
-        Route::get('/edit/{id}', 'edit')->name('edit');
+        Route::get('/edit/{id}/{kategori}', 'edit')->name('edit');
 
         Route::get('/evaluasi/', 'evaluasi')->name('evaluasi');
         Route::get('/evaluasi_sbw/', 'evaluasi_sbw')->name('evaluasi_sbw');

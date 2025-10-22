@@ -114,7 +114,7 @@ class PUR2PurchaseOrderController extends Controller
 
     public function create(Request $r)
     {
-        $user = DataPegawai::admin()->get();
+        $user = DataPegawai::karyawan()->get();
         $suplier = Suplier::where('kategori', $r->kategori)->latest()->get();
         $data = [
             'title' => 'Tambah Purchase Order',

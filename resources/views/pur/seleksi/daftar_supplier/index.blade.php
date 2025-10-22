@@ -94,8 +94,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucwords($r->nama) }}</td>
                             <td>{{ $r->alamat }}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{ $r->contact_person }}</td>
+                            <td>{{ $r->no_telp }}</td>
                             <td>
                                 <a href="{{ route('pur.seleksi.1.evaluasi_sbw', ['semester' => 1, 'id' => $r->id]) }}"
                                     class="mb-2 btn btn-xs {{ $evaluasi_s1 ? 'btn-primary' : 'btn-outline-primary' }}">Semester
@@ -109,8 +109,8 @@
                                     class="mb-1 btn btn-xs btn-info"><i class="fas fa-plus"></i> Seleksi</a>
                             </td>
                             <td>
-                                <a href="{{ route('pur.seleksi.1.edit', $r->id) }}" class="btn btn-xs btn-primary"><i
-                                        class="fas fa-edit"></i></a>
+                                <a href="{{ route('pur.seleksi.1.edit', [$r->id, $kategori]) }}"
+                                    class="btn btn-xs btn-primary"><i class="fas fa-edit"></i></a>
                                 <a onclick="return confirm('Yakin ingin menghapus data ini?')"
                                     href="{{ route('pur.seleksi.1.destroy', $r->id) }}"
                                     class="btn btn-xs btn-danger"><i class="fas fa-trash"></i></a>
