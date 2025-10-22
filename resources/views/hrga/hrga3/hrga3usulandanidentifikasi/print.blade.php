@@ -88,7 +88,7 @@
                         <tr>
                             <th class="text-center dhead">No</th>
                             <th class="text-start dhead">Nama Calon Peserta yang Diusulkan</th>
-                            <th class="text-center dhead">NIP</th>
+                            <th class="text-center dhead">NIK</th>
                             <th class="text-center dhead">Divisi</th>
                             <th class="text-center dhead">Pengusul</th>
                             <th class="text-center dhead">Usulan Jenis Pelatihan <br>
@@ -102,7 +102,7 @@
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
                                 <td>{{ ucwords(strtolower($u->data_pegawai->nama)) }}</td>
-                                <td>{{ $u->data_pegawai->karyawan_id_dari_api }}</td>
+                                <td>{{ $u->data_pegawai->nik }}</td>
                                 <td>{{ $u->data_pegawai->divisi->divisi ?? '-' }}</td>
                                 <td>{{ ucwords(strtolower($u->pengusul)) }}</td>
                                 <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>
