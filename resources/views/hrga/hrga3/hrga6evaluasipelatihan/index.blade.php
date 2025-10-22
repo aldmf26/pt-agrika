@@ -22,7 +22,7 @@
                             <td>{{ ucwords(strtolower($e->tema_pelatihan)) }}</td>
                             <td>{{ ucwords(strtolower($e->data_pegawai->nama)) }}</td>
                             <td>{{ $e->data_pegawai->divisi->divisi }}</td>
-                            <td>{{ $e->data_pegawai->jenis_kelamin == 'P' ? 'Perempuan' : 'Laki-laki' }}
+                            <td>{{ $e->data_pegawai->jenis_kelamin }}
                                 /
                                 {{ date('d-m-Y', strtotime($e->data_pegawai->tgl_lahir)) }}
                             </td>
