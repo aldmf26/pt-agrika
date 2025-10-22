@@ -7,15 +7,17 @@ use App\Models\KodeBahanBaku;
 use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
 use App\Models\Suplier;
+use App\Traits\WithAlert;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class TbhBarang extends Component
 {
+    use WithAlert;
+
     public $nama_barang = "";
-    public $kodeBarang = "";
     public $supplierId = "";
-    public $satuan = "";
+    public $satuan = "PCS";
     public $spek = "";
     public $kategori;
     public $pesan = "";
@@ -24,14 +26,15 @@ class TbhBarang extends Component
 
     public function store()
     {
-
+        $lastBarang = Barang::orderBy('kode_barang', 'DESC')->first();
+        $kodeBarang = $lastBarang ? $lastBarang->kode_barang + 1 : 1;
         // $lot = $this->lot;
         // $no_lot = "{$lot['tgl']} {$lot['bulanDanTahun']} {$lot['bulanExpired']} {$lot['tahunExpired']}";
         // $lastBarang = Barang::orderBy('kode_barang', 'DESC')->first();
         // $this->kodeBarang = $lastBarang->kode_barang ?? '';
         Barang::create([
             'nama_barang' => $this->nama_barang,
-            'kode_barang' => $this->kodeBarang,
+            'kode_barang' => $kodeBarang,
             'supplier_id' => $this->supplierId,
             'satuan' => $this->satuan,
             'spek' => $this->spek,
@@ -39,7 +42,8 @@ class TbhBarang extends Component
             'admin' => auth()->user()->name,
         ]);
 
-        $this->reset(['nama_barang', 'kodeBarang', 'satuan', 'spek']);
+        $this->reset(['nama_barang', 'satuan', 'spek']);
+        $this->alert('sukses', 'Berhasil menambahkan barang baru');
     }
 
     public function updateSpek($id, $value)
@@ -48,6 +52,16 @@ class TbhBarang extends Component
         $barang->spek = $value;
         $barang->save();
         $this->pesan = "berhasil update spek";
+        $this->alert('sukses', $this->pesan);
+    }
+
+    public function updateBarang($id, $value)
+    {
+        $barang = Barang::find($id);
+        $barang->nama_barang = $value;
+        $barang->save();
+        $this->pesan = "berhasil update nama barang";
+        $this->alert('sukses', $this->pesan);
     }
 
     public function hapus($id)
@@ -57,14 +71,18 @@ class TbhBarang extends Component
             $barang = Barang::find($id);
             if ($barang && !$barang->penerimaanHeader && !$barang->penerimaanKemasanHeader) {
                 $barang->delete();
+                $this->alert('sukses', 'Data berhasil dihapus');
             } else {
                 $this->pesan = "Data tidak dapat dihapus karena memiliki relasi dengan penerimaan";
+                $this->alert('error', $this->pesan);
             }
             DB::commit();
         } catch (\Exception $th) {
             DB::rollBack();
             $this->pesan = $th->getMessage();
         }
+
+
     }
 
     public function render()

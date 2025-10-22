@@ -33,13 +33,17 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $d->kode_barang }}</td>
-                                <td>{{ $d->nama_barang }}</td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm"
+                                        value="{{ $d->nama_barang }}"
+                                        wire:change="updateBarang({{ $d->id }}, $event.target.value)">
+                                </td>
                                 <td>{{ $d->satuan }}</td>
                                 <td>{{ $d->supplier->nama_supplier }}</td>
                                 <td>
                                     <input type="text" class="form-control form-control-sm"
                                         value="{{ $d->spek }}"
-                                        wire:blur="updateSpek({{ $d->id }}, $event.target.value)"
+                                        wire:change="updateSpek({{ $d->id }}, $event.target.value)"
                                         placeholder="Ketik spesifikasi...">
                                 </td>
                                 <td>
@@ -58,10 +62,10 @@
     <form wire:submit.prevent="store">
         <h6>{{ ucwords($kategori) }}</h6>
         <div class="row">
-            <div class="col-3">
+            <div class="col-3 d-none">
                 <div class="form-group">
                     <label for="">Kode Barang</label>
-                    <input required type="text" wire:model="kodeBarang" class="form-control">
+                    {{-- <input required type="text" wire:model="kodeBarang" class="form-control"> --}}
                     {{-- <div wire:ignore>
                         <select class="select2" id="kodeBarang">
                             <option value="">Pilih Kode</option>
@@ -72,18 +76,13 @@
                     </div> --}}
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="form-group">
                     <label for="">Nama Barang</label>
                     <input required type="text" wire:model="nama_barang" class="form-control">
                 </div>
             </div>
-            <div class="col-3">
-                <div class="form-group">
-                    <label for="">Satuan</label>
-                    <input required placeholder="satuan" type="text" wire:model="satuan" class="form-control">
-                </div>
-            </div>
+
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Supplier</label>
@@ -95,6 +94,12 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="">Satuan</label>
+                    <input required placeholder="satuan" type="text" wire:model="satuan" class="form-control">
                 </div>
             </div>
             <div class="col-12">
