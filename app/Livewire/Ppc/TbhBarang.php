@@ -27,7 +27,8 @@ class TbhBarang extends Component
 
         // $lot = $this->lot;
         // $no_lot = "{$lot['tgl']} {$lot['bulanDanTahun']} {$lot['bulanExpired']} {$lot['tahunExpired']}";
-
+        $lastBarang = Barang::orderBy('kode_barang', 'DESC')->first();
+        $this->kodeBarang = $lastBarang->kode_barang ?? '';
         Barang::create([
             'nama_barang' => $this->nama_barang,
             'kode_barang' => $this->kodeBarang,
