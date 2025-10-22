@@ -75,8 +75,11 @@ class DataPegawai extends Component
 
     public function render()
     {
+        $tanggalBatas = now()->subYears(17)->format('Y-m-d');
+
         $query = ModelsDataPegawai::with('divisi')
-            ->whereAny(['nama', 'nik', 'posisi', 'tgl_masuk'], 'LIKE', "%{$this->search}%");
+            ->whereAny(['nama', 'nik', 'posisi', 'tgl_masuk'], 'LIKE', "%{$this->search}%")
+            ->whereDate('tgl_lahir', '<=', $tanggalBatas); // hanya yg sudah 17 tahun ke atas
 
         if ($this->sort && $this->sortDirection) {
             $query->orderBy($this->sort, $this->sortDirection);
@@ -84,7 +87,6 @@ class DataPegawai extends Component
 
         $datas = $query->paginate($this->paginate);
 
-        // Simpan ID halaman aktif supaya updatedSelectAll tahu data mana yang ditampilkan
         $this->currentPageIds = $datas->getCollection()->pluck('id')->map(fn($id) => (string)$id)->toArray();
 
         return view('livewire.hrga.hrga4.hrga4-data-pegawai.data-pegawai', [

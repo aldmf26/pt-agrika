@@ -128,7 +128,22 @@
 
 
             @foreach ($checklist as $c)
-                <td class="text-end align-middle" width="8%" colspan="2">02:00 PM</td>
+                @php
+                    $jam = DB::table('checklist_kendaraan_fg')->where('tgl', $c['tgl'])->first();
+                @endphp
+                <td class="text-end align-middle" width="8%" colspan="2">
+                    <input type="time" name="jam_pengantaran[]"
+                        value="{{ empty($jam->jam_pengantaran) ? '14:00' : $jam->jam_pengantaran }}"
+                        class="form-control input jam_pengantaran" tgl="{{ $c['tgl'] }}">
+
+
+                    <span class="print jam_update" data-tgl="{{ $c['tgl'] }}">
+                        {{ empty($jam->jam_pengantaran)
+                            ? date('h:i A', strtotime('14:00:00'))
+                            : date('h:i A', strtotime($jam->jam_pengantaran)) }}
+                    </span>
+
+                </td>
             @endforeach
 
             @for ($i = 0; $i < $maxKolom - $jumlahData; $i++)
@@ -137,8 +152,6 @@
         </tr>
         <tr>
             <td colspan="2">Tujuan / Ekspedisi</td>
-
-
             @foreach ($checklist as $c)
                 <td class="text-end align-middle" width="8%" colspan="2">HK / Garuda Kargo</td>
             @endforeach
@@ -250,5 +263,110 @@
             </tr>
         </table>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.jam_pengantaran').change(function(e) {
+                e.preventDefault();
+                var tgl = $(this).attr('tgl');
+                var jam = $(this).val();
+                $.ajax({
+                    type: "Get",
+                    url: "/update-jam-kedatangan",
+                    data: {
+                        partai: partai,
+                        jam: jam,
+                        kategori: 'jam_kedatangan',
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            console.log('Jam kedatangan berhasil diperbarui.');
+                        } else {
+                            alert('Gagal update.');
+                        }
+                        $('.jam_update[data-partai="' + partai + '"]').text(jam);
+
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert('Terjadi kesalahan saat mengirim data.');
+                    }
+                });
+
+            });
+
+            // $('.no_kendaraan').keyup(function(e) {
+            //     alert('dsa')
+            // });
+            $('.no_kendaraan').keyup(function(e) {
+                e.preventDefault();
+
+                var partai = $(this).attr('partai');
+                var no_kendaraan = $(this).val();
+                $.ajax({
+                    type: "Get",
+                    url: "/update-jam-kedatangan",
+                    data: {
+                        partai: partai,
+                        no_kendaraan: no_kendaraan,
+                        kategori: 'no_kendaraan',
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            console.log('Jam kedatangan berhasil diperbarui.');
+                        } else {
+                            alert('Gagal update.');
+                        }
+                        $('.no_kendaraan_update[data-partai="' + partai + '"]').text(
+                            no_kendaraan);
+
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert('Terjadi kesalahan saat mengirim data.');
+                    }
+                });
+
+            });
+            $('.driver').keyup(function(e) {
+                e.preventDefault();
+
+                var partai = $(this).attr('partai');
+                var driver = $(this).val();
+
+                $('.driver_update[data-partai="' + partai + '"]').text(driver);
+                $.ajax({
+                    type: "Get",
+                    url: "/update-jam-kedatangan",
+                    data: {
+                        partai: partai,
+                        driver: driver,
+                        kategori: 'driver',
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.success) {
+                            console.log('Jam kedatangan berhasil diperbarui.');
+                        } else {
+                            alert('Gagal update.');
+                        }
+
+                    },
+                    error: function(xhr) {
+                        console.error(xhr.responseText);
+                        alert('Terjadi kesalahan saat mengirim data.');
+                    }
+                });
+
+            });
+        });
+    </script>
 
 </x-hccp-print>
