@@ -1,5 +1,7 @@
 <x-app-layout :title="$title">
-    <form action="" method="post">
+    <form action="" method="post" x-data="{
+        kategori: '{{ $kategori }}'
+    }">
         @csrf
         <x-multiple-input>
             <div class="col-3">
@@ -42,18 +44,30 @@
                         <i class="fas fa-info-circle" data-toggle="tooltip" data-placement="top"
                             title="isi Barang: untuk bahan baku, isi kemasan : untuk barang kemasan"></i>
                     </label>
-                    <select name="jenis_produk[]" class="form-control" required>
+                    <select name="jenis_produk[]" x-model="kategori" class="form-control" required>
                         <option value="">Pilih Kategori</option>
                         @foreach (jenisProduk() as $d => $i)
-                            <option value="{{ $d }}">{{ $i }}</option>
+                            <option @selected($d == $kategori) value="{{ $d }}">{{ $i }}
+                            </option>
                         @endforeach
-
                     </select>
+                </div>
+            </div>
+            <div class="col-3" x-show="kategori == 'lainnya'">
+                <div class="form-group">
+                    <label for="">No Reg</label>
+                    <input type="text" name="no_reg[]" placeholder="No registrasi" class="form-control">
+                </div>
+            </div>
+            <div class="col-3" x-show="kategori == 'lainnya'">
+                <div class="form-group">
+                    <label for="">Kode</label>
+                    <input type="no_reg" name="kode[]" placeholder="Kode Rumah Walet" class="form-control">
                 </div>
             </div>
 
             <div class="col-3">
-                <div class="form-group">
+                <div class="form-group" x-show="kategori != 'lainnya'">
                     <label for="">Keterangan</label>
                     <input type="text" name="keterangan[]" placeholder="Keterangan" class="form-control">
                 </div>

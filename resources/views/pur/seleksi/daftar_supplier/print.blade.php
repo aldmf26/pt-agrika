@@ -69,7 +69,7 @@
                         <td class="text-end">{{ $loop->iteration }}</td>
                         <td>{{ ucwords($d->nama) }}</td>
                         <td>{{ $d->alamat }}</td>
-                        <td></td>
+                        <td>{{ $d->contact_person }}</td>
                         <td class="text-end">{{ $d->no_telp }}</td>
                         <td>SBW Kotor</td>
                         <td class="text-end">{{ $d->hasil_evaluasi ?? 100 }}</td>

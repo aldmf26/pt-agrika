@@ -22,7 +22,7 @@ class PUR1DaftarSupplierController extends Controller
         $data = [
             'title' => 'PUR 1 Daftar Supplier',
             'datas' => $datas,
-            'rumah_walet' => RumahWalet::get(),
+            'rumah_walet' => RumahWalet::orderByDesc('id')->get(),
             'kategori' => $kategori,
         ];
 
@@ -421,12 +421,13 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.print_evaluasi_sbw', $data);
     }
 
-    public function edit(Request $r, $id)
+    public function edit(Request $r, $id, $kategori)
     {
+        dd($kategori);
         $data = [
             'title' => 'Edit Daftar Supplier',
             'supplier' => Suplier::where('id', $id)->first(),
-            'kategori' => $r->kategori ?? 'barang',
+            'kategori' => $kategori ?? 'barang',
         ];
 
         return view('pur.seleksi.daftar_supplier.edit', $data);
@@ -434,9 +435,10 @@ class PUR1DaftarSupplierController extends Controller
 
     public function create(Request $r)
     {
+        $kategori = $r->kategori ?? 'barang';
         $data = [
             'title' => 'Tambah Daftar Supplier',
-            'kategori' => $r->kategori ?? 'barang',
+            'kategori' => $kategori,
         ];
 
         return view('pur.seleksi.daftar_supplier.create', $data);
@@ -444,19 +446,31 @@ class PUR1DaftarSupplierController extends Controller
 
     public function store(Request $r)
     {
+
         DB::beginTransaction();
         try {
             for ($i = 0; $i < count($r->nama_supplier); $i++) {
-                Suplier::create([
-                    'nama_supplier' => $r->nama_supplier[$i],
-                    'kategori' => $r->jenis_produk[$i],
-                    'alamat' => $r->alamat_supplier[$i],
-                    'produsen' => 0,
-                    'contact_person' => $r->contact_person[$i],
-                    'no_telp' => $r->no_telp[$i],
-                    'ket' => $r->keterangan[$i],
-                    'hasil_evaluasi' => 0,
-                ]);
+                if ($r->kategori == 'lainnya') {
+                    RumahWalet::create([
+                        'nama' => $r->nama_supplier[$i],
+                        'alamat' => $r->alamat_supplier[$i],
+                        'contact_person' => $r->contact_person[$i],
+                        'no_telp' => $r->no_telp[$i],
+                        'no_reg' => $r->no_reg[$i],
+                        'kode' => $r->kode[$i],
+                    ]);
+                } else {
+                    Suplier::create([
+                        'nama_supplier' => $r->nama_supplier[$i],
+                        'kategori' => $r->jenis_produk[$i],
+                        'alamat' => $r->alamat_supplier[$i],
+                        'produsen' => 0,
+                        'contact_person' => $r->contact_person[$i],
+                        'no_telp' => $r->no_telp[$i],
+                        'ket' => $r->keterangan[$i],
+                        'hasil_evaluasi' => 0,
+                    ]);
+                }
             }
 
             DB::commit();
@@ -520,7 +534,7 @@ class PUR1DaftarSupplierController extends Controller
             'dok' => "Dok.No.: FRM.$nomor, Rev.00",
             'datas' => $datas,
             'kategori' => $r->kategori,
-            'rumah_walet' => DB::table('rumah_walet')->get(),
+            'rumah_walet' => DB::table('rumah_walet')->orderByDesc('id')->get(),
             'k' => $r->kategori != 'lainnya' ? 'satu' : 'lainnya',
             'jenis_supplier' => $r->kategori != 'lainnya' ? ucfirst($r->kategori) : 'Supplier Material SBW',
         ];
