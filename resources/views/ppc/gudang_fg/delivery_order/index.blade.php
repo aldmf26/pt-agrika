@@ -8,8 +8,6 @@
                 Delivery</a> --}}
                 </div>
             </div>
-
-
             <table id="example" class="table table-bordered">
                 <thead>
                     <tr>
