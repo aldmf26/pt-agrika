@@ -5,9 +5,11 @@
         </nav>
         <br>
         <div>
-            <a href="{{ route('pur.pembelian.1.create', ['kategori' => $kategori]) }}" class="btn btn-sm btn-primary"><i
-                    class="fas fa-plus"></i>
-                Purchase Request</a>
+            @if ($kategori != 'lainnya')
+                <a href="{{ route('pur.pembelian.1.create', ['kategori' => $kategori]) }}"
+                    class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                    Purchase Request</a>
+            @endif
         </div>
     </div>
 

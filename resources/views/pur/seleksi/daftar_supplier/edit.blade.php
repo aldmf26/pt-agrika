@@ -6,8 +6,9 @@
             <div class="col-3">
                 <div class="form-group">
                     <label for="">Nama Supplier</label>
-                    <input required type="text" name="nama_supplier" value="{{ $supplier->nama_supplier }}"
-                        placeholder="Nama Supplier" class="form-control">
+                    <input required type="text" name="nama_supplier"
+                        value="{{ $supplier->nama_supplier ?? $supplier->nama }}" placeholder="Nama Supplier"
+                        class="form-control">
                 </div>
             </div>
             <div class="col-3">
@@ -31,6 +32,21 @@
                         class="form-control">
                 </div>
             </div>
+
+            @if ($kategori == 'lainnya')
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="">No Reg</label>
+                    <input value="{{$supplier->kode}}" type="text" name="no_reg" placeholder="No registrasi" class="form-control">
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="form-group">
+                    <label for="">Kode</label>
+                    <input value="{{$supplier->no_reg}}" type="text" name="kode" placeholder="Kode Rumah Walet" class="form-control">
+                </div>
+            </div>
+            @else
             <div class="col-3">
                 <div class="form-group">
                     <label for="">
@@ -55,6 +71,9 @@
                         class="form-control">
                 </div>
             </div>
+            @endif
+
+            
         </div>
         <div class="row">
             <div class="col-12">

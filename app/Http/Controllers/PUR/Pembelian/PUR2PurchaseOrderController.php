@@ -8,6 +8,7 @@ use App\Models\DataPegawai;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseRequestItem;
+use App\Models\PurchaseRequestSbw;
 use App\Models\Suplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,7 +41,7 @@ class PUR2PurchaseOrderController extends Controller
         }
 
         // Ambil nomor PR terakhir dari purchase_requests
-        $lastNoPr = PurchaseOrder::latest()->first()->no_po ?? null;
+        $lastNoPr = PurchaseRequestSbw::latest()->first()->no_pr ?? null;
         $lastNumber = 0;
         if ($lastNoPr) {
             $parts = explode('/', $lastNoPr);
