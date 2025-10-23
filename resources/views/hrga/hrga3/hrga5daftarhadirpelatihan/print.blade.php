@@ -79,7 +79,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
                                 Nama)</span></td>
 
                     </tr>
