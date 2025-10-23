@@ -59,7 +59,7 @@
             </table>
 
         </div>
-        <div class="col-6">
+        <div class="col-6" style="font-size: 11px">
             <p class="ms-3">Penyelenggara : </p>
             <p class="ms-3"><input type="checkbox" name="" id=""
                     {{ $jadwal->penyelenggara == 'internal' ? 'checked' : '' }}> Internal</p>
