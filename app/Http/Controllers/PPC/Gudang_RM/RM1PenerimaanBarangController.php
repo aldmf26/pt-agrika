@@ -17,7 +17,7 @@ class RM1PenerimaanBarangController extends Controller
 {
     public function index()
     {
-        $penerimaan = PenerimaanHeader::with('barang', 'supplier')->latest()->get();
+        $penerimaan = PenerimaanHeader::with(['barang', 'supplier'])->latest()->get();
         $data = [
             'title' => 'Penerimaan Barang',
             'penerimaan' => $penerimaan
