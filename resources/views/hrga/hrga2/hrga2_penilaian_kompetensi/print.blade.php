@@ -389,7 +389,7 @@
             @php
                 $totalParameter = count(
                     array_filter($parameters, function ($v) {
-                        return $v !== 0;
+                        return $v[1] !== 0;
                     }),
                 );
 
