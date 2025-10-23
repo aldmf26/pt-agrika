@@ -57,7 +57,8 @@
                 <div class="card-body">
                     <div class="row">
                         @php
-                            $url = 'hrga5.3.formPermintaanperbaikan';
+                            $url = 'formPermintaanperbaikan';
+                            $url2 = 'formpengajuan';
                         @endphp
                         <div class="col-lg-12">
                             <ul class="nav nav-pills float-start">
@@ -71,6 +72,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link  {{ $kategori == 'ac' ? 'active' : '' }}" aria-current="page"
                                         href="{{ route($url, ['kategori' => 'ac']) }}">AC</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  {{ $kategori == 'mesin' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route($url2, ['kategori' => 'mesin']) }}">Mesin</a>
+
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link  {{ $kategori == 'it' ? 'active' : '' }}" aria-current="page"
+                                        href="{{ route($url2, ['kategori' => 'it']) }}">IT</a>
 
                                 </li>
 
@@ -94,7 +105,8 @@
                             <select name="item_id" id="" class="select2 item">
                                 <option value="">Pilih Sarana & Prasarana</option>
                                 @foreach ($item as $i)
-                                    <option value="{{ $i->id }}">{{ $i->nama_item }} ({{ $i->no_identifikasi }})
+                                    <option value="{{ $i->id }}">{{ $i->nama_item }}
+                                        ({{ $i->no_identifikasi }})
                                     </option>
                                 @endforeach
 

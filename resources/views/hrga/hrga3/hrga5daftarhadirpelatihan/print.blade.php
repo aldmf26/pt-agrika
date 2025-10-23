@@ -4,7 +4,7 @@
             <table class="table table-bordered border-dark" with="100%" style="font-size: 10px">
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Tema Pelatihan</td>
-                    <td colspan="4">{{ $jadwal->tema_pelatihan }}</td>
+                    <td colspan="4">{{ ucfirst($jadwal->tema_pelatihan) }}</td>
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Hari/Tanggal</td>
@@ -50,7 +50,7 @@
                     <tr>
                         <td class="text-end">{{ $loop->iteration }}</td>
                         <td class="text-start">{{ $j->data_pegawai->nama }}</td>
-                        <td class="text-start">{{ $j->data_pegawai->nik }}</td>
+                        <td class="text-end">{{ $j->data_pegawai->nik }}</td>
                         {{-- <td class="text-start">{{ $j->data_pegawai->divisi->divisi }}</td> --}}
                         <td class="text-start">{{ $j->data_pegawai->posisi }}</td>
                         <td></td>
