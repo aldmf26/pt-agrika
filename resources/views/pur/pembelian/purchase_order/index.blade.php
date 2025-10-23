@@ -5,8 +5,10 @@
         </nav>
         <br>
         <div>
-            <a href="{{ route('pur.pembelian.2.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
-                Purchase Order</a>
+            @if ($kategori != 'lainnya')
+                <a href="{{ route('pur.pembelian.2.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                    Purchase Order</a>
+            @endif
         </div>
     </div>
 
@@ -16,10 +18,10 @@
                 <th>#</th>
                 <th class="text-start">No PO</th>
                 <th class="text-end" width="120">Tanggal</th>
-                <th>Supplier</th>
+                {{-- <th>Supplier</th>
                 <th>Alamat Pengiriman</th>
                 <th>PIC</th>
-                <th class="text-start">Telp</th>
+                <th class="text-start">Telp</th> --}}
                 <th class="text-end">Estimasi</th>
                 <td class="text-center">Aksi</td>
             </tr>
@@ -33,10 +35,10 @@
                             onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
                             class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
-                        <td>{{ $d->supplier }}</td>
+                        {{-- <td>{{ $d->supplier }}</td>
                         <td>{{ $d->alamat_pengiriman }}</td>
                         <td>Sinta</td>
-                        <td class="text-start">08</td>
+                        <td class="text-start">08</td> --}}
                         <td>{{ tanggal(date('Y-m-d', strtotime('+2 days', strtotime($d->tgl)))) }}
                         </td>
                         <td>
@@ -57,15 +59,16 @@
                             onclick="Livewire.dispatch('showDetail', { no_po: '{{ $d->no_po }}' })"
                             class="text-start cursor-pointer text-info">{{ $d->no_po }}</td>
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
-                        <td>{{ $d->supplier }}</td>
+                        {{-- <td>{{ $d->supplier }}</td>
                         <td>{{ $d->alamat_pengiriman }}</td>
                         <td>{{ $d->pic }}</td>
-                        <td class="text-start">{{ $d->telp }}</td>
+                        <td class="text-start">{{ $d->telp }}</td> --}}
                         <td class="text-end">{{ tanggal($d->estimasi_kedatangan) }}</td>
                         <td>
                             @if ($d->status == 'draft')
                                 <a class="btn btn-xs float-end btn-info selesai" data-id="{{ $d->id }}"
-                                    data-item="{{ json_encode($d->item) }}" data-kategori="{{ $kategori }}" href="#">setuju</a>
+                                    data-item="{{ json_encode($d->item) }}" data-kategori="{{ $kategori }}"
+                                    href="#">setuju</a>
                             @else
                                 <a class="btn btn-xs float-end btn-primary"
                                     href="{{ route('pur.pembelian.2.print', $d->id) }}"><i

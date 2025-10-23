@@ -421,13 +421,14 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.print_evaluasi_sbw', $data);
     }
 
-    public function edit(Request $r, $id, $kategori)
+    public function edit($id, $kategori)
     {
-        dd($kategori);
+        $supplier = $kategori == 'lainnya' ? RumahWalet::where('id', $id)->first() : Suplier::where('id', $id)->first();
         $data = [
             'title' => 'Edit Daftar Supplier',
-            'supplier' => Suplier::where('id', $id)->first(),
+            'supplier' => $supplier,
             'kategori' => $kategori ?? 'barang',
+            'id' => $id,
         ];
 
         return view('pur.seleksi.daftar_supplier.edit', $data);
@@ -486,16 +487,29 @@ class PUR1DaftarSupplierController extends Controller
         DB::beginTransaction();
 
         try {
-            Suplier::find($id)->update([
-                'nama_supplier' => $r->nama_supplier,
-                'kategori' => $r->jenis_produk,
-                'alamat' => $r->alamat_supplier,
-                'produsen' => 0,
-                'contact_person' => $r->contact_person,
-                'no_telp' => $r->no_telp,
-                'ket' => $r->keterangan,
-                'hasil_evaluasi' => 0,
-            ]);
+
+            if ($r->kategori == 'lainnya') {
+                RumahWalet::find($id)->update([
+                    'nama' => $r->nama_supplier,
+                    'alamat' => $r->alamat_supplier,
+                    'contact_person' => $r->contact_person,
+                    'no_telp' => $r->no_telp,
+                    'no_reg' => $r->no_reg,
+                    'kode' => $r->kode
+                ]);
+            } else {
+
+                Suplier::find($id)->update([
+                    'nama_supplier' => $r->nama_supplier,
+                    'kategori' => $r->jenis_produk,
+                    'alamat' => $r->alamat_supplier,
+                    'produsen' => 0,
+                    'contact_person' => $r->contact_person,
+                    'no_telp' => $r->no_telp,
+                    'ket' => $r->keterangan,
+                    'hasil_evaluasi' => 0,
+                ]);
+            }
 
             DB::commit();
 

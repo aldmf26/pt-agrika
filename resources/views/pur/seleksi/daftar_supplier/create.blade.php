@@ -62,7 +62,7 @@
             <div class="col-3" x-show="kategori == 'lainnya'">
                 <div class="form-group">
                     <label for="">Kode</label>
-                    <input type="no_reg" name="kode[]" placeholder="Kode Rumah Walet" class="form-control">
+                    <input type="text" name="kode[]" placeholder="Kode Rumah Walet" class="form-control">
                 </div>
             </div>
 

@@ -51,13 +51,15 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>No Kendaraan</label>
-                                    <input type="text" name="no_kendaraan[]" class="form-control" required>
+                                    <input type="text" name="no_kendaraan[]" x-model="item.no_kendaraan"
+                                        class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Pengemudi</label>
-                                    <input type="text" name="pengemudi[]" class="form-control" required>
+                                    <input type="text" name="pengemudi[]" x-model="item.pengemudi"
+                                        class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -120,8 +122,8 @@
                                     jumlah: it.jumlah,
                                     tgl_penerimaan: today,
                                     tgl_expired: expired,
-                                    no_kendaraan: '',
-                                    pengemudi: '',
+                                    no_kendaraan: '-',
+                                    pengemudi: '-',
                                     jumlah_barang: '',
                                     jumlah_sampel: '',
                                     keputusan: '',

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\PUR\Pembelian;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barang;
 use App\Models\DataPegawai;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseRequestItem;
+use App\Models\PurchaseRequestSbw;
 use App\Models\Suplier;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,7 +41,7 @@ class PUR2PurchaseOrderController extends Controller
         }
 
         // Ambil nomor PR terakhir dari purchase_requests
-        $lastNoPr = PurchaseOrder::latest()->first()->no_po ?? null;
+        $lastNoPr = PurchaseRequestSbw::latest()->first()->no_pr ?? null;
         $lastNumber = 0;
         if ($lastNoPr) {
             $parts = explode('/', $lastNoPr);
@@ -108,7 +110,6 @@ class PUR2PurchaseOrderController extends Controller
             'datas' => $datas,
             'kategori' => $kategori,
         ];
-
         return view('pur.pembelian.purchase_order.index', $data);
     }
 
@@ -157,6 +158,8 @@ class PUR2PurchaseOrderController extends Controller
 
     public function store(Request $r)
     {
+        // $suplier = Barang::where('id', $r->id[0])->get();
+        // dd($r->all(), $suplier);
         DB::beginTransaction();
         try {
             $no_po = $this->getNoPo();
@@ -165,10 +168,10 @@ class PUR2PurchaseOrderController extends Controller
             $pr = PurchaseOrder::create([
                 'no_po' => $no_po,
                 'tgl' => $tgl,
-                'supplier' => $r->supplier,
-                'alamat_pengiriman' => $r->alamat,
-                'pic' => $r->pic,
-                'telp' => $r->telepon,
+                'supplier' => '-',
+                'alamat_pengiriman' => '-',
+                'pic' => '-',
+                'telp' => '-',
                 'estimasi_kedatangan' => $r->estimasi,
                 'total_harga' => $ttlHarga,
                 'pr_id' => $r->id_pr,
@@ -191,6 +194,8 @@ class PUR2PurchaseOrderController extends Controller
 
     public function print($id)
     {
+        $kepalaPurchasing = DataPegawai::where('posisi', 'Kepala Purchasing')->first()->nama;
+        $telp = "082353347405";
         $datas = PurchaseOrder::with('purchaseRequest')->where('id', $id)->with('item')->first();
         $departemen = $datas->purchaseRequest->departemen;
         $kode = $departemen == 'BARANG' ? 'PURB' : 'PURK';
@@ -205,7 +210,9 @@ class PUR2PurchaseOrderController extends Controller
             'title' => 'PURCHASE ORDER',
             'dok' => "Dok.No.: FRM.{$kode}.01.02, Rev.00",
             'kategori' => $departemen,
-            'datas' => $datas
+            'datas' => $datas,
+            'kepalaPurchasing' => $kepalaPurchasing,
+            'telp' => $telp,
         ];
         return view('pur.pembelian.purchase_order.print', $data);
     }
