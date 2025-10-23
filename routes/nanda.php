@@ -92,6 +92,7 @@ Route::controller(Hrga3UsulandanIdentifikasi::class)
         Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::post('/update', 'update')->name('update');
     });
 Route::controller(Hrga4JadwalDanInformasiPelatihan::class)
     ->prefix('hrga/hrga3/hrga3.4_Jadwal_dan_informasi_pelatihan')

@@ -4,6 +4,7 @@
         <label for="">Tanggal</label>
         <input type="date" class="form-control" name="tanggal" id="tgl" value="{{ $program->tgl_rencana }}">
         <input type="hidden" name="Getid" id="Getid">
+        <input type="hidden" name="nota_pelatihan" value="{{ $nota_pelatihan }}">
     </div>
     <div class="col-lg-2">
         <label for="">Pengusul</label>
@@ -16,23 +17,23 @@
     </div>
     <div class="col-lg-3">
         <label for="">Tempat</label>
-        <input type="text" class="form-control" name="tempat" id="tempat">
+        <input type="text" class="form-control" name="tempat" id="tempat" value="{{ $jadwal->tempat }}">
     </div>
     <div class="col-lg-3 mt-2">
         <label for="">Usulan waktu mulai</label>
-        <input type="time" class="form-control" name="usulan_waktu">
+        <input type="time" class="form-control" name="usulan_waktu" value="{{ $jadwal->waktu }}">
     </div>
     <div class="col-lg-3 mt-2">
         <label for="">Usulan waktu selesai</label>
-        <input type="time" class="form-control" name="usulan_waktu_selesai">
+        <input type="time" class="form-control" name="usulan_waktu_selesai" value="{{ $jadwal->waktu_selesai }}">
     </div>
     <div class="col-lg-6 m-2">
         <label for="">Alasan</label>
-        <input type="text" class="form-control" name="alasan">
+        <input type="text" class="form-control" name="alasan" value="{{ $usulan->alasan }}">
     </div>
     <div class="col-lg-4 m-2">
         <label for="">Tujuan Pelatihan</label>
-        <input type="text" class="form-control" name="tujuan_pelatihan">
+        <input type="text" class="form-control" name="tujuan_pelatihan" value="{{ $evaluasi->tujuan_pelatihan }}">
     </div>
 
     <div class="col-lg-12">
