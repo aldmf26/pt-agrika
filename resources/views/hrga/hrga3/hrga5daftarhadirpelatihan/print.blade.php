@@ -1,7 +1,7 @@
 <x-hccp-print title="DAFTAR HADIR PELATIHAN" dok="Dok.No.: FRM.HRGA.03.05, Rev.00" rev="00">
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered border-dark" with="100%">
+            <table class="table table-bordered border-dark" with="100%" style="font-size: 12px">
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Tema Pelatihan</td>
                     <td colspan="4">{{ $jadwal->tema_pelatihan }}</td>
