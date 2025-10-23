@@ -29,7 +29,7 @@
                     @foreach ($usulan as $u)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ ucfirst(strtolower($u->pelatihan->materi_pelatihan)) }}</td>
+                            <td>{{ ucfirst(strtolower($u->pelatihan->materi_pelatihan ?? '-')) }}</td>
 
                             <td>{{ ucfirst(strtolower($u->pengusul)) }}</td>
 

@@ -81,6 +81,7 @@ Route::controller(Hrga2ProgramPelatihanTahunan::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+        Route::get('/edit', 'edit')->name('edit');
         Route::post('/store', 'store')->name('store');
     });
 Route::controller(Hrga3UsulandanIdentifikasi::class)

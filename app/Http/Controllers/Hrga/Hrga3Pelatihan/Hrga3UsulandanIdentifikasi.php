@@ -31,13 +31,15 @@ class Hrga3UsulandanIdentifikasi extends Controller
 
     public function store(Request $r)
     {
-        ProgramPelatihanTahunan::where('id', $r->Getid)->update([
-            'isi_usulan' => 'Y'
-        ]);
-
         $program = ProgramPelatihanTahunan::where('id', $r->Getid)->first();
         $nota_terakhir = JadwalInformasiPelatihan::orderBy('nota_pelatihan', 'desc')->first();
         $nota = empty($nota_terakhir->nota_pelatihan) ? 1 : $nota_terakhir->nota_pelatihan + 1;
+
+        ProgramPelatihanTahunan::where('id', $r->Getid)->update([
+            'isi_usulan' => 'Y',
+            'nota_pelatihan' => $nota
+
+        ]);
         for ($i = 0; $i < count($r->id_pegawai); $i++) {
             $data = [
                 'divisi_id' => 0,

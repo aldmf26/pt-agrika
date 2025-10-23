@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
 use App\Models\Divisi;
 use App\Models\ProgramPelatihanTahunan;
+use App\Models\usulanDanIdentifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,6 +21,21 @@ class Hrga2ProgramPelatihanTahunan extends Controller
             'karyawan' => DataPegawai::all()
         ];
         return view('hrga.hrga3.hrga2pelatihantahunan.index', $data);
+    }
+
+    public function edit(Request $r)
+    {
+        $nota_pelatihan = $r->notapelatihan;
+
+        $data = [
+            'nota_pelatihan' => $nota_pelatihan,
+            'karyawan' => DataPegawai::all(),
+            'program' => ProgramPelatihanTahunan::where('nota_pelatihan', $nota_pelatihan)->first(),
+            'usulan' =>  usulanDanIdentifikasi::where('nota_pelatihan', $nota_pelatihan)->first()
+
+        ];
+
+        return view('hrga.hrga3.hrga2pelatihantahunan.edit', $data);
     }
 
     public function store(Request $r)

@@ -1,7 +1,7 @@
 <x-hccp-print title="DAFTAR HADIR PELATIHAN" dok="Dok.No.: FRM.HRGA.03.05, Rev.00" rev="00">
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered border-dark" with="100%">
+            <table class="table table-bordered border-dark" with="100%" style="font-size: 10px">
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Tema Pelatihan</td>
                     <td colspan="4">{{ $jadwal->tema_pelatihan }}</td>
@@ -26,8 +26,8 @@
 
             </table>
         </div>
-        <div class="col-12 mt-4">
-            <table class="table table-bordered border-dark">
+        <div class="col-12 ">
+            <table class="table table-bordered border-dark" style="font-size: 10px">
                 <tr sty>
                     <th class="text-center dhead align-middle">No</th>
                     <th class="text-center dhead align-middle">
@@ -59,7 +59,7 @@
             </table>
 
         </div>
-        <div class="col-6">
+        <div class="col-6" style="font-size: 11px">
             <p class="ms-3">Penyelenggara : </p>
             <p class="ms-3"><input type="checkbox" name="" id=""
                     {{ $jadwal->penyelenggara == 'internal' ? 'checked' : '' }}> Internal</p>
@@ -67,10 +67,10 @@
                     {{ $jadwal->penyelenggara == 'eksternal' ? 'checked' : '' }}> Eksternal</p>
 
         </div>
-        <div class="col-6">
+        <div class="col-6" style="font-size: 11px">
             <p>Banjarmasin , {{ tanggal(date('Y-m-d')) }}</p>
-            <br>
-            <table class="table table-bordered border-dark" style="font-size: 11px">
+
+            <table class="table table-bordered border-dark">
                 <thead>
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
@@ -79,7 +79,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
                                 Nama)</span></td>
 
                     </tr>

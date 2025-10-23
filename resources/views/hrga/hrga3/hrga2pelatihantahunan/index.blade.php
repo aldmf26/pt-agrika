@@ -35,11 +35,15 @@
                                 </td>
                                 <td>
                                     @if ($p->isi_usulan == 'Y')
-                                        {{ ucfirst(strtolower($p->materi_pelatihan)) }}
+                                        <a href="#" class="edit_usulan" style="color: green"
+                                            data-bs-toggle="modal" data-bs-target="#edit"
+                                            notapelatihan="{{ $p->nota_pelatihan }}">
+                                            {{ ucfirst(strtolower($p->materi_pelatihan)) }}
+                                        </a>
                                     @else
-                                        <a href="#" class="usulan" data-bs-toggle="modal" data-bs-target="#tambah"
-                                            usulan="{{ $p->materi_pelatihan }}" tgl="{{ $p->tgl_realisasi }}"
-                                            Getid="{{ $p->id }}">
+                                        <a href="#" class="usulan text-danger" data-bs-toggle="modal"
+                                            data-bs-target="#tambah" usulan="{{ $p->materi_pelatihan }}"
+                                            tgl="{{ $p->tgl_realisasi }}" Getid="{{ $p->id }}">
                                             {{ ucfirst(strtolower($p->materi_pelatihan)) }}
                                         </a>
                                     @endif
@@ -94,55 +98,7 @@
             </form>
         </div>
     </div>
-    {{-- <form action="{{ route('hrga3.2.store') }}" method="POST">
-        @csrf
-        <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="tambahModalLabel">Tambah Data</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
 
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <label for="">Materi Pelatihan</label>
-                                <input type="text" name="materi_pelatihan" class="form-control" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">I/E</label>
-                                <select name="sumber" class="form-control" id="">
-                                    <option value="internal">Internal</option>
-                                    <option value="eksternal">Eksternal</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">Narasumber</label>
-                                <input type="text" name="narasumber" class="form-control" required>
-                            </div>
-                            <div class="col-lg-3">
-                                <label for="">Sasaran Peserta</label>
-                                <input type="text" name="sasaran_peserta" class="form-control" required>
-                            </div>
-                            <div class="col-lg-3 mt-2">
-                                <label for="">Tanggal Rencana</label>
-                                <input type="date" name="tgl_rencana" class="form-control" required>
-                            </div>
-                            <div class="col-lg-3 mt-2">
-                                <label for="">Tanggal Realisasi</label>
-                                <input type="date" name="tgl_realisasi" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form> --}}
     <form action="{{ route('hrga3.3.store') }}" method="post">
         @csrf
         <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -171,7 +127,7 @@
                                     id="usulan" readonly>
                             </div>
                             <div class="col-lg-3">
-                                <label for="">Tampat</label>
+                                <label for="">Tempat</label>
                                 <input type="text" class="form-control" name="tempat" id="tempat">
                             </div>
                             <div class="col-lg-3 mt-2">
@@ -254,7 +210,7 @@
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="tambahModalLabel">Tambah Data</h5>
+                        <h5 class="modal-title" id="tambahModalLabel">Print</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
@@ -270,6 +226,29 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form action="{{ route('hrga3.3.store') }}" method="post">
+        @csrf
+        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">Edit Data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="load-edit"></div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -329,6 +308,20 @@
                     let value = $(this).val().toLowerCase();
                     $('#tableKaryawan tbody tr').filter(function() {
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+                $(document).on('click', '.edit_usulan', function() {
+                    var notapelatihan = $(this).attr('notapelatihan');
+                    $.ajax({
+                        type: "get",
+                        url: "{{ route('hrga3.2.edit') }}",
+                        data: {
+                            notapelatihan: notapelatihan
+                        },
+
+                        success: function(response) {
+                            $('#load-edit').html(response);
+                        }
                     });
                 });
             });
