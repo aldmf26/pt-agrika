@@ -67,10 +67,10 @@
                     {{ $jadwal->penyelenggara == 'eksternal' ? 'checked' : '' }}> Eksternal</p>
 
         </div>
-        <div class="col-6">
+        <div class="col-6" style="font-size: 11px">
             <p>Banjarmasin , {{ tanggal(date('Y-m-d')) }}</p>
 
-            <table class="table table-bordered border-dark" style="font-size: 11px">
+            <table class="table table-bordered border-dark">
                 <thead>
                     <tr>
                         <th class="text-center" width="33.33%">Dibuat Oleh:</th>
