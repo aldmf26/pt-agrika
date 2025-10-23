@@ -39,7 +39,7 @@
                     <td>{{ $d->barang->nama_barang }}</td>
                     <td>{{ $d->barang->kode_barang }}</td>
                     <td>{{ tanggal($d->tanggal_terima) }}</td>
-                    <td>{{ $d->supplier->nama_supplier }}</td>
+                    <td>{{ $d->barang->supplier->nama_supplier }}</td>
                     <td>{{ $d->no_kendaraan }}</td>
                     <td>{{ $d->pengemudi }}</td>
                     <td>{{ number_format($d->jumlah_barang, 0) }}</td>
