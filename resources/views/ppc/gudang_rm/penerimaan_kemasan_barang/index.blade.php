@@ -40,7 +40,7 @@
                     <td>{{ $d->barang->nama_barang }}</td>
                     <td>{{ $d->kode_lot }}</td>
                     <td>{{ tanggal($d->tanggal_penerimaan) }}</td>
-                    <td>{{ $d->supplier->nama_supplier }}</td>
+                    <td>{{ $d->barang->supplier->nama_supplier }}</td>
                     <td>{{ $d->no_kendaraan }}</td>
                     <td>{{ $d->pengemudi }}</td>
                     <td>{{ number_format($d->jumlah_barang, 0) }}</td>
