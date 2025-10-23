@@ -70,7 +70,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
         $response = Http::withHeaders([
             'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
         ])->post('https://api.fonnte.com/send', [
-            'target'  => '120363420677213972@g.us', // Gunakan group_id dari form
+            'target'  => '6282351837448-1536203517@g.us', // Gunakan group_id dari form
             'message' => "Pelapor : $r->diajukan_oleh\nNama Item : $item->nama_mesin $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_mesin/$imageName",
         ]);
         return redirect()->route('hrga8.3.sukses', ['invoice_pengajuan' => $no_invoice, 'kategori' => $r->kategori])->with('sukses', 'Pengajuan Berhasil dikirim');
