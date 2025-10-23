@@ -8,7 +8,7 @@
 
         <div class="d-flex justify-content-between" style="font-size: 12px">
             <div>
-                <strong>To:</strong> {{ $datas->supplier }}<br>
+                <strong>To:</strong> {{ $datas->item[0]->barang->supplier->nama_supplier }}<br>
             </div>
             <div>
                 <table style="width: 100%">
@@ -72,9 +72,9 @@
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
             <div class="mt-2" />
-            PIC: {{ $datas->pic }}
+            PIC: {{ $kepalaPurchasing }}
             <br>
-            Telp: {{ $datas->telp }}
+            Telp: {{ $telp }}
             <br>
             Estimasi kedatangan barang: {{ tanggal($datas->estimasi_kedatangan) }}
         </div>
