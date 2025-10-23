@@ -28,9 +28,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Tanggal Penerimaan</label>
-                                    <input type="date" x-model="item.tgl_penerimaan" name="tgl_penerimaan[]"
-                                        class="form-control" required>
-
+                                    <input type="date" x-model="item.tgl_penerimaan"
+                                        @change="updateExpiredDate(index)" name="tgl_penerimaan[]" class="form-control"
+                                        required>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -38,18 +38,13 @@
                                     <label>Tanggal Expired</label>
                                     <input type="date" x-model="item.tgl_expired" name="tgl_expired[]"
                                         class="form-control" required>
-
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Kode Kemasan</label>
-                                    <input type="text"
-                                        :value="item.tgl_penerimaan.split('-')[2] + '-' + item.tgl_penerimaan.split(
-                                                '-')[1] + '-' + item.tgl_penerimaan.split('-')[0] + '-' + item
-                                            .kode + '-' + item.tgl_expired.split('-')[1] + '-' + item
-                                            .tgl_expired.split('-')[0].slice(-2)"
-                                        name="kode_lot[]" class="form-control" readonly>
+                                    <input type="text" :value="generateKodeKemasan(item)" name="kode_lot[]"
+                                        class="form-control" readonly>
                                 </div>
                             </div>
                             <div class="col-md-3"></div>
@@ -73,22 +68,20 @@
                                     <input type="hidden" name="id_barang[]" :value="item.id_barang">
                                 </div>
                             </div>
-                            </table>
                         </div>
-                </div>
-                </template>
+                    </template>
 
-                <div class="text-end">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
                 </div>
             </div>
+        </form>
     </div>
-    </form>
-    </div>
+
     @section('scripts')
         <script>
             $(document).ready(function() {
-                // Delay the initialization slightly to ensure DOM is fully ready
                 setTimeout(function() {
                     $('.select2suplier').select2();
                     $('.select2po').select2();
@@ -111,13 +104,13 @@
                     selectedPo: '',
                     items: [],
                     allPo: @json($po),
+
                     updateItems() {
                         const selected = this.allPo.find(po => po.no_po === this.selectedPo);
                         if (selected && selected.purchase_request?.item) {
                             this.items = selected.purchase_request.item.map(it => {
                                 const today = new Date().toISOString().slice(0, 10);
-                                const expired = new Date(new Date().setFullYear(new Date()
-                                    .getFullYear() + 2)).toISOString().slice(0, 10);
+                                const expired = this.addYearsToDate(today, 2);
 
                                 return {
                                     id: it.id,
@@ -138,6 +131,36 @@
                         } else {
                             this.items = [];
                         }
+                    },
+
+                    // Function untuk update expired date saat penerimaan berubah
+                    updateExpiredDate(index) {
+                        if (this.items[index] && this.items[index].tgl_penerimaan) {
+                            this.items[index].tgl_expired = this.addYearsToDate(this.items[index]
+                                .tgl_penerimaan, 2);
+                        }
+                    },
+
+                    // Function untuk menambah tahun ke tanggal
+                    addYearsToDate(dateString, years) {
+                        if (!dateString) return '';
+
+                        const date = new Date(dateString);
+                        date.setFullYear(date.getFullYear() + years);
+                        return date.toISOString().slice(0, 10);
+                    },
+
+                    // Function untuk generate kode kemasan
+                    generateKodeKemasan(item) {
+                        if (!item.tgl_penerimaan || !item.tgl_expired || !item.kode) {
+                            return '';
+                        }
+
+                        const penerimaanParts = item.tgl_penerimaan.split('-');
+                        const expiredParts = item.tgl_expired.split('-');
+
+                        // Format: DD-MM-YYYY-KODE-MM-YY
+                        return `${penerimaanParts[2]}-${penerimaanParts[1]}-${penerimaanParts[0]}-${item.kode}-${expiredParts[1]}-${expiredParts[0].slice(-2)}`;
                     }
 
                 }))
