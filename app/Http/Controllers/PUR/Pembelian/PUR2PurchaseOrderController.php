@@ -157,8 +157,8 @@ class PUR2PurchaseOrderController extends Controller
 
     public function store(Request $r)
     {
-        $suplier = Barang::where('id', $r->id[0])->get();
-        dd($r->all(), $suplier);
+        // $suplier = Barang::where('id', $r->id[0])->get();
+        // dd($r->all(), $suplier);
         DB::beginTransaction();
         try {
             $no_po = $this->getNoPo();
