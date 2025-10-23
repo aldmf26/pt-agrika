@@ -27,7 +27,7 @@
             </table>
         </div>
         <div class="col-12 mt-4">
-            <table class="table table-bordered border-dark">
+            <table class="table table-bordered border-dark" style="font-size: 12px">
                 <tr sty>
                     <th class="text-center dhead align-middle">No</th>
                     <th class="text-center dhead align-middle">
