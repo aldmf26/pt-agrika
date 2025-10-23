@@ -63,7 +63,7 @@
                                         class="fas fa-print"></i></a>
                             @else
                                 <a class="btn btn-xs btn-info"
-                                    href="{{ route('pur.pembelian.1.selesai', $d->id) }}">selesai</a>
+                                    href="{{ route('pur.pembelian.1.selesai', [$d->id, $kategori]) }}">selesai</a>
                             @endif
                         </td>
                     </tr>

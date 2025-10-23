@@ -65,7 +65,7 @@
                         <td>
                             @if ($d->status == 'draft')
                                 <a class="btn btn-xs float-end btn-info selesai" data-id="{{ $d->id }}"
-                                    data-item="{{ json_encode($d->item) }}" href="#">setuju</a>
+                                    data-item="{{ json_encode($d->item) }}" data-kategori="{{ $kategori }}" href="#">setuju</a>
                             @else
                                 <a class="btn btn-xs float-end btn-primary"
                                     href="{{ route('pur.pembelian.2.print', $d->id) }}"><i
@@ -86,6 +86,7 @@
         @csrf
         <x-modal title="Detail Po" idModal="selesai">
             <input type="hidden" name="id">
+            <input type="hidden" name="kategori">
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -109,6 +110,9 @@
 
                     const id = $(this).data('id');
                     $('input[name=id]').val(id);
+
+                    const kategori = $(this).data('kategori');
+                    $('input[name=kategori]').val(kategori);
 
                     const item = $(this).data('item');
                     $('#tbody-purchase-request').empty();

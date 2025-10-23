@@ -40,7 +40,7 @@
         <tr>
             <td>Supplier</td>
             <td>:</td>
-            <td>{{ $penerimaan->supplier->nama_supplier }}</td>
+            <td>{{ $penerimaan->barang->supplier->nama_supplier }}</td>
         </tr>
         <tr>
             <td>No Kendaraan</td>
