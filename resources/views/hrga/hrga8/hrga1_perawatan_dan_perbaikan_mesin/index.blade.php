@@ -18,6 +18,7 @@
                         <th class=" dhead" rowspan="2">Frekuensi perawatan</th>
                         <th class=" dhead" rowspan="2">Penanggung jawab</th>
                         <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
+                        <th class=" dhead" rowspan="2">Aksi</th>
                     </tr>
                     <tr>
                         @foreach ($bulan as $b)
@@ -52,6 +53,12 @@
                             @foreach ($bulan as $index => $b)
                                 <td class="{{ in_array($index + 1, $bulanPerawatan) ? 'bg-primary' : '' }}"></td>
                             @endforeach
+                            <td>
+                                <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editModal{{ $p->id }}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -137,6 +144,77 @@
             </div>
         </div>
     </form>
+    @foreach ($perawatan as $p)
+        {{-- ... baris tabel kamu di sini ... --}}
+
+        <!-- Modal Edit -->
+        <div class="modal fade" id="editModal{{ $p->id }}" tabindex="-1"
+            aria-labelledby="editModalLabel{{ $p->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <form action="{{ route('hrga8.1.update', $p->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ $p->id }}">
+                                Edit Data Perawatan
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <input type="hidden" name="kategori" value="{{ $kategori }}">
+
+                            <div class="row mb-3">
+                                <div class="col-lg-6">
+                                    <label>Nama Mesin</label>
+                                    <select class="form-control select2" name="item_mesin_id" required>
+                                        <option value="">Pilih mesin</option>
+                                        @foreach ($item as $i)
+                                            <option value="{{ $i->id }}"
+                                                {{ $i->id == $p->item_mesin_id ? 'selected' : '' }}>
+                                                {{ $i->nama_mesin }} - {{ $i->lokasi->lokasi ?? '-' }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <label>Frekuensi Perawatan (bulan)</label>
+                                    <input type="number" name="frekuensi_perawatan" class="form-control"
+                                        value="{{ $p->frekuensi_perawatan }}" min="1" max="12"
+                                        required>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <label>Penanggung Jawab</label>
+                                    <input type="text" name="penanggung_jawab" class="form-control"
+                                        value="{{ $p->penanggung_jawab }}" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <label>Tanggal Mulai</label>
+                                    <input type="date" name="tanggal_mulai" class="form-control"
+                                        value="{{ $p->tanggal_mulai }}" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
 
     @section('scripts')
         <script>
