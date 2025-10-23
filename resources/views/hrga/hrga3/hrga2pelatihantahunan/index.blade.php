@@ -310,6 +310,13 @@
                         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                     });
                 });
+                $(document).on('keyup', '#searchKaryawan2', function() {
+
+                    let value = $(this).val().toLowerCase();
+                    $('#tableKaryawan2 tbody tr').filter(function() {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
                 $(document).on('click', '.edit_usulan', function() {
                     var notapelatihan = $(this).attr('notapelatihan');
                     $.ajax({

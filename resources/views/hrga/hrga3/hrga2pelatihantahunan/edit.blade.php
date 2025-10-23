@@ -42,10 +42,10 @@
     <div class="col-lg-12">
         <div class="row">
             <div class="mb-3">
-                <input type="text" id="searchKaryawan" class="form-control"
+                <input type="text" id="searchKaryawan2" class="form-control"
                     placeholder="Cari nama, divisi, atau jabatan..." style="max-width: 300px;">
             </div>
-            <table class="table table-bordered" id="tableKaryawan">
+            <table class="table table-bordered" id="tableKaryawan2">
                 <thead>
                     <tr>
                         <th>No</th>
