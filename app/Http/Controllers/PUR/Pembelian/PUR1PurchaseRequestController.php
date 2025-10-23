@@ -177,10 +177,10 @@ class PUR1PurchaseRequestController extends Controller
 
 
 
-    public function selesai($id)
+    public function selesai($id, $kategori)
     {
         PurchaseRequest::where('id', $id)->update(['status' => 'disetujui']);
-        return redirect()->route('pur.pembelian.1.index')->with('sukses', 'Purchase Request berhasil disetujui');
+        return redirect()->route('pur.pembelian.1.index', ['kategori' => $kategori])->with('sukses', 'Purchase Request berhasil disetujui');
     }
 
 
