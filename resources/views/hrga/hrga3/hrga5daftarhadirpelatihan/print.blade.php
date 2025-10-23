@@ -69,7 +69,7 @@
         </div>
         <div class="col-6">
             <p>Banjarmasin , {{ tanggal(date('Y-m-d')) }}</p>
-            <br>
+
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
