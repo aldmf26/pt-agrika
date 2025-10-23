@@ -17,7 +17,7 @@
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Tempat</td>
-                    <td colspan="4">{{ $jadwal->tempat }}</td>
+                    <td colspan="4">{{ ucfirst($jadwal->tempat) }}</td>
                 </tr>
                 <tr>
                     <td width="20%" class="dhead p-2 fw-bold">Narasumber</td>

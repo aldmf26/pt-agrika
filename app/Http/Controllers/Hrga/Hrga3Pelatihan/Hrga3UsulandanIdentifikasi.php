@@ -89,4 +89,56 @@ class Hrga3UsulandanIdentifikasi extends Controller
         ];
         return view('hrga.hrga3.hrga3usulandanidentifikasi.print', $data);
     }
+
+    public function update(Request $r)
+    {
+
+        $nota = $r->nota_pelatihan;
+        $program = ProgramPelatihanTahunan::where('nota_pelatihan', $nota)->first();
+
+        ProgramPelatihanTahunan::where('id', $r->Getid)->update([
+            'isi_usulan' => 'Y',
+            'nota_pelatihan' => $nota
+
+        ]);
+        usulanDanIdentifikasi::where('nota_pelatihan', $nota)->delete();
+        JadwalInformasiPelatihan::where('nota_pelatihan', $nota)->delete();
+        DB::table('evaluasi_pelatihan')->where('nota_pelatihan', $nota)->delete();
+
+        for ($i = 0; $i < count($r->id_pegawai); $i++) {
+            $data = [
+                'divisi_id' => 0,
+                'nota_pelatihan' => $nota,
+                'data_pegawais_id' => $r->id_pegawai[$i],
+                'pengusul' => $r->pengusul,
+                'tanggal' => $r->tanggal,
+                'usulan_jenis_pelatihan' => $r->usulan_jenis_pelatihan,
+                'usulan_waktu' => $r->usulan_waktu,
+                'alasan' => $r->alasan
+            ];
+            usulanDanIdentifikasi::insert($data);
+            $data = [
+                'nota_pelatihan' => $nota,
+                'tema_pelatihan' => $r->usulan_jenis_pelatihan,
+                'tanggal' => $r->tanggal,
+                'waktu' => $r->usulan_waktu,
+                'waktu_selesai' => $r->usulan_waktu_selesai,
+                'tempat' => $r->tempat,
+                'narasumber' => $program->narasumber,
+                'kisaran_materi' => $r->alasan,
+                'penyelenggara' => $program->sumber,
+                'data_pegawais_id' => $r->id_pegawai[$i],
+                'konfirmasi_keterangan' => 'Hadir'
+            ];
+            JadwalInformasiPelatihan::insert($data);
+            $data = [
+                'nota_pelatihan' => $nota,
+                'tujuan_pelatihan' => $r->tujuan_pelatihan,
+                'keterangan' => '-',
+            ];
+            DB::table('evaluasi_pelatihan')->insert($data);
+        }
+
+        return redirect()->route('hrga3.2.index')->with('sukses', 'Data Berhasil Disimpan');
+    }
 }

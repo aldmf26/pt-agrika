@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Hrga\Hrga3Pelatihan;
 use App\Http\Controllers\Controller;
 use App\Models\DataPegawai;
 use App\Models\Divisi;
+use App\Models\JadwalInformasiPelatihan;
 use App\Models\ProgramPelatihanTahunan;
 use App\Models\usulanDanIdentifikasi;
 use Illuminate\Http\Request;
@@ -31,7 +32,9 @@ class Hrga2ProgramPelatihanTahunan extends Controller
             'nota_pelatihan' => $nota_pelatihan,
             'karyawan' => DataPegawai::all(),
             'program' => ProgramPelatihanTahunan::where('nota_pelatihan', $nota_pelatihan)->first(),
-            'usulan' =>  usulanDanIdentifikasi::where('nota_pelatihan', $nota_pelatihan)->first()
+            'usulan' =>  usulanDanIdentifikasi::where('nota_pelatihan', $nota_pelatihan)->first(),
+            'jadwal' => JadwalInformasiPelatihan::where('nota_pelatihan', $nota_pelatihan)->first(),
+            'evaluasi' => DB::table('evaluasi_pelatihan')->where('nota_pelatihan', $nota_pelatihan)->first(),
 
         ];
 

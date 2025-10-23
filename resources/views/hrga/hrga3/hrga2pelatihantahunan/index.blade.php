@@ -235,7 +235,7 @@
             </div>
         </div>
     </form>
-    <form action="{{ route('hrga3.3.store') }}" method="post">
+    <form action="{{ route('hrga3.3.update') }}" method="post">
         @csrf
         <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="tambahModalLabel"
             aria-hidden="true">
