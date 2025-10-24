@@ -1,32 +1,5 @@
 <x-hccp-print :title="$title" :dok="$dok">
-
-
-
-
-
     <div class="row">
-        {{-- @php
-            $validLimbah = ['Organik', 'Non Organik'];
-
-            // Tentukan mana yang harus dicoret berdasarkan kategori
-            $limbahDicoret = strtolower($kategori) === 'terjadwal' ? 'Organik' : 'Non Organik';
-        @endphp
-        <div class="col-lg-12" style="font-size: 11px">
-            Jenis Limbah:
-            @foreach ($validLimbah as $limbah)
-                @if (strtolower($limbah) === strtolower($limbahDicoret))
-                    <s>{{ $limbah }}</s>
-                @else
-                    {{ $limbah }}
-                @endif
-                @if (!$loop->last)
-                    /
-                @endif
-            @endforeach
-            <br>
-
-        </div> --}}
-
         <div class="col-sm-12 col-lg-12">
             <table class="table table-bordered border-dark table-sm" style="font-size: 10px;">
                 <thead>
@@ -56,10 +29,17 @@
                                 <td class="text-end">{{ tanggal($p->tgl) }}</td>
                                 <td class="text-end">{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
                                 <td class="text-center">
-                                    @if ($p->tgl <= date('Y-m-d'))
+                                    @php
+                                        $isSunday = date('w', strtotime($p->tgl)) == 0;
+                                    @endphp
+
+                                    @if ($p->tgl <= date('Y-m-d') && !$isSunday)
+                                        ✓
+                                    @endif
+                                    {{-- @if ($p->tgl <= date('Y-m-d'))
                                         ✓
                                     @else
-                                    @endif
+                                    @endif --}}
                                 </td>
                                 <td></td>
                                 <td>{{ $p->katerangan }}</td>
@@ -95,7 +75,7 @@
 
             </span>
         </div>
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-6">
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
