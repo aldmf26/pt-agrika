@@ -100,7 +100,7 @@ class RM8KartuStokController extends Controller
             'jasa' => 'PPCJ',
         ];
         $kode = $kodes[strtolower($kategori)] ?? 'PPCB';
-        $pic =  DataPegawai::where('posisi', $kategori == 'sbw' ? 'Kepala Gudang Bahan Baku' : 'Kepala Gudang Barang Kemasan')->first()->pluck('nama');
+        $pic =  DataPegawai::where('posisi', $kategori == 'sbw' ? 'Kepala Gudang Bahan Baku' : 'Kepala Gudang Barang Kemasan')->first()->nama;
         // Kirim ke view
         $data = [
             'title' => 'KARTU STOK MATERIAL ',
