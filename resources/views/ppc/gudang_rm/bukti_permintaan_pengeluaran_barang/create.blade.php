@@ -68,7 +68,7 @@
                                     <th class="text-center" rowspan="2" width="30%">Nama Barang</th>
                                     <th class="text-center" rowspan="2">Sisa Stok</th>
                                     <th class="text-center" colspan="2">Jumlah</th>
-                                    <th class="text-center" rowspan="2" width="20%">Kode Lot SBW</th>
+                                    <th class="text-center" rowspan="2" width="20%">Kode Barang/Kemasan</th>
                                     <th class="text-center" rowspan="2">Status Ok/Tidak Ok</th>
                                     <th class="text-center" rowspan="2">Aksi</th>
                                 </tr>
