@@ -59,7 +59,7 @@ class RM8KartuStokController extends Controller
         // Tambahkan transaksi masuk
         foreach ($masuk as $m) {
             $transaksiGabung[] = [
-                'tgl' => $m->tgl,
+                'tgl' => $m->tanggal_terima,
                 'jumlah' => $m->jumlah_barang,
                 'jenis' => 'masuk',
                 'kode_lot' => $m->kode_lot,
@@ -70,7 +70,7 @@ class RM8KartuStokController extends Controller
         // Tambahkan transaksi keluar
         foreach ($keluar as $k) {
             $transaksiGabung[] = [
-                'tgl' => $k->tgl,
+                'tgl' => $k->tanggal_terima,
                 'jumlah' => $k->pcs,
                 'jenis' => 'keluar',
                 'kode_lot' => $k->no_lot,
