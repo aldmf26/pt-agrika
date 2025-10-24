@@ -53,7 +53,6 @@ class RM8KartuStokController extends Controller
             ? PenerimaanKemasanHeader::with(['barang', 'po.purchaseRequest'])->where('id_barang', $r->id)->get()
             : PenerimaanHeader::with(['barang', 'po.purchaseRequest'])->where('id_barang', $r->id)->get();
         $keluar = BuktiPermintaanPengeluaranBarang::with('barang')->where('id_barang', $r->id)->get();
-
         $transaksiGabung = [];
 
         // Tambahkan transaksi masuk
@@ -70,7 +69,7 @@ class RM8KartuStokController extends Controller
         // Tambahkan transaksi keluar
         foreach ($keluar as $k) {
             $transaksiGabung[] = [
-                'tgl' => $k->tanggal_terima,
+                'tgl' => $k->tgl,
                 'jumlah' => $k->pcs,
                 'jenis' => 'keluar',
                 'kode_lot' => $k->no_lot,
