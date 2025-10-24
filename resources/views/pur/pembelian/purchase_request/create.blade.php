@@ -2,13 +2,25 @@
     <form action="" method="post">
         @csrf
         <div class="row">
-            <div class="col-6">
+            <div class="col-4">
                 <div class="form-group">
                     <label for="">Kategori</label>
                     <select name="kategori" class="form-control kategori">
                         <option value="">Pilih Kategori</option>
                         <option value="barang" @selected($kategori == 'barang')>Barang</option>
                         <option value="kemasan" @selected($kategori == 'kemasan')>Kemasan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="form-group">
+                    <label for="">Supplier</label>
+                    <select name="idSupplier" class="form-control idSupplier">
+                        <option value="">Pilih Supplier</option>
+                        @foreach ($supplier as $s)
+                            <option value="{{ $s->id }}" @selected($s->id == $idSupplier)>{{ $s->nama_supplier }}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
             </div>
@@ -120,9 +132,22 @@
                 });
 
                 $('.kategori').change(function() {
-                    var kategori = $(this).val();
+                    var kategori = $('.kategori').val();
+                    var idSupplier = $('.idSupplier').val();
                     var url = new URL(window.location.href);
+
                     url.searchParams.set('kategori', kategori);
+                    url.searchParams.set('idSupplier', idSupplier);
+                    window.location.href = url.href;
+                });
+
+                $('.idSupplier').change(function() {
+                    var kategori = $('.kategori').val();
+                    var idSupplier = $('.idSupplier').val();
+                    var url = new URL(window.location.href);
+
+                    url.searchParams.set('kategori', kategori);
+                    url.searchParams.set('idSupplier', idSupplier);
                     window.location.href = url.href;
                 });
             });
