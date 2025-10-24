@@ -196,6 +196,7 @@ Route::controller(Hrga2CeklisPerawatanMesin::class)
         Route::get('/add', 'add')->name('add');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::get('/edit', 'edit')->name('edit');
     });
 Route::controller(Hrga3PermintaanPerbaikanMesin::class)
     ->prefix('hrga/hrga8/3_Permintaan_perbaikan_mesin')
