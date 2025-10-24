@@ -17,7 +17,7 @@
                     <tr>
                         <th class="dhead">#</th>
                         <th class="dhead">Tgl Dibutuhkan</th>
-                        <th class="dhead">Status</th>
+                        {{-- <th class="dhead">Status</th> --}}
                         <th class="dhead">Jabatan</th>
                         <th class="dhead">Jumlah</th>
                         <th class="dhead">Alasan Penambahan</th>
@@ -30,7 +30,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td align="right">{{ tanggal($d->tgl_dibutuhkan) }}</td>
-                            <td>{{ ucwords($d->status) }}</td>
+                            <td>{{ $d->status_posisi }}</td>
                             <td>{{ optional($d->divisi)->divisi ?? 'Cabut' }}</td>
                             <td>{{ $d->jumlah }} Orang</td>
                             <td>{{ $d->alasan_penambahan }}</td>
