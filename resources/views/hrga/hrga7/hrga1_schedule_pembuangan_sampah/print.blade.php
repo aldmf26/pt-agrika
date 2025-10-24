@@ -75,7 +75,7 @@
 
             </span>
         </div>
-        <div class="col-sm-6 col-lg-4">
+        <div class="col-6">
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
