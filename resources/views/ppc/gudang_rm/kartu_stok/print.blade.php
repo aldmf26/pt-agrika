@@ -47,7 +47,7 @@
                         }
                     @endphp
                     <tr>
-                        <td class="text-end">{{ tanggal(\Carbon\Carbon::parse($t['tgl'])->format('Y-m-d')) }}</td>
+                        <td class="text-end">{{ tanggal($t['tgl']) }}</td>
                         <td class="text-end">{{ number_format($masuk, 0) }}
                             {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
                         <td class="text-end">{{ number_format($keluar, 0) }}

@@ -25,4 +25,9 @@ class PenerimaanKemasanHeader extends Model
     {
         return $this->hasMany(PenerimaanKemasanKriteria::class, 'id_penerimaan');
     }
+
+    public function po()
+    {
+        return $this->belongsTo(PurchaseOrder::class, 'no_po', 'no_po');
+    }
 }

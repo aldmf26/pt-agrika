@@ -347,6 +347,7 @@ Route::controller(RM7BuktiPermintaanPengeluaranBarangController::class)
         Route::get('/create/', 'create')->name('create');
         Route::post('/create', 'store')->name('store');
         Route::get('/print/', 'print')->name('print');
+        Route::get('/destroy/', 'destroy')->name('destroy');
     });
 
 Route::controller(RM8KartuStokController::class)

@@ -13,7 +13,8 @@
                 </div>
             </div> --}}
             <div>
-                <a href="{{ route('ppc.gudang-rm.7.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+                <a href="{{ route('ppc.gudang-rm.7.create', ['kategori' => $kategori]) }}"
+                    class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
                     Bukti Pengeluaran Barang</a>
             </div>
         </div>
@@ -51,8 +52,14 @@
                                         'k' => $kategori,
                                     ];
                                 @endphp
-                                <a class="btn btn-xs float-end btn-primary"
+                                <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                    class="btn btn-xs float-end btn-danger"
+                                    href="{{ route('ppc.gudang-rm.7.destroy', $param) }}"><i
+                                        class="fas fa-trash"></i></a>
+
+                                <a class="me-2 btn btn-xs float-end btn-primary"
                                     href="{{ route('ppc.gudang-rm.7.print', $param) }}"><i class="fas fa-print"></i></a>
+
                             </td>
                         </tr>
                     @endforeach

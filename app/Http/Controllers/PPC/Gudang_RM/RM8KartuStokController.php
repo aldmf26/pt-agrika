@@ -50,9 +50,8 @@ class RM8KartuStokController extends Controller
     {
         $kategori = $r->kategori;
         $masuk = ($kategori == 'Kemasan')
-            ? PenerimaanKemasanHeader::with('barang')->where('id_barang', $r->id)->get()
-            : PenerimaanHeader::with('barang')->where('id_barang', $r->id)->get();
-
+            ? PenerimaanKemasanHeader::with(['barang', 'po.purchaseRequest'])->where('id_barang', $r->id)->get()
+            : PenerimaanHeader::with(['barang', 'po.purchaseRequest'])->where('id_barang', $r->id)->get();
         $keluar = BuktiPermintaanPengeluaranBarang::with('barang')->where('id_barang', $r->id)->get();
 
         $transaksiGabung = [];

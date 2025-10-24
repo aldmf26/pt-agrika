@@ -38,7 +38,7 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.index', $data);
     }
 
-    public function create()
+    public function create(Request $r)
     {
         $labels = collect([]);
 
@@ -47,41 +47,45 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
 
         $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])
             ->get();
+        if ($r->kategori == 'barang')
+            foreach ($barangs as $b) {
+                $masuk = PenerimaanHeader::where('kode_lot', $b->kode_lot)->sum('jumlah_barang');
+                $keluar = BuktiPermintaanPengeluaranBarang::where('no_lot', $b->kode_lot)->sum('pcs');
+                $stok_akhir = $masuk - $keluar;
 
-        foreach ($barangs as $b) {
-            $masuk = PenerimaanHeader::where('kode_lot', $b->kode_lot)->sum('jumlah_barang');
-            $keluar = BuktiPermintaanPengeluaranBarang::where('no_lot', $b->kode_lot)->sum('pcs');
-            $stok_akhir = $masuk - $keluar;
+                $labels = $labels->concat(collect([
+                    $b->id => [
+                        'kode_lot' => $b->kode_lot,
+                        'nama_barang' => $b->barang->nama_barang,
+                        'satuan' => $b->barang->satuan,
+                        'stok_akhir' => $stok_akhir
+                    ]
+                ]));
+            }
+        else {
 
-            $labels = $labels->concat(collect([
-                $b->id => [
-                    'kode_lot' => $b->kode_lot,
-                    'nama_barang' => $b->barang->nama_barang,
-                    'satuan' => $b->barang->satuan,
-                    'stok_akhir' => $stok_akhir
-                ]
-            ]));
+            foreach ($kemasan as $b) {
+                $masuk = PenerimaanKemasanHeader::where('kode_lot', $b->kode_lot)->sum('jumlah_barang');
+                $keluar = BuktiPermintaanPengeluaranBarang::where('no_lot', $b->kode_lot)->sum('pcs');
+                $stok_akhir = $masuk - $keluar;
+
+                $labels = $labels->concat(collect([
+                    $b->id => [
+                        'kode_lot' => $b->kode_lot,
+                        'nama_barang' => $b->barang->nama_barang,
+                        'satuan' => $b->barang->satuan,
+                        'stok_akhir' => $stok_akhir
+                    ]
+                ]));
+            }
         }
 
-        foreach ($kemasan as $b) {
-            $masuk = PenerimaanKemasanHeader::where('kode_lot', $b->kode_lot)->sum('jumlah_barang');
-            $keluar = BuktiPermintaanPengeluaranBarang::where('no_lot', $b->kode_lot)->sum('pcs');
-            $stok_akhir = $masuk - $keluar;
-
-            $labels = $labels->concat(collect([
-                $b->id => [
-                    'kode_lot' => $b->kode_lot,
-                    'nama_barang' => $b->barang->nama_barang,
-                    'satuan' => $b->barang->satuan,
-                    'stok_akhir' => $stok_akhir
-                ]
-            ]));
-        }
         $user = DataPegawai::karyawan()->get();
         $data = [
             'title' => 'Tambah Bukti Permintaan Pengeluaran Barang',
             'labels' => $labels->values(), // reset keys
             'user' => $user,
+            'kategori' => $r->kategori,
         ];
 
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.create', $data);
@@ -114,10 +118,10 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
                 ]);
             }
             DB::commit();
-            return redirect()->route('ppc.gudang-rm.7.index')->with('sukses', 'Data Berhasil Disimpan');
+            return redirect()->route('ppc.gudang-rm.7.index', ['kategori' => $r->kategori])->with('sukses', 'Data Berhasil Disimpan');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect()->route('ppc.gudang-rm.7.create')->with('error', $e->getMessage());
+            return redirect()->route('ppc.gudang-rm.7.create', ['kategori' => $r->kategori])->with('error', $e->getMessage());
         }
     }
 
@@ -156,5 +160,23 @@ class RM7BuktiPermintaanPengeluaranBarangController extends Controller
         ];
 
         return view('ppc.gudang_rm.bukti_permintaan_pengeluaran_barang.print', $data);
+    }
+
+    public function destroy(Request $r)
+    {
+        DB::beginTransaction();
+        try {
+            BuktiPermintaanPengeluaranBarang::where([
+                ['nama', $r->nama],
+                ['tgl', $r->tgl],
+                ['departemen', $r->departemen]
+            ])->delete();
+
+            DB::commit();
+            return redirect()->route('ppc.gudang-rm.7.index', ['kategori' => $r->k])->with('sukses', 'Data Berhasil Dihapus');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('ppc.gudang-rm.7.index', ['kategori' => $r->k])->with('error', $e->getMessage());
+        }
     }
 }
