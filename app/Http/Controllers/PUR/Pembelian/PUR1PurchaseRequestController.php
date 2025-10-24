@@ -8,6 +8,7 @@ use App\Models\DataPegawai;
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
 use App\Models\PurchaseRequestSbw;
+use App\Models\Suplier;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -107,13 +108,22 @@ class PUR1PurchaseRequestController extends Controller
     public function create(Request $r)
     {
         $kategori = $r->kategori ?? 'barang';
-        $barangs = Barang::with('supplier')->where('kategori', $kategori)->get();
+        $idSupplier = $r->idSupplier ?? null;
+        $barangs = Barang::with('supplier')
+            ->where('kategori', $kategori)
+            ->when($idSupplier, function ($query) use ($idSupplier) {
+                $query->where('supplier_id', $idSupplier);
+            })
+            ->get();
         $user = DataPegawai::karyawan()->get();
+        $supplier = Suplier::where('kategori', $kategori)->get();
         $data = [
             'title' => 'Tambah Purchase Request',
             'no_pr' => $this->getNoPr(),
             'barangs' => $barangs,
             'kategori' => $kategori,
+            'supplier' => $supplier,
+            'idSupplier' => $idSupplier,
             'user' => $user,
         ];
 

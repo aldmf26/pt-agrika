@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PPC\Gudang_RM;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\BuktiPermintaanPengeluaranBarang;
+use App\Models\DataPegawai;
 use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
 use App\Models\Transaksi;
@@ -85,12 +86,12 @@ class RM8KartuStokController extends Controller
         $sbw = json_decode($sbw, TRUE);
 
         $jabatans = [
-            'barang' => 'STAFF PURCHASING',
+            'barang' => 'KA. GUDANG BARANG & KEMASAN',
             'sbw' => 'KA. GUDANG BAHAN BAKU',
             'kemasan' => 'KA. PACKING & GUDANG FG',
             'jasa' => 'FSTL',
         ];
-        $ttdJabatan = $jabatans[strtolower($kategori)] ?? 'STAFF PURCHASING';
+        $ttdJabatan = $jabatans[strtolower($kategori)] ?? 'KA. GUDANG BARANG & KEMASAN';
 
         $kodes = [
             'barang' => 'PPCB',
@@ -99,7 +100,7 @@ class RM8KartuStokController extends Controller
             'jasa' => 'PPCJ',
         ];
         $kode = $kodes[strtolower($kategori)] ?? 'PPCB';
-
+        $pic =  DataPegawai::where('posisi', $kategori == 'sbw' ? 'Kepala Gudang Bahan Baku' : 'Kepala Gudang Barang Kemasan')->first()->pluck('nama');
         // Kirim ke view
         $data = [
             'title' => 'KARTU STOK MATERIAL ',
@@ -109,6 +110,7 @@ class RM8KartuStokController extends Controller
             'kategori' => $kategori,
             'nm_barang' => $r->nm_barang ?? '-',
             'sbw' => $sbw['data'],
+            'pic' => $pic,
             'ttdJabatan' => $ttdJabatan,
         ];
         return view('ppc.gudang_rm.kartu_stok.print', $data);

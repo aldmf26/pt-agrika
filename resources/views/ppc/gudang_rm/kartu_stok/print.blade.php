@@ -8,7 +8,7 @@
         </tr>
         <tr>
             <th>PIC</th>
-            <td>: {{ $kategori != 'sbw' ? 'Tasya Salsabila' : 'Sinta' }}</td>
+            <td>: {{ $pic }}</td>
         </tr>
     </table>
     <table width="100%" class="mt-3 border-dark table table-xs table-bordered">
