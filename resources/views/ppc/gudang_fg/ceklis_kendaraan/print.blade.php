@@ -274,32 +274,44 @@
             $('.jam_pengantaran').change(function(e) {
                 e.preventDefault();
                 var tgl = $(this).attr('tgl');
-                var jam = $(this).val();
+                var jam = $(this).val(); // contoh: 14:00
+
                 $.ajax({
-                    type: "Get",
+                    type: "GET",
                     url: "/update-jam-kedatangan",
                     data: {
-                        partai: partai,
+                        tgl: tgl,
                         jam: jam,
-                        kategori: 'jam_kedatangan',
+                        kategori: 'jam_pengantaran',
                     },
                     dataType: "json",
                     success: function(response) {
                         if (response.success) {
                             console.log('Jam kedatangan berhasil diperbarui.');
+                            // ubah ke format 12 jam
+                            var jamFormatted = formatJam12(jam);
+                            $('.jam_update[data-tgl="' + tgl + '"]').text(jamFormatted);
                         } else {
                             alert('Gagal update.');
                         }
-                        $('.jam_update[data-partai="' + partai + '"]').text(jam);
-
                     },
                     error: function(xhr) {
                         console.error(xhr.responseText);
                         alert('Terjadi kesalahan saat mengirim data.');
                     }
                 });
-
             });
+
+            // fungsi ubah dari 24 jam ke 12 jam (ex: 14:00 → 02:00 PM)
+            function formatJam12(time24) {
+                if (!time24) return '';
+                var [hour, minute] = time24.split(':');
+                hour = parseInt(hour, 10);
+                var ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12 || 12;
+                return `${String(hour).padStart(2, '0')}:${minute} ${ampm}`;
+            }
+
 
             // $('.no_kendaraan').keyup(function(e) {
             //     alert('dsa')

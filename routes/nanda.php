@@ -599,6 +599,8 @@ Route::get('/update-jam-kedatangan', function (Request $request) {
 
 
 
+
+
     if ($request->kategori == 'jam_kedatangan') {
         if (empty($partai->nm_partai)) {
             DB::table('data_edit_wh')
@@ -627,13 +629,14 @@ Route::get('/update-jam-kedatangan', function (Request $request) {
                 ->update(['driver' => $request->driver]);
         }
     } elseif ($request->kategori == 'jam_pengantaran') {
-        if (empty($partai->nm_partai)) {
-            DB::table('data_edit_wh')
-                ->insert(['nm_partai' => $request->partai, 'driver' => $request->driver]);
+        $fg = DB::table('checklist_kendaraan_fg')->where('tgl', $request->tgl)->first();
+        if (empty($fg->tgl)) {
+            DB::table('checklist_kendaraan_fg')
+                ->insert(['tgl' => $request->tgl, 'jam_pengantaran' => $request->jam]);
         } else {
-            DB::table('data_edit_wh')
-                ->where('nm_partai', $request->partai)
-                ->update(['driver' => $request->driver]);
+            DB::table('checklist_kendaraan_fg')
+                ->where('tgl', $request->tgl)
+                ->update(['jam_pengantaran' => $request->jam]);
         }
     }
 
