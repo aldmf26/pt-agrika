@@ -186,6 +186,7 @@ Route::controller(Hrga1ProgramPerawatanMesin::class)
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
         Route::get('/load_baris', 'load_baris')->name('load_baris');
+        Route::put('/update/{id}', 'update')->name('update');
     });
 Route::controller(Hrga2CeklisPerawatanMesin::class)
     ->prefix('hrga/hrga8/2_Ceklis_perawatan_mesin')

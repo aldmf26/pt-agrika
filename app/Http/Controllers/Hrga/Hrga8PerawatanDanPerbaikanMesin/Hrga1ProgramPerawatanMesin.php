@@ -71,6 +71,49 @@ class Hrga1ProgramPerawatanMesin extends Controller
         return redirect()->route('hrga8.1.index', ['kategori' => $r->kategori])->with('sukses', 'Data Berhasil Disimpan');
     }
 
+    public function update(Request $r, $id)
+    {
+        // Ambil data utama program perawatan
+        $program = ProgramPerawatanMesin::findOrFail($id);
+
+        // Update data utama
+        $program->update([
+            'item_mesin_id' => $r->item_mesin_id,
+            'frekuensi_perawatan' => $r->frekuensi_perawatan,
+            'penanggung_jawab' => $r->penanggung_jawab,
+            'tanggal_mulai' => $r->tanggal_mulai,
+        ]);
+
+        // Hapus checklist lama biar tidak duplikat
+        checklistPerawatanMesin::where('item_mesin_id', $r->item_mesin_id)->delete();
+
+        // Hitung ulang jadwal checklist berdasarkan frekuensi
+        $total = floor(12 / $r->frekuensi_perawatan);
+        for ($j = 0; $j < $total; $j++) {
+            $kriteria = DB::table('kriteria_pemeriksaan')
+                ->where('item_mesin_id', $r->item_mesin_id)
+                ->get();
+
+            $tgl = date('Y-m-d', strtotime($r->tanggal_mulai . ' + ' . ($j * $r->frekuensi_perawatan) . ' month'));
+
+            foreach ($kriteria as $k) {
+                $dataChecklist = [
+                    'item_mesin_id' => $r->item_mesin_id,
+                    'kriteria_id' => $k->id,
+                    'tgl' => $tgl,
+                    'metode' => 'Visual',
+                    'hasil_pemeriksaan' => 'Ok',
+                    'status' => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
+                ];
+                checklistPerawatanMesin::create($dataChecklist);
+            }
+        }
+
+        return redirect()->route('hrga8.1.index', ['kategori' => $r->kategori])
+            ->with('sukses', 'Data Berhasil Diperbarui');
+    }
+
+
     public function print(Request $r)
     {
         if (empty($r->tahun)) {
