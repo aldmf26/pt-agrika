@@ -145,7 +145,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 $kemasan = PenerimaanKemasanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
                 if ($kemasan) {
                     // Ensure supplier is an object
-                    $kemasan->supplier = $kemasan->supplier ?? (object)['nama_supplier' => '-'];
+                    $kemasan->supplier = $kemasan->barang->supplier->nama_supplier ?? (object)['nama_supplier' => '-'];
                     // Set kategori explicitly
                     $kemasan->kategori = 'kemasan';
                     // Ensure kode_barang is set
@@ -166,7 +166,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 $kemasan = PenerimaanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
                 if ($kemasan) {
                     // Ensure supplier is an object
-                    $kemasan->supplier = $kemasan->supplier ?? (object)['nama_supplier' => '-'];
+                    $kemasan->supplier = $kemasan->barang->supplier->nama_supplier ?? (object)['nama_supplier' => '-'];
                     // Set kategori explicitly
                     $kemasan->kategori = 'barang';
                     // Ensure kode_barang is set
