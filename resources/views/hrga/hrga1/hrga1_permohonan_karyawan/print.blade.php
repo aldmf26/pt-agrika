@@ -204,7 +204,8 @@
 
                         </tr>
                         <tr>
-                            <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
+                            <td class="text-center">( {{ $datas->$d->diajukan_oleh }} ) <br> <span
+                                    style="font-size: 8px">
                                     Diisi Oleh User</span>
                             </td>
                             <td class="text-center">( KA. HRGA )</td>
