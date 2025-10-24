@@ -17,7 +17,7 @@
                     <tr>
                         <th class="dhead">#</th>
                         <th class="dhead">Tgl Dibutuhkan</th>
-                        {{-- <th class="dhead">Status</th> --}}
+                        <th class="dhead">Status</th>
                         <th class="dhead">Jabatan</th>
                         <th class="dhead">Jumlah</th>
                         <th class="dhead">Alasan Penambahan</th>
