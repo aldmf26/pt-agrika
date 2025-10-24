@@ -212,7 +212,6 @@ class RM5LabelIdentitasBahanController extends Controller
                 }
             }
         }
-        dd($labels);
         if ($labels->isEmpty()) {
             return redirect()->back()->with('error', 'No valid items found for printing.');
         }
