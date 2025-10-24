@@ -86,4 +86,44 @@ class Hrga2CeklisPerawatanMesin extends Controller
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.print', $data);
     }
+
+    public function edit(Request $r)
+    {
+        $minDate = checklistPerawatanMesin::min('tgl');
+        $kategori = $r->kategori ?? 'mesin';
+        $title = $kategori == 'mesin' ? 'CHECKLIST PERAWATAN MESIN & PERALATAN' : 'CHECKLIST PERAWATAN SOFTWARE dan HARDWARE PROSES PRODUKSI';
+        $no_dokumen = $kategori == 'mesin' ? 'Dok.No.: FRM.HRGA.08.02, Rev.00' : 'Dok.No.: FRM.IT.01.02, Rev.00';
+
+        $data = [
+            'title' => $title,
+            'no_dokumen' => $no_dokumen,
+            'mesin' => ItemMesin::where('id', $r->id)->first(),
+            'perawatan' => ProgramPerawatanMesin::where('item_mesin_id', $r->id)
+                ->latest()
+                ->first(),
+
+            'checklist' => checklistPerawatanMesin::where('item_mesin_id', $r->id)
+                ->whereBetween('tgl', [$minDate, now()])
+                ->orderBy('id', 'asc')
+                ->get(),
+            'checklist2' => checklistPerawatanMesin::where('item_mesin_id', $r->id)->whereMonth('tgl', $r->bulan)->whereYear('tgl', $r->tahun)->orderBy('id', 'asc')->first(),
+            'bulan' => $r->bulan,
+            'tahun' => $r->tahun,
+            'id' => $r->id,
+            'kategori' => $kategori,
+        ];
+        return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.edit', $data);
+    }
+
+    public function update(Request $r)
+    {
+        for ($i = 0; $i < count($r->id); $i++) {
+            checklistPerawatanMesin::where('id', $r->id[$i])->update([
+                'status' => $r->status[$i],
+                'keterangan' => $r->keterangan[$i],
+            ]);
+        }
+
+        return redirect()->route('hrga8.2.index', ['kategori' => $r->kategori])->with('success', 'Data berhasil diupdate');
+    }
 }

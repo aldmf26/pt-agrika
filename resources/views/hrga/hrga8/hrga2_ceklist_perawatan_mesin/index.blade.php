@@ -30,6 +30,9 @@
                                     target="_blank" class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Print</a>
                                 {{-- <a href="{{ route('hrga8.2.add', ['id' => $d->item_mesin_id]) }}"
                                     class="btn btn-sm btn-primary"><i class="fas fa-edit"></i> edit</a> --}}
+                                <a href="{{ route('hrga8.2.edit', ['id' => $d->item_mesin_id, 'kategori' => $kategori]) }}"
+                                    class="btn btn-warning btn-sm"><i class="fas fa-edit"></i>
+                                    Edit</a>
                             </td>
 
                         </tr>

@@ -196,6 +196,8 @@ Route::controller(Hrga2CeklisPerawatanMesin::class)
         Route::get('/add', 'add')->name('add');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
     });
 Route::controller(Hrga3PermintaanPerbaikanMesin::class)
     ->prefix('hrga/hrga8/3_Permintaan_perbaikan_mesin')
@@ -598,6 +600,8 @@ Route::get('/update-jam-kedatangan', function (Request $request) {
 
 
 
+
+
     if ($request->kategori == 'jam_kedatangan') {
         if (empty($partai->nm_partai)) {
             DB::table('data_edit_wh')
@@ -626,13 +630,14 @@ Route::get('/update-jam-kedatangan', function (Request $request) {
                 ->update(['driver' => $request->driver]);
         }
     } elseif ($request->kategori == 'jam_pengantaran') {
-        if (empty($partai->nm_partai)) {
-            DB::table('data_edit_wh')
-                ->insert(['nm_partai' => $request->partai, 'driver' => $request->driver]);
+        $fg = DB::table('checklist_kendaraan_fg')->where('tgl', $request->tgl)->first();
+        if (empty($fg->tgl)) {
+            DB::table('checklist_kendaraan_fg')
+                ->insert(['tgl' => $request->tgl, 'jam_pengantaran' => $request->jam]);
         } else {
-            DB::table('data_edit_wh')
-                ->where('nm_partai', $request->partai)
-                ->update(['driver' => $request->driver]);
+            DB::table('checklist_kendaraan_fg')
+                ->where('tgl', $request->tgl)
+                ->update(['jam_pengantaran' => $request->jam]);
         }
     }
 
