@@ -114,4 +114,16 @@ class Hrga2CeklisPerawatanMesin extends Controller
         ];
         return view('hrga.hrga8.hrga2_ceklist_perawatan_mesin.edit', $data);
     }
+
+    public function update(Request $r)
+    {
+        for ($i = 0; $i < count($r->id); $i++) {
+            checklistPerawatanMesin::where('id', $r->id[$i])->update([
+                'status' => $r->status[$i],
+                'keterangan' => $r->keterangan[$i],
+            ]);
+        }
+
+        return redirect()->route('hrga8.2.index', ['kategori' => $r->kategori])->with('success', 'Data berhasil diupdate');
+    }
 }
