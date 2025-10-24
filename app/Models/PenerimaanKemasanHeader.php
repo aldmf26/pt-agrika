@@ -18,7 +18,7 @@ class PenerimaanKemasanHeader extends Model
 
     public function supplier()
     {
-        return $this->belongsTo(Suplier::class, 'supplier_id');
+        return $this->belongsTo(Suplier::class, 'id_supplier');
     }
 
     public function kriteria()
