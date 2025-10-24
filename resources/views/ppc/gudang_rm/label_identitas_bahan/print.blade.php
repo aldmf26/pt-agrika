@@ -104,7 +104,6 @@
         <div class="p-2">
             <div class="row">
 
-
                 @foreach ($labels as $d)
                     <template x-for="i in jumlah" :key="i">
                         <!-- Label pertama -->
@@ -124,7 +123,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <table style="font-size: 9px; text-align: left">
                                 <tr>
                                     <td>Nama
@@ -139,7 +137,7 @@
                                         Nama Produsen
                                     </td>
                                     <td>:</td>
-                                    <td>{{ $d->kategori == 'Baku' ? ucwords($d->rumah_walet) : $d->supplier->nama_supplier }}
+                                    <td>{{ $d->kategori == 'Baku' ? ucwords($d->rumah_walet) : $d->supplier }}
                                     </td>
                                 </tr>
 
