@@ -145,7 +145,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Dievaluasi oleh: Ka. {{ $evaluasi_detail->data_pegawai->divisi->divisi }}</td>
+                    <td>Dievaluasi oleh: Ka. {{ $evaluasi_detail->data_pegawai->divisi->divisi ?? '-' }}</td>
                     <td>
                         Kesimpulan:
                         <br>
