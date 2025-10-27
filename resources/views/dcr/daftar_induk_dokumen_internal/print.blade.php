@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <table class="table table-bordered border-dark" style="font-size: 10px">
+            <table class="table table-bordered border-dark" style="font-size: 9px">
                 <thead>
                     <tr>
                         <th class="text-center dhead align-middle" rowspan="2">No</th>
