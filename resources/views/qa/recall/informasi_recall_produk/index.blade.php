@@ -40,8 +40,14 @@
                                     <a href="{{ route('qa.5.1.hasil', $recall) }}" class="btn btn-sm btn-info"><i
                                             class="fas fa-plus"></i> Hasil</a>
 
-                                    <a target="_blankeni" href="{{ route('qa.5.1.hasil_print', $recall) }}"
+                                    <a target="_blank" href="{{ route('qa.5.1.hasil_print', $recall) }}"
                                         class="btn btn-sm btn-info"><i class="fas fa-print"></i> Print Hasil</a>
+                                    
+                                    @can('presiden')
+                                    <a onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                        href="{{ route('qa.5.1.destroy', $recall) }}" class="btn btn-sm btn-danger"><i
+                                            class="fas fa-trash"></i> Hapus</a>
+                                            @endcan
                                 </div>
                             </td>
                         </tr>

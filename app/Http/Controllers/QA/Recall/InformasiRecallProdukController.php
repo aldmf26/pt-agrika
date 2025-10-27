@@ -200,4 +200,26 @@ class InformasiRecallProdukController extends Controller
         ];
         return view('qa.recall.informasi_recall_produk.print_hasil', $data);
     }
+
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            // Find the recall record
+            $recall = Recall::findOrFail($id);
+
+            // Delete related team members and products
+            RecallTeamMember::where('recall_id', $recall->id)->delete();
+            RecallProduct::where('recall_id', $recall->id)->delete();
+
+            // Delete the recall record
+            $recall->delete();
+
+            DB::commit();
+            return redirect()->route('qa.5.1.index')->with('sukses', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
+    }
 }
