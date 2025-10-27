@@ -24,7 +24,7 @@ class JadwalVerifikasiController extends Controller
             'title' => 'Jadwal Uji Lab',
             'tahun' => $r->tahun,
             'datas' => JadwalVerifikasi::where('tahun', $r->tahun)
-                ->orderBy('item')
+
                 ->get(),
         ];
         return view('qa.verifikasifalidasi.print', $data);
