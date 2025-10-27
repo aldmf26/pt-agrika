@@ -44,7 +44,7 @@
                             <td class="text-end">{{ $loop->iteration }}</td>
                             <td>{{ $d->no_dokumen }}</td>
                             <td>{{ $d->judul }}</td>
-                            <td class="text-start">{{ $d->divisi }}</td>
+                            <td class="text-start">{{ $d->nama_divisi }}</td>
                             @php
                                 $tgl = date('Y-m-d', strtotime($d->updated_at));
                             @endphp
