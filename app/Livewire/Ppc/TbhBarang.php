@@ -16,6 +16,7 @@ class TbhBarang extends Component
     use WithAlert;
 
     public $nama_barang = "";
+    public $harga_satuan = "";
     public $supplierId = "";
     public $satuan = "PCS";
     public $spek = "";
@@ -33,6 +34,7 @@ class TbhBarang extends Component
         // $lastBarang = Barang::orderBy('kode_barang', 'DESC')->first();
         // $this->kodeBarang = $lastBarang->kode_barang ?? '';
         Barang::create([
+            'harg_satuan' => $this->harg_satuan,
             'nama_barang' => $this->nama_barang,
             'kode_barang' => $kodeBarang,
             'supplier_id' => $this->supplierId,
@@ -42,7 +44,7 @@ class TbhBarang extends Component
             'admin' => auth()->user()->name,
         ]);
 
-        $this->reset(['nama_barang', 'satuan', 'spek']);
+        $this->reset(['nama_barang', 'harga_satuan', 'satuan', 'spek']);
         $this->alert('sukses', 'Berhasil menambahkan barang baru');
     }
 
@@ -64,6 +66,15 @@ class TbhBarang extends Component
         $this->alert('sukses', $this->pesan);
     }
 
+    public function updateHargaSatuan($id, $value)
+    {
+        $barang = Barang::find($id);
+        $barang->harga_satuan = $value;
+        $barang->save();
+        $this->pesan = "berhasil update harga satuan";
+        $this->alert('sukses', $this->pesan);
+    }
+
     public function hapus($id)
     {
         try {
@@ -81,8 +92,6 @@ class TbhBarang extends Component
             DB::rollBack();
             $this->pesan = $th->getMessage();
         }
-
-
     }
 
     public function render()

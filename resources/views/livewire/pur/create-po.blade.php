@@ -35,8 +35,9 @@
                                 {{ $d->item_spesifikasi }}
                             </td>
                             <td>
-                                <input required autocomplete="off" value="{{ $d->harga_po ?? 0 }}" type="text"
-                                    inputmode="numeric" name="harga[]" class="text-end form-control form-control-sm" />
+                                <input required autocomplete="off" value="{{ $d->barang->harga_satuan ?? 0 }}"
+                                    type="text" inputmode="numeric" name="harga[]"
+                                    class="text-end form-control form-control-sm" />
                             </td>
                         </tr>
                     @endforeach

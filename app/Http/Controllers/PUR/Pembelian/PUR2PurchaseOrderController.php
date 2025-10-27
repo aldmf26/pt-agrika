@@ -178,9 +178,23 @@ class PUR2PurchaseOrderController extends Controller
             ]);
 
             foreach ($r->id as $index => $id) {
-                PurchaseRequestItem::where('id', $id)
-                    ->where('pr_id', $r->id_pr)
-                    ->update(['harga_po' => $r->harga[$index]]);
+                $item = PurchaseRequestItem::find($id);
+
+                if ($item && $item->pr_id == $r->id_pr) {
+                    $harga = $r->harga[$index];
+
+                    $item->update([
+                        'harga_po' => $harga,
+                    ]);
+
+                    $item->barang->update([
+                        'harga_satuan' => $harga,
+                    ]);
+                }
+
+                // PurchaseRequestItem::where('id', $id)
+                //     ->where('pr_id', $r->id_pr)
+                //     ->update(['harga_po' => $r->harga[$index]]);
             }
 
             DB::commit();

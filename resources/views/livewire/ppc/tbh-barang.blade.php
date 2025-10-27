@@ -22,6 +22,7 @@
                             <th>#</th>
                             <th>Kode</th>
                             <th>Nama Barang</th>
+                            <th>Harga Satuan</th>
                             <th>Satuan</th>
                             <th>Supplier</th>
                             <th>Spesifikasi (untuk seleksi supplier)</th>
@@ -37,6 +38,11 @@
                                     <input type="text" class="form-control form-control-sm"
                                         value="{{ $d->nama_barang }}"
                                         wire:change="updateBarang({{ $d->id }}, $event.target.value)">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control form-control-sm"
+                                        value="{{ $d->harga_satuan }}"
+                                        wire:change="updateHargaSatuan({{ $d->id }}, $event.target.value)">
                                 </td>
                                 <td>{{ $d->satuan }}</td>
                                 <td>{{ $d->supplier->nama_supplier }}</td>
@@ -85,7 +91,7 @@
             <div class="col-2">
                 <div class="form-group">
                     <label for="">harga Satuan</label>
-                    <input required type="text" wire:model="nama_barang" class="form-control">
+                    <input required type="text" wire:model="harga_satuan" class="form-control">
                 </div>
             </div>
 

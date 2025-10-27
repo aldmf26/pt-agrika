@@ -50,6 +50,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td class="text-start">{{ $d->no_pr }}</td>
+
                         <td class="text-end">{{ tanggal($d->tgl) }}</td>
                         <td>{{ $d->diminta_oleh }}</td>
                         <td>{{ $d->posisi }}</td>
@@ -74,5 +75,7 @@
 
         </tbody>
     </table>
-
+    <x-modal title="Detail Purchase Order" idModal="detail" btnSave="T">
+        @livewire('pur.detail')
+    </x-modal>
 </x-app-layout>
