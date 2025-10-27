@@ -40,7 +40,7 @@ class DaftarDistribusiDokumenInternal extends Controller
         $data = [
             'title' => 'DAFTAR DISTRIBUSI DOKUMEN INTERNAL',
             'dok' => 'Dok.No.: FRM.DCR.01.04, Rev.00',
-            'divisi' => DB::table('divisis')->where('id', $r->divisi_id)->first(),
+            'divisi' => $r->nama_divisi,
             'daftar' => DB::table('daftar_induk_dokumen_internal as a')
                 ->select('a.*')
                 ->where('a.nama_divisi', $r->nama_divisi)
