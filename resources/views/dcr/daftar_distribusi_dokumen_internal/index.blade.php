@@ -122,7 +122,7 @@
                     <select name="dokumen_id[]" class="form-control dokumen select2" required>
                         <option value="">-- Pilih --</option>
                         @foreach ($dokumen as $d)
-                            <option value="{{ $d->id }}">{{ $d->judul }} ({{ $d->no_dokumen }})</option>
+                            <option value="{{ $d->id }}">{{ $d->judul }} ({{ $d->no_dokumen }}) - {{ $d->nama_divisi }}</option>
                         @endforeach
                     </select>
                 </div>
