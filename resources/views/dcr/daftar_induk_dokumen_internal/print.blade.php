@@ -2,7 +2,7 @@
     <div class="row">
 
         <div class="col-lg-12">
-            <table class="table table-bordered border-dark" style="font-size: 10px">
+            <table class="table table-bordered border-dark" style="font-size: 9px">
                 <thead>
                     <tr>
                         <th class="text-center dhead align-middle" rowspan="2">No</th>
@@ -30,15 +30,15 @@
                 <tbody>
                     @foreach ($daftar as $d)
                         <tr>
-                            <td class="text-end">{{ $loop->iteration }}</td>
-                            <td>{{ $d->nama_divisi }}</td>
-                            <td>{{ $d->pic }}</td>
-                            <td class="text-nowrap">{{ $d->judul }}</td>
-                            <td class="text-nowrap">{{ $d->no_dokumen }}</td>
+                            <td class="text-end align-middle">{{ $loop->iteration }}</td>
+                            <td class="align-middle">{{ $d->nama_divisi }}</td>
+                            <td class="align-middle">{{ $d->pic }}</td>
+                            <td class="text-nowrap align-middle">{{ $d->judul }}</td>
+                            <td class="text-nowrap align-middle">{{ $d->no_dokumen }}</td>
                             @php
                                 $rev = date('Y-m-d', strtotime($d->updated_at));
                             @endphp
-                            <td class="text-end text-nowrap">{{ tanggal($rev) }}</td>
+                            <td class="text-end text-nowrap align-middle">{{ tanggal($rev) }}</td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -58,7 +58,7 @@
 
 
         </div>
-        <div class="col-6" style="font-size: 10px">
+        <div class="col-6" style="font-size: 9px">
             <p>Catatan :</p>
             <ol>
                 <li>
@@ -106,7 +106,7 @@
                     <tr>
                         <td class="text-center">( STAFF HRGA )</td>
                         <td class="text-center">( KA. HRGA )</td>
-                        <td class="text-center">( OPERASIONAL MANAGER )</td>
+                        <td class="text-center">( OPERATIONAL MANAGER )</td>
 
                     </tr>
                 </tbody>
