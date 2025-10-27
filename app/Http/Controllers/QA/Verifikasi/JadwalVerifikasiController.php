@@ -11,7 +11,7 @@ class JadwalVerifikasiController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Jadwal Verifikasi',
+            'title' => 'Jadwal Uji Lab',
         ];
 
         return view('qa.verifikasifalidasi.index', $data);
