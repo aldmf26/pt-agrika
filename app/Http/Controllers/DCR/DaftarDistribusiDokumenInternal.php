@@ -12,10 +12,9 @@ class DaftarDistribusiDokumenInternal extends Controller
     {
         $data = [
             'title' => 'Daftar Distribusi Dokumen Internal',
-            'daftar' => DB::table('daftar_distribusi_dokumen_internal')
-                ->join('divisis', 'daftar_distribusi_dokumen_internal.divisi_id', '=', 'divisis.id')
-                ->select('daftar_distribusi_dokumen_internal.*', 'divisis.divisi', DB::raw('COUNT(daftar_distribusi_dokumen_internal.dokumen_id) AS jumlah_dokumen'))
-                ->groupBy('divisi_id')->get(),
+            'daftar' => DB::table('daftar_induk_dokumen_internal as a')
+                ->select('a.*',  DB::raw('COUNT(a.nama_divisi) AS jumlah_dokumen'))
+                ->groupBy('nama_divisi')->get(),
             'divisi' => DB::table('divisis')->get(),
             'dokumen' => DB::table('daftar_induk_dokumen_internal')->get(),
         ];

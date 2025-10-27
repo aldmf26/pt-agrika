@@ -24,10 +24,10 @@
                         @foreach ($daftar as $d)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td class="text-center">{{ $d->divisi }}</td>
+                                <td class="text-center">{{ $d->nama_divisi }}</td>
                                 <td class="text-center">{{ $d->jumlah_dokumen }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('dcr.4.print', ['divisi_id' => $d->divisi_id]) }}"
+                                    <a href="{{ route('dcr.4.print', ['nama_divisi' => $d->nama_divisi]) }}"
                                         class="btn btn-info btn-sm"><i class="fas fa-print"></i> print</a>
                                 </td>
                             </tr>
