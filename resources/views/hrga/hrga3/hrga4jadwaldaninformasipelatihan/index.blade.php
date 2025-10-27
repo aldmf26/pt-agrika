@@ -25,7 +25,7 @@
                             <td>{{ $j->tema_pelatihan }}</td>
                             <td>{{ $j->tanggal }}</td>
                             <td>{{ $j->waktu }}</td>
-                            <td>{{ $j->tempat }}</td>
+                            <td>{{ ucfirst($j->tempat) }}</td>
                             <td>{{ $j->narasumber }}</td>
                             <td>{{ ucfirst(strtolower($j->kisaran_materi)) }}</td>
                             <td>
