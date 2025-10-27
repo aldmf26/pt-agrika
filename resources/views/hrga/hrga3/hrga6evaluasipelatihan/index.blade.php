@@ -20,7 +20,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucwords(strtolower($e->tema_pelatihan)) }}</td>
-                            <td>{{ ucwords(strtolower($e->data_pegawai->nama)) }}</td>
+                            <td>{{ ucwords(strtolower($e->data_pegawai->nama ?? '-')) }}</td>
                             <td>{{ $e->data_pegawai->divisi->divisi }}</td>
                             <td>{{ $e->data_pegawai->jenis_kelamin }}
                                 /
