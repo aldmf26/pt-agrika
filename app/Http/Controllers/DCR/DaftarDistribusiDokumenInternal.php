@@ -41,12 +41,10 @@ class DaftarDistribusiDokumenInternal extends Controller
             'title' => 'DAFTAR DISTRIBUSI DOKUMEN INTERNAL',
             'dok' => 'Dok.No.: FRM.DCR.01.04, Rev.00',
             'divisi' => DB::table('divisis')->where('id', $r->divisi_id)->first(),
-            'daftar' => DB::table('daftar_distribusi_dokumen_internal')
-                ->join('divisis', 'daftar_distribusi_dokumen_internal.divisi_id', '=', 'divisis.id')
-                ->join('daftar_induk_dokumen_internal', 'daftar_distribusi_dokumen_internal.dokumen_id', '=', 'daftar_induk_dokumen_internal.id')
-                ->select('daftar_distribusi_dokumen_internal.*', 'divisis.divisi', 'daftar_induk_dokumen_internal.no_dokumen', 'daftar_induk_dokumen_internal.judul', 'daftar_induk_dokumen_internal.updated_at')
-                ->where('daftar_distribusi_dokumen_internal.divisi_id', $r->divisi_id)
-                ->orderBy('daftar_induk_dokumen_internal.no_dokumen', 'asc')
+            'daftar' => DB::table('daftar_induk_dokumen_internal as a')
+                ->select('a.*')
+                ->where('a.nama_divisi', $r->nama_divisi)
+                ->orderBy('a.no_dokumen', 'asc')
                 ->get(),
         ];
         return view('dcr.daftar_distribusi_dokumen_internal.print', $data);
