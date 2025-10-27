@@ -49,7 +49,8 @@
                     @foreach ($jadwal_detail as $j)
                         <tr>
                             <td class="text-end">{{ $loop->iteration }}</td>
-                            <td class="text-start">{{ ucwords(strtolower($j->data_pegawai->nama ?? '-')) }}</td>
+                            <td class="text-start">
+                                {{ ucwords(strtolower($j->data_pegawai->nama ?? $j->data_pegawais_id)) }}</td>
                             <td class="text-start">
                                 {{ (empty($j->data_pegawai->divisi->divisi) ? '-' : $j->data_pegawai->divisi->divisi == 'Cabut') ? 'Cabut Bulu' : ucwords($j->data_pegawai->divisi->divisi ?? '-') }}
                             </td>
