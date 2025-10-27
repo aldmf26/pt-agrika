@@ -58,7 +58,7 @@
 
 
         </div>
-        <div class="col-6" style="font-size: 10px">
+        <div class="col-6" style="font-size: 9px">
             <p>Catatan :</p>
             <ol>
                 <li>
