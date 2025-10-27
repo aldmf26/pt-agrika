@@ -76,9 +76,15 @@
                     </div> --}}
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-4">
                 <div class="form-group">
                     <label for="">Nama Barang</label>
+                    <input required type="text" wire:model="nama_barang" class="form-control">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="form-group">
+                    <label for="">harga Satuan</label>
                     <input required type="text" wire:model="nama_barang" class="form-control">
                 </div>
             </div>
