@@ -81,6 +81,7 @@
                                             @foreach ($dokumen as $d)
                                                 <option value="{{ $d->id }}">{{ $d->judul }}
                                                     ({{ $d->no_dokumen }})
+                                                    - {{ $d->nama_divisi }}
                                                 </option>
                                             @endforeach
                                         </select>
