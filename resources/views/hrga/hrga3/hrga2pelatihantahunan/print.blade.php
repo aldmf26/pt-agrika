@@ -96,9 +96,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 60px"></td>
-                        <td style="height: 60px"></td>
-                        <td style="height: 60px"></td>
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
+                        <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd &
+                                Nama)</span></td>
                     </tr>
                     <tr>
                         <td class="text-center">(STAFF HRGA)</td>

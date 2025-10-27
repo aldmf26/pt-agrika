@@ -121,7 +121,7 @@
                 </p>
             </div>
             <div class="col-6">
-                <table class="table table-bordered" style="font-size: 11px">
+                <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
                         <tr>
                             <th class="text-center" width="33.33%">Dibuat Oleh:</th>
@@ -131,14 +131,20 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
+                            <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                            <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
+                            <td style="height: 60px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
+                                    &
+                                    Nama)</span></td>
                         </tr>
                         <tr>
-                            <td class="text-center">[SPV. HR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
-                            <td class="text-center">[ DIREKTUR. ]</td>
+                            <td class="text-center">(STAFF HRGA)</td>
+                            <td class="text-center">(KA. HRGA)</td>
+                            <td class="text-center">(OPERATIONAL MANAGER)</td>
                         </tr>
                     </tbody>
                 </table>
