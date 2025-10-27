@@ -30,15 +30,15 @@
                 <tbody>
                     @foreach ($daftar as $d)
                         <tr>
-                            <td class="text-end">{{ $loop->iteration }}</td>
-                            <td>{{ $d->nama_divisi }}</td>
-                            <td>{{ $d->pic }}</td>
-                            <td class="text-nowrap">{{ $d->judul }}</td>
-                            <td class="text-nowrap">{{ $d->no_dokumen }}</td>
+                            <td class="text-end align-middle">{{ $loop->iteration }}</td>
+                            <td class="align-middle">{{ $d->nama_divisi }}</td>
+                            <td class="align-middle">{{ $d->pic }}</td>
+                            <td class="text-nowrap align-middle">{{ $d->judul }}</td>
+                            <td class="text-nowrap align-middle">{{ $d->no_dokumen }}</td>
                             @php
                                 $rev = date('Y-m-d', strtotime($d->updated_at));
                             @endphp
-                            <td class="text-end text-nowrap">{{ tanggal($rev) }}</td>
+                            <td class="text-end text-nowrap align-middle">{{ tanggal($rev) }}</td>
                             <td></td>
                             <td></td>
                             <td></td>
