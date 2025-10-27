@@ -26,7 +26,7 @@ class CreatePo extends Component
     {
         $getPr = '';
         if (!empty($this->selectedPr)) {
-            $getPr = PurchaseRequestItem::where('pr_id', $this->selectedPr)->get();
+            $getPr = PurchaseRequestItem::with('barang')->where('pr_id', $this->selectedPr)->get();
         }
         $data = [
             'no_pr' => PurchaseRequest::whereNotIn('id', function ($query) {
