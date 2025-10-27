@@ -18,7 +18,7 @@
 
                     <td>Dept.</td>
                     <td>:</td>
-                    <td>{{ $evaluasi_detail->data_pegawai->divisi->divisi }}</td>
+                    <td>{{ $evaluasi_detail->data_pegawai->divisi->divisi ?? '-' }}</td>
 
                     <td class="">Training</td>
                     <td class="">:</td>
