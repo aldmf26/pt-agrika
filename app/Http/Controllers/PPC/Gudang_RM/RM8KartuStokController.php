@@ -65,7 +65,6 @@ class RM8KartuStokController extends Controller
                 'satuan' => $m->barang->satuan
             ];
         }
-
         // Tambahkan transaksi keluar
         foreach ($keluar as $k) {
             $transaksiGabung[] = [
