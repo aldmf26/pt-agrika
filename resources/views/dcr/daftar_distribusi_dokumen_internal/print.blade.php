@@ -4,7 +4,7 @@
             <table>
                 <tr>
                     <th>Departemen Penerima</th>
-                    <td>: {{ $divisi->divisi }}</td>
+                    <td>: {{ $divisi }}</td>
                 </tr>
             </table>
 
