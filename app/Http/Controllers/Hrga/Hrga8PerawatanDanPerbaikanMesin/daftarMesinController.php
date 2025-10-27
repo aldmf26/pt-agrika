@@ -91,6 +91,7 @@ class daftarMesinController extends Controller
                 $data = [
                     'item_mesin_id' => $request->id,
                     'kriteria' => $request->kriteria[$i],
+                    'metode' => $request->metode[$i],
                 ];
                 DB::table('kriteria_pemeriksaan')->insert($data);
             } else {
