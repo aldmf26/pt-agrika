@@ -521,6 +521,7 @@ Route::controller(InformasiRecallProdukController::class)
         Route::get('/edit/{id}', 'edit')->name('edit');
         Route::post('/edit/{id}', 'update')->name('update');
         Route::get('/hasil/{id}', 'hasil')->name('hasil');
+        Route::get('/destroy/{id}', 'destroy')->name('destroy');
         Route::post('/hasil/{id}', 'store_hasil')->name('store_hasil');
         Route::get('/hasil_print/{id}', 'hasil_print')->name('hasil_print');
     });
