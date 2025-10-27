@@ -165,10 +165,10 @@
                         <tr>
 
                             <td class="text-center align-middle">
-                                (FSTL)
+                                (KA. LAB & FSTL)
                             </td>
                             <td class="text-center align-middle">
-                                (DIREKTUR UTAMA)
+                                (OPERATIONAL MANAGER)
                             </td>
 
                         </tr>
