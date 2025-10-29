@@ -52,15 +52,12 @@ class RM8KartuStokController extends Controller
         $id = $r->id;
         $kategori = $r->kategori;
 
-        $barang = Barang::with(['supplier', 'penerimaan', 'pengeluaran', 'purchaseRequestItem'])->find($id);
+        $barang = Barang::with(['supplier', 'penerimaan', 'penerimaanKemasan', 'pengeluaran', 'purchaseRequestItem'])->find($id);
+        $stok = $barang->penerimaan->sum('jumlah_barang') + $barang->penerimaanKemasan->sum('jumlah_barang') - $barang->pengeluaran->sum('pcs');
 
-        // $penerimaan = $kategori == 'barang' ? PenerimaanHeader::where('id_barang', $id)->get() : PenerimaanKemasanHeader::where('id_barang', $id)->get();
-
-        $stok = $barang->penerimaan->sum('jumlah_barang') - $barang->pengeluaran->sum('pcs');
         $data = [
             'title' => 'Lacak Stok',
             'barang' => $barang,
-            // 'penerimaan' => $penerimaan,
             'kategori' => $kategori,
             'stok' => $stok
         ];

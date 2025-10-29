@@ -37,9 +37,19 @@
                                 <td align="right">{{ number_format($p->jumlah_barang, 0) }}</td>
                             </tr>
                         @endforeach
+
+                        @foreach ($barang->penerimaanKemasan as $p)
+                            <tr>
+                                <td>{{ $p->no_po }}</td>
+                                <td>{{ tanggal($p->tanggal_penerimaan) }}</td>
+                                <td align="right">{{ number_format($p->jumlah_barang, 0) }}</td>
+                            </tr>
+                        @endforeach
                         <tr>
                             <th colspan="2">Total</th>
-                            <th class="text-end">{{ number_format($barang->penerimaan->sum('jumlah_barang'), 0) }}</th>
+                            <th class="text-end">
+                                {{ number_format($barang->penerimaan->sum('jumlah_barang') + $barang->penerimaanKemasan->sum('jumlah_barang'), 0) }}
+                            </th>
                         </tr>
                     </table>
                 </div>
