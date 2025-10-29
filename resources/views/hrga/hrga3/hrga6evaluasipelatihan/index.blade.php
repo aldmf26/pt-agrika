@@ -20,15 +20,16 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ ucwords(strtolower($e->tema_pelatihan)) }}</td>
-                            <td>{{ ucwords(strtolower($e->data_pegawai->nama)) }}</td>
-                            <td>{{ $e->data_pegawai->divisi->divisi }}</td>
-                            <td>{{ $e->data_pegawai->jenis_kelamin }}
+                            <td>{{ ucwords(strtolower($e->data_pegawai->nama ?? '-')) }}</td>
+                            <td>{{ $e->data_pegawai->divisi->divisi ?? '-' }}</td>
+                            <td>{{ $e->data_pegawai->jenis_kelamin ?? '-' }}
                                 /
-                                {{ date('d-m-Y', strtotime($e->data_pegawai->tgl_lahir)) }}
+                                {{ empty($e->data_pegawai->tgl_lahir) ? '-' : date('d-m-Y', strtotime($e->data_pegawai->tgl_lahir)) }}
                             </td>
-                            <td>{{ ucwords(strtolower($e->data_pegawai->status)) }}</td>
-                            <td>{{ date('d-m-Y', strtotime($e->data_pegawai->tgl_masuk)) }}</td>
-                            <td>{{ ucwords(strtolower($e->data_pegawai->posisi)) }}</td>
+                            <td>{{ ucwords(strtolower($e->data_pegawai->status ?? '-')) }}</td>
+                            <td>{{ empty($e->data_pegawai->tgl_lahir) ? '-' : date('d-m-Y', strtotime($e->data_pegawai->tgl_masuk)) }}
+                            </td>
+                            <td>{{ ucwords(strtolower($e->data_pegawai->posisi ?? '-')) }}</td>
                             <td>
                                 <a href="{{ route('hrga3.6.print', ['id_evaluasi' => $e->id]) }}" target="_blank"
                                     class="btn btn-primary btn-sm"> <i class="fas fa-print"></i></a>
