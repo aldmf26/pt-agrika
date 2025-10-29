@@ -15,26 +15,30 @@ use Illuminate\Support\Facades\DB;
 
 class RM1PenerimaanBarangController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
         $penerimaan = PenerimaanHeader::with(['barang', 'supplier'])->latest()->get();
         $data = [
             'title' => 'Penerimaan Barang',
-            'penerimaan' => $penerimaan
+            'penerimaan' => $penerimaan,
+            'kategori' => $r->kategori
         ];
         return view('ppc.gudang_rm.penerimaan_barang.index', $data);
     }
 
     public function create()
     {
+        $kode = request()->kategori == 'barang' ? 'POB' : 'POK';
         $po = PurchaseOrder::with('purchaseRequest.item.barang')
             ->where('status', '!=', 'selesai')
+            ->where('purchase_orders.no_po', 'like', "%{$kode}%")
             ->orderBy('purchase_orders.created_at', 'desc')
             ->get();
-
+        $kategori = request()->kategori ?? 'barang';
         $data = [
             'title' => 'Penerimaan Barang',
             'po' => $po,
+            'kategori' => $kategori
 
         ];
         return view('ppc.gudang_rm.penerimaan_barang.create', $data);
@@ -86,10 +90,10 @@ class RM1PenerimaanBarangController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('ppc.gudang-rm.1.index')->with('sukses', 'berhasil ditambahkan');
+            return redirect()->route('ppc.gudang-rm.1.index', ['kategori' => $r->kategori])->with('sukses', 'berhasil ditambahkan');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('ppc.gudang-rm.1.create')->with('error', $e->getMessage());
+            return redirect()->route('ppc.gudang-rm.1.create', ['kategori' => $r->kategori])->with('error', $e->getMessage());
         }
     }
 

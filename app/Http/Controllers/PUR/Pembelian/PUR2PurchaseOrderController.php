@@ -117,26 +117,31 @@ class PUR2PurchaseOrderController extends Controller
 
     public function create(Request $r)
     {
+        $kategori = $r->kategori ?? 'barang';
         $user = DataPegawai::karyawan()->get();
-        $suplier = Suplier::where('kategori', $r->kategori)->latest()->get();
+        $suplier = Suplier::where('kategori', $kategori)->latest()->get();
         $data = [
             'title' => 'Tambah Purchase Order',
-            'no_po' => $this->getNoPo(),
+            'no_po' => $this->getNoPo($kategori),
             'supplier' => $suplier,
+            'kategori' => $kategori,
             'user' => $user
         ];
 
         return view('pur.pembelian.purchase_order.create', $data);
     }
 
-    public function getNoPo()
+    public function getNoPo($kategori = 'barang')
     {
         $bulan = strtoupper(date('n'));
         $tahun = date('Y');
-        $lastRequest = PurchaseOrder::latest()->first();
+        $lastRequest = PurchaseOrder::with('item')
+            ->whereHas('purchaseRequest', function ($q) use ($kategori) {
+                $q->where('departemen', $kategori);
+            })->where('status', '!=', 'selesai')->latest()->first();
 
         if ($lastRequest) {
-            $lastNo = (int) substr($lastRequest->no_po, 3, 2);
+            $lastNo = (int) substr($lastRequest->no_po, 4, 2);
             $newNo = str_pad($lastNo + 1, 2, '0', STR_PAD_LEFT);
         } else {
             $newNo = '01';
@@ -144,8 +149,8 @@ class PUR2PurchaseOrderController extends Controller
 
         $romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
         $bulanRoman = $romanMonths[$bulan - 1];
-
-        $no_pr = "PO/{$newNo}/{$bulanRoman}/{$tahun}";
+        $kode = $kategori == 'barang' ? 'POB' : 'POK';
+        $no_pr = "{$kode}/{$newNo}/{$bulanRoman}/{$tahun}";
 
         return $no_pr;
     }
@@ -164,7 +169,7 @@ class PUR2PurchaseOrderController extends Controller
         // dd($r->all(), $suplier);
         DB::beginTransaction();
         try {
-            $no_po = $this->getNoPo();
+            $no_po = $this->getNoPo($r->kategori);
             $tgl = $r->tgl;
             $ttlHarga = array_sum($r->harga);
             $pr = PurchaseOrder::create([
@@ -282,11 +287,11 @@ class PUR2PurchaseOrderController extends Controller
         $penerimaanHeader = PenerimaanHeader::where('no_po', $po->no_po)->first();
         $penerimaanKemasanHeader = PenerimaanKemasanHeader::where('no_po', $po->no_po)->first();
 
-        if($penerimaanHeader){
+        if ($penerimaanHeader) {
             return redirect()->route('pur.pembelian.2.index', ['kategori' => $kategori])->with('error', 'Purchase Order sudah memiliki penerimaan');
         }
 
-        if($penerimaanKemasanHeader){
+        if ($penerimaanKemasanHeader) {
             return redirect()->route('pur.pembelian.2.index', ['kategori' => $kategori])->with('error', 'Purchase Order sudah memiliki penerimaan kemasan');
         }
 

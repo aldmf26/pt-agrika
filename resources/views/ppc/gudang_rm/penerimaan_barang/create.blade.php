@@ -3,6 +3,7 @@
         <form action="" method="post">
             @csrf
             <div class="card">
+                <input type="hidden" name="kategori" value="{{ $kategori }}">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-3">
