@@ -19,10 +19,10 @@
                     <td>: {{ number_format($stok, 0) }} {{ $barang->satuan }}</td>
                 </tr>
             </table>
-
+            <hr>
             <div class="row">
                 <div class="col-6">
-                    <h5 class="mt-5">Penerimaan Barang/Kemasan</h5>
+                    <h5 class="">Penerimaan Barang/Kemasan</h5>
                     <table class="table table-bordered border-dark">
                         <tr>
                             <th>No PO</th>
@@ -54,7 +54,7 @@
                     </table>
                 </div>
                 <div class="col-6">
-                    <h5 class="mt-5">Pengeluaran Barang/Kemasan</h5>
+                    <h5 class="">Pengeluaran Barang/Kemasan</h5>
                     <table class="table table-bordered border-dark">
                         <tr>
                             <th>Nama Pemohon</th>
