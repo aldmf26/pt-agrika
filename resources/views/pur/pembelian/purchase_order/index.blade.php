@@ -73,6 +73,12 @@
                                 <a class="btn btn-xs float-end btn-primary"
                                     href="{{ route('pur.pembelian.2.print', $d->id) }}"><i
                                         class="fas fa-print"></i></a>
+                                @can('presiden')
+                                    <a onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                        class="me-1 btn btn-xs float-end btn-danger"
+                                        href="{{ route('pur.pembelian.2.destroy', [$d->id, $kategori]) }}"><i
+                                            class="fas fa-trash"></i></a>
+                                @endcan
                             @endif
                         </td>
                     </tr>

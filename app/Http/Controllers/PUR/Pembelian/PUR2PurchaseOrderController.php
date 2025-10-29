@@ -5,6 +5,8 @@ namespace App\Http\Controllers\PUR\Pembelian;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\DataPegawai;
+use App\Models\PenerimaanHeader;
+use App\Models\PenerimaanKemasanHeader;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderItem;
 use App\Models\PurchaseRequestItem;
@@ -271,5 +273,25 @@ class PUR2PurchaseOrderController extends Controller
             'items' => $items,
         ];
         return view('pur.pembelian.purchase_order.print_sbw', $data);
+    }
+
+    public function destroy($id, $kategori)
+    {
+        $po = PurchaseOrder::find($id);
+
+        $penerimaanHeader = PenerimaanHeader::where('no_po', $po->no_po)->first();
+        $penerimaanKemasanHeader = PenerimaanKemasanHeader::where('no_po', $po->no_po)->first();
+
+        if($penerimaanHeader){
+            return redirect()->route('pur.pembelian.2.index', ['kategori' => $kategori])->with('error', 'Purchase Order sudah memiliki penerimaan');
+        }
+
+        if($penerimaanKemasanHeader){
+            return redirect()->route('pur.pembelian.2.index', ['kategori' => $kategori])->with('error', 'Purchase Order sudah memiliki penerimaan kemasan');
+        }
+
+        $po->delete();
+
+        return redirect()->route('pur.pembelian.2.index', ['kategori' => $kategori])->with('sukses', 'Data berhasil dihapus');
     }
 }

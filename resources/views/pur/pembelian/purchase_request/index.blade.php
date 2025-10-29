@@ -62,6 +62,12 @@
                                         href="{{ route('pur.pembelian.2.create', ['id_pr' => $d->id, 'kategori' => $kategori]) }}">po</a>
                                 @endif
                             @else
+                                @can('presiden')
+                                    <a class="btn btn-xs btn-info ms-1"
+                                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"
+                                        href="{{ route('pur.pembelian.1.destroy', [$d->id, $kategori]) }}"><i
+                                            class="fas fa-trash"></i></a>
+                                @endcan
                                 <a class="btn btn-xs btn-info"
                                     href="{{ route('pur.pembelian.1.selesai', [$d->id, $kategori]) }}">selesai</a>
                             @endif

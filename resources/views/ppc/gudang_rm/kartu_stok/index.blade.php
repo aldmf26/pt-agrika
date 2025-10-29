@@ -57,6 +57,9 @@
                                                 'kategori' => $d->kategori,
                                             ];
                                         @endphp
+                                        <a target="_blank" class="ms-1 btn btn-xs float-end btn-info"
+                                            href="{{ route('ppc.gudang-rm.8.lacak', $param) }}">Lacak</a>
+
                                         <a class="btn btn-xs float-end btn-primary"
                                             href="{{ route('ppc.gudang-rm.8.print', $param) }}"><i
                                                 class="fas fa-print"></i></a>

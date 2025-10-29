@@ -8,6 +8,7 @@ use App\Models\BuktiPermintaanPengeluaranBarang;
 use App\Models\DataPegawai;
 use App\Models\PenerimaanHeader;
 use App\Models\PenerimaanKemasanHeader;
+use App\Models\PurchaseRequestItem;
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -44,6 +45,26 @@ class RM8KartuStokController extends Controller
         ];
 
         return view('ppc.gudang_rm.kartu_stok.index', $data);
+    }
+
+    public function lacak(Request $r)
+    {
+        $id = $r->id;
+        $kategori = $r->kategori;
+
+        $barang = Barang::with(['supplier', 'penerimaan', 'pengeluaran', 'purchaseRequestItem'])->find($id);
+
+        // $penerimaan = $kategori == 'barang' ? PenerimaanHeader::where('id_barang', $id)->get() : PenerimaanKemasanHeader::where('id_barang', $id)->get();
+
+        $stok = $barang->penerimaan->sum('jumlah_barang') - $barang->pengeluaran->sum('pcs');
+        $data = [
+            'title' => 'Lacak Stok',
+            'barang' => $barang,
+            // 'penerimaan' => $penerimaan,
+            'kategori' => $kategori,
+            'stok' => $stok
+        ];
+        return view('ppc.gudang_rm.kartu_stok.lacak', $data);
     }
 
     public function print(Request $r)

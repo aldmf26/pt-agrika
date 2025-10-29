@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PUR\Pembelian;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\DataPegawai;
+use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
 use App\Models\PurchaseRequestSbw;
@@ -256,5 +257,18 @@ class PUR1PurchaseRequestController extends Controller
             'items' => $items,
         ];
         return view('pur.pembelian.purchase_request.print_sbw', $data);
+    }
+
+    public function destroy($id, $kategori)
+    {
+        $sudahPo = PurchaseOrder::where('pr_id', $id)->first();
+        if ($sudahPo) {
+            return redirect()->route('pur.pembelian.1.index', ['kategori' => $kategori])->with('error', 'Purchase Request sudah memiliki PO');
+        }
+        PurchaseRequest::where('id', $id)->delete();
+        PurchaseRequestItem::where('pr_id', $id)->delete();
+
+
+        return redirect()->route('pur.pembelian.1.index', ['kategori' => $kategori])->with('sukses', 'Purchase Request berhasil dihapus');
     }
 }
