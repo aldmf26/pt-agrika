@@ -135,10 +135,8 @@ class PUR2PurchaseOrderController extends Controller
     {
         $bulan = strtoupper(date('n'));
         $tahun = date('Y');
-        $lastRequest = PurchaseOrder::with('item')
-            ->whereHas('purchaseRequest', function ($q) use ($kategori) {
-                $q->where('departemen', $kategori);
-            })->where('status', '!=', 'selesai')->latest()->first();
+        $kode = $kategori == 'barang' ? 'POB' : 'POK';
+        $lastRequest = PurchaseOrder::where('no_po', 'like', "%{$kode}%")->latest()->first();
 
         if ($lastRequest) {
             $lastNo = (int) substr($lastRequest->no_po, 4, 2);
@@ -149,7 +147,6 @@ class PUR2PurchaseOrderController extends Controller
 
         $romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
         $bulanRoman = $romanMonths[$bulan - 1];
-        $kode = $kategori == 'barang' ? 'POB' : 'POK';
         $no_pr = "{$kode}/{$newNo}/{$bulanRoman}/{$tahun}";
 
         return $no_pr;
