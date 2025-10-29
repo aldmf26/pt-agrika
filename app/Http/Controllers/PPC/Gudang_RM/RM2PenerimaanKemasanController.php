@@ -15,6 +15,7 @@ class RM2PenerimaanKemasanController extends Controller
 {
     public function index()
     {
+        
         $penerimaan = PenerimaanKemasanHeader::with('barang', 'supplier')->latest()->get();
         $data = [
             'title' => 'Penerimaan kemasan',
@@ -25,8 +26,10 @@ class RM2PenerimaanKemasanController extends Controller
 
     public function create()
     {
+        $kode = request()->kategori == 'barang' ? 'POB' : 'POK';
         $po = PurchaseOrder::with('purchaseRequest.item.barang')
             ->where('status', '!=', 'selesai')
+            ->where('purchase_orders.no_po', 'like', "%{$kode}%")
             ->orderBy('purchase_orders.created_at', 'desc')
             ->get();
 
