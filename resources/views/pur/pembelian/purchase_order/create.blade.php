@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-3">
                 <div class="form-group">
+                    <input type="hidden" name="kategori" value="{{ $kategori }}">
                     <label for="">No Po</label>
                     <input type="text" readonly value="{{ $no_po }}" name="no_po" class="form-control">
                 </div>

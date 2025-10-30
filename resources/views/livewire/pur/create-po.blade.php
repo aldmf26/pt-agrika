@@ -20,7 +20,7 @@
                 <tr>
                     <th class="text-white text-center" width="80">Jumlah</th>
                     <th class="text-white text-center">Item dan Spesifikasi</th>
-                    <th class="text-white text-center" width="180">Harga</th>
+                    <th class="text-white text-center" width="180">Harga Satuan</th>
                 </tr>
             </thead>
             <tbody>

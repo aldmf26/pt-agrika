@@ -5,6 +5,7 @@ namespace App\Http\Controllers\PUR\Pembelian;
 use App\Http\Controllers\Controller;
 use App\Models\Barang;
 use App\Models\DataPegawai;
+use App\Models\PurchaseOrder;
 use App\Models\PurchaseRequest;
 use App\Models\PurchaseRequestItem;
 use App\Models\PurchaseRequestSbw;
@@ -82,7 +83,7 @@ class PUR1PurchaseRequestController extends Controller
             $bulan = $bulanRomawi[$tanggalData->month];
             $tahun = $tanggalData->year;
 
-            $item->no_pr = "PR/{$noUrut}/{$bulan}/{$tahun}";
+            $item->no_pr = "PRS/{$noUrut}/{$bulan}/{$tahun}";
         }
 
         // Balik lagi ke DESC untuk ditampilkan
@@ -119,7 +120,7 @@ class PUR1PurchaseRequestController extends Controller
         $supplier = Suplier::where('kategori', $kategori)->get();
         $data = [
             'title' => 'Tambah Purchase Request',
-            'no_pr' => $this->getNoPr(),
+            'no_pr' => $this->getNoPr($kategori),
             'barangs' => $barangs,
             'kategori' => $kategori,
             'supplier' => $supplier,
@@ -130,14 +131,14 @@ class PUR1PurchaseRequestController extends Controller
         return view('pur.pembelian.purchase_request.create', $data);
     }
 
-    public function getNoPr()
+    public function getNoPr($departemen = 'barang')
     {
         $bulan = strtoupper(date('n'));
         $tahun = date('Y');
-        $lastRequest = PurchaseRequest::latest()->first();
+        $lastRequest = PurchaseRequest::where('departemen', $departemen)->latest()->first();
 
         if ($lastRequest) {
-            $lastNo = (int) substr($lastRequest->no_pr, 3, 1);
+            $lastNo = (int) substr($lastRequest->no_pr, 4, 1);
             $newNo = str_pad($lastNo + 1, 1, '0', STR_PAD_LEFT);
         } else {
             $newNo = '1';
@@ -145,8 +146,8 @@ class PUR1PurchaseRequestController extends Controller
 
         $romanMonths = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
         $bulanRoman = $romanMonths[$bulan - 1];
-
-        $no_pr = "PR/{$newNo}/{$bulanRoman}/{$tahun}";
+        $kode = $departemen == 'barang' ? 'PRB' : 'PRK';
+        $no_pr = "{$kode}/{$newNo}/{$bulanRoman}/{$tahun}";
 
         return $no_pr;
     }
@@ -155,7 +156,7 @@ class PUR1PurchaseRequestController extends Controller
     {
         DB::beginTransaction();
         try {
-            $no_pr = $this->getNoPr();
+            $no_pr = $this->getNoPr($r->departemen);
             $tgl = $r->tgl;
 
             $pr = PurchaseRequest::create([
@@ -256,5 +257,18 @@ class PUR1PurchaseRequestController extends Controller
             'items' => $items,
         ];
         return view('pur.pembelian.purchase_request.print_sbw', $data);
+    }
+
+    public function destroy($id, $kategori)
+    {
+        $sudahPo = PurchaseOrder::where('pr_id', $id)->first();
+        if ($sudahPo) {
+            return redirect()->route('pur.pembelian.1.index', ['kategori' => $kategori])->with('error', 'Purchase Request sudah memiliki PO');
+        }
+        PurchaseRequest::where('id', $id)->delete();
+        PurchaseRequestItem::where('pr_id', $id)->delete();
+
+
+        return redirect()->route('pur.pembelian.1.index', ['kategori' => $kategori])->with('sukses', 'Purchase Request berhasil dihapus');
     }
 }

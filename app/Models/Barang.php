@@ -45,4 +45,14 @@ class Barang extends Model
     {
         return $this->hasMany(PenerimaanKemasanHeader::class, 'id_barang');
     }
+
+    public function pengeluaran()
+    {
+        return $this->hasMany(BuktiPermintaanPengeluaranBarang::class, 'id_barang');
+    }
+
+    public function purchaseRequestItem()
+    {
+        return $this->hasMany(PurchaseRequestItem::class, 'item_spesifikasi', 'nama_barang');
+    }
 }

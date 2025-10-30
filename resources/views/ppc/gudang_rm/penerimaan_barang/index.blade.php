@@ -10,7 +10,8 @@
             </div>
         </div>
         <div>
-            <a href="{{ route('ppc.gudang-rm.1.create') }}" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i>
+            <a href="{{ route('ppc.gudang-rm.1.create', ['kategori' => $kategori]) }}" class="btn btn-sm btn-primary"><i
+                    class="fas fa-plus"></i>
                 Penerimaan Barang</a>
         </div>
     </div>

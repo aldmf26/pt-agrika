@@ -10,6 +10,11 @@ class PurchaseRequestItem extends Model
     protected $guarded = [];
     protected $primaryKey = 'id';
 
+    public function pr()
+    {
+        return $this->belongsTo(PurchaseRequest::class, 'pr_id');
+    }
+
     public function po()
     {
         return $this->belongsTo(PurchaseRequest::class, 'pr_id');
