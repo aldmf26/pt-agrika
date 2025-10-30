@@ -110,19 +110,19 @@
                         </div>
                         <div class="col-6 mt-2">
                             <label for="">Diajukan oleh</label>
-                            <input type="text" class="form-control" name="diajukan_oleh">
+                            <input type="text" class="form-control" name="diajukan_oleh" required>
                         </div>
                         <div class="col-6 mt-2">
                             <label for="">Deadline</label>
-                            <input type="date" class="form-control" name="deadline">
+                            <input type="date" class="form-control" name="deadline" required>
                         </div>
                         <div class="col-12 mt-2">
                             <label for="">Image</label>
-                            <input type="file" class="form-control" name="image">
+                            <input type="file" class="form-control" name="image" required>
                         </div>
                         <div class="col-12 mt-2">
                             <label for="">Deskripsi Masalah</label>
-                            <textarea name="deskripsi_masalah" class="form-control" id="" cols="10" rows="3"></textarea>
+                            <textarea name="deskripsi_masalah" class="form-control" id="" cols="10" rows="3" required></textarea>
                         </div>
                     </div>
 
