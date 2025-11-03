@@ -23,7 +23,12 @@ class Hrga2HasilWawancara extends Controller
         $bulan = dataDariBulan()['bulan'];
         $tahun = dataDariBulan()['tahun'];
 
-        $datas = DataPegawai::with('divisi')->whereRaw("year(tgl_masuk) = $tahun and month(tgl_masuk) >= $bulan")->orderBy('id', 'desc')->get();
+        $datas = DataPegawai::with('divisi')
+            ->whereRaw("YEAR(tgl_masuk) = $tahun AND MONTH(tgl_masuk) >= $bulan")
+            ->whereRaw("TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) >= 17")
+            ->orderBy('id', 'desc')
+            ->get();
+
         $data = [
             'title' => 'Hrga 1.2 hasil wawancara',
             'datas' => $datas
