@@ -30,17 +30,15 @@
                                 <td class="text-end">{{ date('h:i A', strtotime($p->jam_cek)) }}</td>
                                 <td class="text-center">
                                     @php
-                                        $isSunday = date('w', strtotime($p->tgl)) == 0;
+                                        $dayOfWeek = date('w', strtotime($p->tgl)); // 0 = Minggu, 6 = Sabtu
+                                        $isWeekend = $dayOfWeek == 0 || $dayOfWeek == 6;
                                     @endphp
 
-                                    @if ($p->tgl <= date('Y-m-d') && !$isSunday)
+                                    @if ($p->tgl <= date('Y-m-d') && !$isWeekend)
                                         ✓
                                     @endif
-                                    {{-- @if ($p->tgl <= date('Y-m-d'))
-                                        ✓
-                                    @else
-                                    @endif --}}
                                 </td>
+
                                 <td></td>
                                 <td>{{ $p->katerangan }}</td>
                             </tr>
