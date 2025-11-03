@@ -4,7 +4,7 @@
             <table>
                 <tr>
                     <th>Departemen Penerima</th>
-                    <td>: QC</td>
+                    <td>: LAB & FSTL</td>
                 </tr>
             </table>
         </div>
