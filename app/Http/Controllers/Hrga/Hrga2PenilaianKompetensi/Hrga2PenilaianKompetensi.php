@@ -15,7 +15,9 @@ class Hrga2PenilaianKompetensi extends Controller
 {
     public function index()
     {
-        $datas = DataPegawai::with('divisi')->orderBy('tgl_masuk', 'desc')->get();
+        $datas = DataPegawai::with('divisi')
+            ->whereRaw("TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) >= 17")
+            ->orderBy('tgl_masuk', 'desc')->get();
         $data = [
             'title' => 'Hrga 2 penilaian kompetensi',
             'datas' => $datas
