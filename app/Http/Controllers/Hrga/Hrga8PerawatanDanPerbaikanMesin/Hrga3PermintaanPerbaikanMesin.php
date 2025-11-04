@@ -13,7 +13,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
     public function index(Request $r)
     {
         $kategori = $r->kategori ?? 'mesin';
-        $title = $kategori == 'mesin' ? 'Permintaan Perbaikan Mesin' : 'Permintaan Perbaikan Software dan Hardware';
+        $title = $kategori == 'mesin' ? 'Permintaan Perbaikan Mesin dan Peralatan' : 'Permintaan Perbaikan Software dan Hardware';
         $data = [
             'title' => $title,
             'permintaan' => PermintaanPerbaikanMesin::whereHas('item_mesin', function ($query) use ($kategori) {

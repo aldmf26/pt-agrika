@@ -21,7 +21,7 @@ class Hrga1ProgramPerawatanMesin extends Controller
         $kategori = $r->kategori ?? 'mesin';
 
         $data = [
-            'title' => 'Program perawatan mesin',
+            'title' => 'Program perawatan mesin dan peralatan',
             'bulan' => DB::table('bulan')->get(),
             'tahun' => $tahun,
             'item' => ItemMesin::where('kategori', $kategori)->get(),
