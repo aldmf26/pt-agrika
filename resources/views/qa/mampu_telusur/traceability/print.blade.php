@@ -334,6 +334,10 @@
                             @endforeach
 
                         </tbody>
+                        <tfoot>
+                            <th>{{ sumBk('pcs', $kirim) }}</th>
+                            <th>{{ sumBk('gr', $kirim) }}</th>
+                        </tfoot>
 
                     </table>
                 </div>
