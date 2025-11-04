@@ -25,7 +25,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $d->judul_dokumen }}</td>
                                 <td>{{ $d->no_dokumen }}</td>
-                                <td>{{ $d->peninjauan_terakhir }}</td>
+                                <td class="text-start">{{ tanggal($d->peninjauan_terakhir) }}</td>
                                 <td>{{ $d->status }}</td>
                                 <td></td>
                             </tr>
