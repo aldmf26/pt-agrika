@@ -332,7 +332,7 @@
                             @foreach ($kirim as $k)
                                 @php
                                     $ttl_pcs_tes += $k['pcs'];
-                                    $ttl_gr_tes = $k['gr'];
+                                    $ttl_gr_tes += $k['gr'];
                                 @endphp
                                 <tr>
                                     <td class="text-end" style="border-left: 1px solid #dee2e6">
