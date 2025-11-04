@@ -172,6 +172,7 @@
                                 $b_bersih = 0;
                                 $gr_awal = 0;
                                 $pcs_grading = 0;
+                                $gr_grading = 0;
 
                             @endphp
                             @foreach ($bk as $b)
@@ -179,6 +180,7 @@
                                     $gr_awal += $b['gr_awal'];
                                     $b_bersih = $b['berat_bersih'];
                                     $pcs_grading += $b['pcs_grading'];
+                                    $gr_grading += $b['gr_grading'];
                                 @endphp
                                 <tr>
                                     @if ($loop->first == 1)
@@ -292,6 +294,22 @@
                                 <td></td>
                                 <td></td>
                                 <td class="text-end fw-bold">{{ number_format($gr_awal, 0) }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-end fw-bold">{{ $pcs_grading }}</td>
+                                <td class="text-end fw-bold">{{ $pcs_grading }}</td>
                             </tr>
                             <tr>
                                 <td>Selisih</td>
