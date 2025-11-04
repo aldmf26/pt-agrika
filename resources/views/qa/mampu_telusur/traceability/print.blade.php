@@ -322,7 +322,15 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $ttl_pcs = 0;
+                                $ttl_gr = 0;
+                            @endphp
                             @foreach ($kirim as $k)
+                                @php
+                                    $ttl_pcs += $k['pcs'];
+                                    $ttl_gr = $k['gr'];
+                                @endphp
                                 <tr>
                                     <td class="text-end" style="border-left: 1px solid #dee2e6">
                                         {{ number_format($k['pcs'], 0) }}</td>
@@ -334,6 +342,12 @@
                             @endforeach
 
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-end">{{ number_format($ttl_pcs, 0) }}</th>
+                                <th class="text-end">{{ number_format($ttl_gr, 0) }}</th>
+                            </tr>
+                        </tfoot>
 
                     </table>
                 </div>
