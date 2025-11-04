@@ -53,7 +53,7 @@
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="penilaian">Hasil Penilaian</label>
+                        <label for="penilaian">Hasil penilaian</label>
                         <input type="text" id="penilaian" placeholder="Contoh: 90" name="kuantitas_penilaian[]"
                             class="form-control form-control-sm">
                     </div>
@@ -63,7 +63,7 @@
         <hr>
 
         {{-- Waktu tidak sesuai --}}
-        <h6>Jumlah pengiriman dengan Waktu yang tidak sesuai:</h6>
+        <h6>Jumlah pengiriman dengan waktu yang tidak sesuai:</h6>
         <button class="btn btn-xs btn-info" type="button" @click="showWaktu = !showWaktu">Tambah</button>
         <div x-show="showWaktu" x-transition>
             <x-evaluasi-input :evaluasi="$evaluasi" kriteria="waktu" />
@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-2">
                     <div class="form-group">
-                        <label for="penilaian">Hasil Penilaian</label>
+                        <label for="penilaian">Hasil penilaian</label>
                         <input type="text" id="penilaian" name="waktu_penilaian[]"
                             class="form-control form-control-sm">
                     </div>
@@ -94,7 +94,7 @@
         <hr>
 
         {{-- Kualitas tidak sesuai --}}
-        <h6>Jumlah pengiriman dengan Kualitas yang tidak sesuai:</h6>
+        <h6>Jumlah pengiriman dengan kualitas yang tidak sesuai:</h6>
         <button class="btn btn-xs btn-info" type="button" @click="showKualitas = !showKualitas">Tambah</button>
         <div x-show="showKualitas" x-transition>
             <x-evaluasi-input :evaluasi="$evaluasi" kriteria="kualitas" />

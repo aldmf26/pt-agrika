@@ -171,11 +171,16 @@
                                 $first = true;
                                 $b_bersih = 0;
                                 $gr_awal = 0;
+                                $pcs_grading = 0;
+                                $gr_grading = 0;
+
                             @endphp
                             @foreach ($bk as $b)
                                 @php
                                     $gr_awal += $b['gr_awal'];
                                     $b_bersih = $b['berat_bersih'];
+                                    $pcs_grading += $b['pcs_grading'];
+                                    $gr_grading += $b['gr_grading'];
                                 @endphp
                                 <tr>
                                     @if ($loop->first == 1)
@@ -289,6 +294,22 @@
                                 <td></td>
                                 <td></td>
                                 <td class="text-end fw-bold">{{ number_format($gr_awal, 0) }}</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="text-end fw-bold">{{ $pcs_grading }}</td>
+                                <td class="text-end fw-bold">{{ $gr_grading }}</td>
                             </tr>
                             <tr>
                                 <td>Selisih</td>
@@ -322,18 +343,32 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $ttl_pcs_tes = 0;
+                                $ttl_gr_tes = 0;
+                            @endphp
                             @foreach ($kirim as $k)
+                                @php
+                                    $ttl_pcs_tes += $k['pcs'];
+                                    $ttl_gr_tes += $k['gr'];
+                                @endphp
                                 <tr>
                                     <td class="text-end" style="border-left: 1px solid #dee2e6">
                                         {{ number_format($k['pcs'], 0) }}</td>
                                     <td class="text-end">{{ number_format($k['gr'], 0) }}</td>
                                     <td class="text-end">
                                         {{ empty($k['tgl_input']) ? '-' : tanggal($k['tgl_input']) }}</td>
-                                    <td class="text-end">{{ $k['tujuan'] }}</td>
+                                    <td class="text-end">Hk</td>
                                 </tr>
                             @endforeach
 
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <th class="text-end">{{ number_format($ttl_pcs_tes, 0) }}</th>
+                                <th class="text-end">{{ number_format($ttl_gr_tes, 0) }}</th>
+                            </tr>
+                        </tfoot>
 
                     </table>
                 </div>

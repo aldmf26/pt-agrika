@@ -13,7 +13,7 @@ class Hrga2CeklisPerawatanMesin extends Controller
     public function index(Request $r)
     {
         $kategori = $r->kategori ?? 'mesin';
-        $title = $kategori == 'mesin' ? 'CHECKLIST PERAWATAN MESIN PROSES PRODUKSI' : 'CHECKLIST PERAWATAN SOFTWARE dan HARDWARE PROSES PRODUKSI';
+        $title = $kategori == 'mesin' ? 'CHECKLIST PERAWATAN MESIN Dan PERALATAN PROSES PRODUKSI' : 'CHECKLIST PERAWATAN SOFTWARE dan HARDWARE PROSES PRODUKSI';
         $data = [
             'title' => $title,
             'checklist' => checklistPerawatanMesin::whereHas('item', function ($query) use ($kategori) {

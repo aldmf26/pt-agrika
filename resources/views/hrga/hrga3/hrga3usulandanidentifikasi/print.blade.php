@@ -101,8 +101,8 @@
                         @foreach ($usulan as $u)
                             <tr>
                                 <td class="text-center">{{ $loop->iteration }}</td>
-                                <td>{{ ucwords(strtolower($u->data_pegawai->nama)) }}</td>
-                                <td>{{ $u->data_pegawai->nik }}</td>
+                                <td>{{ ucwords(strtolower($u->data_pegawai->nama ?? '-')) }}</td>
+                                <td>{{ $u->data_pegawai->nik ?? '-' }}</td>
                                 <td>{{ $u->data_pegawai->divisi->divisi ?? '-' }}</td>
                                 <td>{{ ucwords(strtolower($u->pengusul)) }}</td>
                                 <td>{{ ucfirst(strtolower($u->usulan_jenis_pelatihan)) }}</td>

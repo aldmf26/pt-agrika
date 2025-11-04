@@ -193,9 +193,11 @@
                             <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis <br> <span
-                                    class="fst-italic fw-lighter">Type</th>
-                            <th rowspan="2" class="text-center align-middle" width="10%">Grade bahan jadi</th>
+                            <th rowspan="2" class="text-center align-middle">Grade Awal <br> <span
+                                    class="fst-italic fw-lighter">(Bk)</th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk Akhir </th>
+                            <th rowspan="2" class="text-center align-middle" width="10%">Grade Akhir <br> <span
+                                    class="fst-italic fw-lighter">(Bahan Jadi)</span></th>
                             <th rowspan="2" class="text-center align-middle">Waktu <br> Mulai <br> Steam</th>
                             <th colspan="2" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</th>
@@ -285,6 +287,29 @@
                                     <td class="text-start">
                                         {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
                                     </td>
+                                    @php
+                                        if ($p['kelompok'] == '1') {
+                                            $suhu = '80.4';
+                                            $menit = '30 detik';
+                                            $kelompok = 'Mangkok / Segitiga / Oval/Sudut';
+                                        } elseif ($p['kelompok'] == '2') {
+                                            $suhu = '92.6';
+                                            $menit = '1 menit 27 detik';
+                                            $kelompok = 'Patahan';
+                                        } elseif ($p['kelompok'] == '3') {
+                                            $suhu = '85.1';
+                                            $menit = '1 menit 48 detik';
+                                            $kelompok = 'Kaki';
+                                        } else {
+                                            $suhu = '92.9';
+                                            $menit = '50 detik';
+                                            $kelompok = 'Hancuran';
+                                        }
+                                    @endphp
+                                    <td class="text-start" width="5%">
+                                        {{ $kelompok }}
+                                    </td>
+
                                     <td class="text-start" width="5%">
                                         {{ $p['grade'] }}
                                     </td>
@@ -298,21 +323,7 @@
                                         {{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }} Menit
                                         {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik
                                     </td>
-                                    @php
-                                        if ($p['kelompok'] == '1') {
-                                            $suhu = '80.4';
-                                            $menit = '30 detik';
-                                        } elseif ($p['kelompok'] == '2') {
-                                            $suhu = '92.6';
-                                            $menit = '1 menit 27 detik';
-                                        } elseif ($p['kelompok'] == '3') {
-                                            $suhu = '85.1';
-                                            $menit = '1 menit 48 detik';
-                                        } else {
-                                            $suhu = '92.9';
-                                            $menit = '50 detik';
-                                        }
-                                    @endphp
+
                                     <td class="text-end">{{ empty($isi->ttot_c) ? $suhu : $isi->ttot_c }}</td>
                                     <td class="text-end">
                                         @if (!empty($isi->ttot_menit) && $isi->ttot_menit > 0)

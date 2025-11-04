@@ -48,7 +48,7 @@ class Hrga4CeklistFoothbath extends Controller
         }
 
         $data = [
-            'title' => 'Footh Bath',
+            'title' => 'Foot Bath',
             'dok' => 'Dok.No.: FRM.HRGA.06.03, Rev.01',
             'nm_bulan' => Carbon::createFromFormat('m', $r->bulan)->format('F'),
             'tahun' => $r->tahun,

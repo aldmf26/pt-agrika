@@ -38,13 +38,16 @@
                                             str_pad($bulan, 2, '0', STR_PAD_LEFT) .
                                             '-' .
                                             str_pad($h['tanggal'], 2, '0', STR_PAD_LEFT);
+                                        $hariKe = date('w', strtotime($tgl)); // 0 = Minggu, 6 = Sabtu
                                     @endphp
-                                    @if ($tgl <= date('Y-m-d'))
+
+                                    @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
                                         ✓
-                                    @else
                                     @endif
                                 </td>
                             @endforeach
+
+
                         </tr>
                     @endforeach
                     <tr>
