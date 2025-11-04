@@ -183,7 +183,7 @@
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-end">{{ tanggal($r->tgl_audit) }}</td>
                                 <td class="text-end">{{ $r->urutan }}</td>
-                                <td>{{ ucwords(strtolower($r->divisi)) }}</td>
+                                <td>{{ $r->divisi }}</td>
                                 <td>{{ $r->audite }}</td>
                                 <td>{!! nl2br(e($r->finding)) !!}</td>
                                 <td>{!! nl2br(e($r->tindakan)) !!}</td>
