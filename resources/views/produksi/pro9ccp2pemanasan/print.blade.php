@@ -193,9 +193,10 @@
                             <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
-                            <th rowspan="2" class="text-center align-middle">Jenis <br> <span
-                                    class="fst-italic fw-lighter">Type</th>
-                            <th rowspan="2" class="text-center align-middle" width="10%">Grade bahan jadi</th>
+                            <th rowspan="2" class="text-center align-middle">Grade Awal <br> <span
+                                    class="fst-italic fw-lighter">(Bk)</th>
+                            <th rowspan="2" class="text-center align-middle" width="10%">Grade Akhir <br> <span
+                                    class="fst-italic fw-lighter">(Bahan Jadi)</span></th>
                             <th rowspan="2" class="text-center align-middle">Waktu <br> Mulai <br> Steam</th>
                             <th colspan="2" class="text-center align-middle">Jumlah <br> <span
                                     class="fst-italic fw-lighter">Quantity</th>
