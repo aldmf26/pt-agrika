@@ -6,6 +6,7 @@ use App\Http\Controllers\Hrga\Hrga5PerbaikandanPerawatanSaranaPrasarana\Hrga3Per
 use App\Http\Controllers\Hrga\Hrga8PerawatanDanPerbaikanMesin\Hrga3PermintaanPerbaikanMesin;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionerController;
+use App\Models\DataPegawai;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,15 @@ Route::get('/tidak', function () {
     ];
     return view('tidak', $data);
 })->name('tidak');
+
+Route::get('/verify-ttd/{id_pegawai}', function ($id_pegawai) {
+    $pegawai = DataPegawai::where('karyawan_id_dari_api', $id_pegawai)->first();
+
+    $data = [
+        'pegawai' => $pegawai
+    ];
+    return view('verify_ttd', $data);
+})->name('verify-ttd');
 
 Route::get('/questioner', [QuestionerController::class, 'questioner']);
 Route::post('/questioner', [QuestionerController::class, 'questioner_store'])->name('questioner.store');

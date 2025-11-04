@@ -9,16 +9,6 @@
             <div class="col-12">
 
                 <table class="table-xs table table-bordered border-dark">
-                    {{-- <tr>
-                        <th width="150" class="head">No Pr</td>
-                        <td>{{ $datas->no_pr }}</td>
-                    </tr>
-                    <tr>
-                        <th width="150" class="head">Tanggal</td>
-                        <td>
-                            {{ tanggal($datas->tgl) }}
-                        </td>
-                    </tr> --}}
                     @php
                         $jabatan = $datas->posisi;
                     @endphp
@@ -116,13 +106,13 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode id_pegawai="837" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <span>(Ttd & Nama)</span>
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <span>(Ttd & Nama)</span>
                             </td>
                         </tr>
                         <tr>

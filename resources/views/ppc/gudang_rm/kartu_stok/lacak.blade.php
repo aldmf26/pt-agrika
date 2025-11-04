@@ -29,7 +29,6 @@
                             <th>Tanggal Penerimaan</th>
                             <th class="text-end">Jumlah</th>
                         </tr>
-
                         @foreach ($barang->penerimaan as $p)
                             <tr>
                                 <td>{{ $p->no_po }}</td>
