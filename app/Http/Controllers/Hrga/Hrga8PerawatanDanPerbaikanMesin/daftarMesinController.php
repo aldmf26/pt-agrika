@@ -13,7 +13,7 @@ class daftarMesinController extends Controller
     public function index(Request $r)
     {
         $kategori = $r->kategori ?? 'mesin';
-        $title = $kategori == 'mesin' ? 'Daftar Mesin & Peralatan Proses Produksi' : 'Daftar Item It';
+        $title = $kategori == 'mesin' ? 'Daftar Mesin dan Peralatan Proses Produksi' : 'Daftar Item It';
         $data = [
             'title' => $title,
             'lokasi' => LokasiModel::all(),
