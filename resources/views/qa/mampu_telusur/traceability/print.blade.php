@@ -329,7 +329,7 @@
                                     <td class="text-end">{{ number_format($k['gr'], 0) }}</td>
                                     <td class="text-end">
                                         {{ empty($k['tgl_input']) ? '-' : tanggal($k['tgl_input']) }}</td>
-                                    <td class="text-end">{{ $k['tujuan'] }}</td>
+                                    <td class="text-end">Hk</td>
                                 </tr>
                             @endforeach
 
