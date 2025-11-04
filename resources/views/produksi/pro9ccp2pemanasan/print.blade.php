@@ -195,6 +195,7 @@
                             </th>
                             <th rowspan="2" class="text-center align-middle">Grade Awal <br> <span
                                     class="fst-italic fw-lighter">(Bk)</th>
+                            <th rowspan="2" class="text-center align-middle">Jenis Produk Akhir </th>
                             <th rowspan="2" class="text-center align-middle" width="10%">Grade Akhir <br> <span
                                     class="fst-italic fw-lighter">(Bahan Jadi)</span></th>
                             <th rowspan="2" class="text-center align-middle">Waktu <br> Mulai <br> Steam</th>
@@ -285,6 +286,9 @@
                                     <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                     <td class="text-start">
                                         {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
+                                    </td>
+                                    <td class="text-start" width="5%">
+                                        {{ (($p['kelompok'] == '1' ? 'Mangkok/Segitiga/Oval/Sudut' : $p['kelompok'] == '2') ? 'Patahan' : $p['kelompok'] == '3') ? 'Kaki' : 'Hancuran' }}
                                     </td>
                                     <td class="text-start" width="5%">
                                         {{ $p['grade'] }}
