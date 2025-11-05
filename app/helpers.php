@@ -111,6 +111,6 @@ if (!function_exists('divisiAudit')) {
 if (!function_exists('whereTtd')) {
     function whereTtd($where)
     {
-        return DataPegawai::where('posisi', 'like', "%$where%")->first();
+        return DataPegawai::where('posisi', 'like', "%$where%")->first()->karyawan_id_dari_api;
     }
 }
