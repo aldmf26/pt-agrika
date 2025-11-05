@@ -212,15 +212,15 @@ class PUR2PurchaseOrderController extends Controller
 
     public function print($id)
     {
-        $kepalaPurchasing = DataPegawai::where('posisi', 'Kepala Purchasing')->first()->nama;
+        $KEPALA Purchasing = DataPegawai::where('posisi', 'KEPALA  Purchasing')->first()->nama;
         $telp = "082353347405";
         $datas = PurchaseOrder::with('purchaseRequest')->where('id', $id)->with('item')->first();
         $departemen = $datas->purchaseRequest->departemen;
         $kode = $departemen == 'BARANG' ? 'PURB' : 'PURK';
         $jabatans = [
             'barang' => 'STAFF PURCHASING',
-            'lainnya' => 'KA. GUDANG BAHAN BAKU',
-            'kemasan' => 'KA. PACKING & GUDANG FG',
+            'lainnya' => 'KEPALA GUDANG BAHAN BAKU',
+            'kemasan' => 'KEPALA PACKING & GUDANG FG',
             'jasa' => 'FSTL',
         ];
         $jabatan = $jabatans[strtolower($departemen)];
@@ -229,7 +229,7 @@ class PUR2PurchaseOrderController extends Controller
             'dok' => "Dok.No.: FRM.{$kode}.01.02, Rev.00",
             'kategori' => $departemen,
             'datas' => $datas,
-            'kepalaPurchasing' => $kepalaPurchasing,
+            'KEPALA Purchasing' => $KEPALA Purchasing,
             'telp' => $telp,
         ];
         return view('pur.pembelian.purchase_order.print', $data);

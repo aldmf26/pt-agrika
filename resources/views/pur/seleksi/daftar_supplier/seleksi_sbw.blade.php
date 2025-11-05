@@ -254,10 +254,10 @@
                             (DOKTER HEWAN)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. GUDANG BAHAN BAKU)
+                            (KEPALA GUDANG BAHAN BAKU)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. LAB)
+                            (KEPALA LAB)
                         </td>
                         <td class="text-center align-middle">
                             (DIREKTUR UTAMA)

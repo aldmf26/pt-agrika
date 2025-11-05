@@ -244,7 +244,7 @@
                             <td colspan="2">
                                 (STAFF PACKING & GUDANG FG)
                             </td>
-                            <td colspan="2">(KA. PACKING & GUDANG FG)</td>
+                            <td colspan="2">(KEPALA PACKING & GUDANG FG)</td>
                         </tr>
                     </tfoot>
 
@@ -268,7 +268,7 @@
 
                         </tr>
                         <tr>
-                            <td class="text-center">KA. GRADING</td>
+                            <td class="text-center">KEPALA GRADING</td>
 
                         </tr>
 

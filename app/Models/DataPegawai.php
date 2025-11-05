@@ -22,7 +22,7 @@ class DataPegawai extends Model
     public function scopeKaryawan($query)
     {
         return $query->with('divisi')
-            ->where('posisi', 'LIKE', '%Kepala%')
+            ->where('posisi', 'LIKE', '%KEPALA %')
             ->orderBy('nama', 'ASC');
     }
 

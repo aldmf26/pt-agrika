@@ -53,7 +53,7 @@ return new class extends Migration
             ['nomor' => 6, 'kondisi' => 'BAK-KENDARAAN TIDAK BERBAU ASING (BAU HARUS NORMAL)'],
             ['nomor' => 7, 'kondisi' => 'BAK-KENDARAAN HARUS DALAM KEADAAN KERING DAN TIDAK BERMINYAK'],
             ['nomor' => 8, 'kondisi' => 'TIDAK ADA SERANGGA (KECOA, KUTU DLL) DALAM BAK KENDARAAN'],
-            ['nomor' => 9, 'kondisi' => 'KACA KEPALA KENDARAAN HARUS UTUH -TIDAK RUSAK/PECAH'],
+            ['nomor' => 9, 'kondisi' => 'KACA KEPALA  KENDARAAN HARUS UTUH -TIDAK RUSAK/PECAH'],
             ['nomor' => 10, 'kondisi' => 'KHUSUS TRUK TERBUKA HARUS DILENGKAPI TERPAL'],
             ['nomor' => 11, 'kondisi' => 'DAN HARUS MEMBAWA KAYU/PAPAN/BESI SIKU SEBAGAI PENAHAN PRODUK']
         ];
@@ -74,6 +74,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('checklist_kendaraan');
-       Schema::dropIfExists('master_kondisi');
+        Schema::dropIfExists('master_kondisi');
     }
 };

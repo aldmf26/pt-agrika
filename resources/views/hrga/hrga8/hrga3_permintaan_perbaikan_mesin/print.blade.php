@@ -68,7 +68,7 @@
                         <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User
                         </td>
                         @php
-                            $ttd = $permintaan->item_mesin->kategori == 'mesin' ? 'KA. MAINTENANCE' : 'Ka. IT';
+                            $ttd = $permintaan->item_mesin->kategori == 'mesin' ? 'KEPALA MAINTENANCE' : 'KEPALA IT';
                         @endphp
                         <td class="text-center" colspan="2">({{ $ttd }})</td>
                     </tr>

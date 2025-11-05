@@ -353,7 +353,7 @@
                                 (STAFF CABUT)
                             </td>
                             <td colspan="2" class="text-center align-middle">
-                                (KA. CABUT)
+                                (KEPALA CABUT)
                             </td>
                         </tr>
 

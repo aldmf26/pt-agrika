@@ -331,9 +331,9 @@
                         </tr>
                         <tr class="table-bawah">
                             <th colspan="2" style="border: none"></th>
-                            <td colspan="2" class="align-bottom">(KA. MAINTENANCE)</td>
+                            <td colspan="2" class="align-bottom">(KEPALA MAINTENANCE)</td>
                             <td colspan="2" class="align-bottom">(STAFF HRGA)</td>
-                            <td colspan="2" class="align-bottom">(KA. HRGA)</td>
+                            <td colspan="2" class="align-bottom">(KEPALA HRGA)</td>
                         </tr>
                     </tfoot>
 

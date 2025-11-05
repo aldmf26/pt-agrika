@@ -17,7 +17,7 @@
                     </tr>
                     <tr>
                         <th width="150" class="head">Posisi</td>
-                        <td>KA. Gudang Bahan Baku</td>
+                        <td>KEPALA Gudang Bahan Baku</td>
                         <th width="150" class="head">Tanggal</td>
                         <td>
                             {{ tanggal(date('Y-m-d', strtotime('-7 days', strtotime($datas->tgl)))) }}
@@ -102,24 +102,24 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('STAFF PURCHASING')" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PURCHASING')" />
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center align-middle">
-                                (KA. GUDANG BAHAN BAKU)
+                                (KEPALA GUDANG BAHAN BAKU)
                             </td>
                             <td class="text-center align-middle">
                                 (STAFF PURCHASING)
                             </td>
                             <td class="text-center align-middle">
-                                (KA. PURCHASING)
+                                (KEPALA PURCHASING)
                             </td>
                         </tr>
                     </tbody>

@@ -12,7 +12,7 @@
         </tr>
         <tr>
             @php
-                $ttdJabatan = $kategori == 'lainnya' ? 'KA. GUDANG BAHAN BAKU' : 'KA. PURCHASING';
+                $ttdJabatan = $kategori == 'lainnya' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING';
                 $pengawas = $kategori == 'kemasan' ? 'Packing' : 'Cabut Bulu';
             @endphp
 
@@ -126,7 +126,7 @@
                                 Diisi Oleh User</span>
                         </td>
                         <td class="text-center align-middle">
-                            (KA. GUDANG BARANG & KEMASAN)
+                            (KEPALA GUDANG BARANG & KEMASAN)
                         </td>
                         <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
                                 Diisi Oleh User</span>

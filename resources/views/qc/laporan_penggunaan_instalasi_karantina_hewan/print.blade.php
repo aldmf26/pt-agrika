@@ -84,13 +84,13 @@
                         <td>Kepada Yth.</td>
                     </tr>
                     <tr>
-                        <td>Kepala Badan Karantina Pertanian</td>
+                        <td>KEPALA Badan Karantina Pertanian</td>
                     </tr>
                     <tr>
                         <td>Melalui</td>
                     </tr>
                     <tr>
-                        <td>Kepala UPT Balai Karantina Kelas I</td>
+                        <td>KEPALA UPT Balai Karantina Kelas I</td>
                     </tr>
                     <tr>
                         <td>Banjarmasin Kalimantan Selatan</td>

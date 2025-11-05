@@ -101,12 +101,12 @@ class RM8KartuStokController extends Controller
         $sbw = json_decode($sbw, TRUE);
 
         $jabatans = [
-            'barang' => 'KA. GUDANG BARANG & KEMASAN',
-            'sbw' => 'KA. GUDANG BAHAN BAKU',
-            'kemasan' => 'KA. PACKING & GUDANG FG',
+            'barang' => 'KEPALA GUDANG BARANG & KEMASAN',
+            'sbw' => 'KEPALA GUDANG BAHAN BAKU',
+            'kemasan' => 'KEPALA PACKING & GUDANG FG',
             'jasa' => 'FSTL',
         ];
-        $ttdJabatan = $jabatans[strtolower($kategori)] ?? 'KA. GUDANG BARANG & KEMASAN';
+        $ttdJabatan = $jabatans[strtolower($kategori)] ?? 'KEPALA GUDANG BARANG & KEMASAN';
 
         $kodes = [
             'barang' => 'PPCB',
@@ -115,7 +115,7 @@ class RM8KartuStokController extends Controller
             'jasa' => 'PPCJ',
         ];
         $kode = $kodes[strtolower($kategori)] ?? 'PPCB';
-        $pic =  DataPegawai::where('posisi', $kategori == 'sbw' ? 'Kepala Gudang Bahan Baku' : 'Kepala Gudang Barang Kemasan')->first()->nama;
+        $pic =  DataPegawai::where('posisi', $kategori == 'sbw' ? 'KEPALA  Gudang Bahan Baku' : 'KEPALA  Gudang Barang Kemasan')->first()->nama;
         // Kirim ke view
         $data = [
             'title' => 'KARTU STOK MATERIAL ',

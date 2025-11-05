@@ -154,7 +154,7 @@
                 <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
                         Diisi Oleh User</span>
                 </td>
-                <td class="text-center">( KA. LAB & FSTL )</td>
+                <td class="text-center">( KEPALA LAB & FSTL )</td>
 
             </table>
         </div>

@@ -103,8 +103,8 @@
                             @php
                                 $jabatans = [
                                     'barang' => 'STAFF PURCHASING',
-                                    'lainnya' => 'KA. GUDANG BAHAN BAKU',
-                                    'kemasan' => 'KA. PACKING & GUDANG FG',
+                                    'lainnya' => 'KEPALA GUDANG BAHAN BAKU',
+                                    'kemasan' => 'KEPALA PACKING & GUDANG FG',
                                     'jasa' => 'FSTL',
                                 ];
                                 $jabatan = $jabatans[$kategori];
@@ -112,7 +112,7 @@
                             ({{ $jabatan }})
                         </td>
                         <td class="text-center align-middle">
-                            (KA. PURCHASING)
+                            (KEPALA PURCHASING)
                         </td>
                     </tr>
                 </tbody>

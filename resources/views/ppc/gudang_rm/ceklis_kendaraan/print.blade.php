@@ -323,7 +323,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td class="text-center">( KA. GUDANG )</td>
+                                    <td class="text-center">( KEPALA GUDANG )</td>
 
                                 </tr>
                             </tbody>

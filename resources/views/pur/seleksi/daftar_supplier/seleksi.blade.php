@@ -258,7 +258,7 @@
                             (DOKTER HEWAN)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. PURCHASING)
+                            (KEPALA PURCHASING)
                         </td>
                         <td class="text-center align-middle">
                             @php
@@ -272,7 +272,7 @@
                                     $ka = 'GUDANG BAHAN BAKU';
                                 }
                             @endphp
-                            (KA. {{ $ka }})
+                            (KEPALA {{ $ka }})
                         </td>
                         <td class="text-center align-middle">
                             (DIREKTUR UTAMA)

@@ -145,7 +145,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Dievaluasi oleh: Ka. {{ $evaluasi_detail->data_pegawai->divisi->divisi ?? '-' }}</td>
+                    <td>Dievaluasi oleh: KEPALA {{ $evaluasi_detail->data_pegawai->divisi->divisi ?? '-' }}</td>
                     <td>
                         Kesimpulan:
                         <br>
@@ -196,7 +196,7 @@
                     </tr>
                     <tr>
                         <td class="text-center">(STAFF HRGA)</td>
-                        <td class="text-center">(KA. HRGA)</td>
+                        <td class="text-center">(KEPALA HRGA)</td>
                         <td class="text-center">(OPERATIONAL MANAGER)</td>
                     </tr>
                 </tbody>

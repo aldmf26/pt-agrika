@@ -204,8 +204,8 @@ class PUR1PurchaseRequestController extends Controller
         $kode = $departemen == 'BARANG' ? 'PURB' : 'PURK';
         $jabatans = [
             'barang' => 'STAFF PURCHASING',
-            'lainnya' => 'KA. GUDANG BAHAN BAKU',
-            'kemasan' => 'KA. PACKING & GUDANG FG',
+            'lainnya' => 'KEPALA GUDANG BAHAN BAKU',
+            'kemasan' => 'KEPALA PACKING & GUDANG FG',
             'jasa' => 'FSTL',
         ];
         $jabatan = $jabatans[strtolower($departemen)];

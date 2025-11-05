@@ -222,7 +222,7 @@
                                 (STAFF CABUT)
                             </td>
                             <td class="text-center align-middle">
-                                (KA. CABUT)
+                                (KEPALA CABUT)
                             </td>
                         </tr>
 

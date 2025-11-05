@@ -271,7 +271,7 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="7"></th>
-                            <td class="text-center" colspan="2">(KA. PACKING & GUDANG FG)</td>
+                            <td class="text-center" colspan="2">(KEPALA PACKING & GUDANG FG)</td>
 
                         </tr>
                     </tfoot>

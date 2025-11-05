@@ -118,7 +118,7 @@
                         </tr>
                         <tr>
                             <td class="text-center">[SPV. HR]</td>
-                            <td class="text-center">[KA. HRGA]</td>
+                            <td class="text-center">[KEPALA HRGA]</td>
                             <td class="text-center">[ DIREKTUR. ]</td>
                         </tr>
                     </tbody>

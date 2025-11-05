@@ -199,11 +199,11 @@
                                     Nama)</span></td>
                         </tr>
                         @php
-                            $ttd = $kategori == 'it' ? 'KA. IT' : 'KA. MAINTENANCE';
+                            $ttd = $kategori == 'it' ? 'KEPALA IT' : 'KEPALA MAINTENANCE';
                         @endphp
                         <tr>
                             <td class="text-center">({{ $ttd }})</td>
-                            <td class="text-center">(KA. HRGA)</td>
+                            <td class="text-center">(KEPALA HRGA)</td>
 
                         </tr>
                     </tbody>

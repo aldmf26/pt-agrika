@@ -221,7 +221,7 @@
                     </tr>
                     <tr>
                         <td class="text-center">(STAFF GUDANG BAHAN BAKU)</td>
-                        <td class="text-center">(KA. GUDANG BAHAN BAKU)</td>
+                        <td class="text-center">(KEPALA GUDANG BAHAN BAKU)</td>
                         <td class="text-center">(DOKTER HEWAN)</td>
                     </tr>
                 </tbody>

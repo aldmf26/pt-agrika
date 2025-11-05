@@ -388,8 +388,8 @@
                     </tr>
                     <tr class="table-bawah">
 
-                        <td colspan="3" class="text-center align-bottom">(KA. STEAM)</td>
-                        <td colspan="2" class="text-center align-bottom">(KA. QC)</td>
+                        <td colspan="3" class="text-center align-bottom">(KEPALA STEAM)</td>
+                        <td colspan="2" class="text-center align-bottom">(KEPALA QC)</td>
                     </tr>
                 </table>
             </div>

@@ -195,7 +195,7 @@
                         <tr>
                             <td class="text-center">[Spv Lab]
                             </td>
-                            <td class="text-center">[KA. QA&QC]
+                            <td class="text-center">[KEPALA QA&QC]
                             </td>
 
                         </tr>

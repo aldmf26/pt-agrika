@@ -116,7 +116,7 @@
                             <div class="col-md-8 col-sm-12">
                                 <h3>Pelepasan Export</h3>
                                 <h1>
-                                    PT Agrika Gatya Arum Pelepasan export bersama kepala balai
+                                    PT Agrika Gatya Arum Pelepasan export bersama KEPALA balai
                                     karantina 7 Juni 2022
                                 </h1>
                             </div>

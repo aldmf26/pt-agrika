@@ -176,7 +176,7 @@
                             (STAFF PURCHASING)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. PURCHASING)
+                            (KEPALA PURCHASING)
                         </td>
                     </tr>
                 </tbody>

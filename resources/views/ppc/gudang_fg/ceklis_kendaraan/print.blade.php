@@ -254,7 +254,7 @@
 
                             </tr>
                             <tr>
-                                <td class="text-center">(KA. EKSPEDISI & EKSPORT)</td>
+                                <td class="text-center">(KEPALA EKSPEDISI & EKSPORT)</td>
 
                             </tr>
                         </tbody>

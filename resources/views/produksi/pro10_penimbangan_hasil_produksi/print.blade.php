@@ -280,8 +280,8 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="3"></th>
-                            <td colspan="3" class="text-center align-middle">(KA. PACKING & GUDANG FG)</td>
-                            <td colspan="2" class="text-center align-middle">(KA. QC)</td>
+                            <td colspan="3" class="text-center align-middle">(KEPALA PACKING & GUDANG FG)</td>
+                            <td colspan="2" class="text-center align-middle">(KEPALA QC)</td>
                         </tr>
 
                     </tfoot>

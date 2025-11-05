@@ -86,7 +86,7 @@
                         <td>:</td>
                         <td colspan="2">&nbsp;{{ tanggal($datas->tgl_dibutuhkan) }}
                             {{-- <span style="margin-left: 20%">Diajukan Oleh:
-                                Kepala Divisi</span> --}}
+                                KEPALA  Divisi</span> --}}
                         </td>
                     </tr>
                 </table>
@@ -140,7 +140,7 @@
                         <td>:</td>
                         <td>{{ tanggal($datas->tgl_dibutuhkan) }}
                             <span style="margin-left: 20%">Diajukan Oleh:
-                                Kepala Divisi</span>
+                                KEPALA  Divisi</span>
                         </td>
                     </tr>
                     <tr>
@@ -170,7 +170,8 @@
         <br>
         <div class="row mt-4">
             <div class="col-5">
-                <span style="font-size: 12px; font-weight: bold; font-style: italic;">Diisi Oleh (KA. HRGA)</span> <br>
+                <span style="font-size: 12px; font-weight: bold; font-style: italic;">Diisi Oleh (KEPALA HRGA)</span>
+                <br>
                 <span style="font-size: 12px;  font-style: italic;">Disetujui /
                     Ditolak*</span> <br>
                 <span style="font-size: 12px;  font-style: italic;">* Coret salah satu</span>
@@ -208,7 +209,7 @@
                                     style="font-size: 8px">
                                     Diisi Oleh User</span>
                             </td>
-                            <td class="text-center">( KA. HRGA )</td>
+                            <td class="text-center">( KEPALA HRGA )</td>
 
                         </tr>
                     </tbody>

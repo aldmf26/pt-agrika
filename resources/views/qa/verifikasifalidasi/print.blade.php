@@ -165,7 +165,7 @@
                         <tr>
 
                             <td class="text-center align-middle">
-                                (KA. LAB & FSTL)
+                                (KEPALA LAB & FSTL)
                             </td>
                             <td class="text-center align-middle">
                                 (OPERATIONAL MANAGER)

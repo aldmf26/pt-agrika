@@ -72,7 +72,7 @@
             <br>
             Jl. Teluk Tiram Darat No.5B Kel Telawang, Kec. Banjarmasin Barat, Kota Banjarmasin, Kalimantan Selatan
             <div class="mt-2" />
-            PIC: {{ $kepalaPurchasing }}
+            PIC: {{ $KEPALA Purchasing }}
             <br>
             Telp: {{ $telp }}
             <br>
@@ -103,7 +103,7 @@
                             (STAFF PURCHASING)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. PURCHASING)
+                            (KEPALA PURCHASING)
                             <div>Sertakan cap perusahaan</div>
                         </td>
                     </tr>

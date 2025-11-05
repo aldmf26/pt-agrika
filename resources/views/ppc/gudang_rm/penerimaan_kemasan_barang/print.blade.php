@@ -147,7 +147,7 @@
                     </tr>
                     <tr>
                         <td class="text-center">(STAFF PURCHASING)</td>
-                        <td class="text-center">(KA. PURCHASING)</td>
+                        <td class="text-center">(KEPALA PURCHASING)</td>
                     </tr>
                 </tbody>
             </table>

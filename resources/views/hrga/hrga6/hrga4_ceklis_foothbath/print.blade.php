@@ -174,7 +174,7 @@
                     </tr>
                     <tr>
                         <td class="text-center">(STAFF HRGA)</td>
-                        <td class="text-center">(KA. HRGA)</td>
+                        <td class="text-center">(KEPALA HRGA)</td>
                         <td class="text-center">(Dokter Hewan)</td>
 
                     </tr>

@@ -94,7 +94,7 @@
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            (KA. PACKING & GUDANG FG)
+                            (KEPALA PACKING & GUDANG FG)
                         </td>
                     </tr>
                 </tbody>

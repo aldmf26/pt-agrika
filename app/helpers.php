@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\DataPegawai;
 use Carbon\Carbon;
 
 if (!function_exists('tanggal')) {
@@ -104,5 +105,12 @@ if (!function_exists('divisiAudit')) {
             'ekspedisi',
             'hrga',
         ];
+    }
+}
+
+if (!function_exists('whereTtd')) {
+    function whereTtd($where)
+    {
+        return DataPegawai::where('posisi', 'like', "%$where%")->first();
     }
 }

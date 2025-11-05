@@ -180,10 +180,10 @@
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            (KA. GUDANG BAHAN BAKU)
+                            (KEPALA GUDANG BAHAN BAKU)
                         </td>
                         <td class="text-center align-middle">
-                            (KA. PURCHASING)
+                            (KEPALA PURCHASING)
                         </td>
                     </tr>
                 </tbody>
