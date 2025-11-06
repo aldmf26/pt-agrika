@@ -130,7 +130,7 @@
     </table>
 
     <div class="row mt-2">
-        <div class="col-12" style="font-size: 10px">
+        <div class="col-4" style="font-size: 10px">
             <b>Note:</b>
             <div style="font-style: italic;">
                 <div><b>Untuk kriteria penilaian ketidasesuaian (No 1 sampai dengan 3) sebagai berikut:</b></div>
@@ -157,11 +157,8 @@
                         melakukan tindakan perbaikan.</b></p>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-6"></div>
-        <div class="col-6">
+        <div class="col-3"></div>
+        <div class="col-5">
             <table class="table table-bordered border-dark" style="font-size: 11px">
                 <thead>
                     <tr>
@@ -172,10 +169,10 @@
                 <tbody>
                     <tr>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PURCHASING')" />
                         </td>
                     </tr>
                     <tr>
@@ -189,6 +186,11 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6"></div>
+
     </div>
 
 </x-hccp-print>

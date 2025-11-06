@@ -235,9 +235,11 @@
                         <tr class="table-bawah">
                             <th style="border: none" colspan="4"></th>
                             <td colspan="2" style="height: 80px">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('STAFF PACKING & GUDANG FG')" />
                             </td>
-                            <td style="height: 80px" colspan="2"><span style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                            <td style="height: 80px" colspan="2">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                            </td>
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="4"></th>

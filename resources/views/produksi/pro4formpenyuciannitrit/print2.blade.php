@@ -331,10 +331,10 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="pengawasTtd($nama_regu)->karyawan_id_dari_api" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA CABUT')" />
                             </td>
                         </tr>
                         <tr>

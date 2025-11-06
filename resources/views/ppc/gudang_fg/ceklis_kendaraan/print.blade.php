@@ -249,7 +249,7 @@
                         <tbody>
                             <tr>
                                 <td style="height: 45px" class="align-middle text-center">
-                                    <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                    <x-ttd-barcode :id_pegawai="whereTtd('KEPALA EKSPEDISI & EKSPORT')" />
                                 </td>
 
                             </tr>
@@ -266,8 +266,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        < /scri> <script
+        script src = "https://code.jquery.com/jquery-3.6.0.min.js" >
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         $(document).ready(function() {

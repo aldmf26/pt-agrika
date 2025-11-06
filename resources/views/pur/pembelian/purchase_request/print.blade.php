@@ -106,13 +106,13 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode id_pegawai="837" />
+                                <x-ttd-barcode :id_pegawai="pengawasTtd($datas->diminta_oleh)->karyawan_id_dari_api" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span>(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('STAFF PURCHASING')" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span>(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PURCHASING')" />
                             </td>
                         </tr>
                         <tr>

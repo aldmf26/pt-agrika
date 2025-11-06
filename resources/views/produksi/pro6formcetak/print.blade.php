@@ -246,10 +246,12 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="8"></th>
-                            <td colspan="3" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
-                            <td colspan="2" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                            <td colspan="3" style="height: 80px" class="text-center align-middle">
+                                <x-ttd-barcode :id_pegawai="pengawasTtd($pengawas)->karyawan_id_dari_api" />
+                            </td>
+                            <td colspan="2" style="height: 80px" class="text-center align-middle">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA CETAK')" />
+                            </td>
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="8"></th>
@@ -257,7 +259,7 @@
                                 (STAFF CETAK)
                             </td>
                             <td colspan="2" class="text-center align-middle">
-                                (KA.CETAK)
+                                (KEPALA CETAK)
                             </td>
                         </tr>
 

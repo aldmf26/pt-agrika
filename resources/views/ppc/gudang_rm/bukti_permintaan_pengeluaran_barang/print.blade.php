@@ -111,25 +111,26 @@
                 <tbody>
                     <tr>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            @php
+                                $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
+                            @endphp
+                            <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BARANG KEMASAN')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                         </td>
                     </tr>
                     <tr>
 
-                        <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
-                                Diisi Oleh User</span>
+                        <td class="text-center">({{ strtoupper($pegawai->posisi) }})
                         </td>
                         <td class="text-center align-middle">
                             (KEPALA GUDANG BARANG & KEMASAN)
                         </td>
-                        <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
-                                Diisi Oleh User</span>
+                        <td class="text-center">({{ strtoupper($pegawai->posisi) }})
                         </td>
                     </tr>
                 </tbody>

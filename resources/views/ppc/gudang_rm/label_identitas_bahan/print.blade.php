@@ -192,8 +192,16 @@
                                     <td width="30%">STATUS</td>
                                 </tr>
                                 <tr>
-                                    <td></td> <!-- Untuk tanda tangan -->
-                                    <td></td>
+                                    <td>
+                                        <x-ttd-barcode size="50" :id_pegawai="whereTtd(
+                                            $k == 'lainnya' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING',
+                                        )" />
+                                    </td> <!-- Untuk tanda tangan -->
+                                    <td>
+                                        <x-ttd-barcode size="50" :id_pegawai="whereTtd(
+                                            $k != 'lainnya' ? 'KEPALA GUDANG BARANG & KEMASAN' : 'Kepala Lab & FSTL',
+                                        )" />
+                                    </td>
                                     <td>
                                         PASS / REJECT <br>
 

@@ -318,12 +318,12 @@
                             <tbody>
                                 <tr>
                                     <td style="height: 45px" class="align-middle text-center">
-                                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                        <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" />
                                     </td>
 
                                 </tr>
                                 <tr>
-                                    <td class="text-center">( KEPALA GUDANG )</td>
+                                    <td class="text-center">(KEPALA GUDANG BAHAN BAKU)</td>
 
                                 </tr>
                             </tbody>

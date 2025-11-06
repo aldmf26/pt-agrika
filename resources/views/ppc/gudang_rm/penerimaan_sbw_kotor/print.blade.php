@@ -209,14 +209,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
-                                style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" />
                         </td>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
-                                style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" />
                         </td>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
-                                style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('DOKTER HEWAN')" />
                         </td>
                     </tr>
                     <tr>

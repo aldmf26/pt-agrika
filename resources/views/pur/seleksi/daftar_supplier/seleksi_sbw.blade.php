@@ -161,7 +161,8 @@
         </tr>
         <tr>
             <td>
-                Diperiksa Oleh: Rizwina <span class="ms-5"> Ttd:</span>
+                Diperiksa Oleh: Rizwina Aprilita <span class="ms-5"> Ttd: <x-ttd-barcode size="30"
+                        :id_pegawai="whereTtd('Kepala Lab & FSTL')" /></span>
             </td>
         </tr>
     </table>
@@ -192,7 +193,8 @@
         </tr>
         <tr>
             <td>
-                Diperiksa Oleh: Sinta <span class="ms-5"> Ttd:</span>
+                Diperiksa Oleh: Sinta <span style="margin-left: 100px"> Ttd: <x-ttd-barcode size="30"
+                        :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" /></span>
             </td>
         </tr>
     </table>
@@ -237,16 +239,16 @@
                 <tbody>
                     <tr>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('DOKTER HEWAN')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA GUDANG BAHAN BAKU')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('Kepala Lab & FSTL')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA DIREKTUR')" />
                         </td>
                     </tr>
                     <tr>

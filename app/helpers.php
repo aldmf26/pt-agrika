@@ -114,3 +114,9 @@ if (!function_exists('whereTtd')) {
         return DataPegawai::where('posisi', 'like', "%$where%")->first()->karyawan_id_dari_api;
     }
 }
+if (!function_exists('pengawasTtd')) {
+    function pengawasTtd($pengawas)
+    {
+        return DataPegawai::where('nama', 'like', "%$pengawas%")->first();
+    }
+}

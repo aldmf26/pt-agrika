@@ -91,24 +91,25 @@
                 </thead>
                 <tbody>
                     <tr>
+                        @php
+                            $jabatans = [
+                                'barang' => 'STAFF PURCHASING',
+                                'lainnya' => 'KEPALA GUDANG BAHAN BAKU',
+                                'kemasan' => 'KEPALA PACKING & GUDANG FG',
+                                'jasa' => 'FSTL',
+                            ];
+                            $jabatan = $jabatans[$kategori];
+                        @endphp
+
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd($jabatan)" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PURCHASING')" />
                         </td>
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            @php
-                                $jabatans = [
-                                    'barang' => 'STAFF PURCHASING',
-                                    'lainnya' => 'KEPALA GUDANG BAHAN BAKU',
-                                    'kemasan' => 'KEPALA PACKING & GUDANG FG',
-                                    'jasa' => 'FSTL',
-                                ];
-                                $jabatan = $jabatans[$kategori];
-                            @endphp
                             ({{ $jabatan }})
                         </td>
                         <td class="text-center align-middle">

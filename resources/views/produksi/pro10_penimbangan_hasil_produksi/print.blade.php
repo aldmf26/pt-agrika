@@ -273,10 +273,12 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="3"></th>
-                            <td colspan="3" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
-                            <td colspan="2" style="height: 80px" class="text-center align-middle"><span
-                                    style="opacity: 0.5;">(Ttd & Nama)</span></td>
+                            <td colspan="3" style="height: 80px" class="text-center align-middle">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                            </td>
+                            <td colspan="2" style="height: 80px" class="text-center align-middle">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA QC')" />
+                            </td>
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="3"></th>

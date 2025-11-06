@@ -211,15 +211,18 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                @php
+                                    $pegawai = App\Models\DataPegawai::where('nama', $pengawas)->first();
+                                @endphp
+                                <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA CABUT')" />
                             </td>
                         </tr>
                         <tr>
                             <td class="text-center align-middle">
-                                (STAFF CABUT)
+                                ({{ strtoupper($pegawai->posisi) }})
                             </td>
                             <td class="text-center align-middle">
                                 (KEPALA CABUT)
