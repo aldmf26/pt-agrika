@@ -187,10 +187,15 @@
                     <tbody>
                         <tr>
                             <td style="height: 70px" class="align-middle text-center">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                @php
+                                    $pegawai = App\Models\DataPegawai::where('nama', $datas->diajukan_oleh)
+                                        ->where('divisi_id', '2')
+                                        ->first();
+                                @endphp
+                                <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                             </td>
                             <td style="height: 70px" class="align-middle text-center">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />
                             </td>
 
                         </tr>
@@ -205,9 +210,10 @@
 
                         </tr>
                         <tr>
-                            <td class="text-center">( {{ strtoupper($datas->diajukan_oleh) }} ) <br> <span
-                                    style="font-size: 8px">
-                                    Diisi Oleh User</span>
+                            <td class="text-center">
+
+                                ( {{ strtoupper($datas->diajukan_oleh) }} )
+
                             </td>
                             <td class="text-center">( KEPALA HRGA )</td>
 
