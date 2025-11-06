@@ -291,7 +291,7 @@
                                         if ($p['kelompok'] == '1') {
                                             $suhu = '80.4';
                                             $menit = '30 detik';
-                                            $kelompok = 'Mangkok / Segitiga / Oval/Sudut';
+                                            $kelompok = 'Mangkok / Segitiga / Oval / Sudut';
                                         } elseif ($p['kelompok'] == '2') {
                                             $suhu = '92.6';
                                             $menit = '1 menit 27 detik';
