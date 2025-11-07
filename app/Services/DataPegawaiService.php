@@ -27,7 +27,7 @@ class DataPegawaiService
         if ($response->successful()) {
             $dataPegawai = $response->json();
             $sumberData = $dataPegawai['sumber_data'];
-            DataPegawai::where('sumber_data', $sumberData)->delete();
+            // DataPegawai::where('sumber_data', $sumberData)->delete();
             foreach ($dataPegawai['pegawai'] as $pegawai) {
                 // Simpan atau perbarui data pegawai di database lokal
                 $keterangan = $sumberData == 'sarang' ? ($pegawai['kelas_cbt'] ?? null) : ($pegawai['keterangan'] ?? null);

@@ -227,26 +227,6 @@
                 </tbody>
             </table>
         </div>
-        {{-- <div class="col-4">
-            <table class="border-dark table table-bordered" style="font-size: 11px">
-                <thead>
-                    <tr>
-                        <th class="text-center" width="33.33%">Diketahui Oleh:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">Ttd &
-                            Nama
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">(DOKTER HEWAN)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div> --}}
-
     </div>
 
 </x-hccp-print>

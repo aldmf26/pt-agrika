@@ -139,12 +139,8 @@
             </div>
             </p>
         </div>
-
-    </div>
-    <div class="row">
-        <div class="col-5"></div>
-
-        <div class="col-7">
+        <div class="col-2"></div>
+        <div class="col-6">
             <table class="border-dark table table-bordered" style="font-size: 11px">
                 <thead>
                     <tr>
@@ -154,11 +150,11 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
-                                style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('STAFF PURCHASING')" />
                         </td>
-                        <td style="height: 50px; font-size: 8px" class="text-center align-middle"><span
-                                style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <td style="height: 50px; font-size: 8px" class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PURCHASING')" />
                         </td>
                     </tr>
                     <tr>
@@ -168,5 +164,6 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </x-hccp-print>

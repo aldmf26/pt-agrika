@@ -112,7 +112,9 @@
                     <tr>
                         <td style="height: 80px" class="text-center align-middle">
                             @php
-                                $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
+                                $pegawai = App\Models\DataPegawai::where('nama', $nama)
+                                    ->whereNotIn('posisi', ['staff cabut', 'staff cetak'])
+                                    ->first();
                             @endphp
                             <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                         </td>
@@ -128,7 +130,7 @@
                         <td class="text-center">({{ strtoupper($pegawai->posisi) }})
                         </td>
                         <td class="text-center align-middle">
-                            (KEPALA GUDANG BARANG & KEMASAN)
+                            (KEPALA GUDANG BARANG KEMASAN)
                         </td>
                         <td class="text-center">({{ strtoupper($pegawai->posisi) }})
                         </td>
