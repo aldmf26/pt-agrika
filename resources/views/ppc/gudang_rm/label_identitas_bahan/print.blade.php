@@ -187,7 +187,7 @@
                                     <td width="30%">
                                         {{ $k == 'lainnya' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING' }}</td>
                                     <td width="30%">
-                                        {{ $k != 'lainnya' ? 'KEPALA GUDANG BARANG & KEMASAN' : 'KEPALA QC' }}
+                                        {{ $k != 'lainnya' ? 'KEPALA GUDANG BARANG KEMASAN' : 'KEPALA QC' }}
                                     </td>
                                     <td width="30%">STATUS</td>
                                 </tr>
@@ -199,7 +199,7 @@
                                     </td> <!-- Untuk tanda tangan -->
                                     <td>
                                         <x-ttd-barcode size="50" :id_pegawai="whereTtd(
-                                            $k != 'lainnya' ? 'KEPALA GUDANG BARANG & KEMASAN' : 'Kepala Lab & FSTL',
+                                            $k != 'lainnya' ? 'KEPALA GUDANG BARANG KEMASAN' : 'Kepala Lab & FSTL',
                                         )" />
                                     </td>
                                     <td>

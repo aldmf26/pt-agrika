@@ -101,9 +101,9 @@ class RM8KartuStokController extends Controller
         $sbw = json_decode($sbw, TRUE);
 
         $jabatans = [
-            'barang' => 'KEPALA GUDANG BARANG & KEMASAN',
+            'barang' => 'KEPALA GUDANG BARANG KEMASAN',
             'sbw' => 'KEPALA GUDANG BAHAN BAKU',
-            'kemasan' => 'KEPALA PACKING & GUDANG FG',
+            'kemasan' => 'KEPALA GUDANG BARANG KEMASAN',
             'jasa' => 'FSTL',
         ];
         $ttdJabatan = $jabatans[strtolower($kategori)] ?? 'KEPALA GUDANG BARANG & KEMASAN';

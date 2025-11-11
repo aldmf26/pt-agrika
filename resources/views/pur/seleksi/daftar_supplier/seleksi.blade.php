@@ -175,7 +175,8 @@
         </tr>
         <tr>
             <td>
-                Diperiksa Oleh: Rizwina <span class="ms-5"> Ttd:</span>
+                Diperiksa Oleh: Rizwina Aprilita <span class="ms-5"> Ttd: <x-ttd-barcode size="30"
+                        :id_pegawai="whereTtd('Kepala Lab & FSTL')" /></span>
             </td>
         </tr>
     </table>
@@ -201,7 +202,8 @@
         </tr>
         <tr>
             <td>
-                Diperiksa Oleh: Gusti Andriy Wijaya <span class="ms-5"> Ttd:</span>
+                Diperiksa Oleh: Gusti Andriy Wijaya <span class="ms-4"> Ttd: <x-ttd-barcode size="30"
+                        :id_pegawai="whereTtd('Kepala Purchasing')" /></span>
             </td>
         </tr>
     </table>
@@ -240,17 +242,29 @@
                 </thead>
                 <tbody>
                     <tr>
+                        @php
+                            if ($kategori == 'Jasa') {
+                                $ka = 'Lab & FSTL';
+                            } elseif ($kategori == 'Kemasan') {
+                                $ka = 'PACKING & GUDANG FG';
+                            } elseif ($kategori == 'Barang') {
+                                $ka = 'GUDANG BARANG KEMASAN';
+                            } else {
+                                $ka = 'GUDANG BAHAN BAKU';
+                            }
+                        @endphp
+
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('DOKTER HEWAN')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PURCHASING')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA ' . $ka)" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA DIREKTUR')" />
                         </td>
                     </tr>
                     <tr>
@@ -261,17 +275,7 @@
                             (KEPALA PURCHASING)
                         </td>
                         <td class="text-center align-middle">
-                            @php
-                                if ($kategori == 'Jasa') {
-                                    $ka = 'FSTL';
-                                } elseif ($kategori == 'Kemasan') {
-                                    $ka = 'PACKING & GUDANG FG';
-                                } elseif ($kategori == 'Barang') {
-                                    $ka = 'GUDANG BARANG & KEMASAN';
-                                } else {
-                                    $ka = 'GUDANG BAHAN BAKU';
-                                }
-                            @endphp
+
                             (KEPALA {{ $ka }})
                         </td>
                         <td class="text-center align-middle">
