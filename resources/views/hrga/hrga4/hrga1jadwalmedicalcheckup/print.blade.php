@@ -103,8 +103,8 @@
                         @foreach ($jadwal as $j)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $j->data_pegawai->divisi->divisi }}</td>
-                                <td>{{ $j->data_pegawai->nama }}</td>
+                                <td>{{ $j->data_pegawai->divisi->divisi ?? '-' }}</td>
+                                <td>{{ $j->data_pegawai->nama ?? '-' }}</td>
                                 @foreach ($bulan as $b)
                                     <td class="{{ $b->bulan == $j->bulan ? 'bg-secondary' : '' }}"></td>
                                 @endforeach
@@ -140,15 +140,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd('STAFF HRGA')" />
+                            </td>
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />
+                            </td>
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd('OPERATIONAL MANAGER')" />
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center">(STAFF HRGA)</td>

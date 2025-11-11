@@ -316,18 +316,12 @@
                         </tr>
                         <tr class="table-bawah">
                             <th colspan="2" style="border: none"></th>
-                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <span
-                                    style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
-                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <span
-                                    style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
-                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <span
-                                    style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
+                            <td colspan="2" style="height: 60px" class="align-middle text-center"><x-ttd-barcode
+                                    :id_pegawai="whereTtd('KEPALA MAINTENANCE')" /></td>
+                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <x-ttd-barcode
+                                    :id_pegawai="whereTtd('STAFF HRGA')" /></td>
+                            <td colspan="2" style="height: 60px" class="align-middle text-center"> <x-ttd-barcode
+                                    :id_pegawai="whereTtd('KEPALA HRGA')" /></td>
                         </tr>
                         <tr class="table-bawah">
                             <th colspan="2" style="border: none"></th>

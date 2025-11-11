@@ -193,7 +193,7 @@
                                         ->first();
                                 @endphp
                                 <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
-                                dsa
+
                             </td>
                             <td style="height: 70px" class="align-middle text-center">
                                 <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />

@@ -92,10 +92,10 @@
                 <tbody>
                     <tr>
                         <td style="height: 70px" class="align-middle text-center">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('STAFF HRGA')" />
                         </td>
                         <td style="height: 70px" class="align-middle text-center">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />
                         </td>
 
                     </tr>
