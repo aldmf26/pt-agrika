@@ -141,13 +141,13 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd('STAFF HRGA')" />
+                            </td>
 
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center">(STAFF HRGA)</td>
