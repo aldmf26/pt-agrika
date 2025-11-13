@@ -66,6 +66,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
             $imageName = $no_invoice . '.' . $image->getClientOriginalExtension();
             $image->storeAs('perbaikan_mesin', $imageName, 'public'); // Simpan di storage public
         }
+        
 
         $response = Http::withHeaders([
             'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
@@ -73,6 +74,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
             'target'  => '6282351837448-1536203517@g.us', // Gunakan group_id dari form
             'message' => "Pelapor : $r->diajukan_oleh\nNama Item : $item->nama_mesin $item->merek $item->no_identifikasi \nLokasi : $lokasi  \nDeskripsi Masalah : $r->deskripsi_masalah\nFoto/Vidio: \nhttps://ptagrikagatyaarum.com/storage/perbaikan_mesin/$imageName",
         ]);
+
         return redirect()->route('hrga8.3.sukses', ['invoice_pengajuan' => $no_invoice, 'kategori' => $r->kategori])->with('sukses', 'Pengajuan Berhasil dikirim');
     }
     public function sukses(Request $r)

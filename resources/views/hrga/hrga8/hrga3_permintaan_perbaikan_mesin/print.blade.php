@@ -54,22 +54,23 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 60px" colspan="2" class="align-middle text-center"> <span
-                                style="opacity: 0.5;">(Ttd
+                        @php
+                            $ttd = $permintaan->item_mesin->kategori == 'mesin' ? 'KEPALA MAINTENANCE' : 'KEPALA IT';
+                        @endphp
+                        <td style="height: 60px" colspan="2" class="align-middle text-center">
+                            <span style="opacity: 0.5;">(Ttd
                                 &
-                                Nama)</span></td>
+                                Nama)</span>
+                        </td>
 
-                        <td style="height: 60px" colspan="2" class="align-middle text-center"> <span
-                                style="opacity: 0.5;">(Ttd
-                                &
-                                Nama)</span></td>
+                        <td style="height: 60px" colspan="2" class="align-middle text-center">
+                            <x-ttd-barcode :id_pegawai="whereTtd($ttd)" />
+                        </td>
                     </tr>
                     <tr>
                         <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User
                         </td>
-                        @php
-                            $ttd = $permintaan->item_mesin->kategori == 'mesin' ? 'KEPALA MAINTENANCE' : 'KEPALA IT';
-                        @endphp
+
                         <td class="text-center" colspan="2">({{ $ttd }})</td>
                     </tr>
                     <tr>
@@ -145,7 +146,7 @@
                 </tr>
                 <tr>
                     <td style="height: 60px" class="align-middle text-center" colspan="2">
-                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <x-ttd-barcode :id_pegawai="whereTtd($ttd)" />
                     </td>
 
                     <td style="height: 60px" class="align-middle text-center" colspan="2">

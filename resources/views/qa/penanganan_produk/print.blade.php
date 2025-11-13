@@ -176,24 +176,24 @@
                 <tbody>
                     <tr>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('Kepala QC')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('Kepala Lab & FSTL')" />
                         </td>
                         <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('Kepala direktur')" />
                         </td>
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            (QC)
+                            (KEPALA QC)
                         </td>
                         <td class="text-center align-middle">
-                            (FSTL)
+                            (Kepala Lab & FSTL)
                         </td>
                         <td class="text-center align-middle">
-                            (DIREKTUR)
+                            (KEPALA DIREKTUR)
                         </td>
                     </tr>
                 </tbody>

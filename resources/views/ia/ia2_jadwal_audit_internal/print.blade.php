@@ -55,7 +55,7 @@
                     <tr>
 
 
-                        <td class="text-center">(LEAD AUDITOR) </span>
+                        <td class="text-center">(LEAD AUDITOR)</span>
                         </td>
                     </tr>
                 </tbody>

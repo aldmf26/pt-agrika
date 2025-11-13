@@ -190,17 +190,18 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
+                            @php
+                                $ttd = $kategori == 'it' ? 'KEPALA IT' : 'KEPALA MAINTENANCE';
+                            @endphp
 
-                            <td style="height: 80px" class="align-middle text-center"> <span style="opacity: 0.5;">(Ttd
-                                    &
-                                    Nama)</span></td>
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd($ttd)" />
+                            </td>
+
+                            <td style="height: 80px" class="align-middle text-center">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />
+                            </td>
                         </tr>
-                        @php
-                            $ttd = $kategori == 'it' ? 'KEPALA IT' : 'KEPALA MAINTENANCE';
-                        @endphp
                         <tr>
                             <td class="text-center">({{ $ttd }})</td>
                             <td class="text-center">(KEPALA HRGA)</td>
