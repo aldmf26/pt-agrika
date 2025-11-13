@@ -179,7 +179,7 @@
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ $pengawas }}</td>
                                 <td class="text-start">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-start">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
+                                <td class="text-end">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
                                 </td>
                                 <td class="text-start">{{ $sbw->nama ?? '-' }}</td>
                                 <td class="text-end">{{ $d['no_box'] }}</td>
