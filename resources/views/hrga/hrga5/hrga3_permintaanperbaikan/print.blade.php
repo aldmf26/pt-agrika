@@ -55,15 +55,13 @@
                                 &
                                 Nama)</span></td>
 
-                        <td style="height: 60px" colspan="2" class="align-middle text-center"> <span
-                                style="opacity: 0.5;">(Ttd
-                                &
-                                Nama)</span></td>
+                        <td style="height: 60px" colspan="2" class="align-middle text-center"> <x-ttd-barcode
+                                :id_pegawai="whereTtd('KEPALA MAINTENANCE')" /></td>
                     </tr>
                     <tr>
                         <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User
                         </td>
-                        <td class="text-center" colspan="2">(STAFF HRGA)</td>
+                        <td class="text-center" colspan="2">(STAFF MAINTENANCE)</td>
                     </tr>
                     <tr>
                         <td class="text-start" width="4%" style="border-right:none">Tanggal </td>
@@ -135,7 +133,7 @@
                 </tr>
                 <tr>
                     <td style="height: 60px" class="align-middle text-center" colspan="2">
-                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <x-ttd-barcode :id_pegawai="whereTtd('KEPALA MAINTENANCE')" />
                     </td>
 
                     <td style="height: 60px" class="align-middle text-center" colspan="2">
@@ -144,7 +142,7 @@
 
                 </tr>
                 <tr>
-                    <td class="text-center" colspan="2">(STAFF HRGA)</td>
+                    <td class="text-center" colspan="2">(KEPALA MAINTENANCE)</td>
                     <td class="text-center" colspan="2">(.................................) <br>Diisi Oleh User</td>
                 </tr>
                 <tr>

@@ -75,17 +75,17 @@
                 <tbody>
                     <tr>
                         <td style="height: 70px" class="align-middle text-center">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA HRGA')" />
                         </td>
                         <td style="height: 70px" class="align-middle text-center">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                            <x-ttd-barcode :id_pegawai="whereTtd('OPERATIONAL MANAGER')" />
                         </td>
 
                     </tr>
 
                     <tr>
                         <td class="text-center">( KEPALA HRGA )</td>
-                        <td class="text-center">( OPERASIONAL MANAGER )</td>
+                        <td class="text-center">( OPERATIONAL MANAGER )</td>
 
                     </tr>
                 </tbody>

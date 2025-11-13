@@ -16,6 +16,8 @@ class Hrga1JadwalMedicalCheckup extends Controller
         $tahun = empty($r->tahun) ? date('Y') : $r->tahun;
         $divisi = $r->divisi == 'All' ? '' : $r->divisi;
 
+
+
         $data = [
             'title' => 'Jadwal Medical Checkup',
             'jadwal' => JadwalMedicalModel::when(!empty($divisi), function ($query) use ($divisi) {
