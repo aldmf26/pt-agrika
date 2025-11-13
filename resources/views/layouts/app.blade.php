@@ -134,7 +134,32 @@
                         </div>
                     </div>
                 </div>
+                <!-- Back to Top Button -->
+                <button id="backToTopBtn" class="btn btn-primary btn-sm"
+                    style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99;">
+                    <i class="bi bi-arrow-up"></i>
+                </button>
             </footer>
+
+            <script>
+                // Back to Top Button Functionality
+                const backToTopBtn = document.getElementById('backToTopBtn');
+
+                window.addEventListener('scroll', function() {
+                    if (window.pageYOffset > 300) {
+                        backToTopBtn.style.display = 'block';
+                    } else {
+                        backToTopBtn.style.display = 'none';
+                    }
+                });
+
+                backToTopBtn.addEventListener('click', function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            </script>
         </div>
     </div>
 
