@@ -213,7 +213,7 @@
                             <td style="height: 80px" class="text-center align-middle">
                                 @php
                                     $pegawai = App\Models\DataPegawai::where('nama', $pengawas)
-                                        ->where('divisi_id', '2')
+
                                         ->whereNotIn('posisi', ['staff cabut', 'staff cetak'])
                                         ->first();
                                 @endphp
