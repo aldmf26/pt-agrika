@@ -212,7 +212,10 @@
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
                                 @php
-                                    $pegawai = App\Models\DataPegawai::where('nama', $pengawas)->first();
+                                    $pegawai = App\Models\DataPegawai::where('nama', $pengawas)
+                                        ->where('divisi_id', '2')
+                                        ->whereNotIn('posisi', ['staff cabut', 'staff cetak'])
+                                        ->first();
                                 @endphp
                                 <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                             </td>
