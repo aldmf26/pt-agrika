@@ -262,7 +262,7 @@
                             (KEPALA LAB)
                         </td>
                         <td class="text-center align-middle">
-                            (DIREKTUR UTAMA)
+                            (KEPALA DIREKTUR)
                         </td>
                     </tr>
                 </tbody>

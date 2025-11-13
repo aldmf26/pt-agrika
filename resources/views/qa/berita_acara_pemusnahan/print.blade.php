@@ -48,7 +48,7 @@
                         <th class="text-center" width="25%">Diketahui Oleh:</th>
                     </tr>
                 </thead>
-               <tbody>
+                <tbody>
                     <tr>
                         <td style="height: 80px" class="text-center align-middle">
                             <x-ttd-barcode :id_pegawai="whereTtd('Kepala QC')" />
@@ -65,7 +65,7 @@
                             (KEPALA QC)
                         </td>
                         <td class="text-center align-middle">
-                            (Kepala Lab & FSTL)
+                            (KEPALA LAB & FSTL)
                         </td>
                         <td class="text-center align-middle">
                             (KEPALA DIREKTUR)

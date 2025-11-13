@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td class="text-center align-middle">
-                            (Kepala Lab & FSTL)
+                            (KEPALA LAB & FSTL)
                         </td>
                         <td class="text-center align-middle">
                             (KEPALA DIREKTUR)

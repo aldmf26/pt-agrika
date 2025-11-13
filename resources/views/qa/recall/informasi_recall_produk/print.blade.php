@@ -92,7 +92,7 @@
                         <tr>
 
                             <td class="text-center align-middle">
-                            (KEPALA LAB & FSTL)
+                                (KEPALA LAB & FSTL)
                             </td>
 
                         </tr>

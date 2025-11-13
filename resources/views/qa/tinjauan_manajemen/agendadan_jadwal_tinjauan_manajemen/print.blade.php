@@ -56,7 +56,7 @@
                       <tr>
 
                           <td class="text-center align-middle">
-                              (Kepala Lab & FSTL)
+                              (KEPALA LAB & FSTL)
                           </td>
 
                       </tr>
