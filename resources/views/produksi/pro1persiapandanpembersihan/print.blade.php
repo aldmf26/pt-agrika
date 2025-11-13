@@ -179,7 +179,7 @@
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ $pengawas }}</td>
                                 <td class="text-start">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-start">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
+                                <td class="text-end">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
                                 </td>
                                 <td class="text-start">{{ $sbw->nama ?? '-' }}</td>
                                 <td class="text-end">{{ $d['no_box'] }}</td>
@@ -213,7 +213,7 @@
                             <td style="height: 80px" class="text-center align-middle">
                                 @php
                                     $pegawai = App\Models\DataPegawai::where('nama', $pengawas)
-                                        ->where('divisi_id', '2')
+
                                         ->whereNotIn('posisi', ['staff cabut', 'staff cetak'])
                                         ->first();
                                 @endphp
