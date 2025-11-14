@@ -38,6 +38,10 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
 
     public function store(Request $r)
     {
+
+        $r->validate([
+            'image' => 'required|file|mimes:jpg,jpeg,png,webp,mp4,mov,mkv,avi'
+        ]);
         $max_invoice = PermintaanPerbaikanMesin::max('invoice_pengajuan');
 
 
@@ -66,7 +70,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
             $imageName = $no_invoice . '.' . $image->getClientOriginalExtension();
             $image->storeAs('perbaikan_mesin', $imageName, 'public'); // Simpan di storage public
         }
-        
+
 
         $response = Http::withHeaders([
             'Authorization' => 'CP4KiwRsHdyskjdbamnn', // Pastikan token ini valid
