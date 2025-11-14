@@ -35,8 +35,8 @@ Route::get('/verify-ttd/{id_pegawai}', function ($id_pegawai) {
 
 Route::get('/questioner', [QuestionerController::class, 'questioner']);
 Route::post('/questioner', [QuestionerController::class, 'questioner_store'])->name('questioner.store');
-Route::get('/tamu', [Hrga1VisitorHealthForm::class, 'tamu']);
-Route::post('/tamu', [Hrga1VisitorHealthForm::class, 'storeTamu'])->name('tamu.store');
+// Route::get('/tamu', [Hrga1VisitorHealthForm::class, 'tamu']);
+// Route::post('/tamu', [Hrga1VisitorHealthForm::class, 'storeTamu'])->name('tamu.store');
 
 Route::get('/formPermintaanperbaikan', [Hrga3PermintaanPerbaikan::class, 'formPermintaanperbaikan'])
     ->name('formPermintaanperbaikan');
