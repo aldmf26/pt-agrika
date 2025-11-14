@@ -110,8 +110,6 @@
 
     </div>
 
-
-
     @section('scripts')
         <script>
             $('.uploadttd').click(function() {
