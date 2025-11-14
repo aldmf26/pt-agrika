@@ -13,6 +13,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tes', function () {
+    return view('tes');
+});
+
 Route::get('/tidak', function () {
     $data = [
         'title' => 'tidak'
