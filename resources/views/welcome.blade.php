@@ -75,8 +75,6 @@
                     <li><a href="#team" class="smoothScroll">Visi & Misi</a></li>
                     <li><a href="#menu" class="smoothScroll">Galery</a></li>
                     <li><a href="#contact" class="smoothScroll">Contact Us</a></li>
-                    <li><a href="{{ route('login') }}" class="smoothScroll"
-                            style="background-color: #346796; color: #fff; border-radius: 5px;">Login</a></li>
                 </ul>
             </div>
         </div>
