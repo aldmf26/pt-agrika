@@ -169,7 +169,7 @@
                         <tr>
                             <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
                                     alt=""></th>
-                            <th colspan="9">
+                            <th colspan="11">
                                 <p class="cop_judul mt-3">FORM PENCUCIAN NITRIT (CCP 1)</p>
                                 <p class="cop_bawah text-center">Material cleaning and washing CCP 1</p>
                             </th>
