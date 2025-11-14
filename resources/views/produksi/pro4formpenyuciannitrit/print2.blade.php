@@ -335,7 +335,7 @@
                                 @php
                                     $pegawai = App\Models\DataPegawai::where('nama', $nama_regu)
 
-                                        ->whereNotIn('posisi', ['staff cabut', 'staff cetak'])
+                                        ->whereNotIn('posisi', ['staff cabut', 'staff cetak', 'kepala qc'])
                                         ->first();
                                 @endphp
                             </td>

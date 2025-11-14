@@ -214,7 +214,7 @@
                                 @php
                                     $pegawai = App\Models\DataPegawai::where('nama', $pengawas)
 
-                                        ->whereNotIn('posisi', ['staff cabut', 'staff cetak'])
+                                        ->whereNotIn('posisi', ['staff cabut', 'staff cetak', 'kepala qc'])
                                         ->first();
                                 @endphp
                                 <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
