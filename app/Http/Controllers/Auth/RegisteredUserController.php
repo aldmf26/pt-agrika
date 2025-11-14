@@ -43,8 +43,8 @@ class RegisteredUserController extends Controller
             'posisi_id' => 1,
             'lokasi' => 'bjm',
         ]);
-        $path = $request->file('ttd')->store('ttd', 'public');
-        Ttd::updateOrCreate(['user_id' => $user->id], ['link' => $path]);
+        // $path = $request->file('ttd')->store('ttd', 'public');
+        // Ttd::updateOrCreate(['user_id' => $user->id], ['link' => $path]);
 
         Auth::login($user);
 
