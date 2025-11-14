@@ -36,9 +36,9 @@
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <div>
-                        <label for="auditee" class="form-label">Auditee</label>
+                        <label for="auditee" class="form-label">Auditor</label>
                         <select name="audite" class="form-control selectAudtor">
-                            <option value="">Pilih Auditee</option>
+                            <option value="">Pilih Auditor</option>
                             @foreach ($user as $u)
                                 <option value="{{ $u->nama }}">{{ $u->nama }}</option>
                             @endforeach

@@ -20,15 +20,19 @@
                 <div class="col-md-2 col-sm-4">
                     <div>
                         <label for="divisi" class="form-label">divisi</label>
-                        <input type="text" class="form-control" id="divisi" name="divisi"
-                            value="{{ $laporan->divisi }}" required>
+                        <select name="divisi" class="selectAudtor" id="">
+                            <option value="">Pilih Divisi</option>
+                            @foreach ($divisi as $d)
+                                <option @selected($laporan->divisi == $d->divisi) value="{{ $d->divisi }}">{{ $d->divisi }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-3 col-sm-12">
                     <div>
-                        <label for="auditee" class="form-label">Auditee</label>
+                        <label for="auditee" class="form-label">Auditor</label>
                         <select name="audite" class="form-control selectAudtor">
-                            <option value="">Pilih Auditee</option>
+                            <option value="">Pilih Auditor</option>
                             @foreach ($user as $u)
                                 <option value="{{ $u->nama }}"
                                     {{ $laporan->audite == $u->nama ? 'selected' : '' }}>
