@@ -42,6 +42,10 @@ class Hrga3PermintaanPerbaikan extends Controller
     public function store(Request $r)
     {
 
+        $r->validate([
+            'image' => 'required|file|mimes:jpg,jpeg,png,webp,mp4,mov,mkv,avi'
+        ]);
+
         $max_invoice = PermintaanPerbaikanSaranaPrasana::max('invoice_pengajuan');
         if (empty($max_invoice)) {
             $no_invoice = 10001;
