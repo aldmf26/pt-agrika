@@ -31,11 +31,11 @@
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             {{ $slot }}
 
-            <p class="mt-10 text-center text-sm/6 text-gray-500">
+            {{-- <p class="mt-10 text-center text-sm/6 text-gray-500">
                 Daftar ?
                 <a href="{{ route('register') }}"
                     class="font-semibold text-indigo-600 hover:text-indigo-500">Register</a>
-            </p>
+            </p> --}}
         </div>
     </div>
 </body>

@@ -64,6 +64,7 @@ class IA4LaporanAuditInternalController extends Controller
             'title' => 'Edit Laporan Audit Internal',
             'laporan' => $laporan,
             'user' => $user,
+            'divisi' => Divisi::get(),
         ];
 
         return view('ia.ia4_laporan_audit_internal.edit', $data);
