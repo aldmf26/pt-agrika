@@ -84,9 +84,6 @@
                                     </td>
                                     <td>
                                         @if (empty($user->ttd))
-                                            <button data-id="{{ $user->id }}" class="btn btn-xs btn-info uploadttd"
-                                                type="button">Upload
-                                                ttd</button>
                                         @else
                                             <img src="{{ Storage::url($user->ttd->link) }}" width="250"
                                                 alt="">
@@ -113,12 +110,7 @@
 
     </div>
 
-    <form action="{{ route('user.upload') }}" enctype="multipart/form-data" method="post">
-        @csrf
-        <x-modal idModal="uploadttd">
 
-        </x-modal>
-    </form>
 
     @section('scripts')
         <script>
