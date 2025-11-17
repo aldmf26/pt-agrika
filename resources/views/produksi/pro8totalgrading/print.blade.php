@@ -215,8 +215,8 @@
                                 <td class="text-start align-middle">{!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
                                 </td>
                                 <td class="text-end align-middle">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
-                                <td class="text-end align-middle">{{ $g['pcs'] }}</td>
-                                <td class="text-end align-middle">{{ $g['gr'] }}</td>
+                                <td class="text-end align-middle">{{ number_format($g['pcs'], 0) }}</td>
+                                <td class="text-end align-middle">{{ number_format($g['gr'], 0) }}</td>
                                 <td class="text-start align-middle">{{ strtoupper($g['grade']) }}</td>
                                 <td class="text-end align-middle">{{ $g['box'] }}</td>
                                 <td class="text-center align-middle"></td>

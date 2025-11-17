@@ -274,10 +274,10 @@
                         <tr class="table-bawah">
                             <th style="border: none" colspan="3"></th>
                             <td colspan="3" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                                <x-ttd-barcode size="40" :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
                             </td>
                             <td colspan="2" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA QC')" />
+                                <x-ttd-barcode size="40" :id_pegawai="whereTtd('KEPALA QC')" />
                             </td>
                         </tr>
                         <tr class="table-bawah">
