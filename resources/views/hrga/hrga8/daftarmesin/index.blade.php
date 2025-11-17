@@ -127,6 +127,12 @@
                                             <input type="text" class="form-control" name="metode[]"
                                                 x-model="item.metode">
                                         </div>
+                                        <div class="col-lg-4 mt-2">
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                @click="items.splice(index, 1)">
+                                                <i class="fas fa-trash"></i> Hapus
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </template>
