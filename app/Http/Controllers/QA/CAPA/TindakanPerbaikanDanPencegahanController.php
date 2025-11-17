@@ -9,13 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class TindakanPerbaikanDanPencegahanController extends Controller
 {
-    public function index()
+    public function index(Request $r)
     {
+
         // Contoh pakai DB, atau scan folder seperti sebelumnya
-        $files = DB::table('excel_files')->orderBy('created_at', 'desc')->get(['id', 'nama_file', 'path', 'created_at', 'admin']);
+        $files = DB::table('excel_files')->where('kategori', $r->kategori)->orderBy('created_at', 'desc')->get(['id', 'nama_file', 'path', 'created_at', 'admin']);
+        if ($r->kategori == 'capa') {
+            $title = 'Tindakan Perbaikan dan Pencegahan';
+        } else {
+            $title = ucwords($r->kategori);
+        }
         $data = [
-            'title' => 'Tindakan Perbaikan dan Pencegahan',
-            'files' => $files
+            'title' => $title,
+            'files' => $files,
+            'kategori' => $r->kategori
         ];
 
         return view('qa.capa.tindakan_perbaikan_dan_pencegahan.index', $data);

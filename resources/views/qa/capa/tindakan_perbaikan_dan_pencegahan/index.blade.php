@@ -13,6 +13,7 @@
                 <label for="excelFile" class="form-label">Pilih File Excel (.xlsx atau .xls)</label>
                 <input type="file" class="form-control" id="excelFile" name="excel_file" accept=".xlsx,.xls"
                     required>
+                <input type="hidden" name="kategori" value="{{ $kategori }}">
                 <div class="form-text">Ukuran maksimal 10MB. Hanya file Excel yang valid.</div>
             </div>
         </x-modal>
@@ -90,7 +91,7 @@
                         type: 'POST',
                         data: formData,
                         processData: false,
-                        contentType: false, 
+                        contentType: false,
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
