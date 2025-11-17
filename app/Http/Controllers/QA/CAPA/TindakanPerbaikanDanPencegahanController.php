@@ -44,6 +44,7 @@ class TindakanPerbaikanDanPencegahanController extends Controller
             'nama_file' => $filename,
             'path' => $path,
             'admin' => auth()->user()->name,
+            'kategori' => $request->kategori,
             'created_at' => now()
         ]);
 
