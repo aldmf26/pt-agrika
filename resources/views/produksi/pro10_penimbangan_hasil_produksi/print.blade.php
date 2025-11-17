@@ -162,13 +162,13 @@
             <div class="col-lg-12">
 
 
-                <table width="100%" class="mt-4" style="font-size: 11px">
+                <table width="100%" style="font-size: 11px">
                     <thead>
                         <tr>
-                            <th class="align-top"><img style="width: 80px" src="{{ asset('img/logo.jpeg') }}"
-                                    alt=""></th>
+                            <th colspan="2" class="align-top"><img style="width: 80px"
+                                    src="{{ asset('img/logo.jpeg') }}" alt=""></th>
 
-                            <th colspan="5">
+                            <th colspan="4">
                                 <p class="cop_judul text-center">FORM PENIMBANGAN HASIL PRODUKSI</p>
                                 <p class="cop_bawah text-center">Production Results</p>
                             </th>
@@ -184,7 +184,7 @@
                             </th>
                         </tr> --}}
                         <tr>
-                            <td>Hari / Tanggal <br> <span class="fst-italic">Date</span></td>
+                            <td colspan="2">Hari / Tanggal <br> <span class="fst-italic">Date</span></td>
                             <td>&nbsp; : {{ tanggal($tgl) }}</td>
                         </tr>
 
@@ -261,7 +261,7 @@
 
 
                     </tbody>
-                    <tfoot>
+                    {{-- <tfoot>
                         <tr>
                             <th colspan="13">&nbsp;</th>
                         </tr>
@@ -273,11 +273,11 @@
                         </tr>
                         <tr class="table-bawah">
                             <th style="border: none" colspan="3"></th>
-                            <td colspan="3" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode size="40" :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                            <td colspan="3" class="text-center align-middle">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
                             </td>
-                            <td colspan="2" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode size="40" :id_pegawai="whereTtd('KEPALA QC')" />
+                            <td colspan="2" class="text-center align-middle">
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA QC')" />
                             </td>
                         </tr>
                         <tr class="table-bawah">
@@ -286,7 +286,7 @@
                             <td colspan="2" class="text-center align-middle">(KEPALA QC)</td>
                         </tr>
 
-                    </tfoot>
+                    </tfoot> --}}
 
                 </table>
             </div>
@@ -295,29 +295,29 @@
 
 
             </div>
-            {{-- <div class="col-5">
+            <div class="col-5">
                 <br>
                 <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px; text-align: center; vertical-align: bottom;">
-                                KA.PACKING
-                            </td>
-                            <td style="height: 80px; text-align: center; vertical-align: bottom;">
-                                QC PACKING
-                            </td>
+                    <tr>
+                        <th class="text-center" width="50%">Dibuat Oleh:</th>
+                        <th class="text-center" width="50%">Diperiksa Oleh:</th>
+                    </tr>
+                    <tr>
 
-                        </tr>
+                        <td class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                        </td>
+                        <td class="text-center align-middle">
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA QC')" />
+                        </td>
+                    </tr>
+                    <tr>
 
-                    </tbody>
+                        <td class="text-center align-middle">(KEPALA PACKING & GUDANG FG)</td>
+                        <td class="text-center align-middle">(KEPALA QC)</td>
+                    </tr>
                 </table>
-            </div> --}}
+            </div>
 
 
         </div>
