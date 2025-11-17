@@ -33,14 +33,18 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ tanggal($g['tgl']) }}</td>
                             <td>{{ $sbw->no_invoice ?? $g['nm_partai'] }}</td>
-                            <td>{{ $g['no_invoice'] }}</td>
+                            <td>{{ $g['no_invoice'] ?? $g['nm_partai'] }}</td>
                             <td>{{ $sbw->nama ?? '-' }}</td>
                             <td>{{ number_format($g['pcs'], 0) }}</td>
                             <td>{{ number_format($g['gr'], 0) }}</td>
                             <td class="text-center">
-                                <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama ?? '-', 'kode_lot' => $sbw->no_invoice, 'no_po' => $g['no_invoice']]) }}"
-                                    target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
-                                    Print</a>
+                                @if (empty($sbw->no_invoice))
+                                @else
+                                    <a href="{{ route('produksi.7.print', ['tgl' => $g['tgl'], 'nm_partai' => $g['nm_partai'], 'grade' => $sbw->nama ?? '-', 'kode_lot' => $sbw->no_invoice, 'no_po' => $g['no_invoice']]) }}"
+                                        target="_blank" class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
+                                        Print</a>
+                                @endif
+
                             </td>
 
                         </tr>
