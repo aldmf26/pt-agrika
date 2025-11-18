@@ -20,7 +20,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($datas->sortByDesc('tgl_masuk') as $d)
+                    @foreach ($datas as $d)
                         <tr style="font-size: 13px" class="text-center align-middle">
                             <td class="text-end">{{ $loop->iteration }}</td>
                             <td class="text-start">{{ $d->divisi->divisi ?? 'Cabut Bulu' }}</td>
