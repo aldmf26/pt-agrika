@@ -79,7 +79,10 @@
                                 $nama = $s['name'];
                                 $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
                             @endphp
-                            <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
+                            @if (empty($pegawai))
+                            @else
+                                <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
+                            @endif
                             {{-- {{ $s['name'] }} --}}
                         </td>
                     </tr>
