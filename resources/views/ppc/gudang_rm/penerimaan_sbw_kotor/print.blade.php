@@ -144,7 +144,7 @@
         <thead>
             <tr>
                 <th></th>
-                <th colspan="{{ $total_kolom }}">No Reg Rumah Walet : {{ $penerimaan->no_invoice }}</th>
+                <th colspan="{{ $total_kolom }}">No Reg Rumah Walet : {{ $penerimaan->no_reg }}</th>
             </tr>
         </thead>
         <tbody>
