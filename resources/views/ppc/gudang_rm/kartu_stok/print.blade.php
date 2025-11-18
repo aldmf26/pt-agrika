@@ -55,7 +55,9 @@
                         <td class="text-end">{{ number_format($saldo, 0) }}
                             {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
                         <td class="text-end">{{ $t['kode_lot'] }}</td>
-                        <td></td>
+                        <td>
+                            {{ $t['nm_partai'] }}
+                        </td>
                     </tr>
                 @endforeach
             @else
