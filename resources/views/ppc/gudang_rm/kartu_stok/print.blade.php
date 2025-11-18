@@ -56,7 +56,7 @@
                             {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
                         <td class="text-end">{{ $t['kode_lot'] }}</td>
                         <td>
-                            {{ $t['nm_partai'] }}
+
                         </td>
                     </tr>
                 @endforeach
@@ -74,7 +74,9 @@
                         <td class="text-end">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }} GR</td>
                         <td class="text-end">{{ number_format($saldo2, 0) }} GR</td>
                         <td class="text-end">{{ $s['no_invoice'] }}</td>
-                        <td></td>
+                        <td>
+                            {{ $t['nm_partai'] }}
+                        </td>
                     </tr>
                 @endforeach
             @endif
