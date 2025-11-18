@@ -70,6 +70,7 @@ class DataPegawai extends Component
         }
 
         $dataToPrint = $query->get();
+        session()->forget('dataToPrint');
         session()->put('dataToPrint', $dataToPrint);
         return redirect()->route('hrga1.4.print');
     }
