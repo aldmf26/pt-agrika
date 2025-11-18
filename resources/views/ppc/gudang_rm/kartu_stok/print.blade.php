@@ -76,7 +76,7 @@
                             GR</td>
                         <td class="text-end align-middle">{{ number_format($saldo2, 0) }} GR</td>
                         <td class="text-end align-middle">{{ $s['no_invoice'] }}</td>
-                        <td style="height: 40px">
+                        <td style="height: 40px" class="text-center align-middle">
                             @php
                                 $nama = $s['nama'];
                                 $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
