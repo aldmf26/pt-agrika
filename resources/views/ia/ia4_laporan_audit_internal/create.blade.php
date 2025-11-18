@@ -23,7 +23,7 @@
                             name="urutan" required>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-4">
+                <div class="col-md-4 col-sm-4">
                     <div>
                         <label for="divisi" class="form-label">divisi</label>
                         <select name="divisi" class="selectAudtor" id="">
@@ -34,7 +34,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-5 col-sm-12">
                     <div>
                         <label for="auditee" class="form-label">Auditor</label>
                         <select name="audite" class="form-control selectAudtor">
@@ -45,26 +45,26 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div>
                         <label for="finding" class="form-label">Finding</label>
-                        <input type="text" class="form-control" id="finding" name="finding" required>
+                        <textarea rows="10" class="form-control" id="tindakan" name="finding" required></textarea>
                     </div>
                 </div>
 
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <div class="">
                         <label for="tindakan" class="form-label">Tindak Perbaikan</label>
                         <textarea rows="10" class="form-control" id="tindakan" name="perbaikan" required></textarea>
                     </div>
                 </div>
-                <div class="col-md-6 col-sm-6">
+                <div class="col-md-4 col-sm-6">
                     <div class="">
                         <label for="tindakan" class="form-label">Tindak Pencegahan</label>
                         <textarea rows="10" class="form-control" id="tindakan" name="pencegahan" required></textarea>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div>
                         <label for="pic" class="form-label">PIC</label>
                         <select name="pic" class="form-control selectAudtor">
@@ -75,7 +75,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12">
+                <div class="col-md-4 col-sm-12">
                     <div>
                         <label for="completion_date" class="form-label">Completion Date</label>
                         <input type="date" class="form-control" id="completion_date" name="completion_date" required>
@@ -87,7 +87,7 @@
                         <input type="text" class="form-control" id="status" name="status" required>
                     </div>
                 </div>
-                <div class="col-md-3 col-sm-12 d-flex justify-content-end">
+                <div class="col-md-1 col-sm-12 d-flex justify-content-end">
                     <div>
                         <button type="submit" class="btn btn-primary float-end mt-4">Save</button>
                     </div>
