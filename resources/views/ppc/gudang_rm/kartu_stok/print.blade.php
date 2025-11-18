@@ -75,7 +75,7 @@
                         <td class="text-end">{{ number_format($saldo2, 0) }} GR</td>
                         <td class="text-end">{{ $s['no_invoice'] }}</td>
                         <td>
-                            {{ $t['nm_partai'] }}
+                            {{ $s['nm_partai'] }}
                         </td>
                     </tr>
                 @endforeach
