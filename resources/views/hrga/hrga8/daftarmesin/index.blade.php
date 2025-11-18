@@ -54,7 +54,7 @@
     <!-- FORM -->
     <form action="{{ route('hrga8.0.store') }}" method="post">
         @csrf
-        <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal " id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -157,7 +157,7 @@
     </form>
     <form action="{{ route('hrga8.0.update') }}" method="post">
         @csrf
-        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal " id="edit" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xlplus">
                 <div class="modal-content">
                     <div class="modal-header">
