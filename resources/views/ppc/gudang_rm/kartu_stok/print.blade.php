@@ -81,7 +81,7 @@
                             @endphp
                             @if (empty($pegawai))
                             @else
-                                <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
+                                <x-ttd-barcode size="40" :id_pegawai="$pegawai->karyawan_id_dari_api" />
                             @endif
                             {{-- {{ $s['name'] }} --}}
                         </td>
