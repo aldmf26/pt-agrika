@@ -76,16 +76,17 @@
                             GR</td>
                         <td class="text-end align-middle">{{ number_format($saldo2, 0) }} GR</td>
                         <td class="text-end align-middle">{{ $s['no_invoice'] }}</td>
-                        <td style="height: 40px">
-                            @php
-                                $nama = $s['name'];
+                        <td style="height: 40px" class="text-center align-middle">
+                            {{-- @php
+                                $nama = $s['nama'];
                                 $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
                             @endphp
                             @if (empty($pegawai))
+                                {{ $s['nama'] }}
                             @else
                                 <x-ttd-barcode size="40" :id_pegawai="$pegawai->karyawan_id_dari_api" />
-                            @endif
-                            {{-- {{ $s['name'] }} --}}
+                            @endif --}}
+
                         </td>
                     </tr>
                 @endforeach
