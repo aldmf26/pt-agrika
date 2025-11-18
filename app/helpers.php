@@ -111,12 +111,12 @@ if (!function_exists('divisiAudit')) {
 if (!function_exists('whereTtd')) {
     function whereTtd($where)
     {
-        return DataPegawai::where('posisi', "%$where%")->first()->karyawan_id_dari_api;
+        return DataPegawai::where('posisi', $where)->first()->karyawan_id_dari_api;
     }
 }
 if (!function_exists('pengawasTtd')) {
     function pengawasTtd($pengawas)
     {
-        return DataPegawai::where('nama', "%$pengawas%")->first();
+        return DataPegawai::where('nama', $pengawas)->first();
     }
 }
