@@ -82,7 +82,7 @@
                                 $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
                             @endphp
                             @if (empty($pegawai))
-                                {{ $s['name'] }}
+                                {{ $s['nama'] }}
                             @else
                                 <x-ttd-barcode size="40" :id_pegawai="$pegawai->karyawan_id_dari_api" />
                             @endif
