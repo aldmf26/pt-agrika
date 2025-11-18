@@ -78,7 +78,7 @@
                         <td class="text-end align-middle">{{ $s['no_invoice'] }}</td>
                         <td style="height: 40px">
                             @php
-                                $nama = $s['name'];
+                                $nama = $s['nama'];
                                 $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
                             @endphp
                             @if (empty($pegawai))
