@@ -62,7 +62,7 @@ class RM3PenerimaanSBWKotorController extends Controller
             ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
             ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
             ->leftJoin('data_edit_wh', 'data_edit_wh.nm_partai', '=', 'sbw_kotor.nm_partai')
-            ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*', 'data_edit_wh.driver', 'data_edit_wh.no_kendaraan as no_kendaraan_edit')
+            ->select('grade_sbw_kotor.nama', 'rumah_walet.nama as rumah_walet', 'rumah_walet.no_reg', 'sbw_kotor.*', 'data_edit_wh.driver', 'data_edit_wh.no_kendaraan as no_kendaraan_edit')
             ->where('sbw_kotor.id', $r->id)
             ->orderBy('sbw_kotor.tgl', 'desc')
             ->first();
