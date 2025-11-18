@@ -117,6 +117,6 @@ if (!function_exists('whereTtd')) {
 if (!function_exists('pengawasTtd')) {
     function pengawasTtd($pengawas)
     {
-        return DataPegawai::where('nama', 'like', "%$pengawas%")->first();
+        return DataPegawai::where('nama', "%$pengawas%")->first();
     }
 }
