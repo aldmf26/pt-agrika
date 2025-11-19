@@ -223,10 +223,10 @@
                                         {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir'], 0) }}
                                     </td>
                                     <td class="text-end">
-                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_serah'] ?? '-') }}
+                                        {{ $b['pcs_akhir'] != $b['pcs_awal'] ? '-' : $b['tgl_serah'] }}
                                     </td>
                                     <td class="text-end">
-                                        {{ $b['pcs_awal_ctk'] == 0 ? '-' : tanggal($b['tgl_selesai_ctk']) }}
+                                        {{ $b['pcs_awal_ctk'] == 0 ? '-' : $b['tgl_selesai_ctk'] }}
                                     </td>
 
                                     <td class="text-end">
@@ -241,7 +241,7 @@
                                     </td>
                                     {{-- grading --}}
                                     <td class="text-end">
-                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
+                                        {{ ($b['pcs_grading'] != $b['pcs_awal'] ? '-' : empty($b['tgl_grading'])) ? '-' : $b['tgl_grading'] }}
                                     </td>
                                     <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
@@ -250,7 +250,7 @@
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
                                     </td>
                                     <td class="text-end">
-                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
+                                        {{ ($b['pcs_grading'] != $b['pcs_awal'] ? '-' : empty($b['tgl_grading'])) ? '-' : $b['tgl_grading'] }}
                                     </td>
                                     <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
@@ -272,7 +272,7 @@
                                         $tgl = date('Y-m-d', strtotime($b['tgl_grading'] . ' + 1 days'));
                                     @endphp
                                     <td class="text-end">
-                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($tgl) }}
+                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : $tgl }}
                                     </td>
                                     {{-- <td></td>
                                     <td></td>
