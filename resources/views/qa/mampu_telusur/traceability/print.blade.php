@@ -235,13 +235,13 @@
                                     </td>
                                     <td class="text-end">
 
-                                        {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir_ctk'], 0) }}
+                                        {{ $b[' '] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir_ctk'], 0) }}
                                         /
                                         {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir_ctk'], 0) }}
                                     </td>
                                     {{-- grading --}}
                                     <td class="text-end">
-                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
+                                        {{ ($b['pcs_grading'] != $b['pcs_awal'] ? '-' : empty(tanggal($b['tgl_grading']))) ? '-' : tanggal($b['tgl_grading']) }}
                                     </td>
                                     <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
@@ -250,7 +250,7 @@
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['gr_grading'], 0) }}
                                     </td>
                                     <td class="text-end">
-                                        {{ $b['pcs_grading'] != $b['pcs_awal'] ? '-' : tanggal($b['tgl_grading']) }}
+                                        {{ ($b['pcs_grading'] != $b['pcs_awal'] ? '-' : empty(tanggal($b['tgl_grading']))) ? '-' : tanggal($b['tgl_grading']) }}
                                     </td>
                                     <td class="text-end">
                                         {{ $b['pcs_grading'] != $b['pcs_awal'] ? '0' : number_format($b['pcs_grading'], 0) }}
