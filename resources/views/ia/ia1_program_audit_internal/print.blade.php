@@ -85,11 +85,11 @@
                 </tr>
                 <tr>
                     <td style="height: 70px" class="align-middle text-center">
-                        <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                        <x-ttd-barcode :id_pegawai="whereTtd('Kepala Lab & FSTL')" />
                     </td>
                 </tr>
-                <td class="text-center">( .......................... ) <br> <span style="font-size: 8px">
-                        Diisi Oleh User</span>
+                <td class="text-center">
+                    (Kepala Lab & FSTL)
                 </td>
             </table>
         </div>

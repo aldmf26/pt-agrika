@@ -62,6 +62,7 @@ class DataPegawai extends Component
     public function print()
     {
         $query = ModelsDataPegawai::with('divisi')
+            ->orderBy('divisi_id', 'asc')
             ->orderBy('tgl_masuk', 'asc');
 
         if (!empty($this->cekPegawai)) {
@@ -69,6 +70,7 @@ class DataPegawai extends Component
         }
 
         $dataToPrint = $query->get();
+        session()->forget('dataToPrint');
         session()->put('dataToPrint', $dataToPrint);
         return redirect()->route('hrga1.4.print');
     }
