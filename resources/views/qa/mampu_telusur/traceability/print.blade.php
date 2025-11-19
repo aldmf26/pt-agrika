@@ -235,7 +235,7 @@
                                     </td>
                                     <td class="text-end">
 
-                                        {{ $b[' '] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir_ctk'], 0) }}
+                                        {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['pcs_akhir_ctk'], 0) }}
                                         /
                                         {{ $b['pcs_akhir_ctk'] != $b['pcs_awal'] ? '-' : number_format($b['gr_akhir_ctk'], 0) }}
                                     </td>
