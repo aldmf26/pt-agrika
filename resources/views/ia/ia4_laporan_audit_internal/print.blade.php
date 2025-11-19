@@ -213,6 +213,7 @@
                                     $pegawai = App\Models\DataPegawai::where('nama', 'Muhammad Fahrizaldi')->first();
                                 @endphp
                                 <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
+
                             </td>
                         </tr>
                         <tr>
