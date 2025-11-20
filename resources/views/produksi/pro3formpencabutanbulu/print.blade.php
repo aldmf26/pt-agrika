@@ -300,14 +300,7 @@
                                     %
                                 </td>
                                 <td class="text-start">
-                                    @php
-                                        $susut = (1 - $c['gr_akhir'] / $c['gr']) * 100;
-                                    @endphp
-                                    @if ($susut < 31)
-                                        OK
-                                    @else
-                                        NOT OK
-                                    @endif
+                                    {{ $susut < 31 ? 'OK' : 'NOT OK' }}
                                 </td>
                                 <td class="text-start">
                                     @if ($susut >= 31)
@@ -320,7 +313,6 @@
                                         </span>
                                     @endif
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
