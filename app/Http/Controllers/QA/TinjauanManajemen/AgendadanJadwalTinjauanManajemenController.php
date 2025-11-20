@@ -79,9 +79,10 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
         }
 
         for ($i = 0; $i < count($r->pic); $i++) {
+            $pegawai = DB::table('data_pegawais')->where('id', $r->pic[$i])->first();
             $data3 = [
                 'nota_agenda' => $nota,
-                'pegawai_id' => $r->pic[$i],
+                'pegawai_id' => $pegawai->karyawan_id_dari_api,
             ];
             DB::table('daftar_hadir')->insert($data3);
         }
