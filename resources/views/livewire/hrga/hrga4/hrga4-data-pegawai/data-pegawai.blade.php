@@ -27,7 +27,7 @@
                     </th>
                     <th class="">Berhenti</th>
                     <th class="pointer" wire:click='sortBy("posisi")'>Posisi <i class="fas fa-sort float-end"></i></th>
-                    <th class="text-center">Aksi <br> <input type="checkbox" wire:model.live="selectAll"></th>
+                    <th class="text-center">Aksi</th>
                 </tr>
             </thead>
             @foreach ($datas as $i => $d)
