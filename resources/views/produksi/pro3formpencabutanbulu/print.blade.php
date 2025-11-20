@@ -343,10 +343,10 @@
                         <tr class="table-bawah">
                             <th style="border: none" colspan="15"></th>
                             <td colspan="3" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="pengawasTtd($pengawas)->karyawan_id_dari_api" />
+                                <x-ttd-barcode format="png" :id_pegawai="pengawasTtd($pengawas)->karyawan_id_dari_api" />
                             </td>
                             <td colspan="2" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA CABUT')" />
+                                <x-ttd-barcode format="png" :id_pegawai="whereTtd('KEPALA CABUT')" />
                             </td>
                         </tr>
                         <tr class="table-bawah">

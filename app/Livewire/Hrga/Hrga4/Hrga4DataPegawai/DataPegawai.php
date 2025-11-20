@@ -81,7 +81,8 @@ class DataPegawai extends Component
 
         $query = ModelsDataPegawai::with('divisi')
             ->whereAny(['nama', 'nik', 'posisi', 'tgl_masuk'], 'LIKE', "%{$this->search}%")
-            ->whereDate('tgl_lahir', '<=', $tanggalBatas); // hanya yg sudah 17 tahun ke atas
+            ->whereDate('tgl_lahir', '<=', $tanggalBatas)
+            ->where('berhenti', 'T'); // hanya yg sudah 17 tahun ke atas
 
         if ($this->sort && $this->sortDirection) {
             $query->orderBy($this->sort, $this->sortDirection);
