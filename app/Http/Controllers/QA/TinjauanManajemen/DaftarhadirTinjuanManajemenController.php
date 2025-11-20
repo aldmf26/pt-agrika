@@ -27,7 +27,7 @@ class DaftarhadirTinjuanManajemenController extends Controller
                     DB::raw("agendadan_jadwal_tinjauan_manajemens.nota_agenda COLLATE utf8mb4_unicode_ci")
                 );
             })
-            ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
+            ->leftJoin('data_pegawais', 'data_pegawais.karyawan_id_dari_api', '=', 'daftar_hadir.pegawai_id')
             ->groupBy('agendadan_jadwal_tinjauan_manajemens.nota_agenda')
             ->get();
         $data = [
