@@ -6,7 +6,7 @@
                 @livewire('notes')
             </div>
             <div class="header-top-right">
-                @livewire('header-notification')
+                {{-- @livewire('header-notification') --}}
 
                 <div x-data="{ open: false }" @click.outside="open = false">
                     <a @click="open = ! open" href="#" id="topbarUserDropdown"
@@ -102,7 +102,7 @@
             <ul>
                 <li class="menu-item {{ $getRouteName == 'dashboard.index' ? 'active' : '' }}">
                     <a wire:navigate href="{{ route('dashboard.index') }}" class='menu-link'>
-                        <span><i class="bi bi-grid-fill"></i> Dashboard</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 

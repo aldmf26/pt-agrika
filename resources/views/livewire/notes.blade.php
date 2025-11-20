@@ -1,8 +1,10 @@
 <div class="ms-2">
-    <a data-bs-toggle="modal" href="#notes" class="btn btn-outline-primary btn-sm">Note's</a>
+    <a data-bs-toggle="modal" href="#notes" class="btn btn-outline-primary btn-sm">Cari Menu</a>
     <x-modal id="notes" title="Note's" btnSave="T" size="modal-lg" wire:ignore.self>
+        @livewire('dashboard.search')
+
         {{-- Tambah Catatan --}}
-        <div class="mb-3 d-flex ">
+        {{-- <div class="mb-3 d-flex ">
             <input type="text" wire:model.defer="newNote" class="form-control" placeholder="Tulis catatan baru...">
             <button wire:click="saveNote" class="btn btn-sm btn-primary ms-2 float-end">Tambah</button>
         </div>
@@ -10,11 +12,11 @@
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-        </div>
+        </div> --}}
 
 
         {{-- List Notes --}}
-        <table class="table table-striped table-bordered table-dark">
+        {{-- <table class="table table-striped table-bordered table-dark">
             <thead>
                 <tr>
                     <th>No</th>
@@ -48,6 +50,6 @@
                     </tr>
                 @endforeach
             </tbody>
-        </table>
+        </table> --}}
     </x-modal>
 </div>

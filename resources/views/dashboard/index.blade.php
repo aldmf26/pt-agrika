@@ -2,10 +2,10 @@
     <div class="row">
         <div class="col-12">
 
-            @can('presiden')
+            {{-- @can('presiden')
                 <a href="#tambah" data-bs-toggle="modal" class="float-end btn btn-primary btn-sm"><i class="fas fa-plus"></i>
                     Dokumen</a>
-            @endcan
+            @endcan --}}
 
             <form action="{{ route('dashboard.store') }}" method="POST">
                 <x-modal id="tambah" title="Tambah Dokumen Internal">
