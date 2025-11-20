@@ -1,5 +1,5 @@
 <div class="row">
-    <main class="col-12">
+    <main class="col-6">
         <div x-data="searchInput">
             <input class="form-control" type="text" placeholder="cari menu" wire:model.live.debounce.300ms="search">
             <div wire:loading>
@@ -11,7 +11,7 @@
                 <table class="table table-bordered table-dark table-hover mt-2">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <th scope="col" class="text-center">No</th>
                             <th scope="col">Judul</th>
                             <th scope="col">Link</th>
                         </tr>
@@ -19,7 +19,7 @@
                     <tbody>
                         @foreach ($dokumen as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td align="center">{{ $loop->iteration }}</td>
                                 <td>{{ $item->title }}</td>
                                 <td>
                                     @if (!empty($item->subtitle))
