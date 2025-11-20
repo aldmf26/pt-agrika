@@ -254,11 +254,7 @@
                             <tr class="table-bawah">
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
-<<<<<<< Updated upstream
-                                <td class="text-end">{{ $sbw->no_invoice ?? '-' }}</td>
-=======
                                 <td class="text-end">{{ $sbw->no_invoice ?? '' }}</td>
->>>>>>> Stashed changes
                                 <td class="text-end">{{ $c['no_box'] }}</td>
                                 <td class="text-start">{{ strtoupper($sbw->nama ?? '-') }}</td>
                                 <td class="text-end">{{ tanggal($c['tgl']) }}</td>
