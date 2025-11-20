@@ -44,7 +44,7 @@ class DaftarhadirTinjuanManajemenController extends Controller
 
         $agenda = DB::table('daftar_hadir')
             ->leftJoin('data_pegawais', 'data_pegawais.karyawan_id_dari_api', '=', 'daftar_hadir.pegawai_id')
-            ->where('nota_agenda', $r->nota_agenda)->get();
+            ->where('nota_agenda', $r->nota_agenda)->orderBy('data_pegawais.nama', 'asc')->get();
 
         $data = [
             'title' => 'Daftar Hadir Tinjauan Manajemen',
