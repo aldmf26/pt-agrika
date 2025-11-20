@@ -1,5 +1,5 @@
-<div class="row">
-    <main class="col-6">
+<div>
+    <main>
         <div x-data="searchInput">
             <input class="form-control" type="text" placeholder="cari menu" wire:model.live.debounce.300ms="search">
             <div wire:loading>
