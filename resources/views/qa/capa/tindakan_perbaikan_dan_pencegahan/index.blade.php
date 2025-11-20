@@ -1,7 +1,7 @@
 <x-app-layout :title="$title">
     <div class="d-flex justify-content-end gap-2 mb-3">
         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadModal">
-            <i class="fas fa-upload"></i> Upload Excel
+            <i class="fas fa-upload"></i> Upload File
         </button>
     </div>
 
@@ -10,11 +10,10 @@
         <x-modal idModal="uploadModal" title="Upload File Excel" size="md">
             @csrf
             <div class="mb-3">
-                <label for="excelFile" class="form-label">Pilih File Excel (.xlsx atau .xls)</label>
-                <input type="file" class="form-control" id="excelFile" name="excel_file" accept=".xlsx,.xls"
-                    required>
+                <label for="excelFile" class="form-label">Pilih File </label>
+                <input type="file" class="form-control" id="excelFile" name="excel_file" required>
                 <input type="hidden" name="kategori" value="{{ $kategori }}">
-                <div class="form-text">Ukuran maksimal 10MB. Hanya file Excel yang valid.</div>
+                <div class="form-text">Ukuran maksimal 10MB.</div>
             </div>
         </x-modal>
     </form>
