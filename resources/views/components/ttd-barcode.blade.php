@@ -1,7 +1,7 @@
 @props([
     'size' => '80',
     'id_pegawai' => null,
-    'format' => 'png',
+    'format' => 'svg',
 ])
 <span>
     @if ($format === 'svg')
