@@ -14,6 +14,10 @@
                     <th width="150">Alamat</th>
                     <td>: {{ $supplier->alamat }}</td>
                 </tr>
+                <tr>
+                    <th width="150">Tanggal</th>
+                    <td>: {{ tanggal(date('Y-m-d', strtotime($supplier->created_at))) }}</td>
+                </tr>
             </table>
         </div>
     </div>

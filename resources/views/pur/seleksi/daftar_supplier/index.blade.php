@@ -75,8 +75,8 @@
                                     class="mb-1 btn btn-xs btn-info"><i class="fas fa-plus"></i> Seleksi</a>
                             </td>
                             <td>
-                                <a href="{{ route('pur.seleksi.1.edit', [$d->id, $kategori]) }}" class="btn btn-xs btn-primary"><i
-                                        class="fas fa-edit"></i></a>
+                                <a href="{{ route('pur.seleksi.1.edit', [$d->id, $kategori]) }}"
+                                    class="btn btn-xs btn-primary"><i class="fas fa-edit"></i></a>
 
                                 <a onclick="return confirm('Yakin ingin menghapus data ini?')"
                                     href="{{ route('pur.seleksi.1.destroy', $d->id) }}"
