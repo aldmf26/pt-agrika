@@ -50,6 +50,7 @@
 
     });
 
+
     function initSelect2() {
         $('.select2-alpine').select2();
     }
