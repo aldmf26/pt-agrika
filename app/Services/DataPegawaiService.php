@@ -32,11 +32,20 @@ class DataPegawaiService
                 // Simpan atau perbarui data pegawai di database lokal
                 $keterangan = $sumberData == 'sarang' ? ($pegawai['kelas_cbt'] ?? null) : ($pegawai['keterangan'] ?? null);
                 // if (($pegawai['id_pengawas'] != null && $pegawai['id_anak'] != 0) || ($pegawai['id_anak'] == 0 && !empty($pegawai['posisi']))) {
+                $nikValid = (
+                    !empty($pegawai['nik']) &&
+                    $pegawai['nik'] != '0' &&
+                    strlen($pegawai['nik']) == 16 &&
+                    ctype_digit($pegawai['nik'])
+                );
                 $statusPegawai =
-                    (($pegawai['id_pengawas'] != null && $pegawai['id_anak'] != 0)
-                        || ($pegawai['id_anak'] == 0 && !empty($pegawai['posisi'])))
-                    ? 'T'  // aktif
-                    : 'Y'; // berhenti
+                    (
+                        (($pegawai['id_pengawas'] != null && $pegawai['id_anak'] != 0)
+                            || ($pegawai['id_anak'] == 0 && !empty($pegawai['posisi'])))
+                        && $nikValid
+                    )
+                    ? 'T'   // aktif
+                    : 'Y';  // berhenti
                 DataPegawai::updateOrCreate(
                     [
                         'karyawan_id_dari_api' => $pegawai['id_pegawai'] ?? null,
