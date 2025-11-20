@@ -246,23 +246,21 @@
 
                         @foreach ($cabut as $c)
                             @php
-                                $sbw = DB::table('sbw_kotor')
-                                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', 'like', '%' . $c['nm_partai'] . '%')
-                                    ->first();
+                                $sbw = $c['sbw'];
 
-                                $edit = DB::table('form_pros_01_02_edit')
-                                    ->where('no_box', $c['no_box'])
-                                    ->where('tgl', $c['tgl'])
-                                    ->first();
+                                $edit = $c['edit'];
 
                             @endphp
                             <tr class="table-bawah">
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ ucwords(strtolower($c['nm_anak'])) }}</td>
-                                <td class="text-end">{{ $sbw->no_invoice }}</td>
+<<<<<<< Updated upstream
+                                <td class="text-end">{{ $sbw->no_invoice ?? '-' }}</td>
+=======
+                                <td class="text-end">{{ $sbw->no_invoice ?? '' }}</td>
+>>>>>>> Stashed changes
                                 <td class="text-end">{{ $c['no_box'] }}</td>
-                                <td class="text-start">{{ strtoupper($sbw->nama) }}</td>
+                                <td class="text-start">{{ strtoupper($sbw->nama ?? '-') }}</td>
                                 <td class="text-end">{{ tanggal($c['tgl']) }}</td>
                                 <td class="text-end">{{ number_format($c['pcs'], 0) }}</td>
                                 <td class="text-end">{{ number_format($c['gr'], 0) }}</td>

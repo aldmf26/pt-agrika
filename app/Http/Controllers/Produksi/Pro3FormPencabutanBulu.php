@@ -22,16 +22,76 @@ class Pro3FormPencabutanBulu extends Controller
 
     public function print(Request $r)
     {
-        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_pengeringan_new_detail?id_pengawas=$r->id_pengawas");
-        $cabut = json_decode($cabut, TRUE);
-        $data = [
+        // Ambil data utama dari API
+        $cabut = Http::get("https://sarang.ptagafood.com/api/apihasap/cabut_pengeringan_new_detail?id_pengawas=$r->id_pengawas")
+            ->json()['data'] ?? [];
+
+        if (!$cabut) {
+            return "Data API kosong";
+        }
+
+        // --- 1. Ambil semua nm_partai unik untuk sbw_kotor ---
+        $nmPartaiList = collect($cabut)->pluck('nm_partai')->unique()->toArray();
+
+        $sbwList = DB::table('sbw_kotor')
+            ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+            ->where(function ($q) use ($nmPartaiList) {
+                foreach ($nmPartaiList as $nm) {
+                    $q->orWhere('nm_partai', 'like', '%' . $nm . '%');
+                }
+            })
+            ->select(
+                'sbw_kotor.*',
+                'grade_sbw_kotor.nama as grade_nama',
+                'sbw_kotor.no_invoice'
+            )
+            ->get()
+            ->groupBy('nm_partai');
+
+
+        // --- 2. Ambil semua no_box + tgl untuk edit ---
+        $editKeys = collect($cabut)->map(function ($c) {
+            return $c['no_box'] . '|' . $c['tgl'];
+        });
+
+        $editList = DB::table('form_pros_01_02_edit')
+            ->whereIn(DB::raw("CONCAT(no_box, '|', tgl)"), $editKeys)
+            ->get()
+            ->keyBy(function ($row) {
+                return $row->no_box . '|' . $row->tgl;
+            });
+
+
+        // --- 3. Gabungkan data ke masing-masing item cabut ---
+        $cabut = collect($cabut)->map(function ($c) use ($sbwList, $editList) {
+
+            // sbw_kotor matching
+            $sbw = null;
+
+            if (isset($sbwList[$c['nm_partai']])) {
+                $sbw = $sbwList[$c['nm_partai']]->first();
+            }
+
+            // edit matching
+            $editKey = $c['no_box'] . '|' . $c['tgl'];
+            $edit = $editList[$editKey] ?? null;
+
+            // Tambahkan ke item (tanpa mengubah struktur)
+            $c['sbw'] = $sbw;
+            $c['edit'] = $edit;
+
+            return $c;
+        });
+
+        // kirim ke blade
+        return view('produksi.pro3formpencabutanbulu.print', [
             'title' => 'Form Pencabutan Bulu',
-            'cabut' => $cabut['data'],
+            'cabut' => $cabut,
             'tgl' => $r->tgl,
             'pengawas' => $r->pengawas
-        ];
-        return view('produksi.pro3formpencabutanbulu.print', $data);
+        ]);
     }
+
 
     public function edit(Request $request)
     {
