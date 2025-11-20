@@ -36,7 +36,7 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
 
 
 
-        $pegawai = DB::table('data_pegawais')->whereIn('posisi', ['Pengawas', 'Staf Admin'])->get();
+        $pegawai = DB::table('data_pegawais')->whereNotIn('posisi', ['Staff cetak', 'staff cabut'])->get();
         $data = [
             'title' => 'Agenda dan Jadwal Tinjauan Manajemen',
             'agenda' => $agenda,
