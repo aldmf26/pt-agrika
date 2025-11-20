@@ -1,6 +1,6 @@
 <div class="ms-2">
     <a data-bs-toggle="modal" href="#notes" class="btn btn-outline-primary btn-sm">Cari Menu</a>
-    <x-modal id="notes" title="Note's" btnSave="T" size="modal-sm" wire:ignore.self>
+    <x-modal id="notes" title="Note's" btnSave="T" size="modal-lg" wire:ignore.self>
         @livewire('dashboard.search')
 
         {{-- Tambah Catatan --}}
