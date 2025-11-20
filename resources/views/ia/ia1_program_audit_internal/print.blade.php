@@ -85,11 +85,14 @@
                 </tr>
                 <tr>
                     <td style="height: 70px" class="align-middle text-center">
-                        <x-ttd-barcode :id_pegawai="whereTtd('Kepala Lab & FSTL')" />
+                        @php
+                            $pegawai = App\Models\DataPegawai::where('nama', 'Muhammad Fahrizaldi')->first();
+                        @endphp
+                        <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
                     </td>
                 </tr>
                 <td class="text-center">
-                    (Kepala Lab & FSTL)
+                    (LEAD AUDITOR)
                 </td>
             </table>
         </div>
