@@ -29,8 +29,7 @@
                         @foreach ($jadwal as $j)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ ucfirst(strtolower($j->data_pegawai->nama ?? '-')) }} -
-                                    {{ $j->id_karyawan }}</td>
+                                <td>{{ ucfirst(strtolower($j->data_pegawai->nama ?? '-')) }} </td>
                                 <td>{{ $j->data_pegawai->divisi->divisi ?? '-' }}</td>
                                 @foreach ($bulan as $b)
                                     <td class="{{ $b->bulan == $j->bulan ? 'bg-primary' : '' }}"></td>
