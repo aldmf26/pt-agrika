@@ -22,6 +22,7 @@
                             <th rowspan="2" class="text-nowrap">Rentang min-Maks</th>
                             <th rowspan="2" class="text-nowrap">Resolusi</th>
                             <th colspan="12" class="text-center">Tahun {{ $tahun }}</th>
+                            <th rowspan="2">Aksi</th>
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
@@ -43,6 +44,9 @@
                                 @foreach ($bulan as $b)
                                     <td class="{{ $p->bulan == $b->bulan ? 'bg-secondary' : '' }}"></td>
                                 @endforeach
+                                <td>
+                                    <a href="" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                                </td>
 
                             </tr>
                         @endforeach
