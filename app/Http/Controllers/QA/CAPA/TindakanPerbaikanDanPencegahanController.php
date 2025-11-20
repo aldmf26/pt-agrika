@@ -31,7 +31,7 @@ class TindakanPerbaikanDanPencegahanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:xlsx,xls,doc,docx,pdf,jpg,jpeg,png,webp|max:10240'
+            'excel_file' => 'required|file|mimes:xlsx,xls,doc,docx,pdf,jpg,jpeg,png,webp|max:10240'
         ]);
 
 
