@@ -16,8 +16,6 @@ class Hrga1JadwalMedicalCheckup extends Controller
         $tahun = empty($r->tahun) ? date('Y') : $r->tahun;
         $divisi = $r->divisi == 'All' ? '' : $r->divisi;
 
-
-
         $data = [
             'title' => 'Jadwal Medical Checkup',
             'jadwal' => JadwalMedicalModel::when(!empty($divisi), function ($query) use ($divisi) {
@@ -37,6 +35,21 @@ class Hrga1JadwalMedicalCheckup extends Controller
         ];
         return view('hrga.hrga4.hrga1jadwalmedicalcheckup.index', $data);
     }
+
+    public function editbulan(Request $r)
+{
+    $update = JadwalMedicalModel::where('id', $r->id)
+        ->update([
+            'bulan' => $r->bulan,
+            'tahun' => $r->tahun,
+        ]);
+
+    return response()->json([
+        'success' => true,
+        'new_bulan' => $r->bulan
+    ]);
+}
+
 
     public function getPegawai(Request $r)
     {

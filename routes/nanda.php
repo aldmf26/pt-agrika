@@ -126,6 +126,7 @@ Route::controller(Hrga1JadwalMedicalCheckup::class)
         Route::get('/', 'index')->name('index');
         Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
         Route::get('/print', 'print')->name('print');
+        Route::get('/editbulan', 'editbulan')->name('editbulan');
         Route::post('/store', 'store')->name('store');
     });
 Route::controller(RekapHasilMedicalCheckupCOntroller::class)
