@@ -50,6 +50,30 @@ class Hrga1ProgramKalibrasi extends Controller
         return redirect()->route('hrga9.1.index', ['tahun' => $request->tahun])->with('success', 'Data Berhasil Disimpan');
     }
 
+    public function getData($id)
+    {
+        $data = hrga9_1KalibrasiModel::with('item_kalibrasi.lokasi')->find($id);
+        return response()->json($data);
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'item_kalibrasi_id' => 'required',
+            'rentang' => 'required',
+            'resolusi' => 'required',
+            'bulan' => 'required',
+            'tahun' => 'required',
+        ]);
+
+        $data = hrga9_1KalibrasiModel::find($request->id);
+        $data->update($request->all());
+
+        return redirect()->route('hrga9.1.index', ['tahun' => $request->tahun])
+            ->with('success', 'Data berhasil diupdate');
+    }
+
     public function itemKalibrasi($id)
     {
         $item = ItemKalibrasiModel::with('lokasi')->find($id);

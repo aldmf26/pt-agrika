@@ -27,6 +27,7 @@
                             <th class="text-nowrap">Aktual nilai koreksi</th>
                             <th class="text-nowrap">Status</th>
                             <th class="text-nowrap">Rencana kalibrasi selanjutnya</th>
+                            <th class="text-nowrap">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,13 @@
                                 <td class="td_atas">{{ $j->aktual_nilai }}</td>
                                 <td class="td_atas">{{ ucfirst(strtolower($j->status)) }}</td>
                                 <td class="td_atas">{{ date('d-m-Y', strtotime($j->tanggal_selanjutnya)) }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm btn-edit"
+                                        data-id="{{ $j->id }}" data-bs-toggle="modal"
+                                        data-bs-target="#editModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -132,6 +140,91 @@
         </div>
     </form>
 
+    <form action="{{ route('hrga9.2.update') }}" method="POST">
+        @csrf
+
+
+        <div class="modal fade" id="editModal" tabindex="-1">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title">Edit Kalibrasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <input type="hidden" name="id" class="edit-id">
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label for="">Nama alat ukur</label>
+                                <select name="item_kalibrasi_id" id=""
+                                    class="select2 form-control edit-item item_kalibrasi_id">
+                                    <option value="">-Pilih alat ukur-</option>
+                                    @foreach ($item as $i)
+                                        <option value="{{ $i->id }}">{{ $i->name }}
+                                            ({{ $i->nomor_seri }})
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <label for="">Merek</label>
+                                <input type="text" class="form-control merek edit-merek" disabled>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <label for="">Type/Nomer seri</label>
+                                <input type="text" class="form-control nomor-ser edit-nomor" disabled>
+                            </div>
+                            <div class="col-lg-3 col-6">
+                                <label for="">Lokasi</label>
+                                <input type="text" class="form-control lokasi edit-lokasi" disabled>
+                            </div>
+                            <div class="col-lg-3 col-6 mt-2">
+                                <label for="">Frekuensi kalibrasi</label>
+                                <input type="text" class="form-control edit-frekuensi" name="frekuensi"
+                                    value="Tahunan">
+                            </div>
+                            <div class="col-lg-3  col-6 mt-2">
+                                <label for="">Rentang Min-Maks</label>
+                                <input type="text" class="form-control edit-rentang" name="rentang">
+                            </div>
+                            <div class="col-lg-3 col-6 mt-2">
+                                <label for="">Resolusi</label>
+                                <input type="text" class="form-control edit-resolusi" name="resolusi">
+                            </div>
+                            <div class="col-lg-3 col-6 mt-2">
+                                <label for="">Tanggal Aktual Kalibrasi</label>
+                                <input type="date" class="form-control edit-tanggal" name="tanggal" required>
+                            </div>
+                            <div class="col-lg-3 col-6 mt-2">
+                                <label for="">Standard Nilai koreksi</label>
+                                <input type="text" class="form-control edit-standart" name="standart">
+                            </div>
+                            <div class="col-lg-3 col-6 mt-2">
+                                <label for="">Aktual nilai koreksi</label>
+                                <input type="text" class="form-control edit-aktual" name="aktual">
+                            </div>
+                            <div class="col-lg-3 col-6 mt-2">
+                                <label for="">Status</label>
+                                <input type="text" class="form-control edit-status" name="status">
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
 
 
     <form action="" method="get">
@@ -183,6 +276,54 @@
                         error: function(xhr) {
                             console.error(xhr.responseText);
                             alert('Terjadi kesalahan saat mengambil data!');
+                        }
+                    });
+                });
+
+                $('.btn-edit').on('click', function() {
+                    var id = $(this).data('id');
+
+
+                    $.ajax({
+                        url: "{{ route('hrga9.2.getData', ['id' => ':id']) }}".replace(':id', id),
+                        type: "GET",
+                        success: function(data) {
+                            $('.select3').select2({
+                                dropdownParent: $(
+                                    '#editModal'), // Ganti dengan ID modal kamu
+                                width: '100%'
+                            });
+
+                            // isi hidden id
+                            $('.edit-id').val(data.id);
+
+                            // select item
+                            $('.edit-item').val(data.item_kalibrasi_id).trigger('change');
+
+                            // atribut
+                            $('.edit-merek').val(data.item_kalibrasi.merk);
+                            $('.edit-nomor').val(data.item_kalibrasi.nomor_seri);
+                            $('.edit-lokasi').val(
+                                data.item_kalibrasi.lokasi ?
+                                data.item_kalibrasi.lokasi.lokasi :
+                                '-'
+                            );
+
+                            // lainnya
+                            $('.edit-frekuensi').val(data.frekuensi);
+                            $('.edit-rentang').val(data.rentang);
+                            $('.edit-resolusi').val(data.resolusi);
+                            $('.edit-tanggal').val(data.tanggal);
+                            $('.edit-standart').val(data.standar_nilai);
+                            $('.edit-aktual').val(data.aktual_nilai);
+                            $('.edit-status').val(data.status);
+                            // $('.edit-bulan').val(data.bulan).trigger('change');
+                            // $('.edit-tahun').val(data.tahun).trigger('change');
+                            // $('.edit-status').val(data.status);
+                        },
+                        error: function(xhr) {
+                            console.error(xhr.responseText);
+                            alert("Terjadi kesalahan mengambil data!");
                         }
                     });
                 });

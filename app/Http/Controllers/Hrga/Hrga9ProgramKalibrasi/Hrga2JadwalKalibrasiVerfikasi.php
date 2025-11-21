@@ -54,6 +54,12 @@ class Hrga2JadwalKalibrasiVerfikasi extends Controller
         return view('hrga.hrga9.hrga2_jadwalkalibrasi.print', $data);
     }
 
+    public function getData($id)
+    {
+        $data = JadwalKalibrasi::with('itemKalibrasi.lokasi')->find($id);
+        return response()->json($data);
+    }
+
     public function store(Request $r)
     {
         JadwalKalibrasi::create([
@@ -75,6 +81,24 @@ class Hrga2JadwalKalibrasiVerfikasi extends Controller
             'frekuensi' => $r->frekuensi,
             'bulan' => date('m', strtotime($r->tanggal)),
             'tahun' => date('Y', strtotime($r->tanggal)),
+        ]);
+        $tahun = date('Y', strtotime($r->tanggal));
+        return redirect()->route('hrga9.2.index', ['tahun' => $tahun])->with('success', 'Data Berhasil Disimpan');
+    }
+    public function update(Request $r)
+    {
+
+
+        JadwalKalibrasi::where('id', $r->id)->update([
+            'item_kalibrasi_id' => $r->item_kalibrasi_id,
+            'frekuensi' => $r->frekuensi,
+            'rentang' => $r->rentang,
+            'resolusi' => $r->resolusi,
+            'tanggal' => $r->tanggal,
+            'standar_nilai' => $r->standart,
+            'aktual_nilai' => $r->aktual,
+            'status' => $r->status,
+            'tanggal_selanjutnya' => date('Y-m-d', strtotime("+1 year", strtotime($r->tanggal))),
         ]);
         $tahun = date('Y', strtotime($r->tanggal));
         return redirect()->route('hrga9.2.index', ['tahun' => $tahun])->with('success', 'Data Berhasil Disimpan');

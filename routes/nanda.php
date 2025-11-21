@@ -240,6 +240,8 @@ Route::controller(Hrga1ProgramKalibrasi::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/itemKalibrasi/{id}', 'itemKalibrasi')->name('itemKalibrasi');
         Route::get('/print', 'print')->name('print');
+        Route::get('/getData/{id}', 'getData')->name('getData');
+        Route::post('/update', 'update')->name('update');
     });
 Route::controller(Hrga2JadwalKalibrasiVerfikasi::class)
     ->prefix('hrga/hrga9/hrga9.2_Jadwal_Kalibrasi')
@@ -247,7 +249,10 @@ Route::controller(Hrga2JadwalKalibrasiVerfikasi::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+        Route::get('/getData/{id}', 'getData')->name('getData');
+
         Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
     });
 
 Route::controller(Pro1PersiapandanPembersihanController::class)
