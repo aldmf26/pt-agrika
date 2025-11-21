@@ -26,7 +26,6 @@ class Pro2FormSerahTerimaBahanBaku extends Controller
             'bulans' => DB::table('bulan')->get(),
             'bulan' => $bulan,
             'tahun' => $tahun
-
         ];
         return view('produksi.pro2formserahterimabahanbaku.index', $data);
     }
