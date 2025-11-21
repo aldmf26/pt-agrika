@@ -11,7 +11,6 @@ class Pro1PersiapandanPembersihanController extends Controller
 {
     public function index()
     {
-
         (new \App\Jobs\SyncHasapData())->handle();
         $posisi = auth()->user()->posisi_id;
 
@@ -21,8 +20,6 @@ class Pro1PersiapandanPembersihanController extends Controller
             $id_pengawas = auth()->user()->name;
             $bk = DB::table('persiapan_serah_terima')->where('nama_petugas', $id_pengawas)->orderBy('tgl', 'desc')->groupBy(['tgl', 'nama_petugas'])->select('tgl', 'nama_petugas', 'nama_pencabut', DB::raw('SUM(pcs) as pcs'), DB::raw('SUM(gr) as gr'))->get();
         }
-
-
         $data = [
             'title' => 'Persiapan dan pembersihan',
             'bk' => $bk
