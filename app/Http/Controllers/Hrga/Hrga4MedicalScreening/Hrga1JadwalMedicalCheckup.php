@@ -18,7 +18,7 @@ class Hrga1JadwalMedicalCheckup extends Controller
 
         $data = [
             'title' => 'Jadwal Medical Checkup',
-            'jadwal' => JadwalMedicalModel::when(!empty($divisi), function ($query) use ($divisi) {
+            'jadwal' => JadwalMedicalModel::with(['data_pegawai.divisi'])->when(!empty($divisi), function ($query) use ($divisi) {
                 $query->whereHas('data_pegawai', function ($query) use ($divisi) {
                     $query->where('divisi_id', $divisi);
                 });
@@ -37,18 +37,18 @@ class Hrga1JadwalMedicalCheckup extends Controller
     }
 
     public function editbulan(Request $r)
-{
-    $update = JadwalMedicalModel::where('id', $r->id)
-        ->update([
-            'bulan' => $r->bulan,
-            'tahun' => $r->tahun,
-        ]);
+    {
+        $update = JadwalMedicalModel::where('id', $r->id)
+            ->update([
+                'bulan' => $r->bulan,
+                'tahun' => $r->tahun,
+            ]);
 
-    return response()->json([
-        'success' => true,
-        'new_bulan' => $r->bulan
-    ]);
-}
+        return response()->json([
+            'success' => true,
+            'new_bulan' => $r->bulan
+        ]);
+    }
 
 
     public function getPegawai(Request $r)
@@ -85,7 +85,7 @@ class Hrga1JadwalMedicalCheckup extends Controller
 
         $data = [
             'title' => 'Jadwal Medical Checkup',
-            'jadwal' => JadwalMedicalModel::when(!empty($divisi), function ($query) use ($divisi) {
+            'jadwal' => JadwalMedicalModel::with(['data_pegawai.divisi'])->when(!empty($divisi), function ($query) use ($divisi) {
                 $query->whereHas('data_pegawai', function ($query) use ($divisi) {
                     $query->where('divisi_id', $divisi);
                 });
