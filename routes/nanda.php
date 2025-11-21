@@ -75,6 +75,8 @@ Route::controller(Hrga1InformasiTawaranPelatihan::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+        Route::put('/update', 'update')->name('update');
+        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
     });
 Route::controller(Hrga2ProgramPelatihanTahunan::class)
     ->prefix('hrga/hrga3/hrga3.2_Program_pelatihan_tahunan')
@@ -124,6 +126,7 @@ Route::controller(Hrga1JadwalMedicalCheckup::class)
         Route::get('/', 'index')->name('index');
         Route::get('/getPegawai', 'getPegawai')->name('getPegawai');
         Route::get('/print', 'print')->name('print');
+        Route::get('/editbulan', 'editbulan')->name('editbulan');
         Route::post('/store', 'store')->name('store');
     });
 Route::controller(RekapHasilMedicalCheckupCOntroller::class)
@@ -346,6 +349,8 @@ Route::controller(AgendadanJadwalTinjauanManajemenController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+        Route::post('/update', 'update')->name('update');
+        Route::get('/destroy', 'destroy')->name('destroy');
         Route::get('/tambah_baris', 'tambah_baris')->name('tambah_baris');
 
         Route::post('/store', 'store')->name('store');

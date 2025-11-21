@@ -8,6 +8,7 @@
                     class="fas fa-print"></i> print</button>
             <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
                     class="fas fa-calendar"></i> view</button>
+            <span class="text-sm text-warning"><em>Klik kolom untuk mengubah bulan medical checkup</em></span>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -32,7 +33,10 @@
                                 <td>{{ ucfirst(strtolower($j->data_pegawai->nama ?? '-')) }} </td>
                                 <td>{{ $j->data_pegawai->divisi->divisi ?? '-' }}</td>
                                 @foreach ($bulan as $b)
-                                    <td class="{{ $b->bulan == $j->bulan ? 'bg-primary' : '' }}"></td>
+                                    <td data-id="{{ $j->id }}" data-bulan="{{ $b->bulan }}"
+                                        data-tahun="{{ $tahun }}" data-id_karyawan="{{ $j->id_karyawan }}"
+                                        class="{{ $b->bulan == $j->bulan ? 'bg-primary' : 'editbulan pointer' }}">
+                                    </td>
                                 @endforeach
                             </tr>
                         @endforeach
@@ -45,6 +49,7 @@
 
         </div>
     </div>
+
     <form action="{{ route('hrga4.1.store') }}" method="post">
         @csrf
         <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
@@ -145,6 +150,7 @@
             </div>
         </div>
     </form>
+
     <form action="" method="get">
         <div class="modal fade" id="view" tabindex="-1" aria-labelledby="tambahModalLabel"
             aria-hidden="true">
@@ -229,6 +235,46 @@
                     var check = $(this).prop('checked');
                     $('.check_item').prop('checked', check);
                 });
+
+                $(document).on('click', '.editbulan', function(e) {
+                    e.preventDefault();
+
+                    let td = $(this); // simpan elemen yg diklik
+                    let id = td.data('id');
+                    let bulan = td.data('bulan');
+                    let tahun = td.data('tahun');
+                    let id_karyawan = td.data('id_karyawan');
+
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ route('hrga4.1.editbulan') }}",
+                        data: {
+                            id: id,
+                            bulan: bulan,
+                            tahun: tahun,
+                            id_karyawan: id_karyawan
+                        },
+                        success: function(response) {
+
+                            if (response.success) {
+
+                                // 1. Hapus bg-primary semua cell pada baris yang sama
+                                td.closest('tr').find('td').removeClass('bg-primary');
+
+                                // 2. Tambahkan bg-primary pada cell yang diklik
+                                td.addClass('bg-primary');
+
+                                // 3. Update data-bulan agar tidak salah bulan berikutnya
+                                td.data('bulan', response.new_bulan);
+                                // alertToast('Data updated successfully');
+                            }
+                        },
+                        error: function(xhr) {
+                            console.error(xhr.responseText);
+                        }
+                    });
+                });
+
             });
         </script>
     @endsection

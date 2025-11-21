@@ -86,8 +86,6 @@
                             <th class="dhead text-center" rowspan="2">Divisi</th>
                             <th class="dhead text-center" rowspan="2">Nama Karyawan</th>
                             <th class="text-center dhead" colspan="12">Tahun {{ $tahun }}</th>
-
-
                         </tr>
                         <tr>
                             @foreach ($bulan as $b)
