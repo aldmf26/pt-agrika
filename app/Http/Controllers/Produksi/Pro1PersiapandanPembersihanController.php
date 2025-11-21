@@ -4,38 +4,40 @@ namespace App\Http\Controllers\Produksi;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class Pro1PersiapandanPembersihanController extends Controller
 {
     public function index()
     {
+
+        (new \App\Jobs\SyncHasapData())->handle();
         $posisi = auth()->user()->posisi_id;
 
         if ($posisi == 1) {
-            $bk = Http::get("https://sarang.ptagafood.com/api/apihasap");
-            $bk = json_decode($bk, TRUE);
+            $bk = DB::table('persiapan_serah_terima')->orderBy('tgl', 'desc')->groupBy(['tgl', 'nama_petugas'])->select('tgl', 'nama_petugas', 'nama_pencabut', DB::raw('SUM(pcs) as pcs'), DB::raw('SUM(gr) as gr'))->get();
         } else {
-            $id_pengawas = auth()->user()->id;
-
-            $bk = Http::get("https://sarang.ptagafood.com/api/apihasap?id_pengawas=$id_pengawas");
-            $bk = json_decode($bk, TRUE);
+            $id_pengawas = auth()->user()->name;
+            $bk = DB::table('persiapan_serah_terima')->where('nama_petugas', $id_pengawas)->orderBy('tgl', 'desc')->groupBy(['tgl', 'nama_petugas'])->select('tgl', 'nama_petugas', 'nama_pencabut', DB::raw('SUM(pcs) as pcs'), DB::raw('SUM(gr) as gr'))->get();
         }
+
+
         $data = [
             'title' => 'Persiapan dan pembersihan',
-            'bk' => $bk['data']
+            'bk' => $bk
         ];
         return view('produksi.pro1persiapandanpembersihan.index', $data);
     }
 
     public function print(Request $r)
     {
-        $detail = Http::get("https://sarang.ptagafood.com/api/apihasap/detail/" . $r->id_pengawas . '/' . $r->tgl);
-        $detail = json_decode($detail, TRUE);
+        $detail = DB::table('persiapan_serah_terima')->where('tgl', $r->tgl)->where('nama_petugas', $r->pengawas)->get();
+
 
         $data = [
             'title' => 'Persiapan & Pembersihan',
-            'detail' => $detail['data'],
+            'detail' => $detail,
             'pengawas' => $r->pengawas,
             'tanggal' => $r->tgl
         ];
