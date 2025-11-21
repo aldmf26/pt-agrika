@@ -57,7 +57,15 @@
                                 <td style="vertical-align: top !important;">{{ ucfirst(strtolower($d->sanitizer)) }}
                                 </td>
                                 <td style="vertical-align: top !important;">{{ date('d-m-Y', strtotime($d->tgl)) }}</td>
-                                <td style="vertical-align: top !important;"></td>
+                                <td style="vertical-align: top !important;">
+                                    <form action="{{ route('hrga6.1.destroy', $d->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Yakin ingin menghapus data?')"><i
+                                                class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

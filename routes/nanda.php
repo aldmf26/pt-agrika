@@ -616,11 +616,6 @@ Route::get('/update-jam-kedatangan', function (Request $request) {
     $partai = DB::table('data_edit_wh')
         ->where('nm_partai', $request->partai)
         ->first();
-
-
-
-
-
     if ($request->kategori == 'jam_kedatangan') {
         if (empty($partai->nm_partai)) {
             DB::table('data_edit_wh')

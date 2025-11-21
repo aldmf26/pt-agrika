@@ -25,7 +25,7 @@ class Hrga1PerencanaanKebersihan extends Controller
             'lokasi' => $lokasi,
             'id_lokasi' => $getIdLokasi,
         ];
-        return view($this->view . '.index', $data);
+        return view('hrga.hrga6.hrga1_perencanaan_kebersihan.index', $data);
     }
 
     public function store(Request $r)
@@ -66,6 +66,6 @@ class Hrga1PerencanaanKebersihan extends Controller
             'dok' => 'Dok.No.:FRM.HRGA.06.01, Rev.00',
             'datas' => $datas
         ];
-        return view($this->view . '.print', $data);
+        return view('hrga.hrga6.hrga1_perencanaan_kebersihan.print', $data);
     }
 }

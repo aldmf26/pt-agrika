@@ -65,6 +65,7 @@ class Hrga1JadwalMedicalCheckup extends Controller
         return view('hrga.hrga4.hrga1jadwalmedicalcheckup.getpegawai', compact('pegawai'));
     }
 
+
     public function store(Request $r)
     {
         for ($i = 0; $i < count($r->id_pegawai); $i++) {
