@@ -52,11 +52,13 @@
                                             <i class="fas fa-edit"></i>
                                         </button>
 
-                                        <a href="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.destroy', ['tanggal' => $a->tanggal]) }}"
-                                            onclick="return confirm('Yakin ingin menghapus data ini?')"
-                                            class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        @can('presiden')
+                                            <a href="{{ route('qa.agendadan_jadwal_tinjauan_manajemen.destroy', ['tanggal' => $a->tanggal]) }}"
+                                                onclick="return confirm('Yakin ingin menghapus data ini?')"
+                                                class="btn btn-sm btn-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        @endcan
                                     </td>
                                 </tr>
                             @endforeach

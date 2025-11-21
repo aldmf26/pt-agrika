@@ -75,6 +75,8 @@ Route::controller(Hrga1InformasiTawaranPelatihan::class)
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
         Route::post('/store', 'store')->name('store');
+        Route::put('/update', 'update')->name('update');
+        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
     });
 Route::controller(Hrga2ProgramPelatihanTahunan::class)
     ->prefix('hrga/hrga3/hrga3.2_Program_pelatihan_tahunan')

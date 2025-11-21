@@ -45,6 +45,36 @@ class Hrga1InformasiTawaranPelatihan extends Controller
         return redirect()->back()->with('sukses', 'Data berhasil ditambahkan');
     }
 
+    public function update(Request $r)
+    {
+        $r->validate([
+            'tanggal' => 'required',
+            'jenis' => 'required',
+            'sasaran' => 'required',
+            'tema' => 'required',
+            'sumber_informasi' => 'required',
+            'personil_penghubung' => 'required',
+            'no_telp' => 'required',
+            'email' => 'required',
+        ]);
+
+        $data = InformasiTawaranPelatihan::findOrFail($r->id);
+
+        $data->update([
+            'tanggal' => $r->tanggal,
+            'jenis' => $r->jenis,
+            'sasaran' => $r->sasaran,
+            'tema' => $r->tema,
+            'sumber_informasi' => $r->sumber_informasi,
+            'personil_penghubung' => $r->personil_penghubung,
+            'no_telp' => $r->no_telp,
+            'email' => $r->email,
+        ]);
+
+        return redirect()->back()->with('sukses', 'Data berhasil diperbarui');
+    }
+
+
     public function print(Request $r)
     {
         $tgl1 = $r->tgl1;
@@ -55,5 +85,11 @@ class Hrga1InformasiTawaranPelatihan extends Controller
             'informasi' => InformasiTawaranPelatihan::whereBetween('tanggal', [$tgl1, $tgl2])->orderBy('id', 'asc')->get(),
         ];
         return view('hrga.hrga3.hrga1informasitawaranpelatihan.print', $data);
+    }
+
+    public function destroy($id)
+    {
+        InformasiTawaranPelatihan::destroy($id);
+        return redirect()->back()->with('sukses', 'Data berhasil dihapus');
     }
 }
