@@ -17,7 +17,8 @@ class Hrga1PerencanaanKebersihan extends Controller
         $lokasi = DB::table('lokasi')->get();
         $getIdLokasi = DB::table('lokasi')->where('lokasi', $area)->first()->id ?? 0;
 
-        $datas = DB::table('hrga6_perencanaan_sanitasi')->where('id_lokasi', $getIdLokasi)->get();
+        $datas = DB::table('hrga6_perencanaan_sanitasi')->where('id_lokasi', $getIdLokasi)->orderBy('id_perencanaan', 'desc')->get();
+
         $data = [
             'title' => 'Perencanaan Kebersihan / Sanitasi',
             'area' => $area,
@@ -25,7 +26,7 @@ class Hrga1PerencanaanKebersihan extends Controller
             'lokasi' => $lokasi,
             'id_lokasi' => $getIdLokasi,
         ];
-        return view($this->view . '.index', $data);
+        return view('hrga.hrga6.hrga1_perencanaan_kebersihan.index', $data);
     }
 
     public function store(Request $r)
@@ -56,6 +57,30 @@ class Hrga1PerencanaanKebersihan extends Controller
         }
     }
 
+    public function update(Request $r)
+    {
+        try {
+            DB::table('hrga6_perencanaan_sanitasi')
+                ->where('id_perencanaan', $r->id)
+                ->update([
+                    'nm_alat' => $r->nm_alat,
+                    'identifikasi_alat' => $r->identifikasi_alat,
+                    'metode' => $r->metode,
+                    'penanggung_jawab' => $r->penanggung_jawab,
+                    'frekuensi' => $r->frekuensi,
+                    'sarana_cleaning' => $r->sarana_cleaning,
+                    'sanitizer' => $r->sanitizer,
+                    'tgl' => now(),
+                    'admin' => auth()->user()->name
+                ]);
+
+            return redirect()->back()->with('sukses', 'Data berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+
     public function print(Request $r)
     {
         $datas = DB::table('hrga6_perencanaan_sanitasi')->where('id_lokasi', $r->id_lokasi)->get();
@@ -66,6 +91,16 @@ class Hrga1PerencanaanKebersihan extends Controller
             'dok' => 'Dok.No.:FRM.HRGA.06.01, Rev.00',
             'datas' => $datas
         ];
-        return view($this->view . '.print', $data);
+        return view('hrga.hrga6.hrga1_perencanaan_kebersihan.print', $data);
+    }
+
+    public function destroy($id)
+    {
+        try {
+            DB::table('hrga6_perencanaan_sanitasi')->where('id_perencanaan', $id)->delete();
+            return redirect()->back()->with('sukses', 'Data berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

@@ -162,7 +162,9 @@ Route::controller(Hrga1PerencanaanKebersihan::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
         Route::get('/print', 'print')->name('print');
+        Route::delete('/destroy/{id}', 'destroy')->name('destroy');
     });
 
 Route::controller(Hrga2CeklistSanitasi::class)
