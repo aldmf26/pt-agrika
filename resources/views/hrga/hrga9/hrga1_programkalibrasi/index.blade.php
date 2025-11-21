@@ -1,8 +1,8 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
-            {{-- <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
-                    class="fas fa-plus"></i> Data</button> --}}
+            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
+                    class="fas fa-plus"></i> Data</button>
             <button class="btn btn-primary float-end me-2" data-bs-toggle="modal" data-bs-target="#view"><i
                     class="fas fa-calendar"></i> View</button>
             <a href="{{ route('hrga9.1.print', ['tahun' => $tahun]) }}" target="_blank"

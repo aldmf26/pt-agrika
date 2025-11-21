@@ -249,7 +249,10 @@ Route::controller(Hrga2JadwalKalibrasiVerfikasi::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+        Route::get('/getData/{id}', 'getData')->name('getData');
+
         Route::post('/store', 'store')->name('store');
+        Route::post('/update', 'update')->name('update');
     });
 
 Route::controller(Pro1PersiapandanPembersihanController::class)
