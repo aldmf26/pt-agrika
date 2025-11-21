@@ -58,13 +58,26 @@
                                 </td>
                                 <td style="vertical-align: top !important;">{{ date('d-m-Y', strtotime($d->tgl)) }}</td>
                                 <td style="vertical-align: top !important;">
-                                    <form action="{{ route('hrga6.1.destroy', $d->id) }}" method="post">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Yakin ingin menghapus data?')"><i
-                                                class="fas fa-trash"></i></button>
-                                    </form>
+
+
+                                    @can('presiden')
+                                        <button class="btn btn-sm btn-warning btn-edit" data-id="{{ $d->id_perencanaan }}"
+                                            data-nm="{{ $d->nm_alat }}" data-identifikasi="{{ $d->identifikasi_alat }}"
+                                            data-metode="{{ $d->metode }}" data-pj="{{ $d->penanggung_jawab }}"
+                                            data-frekuensi="{{ $d->frekuensi }}" data-sarana="{{ $d->sarana_cleaning }}"
+                                            data-sanitizer="{{ $d->sanitizer }}" data-bs-toggle="modal"
+                                            data-bs-target="#editModal">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+
+                                        <form action="{{ route('hrga6.1.destroy', $d->id_perencanaan) }}" method="post">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Yakin ingin menghapus data?')"><i
+                                                    class="fas fa-trash"></i></button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
@@ -143,6 +156,73 @@
                     </table>
                 </x-modal>
             </form>
+
+            <form action="{{ route('hrga6.1.update') }}" method="POST">
+                @csrf
+                <x-modal idModal="editModal" title="Edit Jadwal Sanitasi" size="modal-full" btnSave="Y">
+
+                    <input type="hidden" name="id" id="edit_id">
+
+                    <div class="row">
+                        <div class="col-lg-4 mb-2">
+                            <label>Nama Alat/Area</label>
+                            <input type="text" class="form-control" name="nm_alat" id="edit_nm_alat">
+                        </div>
+
+                        <div class="col-lg-4 mb-2">
+                            <label>Identifikasi Alat</label>
+                            <input type="text" class="form-control" name="identifikasi_alat"
+                                id="edit_identifikasi">
+                        </div>
+
+                        <div class="col-lg-4 mb-2">
+                            <label>Metode Sanitasi</label>
+                            <input type="text" class="form-control" name="metode" id="edit_metode">
+                        </div>
+
+                        <div class="col-lg-4 mb-2">
+                            <label>Penanggung Jawab</label>
+                            <input type="text" class="form-control" name="penanggung_jawab" id="edit_pj">
+                        </div>
+
+                        <div class="col-lg-4 mb-2">
+                            <label>Frekuensi</label>
+                            <input type="text" class="form-control" name="frekuensi" id="edit_frekuensi">
+                        </div>
+
+                        <div class="col-lg-4 mb-2">
+                            <label>Sarana Cleaning</label>
+                            <input type="text" class="form-control" name="sarana_cleaning" id="edit_sarana">
+                        </div>
+
+                        <div class="col-lg-4 mb-2">
+                            <label>Sanitizer & Pengenceran</label>
+                            <input type="text" class="form-control" name="sanitizer" id="edit_sanitizer">
+                        </div>
+                    </div>
+
+                </x-modal>
+            </form>
+
         </div>
     </div>
+
+    @section('scripts')
+        <script>
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.btn-edit')) {
+                    let btn = e.target.closest('.btn-edit');
+
+                    document.getElementById('edit_id').value = btn.dataset.id;
+                    document.getElementById('edit_nm_alat').value = btn.dataset.nm;
+                    document.getElementById('edit_identifikasi').value = btn.dataset.identifikasi;
+                    document.getElementById('edit_metode').value = btn.dataset.metode;
+                    document.getElementById('edit_pj').value = btn.dataset.pj;
+                    document.getElementById('edit_frekuensi').value = btn.dataset.frekuensi;
+                    document.getElementById('edit_sarana').value = btn.dataset.sarana;
+                    document.getElementById('edit_sanitizer').value = btn.dataset.sanitizer;
+                }
+            });
+        </script>
+    @endsection
 </x-app-layout>
