@@ -172,19 +172,19 @@
                             @php
                                 $sbw = DB::table('sbw_kotor')
                                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
-                                    ->where('nm_partai', 'like', '%' . $d['nm_partai'] . '%')
+                                    ->where('nm_partai', 'like', '%' . $d->nm_partai . '%')
                                     ->first();
                             @endphp
                             <tr>
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ $pengawas }}</td>
-                                <td class="text-start">{{ ucwords(strtolower($d['nama'])) }}</td>
-                                <td class="text-end">{{ $sbw->no_invoice ?? $d['nm_partai'] }}
+                                <td class="text-start">{{ ucwords(strtolower($d->nama_pencabut)) }}</td>
+                                <td class="text-end">{{ $sbw->no_invoice ?? $d->nm_partai }}
                                 </td>
                                 <td class="text-start">{{ $sbw->nama ?? '-' }}</td>
-                                <td class="text-end">{{ $d['no_box'] }}</td>
-                                <td class="text-end">{{ $d['pcs'] }}</td>
-                                <td class="text-end">{{ $d['gr_awal'] }}</td>
+                                <td class="text-end">{{ $d->no_box }}</td>
+                                <td class="text-end">{{ $d->pcs }}</td>
+                                <td class="text-end">{{ $d->gr }}</td>
 
                                 <td class="text-center">
                                     {{-- barang dari {{ $d['tgl'] }} ~ {{ $d['tgl_selesai'] }} --}}
