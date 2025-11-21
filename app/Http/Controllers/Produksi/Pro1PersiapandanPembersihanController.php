@@ -30,8 +30,6 @@ class Pro1PersiapandanPembersihanController extends Controller
     public function print(Request $r)
     {
         $detail = DB::table('persiapan_serah_terima')->where('tgl', $r->tgl)->where('nama_petugas', $r->pengawas)->get();
-
-
         $data = [
             'title' => 'Persiapan & Pembersihan',
             'detail' => $detail,
