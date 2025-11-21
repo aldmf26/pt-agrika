@@ -341,6 +341,8 @@ Route::controller(AgendadanJadwalTinjauanManajemenController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/print', 'print')->name('print');
+        Route::post('/update', 'update')->name('update');
+        Route::get('/destroy', 'destroy')->name('destroy');
         Route::get('/tambah_baris', 'tambah_baris')->name('tambah_baris');
 
         Route::post('/store', 'store')->name('store');

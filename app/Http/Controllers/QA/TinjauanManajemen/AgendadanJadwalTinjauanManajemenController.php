@@ -18,7 +18,8 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             'agendadan_jadwal_tinjauan_manajemens.dari_jam',
             'agendadan_jadwal_tinjauan_manajemens.sampai_jam',
             DB::raw("GROUP_CONCAT(DISTINCT agendadan_jadwal_tinjauan_manajemens.agenda SEPARATOR '||') as agendas"),
-            DB::raw("GROUP_CONCAT(DISTINCT data_pegawais.nama SEPARATOR ', ') as pics")
+            DB::raw("GROUP_CONCAT(DISTINCT data_pegawais.nama SEPARATOR ', ') as pics"),
+            DB::raw("GROUP_CONCAT(DISTINCT data_pegawais.karyawan_id_dari_api SEPARATOR ',') as pics_ids"),
         )
             ->leftJoin('daftar_hadir', function ($join) {
                 $join->on(
@@ -27,13 +28,10 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
                     DB::raw("agendadan_jadwal_tinjauan_manajemens.nota_agenda COLLATE utf8mb4_unicode_ci")
                 );
             })
-            ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
+            ->leftJoin('data_pegawais', 'data_pegawais.karyawan_id_dari_api', '=', 'daftar_hadir.pegawai_id')
             ->groupBy('agendadan_jadwal_tinjauan_manajemens.nota_agenda')
             ->orderBy('agendadan_jadwal_tinjauan_manajemens.created_at', 'desc') // ✅ perbaikan
             ->get();
-
-
-
 
 
         $pegawai = DB::table('data_pegawais')->whereNotIn('posisi', ['Staff cetak', 'staff cabut'])->get();
@@ -48,47 +46,90 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
 
     public function store(Request $r)
     {
-        $agenda = AgendadanJadwalTinjauanManajemen::where('tanggal', $r->tanggal)->delete();
+        // Hapus data lama di tanggal yg sama
+        AgendadanJadwalTinjauanManajemen::where('tanggal', $r->tanggal)->delete();
+
         $nota = Str::random(10);
 
         for ($i = 0; $i < count($r->agenda); $i++) {
+
+            // Simpan detail agenda
+            $data = [
+                'dari_jam' => $r->waktu_dari,
+                'sampai_jam' => $r->waktu_sampai,
+                'agenda' => $r->agenda[$i],
+            ];
+
             if (empty($r->id[$i])) {
-                $data = [
-                    'dari_jam' => $r->waktu_dari,
-                    'sampai_jam' => $r->waktu_sampai,
-                    'agenda' => $r->agenda[$i],
-                ];
                 DB::table('agenda')->insert($data);
             } else {
-                $data = [
-                    'dari_jam' => $r->waktu_dari,
-                    'sampai_jam' => $r->waktu_sampai,
-                    'agenda' => $r->agenda[$i],
-                ];
                 DB::table('agenda')->where('id', $r->id[$i])->update($data);
             }
 
+            // Simpan master agenda + PIC
             $data2 = [
                 'tanggal' => $r->tanggal,
                 'dari_jam' => $r->waktu_dari,
                 'sampai_jam' => $r->waktu_sampai,
                 'agenda' => $r->agenda[$i],
                 'nota_agenda' => $nota,
+
+                // FIX UTAMA
+                'pic' => implode(',', $r->pic ?? []),
             ];
+
             AgendadanJadwalTinjauanManajemen::create($data2);
         }
 
+        // Simpan daftar hadir berdasarkan PIC
         for ($i = 0; $i < count($r->pic); $i++) {
-            $pegawai = DB::table('data_pegawais')->where('id', $r->pic[$i])->first();
-            $data3 = [
+            $pegawai = DB::table('data_pegawais')
+                ->where('karyawan_id_dari_api', $r->pic[$i])
+                ->first();
+
+            DB::table('daftar_hadir')->insert([
                 'nota_agenda' => $nota,
                 'pegawai_id' => $pegawai->karyawan_id_dari_api,
-            ];
-            DB::table('daftar_hadir')->insert($data3);
+            ]);
         }
 
-        return redirect()->route('qa.agendadan_jadwal_tinjauan_manajemen.index')->with('sukses', 'Data Berhasil Disimpan');
+        return redirect()
+            ->route('qa.agendadan_jadwal_tinjauan_manajemen.index')
+            ->with('sukses', 'Data Berhasil Disimpan');
     }
+
+
+    public function update(Request $r)
+    {
+        // hapus data lama
+        AgendadanJadwalTinjauanManajemen::where('tanggal', $r->tanggal_lama)->delete();
+        DB::table('daftar_hadir')->where('nota_agenda', $r->tanggal_lama)->delete();
+
+        $nota = Str::random(10);
+
+        // agenda
+        foreach ($r->agenda as $ag) {
+            AgendadanJadwalTinjauanManajemen::create([
+                'tanggal' => $r->tanggal,
+                'dari_jam' => $r->waktu_dari,
+                'sampai_jam' => $r->waktu_sampai,
+                'agenda' => $ag,
+                'nota_agenda' => $nota
+            ]);
+        }
+
+        // PIC
+        foreach ($r->pic as $p) {
+            DB::table('daftar_hadir')->insert([
+                'nota_agenda' => $nota,
+                'pegawai_id' => $p
+            ]);
+        }
+
+        return redirect()->route('qa.agendadan_jadwal_tinjauan_manajemen.index')
+            ->with('sukses', 'Data berhasil diupdate!');
+    }
+
 
     public function print(Request $r)
     {
@@ -106,7 +147,7 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
                     DB::raw("agendadan_jadwal_tinjauan_manajemens.nota_agenda COLLATE utf8mb4_unicode_ci")
                 );
             })
-            ->leftJoin('data_pegawais', 'data_pegawais.id', '=', 'daftar_hadir.pegawai_id')
+            ->leftJoin('data_pegawais', 'data_pegawais.karyawan_id_dari_api', '=', 'daftar_hadir.pegawai_id')
             ->where('agendadan_jadwal_tinjauan_manajemens.tanggal', $r->tanggal)
             ->groupBy('agendadan_jadwal_tinjauan_manajemens.nota_agenda')
             ->orderBy('agendadan_jadwal_tinjauan_manajemens.created_at', 'desc')
@@ -117,6 +158,15 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             'tanggal' => $r->tanggal,
         ];
         return view('qa.tinjauan_manajemen.agendadan_jadwal_tinjauan_manajemen.print', $data);
+    }
+
+    public function destroy(Request $r)
+    {
+        AgendadanJadwalTinjauanManajemen::where('tanggal', $r->tanggal)->delete();
+        DB::table('daftar_hadir')->where('nota_agenda', $r->tanggal)->delete();
+
+        return redirect()->route('qa.agendadan_jadwal_tinjauan_manajemen.index')
+            ->with('sukses', 'Data berhasil dihapus!');
     }
 
 
