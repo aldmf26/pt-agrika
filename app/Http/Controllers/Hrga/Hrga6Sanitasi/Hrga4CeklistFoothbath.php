@@ -23,15 +23,35 @@ class Hrga4CeklistFoothbath extends Controller
             'bulan' => DB::table('bulan')->get(),
             'lokasi' => DB::table('lokasi')->get(),
         ];
-        return view($this->view . '.index', $data);
+        return view('hrga.hrga6.hrga4_ceklis_foothbath.index', $data);
     }
+
+    public function get($id)
+    {
+        return DB::table('checklis_footbath')->where('id', $id)->first();
+    }
+
+    public function update(Request $r)
+    {
+        DB::table('checklis_footbath')
+            ->where('id', $r->id)
+            ->update([
+                'item' => $r->item,
+                'lokasi_id' => $r->lokasi_id,
+                'bulan' =>    $r->bulan,
+                'tahun' =>    $r->tahun,
+            ]);
+
+        return redirect()->route('hrga6.4.index')->with('success', 'Data berhasil diupdate');
+    }
+
 
     public function create()
     {
         $data = [
             'title' => 'Ceklis Foothbath'
         ];
-        return view($this->view . '.create', $data);
+        return view('hrga.hrga6.hrga4_ceklis_foothbath.create', $data);
     }
 
     public function print(Request $r)
@@ -60,7 +80,7 @@ class Hrga4CeklistFoothbath extends Controller
                 ->get(),
 
         ];
-        return view($this->view . '.print', $data);
+        return view('hrga.hrga6.hrga4_ceklis_foothbath.print', $data);
     }
 
     public function store(Request $r)

@@ -34,6 +34,12 @@
                                     ];
                                 @endphp
                                 <td>
+                                    <button class="btn btn-sm btn-warning editBtn" data-id="{{ $d->id_lokasi }}"
+                                        data-bulan="{{ $d->bulan }}" data-tahun="{{ $d->tahun }}"
+                                        data-bs-toggle="modal" data-bs-target="#editModal">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+
                                     <a target="_blank" class="btn btn-sm btn-primary"
                                         href="{{ route('hrga6.2.print', $param) }}"><i class="fas fa-print"></i>
                                         Print</a>
@@ -95,6 +101,41 @@
         </x-modal>
     </form>
 
+    <form action="{{ route('hrga6.2.update') }}" method="post">
+        @csrf
+        <x-modal idModal="editModal" title="Edit Ceklist Sanitasi" size="modal-lg" btnSave="Y">
+
+            <input type="hidden" name="id_lokasi" id="edit_id_lokasi">
+            <input type="hidden" name="bulan" id="edit_bulan">
+            <input type="hidden" name="tahun" id="edit_tahun">
+            <div id="loadingSpinner" class="text-center my-3" style="display:none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p>Loading data...</p>
+            </div>
+            <div class="col-lg-12 mt-3">
+                <h6>Edit Item Sanitasi</h6>
+                <table class="table table-bordered" id="table-edit-sanitasi">
+                    <thead>
+                        <tr>
+                            <th>Nama Item Sanitasi</th>
+                            <th width="50">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="editBody">
+                    </tbody>
+                </table>
+
+                <button type="button" id="addRowEdit" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> Tambah Baris
+                </button>
+            </div>
+
+        </x-modal>
+    </form>
+
+
     @section('scripts')
         <script>
             $(document).ready(function() {
@@ -118,6 +159,59 @@
                 $(document).on('click', '.remove', function() {
                     $(this).closest('tr').remove();
                 });
+
+                // tombol edit diklik
+                $(document).on('click', '.editBtn', function() {
+
+                    let id_lokasi = $(this).data('id');
+                    let bulan = $(this).data('bulan');
+                    let tahun = $(this).data('tahun');
+
+                    $('#edit_id_lokasi').val(id_lokasi);
+                    $('#edit_bulan').val(bulan);
+                    $('#edit_tahun').val(tahun);
+
+                    // ambil data sanitasi via AJAX
+                    $.get('/hrga/6/ceklist-sanitasi/getItems', {
+                        id_lokasi: id_lokasi,
+                        bulan: bulan,
+                        tahun: tahun
+                    }, function(res) {
+
+                        $('#editBody').empty();
+
+                        res.forEach(item => {
+                            $('#editBody').append(`
+                <tr>
+                    <td>
+                        <input type="text" name="items[]" class="form-control" value="${item.item}">
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm remove">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `);
+                        });
+                    });
+                });
+
+                // tambah baris di modal edit
+                $('#addRowEdit').click(function() {
+                    $('#editBody').append(`
+        <tr>
+            <td><input type="text" name="items[]" class="form-control"></td>
+            <td><button type="button" class="btn btn-danger btn-sm remove"><i class="fas fa-trash"></i></button></td>
+        </tr>
+    `);
+                });
+
+                // hapus baris
+                $(document).on('click', '.remove', function() {
+                    $(this).closest('tr').remove();
+                });
+
             });
         </script>
     @endsection
