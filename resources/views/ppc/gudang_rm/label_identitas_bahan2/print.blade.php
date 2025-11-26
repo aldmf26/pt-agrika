@@ -131,15 +131,6 @@
                                     <td>:</td>
                                     <th>{{ $d->kategori == 'Baku' ? ucwords(strtolower($d->grade)) : ucwords($d->barang->nama_barang) }}
                                     </th>
-                                    @if ($d->kategori == 'Baku')
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>No Box</td>
-                                        <td>: {{ $d->no_box }}</td>
-                                    @endif
-
                                 </tr>
                                 <tr>
                                     <td>
@@ -148,15 +139,6 @@
                                     <td>:</td>
                                     <td>{{ $d->kategori == 'Baku' ? ucwords($d->rumah_walet) : $d->supplier }}
                                     </td>
-                                    @if ($d->kategori == 'Baku')
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>Pcs</td>
-                                        <td>: {{ $d->pcs }}</td>
-                                    @endif
-
                                 </tr>
 
                                 <tr>
@@ -174,14 +156,6 @@
                                             {{ tanggal($d->tanggal_penerimaan) }}
                                         @endif
                                     </td>
-                                    @if ($d->kategori == 'Baku')
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>&nbsp;</td>
-                                        <td>Gram</td>
-                                        <td>: {{ $d->gr }}</td>
-                                    @endif
                                 </tr>
                                 <tr>
                                     <td>Kode Lot</td>
@@ -211,21 +185,21 @@
                             <table class="signature-table">
                                 <tr>
                                     <td width="30%">
-                                        {{ $k == 'sbw' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING' }}</td>
+                                        {{ $k == 'lainnya' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING' }}</td>
                                     <td width="30%">
-                                        {{ $k != 'sbw' ? 'KEPALA GUDANG BARANG KEMASAN' : 'KEPALA QC' }}
+                                        {{ $k != 'lainnya' ? 'KEPALA GUDANG BARANG KEMASAN' : 'KEPALA QC' }}
                                     </td>
                                     <td width="30%">STATUS</td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 55px">
-                                        <x-ttd-barcode size="40" :id_pegawai="whereTtd(
-                                            $k == 'sbw' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING',
+                                    <td>
+                                        <x-ttd-barcode size="50" :id_pegawai="whereTtd(
+                                            $k == 'lainnya' ? 'KEPALA GUDANG BAHAN BAKU' : 'KEPALA PURCHASING',
                                         )" />
                                     </td> <!-- Untuk tanda tangan -->
                                     <td>
-                                        <x-ttd-barcode size="40" :id_pegawai="whereTtd(
-                                            $k != 'sbw' ? 'KEPALA GUDANG BARANG KEMASAN' : 'Kepala Lab & FSTL',
+                                        <x-ttd-barcode size="50" :id_pegawai="whereTtd(
+                                            $k != 'lainnya' ? 'KEPALA GUDANG BARANG KEMASAN' : 'Kepala Lab & FSTL',
                                         )" />
                                     </td>
                                     <td>

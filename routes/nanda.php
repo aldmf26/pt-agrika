@@ -29,6 +29,7 @@ use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga2JadwalKalibrasiVerfikas
 use App\Http\Controllers\Hrga\Hrga9ProgramKalibrasi\Hrga1ProgramKalibrasi;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PPC\Gudang_FG\FG2CheklistKendaraanController;
+use App\Http\Controllers\PPC\Gudang_RM\RM5LabelIdentitasBahanController2;
 use App\Http\Controllers\Produksi\Pro10PenimbanganHasilProduksi;
 use App\Http\Controllers\Produksi\Pro11FormPengemasanAkhirController;
 use App\Http\Controllers\Produksi\Pro1PersiapandanPembersihanController;
@@ -505,6 +506,12 @@ Route::controller(KesigapanTanggapDaruratController::class)
         Route::post('/store', 'tim_store')->name('tim_store');
         Route::put('/update/{id}', 'tim_update')->name('tim_update');
         Route::delete('/delete/{id}', 'tim_delete')->name('tim_delete');
+    });
+Route::controller(RM5LabelIdentitasBahanController2::class)
+    ->prefix('ppc/gudang-rm/5-label-identitas-sbw')
+    ->name('ppc.gudang-rm.5.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 
 Route::controller(KesigapanTanggapDaruratController::class)

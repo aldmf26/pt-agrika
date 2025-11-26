@@ -11,6 +11,7 @@ use App\Models\PenerimaanKemasanHeader;
 use App\Models\PenerimaanKemasanSbwKotorHeader;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class RM5LabelIdentitasBahanController extends Controller
 {
@@ -184,20 +185,27 @@ class RM5LabelIdentitasBahanController extends Controller
                 }
             }
             if ($identitas === 'sbw') {
+                $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/no_box_label_detail?no_box=$id");
+                $bk = json_decode($bk, TRUE);
+                $bk = $bk['data'];
+
                 $kemasan = DB::table('sbw_kotor')
-                    ->leftJoin('grade_sbw_kotor', 'grade_sbw_kotor.id', '=', 'sbw_kotor.grade_id')
-                    ->leftJoin('rumah_walet', 'rumah_walet.id', '=', 'sbw_kotor.rwb_id')
-                    ->select('grade_sbw_kotor.nama as grade', 'grade_sbw_kotor.kode', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
-                    ->where('sbw_kotor.no_invoice', $id)
+                    ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                    ->leftJoin('rumah_walet', 'sbw_kotor.rwb_id', '=', 'rumah_walet.id')
+                    ->select('sbw_kotor.*', 'sbw_kotor.no_invoice', 'grade_sbw_kotor.kode', 'grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet')
+                    ->where('nm_partai', 'like', '%' . $bk['nm_partai'] . '%')
                     ->first();
                 if ($kemasan) {
                     // Ensure supplier is an object
-                    $kemasan->supplier = $kemasan->rumah_walet ?? (object)['nama_supplier' => '-'];
+                    $kemasan->supplier = $sbw->rumah_walet ?? (object)['nama_supplier' => '-'];
                     // Set kategori explicitly
                     $kemasan->kategori = 'Baku';
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
                     $kemasan->keterangan = $kemasan->nm_partai;
+                    $kemasan->no_box = $bk['kode_lot'];
+                    $kemasan->pcs = $bk['pcs_awal'];
+                    $kemasan->gr = $bk['gr_awal'];
 
 
                     // Ensure penerimaan or penerimaanKemasan is a collection
@@ -205,7 +213,10 @@ class RM5LabelIdentitasBahanController extends Controller
                         (object)[
                             'tanggal_terima' =>  date('Y-m-d', strtotime('+1 day', strtotime($kemasan->tgl))),
                             'kode_lot' => $kemasan->no_invoice,
-                            'keterangan' => $kemasan->nm_partai,
+                            'keterangan' => '-',
+                            'no_box' => $bk['kode_lot'],
+                            'pcs' => $bk['pcs_awal'],
+                            'gr' => $bk['gr_awal'],
                         ]
                     ]);
                     $labels->push($kemasan);
@@ -213,6 +224,7 @@ class RM5LabelIdentitasBahanController extends Controller
             }
         }
         if ($labels->isEmpty()) {
+
             return redirect()->back()->with('error', 'No valid items found for printing.');
         }
         $data = [
