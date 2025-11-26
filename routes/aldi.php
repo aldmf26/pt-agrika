@@ -175,6 +175,8 @@ Route::controller(Hrga2CeklistSanitasi::class)
         Route::get('/create/', 'create')->name('create');
         Route::get('/add/', 'add')->name('add');
         Route::get('/print', 'print')->name('print');
+        Route::get('/getItems', 'getItems')->name('getItems');
+        Route::post('/update', 'update')->name('update');
         Route::post('/store', 'store')->name('store');
     });
 
@@ -186,6 +188,8 @@ Route::controller(Hrga4CeklistFoothbath::class)
         Route::get('/create/', 'create')->name('create');
         Route::get('/add/', 'add')->name('add');
         Route::get('/print', 'print')->name('print');
+        Route::get('/get/{id}', 'get')->name('get');
+        Route::post('/update', 'update')->name('update');
         Route::post('/store', 'store')->name('store');
     });
 

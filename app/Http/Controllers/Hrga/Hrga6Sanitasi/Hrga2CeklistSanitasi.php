@@ -23,8 +23,42 @@ class Hrga2CeklistSanitasi extends Controller
             'bulan' => DB::table('bulan')->get(),
             'lokasi' => DB::table('lokasi')->get(),
         ];
-        return view($this->view . '.index', $data);
+        return view('hrga.hrga6.hrga2_ceklist_sanitasi.index', $data);
     }
+
+    public function getItems(Request $r)
+    {
+
+        $items = DB::table('sanitasi')
+            ->where('id_lokasi', $r->id_lokasi)
+            ->where('bulan', $r->bulan)
+            ->where('tahun', $r->tahun)
+            ->get();
+
+        return response()->json($items);
+    }
+    public function update(Request $r)
+    {
+        DB::table('sanitasi')
+            ->where('id_lokasi', $r->id_lokasi)
+            ->where('bulan', $r->bulan)
+            ->where('tahun', $r->tahun)
+            ->delete();
+
+        if ($r->items) {
+            foreach ($r->items as $value) {
+                DB::table('sanitasi')->insert([
+                    'id_lokasi' => $r->id_lokasi,
+                    'bulan' => $r->bulan,
+                    'tahun' => $r->tahun,
+                    'item' => $value
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil diupdate');
+    }
+
 
     public function add()
     {
@@ -33,7 +67,7 @@ class Hrga2CeklistSanitasi extends Controller
             'lokasi' => DB::table('lokasi')->get(),
             'bulan' => DB::table('bulan')->get(),
         ];
-        return view($this->view . '.add', $data);
+        return view('hrga.hrga6.hrga2_ceklist_sanitasi.add', $data);
     }
 
     public function create()
@@ -41,7 +75,7 @@ class Hrga2CeklistSanitasi extends Controller
         $data = [
             'title' => 'Ceklis Sanitasi'
         ];
-        return view($this->view . '.create', $data);
+        return view('hrga.hrga6.hrga2_ceklist_sanitasi.create', $data);
     }
 
     public function print(Request $r)
@@ -68,7 +102,7 @@ class Hrga2CeklistSanitasi extends Controller
             'sanitasi' => DB::table('sanitasi')->where('id_lokasi', $r->id_lokasi)->where('bulan', $r->bulan)->where('tahun', $r->tahun)->get(),
 
         ];
-        return view($this->view . '.print', $data);
+        return view('hrga.hrga6.hrga2_ceklist_sanitasi.print', $data);
     }
 
     public function store(Request $r)

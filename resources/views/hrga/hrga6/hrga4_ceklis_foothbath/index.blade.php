@@ -37,6 +37,10 @@
                                     ];
                                 @endphp
                                 <td>
+                                    <button class="btn btn-warning btn-sm btnEdit" data-id="{{ $d->id }}">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </button>
+
                                     <a target="_blank" class="btn btn-sm btn-primary"
                                         href="{{ route('hrga6.4.print', $param) }}"><i class="fas fa-print"></i>
                                         Print</a>
@@ -98,6 +102,72 @@
                 </x-modal>
             </form>
 
+            <div class="modal fade" id="editModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <form action="{{ route('hrga6.4.update') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id" id="edit_id">
+
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Edit Data</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <!-- Spinner -->
+                                <div id="spinnerEdit" class="text-center py-5" style="display:none;">
+                                    <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;"></div>
+                                    <p>Loading...</p>
+                                </div>
+
+                                <!-- Form edit -->
+                                <div id="formEdit" style="display:none;">
+                                    <div class="mb-3">
+                                        <label>Bulan</label>
+                                        <select name="bulan" id="edit_bulan" class="form-control">
+                                            <option value="">-- Pilih Bulan --</option>
+                                            @foreach ($bulan as $b)
+                                                <option value="{{ $b->id_bulan }}">{{ $b->nm_bulan }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Item</label>
+                                        <input type="text" name="item" id="edit_item" class="form-control">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Lokasi</label>
+                                        <select name="lokasi_id" id="edit_lokasi_id" class="form-control">
+                                            <option value="">-- Pilih Lokasi --</option>
+                                            @foreach ($lokasi as $l)
+                                                <option value="{{ $l->id }}">{{ ucwords($l->lokasi) }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label>Tahun</label>
+                                        <input type="number" name="tahun" id="edit_tahun" class="form-control">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
         </div>
     </div>
     @section('scripts')
@@ -154,6 +224,30 @@
                 $(document).on('click', '.remove', function() {
                     $(this).closest('tr').remove();
                 });
+                
+
+                // === EDIT BUTTON CLICK ===
+                $(document).on('click', '.btnEdit', function() {
+                    let id = $(this).data('id');
+
+                    $('#editModal').modal('show');
+                    $('#spinnerEdit').show();
+                    $('#formEdit').hide();
+
+                    // Load data
+                    $.get("{{ url('hrga/6/3-ceklist-foothbath/get') }}/" + id, function(res) {
+
+                        $('#edit_id').val(res.id);
+                        $('#edit_bulan').val(res.bulan);
+                        $('#edit_item').val(res.item);
+                        $('#edit_lokasi_id').val(res.lokasi_id);
+                        $('#edit_tahun').val(res.tahun);
+
+                        $('#spinnerEdit').hide();
+                        $('#formEdit').show();
+                    });
+                });
+
             });
         </script>
     @endsection
