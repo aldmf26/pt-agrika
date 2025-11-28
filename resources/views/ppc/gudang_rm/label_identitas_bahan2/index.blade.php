@@ -37,6 +37,7 @@
                     <th>Nama Barang / Bahan baku</th>
                     <th>Nama Produsen / No. Reg SBW</th>
                     <th>Tanggal Kedatangan</th>
+                    <th>Kode Grading</th>
                     <th>No Box</th>
                     <th>pcs</th>
                     <th>gr</th>
@@ -59,6 +60,7 @@
                         <td>{{ $sbw->nama ?? '-' }}</td>
                         <td>{{ $sbw->rumah_walet ?? '-' }}</td>
                         <td>{{ tanggal($sbw->tgl) ?? '-' }}</td>
+                        <td>{{ $i['nm_partai'] }}</td>
                         <td>{{ $i['kode_lot'] }}</td>
                         <td>{{ $i['pcs_awal'] }}</td>
                         <td>{{ $i['gr_awal'] }}</td>
