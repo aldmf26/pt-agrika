@@ -241,7 +241,7 @@
                             </table>
                         </div>
                     </template>
-                    @if (($i + 1) % 9 == 0)
+                    @if (($d + 1) % 9 == 0)
                         <div class="page-break"></div>
                     @endif
                 @endforeach
