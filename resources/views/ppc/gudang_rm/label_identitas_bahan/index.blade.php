@@ -80,7 +80,7 @@
                             <input type="hidden" name="checked" :value="JSON.stringify(checked)">
                             <input type="checkbox" class="form-check-input"
                                 :value="'{{ $d['kode_lot'] }}:{{ $d['identitas'] }}'" x-model="checked"
-                                :disabled="checked.length >= 8 && !checked.includes('{{ $d['kode_lot'] }}:{{ $d['identitas'] }}')">
+                                :disabled="checked.length >= 9 && !checked.includes('{{ $d['kode_lot'] }}:{{ $d['identitas'] }}')">
                         </td>
                     </tr>
                 @empty
