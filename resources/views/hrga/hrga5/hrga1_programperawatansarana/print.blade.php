@@ -109,7 +109,7 @@
                             <tr>
                                 <td class="align-top">{{ $loop->iteration }}</td>
                                 <td class="align-top">{{ ucfirst(strtolower($p->item->nama_item)) }}</td>
-                                <td class="text-nowrap align-top text-end">{{ ucfirst(strtolower($p->item->jumlah)) }}
+                                <td class="text-nowrap align-top text-end">{{ ucwords(strtolower($p->item->jumlah)) }}
                                 </td>
                                 {{-- <td>{{ $p->item->no_identifikasi }}</td> --}}
                                 <td class="text-nowrap align-top">{{ ucfirst(strtolower($p->item->lokasi->lokasi)) }}
