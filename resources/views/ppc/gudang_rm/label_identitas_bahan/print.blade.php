@@ -31,6 +31,10 @@
             .tidak-cetak {
                 display: none;
             }
+
+            .page-break {
+                page-break-after: always;
+            }
         }
 
         .label {
@@ -237,6 +241,9 @@
                             </table>
                         </div>
                     </template>
+                    @if (($i + 1) % 9 == 0)
+                        <div class="page-break"></div>
+                    @endif
                 @endforeach
 
             </div>
