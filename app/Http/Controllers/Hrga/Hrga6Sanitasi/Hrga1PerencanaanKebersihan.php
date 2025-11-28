@@ -36,7 +36,7 @@ class Hrga1PerencanaanKebersihan extends Controller
 
             for ($i = 0; $i < count($r->nm_alat); $i++) {
                 $data = [
-                    'id_lokasi' => $r->id_lokasi[$i],
+                    // 'id_lokasi' => $r->id_lokasi[$i],
                     'nm_alat' => $r->nm_alat[$i],
                     'identifikasi_alat' => $r->identifikasi_alat[$i],
                     'metode' => $r->metode[$i],
