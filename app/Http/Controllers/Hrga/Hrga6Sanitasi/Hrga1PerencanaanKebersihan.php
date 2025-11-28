@@ -35,7 +35,7 @@ class Hrga1PerencanaanKebersihan extends Controller
             DB::beginTransaction();
 
             for ($i = 0; $i < count($r->nm_alat); $i++) {
-                $data[] = [
+                $data = [
                     'id_lokasi' => $r->id_lokasi[$i],
                     'nm_alat' => $r->nm_alat[$i],
                     'identifikasi_alat' => $r->identifikasi_alat[$i],
@@ -47,8 +47,9 @@ class Hrga1PerencanaanKebersihan extends Controller
                     'tgl' => now(),
                     'admin' => auth()->user()->name
                 ];
+                DB::table('hrga6_perencanaan_sanitasi')->insert($data);
             }
-            DB::table('hrga6_perencanaan_sanitasi')->insert($data);
+
 
             DB::commit();
             return redirect()->back()->with('sukses', 'Data berhasil disimpan');
