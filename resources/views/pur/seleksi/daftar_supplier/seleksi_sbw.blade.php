@@ -16,7 +16,8 @@
                 </tr>
                 <tr>
                     <th width="150">Tanggal</th>
-                    <td>: {{ tanggal(date('Y-m-d', strtotime($supplier->created_at))) }}</td>
+                    <td>: {{ tanggal(date('Y-m-d', strtotime($supplier->created_at))) }}
+                    </td>
                 </tr>
             </table>
         </div>

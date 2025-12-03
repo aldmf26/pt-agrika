@@ -557,6 +557,7 @@ Route::controller(DaftarIndukDokumenInternal::class)
         Route::get('/', 'index')->name('index');
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
+        Route::get('/export', 'export')->name('export');
     });
 Route::controller(DaftarIndukDokumenEksternal::class)
     ->prefix('dcr/daftar_induk_dokumen_eksternal')
