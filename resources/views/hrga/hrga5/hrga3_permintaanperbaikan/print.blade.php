@@ -156,7 +156,7 @@
                     </td>
                     @php
                         $base = \Carbon\Carbon::parse($permintaan->waktu);
-                        $newTime = $base->copy()->addHours(2)->addMinutes(47);
+                        $newTime = $base->copy()->addHours(1)->addMinutes(47);
                     @endphp
                     <td class="text-start" style="border-left:none">
                         : {{ $newTime->format('h:i A') }}
