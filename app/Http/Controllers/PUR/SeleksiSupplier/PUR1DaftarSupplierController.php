@@ -154,7 +154,7 @@ class PUR1DaftarSupplierController extends Controller
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
-            'dok' => 'Dok.No.: FRM.PURS.01.04, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.01.03, Rev.00',
         ];
         return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
