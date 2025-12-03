@@ -122,13 +122,22 @@ class DaftarIndukDokumenInternal extends Controller
             $row++;
         }
 
+        // ==== Tambahin BORDER ====
+        $lastRow = $row - 1;
+        $range = 'A1:E' . $lastRow;
+
+        $sheet->getStyle($range)->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+
+        // Auto size kolom
+        foreach (range('A', 'E') as $columnID) {
+            $sheet->getColumnDimension($columnID)->setAutoSize(true);
+        }
+
         // Nama file
         $fileName = 'daftar-dokumen-' . date('YmdHis') . '.xlsx';
 
-        // Response download
         $writer = new Xlsx($spreadsheet);
 
-        // header download
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
         header("Content-Disposition: attachment; filename=\"$fileName\"");
 
