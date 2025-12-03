@@ -49,7 +49,6 @@
                                     <i class="fas fa-edit"></i>
                                 </button>
 
-                                @can('presiden')
                                     <form action="{{ route('hrga3.1.destroy', $i->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
@@ -57,7 +56,6 @@
                                             onclick="return confirm('Yakin Hapus Data ?')"><i
                                                 class="fas fa-trash"></i></button>
                                     </form>
-                                @endcan
                             </td>
                         </tr>
                     @endforeach

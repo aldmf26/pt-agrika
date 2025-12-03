@@ -60,7 +60,6 @@
                                 <td style="vertical-align: top !important;">
 
 
-                                    @can('presiden')
                                         <button class="btn btn-sm btn-warning btn-edit" data-id="{{ $d->id_perencanaan }}"
                                             data-nm="{{ $d->nm_alat }}" data-identifikasi="{{ $d->identifikasi_alat }}"
                                             data-metode="{{ $d->metode }}" data-pj="{{ $d->penanggung_jawab }}"
@@ -77,7 +76,6 @@
                                                 onclick="return confirm('Yakin ingin menghapus data?')"><i
                                                     class="fas fa-trash"></i></button>
                                         </form>
-                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
