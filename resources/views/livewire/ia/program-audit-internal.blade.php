@@ -42,13 +42,13 @@
                 <label for="">Departemen :</label>
                 {{-- <input type="text" wire:model="form.departemen" class="form-control" placeholder="Departemen"> --}}
 
-                {{-- <select data-field="departemen" wire:model="form.departemen" id="select-departemen"
+                <select data-field="departemen" wire:model="form.departemen" id="select-departemen"
                     class="form-control">
                     <option value="">Pilih Departemen</option>
                     @foreach ($departemenBk as $item)
                         <option value="{{ $item }}">{{ $item }}</option>
                     @endforeach
-                </select> --}}
+                </select>
             </div>
             <div class="col-2">
                 <label for="">Auditee :</label>
@@ -56,7 +56,7 @@
                     <option value="">Pilih Auditee</option>
                     @foreach ($user as $u)
                         <option value="{{ $u->nama }}">{{ $u->nama }}</option>
-                    @endforeach 
+                    @endforeach
                 </select>
                 {{-- <input type="text" wire:model="form.audite" class="form-control"> --}}
             </div>

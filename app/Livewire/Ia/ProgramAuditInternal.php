@@ -95,7 +95,6 @@ class ProgramAuditInternal extends Component
 
     public function add()
     {
-        dd($this->form);
         $existing = $this->model::where('departemen', $this->form['departemen'])
             ->where('tahun', $this->tahun)
             ->first();
