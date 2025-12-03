@@ -159,12 +159,12 @@
                         $newTime = $base->copy()->addHours(2)->addMinutes(47);
                     @endphp
                     <td class="text-start" style="border-left:none">
-                        : {{ $randomTime->format('h:i A') }}
+                        : {{ $newTime->format('h:i A') }}
                     </td>
                     <td class="text-start" style="border-right:none">Pukul
                     </td>
                     <td class="text-start" style="border-left:none">
-                        : {{ $randomTime->format('h:i A') }}
+                        : {{ $newTime->format('h:i A') }}
                     </td>
                 </tr>
             </table>
