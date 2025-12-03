@@ -6,6 +6,8 @@
                     class="fas fa-plus"></i> import</button>
             <a href="{{ route('dcr.1.print') }}" target="_blank" class="btn btn-primary float-end me-2"><i
                     class="fas fa-print"></i> print</a>
+            <a href="{{ route('dcr.1.export') }}" target="_blank" class="btn btn-primary float-end me-2"><i
+                    class="fas fa-excel"></i> export</a>
             {{-- <button data-bs-toggle="modal" data-bs-target="#view" class="btn btn-primary float-end me-2"><i
                     class="fas fa-calendar"></i> view</button> --}}
         </div>

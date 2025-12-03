@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date as ExcelDate;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Carbon\Carbon;
 
 class DaftarIndukDokumenInternal extends Controller
@@ -92,5 +94,45 @@ class DaftarIndukDokumenInternal extends Controller
         }
 
         return redirect()->back()->with('sukses', 'Data berhasil diimport!');
+    }
+
+    public function export()
+    {
+        $data = DB::table('daftar_induk_dokumen_internal')->get();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        // Header Excel
+        $sheet->setCellValue('A1', 'No');
+        $sheet->setCellValue('B1', 'Nama Divisi');
+        $sheet->setCellValue('C1', 'PIC');
+        $sheet->setCellValue('D1', 'Judul');
+        $sheet->setCellValue('E1', 'No Dokumen');
+
+        $row = 2;
+        $no = 1;
+
+        foreach ($data as $d) {
+            $sheet->setCellValue('A' . $row, $no++);
+            $sheet->setCellValue('B' . $row, $d->nama_divisi);
+            $sheet->setCellValue('C' . $row, $d->pic);
+            $sheet->setCellValue('D' . $row, $d->judul);
+            $sheet->setCellValue('E' . $row, $d->no_dokumen);
+            $row++;
+        }
+
+        // Nama file
+        $fileName = 'daftar-dokumen-' . date('YmdHis') . '.xlsx';
+
+        // Response download
+        $writer = new Xlsx($spreadsheet);
+
+        // header download
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$fileName\"");
+
+        $writer->save('php://output');
+        exit;
     }
 }
