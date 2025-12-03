@@ -156,8 +156,11 @@
                     </td>
                     @php
                         $base = \Carbon\Carbon::parse($permintaan->waktu);
-                        $randomHour = rand(1, 3); // random 1–3 jam
-                        $randomTime = $base->copy()->addHours($randomHour);
+
+                        // random total detik antara 10 menit (600s) sampai 3 jam (10800s)
+                        $randomSeconds = rand(600, 10800);
+
+                        $randomTime = $base->copy()->addSeconds($randomSeconds);
                     @endphp
                     <td class="text-start" style="border-left:none">
                         : {{ $randomTime->format('h:i A') }}
