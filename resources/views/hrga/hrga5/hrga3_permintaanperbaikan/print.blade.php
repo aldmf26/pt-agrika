@@ -154,15 +154,18 @@
                 <tr>
                     <td class="text-start" style="border-right:none">Pukul
                     </td>
+                    @php
+                        $base = \Carbon\Carbon::parse($permintaan->waktu);
+                        $randomHour = rand(1, 3); // random 1–3 jam
+                        $randomTime = $base->copy()->addHours($randomHour);
+                    @endphp
                     <td class="text-start" style="border-left:none">
-                        : {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('h:i A') }}
-
+                        : {{ $randomTime->format('h:i A') }}
                     </td>
                     <td class="text-start" style="border-right:none">Pukul
                     </td>
                     <td class="text-start" style="border-left:none">
-                        : {{ \Carbon\Carbon::parse($permintaan->waktu)->addHours(2)->format('h:i A') }}
-
+                        : {{ $randomTime->format('h:i A') }}
                     </td>
                 </tr>
             </table>
