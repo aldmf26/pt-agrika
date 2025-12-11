@@ -52,7 +52,7 @@
                         <td>{{ $d->deleted_at == null ? '-' : tanggal($d->deleted_at) }}</td>
                         <td>{{ $d->posisi }}</td>
                         <td>
-                            <x-ttd-barcode :id_pegawai="$d->id" />
+                            <x-ttd-barcode :id_pegawai="$d->karyawan_id_dari_api" />
                         </td>
                         <td align="center">
                             <input wire:key="checkbox-{{ $d->id }}-{{ $datas->currentPage() }}"
