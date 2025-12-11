@@ -39,8 +39,8 @@
         columnDefs: [{
             "defaultContent": "-",
             "targets": "_all",
-            "stateSave": true
         }],
+            "stateSave": true
 
     });
     $(document).ready(function() {
