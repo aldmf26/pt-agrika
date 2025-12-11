@@ -27,6 +27,7 @@
                     </th>
                     <th class="">Berhenti</th>
                     <th class="pointer" wire:click='sortBy("posisi")'>Posisi <i class="fas fa-sort float-end"></i></th>
+                    <th class="text-center">Ttd</th>
                     <th class="text-center">Aksi</th>
                 </tr>
             </thead>
@@ -50,6 +51,9 @@
                         </td>
                         <td>{{ $d->deleted_at == null ? '-' : tanggal($d->deleted_at) }}</td>
                         <td>{{ $d->posisi }}</td>
+                        <td>
+                            <x-ttd-barcode :id_pegawai="$d->id" />
+                        </td>
                         <td align="center">
                             <input wire:key="checkbox-{{ $d->id }}-{{ $datas->currentPage() }}"
                                 class="pointer form-check-input" type="checkbox" value="{{ $d->id }}"

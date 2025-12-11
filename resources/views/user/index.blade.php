@@ -83,12 +83,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        @if (empty($user->ttd))
-                                        @else
-                                            <img src="{{ Storage::url($user->ttd->link) }}" width="250"
-                                                alt="">
-                                        @endif
-                                        <img src="" alt="">
+                                       
                                     </td>
                                     <td>
                                         <a x-show="!edit" @click="edit = !edit" class="btn btn-sm btn-primary"><i
