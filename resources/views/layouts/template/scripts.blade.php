@@ -38,8 +38,9 @@
     $("#example").dataTable({
         columnDefs: [{
             "defaultContent": "-",
-            "targets": "_all"
+            "targets": "_all",
         }],
+            "stateSave": true
 
     });
     $(document).ready(function() {

@@ -119,6 +119,7 @@
                                 <label>Resolusi</label>
                                 <input type="text" name="resolusi" class="form-control edit-resolusi">
                             </div>
+                            
 
                             <div class="col-lg-3 col-6 mt-2">
                                 <label for="">Bulan</label>
@@ -136,7 +137,6 @@
                                     <option value="{{ date('Y') }}">{{ date('Y') }}</option>
                                     <option value="{{ date('Y', strtotime('+1 year')) }}">
                                         {{ date('Y', strtotime('+1 year')) }}</option>
-
                                 </select>
                             </div>
 
@@ -144,7 +144,6 @@
                                 <label>Status</label>
                                 <input type="text" name="status" class="form-control edit-status">
                             </div>
-
                         </div>
                     </div>
 
