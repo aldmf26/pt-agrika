@@ -216,25 +216,131 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($pemanasan as $p)
-                            <tr class="table-bawah">
-                                <td class="text-end">{{ $p->urutan_pemanasan }}</td>
-                                <td class="text-end">{{ $p->tray }}</td>
-                                <td class="text-end">{{ $p->kode_batch }}</td>
-                                <td class="text-start">{{ $p->grade_awal }}</td>
-                                <td class="text-start">{{ $p->jenis_produk_akhir }}</td>
-                                <td class="text-start">{{ $p->grade_akhir }}</td>
-                                <td class="text-end">{{ date('h:i A', strtotime($p->waktu_mulai_steam)) }}</td>
-                                <td class="text-end">{{ number_format($p->pcs, 0) }}</td>
-                                <td class="text-end">{{ number_format($p->gr, 0) }}</td>
-                                <td class="text-end">{{ $p->tventing_c }}</td>
-                                <td class="text-end">{{ $p->tventing_mnt }}</td>
-                                <td class="text-end">{{ $p->ttot_c }}</td>
-                                <td class="text-end">{{ $p->ttot_mnt }}</td>
-                                <td></td>
-                                <td class="text-start">{{ $p->keterangan }}</td>
+                        @php
+                            $groupedPemanasan = collect($pemanasan)->groupBy('kelompok');
+                            $startTime = \Carbon\Carbon::createFromTime(9, 0);
+                            $trayNumber = 0;
+                        @endphp
+
+                        @foreach ($groupedPemanasan as $kelompok => $items)
+                            @php
+                                // Hitung total tray yang dibutuhkan untuk kelompok ini
+                                $totalTrayKelompok = ceil($items->count() / 6);
+
+                                // Naikkan nomor tray mulai dari yang terakhir
+                                $trayAwal = $trayNumber + 1;
+                                $trayAkhir = $trayNumber + $totalTrayKelompok;
+                                $trayNumber = $trayAkhir;
+
+                                $indexDalamKelompok = 0;
+                            @endphp
+
+                            <tr>
+                                <td colspan="14" class="fw-bold text-center bg-light">
+                                    {{-- KELOMPOK {{ $trayAwal }}–{{ $trayAkhir }} ({{ strtoupper($kelompok) }}) --}}
+                                    &nbsp;
+                                </td>
                             </tr>
+
+                            @foreach ($items->values() as $i => $p)
+                                @php
+                                    $indexDalamKelompok++;
+
+                                    // Hitung tray keberapa dalam kelompok ini
+                                    $trayKe = $trayAwal + floor(($indexDalamKelompok - 1) / 6);
+
+                                    // Urutan dalam tray (1–6)
+                                    $urutanDalamTray = (($indexDalamKelompok - 1) % 6) + 1;
+
+                                    $rawPartai = $p['nm_partai'];
+                                    $cleaned = str_replace("'", '', $rawPartai);
+                                    $partaiArray = array_map('trim', explode(',', $cleaned));
+
+                                    $sbwList = DB::table('sbw_kotor')
+                                        ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
+                                        ->whereIn('nm_partai', $partaiArray)
+                                        ->get();
+
+                                    $time = $startTime
+                                        ->copy()
+                                        ->addMinutes(15 * ($trayKe - 1))
+                                        ->format('H:i');
+
+                                    $isi = DB::table('isi_ccp2')->where('tgl', $tgl)->where('urutan', $trayKe)->first();
+                                @endphp
+
+                                {{-- Garis pemisah tiap 6 data --}}
+                                @if ($indexDalamKelompok > 1 && ($indexDalamKelompok - 1) % 6 == 0)
+                                    <tr class="table-bawah">
+                                        <td colspan="13">&nbsp;</td>
+                                    </tr>
+                                @endif
+
+                                <tr class="table-bawah">
+                                    {{-- Nomor Tray --}}
+                                    <td class="text-end">{{ $trayKe }}</td>
+
+                                    {{-- Urutan dalam tray (1–6) --}}
+                                    <td class="text-end">{{ $urutanDalamTray }}</td>
+
+                                    <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                    <td class="text-start">
+                                        {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
+                                    </td>
+                                    @php
+                                        if ($p['kelompok'] == '1') {
+                                            $suhu = '80.4';
+                                            $menit = '30 detik';
+                                            $kelompok = 'Mangkok / Segitiga / Oval / Sudut';
+                                        } elseif ($p['kelompok'] == '2') {
+                                            $suhu = '92.6';
+                                            $menit = '1 menit 27 detik';
+                                            $kelompok = 'Patahan';
+                                        } elseif ($p['kelompok'] == '3') {
+                                            $suhu = '85.1';
+                                            $menit = '1 menit 48 detik';
+                                            $kelompok = 'Kaki';
+                                        } else {
+                                            $suhu = '92.9';
+                                            $menit = '50 detik';
+                                            $kelompok = 'Hancuran';
+                                        }
+                                    @endphp
+                                    <td class="text-start" width="5%">
+                                        {{ $kelompok }}
+                                    </td>
+
+                                    <td class="text-start" width="5%">
+                                        {{ $p['grade'] }}
+                                    </td>
+                                    <td class="text-end">
+                                        {{ empty($isi->waktu_mulai) ? date('h:i A', strtotime($time)) : date('h:i A', strtotime($isi->waktu_mulai)) }}
+                                    </td>
+                                    <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
+                                    <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
+                                    <td class="text-end">{{ empty($isi->tventing_c) ? 57.1 : $isi->tventing_c }}</td>
+                                    <td class="text-end">
+                                        {{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }} Menit
+                                        {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik
+                                    </td>
+
+                                    <td class="text-end">{{ empty($isi->ttot_c) ? $suhu : $isi->ttot_c }}</td>
+                                    <td class="text-end">
+                                        @if (!empty($isi->ttot_menit) && $isi->ttot_menit > 0)
+                                            {{ $isi->ttot_menit }} Menit
+                                        @endif
+                                        {{ empty($isi->ttot_detik) ? $menit : $isi->ttot_detik }}
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
                         @endforeach
+
+
+
+
+
                     </tbody>
 
 
@@ -258,13 +364,13 @@
                         </th>
                         <th style="border: none; text-align: start" rowspan="3" colspan="2  ">
                             <span class="fst-underline"> </span> <br>
-                            <span class="fw-light">: 72.5 °C Selama 35 Detik</span> <br>
-                            <span class="fw-light">: 80.9 °C Selama 32 Detik</span> <br>
-                            <span class="fw-light">: 86.0 °C Selama 43 Detik</span> <br>
-                            <span class="fw-light">: 97.4 °C Selama 1 menit 38 detik</span> <br> <br>
+                            <span class="fw-light">: 80,4 °C Selama 30 Detik</span> <br>
+                            <span class="fw-light">: 92.6 °C Selama 1 Menit 27 Detik</span> <br>
+                            <span class="fw-light">: 85.1 °C Selama 1 Menit 48 Detik</span> <br>
+                            <span class="fw-light">: 92.9 °C Selama 50 Detik</span> <br> <br>
 
-                            <span class="fw-light">: 56.3 °C</span> <br>
-                            <span class="fw-light">: 1 Menit 5 Detik</span> <br>
+                            <span class="fw-light">: 57.1 °C</span> <br>
+                            <span class="fw-light">: 1 Menit 3 Detik</span> <br>
 
 
                         </th>

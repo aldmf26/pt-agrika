@@ -41,6 +41,7 @@ use App\Http\Controllers\Produksi\Pro6FormCetak;
 use App\Http\Controllers\Produksi\Pro7FormPemilahanAkhir;
 use App\Http\Controllers\Produksi\Pro8Totalhasilgrading;
 use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan;
+use App\Http\Controllers\Produksi\Pro9Ccp2Pemanasan2;
 use App\Http\Controllers\PUR\SeleksiSupplier\PUR2SeleksiSupplier;
 use App\Http\Controllers\QA\kesigapantanggapdarurat\KesigapanTanggapDaruratController;
 use App\Http\Controllers\QA\MampuTelusur\TraceabilityController;
@@ -328,6 +329,15 @@ Route::controller(Pro9Ccp2Pemanasan::class)
         Route::post('/store', 'store')->name('store');
         Route::get('/print', 'print')->name('print');
         Route::get('/get_edit', 'get_edit')->name('get_edit');
+    });
+Route::controller(Pro9Ccp2Pemanasan2::class)
+    ->prefix('produksi/9_CCP2_Pemanasan2')
+    ->name('produksi.9.2.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/import', 'import')->name('import');
+        Route::get('/print', 'print')->name('print');
+        Route::get('/delete', 'delete')->name('delete');
     });
 Route::controller(Pro10PenimbanganHasilProduksi::class)
     ->prefix('produksi/10_Penimbangan_Hasil_Produksi')
