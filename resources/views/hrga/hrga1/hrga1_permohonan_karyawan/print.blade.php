@@ -187,12 +187,12 @@
                     <tbody>
                         <tr>
                             <td style="height: 70px" class="align-middle text-center">
-                                @php
+                                {{-- @php
                                     $pegawai = App\Models\DataPegawai::where('nama', $datas->diajukan_oleh)
                                         ->where('divisi_id', '2')
                                         ->first();
-                                @endphp
-                                <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
+                                @endphp --}}
+                                <x-ttd-barcode :id_pegawai="pengawasTtd($datas->diajukan_oleh)" />
 
                             </td>
                             <td style="height: 70px" class="align-middle text-center">
