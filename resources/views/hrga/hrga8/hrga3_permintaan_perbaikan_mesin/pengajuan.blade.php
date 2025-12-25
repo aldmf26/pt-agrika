@@ -95,7 +95,8 @@
                             <select name="item_id" id="" class="select2 item" required>
                                 <option value="">-Pilih Mesin-</option>
                                 @foreach ($mesin as $m)
-                                    <option value="{{ $m->id }}">{{ $m->nama_mesin }}</option>
+                                    <option value="{{ $m->id }}">
+                                        {{ $m->nama_mesin }}-({{ $m->lokasi->lokasi }})</option>
                                 @endforeach
 
                             </select>
