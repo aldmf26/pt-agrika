@@ -82,7 +82,7 @@ class PembuanganSampah extends Component
     {
         if ($value) {
             // Convert month number to number of days
-            $this->daysInMonth = Carbon::create(2025, $value)->daysInMonth;
+            $this->daysInMonth = Carbon::create(alue)->daysInMonth;
         }
     }
     public function updatedPilihanLimbah($value)

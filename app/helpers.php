@@ -120,3 +120,15 @@ if (!function_exists('pengawasTtd')) {
         return DataPegawai::where('nama', $pengawas)->first();
     }
 }
+if (!function_exists('pengawasTtd')) {
+    function pengawasTtd($pengawas)
+    {
+        return DataPegawai::where('nama', $pengawas)->first();
+    }
+}
+if (!function_exists('pengawasTtdLike')) {
+    function pengawasTtdLike($pengawas)
+    {
+        return DataPegawai::where([['nama', $pengawas], ['posisi', 'like', '%kepala%']])->first();
+    }
+}
