@@ -57,7 +57,7 @@ class Hrga1SchedulePembuanganSampah extends Controller
             'jenis_limbah' => $jenis_limbah,
             'pembuangan' => DB::table('pembuangan_sampahs')
                 ->whereMonth('tgl', $r->bulan)
-                ->whereYear('tgl', date('Y'))
+                ->whereYear('tgl', $r->tahun)
                 ->where('jenis_sampah', $jenis_limbah)
                 ->where('kategori', $r->kategori)
                 ->groupBy('tgl')
