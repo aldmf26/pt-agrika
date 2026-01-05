@@ -66,7 +66,7 @@ class Pro9Ccp2Pemanasan extends Controller
             'header' => DB::table('header_ccp2')->where('tgl', $r->tgl)->first()
 
         ];
-        return view('produksi.pro9ccp2pemanasan.print', $data);
+        return view('produksi.pro9ccp2pemanasan2.print', $data);
     }
 
     public function get_edit(Request $r)
