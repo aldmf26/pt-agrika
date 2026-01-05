@@ -106,7 +106,7 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="pengawasTtd($datas->diminta_oleh)->karyawan_id_dari_api" />
+                                <x-ttd-barcode :id_pegawai="pengawasTtdLike($datas->diminta_oleh)->karyawan_id_dari_api" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
                                 <x-ttd-barcode :id_pegawai="whereTtd('STAFF PURCHASING')" />
