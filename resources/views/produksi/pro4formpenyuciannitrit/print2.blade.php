@@ -249,36 +249,10 @@
                                     ->where('tgl', $tgl)
                                     ->first();
 
-                                $jadwalKhusus = [
-                                    'Nurul Huda' => '14:00',
-                                    'Erna' => '14:30',
-                                    'Norjanah' => '14:30',
-                                    'Siti Patimah' => '14:00',
-                                    'Eka Pebriana Putri' => '15:00',
-                                ];
-
-                                // Cek apakah nama anak ini ada di daftar khusus?
-                                if (array_key_exists($nama_regu, $jadwalKhusus)) {
-                                    // Jika ada, pakai jam dari daftar
-                                    $defaultJamMulai = $jadwalKhusus[$nama_regu];
-                                } else {
-                                    // Jika TIDAK ada, pakai logika Random (Sesi Pagi/Siang) yang lama
-                                    $sesi = rand(0, 1);
-                                    if ($sesi == 0) {
-                                        // Sesi Pagi
-                                        $baseTime = Carbon::createFromTime(9, 0, 0);
-                                        $addMinutes = rand(0, 119);
-                                    } else {
-                                        // Sesi Siang
-                                        $baseTime = Carbon::createFromTime(13, 0, 0);
-                                        $addMinutes = rand(0, 120);
-                                    }
-                                    $defaultJamMulai = $baseTime->addMinutes($addMinutes)->format('H:i');
-                                }
-
                                 // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
                                 // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
+                                $defaultJamMulai = sprintf('%02d:00', $defaultHour); // "14:00"
 
                                 // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
                                 $rawJamMulai =
