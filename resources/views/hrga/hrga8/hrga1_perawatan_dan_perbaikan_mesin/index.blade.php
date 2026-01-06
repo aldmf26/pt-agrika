@@ -3,7 +3,7 @@
         <div class="card-header">
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah"><i
                     class="fas fa-plus"></i> Add</button>
-            <a href="{{ route('hrga8.1.print', ['kategori' => $kategori]) }}" target="_blank"
+            <a href="{{ route('hrga8.1.print', ['kategori' => $kategori, 'tahun' => $tahun]) }}" target="_blank"
                 class="btn  btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
             <div class="w-25">
                 <label for="">Tahun</label>
