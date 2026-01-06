@@ -249,21 +249,27 @@
                                     ->where('tgl', $tgl)
                                     ->first();
 
-                                do {
-                                    // 1. Acak menit antara 0 s.d 1080 (18 jam durasi dari jam 9 pagi - 3 pagi)
-                                    $menitAcak = rand(0, 1080);
+                                $sesi = rand(0, 1);
 
-                                    // 2. Tambahkan ke jam 09:00
-                                    $tempTime = Carbon::createFromTime(9, 0, 0)->addMinutes($menitAcak);
+                                if ($sesi == 0) {
+                                    // === SESI PAGI (09:00 - 10:59) ===
+                                    // Base: 09:00
+                                    // Max tambah menit: 1 jam 59 menit = 119 menit
+                                    $baseTime = Carbon::createFromTime(9, 0, 0);
+                                    $addMinutes = rand(0, 119);
+                                } else {
+                                    // === SESI SIANG (13:00 - 15:00) ===
+                                    // Base: 13:00
+                                    // Max tambah menit: 2 jam = 120 menit (supaya max jam 15:00 pas)
+                                    $baseTime = Carbon::createFromTime(13, 0, 0);
+                                    $addMinutes = rand(0, 120);
+                                }
 
-                                    // 3. Cek apakah jamnya 12? (12:00 s/d 12:59)
-                                    // Jika $tempTime->hour bernilai 12, loop akan mengulang acak lagi
-                                } while ($tempTime->hour == 12);
+                                $defaultJamMulai = $baseTime->addMinutes($addMinutes)->format('H:i');
 
                                 // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
                                 // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
-                                $defaultJamMulai = $tempTime->format('H:i');
 
                                 // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
                                 $rawJamMulai =
