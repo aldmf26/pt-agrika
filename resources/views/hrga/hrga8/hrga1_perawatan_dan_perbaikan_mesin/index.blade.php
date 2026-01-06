@@ -5,6 +5,22 @@
                     class="fas fa-plus"></i> Add</button>
             <a href="{{ route('hrga8.1.print', ['kategori' => $kategori]) }}" target="_blank"
                 class="btn  btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
+            <div>
+                <label for="">Tahun</label>
+                <select name="tahun" id="tahun">
+                    @php
+                        $currentYear = date('Y');
+                        $tahun_list = [];
+                        for ($i = $currentYear - 3; $i <= $currentYear + 3; $i++) {
+                            $tahun_list[] = $i;
+                        }
+                    @endphp
+                    @foreach ($tahun_list as $t)
+                        <option value="{{ $t }}" {{ $t == $tahun ? 'selected' : '' }}>{{ $t }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div class="card-body table-responsive">
             <table class="table table-bordered" id="example">
@@ -246,6 +262,15 @@
                     var baris = $(this).attr('baris');
                     $('[baris="' + baris + '"]').remove();
                 });
+
+                $(document).on('change', '#tahun', function() {
+                    var tahun = $(this).val();
+                    var kategori = '{{ $kategori }}';
+                    window.location.href =
+                        "{{ route('hrga8.1.index') }}" + "?tahun=" + tahun + "&kategori=" + kategori;
+                });
+
+
             });
         </script>
     @endsection
