@@ -249,10 +249,13 @@
                                     ->where('tgl', $tgl)
                                     ->first();
 
+                                $baseTime = Carbon::createFromTime(9, 0, 0);
+                                $randomMinutes = rand(0, 1080);
+
                                 // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
                                 // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
-                                $defaultJamMulai = sprintf('%02d:00', $defaultHour); // "14:00"
+                                $defaultJamMulai = $baseTime->copy()->addMinutes($randomMinutes)->format('H:i');
 
                                 // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
                                 $rawJamMulai =

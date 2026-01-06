@@ -17,7 +17,6 @@ class Pro6FormCetak extends Controller
             $cetak = json_decode($cetak, TRUE);
         } else {
             $id_pengawas = auth()->user()->id;
-
             $cetak = Http::get("https://sarang.ptagafood.com/api/apihasap/cetak?id_pengawas=$id_pengawas");
             $cetak = json_decode($cetak, TRUE);
         }
