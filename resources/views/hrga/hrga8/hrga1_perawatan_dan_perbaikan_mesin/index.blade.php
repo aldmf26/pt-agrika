@@ -5,7 +5,7 @@
                     class="fas fa-plus"></i> Add</button>
             <a href="{{ route('hrga8.1.print', ['kategori' => $kategori]) }}" target="_blank"
                 class="btn  btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
-            <div>
+            <div class="w-25">
                 <label for="">Tahun</label>
                 <select name="tahun" id="tahun" class='form-select'>
                     @php
