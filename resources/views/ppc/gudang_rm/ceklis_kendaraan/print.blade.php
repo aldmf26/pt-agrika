@@ -123,7 +123,7 @@
                     @endphp
 
                     @foreach ($checklist as $c)
-                        <td class="text-endalign-middle" width="8%" colspan="2">{{ tanggal($c->tgl) }}
+                        <td class="text-endalign-middle text-end" width="8%" colspan="2">{{ tanggal($c->tgl) }}
                         </td>
                     @endforeach
 
