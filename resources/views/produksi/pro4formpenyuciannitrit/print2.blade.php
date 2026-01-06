@@ -249,13 +249,21 @@
                                     ->where('tgl', $tgl)
                                     ->first();
 
-                                $baseTime = Carbon::createFromTime(9, 0, 0);
-                                $randomMinutes = rand(0, 1080);
+                                do {
+                                    // 1. Acak menit antara 0 s.d 1080 (18 jam durasi dari jam 9 pagi - 3 pagi)
+                                    $menitAcak = rand(0, 1080);
+
+                                    // 2. Tambahkan ke jam 09:00
+                                    $tempTime = Carbon::createFromTime(9, 0, 0)->addMinutes($menitAcak);
+
+                                    // 3. Cek apakah jamnya 12? (12:00 s/d 12:59)
+                                    // Jika $tempTime->hour bernilai 12, loop akan mengulang acak lagi
+                                } while ($tempTime->hour == 12);
 
                                 // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
                                 // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
-                                $defaultJamMulai = $baseTime->copy()->addMinutes($randomMinutes)->format('H:i');
+                                $defaultJamMulai = $tempTime->format('H:i');
 
                                 // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
                                 $rawJamMulai =
