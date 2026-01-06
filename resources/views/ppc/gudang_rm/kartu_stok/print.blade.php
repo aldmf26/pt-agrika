@@ -54,7 +54,7 @@
                             {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
                         <td class="text-end">{{ number_format($saldo, 0) }}
                             {{ $kategori == 'sbw' ? '(GR)' : $t['satuan'] }}</td>
-                        <td class="text-end">{{ $t['kode_lot'] }}</td>
+                        <td class="text-end">{{ $t['kode_lot'] }} </td>
                         <td>
 
                         </td>
@@ -75,9 +75,9 @@
                         <td class="text-end align-middle">{{ $s['ket'] == 'masuk' ? 0 : number_format($s['gr'], 0) }}
                             GR</td>
                         <td class="text-end align-middle">{{ number_format($saldo2, 0) }} GR</td>
-                        <td class="text-end align-middle">{{ $s['no_invoice'] }}</td>
+                        <td class="text-end align-middle">{{ $s['no_invoice'] }} </td>
                         <td style="height: 40px" class="text-center align-middle">
-                            {{-- @php
+                            @php
                                 $nama = $s['nama'];
                                 $pegawai = App\Models\DataPegawai::where('nama', $nama)->first();
                             @endphp
@@ -85,7 +85,7 @@
                                 {{ $s['nama'] }}
                             @else
                                 <x-ttd-barcode size="40" :id_pegawai="$pegawai->karyawan_id_dari_api" />
-                            @endif --}}
+                            @endif
 
                         </td>
                     </tr>
