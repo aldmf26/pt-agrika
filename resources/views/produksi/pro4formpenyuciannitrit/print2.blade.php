@@ -252,7 +252,16 @@
                                 // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
                                 // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
-                                $defaultJamMulai = sprintf('%02d:00', $defaultHour); // "14:00"
+
+                                if ($nama_regu == 'Nurul Huda' || $nama_regu == 'Siti Patimah') {
+                                    $defaultJamMulai = sprintf('%02d:00', $defaultHour);
+                                } elseif ($nama_regu == 'Erna' || $nama_regu == 'Norjanah') {
+                                    $defaultJamMulai = sprintf('%02d:30', $defaultHour);
+                                } else {
+                                    $defaultJamMulai = sprintf('%03d', $defaultHour);
+                                }
+
+                                // "14:00"
 
                                 // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
                                 $rawJamMulai =
