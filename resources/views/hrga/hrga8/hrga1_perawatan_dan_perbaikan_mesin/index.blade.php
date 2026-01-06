@@ -7,11 +7,11 @@
                 class="btn  btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
             <div>
                 <label for="">Tahun</label>
-                <select name="tahun" id="tahun">
+                <select name="tahun" id="tahun" class='form-select'>
                     @php
                         $currentYear = date('Y');
                         $tahun_list = [];
-                        for ($i = $currentYear - 3; $i <= $currentYear + 3; $i++) {
+                        for ($i = $currentYear - 2; $i <= $currentYear; $i++) {
                             $tahun_list[] = $i;
                         }
                     @endphp
