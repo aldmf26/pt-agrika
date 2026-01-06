@@ -250,7 +250,7 @@
 
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
 
-                                if ($nama_regu == 'Nurul Huda' || $nama_regu == 'Siti Patimah') {
+                                if ($nama_regu == 'Nurul huda' || $nama_regu == 'Siti Patimah') {
                                     // Jam 14:00
                                     $defaultJamMulai = sprintf('%02d:00', $defaultHour);
                                 } elseif ($nama_regu == 'Erna' || $nama_regu == 'Norjanah') {
