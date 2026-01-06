@@ -258,9 +258,9 @@
                                 ];
 
                                 // Cek apakah nama anak ini ada di daftar khusus?
-                                if (array_key_exists($namaAnak, $jadwalKhusus)) {
+                                if (array_key_exists($nama_regu, $jadwalKhusus)) {
                                     // Jika ada, pakai jam dari daftar
-                                    $defaultJamMulai = $jadwalKhusus[$namaAnak];
+                                    $defaultJamMulai = $jadwalKhusus[$nama_regu];
                                 } else {
                                     // Jika TIDAK ada, pakai logika Random (Sesi Pagi/Siang) yang lama
                                     $sesi = rand(0, 1);
