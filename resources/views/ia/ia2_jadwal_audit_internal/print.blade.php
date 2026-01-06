@@ -48,9 +48,12 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="height: 80px" class="text-center align-middle">
-                            <span style="opacity: 0.5;">(Ttd & Nama)</span>
-                        </td>
+                        <td style="height: 70px" class="align-middle text-center">
+                        @php
+                            $pegawai = App\Models\DataPegawai::where('nama', 'Muhammad Fahrizaldi')->first();
+                        @endphp
+                        <x-ttd-barcode :id_pegawai="$pegawai->karyawan_id_dari_api" />
+                    </td>
                     </tr>
                     <tr>
 
