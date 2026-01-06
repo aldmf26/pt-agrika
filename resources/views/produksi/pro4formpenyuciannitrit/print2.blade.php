@@ -249,23 +249,32 @@
                                     ->where('tgl', $tgl)
                                     ->first();
 
-                                $sesi = rand(0, 1);
+                                $jadwalKhusus = [
+                                    'Nurul Huda' => '14:00',
+                                    'Erna' => '14:30',
+                                    'Norjanah' => '14:30',
+                                    'Siti Patimah' => '14:00',
+                                    'Eka Pebriana Putri' => '15:00',
+                                ];
 
-                                if ($sesi == 0) {
-                                    // === SESI PAGI (09:00 - 10:59) ===
-                                    // Base: 09:00
-                                    // Max tambah menit: 1 jam 59 menit = 119 menit
-                                    $baseTime = Carbon::createFromTime(9, 0, 0);
-                                    $addMinutes = rand(0, 119);
+                                // Cek apakah nama anak ini ada di daftar khusus?
+                                if (array_key_exists($namaAnak, $jadwalKhusus)) {
+                                    // Jika ada, pakai jam dari daftar
+                                    $defaultJamMulai = $jadwalKhusus[$namaAnak];
                                 } else {
-                                    // === SESI SIANG (13:00 - 15:00) ===
-                                    // Base: 13:00
-                                    // Max tambah menit: 2 jam = 120 menit (supaya max jam 15:00 pas)
-                                    $baseTime = Carbon::createFromTime(13, 0, 0);
-                                    $addMinutes = rand(0, 120);
+                                    // Jika TIDAK ada, pakai logika Random (Sesi Pagi/Siang) yang lama
+                                    $sesi = rand(0, 1);
+                                    if ($sesi == 0) {
+                                        // Sesi Pagi
+                                        $baseTime = Carbon::createFromTime(9, 0, 0);
+                                        $addMinutes = rand(0, 119);
+                                    } else {
+                                        // Sesi Siang
+                                        $baseTime = Carbon::createFromTime(13, 0, 0);
+                                        $addMinutes = rand(0, 120);
+                                    }
+                                    $defaultJamMulai = $baseTime->addMinutes($addMinutes)->format('H:i');
                                 }
-
-                                $defaultJamMulai = $baseTime->addMinutes($addMinutes)->format('H:i');
 
                                 // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
                                 // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
