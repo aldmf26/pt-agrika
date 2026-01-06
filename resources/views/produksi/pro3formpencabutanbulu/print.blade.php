@@ -320,7 +320,7 @@
                                         <input type="text" class="form-control no-print form-edit"
                                             style="font-size: 12px" name="keterangan"
                                             data-no_box="{{ $c['no_box'] }}" data-tgl="{{ $c['tgl'] }}"
-                                            value="{{ empty($edit) ? 'Susut Melebihi Batas Standar Karena Banyak Pasir' : $edit->keterangan }}">
+                                            value="{{ empty($edit) ? 'Susut melebihi batas standar karena banyak pasir' : $edit->keterangan }}">
                                         <span class="print print-keterangan">
                                             {{ $edit && $edit->keterangan ? $edit->keterangan : 'Susut melebihi batas standar karena banyak pasir' }}
                                         </span>
