@@ -16,6 +16,7 @@ class Hrga3PermintaanPerbaikan extends Controller
 {
     public function index(Request $r)
     {
+        $tahun = empty($r->tahun) ? date('Y') : $r->tahun;
         $kategori = empty($r->kategori) ? 'ruangan' : $r->kategori;
         $data = [
             'title' => 'Permintaan Perbaikan Sarana dan Prasarana Umum',
@@ -23,6 +24,7 @@ class Hrga3PermintaanPerbaikan extends Controller
                 $query->where('jenis_item', $kategori);
             })->orderBy('invoice_pengajuan', 'desc')->get(),
             'kategori' => $kategori,
+            'tahun' => $tahun
         ];
         return view('hrga.hrga5.hrga3_permintaanperbaikan.index', $data);
     }
