@@ -73,7 +73,7 @@ class Penilaiankompetensi extends Component
     public function mount($karyawan)
     {
         $this->karyawan = $karyawan;
-        $this->tahun = date('Y');
+        $this->tahun = 2025;
 
         // Initialize kompetensi
         foreach ($this->masterKompetensi as $komp) {
