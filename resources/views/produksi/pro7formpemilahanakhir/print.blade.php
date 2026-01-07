@@ -258,7 +258,7 @@
 
                 </table>
                 <br>
-                <table width="100%" style="font-size: 11px">
+                <table width="20%" style="font-size: 11px">
                     <tr>
                         <th colspan="9">&nbsp;</th>
                     </tr>
