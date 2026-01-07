@@ -10,7 +10,7 @@ class RM5LabelIdentitasBahanController2 extends Controller
 {
     public function index(Request $r)
     {
-        $tgl1 = $r->tgl1 ?? date('Y-m-01');
+        $tgl1 = $r->tgl1 ?? date('2025-10-01');
         $tgl2 = $r->tgl2 ?? date('Y-m-d');
 
         $k = 'sbw';
