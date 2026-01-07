@@ -31,7 +31,11 @@
                                       {{ $i + 1 }}. {{ $agenda }} <br>
                                   @endforeach
                               </td>
-                              <td>{!! ucwords(strtolower($a->pics)) !!}</td>
+                              <td>
+                                @foreach (explode('<br/>', $a->pics) as $pic)
+        - {{ ucwords(strtolower($pic)) }} <br>
+    @endforeach
+                              </td>
                           </tr>
                       @endforeach
                   </tbody>
