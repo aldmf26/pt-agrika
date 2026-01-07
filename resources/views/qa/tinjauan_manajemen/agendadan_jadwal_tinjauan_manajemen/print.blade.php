@@ -14,7 +14,7 @@
                           <th class="text-center">Tanggal</th>
                           <th class="text-center">Waktu</th>
                           <th class="text-center">Agenda</th>
-                          <th class="text-center" width="100">PIC</th>
+                          <th class="text-center" width="180">PIC</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -31,7 +31,11 @@
                                       {{ $i + 1 }}. {{ $agenda }} <br>
                                   @endforeach
                               </td>
-                              <td>{{ $a->pics }}</td>
+                              <td>
+                                  @foreach (explode('<br/>', $a->pics) as $pic)
+                                      - {{ ucwords(strtolower($pic)) }} <br>
+                                  @endforeach
+                              </td>
                           </tr>
                       @endforeach
                   </tbody>

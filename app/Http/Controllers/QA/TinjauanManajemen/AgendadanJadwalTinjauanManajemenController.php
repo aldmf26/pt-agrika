@@ -138,7 +138,7 @@ class AgendadanJadwalTinjauanManajemenController extends Controller
             'agendadan_jadwal_tinjauan_manajemens.dari_jam',
             'agendadan_jadwal_tinjauan_manajemens.sampai_jam',
             DB::raw("GROUP_CONCAT(DISTINCT agendadan_jadwal_tinjauan_manajemens.agenda SEPARATOR '||') as agendas"),
-            DB::raw("GROUP_CONCAT(DISTINCT data_pegawais.nama SEPARATOR ', ') as pics")
+            DB::raw("GROUP_CONCAT(DISTINCT data_pegawais.nama SEPARATOR '<br/>') as pics")
         )
             ->leftJoin('daftar_hadir', function ($join) {
                 $join->on(
