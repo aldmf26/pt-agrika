@@ -49,7 +49,7 @@ class PUR1DaftarSupplierController extends Controller
 
     public function create_seleksi_sbw(RumahWalet $supplier, Request $r)
     {
-        $seleksi = $supplier->seleksi()->where('kategori', $r->kategori)->latest()->first();
+        $seleksi = $supplier->seleksi()->where('kategori', 'sbw')->latest()->first();
         $data = [
             'title' => 'Tambah Seleksi Supplier',
             'supplier' => $supplier,
