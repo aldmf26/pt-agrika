@@ -209,7 +209,7 @@
                                 <tr>
                                     <td>Keterangan</td>
                                     <td>:</td>
-                                    <td>{{ substr($d->keterangan, 3) }}</td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <table class="signature-table">

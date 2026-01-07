@@ -231,6 +231,12 @@ class RM5LabelIdentitasBahanController extends Controller
         $data = [
             'labels' => $labels,
         ];
-        return view('ppc.gudang_rm.label_identitas_bahan.print', $data);
+
+        if ($identitas === 'sbw') {
+
+            return view('ppc.gudang_rm.label_identitas_bahan.print2', $data);
+        } else {
+            return view('ppc.gudang_rm.label_identitas_bahan.print', $data);
+        }
     }
 }
