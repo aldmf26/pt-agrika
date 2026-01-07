@@ -258,27 +258,33 @@
 
                 </table>
                 <br>
-                <table width="20%" style="font-size: 11px">
-                    <tr>
-                        <th colspan="9">&nbsp;</th>
-                    </tr>
-                    <tr class="table-bawah">
-                        <th style="border: none" colspan="7"></th>
-                        <th class="text-center" colspan="2">Dibuat Oleh:</th>
-                    </tr>
-                    <tr class="table-bawah">
-                        <th style="border: none" colspan="7"></th>
-                        <td style="height: 50px" colspan="2">
-                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
-                        </td>
+                <div class="row">
+                    <div class="col-10"></div>
+                    <div class="col-2">
+                        <table width="20%" style="font-size: 11px">
+                            <tr>
+                                <th colspan="9">&nbsp;</th>
+                            </tr>
+                            <tr class="table-bawah">
+                                <th style="border: none" colspan="7"></th>
+                                <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                            </tr>
+                            <tr class="table-bawah">
+                                <th style="border: none" colspan="7"></th>
+                                <td style="height: 50px" colspan="2">
+                                    <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                                </td>
 
-                    </tr>
-                    <tr class="table-bawah">
-                        <th style="border: none" colspan="7"></th>
-                        <td class="text-center" colspan="2">(KEPALA PACKING & GUDANG FG)</td>
+                            </tr>
+                            <tr class="table-bawah">
+                                <th style="border: none" colspan="7"></th>
+                                <td class="text-center" colspan="2">(KEPALA PACKING & GUDANG FG)</td>
 
-                    </tr>
-                </table>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
             </div>
 
 
