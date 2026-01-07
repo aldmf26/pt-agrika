@@ -105,7 +105,7 @@
                                     II</a>
                             </td>
                             <td>
-                                <a href="{{ route('pur.seleksi.1.create_seleksi_sbw', $r) }}"
+                                <a href="{{ route('pur.seleksi.1.create_seleksi_sbw', $r) }}?kategori={{ $kategori }}"
                                     class="mb-1 btn btn-xs btn-info"><i class="fas fa-plus"></i> Seleksi</a>
                             </td>
                             <td>
