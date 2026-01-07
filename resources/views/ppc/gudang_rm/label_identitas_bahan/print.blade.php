@@ -140,8 +140,8 @@
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td>No Box</td>
-                                        <td>: {{ $d->no_box }}</td>
+                                        {{-- <td>No Box</td>
+                                        <td>: {{ $d->no_box }}</td> --}}
                                     @endif
 
                                 </tr>
@@ -157,8 +157,8 @@
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td>Pcs</td>
-                                        <td>: {{ $d->pcs }}</td>
+                                        {{-- <td>Pcs</td>
+                                        <td>: {{ $d->pcs }}</td> --}}
                                     @endif
 
                                 </tr>
@@ -183,8 +183,8 @@
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
                                         <td>&nbsp;</td>
-                                        <td>Gram</td>
-                                        <td>: {{ $d->gr }}</td>
+                                        {{-- <td>Gram</td>
+                                        <td>: {{ $d->gr }}</td> --}}
                                     @endif
                                 </tr>
                                 <tr>
@@ -209,7 +209,7 @@
                                 <tr>
                                     <td>Keterangan</td>
                                     <td>:</td>
-                                    <td>{{ substr($d->keterangan, 3) }}</td>
+                                    <td></td>
                                 </tr>
                             </table>
                             <table class="signature-table">
