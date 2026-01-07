@@ -5,10 +5,11 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <h6>Data Seleksi Supplier</h6>
-                    @if ($seleksi)
-                        <a target="_blank" href="{{ route('pur.seleksi.1.seleksi_sbw', $supplier) }}"
-                            class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak</a>
-                    @endif
+                    {{-- @if ($seleksi) --}}
+                    <a target="_blank"
+                        href="{{ route('pur.seleksi.1.seleksi_sbw', $supplier) }}?kategori={{ $kategori }}"
+                        class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak</a>
+                    {{-- @endif --}}
                 </div>
                 <table class="table table-lg border-dark">
                     <thead>
@@ -135,7 +136,7 @@
                                                         <label class="form-label">Spesifikasi</label>
                                                         <textarea name="spesifikasi" class="form-control" rows="3">{!! $seleksi->spesifikasi ??
                                                             '1. Tidak ada jamur pink
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        2. Tidak boleh ada batu' !!}</textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                2. Tidak boleh ada batu' !!}</textarea>
                                                     </div>
 
                                                     <div class="form-group mb-3">
@@ -243,7 +244,7 @@
                                                 <label class="form-label">Hasil Pemeriksaan</label>
                                                 <textarea name="hasil_pemeriksaan_lab" class="form-control" rows="3">{!! $seleksi->hasil_pemeriksaan_lab ??
                                                     '1. SBW sesuai dalam kondisi visual, tidak ada jamur pink, serta batu
-                                                                                                                                                                                                                                                                                                                                                                                                                                                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm)' !!}</textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                2. SBW sesuai dengan kadar nitrite maksimal 50mg/l (ppm)' !!}</textarea>
                                             </div>
 
                                             <div class="form-group mb-3">

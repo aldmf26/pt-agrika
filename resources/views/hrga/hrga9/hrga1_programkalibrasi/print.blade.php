@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="col-3 ">
-                <p class="cop_text float-end">Dok.No.: FRM.HRGA.09.02, Rev.00</p>
+                <p class="cop_text float-end">Dok.No.: FRM.HRGA.09.01, Rev.00</p>
             </div>
             <div class="col-lg-12">
                 <table class="table table-bordered border-dark text-nowrap" style="font-size: 11px">

@@ -93,7 +93,7 @@ class Hrga3PermintaanPerbaikanMesin extends Controller
     {
         $kategori = $r->kategori ?? 'mesin';
         $title = $kategori == 'mesin' ? 'PERMINTAAN PERBAIKAN MESIN & PERALATAN' : 'PERMINTAAN PERBAIKAN SOFTWARE & HARDWARE PROSES PRODUKSI';
-        $dokumen = $kategori == 'mesin' ? 'Dok.No.: FRM.HRGA.08.04, Rev.00' : 'Dok.No.: FRM.IT.01.03, Rev.00';
+        $dokumen = $kategori == 'mesin' ? 'Dok.No.: FRM.HRGA.08.03, Rev.00' : 'Dok.No.: FRM.IT.01.03, Rev.00';
         $data = [
             'title' => $title,
             'dok' => $dokumen,
