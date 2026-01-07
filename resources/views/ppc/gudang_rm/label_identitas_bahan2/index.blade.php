@@ -41,6 +41,7 @@
                     <th>No Box</th>
                     <th>pcs</th>
                     <th>gr</th>
+                    <th>Pengawas</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -64,6 +65,7 @@
                         <td>{{ $i['kode_lot'] }}</td>
                         <td>{{ $i['pcs_awal'] }}</td>
                         <td>{{ $i['gr_awal'] }}</td>
+                        <td>{{ $i['pengawas'] }}</td>
 
                         <td>
                             <input type="hidden" name="checked" :value="JSON.stringify(checked)">
