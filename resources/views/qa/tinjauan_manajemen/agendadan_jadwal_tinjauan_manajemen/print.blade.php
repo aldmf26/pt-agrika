@@ -31,7 +31,7 @@
                                       {{ $i + 1 }}. {{ $agenda }} <br>
                                   @endforeach
                               </td>
-                              <td>{{ $a->pics }}</td>
+                              <td>{{ ucwords($a->pics) }}</td>
                           </tr>
                       @endforeach
                   </tbody>
