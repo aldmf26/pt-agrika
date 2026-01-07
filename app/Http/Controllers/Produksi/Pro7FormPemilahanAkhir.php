@@ -25,7 +25,7 @@ class Pro7FormPemilahanAkhir extends Controller
 
     public function print(Request $r)
     {
-        $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/grading_detail?no_invoice=$r->tgl");
+        $grading = Http::get("https://sarang.ptagafood.com/api/apihasap/grading_detail?tgl=$r->tgl");
         $grading = json_decode($grading, TRUE);
 
         $data = [
