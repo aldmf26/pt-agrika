@@ -209,7 +209,7 @@
                                     <tr>
                                         <td>Keterangan</td>
                                         <td>:</td>
-                                        <td>{{ $d->keterangan ?? '-' }}</td>
+                                        <td></td>
                                     </tr>
                                 </table>
                                 <table class="signature-table">
