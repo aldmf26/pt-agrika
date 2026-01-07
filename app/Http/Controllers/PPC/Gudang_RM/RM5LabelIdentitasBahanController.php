@@ -186,7 +186,7 @@ class RM5LabelIdentitasBahanController extends Controller
             }
             if ($identitas === 'sbw') {
                 $bk = Http::get("https://sarang.ptagafood.com/api/apihasap/no_box_label_detail?no_box=$id");
-                dd($bk);
+
                 $bk = json_decode($bk, TRUE);
                 $bk = $bk['data'];
 
