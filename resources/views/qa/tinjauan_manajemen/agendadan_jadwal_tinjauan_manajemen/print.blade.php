@@ -31,7 +31,14 @@
                                       {{ $i + 1 }}. {{ $agenda }} <br>
                                   @endforeach
                               </td>
-                              <td>{{ ucwords(strtolower($a->pics)) }}</td>
+                              <td>
+                                  @php
+                                  $names = explode(', ', ucwords(strtolower($a->pics));
+                                  foreach ($names as $name) {
+                                      echo $name . '<br>';
+                                  }
+                                  @endphp
+                              </td>
                           </tr>
                       @endforeach
                   </tbody>
