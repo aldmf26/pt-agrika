@@ -58,9 +58,9 @@ class PUR1DaftarSupplierController extends Controller
         return view('pur.seleksi.daftar_supplier.create_seleksi_sbw', $data);
     }
 
-    public function create_seleksi(Suplier $supplier)
+    public function create_seleksi(Suplier $supplier, Request $r)
     {
-        $seleksi = $supplier->seleksi()->latest()->first();
+        $seleksi = $supplier->seleksi()->where('kategori',$r->kategori)->latest()->first();
         $data = [
             'title' => 'Tambah Seleksi Supplier',
             'supplier' => $supplier,
