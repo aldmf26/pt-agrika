@@ -243,16 +243,31 @@
 
                                 $pcs = (int) ($c['pcs'] == 0 ? round($c['gr'] / 6, 0) : $c['pcs']);
 
-                                // ambil edit jika ada (pastikan query sesuai)
                                 $edit = DB::table('form_pros_01_03_edit')
                                     ->where('no_box', $c['no_box'])
                                     ->where('tgl', $tgl)
                                     ->first();
 
-                                // DEFAULT jamMulai jika tidak ada $edit->waktu_mulai
-                                // gunakan jam dasar: 14:00 + offset jam per counter (sebelumnya kamu pakai jam per 1 jam)
                                 $defaultHour = 14 + ($counterNamaAnak[$namaAnak] - 1);
-                                $defaultJamMulai = sprintf('%02d:00', $defaultHour); // "14:00"
+
+                                if ($nama_regu == 'Nurul huda' || $nama_regu == 'Siti Patimah') {
+                                    // Jam 14:00
+                                    $defaultJamMulai = sprintf('%02d:00', $defaultHour);
+                                } elseif ($nama_regu == 'Erna' || $nama_regu == 'Norjanah') {
+                                    // Jam 14:30
+                                    $defaultJamMulai = sprintf('%02d:30', $defaultHour);
+                                } else {
+                                    // === INI YANG KAKAK MINTA (JAM 15:00) ===
+
+                                    // Opsi A: Jika ingin otomatis ikut urutan (15:00, 16:00, dst)
+                                    // Kita tambah 1 karena basis defaultHour adalah 14
+                                    $defaultJamMulai = sprintf('%02d:00', $defaultHour + 1);
+
+                                    // Opsi B: Jika ingin SELALU jam 15:00 (mati/hardcode) tidak peduli jumlah box
+                                    // $defaultJamMulai = '15:00';
+                                }
+
+                                // "14:00"
 
                                 // Ambil nilai jam mulai (bisa "17:00", "17:00:00", atau datetime)
                                 $rawJamMulai =
