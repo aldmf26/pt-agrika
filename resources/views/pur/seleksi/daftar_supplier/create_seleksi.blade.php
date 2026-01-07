@@ -5,10 +5,10 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <h6>Data Seleksi Supplier</h6>
-                    @if ($seleksi)
-                        <a target="_blank" href="{{ route('pur.seleksi.1.seleksi', $supplier) }}"
+                    {{-- @if ($seleksi) --}}
+                        <a target="_blank" href="{{ route('pur.seleksi.1.seleksi', $supplier) }}?kategori={{ $kategori }}"
                             class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak</a>
-                    @endif
+                    {{-- @endif --}}
                 </div>
                 <table class="table table-lg border-dark">
                     <thead>

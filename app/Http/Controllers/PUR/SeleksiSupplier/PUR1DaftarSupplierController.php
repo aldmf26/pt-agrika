@@ -54,6 +54,7 @@ class PUR1DaftarSupplierController extends Controller
             'title' => 'Tambah Seleksi Supplier',
             'supplier' => $supplier,
             'seleksi' => $seleksi,
+            'kategori' => $r->kategori,
         ];
         return view('pur.seleksi.daftar_supplier.create_seleksi_sbw', $data);
     }
@@ -65,6 +66,7 @@ class PUR1DaftarSupplierController extends Controller
             'title' => 'Tambah Seleksi Supplier',
             'supplier' => $supplier,
             'seleksi' => $seleksi,
+            'kategori' => $r->kategori,
         ];
         return view('pur.seleksi.daftar_supplier.create_seleksi', $data);
     }
