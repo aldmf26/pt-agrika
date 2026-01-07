@@ -14,7 +14,7 @@
                           <th class="text-center">Tanggal</th>
                           <th class="text-center">Waktu</th>
                           <th class="text-center">Agenda</th>
-                          <th class="text-center" width="150">PIC</th>
+                          <th class="text-center" width="180">PIC</th>
                       </tr>
                   </thead>
                   <tbody>
