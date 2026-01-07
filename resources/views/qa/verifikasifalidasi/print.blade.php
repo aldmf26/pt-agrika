@@ -156,10 +156,10 @@
                     <tbody>
                         <tr>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA LAB & FSTL')" />
                             </td>
                             <td style="height: 80px" class="text-center align-middle">
-                                <span style="opacity: 0.5;">(Ttd & Nama)</span>
+                                <x-ttd-barcode :id_pegawai="whereTtd('DIREKTUR UTAMA')" />
                             </td>
                         </tr>
                         <tr>
@@ -168,7 +168,7 @@
                                 (KEPALA LAB & FSTL)
                             </td>
                             <td class="text-center align-middle">
-                                (OPERATIONAL MANAGER)
+                                (DIREKTUR UTAMA)
                             </td>
 
                         </tr>
