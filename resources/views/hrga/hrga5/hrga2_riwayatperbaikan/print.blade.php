@@ -185,7 +185,7 @@
 
                             </th>
                             <th colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.:FRM.HRGA.05.0,
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.:FRM.HRGA.05.02,
                                     Rev.00</p>
                             </th>
                         </tr>
