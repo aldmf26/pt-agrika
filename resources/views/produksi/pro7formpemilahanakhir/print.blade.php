@@ -244,10 +244,10 @@
                             <tr class="table-bawah">
                                 <td class="text-end">{{ $loop->iteration }}</td>
                                 <td class="text-start">{{ strtoupper($g['grade']) }}</td>
-                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : $g['pcs'] }}</td>
-                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : $g['gr'] }}</td>
-                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['pcs'] : 0 }}</td>
-                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? $g['gr'] : 0 }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : number_format($g['pcs'], 0) }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? 0 : number_format($g['gr'], 0) }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? number_format($g['pcs'], 0) : 0 }}</td>
+                                <td class="text-end">{{ $g['not_oke'] == 'Y' ? number_format($g['gr'], 0) : 0 }}</td>
                                 <td class="text-end">{{ $g['box'] }}</td>
                                 <td class="text-end">{{ $g['box_pengiriman'] }}</td>
                                 <td class="text-center"></td>
