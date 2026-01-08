@@ -226,8 +226,16 @@
                                     {{ $p->grade_awal }}
 
                                 </td>
-                                <td class="text-end align-middle">
-                                    {{ $p->kode_batch }}
+                                <td class="text-end align-middle" style="font-size: 9px;">
+                                    @foreach ($p->kode_batch as $batch)
+                                        {{-- Tampilkan Batch --}}
+                                        {{ $batch }}
+
+                                        {{-- Jika bukan item terakhir, tambahkan koma dan enter --}}
+                                        @if (!$loop->last)
+                                            ,<br>
+                                        @endif
+                                    @endforeach
                                 </td>
                                 {{-- <td class="text-end align-middle">{{ number_format($i['pcs'], 0) }}</td>
                                 <td class="text-end align-middle">{{ number_format($i['gr'], 0) }}</td> --}}
