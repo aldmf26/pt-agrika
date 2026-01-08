@@ -280,8 +280,9 @@
 
                 </table>
             </div>
-            <br>
+
             <div class="col-7">
+                <br>
 
 
             </div>
