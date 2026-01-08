@@ -272,7 +272,7 @@
                                 {{-- Garis pemisah tiap 6 data --}}
                                 @if ($indexDalamKelompok > 1 && ($indexDalamKelompok - 1) % 6 == 0)
                                     <tr class="table-bawah">
-                                        <td colspan="13">&nbsp;</td>
+                                        <td colspan="13"></td>
                                     </tr>
                                 @endif
 
@@ -289,20 +289,20 @@
                                     </td>
                                     @php
                                         if ($p['kelompok'] == '1') {
-                                            $suhu = '80.4';
-                                            $menit = '30 detik';
+                                            $suhu = '72.5';
+                                            $menit = '35 detik';
                                             $kelompok = 'Mangkok / Segitiga / Oval / Sudut';
                                         } elseif ($p['kelompok'] == '2') {
-                                            $suhu = '92.6';
-                                            $menit = '1 menit 27 detik';
+                                            $suhu = '80.9';
+                                            $menit = '32 detik';
                                             $kelompok = 'Patahan';
                                         } elseif ($p['kelompok'] == '3') {
-                                            $suhu = '85.1';
-                                            $menit = '1 menit 48 detik';
+                                            $suhu = '86.0';
+                                            $menit = '43 detik';
                                             $kelompok = 'Kaki';
                                         } else {
-                                            $suhu = '92.9';
-                                            $menit = '50 detik';
+                                            $suhu = '97.4';
+                                            $menit = '1 menit 38 detik';
                                             $kelompok = 'Hancuran';
                                         }
                                     @endphp
@@ -364,13 +364,13 @@
                         </th>
                         <th style="border: none; text-align: start" rowspan="3" colspan="2  ">
                             <span class="fst-underline"> </span> <br>
-                            <span class="fw-light">: 80,4 °C Selama 30 Detik</span> <br>
-                            <span class="fw-light">: 92.6 °C Selama 1 Menit 27 Detik</span> <br>
-                            <span class="fw-light">: 85.1 °C Selama 1 Menit 48 Detik</span> <br>
-                            <span class="fw-light">: 92.9 °C Selama 50 Detik</span> <br> <br>
+                            <span class="fw-light">: 72.5 °C Selama 35 Detik</span> <br>
+                            <span class="fw-light">: 80.9 °C Selama 32 Detik</span> <br>
+                            <span class="fw-light">: 86.0 °C Selama 43 Detik</span> <br>
+                            <span class="fw-light">: 97.4 °C Selama 1 menit 38 detik</span> <br> <br>
 
-                            <span class="fw-light">: 57.1 °C</span> <br>
-                            <span class="fw-light">: 1 Menit 3 Detik</span> <br>
+                            <span class="fw-light">: 56.3 °C</span> <br>
+                            <span class="fw-light">: 1 Menit 5 Detik</span> <br>
 
 
                         </th>
