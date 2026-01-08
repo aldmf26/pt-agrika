@@ -15,11 +15,11 @@
                         <a wire:navigate class="nav-link {{ $kategori == 'survey' ? 'active' : '' }}" aria-current="page"
                             href="{{ route($url, ['kategori' => 'survey']) }}">Survey</a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a wire:navigate class="nav-link {{ $kategori == 'final' ? 'active' : '' }}" aria-current="page"
                             href="{{ route($url, ['kategori' => 'final']) }}">Final
                             Report</a>
-                    </li>
+                    </li> --}}
 
                 </ul>
            
