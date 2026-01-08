@@ -153,10 +153,13 @@ class PUR1DaftarSupplierController extends Controller
 
     public function seleksi_sbw(RumahWalet $supplier)
     {
+        $seleksi = $supplier->seleksi()->where('kategori', 'sbw')->latest()->first();
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
             'dok' => 'Dok.No.: FRM.PURS.01.03, Rev.00',
+            'kategori' => 'sbw',
+            'seleksi' => $seleksi,
         ];
         return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
