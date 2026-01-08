@@ -229,55 +229,40 @@
                             </tr>
                         @endforeach
                     </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="12">&nbsp;</th>
-                        </tr>
-                        <tr class="table-bawah">
-                            <th style="border: none" colspan="8"></th>
-                            <th class="text-center" colspan="2">Dibuat Oleh:</th>
-                            <th class="text-center" colspan="2">Diperiksa Oleh:</th>
-                        </tr>
-                        <tr class="table-bawah">
-                            <th style="border: none" colspan="8"></th>
-                            <td style="height: 50px" colspan="2">
-                                <x-ttd-barcode :id_pegawai="whereTtd('STAFF PACKING & GUDANG FG')" />
-                            </td>
-                            <td style="height: 50px" colspan="2">
-                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
-                            </td>
 
-                        </tr>
-                        <tr class="table-bawah">
-                            <th style="border: none" colspan="8"></th>
-                            <td class="text-center" colspan="2">(STAFF PACKING & GUDANG FG)</td>
-                            <td class="text-center" colspan="2">(KEPALA PACKING & GUDANG FG)</td>
-
-                        </tr>
-                    </tfoot>
                 </table>
+                <br>
             </div>
-            {{-- <div class="col-7">
+            <div class="col-7">
 
 
             </div>
             <div class="col-5">
                 <table class="table table-bordered" style="font-size: 11px">
-                    <thead>
-                        <tr>
-                            <th class="text-center" width="33.33%">Dibuat Oleh:</th>
-                            <th class="text-center" width="33.33%">Diperiksa Oleh:</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="height: 80px"></td>
-                            <td style="height: 80px"></td>
-                        </tr>
 
-                    </tbody>
+                    <tr class="table-bawah">
+
+                        <th class="text-center" colspan="2">Dibuat Oleh:</th>
+                        <th class="text-center" colspan="2">Diperiksa Oleh:</th>
+                    </tr>
+                    <tr class="table-bawah">
+
+                        <td style="height: 50px" colspan="2">
+                            <x-ttd-barcode :id_pegawai="whereTtd('STAFF PACKING & GUDANG FG')" />
+                        </td>
+                        <td style="height: 50px" colspan="2">
+                            <x-ttd-barcode :id_pegawai="whereTtd('KEPALA PACKING & GUDANG FG')" />
+                        </td>
+
+                    </tr>
+                    <tr class="table-bawah">
+
+                        <td class="text-center" colspan="2">(STAFF PACKING & GUDANG FG)</td>
+                        <td class="text-center" colspan="2">(KEPALA PACKING & GUDANG FG)</td>
+
+                    </tr>
                 </table>
-            </div> --}}
+            </div>
 
 
         </div>
