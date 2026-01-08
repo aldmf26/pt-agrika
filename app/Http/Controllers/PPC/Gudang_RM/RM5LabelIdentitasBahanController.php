@@ -194,7 +194,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
                     ->leftJoin('rumah_walet', 'sbw_kotor.rwb_id', '=', 'rumah_walet.id')
                     ->select('sbw_kotor.*', 'sbw_kotor.no_invoice', 'grade_sbw_kotor.kode', 'grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet')
-                    ->where('nm_partai', 'like', '%' . $bk['nm_partai'] . '%')
+
                     ->first();
                 if ($kemasan) {
                     // Ensure supplier is an object
