@@ -54,7 +54,7 @@ class PUR1DaftarSupplierController extends Controller
             'title' => 'Tambah Seleksi Supplier',
             'supplier' => $supplier,
             'seleksi' => $seleksi,
-            'kategori' => $r->kategori,
+            'kategori' => 'sbw',
         ];
         return view('pur.seleksi.daftar_supplier.create_seleksi_sbw', $data);
     }
@@ -137,7 +137,7 @@ class PUR1DaftarSupplierController extends Controller
                 'tgl' => date('Y-m-d'),
             ];
 
-            $seleksi = SeleksiSupplier::where('supplier_id', $supplier->id)->first();
+            $seleksi = SeleksiSupplier::where('supplier_id', $supplier->id, 'kategori', $r->kategori)->first();
             if ($seleksi) {
                 $seleksi->update($data);
             } else {
@@ -153,10 +153,13 @@ class PUR1DaftarSupplierController extends Controller
 
     public function seleksi_sbw(RumahWalet $supplier)
     {
+        $seleksi = $supplier->seleksi()->where('kategori', 'sbw')->latest()->first();
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
             'dok' => 'Dok.No.: FRM.PURS.01.03, Rev.00',
+            'kategori' => 'sbw',
+            'seleksi' => $seleksi,
         ];
         return view('pur.seleksi.daftar_supplier.seleksi_sbw', $data);
     }
