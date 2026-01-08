@@ -81,7 +81,7 @@
             </div>
 
             <div class="col-12 ">
-                <p class="mt-2 text-center">Dok.No.: FRM.QA.07.01</p>
+                <p class="mt-2 text-center">Dok.No.: FRM.QA.08.01</p>
 
             </div>
 
