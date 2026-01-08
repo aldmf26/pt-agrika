@@ -53,30 +53,42 @@ class Pro9Ccp2Pemanasan2 extends Controller
             ->get();
 
         // 2. Proses Pecah Data & Logika Pembagian Berat
+        // 2. Proses Pecah Data & Logika Pembagian Berat
         $pemanasanProcessed = $rawPemanasan->flatMap(function ($item) {
-            $grades = explode(',', $item->grade_akhir);
+            // --- PERBAIKAN DI SINI ---
+            $gradesRaw = explode(',', $item->grade_akhir);
+
+            // Filter: Hanya ambil yang tidak kosong
+            $grades = array_values(array_filter($gradesRaw, function ($value) {
+                return trim($value) !== ''; // Hapus jika cuma spasi atau kosong
+            }));
+            // -------------------------
+
             $jumlah_grade = count($grades);
+
+            // Jika setelah difilter ternyata kosong (misal datanya ",,"), return kosong
+            if ($jumlah_grade == 0) return [];
 
             $total_pcs = $item->pcs;
             $total_gr = $item->gr;
 
             $hasil_split = [];
 
+            // ... LANJUTKAN KODE PERHITUNGAN SEPERTI SEBELUMNYA DI BAWAH INI ...
+
             // Hitung porsi berat & pcs
             if ($jumlah_grade == 1) {
-                // Jika cuma 1, ambil semua
+                // ... logic sama ...
                 $porsi_utama_gr = $total_gr;
                 $porsi_sisa_gr = 0;
-
                 $porsi_utama_pcs = $total_pcs;
                 $porsi_sisa_pcs = 0;
             } else {
-                // Aturan: Grade pertama dapat 50%, sisanya bagi rata
+                // ... logic sama ...
                 $porsi_utama_gr = $total_gr * 0.5;
                 $sisa_gr_total = $total_gr - $porsi_utama_gr;
                 $porsi_sisa_gr = $sisa_gr_total / ($jumlah_grade - 1);
 
-                // Lakukan hal yang sama untuk PCS (opsional, jika pcs juga mau dibagi)
                 $porsi_utama_pcs = floor($total_pcs * 0.5);
                 $sisa_pcs_total = $total_pcs - $porsi_utama_pcs;
                 $porsi_sisa_pcs = floor($sisa_pcs_total / ($jumlah_grade - 1));
@@ -85,7 +97,6 @@ class Pro9Ccp2Pemanasan2 extends Controller
             foreach ($grades as $index => $gradeRaw) {
                 $gradeClean = trim($gradeRaw);
 
-                // Tentukan berat & pcs untuk baris ini
                 if ($index == 0) {
                     $fix_gr = $porsi_utama_gr;
                     $fix_pcs = $porsi_utama_pcs;
@@ -94,11 +105,10 @@ class Pro9Ccp2Pemanasan2 extends Controller
                     $fix_pcs = $porsi_sisa_pcs;
                 }
 
-                // Kita buat object baru (stdClass) agar strukturnya sama dengan hasil DB
-                $newRow = clone $item; // Copy data asli (tanggal, batch, grade_awal, dll)
-                $newRow->grade_akhir = $gradeClean; // Timpa dengan grade pecahan (misal: "D")
-                $newRow->gr = $fix_gr;   // Timpa dengan berat baru
-                $newRow->pcs = $fix_pcs; // Timpa dengan pcs baru
+                $newRow = clone $item;
+                $newRow->grade_akhir = $gradeClean;
+                $newRow->gr = $fix_gr;
+                $newRow->pcs = $fix_pcs;
 
                 $hasil_split[] = $newRow;
             }
