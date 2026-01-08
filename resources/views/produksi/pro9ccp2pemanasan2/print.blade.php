@@ -270,11 +270,7 @@
                                 @endphp
 
                                 {{-- Garis pemisah tiap 6 data --}}
-                                @if ($indexDalamKelompok > 1 && ($indexDalamKelompok - 1) % 6 == 0)
-                                    <tr class="table-bawah">
-                                        <td colspan="13">&nbsp;</td>
-                                    </tr>
-                                @endif
+
 
                                 <tr class="table-bawah">
                                     {{-- Nomor Tray --}}
