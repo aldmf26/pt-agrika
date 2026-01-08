@@ -314,10 +314,10 @@
                                     </td>
                                     <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
                                     <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
-                                    <td class="text-end">{{ empty($isi->tventing_c) ? 57.1 : $isi->tventing_c }}</td>
+                                    <td class="text-end">{{ empty($isi->tventing_c) ? 56 : $isi->tventing_c }}</td>
                                     <td class="text-end">
                                         {{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }} Menit
-                                        {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik
+                                        {{ empty($isi->tventing_detik) ? 5 : $isi->tventing_detik }} Detik
                                     </td>
 
                                     <td class="text-end">{{ empty($isi->ttot_c) ? $suhu : $isi->ttot_c }}</td>
