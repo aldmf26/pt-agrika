@@ -241,7 +241,7 @@
                                 <td class="text-end align-middle">{{ number_format($i['gr'], 0) }}</td> --}}
 
                                 <td class="text-start align-middle ">
-                                    {{ $p->grade_akhir }}
+                                    {{ strtoupper($p->grade_akhir) }}
                                 </td>
                                 <td class="text-end">{{ number_format($p->pcs, 0) }}</td>
                                 <td class="text-end">{{ number_format($p->gr, 0) }}</td>
