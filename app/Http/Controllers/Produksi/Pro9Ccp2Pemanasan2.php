@@ -43,6 +43,21 @@ class Pro9Ccp2Pemanasan2 extends Controller
         ];
         return view('produksi.pro9ccp2pemanasan.print', $data);
     }
+    public function print2(Request $r)
+    {
+        $tgl = $r->tgl;
+
+        $pemanasan = DB::table('pemanasan_cpp2s')->where('tanggal', $r->tgl)->get();
+        $data = [
+            'title' => 'Form pemanasan CCP 2',
+            'pemanasan' => $pemanasan,
+            'tgl' => $tgl,
+
+            'header' => DB::table('header_ccp2')->where('tgl', $r->tgl)->first()
+
+        ];
+        return view('produksi.pro9ccp2pemanasan.print2', $data);
+    }
 
     public function delete(Request $r)
     {

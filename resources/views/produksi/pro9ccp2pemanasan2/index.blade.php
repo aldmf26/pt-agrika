@@ -27,6 +27,9 @@
                                 <a href="{{ route('produksi.9.2.print', ['tgl' => $p->tgl]) }}" target="_blank"
                                     class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
                                     Print</a>
+                                <a href="{{ route('produksi.9.2.print2', ['tgl' => $p->tgl]) }}" target="_blank"
+                                    class="btn btn-primary btn-sm "><i class="fas fa-print"></i>
+                                    Print2</a>
                                 <a href="{{ route('produksi.9.2.delete', ['tgl' => $p->tgl]) }}"
                                     onclick=" return confirm('Yakin ingin menghapus data ini?')"
                                     class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
