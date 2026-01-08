@@ -235,12 +235,12 @@
                                 $indexDalamKelompok = 0;
                             @endphp
 
-                            <tr>
+                            {{-- <tr>
                                 <td colspan="14" class="fw-bold text-center bg-light">
-                                    {{-- KELOMPOK {{ $trayAwal }}–{{ $trayAkhir }} ({{ strtoupper($kelompok) }}) --}}
+
                                     &nbsp;
                                 </td>
-                            </tr>
+                            </tr> --}}
 
                             @foreach ($items->values() as $i => $p)
                                 @php
