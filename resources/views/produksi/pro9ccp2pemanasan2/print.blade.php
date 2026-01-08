@@ -270,7 +270,11 @@
                                 @endphp
 
                                 {{-- Garis pemisah tiap 6 data --}}
-
+                                @if ($indexDalamKelompok > 1 && ($indexDalamKelompok - 1) % 6 == 0)
+                                    <tr class="table-bawah">
+                                        <td colspan="13">&nbsp;</td>
+                                    </tr>
+                                @endif
 
                                 <tr class="table-bawah">
                                     {{-- Nomor Tray --}}
@@ -279,7 +283,7 @@
                                     {{-- Urutan dalam tray (1–6) --}}
                                     <td class="text-end">{{ $urutanDalamTray }}</td>
 
-                                    <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                    <td class="text-end nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                     <td class="text-start">
                                         {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
                                     </td>
