@@ -190,7 +190,7 @@
                                     class="fst-italic fw-lighter">Heating Number</span></th>
                             <th rowspan="2" class="text-center align-middle">Nampan <br> <span
                                     class="fst-italic fw-lighter">Tray</th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="2" class="text-center align-middle text-nowrap">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
                             <th rowspan="2" class="text-center align-middle">Grade Awal <br> <span
@@ -235,12 +235,12 @@
                                 $indexDalamKelompok = 0;
                             @endphp
 
-                            <tr>
+                            {{-- <tr>
                                 <td colspan="14" class="fw-bold text-center bg-light">
-                                    {{-- KELOMPOK {{ $trayAwal }}–{{ $trayAkhir }} ({{ strtoupper($kelompok) }}) --}}
+
                                     &nbsp;
                                 </td>
-                            </tr>
+                            </tr> --}}
 
                             @foreach ($items->values() as $i => $p)
                                 @php
@@ -270,11 +270,7 @@
                                 @endphp
 
                                 {{-- Garis pemisah tiap 6 data --}}
-                                @if ($indexDalamKelompok > 1 && ($indexDalamKelompok - 1) % 6 == 0)
-                                    <tr class="table-bawah">
-                                        <td colspan="13">&nbsp;</td>
-                                    </tr>
-                                @endif
+
 
                                 <tr class="table-bawah">
                                     {{-- Nomor Tray --}}
@@ -283,26 +279,26 @@
                                     {{-- Urutan dalam tray (1–6) --}}
                                     <td class="text-end">{{ $urutanDalamTray }}</td>
 
-                                    <td class="text-end">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                    <td class="text-end  text-nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                     <td class="text-start">
                                         {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
                                     </td>
                                     @php
                                         if ($p['kelompok'] == '1') {
-                                            $suhu = '80.4';
-                                            $menit = '30 detik';
+                                            $suhu = '72.5';
+                                            $menit = '35 detik';
                                             $kelompok = 'Mangkok / Segitiga / Oval / Sudut';
                                         } elseif ($p['kelompok'] == '2') {
-                                            $suhu = '92.6';
-                                            $menit = '1 menit 27 detik';
+                                            $suhu = '80.9';
+                                            $menit = '32 detik';
                                             $kelompok = 'Patahan';
                                         } elseif ($p['kelompok'] == '3') {
-                                            $suhu = '85.1';
-                                            $menit = '1 menit 48 detik';
+                                            $suhu = '86.0';
+                                            $menit = '43 detik';
                                             $kelompok = 'Kaki';
                                         } else {
-                                            $suhu = '92.9';
-                                            $menit = '50 detik';
+                                            $suhu = '97.4';
+                                            $menit = '1 menit 38 detik';
                                             $kelompok = 'Hancuran';
                                         }
                                     @endphp
@@ -318,10 +314,10 @@
                                     </td>
                                     <td class="text-end">{{ number_format($p['pcs'], 0) }}</td>
                                     <td class="text-end">{{ number_format($p['gr'], 0) }}</td>
-                                    <td class="text-end">{{ empty($isi->tventing_c) ? 57.1 : $isi->tventing_c }}</td>
+                                    <td class="text-end">{{ empty($isi->tventing_c) ? 56 : $isi->tventing_c }}</td>
                                     <td class="text-end">
                                         {{ empty($isi->tventing_menit) ? 1 : $isi->tventing_menit }} Menit
-                                        {{ empty($isi->tventing_detik) ? 3 : $isi->tventing_detik }} Detik
+                                        {{ empty($isi->tventing_detik) ? 5 : $isi->tventing_detik }} Detik
                                     </td>
 
                                     <td class="text-end">{{ empty($isi->ttot_c) ? $suhu : $isi->ttot_c }}</td>
@@ -364,13 +360,13 @@
                         </th>
                         <th style="border: none; text-align: start" rowspan="3" colspan="2  ">
                             <span class="fst-underline"> </span> <br>
-                            <span class="fw-light">: 80,4 °C Selama 30 Detik</span> <br>
-                            <span class="fw-light">: 92.6 °C Selama 1 Menit 27 Detik</span> <br>
-                            <span class="fw-light">: 85.1 °C Selama 1 Menit 48 Detik</span> <br>
-                            <span class="fw-light">: 92.9 °C Selama 50 Detik</span> <br> <br>
+                            <span class="fw-light">: 72.5 °C Selama 35 Detik</span> <br>
+                            <span class="fw-light">: 80.9 °C Selama 32 Detik</span> <br>
+                            <span class="fw-light">: 86.0 °C Selama 43 Detik</span> <br>
+                            <span class="fw-light">: 97.4 °C Selama 1 menit 38 detik</span> <br> <br>
 
-                            <span class="fw-light">: 57.1 °C</span> <br>
-                            <span class="fw-light">: 1 Menit 3 Detik</span> <br>
+                            <span class="fw-light">: 56.3 °C</span> <br>
+                            <span class="fw-light">: 1 Menit 5 Detik</span> <br>
 
 
                         </th>

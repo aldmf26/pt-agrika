@@ -337,6 +337,7 @@ Route::controller(Pro9Ccp2Pemanasan2::class)
         Route::get('/', 'index')->name('index');
         Route::post('/import', 'import')->name('import');
         Route::get('/print', 'print')->name('print');
+        Route::get('/print2', 'print2')->name('print2');
         Route::get('/delete', 'delete')->name('delete');
     });
 Route::controller(Pro10PenimbanganHasilProduksi::class)
