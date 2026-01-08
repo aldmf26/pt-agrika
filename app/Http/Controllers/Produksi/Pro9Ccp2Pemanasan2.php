@@ -116,30 +116,36 @@ class Pro9Ccp2Pemanasan2 extends Controller
             return $hasil_split;
         });
 
+        // ... code sebelumnya ...
         $pemanasanMerged = $pemanasanProcessed->groupBy('grade_akhir')->map(function ($rowGroup) {
-            // $rowGroup berisi kumpulan baris yang gradenya sama (misal semua 'Y4')
-
-            // Ambil data sample dari baris pertama untuk data umum
             $firstItem = $rowGroup->first();
 
             return (object) [
                 'grade_akhir' => $firstItem->grade_akhir,
-
-                // JUMLAHKAN Angkanya
                 'pcs' => $rowGroup->sum('pcs'),
                 'gr'  => $rowGroup->sum('gr'),
 
-                // GABUNGKAN Kode Batch (Supaya ketahuan Y4 ini dari batch mana saja)
-                // unique() agar batch yang sama tidak muncul 2x
-                // implode(', ') untuk memisahkan dengan koma
-                'kode_batch' => $rowGroup->pluck('kode_batch')->unique()->implode(', '),
+                // --- PERBAIKAN DI SINI ---
+                'kode_batch' => $rowGroup->pluck('kode_batch')
+                    ->flatMap(function ($item) {
+                        return explode(',', $item); // 1. Pecah jika dalam 1 cell ada banyak koma
+                    })
+                    ->map(function ($item) {
+                        return trim($item); // 2. Hapus spasi berlebih
+                    })
+                    ->filter(function ($item) {
+                        return $item != ''; // 3. Hapus yang kosong
+                    })
+                    ->unique()   // 4. Pastikan unik (Hapus duplikat)
+                    ->values()   // 5. Reset nomor urut array
+                    ->toArray(), // 6. Kirim sebagai ARRAY (bukan string)
+                // -------------------------
 
-                // Grade Awal juga digabung kalau-kalau ada grade awal beda menghasilkan grade akhir sama
                 'grade_awal' => $rowGroup->pluck('grade_awal')->unique()->implode(', '),
-
                 'tanggal' => $firstItem->tanggal,
             ];
         });
+        // ... code setelahnya ...
 
         // 4. Sorting
         // Urutkan berdasarkan Abjad (D, S, V, Y, dst)
