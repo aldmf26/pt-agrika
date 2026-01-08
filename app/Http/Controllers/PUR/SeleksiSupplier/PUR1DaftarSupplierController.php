@@ -54,7 +54,7 @@ class PUR1DaftarSupplierController extends Controller
             'title' => 'Tambah Seleksi Supplier',
             'supplier' => $supplier,
             'seleksi' => $seleksi,
-            'kategori' => $r->kategori,
+            'kategori' => 'sbw',
         ];
         return view('pur.seleksi.daftar_supplier.create_seleksi_sbw', $data);
     }
@@ -137,7 +137,7 @@ class PUR1DaftarSupplierController extends Controller
                 'tgl' => date('Y-m-d'),
             ];
 
-            $seleksi = SeleksiSupplier::where('supplier_id', $supplier->id)->first();
+            $seleksi = SeleksiSupplier::where('supplier_id', $supplier->id, 'kategori', $r->kategori)->first();
             if ($seleksi) {
                 $seleksi->update($data);
             } else {

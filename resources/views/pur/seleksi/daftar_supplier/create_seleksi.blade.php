@@ -1,13 +1,14 @@
 <x-app-layout :title="$title">
     <form action="{{ route('pur.seleksi.1.store_seleksi', $supplier) }}" method="post">
         @csrf
+        <input type="hidden" name="kategori" value="{{ $kategori }}">
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <h6>Data Seleksi Supplier</h6>
                     {{-- @if ($seleksi) --}}
-                        <a target="_blank" href="{{ route('pur.seleksi.1.seleksi', $supplier) }}?kategori={{ $kategori }}"
-                            class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak</a>
+                    <a target="_blank" href="{{ route('pur.seleksi.1.seleksi', $supplier) }}?kategori={{ $kategori }}"
+                        class="btn btn-sm btn-primary"><i class="fas fa-print"></i> Cetak</a>
                     {{-- @endif --}}
                 </div>
                 <table class="table table-lg border-dark">
@@ -112,6 +113,7 @@
                                                         <label class="form-label">No Reg RWB</label>
                                                         <div>
                                                             <div class="form-check form-check-inline">
+
                                                                 <input class="form-check-input" type="radio" name="reg_rwb"
                                                                     id="reg_rwb-ada" value="Ada (lampirkan)"
                                                                     {{ isset($seleksi) && $seleksi->reg_rwb == 'Ada (lampirkan)' ? 'checked' : '' }}>
