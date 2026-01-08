@@ -190,7 +190,7 @@
                                     class="fst-italic fw-lighter">Heating Number</span></th>
                             <th rowspan="2" class="text-center align-middle">Nampan <br> <span
                                     class="fst-italic fw-lighter">Tray</th>
-                            <th rowspan="2" class="text-center align-middle">Kode Batch/Lot <br> <span
+                            <th rowspan="2" class="text-center align-middle text-nowrap">Kode Batch/Lot <br> <span
                                     class="fst-italic fw-lighter">Batch/Lot code
                             </th>
                             <th rowspan="2" class="text-center align-middle">Grade Awal <br> <span
@@ -283,7 +283,7 @@
                                     {{-- Urutan dalam tray (1–6) --}}
                                     <td class="text-end">{{ $urutanDalamTray }}</td>
 
-                                    <td class="text-end nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
+                                    <td class="text-end  text-nowrap">{!! $sbwList->pluck('no_invoice')->unique()->implode(', <br>') ?: '-' !!}</td>
                                     <td class="text-start">
                                         {!! $sbwList->pluck('nama')->unique()->map(fn($n) => strtoupper($n))->implode(', <br>') ?: '-' !!}
                                     </td>
