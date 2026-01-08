@@ -223,7 +223,7 @@
                                 </td>
 
                                 <td class="text-start align-middle">
-                                    {{ $p->grade_awal }}
+                                    {{ strtoupper($p->grade_awal) }}
 
                                 </td>
                                 <td class="text-end align-middle" style="font-size: 9px;">
