@@ -116,14 +116,38 @@ class Pro9Ccp2Pemanasan2 extends Controller
             return $hasil_split;
         });
 
-        // 3. Sorting / Grouping Visual
-        // Ini akan mengurutkan berdasarkan abjad grade_akhir (D dulu, lalu S, lalu V, dst)
-        // values() digunakan untuk mereset index array
-        $pemanasanSorted = $pemanasanProcessed->sortBy('grade_akhir')->values();
+        $pemanasanMerged = $pemanasanProcessed->groupBy('grade_akhir')->map(function ($rowGroup) {
+            // $rowGroup berisi kumpulan baris yang gradenya sama (misal semua 'Y4')
+
+            // Ambil data sample dari baris pertama untuk data umum
+            $firstItem = $rowGroup->first();
+
+            return (object) [
+                'grade_akhir' => $firstItem->grade_akhir,
+
+                // JUMLAHKAN Angkanya
+                'pcs' => $rowGroup->sum('pcs'),
+                'gr'  => $rowGroup->sum('gr'),
+
+                // GABUNGKAN Kode Batch (Supaya ketahuan Y4 ini dari batch mana saja)
+                // unique() agar batch yang sama tidak muncul 2x
+                // implode(', ') untuk memisahkan dengan koma
+                'kode_batch' => $rowGroup->pluck('kode_batch')->unique()->implode(', '),
+
+                // Grade Awal juga digabung kalau-kalau ada grade awal beda menghasilkan grade akhir sama
+                'grade_awal' => $rowGroup->pluck('grade_awal')->unique()->implode(', '),
+
+                'tanggal' => $firstItem->tanggal,
+            ];
+        });
+
+        // 4. Sorting
+        // Urutkan berdasarkan Abjad (D, S, V, Y, dst)
+        $finalData = $pemanasanMerged->sortBy('grade_akhir')->values();
 
         $data = [
             'title' => 'Form pemanasan CCP 2',
-            'pemanasan' => $pemanasanSorted, // Data yang sudah dipecah & diurutkan
+            'pemanasan' => $finalData, // Gunakan variabel hasil merging
             'tgl' => $tgl,
             'header' => DB::table('header_ccp2')->where('tgl', $r->tgl)->first()
         ];
