@@ -31,7 +31,7 @@ class RM5LabelIdentitasBahanController extends Controller
             ->select('grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
             ->get();
 
-        dd($sbw);
+
 
         $items = [];
         // Tambahkan data SBW
