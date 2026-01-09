@@ -31,8 +31,6 @@ class RM5LabelIdentitasBahanController extends Controller
             ->select('grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet', 'sbw_kotor.*')
             ->get();
 
-
-
         $items = [];
         // Tambahkan data SBW
 
@@ -206,7 +204,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
                     $kemasan->keterangan = $kemasan->nm_partai;
-                    $kemasan->no_box = $bk['kode_lot'];
+                    $kemasan->no_invoice = $bk['kode_lot'];
                     $kemasan->pcs = $bk['pcs_awal'];
                     $kemasan->gr = $bk['gr_awal'];
 
