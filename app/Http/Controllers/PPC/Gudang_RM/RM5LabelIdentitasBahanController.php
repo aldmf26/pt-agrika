@@ -205,8 +205,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
                     $kemasan->keterangan = $kemasan->nm_partai;
                     $kemasan->no_invoice = $kemasan->no_invoice;
-                    $kemasan->pcs = $bk['pcs_awal'];
-                    $kemasan->gr = $bk['gr_awal'];
+
 
 
                     // Ensure penerimaan or penerimaanKemasan is a collection
