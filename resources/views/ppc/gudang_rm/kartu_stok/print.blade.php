@@ -86,6 +86,7 @@
                             @else
                                 <x-ttd-barcode size="40" :id_pegawai="$pegawai->karyawan_id_dari_api" />
                             @endif --}}
+                            <span style="font-size: 5px">{{ $s['nama'] }}</span>
 
                         </td>
                     </tr>
