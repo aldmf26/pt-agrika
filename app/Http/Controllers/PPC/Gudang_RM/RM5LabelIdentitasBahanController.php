@@ -214,9 +214,7 @@ class RM5LabelIdentitasBahanController extends Controller
                             'tanggal_terima' =>  date('Y-m-d', strtotime('+1 day', strtotime($kemasan->tgl))),
                             'kode_lot' => $kemasan->no_invoice,
                             'keterangan' => '-',
-                            'no_box' => $bk['kode_lot'],
-                            'pcs' => $bk['pcs_awal'],
-                            'gr' => $bk['gr_awal'],
+
                         ]
                     ]);
                     $labels->push($kemasan);
