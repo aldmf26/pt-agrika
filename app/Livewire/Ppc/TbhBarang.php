@@ -34,7 +34,7 @@ class TbhBarang extends Component
         // $lastBarang = Barang::orderBy('kode_barang', 'DESC')->first();
         // $this->kodeBarang = $lastBarang->kode_barang ?? '';
         Barang::create([
-            'harg_satuan' => $this->harga_satuan,
+            'harga_satuan' => $this->harga_satuan,
             'nama_barang' => $this->nama_barang,
             'kode_barang' => $kodeBarang,
             'supplier_id' => $this->supplierId,
