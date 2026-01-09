@@ -61,7 +61,11 @@ class DataPegawai extends Component
 
     public function print()
     {
+        $tanggalBatas = now()->subYears(17)->format('Y-m-d');
+
         $query = ModelsDataPegawai::with('divisi')
+            ->whereDate('tgl_lahir', '<=', $tanggalBatas)
+            ->where('berhenti', 'T') // hanya yg sudah 17 tahun ke atas
             ->orderBy('divisi_id', 'asc')
             ->orderBy('tgl_masuk', 'asc');
 
