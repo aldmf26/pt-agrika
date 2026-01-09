@@ -22,11 +22,11 @@ class DataPegawai extends Component
 
     public function mount(DataPegawaiService $dataPegawaiService)
     {
-        try {
-            $dataPegawaiService->download();
-        } catch (\Exception $e) {
-            session()->flash('error', $e->getMessage());
-        }
+        // try {
+        //     $dataPegawaiService->download();
+        // } catch (\Exception $e) {
+        //     session()->flash('error', $e->getMessage());
+        // }
     }
 
     public function updatedSelectAll($value)
