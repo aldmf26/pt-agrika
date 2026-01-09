@@ -194,7 +194,7 @@ class RM5LabelIdentitasBahanController extends Controller
                     ->leftJoin('grade_sbw_kotor', 'sbw_kotor.grade_id', '=', 'grade_sbw_kotor.id')
                     ->leftJoin('rumah_walet', 'sbw_kotor.rwb_id', '=', 'rumah_walet.id')
                     ->select('sbw_kotor.*', 'sbw_kotor.no_invoice', 'grade_sbw_kotor.kode', 'grade_sbw_kotor.nama as grade', 'rumah_walet.nama as rumah_walet')
-                    ->where('nm_partai', 'like', '%' . $bk['nm_partai'] . '%')
+                    ->where('sbw_kotor.no_invoice', $id)
                     ->first();
                 if ($kemasan) {
                     // Ensure supplier is an object
@@ -204,9 +204,8 @@ class RM5LabelIdentitasBahanController extends Controller
                     // Ensure kode_barang is set
                     $kemasan->kode_barang = $kemasan->no_invoice ?? '-';
                     $kemasan->keterangan = $kemasan->nm_partai;
-                    $kemasan->no_box = $bk['kode_lot'];
-                    $kemasan->pcs = $bk['pcs_awal'];
-                    $kemasan->gr = $bk['gr_awal'];
+                    $kemasan->no_invoice = $kemasan->no_invoice;
+
 
 
                     // Ensure penerimaan or penerimaanKemasan is a collection
@@ -215,9 +214,7 @@ class RM5LabelIdentitasBahanController extends Controller
                             'tanggal_terima' =>  date('Y-m-d', strtotime('+1 day', strtotime($kemasan->tgl))),
                             'kode_lot' => $kemasan->no_invoice,
                             'keterangan' => '-',
-                            'no_box' => $bk['kode_lot'],
-                            'pcs' => $bk['pcs_awal'],
-                            'gr' => $bk['gr_awal'],
+
                         ]
                     ]);
                     $labels->push($kemasan);
