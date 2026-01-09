@@ -19,6 +19,7 @@ class Hrga3HasilEvaluasiKaryawanBaru extends Controller
         $datas = DataPegawai::with(['penilaianKaryawan'])
             ->whereRaw("year(tgl_masuk) = $tahun and month(tgl_masuk) >= $bulan")
             ->whereRaw("TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) >= 17")
+            ->where('berhenti', 'T')
             ->orderBy('id', 'desc')
             ->get();
 

@@ -26,6 +26,7 @@ class Hrga2HasilWawancara extends Controller
         $datas = DataPegawai::with('divisi')
             ->whereRaw("YEAR(tgl_masuk) = $tahun AND MONTH(tgl_masuk) >= $bulan")
             ->whereRaw("TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) >= 17")
+            ->where('berhenti', 'T')
             ->orderBy('id', 'desc')
             ->get();
 
