@@ -267,7 +267,7 @@
                                 <td class="text-end align-middle">
                                     {{ tanggal($tgl) }}</td>
                                 <td class="text-end align-middle text-nowrap">
-                                    {{ $p['grade'] == 'sbt' ? '02-07-2025-01-07-27' : '02-07-2025-02-07-27' }}
+                                    {{ $p['grade'] == 'sbt' ? '23-10-2025-02-10-27' : '23-10-2025-10-10-27' }}
                                 </td>
                                 <td class="text-end align-middle">
                                     {{ $p['no_barcode'] }}
