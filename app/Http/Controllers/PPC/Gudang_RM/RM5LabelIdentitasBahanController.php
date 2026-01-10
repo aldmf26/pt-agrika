@@ -164,24 +164,24 @@ class RM5LabelIdentitasBahanController extends Controller
                 }
             }
             if ($identitas === 'barang') {
-                $kemasan = PenerimaanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
-                if ($kemasan) {
+                $barang = PenerimaanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
+                if ($barang) {
                     // Ensure supplier is an object
-                    $kemasan->supplier = $kemasan->supplier->nama_supplier ?? (object)['nama_supplier' => '-'];
+                    $barang->supplier = $barang->supplier->nama_supplier ?? (object)['nama_supplier' => '-'];
                     // Set kategori explicitly
-                    $kemasan->kategori = 'barang';
+                    $barang->kategori = 'barang';
                     // Ensure kode_barang is set
-                    $kemasan->kode_barang = $kemasan->barang->kode_lot ?? '-';
-                    $kemasan->keterangan =  '-';
+                    $barang->kode_barang = $barang->barang->kode_lot ?? '-';
+                    $barang->keterangan =  '-';
                     // Ensure penerimaan or penerimaanKemasan is a collection
-                    $kemasan->penerimaan = collect([
+                    $barang->penerimaan = collect([
                         (object)[
-                            'tanggal_terima' => $kemasan->tanggal_terima,
-                            'kode_lot' => $kemasan->kode_lot,
+                            'tanggal_terima' => $barang->tanggal_terima,
+                            'kode_lot' => $barang->kode_lot,
                             'keterangan' =>  '-',
                         ]
                     ]);
-                    $labels->push($kemasan);
+                    $labels->push($barang);
                 }
             }
             if ($identitas === 'sbw') {
