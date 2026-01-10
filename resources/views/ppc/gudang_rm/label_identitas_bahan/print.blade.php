@@ -150,7 +150,8 @@
                                         Nama Produsen
                                     </td>
                                     <td>:</td>
-                                    <td>{{ $d->kategori == 'Baku' ? ucwords($d->rumah_walet) : $d->supplier }}
+                                    <td>{{ $d->kategori == 'Baku' ? ucwords($d->rumah_walet) : $d->supplier->nama_supplier }}
+                                    </td>
                                     </td>
                                     @if ($d->kategori == 'Baku')
                                         <td>&nbsp;</td>
