@@ -59,11 +59,11 @@ class RM1PenerimaanBarangController extends Controller
             for ($i = 0; $i < count($r->id_barang); $i++) {
                 $barang = Barang::find($r->id_barang[$i]);
                 $jumlahSampel = max(1, round($r->jumlah_barang[$i] * 0.01));
-
+                $supplier_id = $barang->supplier_id;
                 $header = PenerimaanHeader::create([
                     'tanggal_terima' => $r->tgl_penerimaan[$i],
                     'id_barang' => $r->id_barang[$i],
-                    'id_supplier' => 2,
+                    'id_supplier' => $supplier_id,
                     'no_kendaraan' => $r->no_kendaraan[$i],
                     'pengemudi' => $r->pengemudi[$i],
                     'jumlah_barang' => $r->jumlah_barang[$i],
