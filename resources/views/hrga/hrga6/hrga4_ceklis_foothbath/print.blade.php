@@ -43,9 +43,9 @@
                                         $hariKe = date('w', strtotime($tgl)); // 0 = Minggu, 6 = Sabtu
                                     @endphp
 
-                                    @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
+                                    {{-- @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
                                         ✓
-                                    @endif
+                                    @endif --}}
                                 </td>
                             @endforeach
                         </tr>
@@ -63,9 +63,9 @@
                                         $hariKe = date('w', strtotime($tgl)); // 0 = Minggu, 6 = Sabtu
                                     @endphp
 
-                                    @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
+                                    {{-- @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
                                         ✓
-                                    @endif
+                                    @endif --}}
                                 </td>
                             @endforeach
                         </tr>
@@ -83,9 +83,9 @@
                                         $hariKe = date('w', strtotime($tgl)); // 0 = Minggu, 6 = Sabtu
                                     @endphp
 
-                                    @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
+                                    {{-- @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
                                         ✓
-                                    @endif
+                                    @endif --}}
                                 </td>
                             @endforeach
                         </tr>
@@ -103,9 +103,9 @@
                                         $hariKe = date('w', strtotime($tgl)); // 0 = Minggu, 6 = Sabtu
                                     @endphp
 
-                                    @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
+                                    {{-- @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
                                         ✓
-                                    @endif
+                                    @endif --}}
                                 </td>
                             @endforeach
                         </tr>
