@@ -166,6 +166,7 @@ class RM5LabelIdentitasBahanController extends Controller
             if ($identitas === 'barang') {
                 $barang = PenerimaanHeader::with(['barang', 'supplier'])->where('kode_lot', $id)->first();
                 if ($barang) {
+                    dd($barang);
                     // Ensure supplier is an object
                     $barang->supplier = $barang->supplier->nama_supplier ?? (object)['nama_supplier' => '-'];
                     // Set kategori explicitly
