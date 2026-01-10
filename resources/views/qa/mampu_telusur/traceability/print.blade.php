@@ -308,8 +308,8 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td class="text-end fw-bold">{{ $pcs_grading }}</td>
-                                <td class="text-end fw-bold">{{ $gr_grading }}</td>
+                                <td class="text-end fw-bold">{{ number_format($pcs_grading, 0) }}</td>
+                                <td class="text-end fw-bold">{{ number_format($gr_grading, 0) }}</td>
                             </tr>
                             <tr>
                                 <td>Selisih</td>
