@@ -66,9 +66,9 @@
                     </tr>
                     <tr>
                         <td>Kompetensi Inti</td>
-                        <td>{{ ucfirst($pegawai->penilaiankaryawan->kompetensi_inti_standar) ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        <td>{{ ucfirst(optional($pegawai->penilaiankaryawan)->kompetensi_inti_standar ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW') }}
                         </td>
-                        <td>{{ ucfirst($pegawai->penilaiankaryawan->kompetensi_inti_hasil) ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW' }}
+                        <td>{{ ucfirst(optional($pegawai->penilaiankaryawan)->kompetensi_inti_hasil ?? 'Mampu membedakan jenis SBW, mampu melihat jenis pengotor SBW') }}
                         </td>
                     </tr>
                 </table>
