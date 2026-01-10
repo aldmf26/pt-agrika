@@ -4,11 +4,11 @@
             <table width="100%" style="font-size: 11px">
                 <tr>
                     <td>Bulan</td>
-                    <td>: {{ $nm_bulan }} {{ $tahun }}</td>
+                    <td>: </td>
                 </tr>
                 <tr>
                     <td>Area</td>
-                    <td>: {{ ucwords($lokasi->lokasi) }}</td>
+                    <td>: </td>
                 </tr>
 
             </table>
