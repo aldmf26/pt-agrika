@@ -31,7 +31,7 @@
                                 <td class="text-center">
                                     @php
                                         $dayOfWeek = date('w', strtotime($p->tgl)); // 0 = Minggu, 6 = Sabtu
-                                        $isWeekend = $dayOfWeek == 0 || $dayOfWeek == 6;
+                                        $isWeekend = $dayOfWeek == 0;
                                     @endphp
 
                                     @if ($p->tgl <= date('Y-m-d') && !$isWeekend)
