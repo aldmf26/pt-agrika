@@ -26,7 +26,7 @@
                     <td class="align-top">{{ ucwords($d->penanggung_jawab) }}</td>
                     <td class="align-top">{{ ucfirst(strtolower($d->frekuensi)) }}</td>
                     <td class="align-top">{{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
-                    <td class="align-top">{{ ucfirst(strtolower($d->sanitizer)) }}</td>
+                    <td class="align-top">{{ $d->sanitizer }}</td>
                 </tr>
             @endforeach
         </tbody>
