@@ -54,28 +54,28 @@
                                 </td>
                                 <td style="vertical-align: top !important;">
                                     {{ ucfirst(strtolower($d->sarana_cleaning)) }}</td>
-                                <td style="vertical-align: top !important;">{{ ucfirst(strtolower($d->sanitizer)) }}
+                                <td style="vertical-align: top !important;">{{ $d->sanitizer }}
                                 </td>
                                 <td style="vertical-align: top !important;">{{ date('d-m-Y', strtotime($d->tgl)) }}</td>
                                 <td style="vertical-align: top !important;">
 
 
-                                        <button class="btn btn-sm btn-warning btn-edit" data-id="{{ $d->id_perencanaan }}"
-                                            data-nm="{{ $d->nm_alat }}" data-identifikasi="{{ $d->identifikasi_alat }}"
-                                            data-metode="{{ $d->metode }}" data-pj="{{ $d->penanggung_jawab }}"
-                                            data-frekuensi="{{ $d->frekuensi }}" data-sarana="{{ $d->sarana_cleaning }}"
-                                            data-sanitizer="{{ $d->sanitizer }}" data-bs-toggle="modal"
-                                            data-bs-target="#editModal">
-                                            <i class="fas fa-edit"></i>
-                                        </button>
+                                    <button class="btn btn-sm btn-warning btn-edit" data-id="{{ $d->id_perencanaan }}"
+                                        data-nm="{{ $d->nm_alat }}" data-identifikasi="{{ $d->identifikasi_alat }}"
+                                        data-metode="{{ $d->metode }}" data-pj="{{ $d->penanggung_jawab }}"
+                                        data-frekuensi="{{ $d->frekuensi }}" data-sarana="{{ $d->sarana_cleaning }}"
+                                        data-sanitizer="{{ $d->sanitizer }}" data-bs-toggle="modal"
+                                        data-bs-target="#editModal">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
 
-                                        <form action="{{ route('hrga6.1.destroy', $d->id_perencanaan) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <button class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Yakin ingin menghapus data?')"><i
-                                                    class="fas fa-trash"></i></button>
-                                        </form>
+                                    <form action="{{ route('hrga6.1.destroy', $d->id_perencanaan) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button class="btn btn-sm btn-danger"
+                                            onclick="return confirm('Yakin ingin menghapus data?')"><i
+                                                class="fas fa-trash"></i></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
