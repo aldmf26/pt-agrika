@@ -32,6 +32,10 @@ class Hrga1ProgramPerawatanMesin extends Controller
                 ->orderBy('id', 'desc')
                 ->get(),
             'kategori' => $kategori,
+            'tahun_pilih' => ProgramPerawatanMesin::selectRaw('YEAR(tanggal_mulai) as year')
+                ->distinct()
+                ->orderBy('year', 'asc')
+                ->pluck('year')
 
         ];
         return view('hrga.hrga8.hrga1_perawatan_dan_perbaikan_mesin.index', $data);

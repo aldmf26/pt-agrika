@@ -7,16 +7,13 @@
                 class="btn  btn-primary float-end me-2"><i class="fas fa-print"></i> Print</a>
             <div class="w-25">
                 <label for="">Tahun</label>
-                <select name="tahun" id="tahun" class='form-select'>
-                    @php
-                        $currentYear = date('Y');
-                        $tahun_list = [];
-                        for ($i = $currentYear - 2; $i <= $currentYear; $i++) {
-                            $tahun_list[] = $i;
-                        }
-                    @endphp
-                    @foreach ($tahun_list as $t)
-                        <option value="{{ $t }}" {{ $t == $tahun ? 'selected' : '' }}>{{ $t }}
+                <select name="tahun" id="tahun" class="form-select">
+
+
+                    @foreach ($tahun_pilih as $t)
+                        {{-- Menggunakan request('tahun') agar saat disubmit, pilihan tidak mereset --}}
+                        <option value="{{ $t }}" {{ request('tahun') == $t ? 'selected' : '' }}>
+                            {{ $t }}
                         </option>
                     @endforeach
                 </select>
