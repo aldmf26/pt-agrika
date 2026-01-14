@@ -211,7 +211,7 @@
                                         <td></td>
                                     @endif
                                     <td class="text-end">
-                                        {{ number_format($b['gr_awal'], 0) }}
+                                        {{ number_format($b['gr_awal'], 0) }} dsa
                                     </td>
                                     <td class="text-end">{{ tanggal($b['tgl_terima'] ?? '-') }}</td>
                                     <td class="text-end">{{ number_format($b['pcs_awal'], 0) }} /
