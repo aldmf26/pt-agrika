@@ -51,7 +51,10 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="100" style="height: 5px"></td>
+                        <td colspan="100" style="height: 5px">
+                            Ket : Benda tajam / barang mudah pecah juga dilihat kondisinya apakah ada retak, pecah atau
+                            tidak.
+                        </td>
                     </tr>
                     <tr>
                         <td>Paraf Petugas</td>
