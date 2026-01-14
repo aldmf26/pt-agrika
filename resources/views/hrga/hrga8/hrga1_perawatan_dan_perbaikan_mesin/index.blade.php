@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <input type="number" class="form-control" name="frekuensi_perawatan[]" min="1"
-                                    max="12" value="1">
+                                     value="1">
                             </div>
                             <div class="col-lg-2">
                                 <input type="text" class="form-control" name="penanggung_jawab[]">
