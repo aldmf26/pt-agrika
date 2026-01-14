@@ -131,7 +131,7 @@
                             </div>
                             <div class="col-lg-3">
                                 <input type="number" class="form-control" name="frekuensi_perawatan[]" min="1"
-                                     value="1">
+                                    value="1">
                             </div>
                             <div class="col-lg-2">
                                 <input type="text" class="form-control" name="penanggung_jawab[]">
@@ -200,8 +200,7 @@
                                 <div class="col-lg-3">
                                     <label>Frekuensi Perawatan (bulan)</label>
                                     <input type="number" name="frekuensi_perawatan" class="form-control"
-                                        value="{{ $p->frekuensi_perawatan }}" min="1" max="12"
-                                        required>
+                                        value="{{ $p->frekuensi_perawatan }}" min="1" required>
                                 </div>
 
                                 <div class="col-lg-3">
