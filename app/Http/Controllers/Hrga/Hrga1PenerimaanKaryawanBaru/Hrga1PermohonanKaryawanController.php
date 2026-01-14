@@ -41,13 +41,13 @@ class Hrga1PermohonanKaryawanController extends Controller
 
         return redirect()->route('hrga1.1.index')->with('sukses', 'Data Berhasil disinkronkan');
     }
-    
+
     public function index()
     {
         $bulan = dataDariBulan()['bulan'];
         $tahun = dataDariBulan()['tahun'];
 
-        $dataBaru = PermohonanKaryawan::with('divisi')->whereRaw("year(tgl_dibutuhkan) = $tahun and month(tgl_dibutuhkan) >= $bulan")->orderByDesc('tgl_dibutuhkan')->get();
+        $dataBaru = PermohonanKaryawan::with('divisi')->orderByDesc('tgl_dibutuhkan')->get();
 
         $data = [
             'title' => 'Hrga 1.1 permohonan karyawan',
