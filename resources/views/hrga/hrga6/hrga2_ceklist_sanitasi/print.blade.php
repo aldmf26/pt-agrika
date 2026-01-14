@@ -52,8 +52,7 @@
                     @endforeach
                     <tr>
                         <td colspan="100" style="height: 5px">
-                            Ket : Benda tajam / barang mudah pecah juga dilihat kondisinya apakah ada retak, pecah atau
-                            tidak.
+
                         </td>
                     </tr>
                     <tr>
@@ -81,6 +80,8 @@
 
     <div class="row">
         <div class="col-lg-4">
+            <p> Ket : Benda tajam / barang mudah pecah juga dilihat kondisinya apakah ada retak, pecah atau
+                tidak.</p>
         </div>
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
