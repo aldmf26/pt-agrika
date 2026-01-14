@@ -39,71 +39,116 @@ class Hrga1ProgramPerawatanMesin extends Controller
 
     public function store(Request $r)
     {
-        for ($i = 0; $i < count($r->item_mesin_id); $i++) {
-            $data = [
-                'item_mesin_id' => $r->item_mesin_id[$i],
-                'frekuensi_perawatan' => $r->frekuensi_perawatan[$i],
-                'penanggung_jawab' => $r->penanggung_jawab[$i],
-                'tanggal_mulai' => $r->tanggal_mulai[$i],
-            ];
-            ProgramPerawatanMesin::create($data);
+        // Cek apakah ada data yang dikirim untuk menghindari error count() pada null
+        if ($r->has('item_mesin_id')) {
 
-            $total = floor(12 / $r->frekuensi_perawatan[$i]);
-            for ($j = 0; $j < $total; $j++) {
+            for ($i = 0; $i < count($r->item_mesin_id); $i++) {
 
-                $kriteria = DB::table('kriteria_pemeriksaan')->where('item_mesin_id', $r->item_mesin_id[$i])->get();
-                $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . ($j * $r->frekuensi_perawatan[$i]) . ' month'));
-                foreach ($kriteria as $k) {
-                    $data = [
-                        'item_mesin_id' => $r->item_mesin_id[$i],
-                        'kriteria_id' => $k->id,
-                        'tgl' => $tgl,
-                        'metode' => 'Visual',
-                        'hasil_pemeriksaan' => 'Ok',
-                        'status' => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
-                    ];
-                    checklistPerawatanMesin::create($data);
+                // 1. Simpan Data Induk Program Perawatan
+                $data = [
+                    'item_mesin_id'       => $r->item_mesin_id[$i],
+                    'frekuensi_perawatan' => $r->frekuensi_perawatan[$i],
+                    'penanggung_jawab'    => $r->penanggung_jawab[$i],
+                    'tanggal_mulai'       => $r->tanggal_mulai[$i],
+                ];
+                ProgramPerawatanMesin::create($data);
+
+                // 2. Logika Penentuan Jumlah Jadwal ke Depan
+                // Kita set range perencanaan untuk 60 bulan (5 tahun) ke depan
+                // Agar frekuensi besar (seperti 18 bulan) tetap masuk hitungan.
+                $range_perencanaan_bulan = 60;
+
+                // Hitung berapa kali perawatan terjadi dalam 5 tahun
+                $total = floor($range_perencanaan_bulan / $r->frekuensi_perawatan[$i]);
+
+                // PENTING: Jika hasil pembagian 0 (misal frekuensi > 60), 
+                // paksa jadi 1 agar minimal tersimpan tanggal mulainya.
+                if ($total < 1) {
+                    $total = 1;
+                }
+
+                // 3. Looping untuk generate Checklist sesuai frekuensi
+                for ($j = 0; $j < $total; $j++) {
+
+                    // Ambil kriteria berdasarkan item mesin saat ini
+                    $kriteria = DB::table('kriteria_pemeriksaan')
+                        ->where('item_mesin_id', $r->item_mesin_id[$i])
+                        ->get();
+
+                    // Hitung tanggal jadwal: Tanggal Mulai + (Urutan Loop * Frekuensi Bulan)
+                    // Contoh: Loop 0 = +0 bulan, Loop 1 = +18 bulan, dst.
+                    $tambah_bulan = $j * $r->frekuensi_perawatan[$i];
+                    $tgl = date('Y-m-d', strtotime($r->tanggal_mulai[$i] . ' + ' . $tambah_bulan . ' month'));
+
+                    // Simpan setiap kriteria ke tabel checklist
+                    foreach ($kriteria as $k) {
+                        $checklistData = [
+                            'item_mesin_id'     => $r->item_mesin_id[$i],
+                            'kriteria_id'       => $k->id,
+                            'tgl'               => $tgl,
+                            'metode'            => 'Visual', // Default value
+                            'hasil_pemeriksaan' => 'Ok',     // Default value
+                            'status'            => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
+                        ];
+                        checklistPerawatanMesin::create($checklistData);
+                    }
                 }
             }
         }
 
-
-        return redirect()->route('hrga8.1.index', ['kategori' => $r->kategori])->with('sukses', 'Data Berhasil Disimpan');
+        return redirect()
+            ->route('hrga8.1.index', ['kategori' => $r->kategori])
+            ->with('sukses', 'Data Berhasil Disimpan');
     }
 
     public function update(Request $r, $id)
     {
-        // Ambil data utama program perawatan
+        // 1. Ambil data utama program perawatan
         $program = ProgramPerawatanMesin::findOrFail($id);
 
-        // Update data utama
+        // 2. Update data utama
         $program->update([
-            'item_mesin_id' => $r->item_mesin_id,
+            'item_mesin_id'       => $r->item_mesin_id,
             'frekuensi_perawatan' => $r->frekuensi_perawatan,
-            'penanggung_jawab' => $r->penanggung_jawab,
-            'tanggal_mulai' => $r->tanggal_mulai,
+            'penanggung_jawab'    => $r->penanggung_jawab,
+            'tanggal_mulai'       => $r->tanggal_mulai,
         ]);
 
-        // Hapus checklist lama biar tidak duplikat
+        // 3. Hapus checklist lama
+        // CATATAN: Hati-hati, ini menghapus SEMUA riwayat checklist item ini (termasuk yg sudah dikerjakan).
+        // Jika ingin menghapus jadwal masa depan saja, tambahkan ->where('tgl', '>=', date('Y-m-d'))
         checklistPerawatanMesin::where('item_mesin_id', $r->item_mesin_id)->delete();
 
-        // Hitung ulang jadwal checklist berdasarkan frekuensi
-        $total = floor(12 / $r->frekuensi_perawatan);
+        // 4. Hitung ulang jadwal checklist (Logika Baru 5 Tahun / 60 Bulan)
+        $range_perencanaan_bulan = 60;
+
+        // Hitung berapa kali loop harus berjalan
+        $total = floor($range_perencanaan_bulan / $r->frekuensi_perawatan);
+
+        // Safety check: Jika frekuensi > 60 bulan, paksa minimal 1x (tanggal mulai)
+        if ($total < 1) {
+            $total = 1;
+        }
+
+        // 5. Generate ulang checklist
         for ($j = 0; $j < $total; $j++) {
+
             $kriteria = DB::table('kriteria_pemeriksaan')
                 ->where('item_mesin_id', $r->item_mesin_id)
                 ->get();
 
-            $tgl = date('Y-m-d', strtotime($r->tanggal_mulai . ' + ' . ($j * $r->frekuensi_perawatan) . ' month'));
+            // Hitung tanggal: start + (urutan * frekuensi)
+            $tambah_bulan = $j * $r->frekuensi_perawatan;
+            $tgl = date('Y-m-d', strtotime($r->tanggal_mulai . ' + ' . $tambah_bulan . ' month'));
 
             foreach ($kriteria as $k) {
                 $dataChecklist = [
-                    'item_mesin_id' => $r->item_mesin_id,
-                    'kriteria_id' => $k->id,
-                    'tgl' => $tgl,
-                    'metode' => 'Visual',
+                    'item_mesin_id'     => $r->item_mesin_id,
+                    'kriteria_id'       => $k->id,
+                    'tgl'               => $tgl,
+                    'metode'            => 'Visual',
                     'hasil_pemeriksaan' => 'Ok',
-                    'status' => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
+                    'status'            => 'Tidak membutuhkan perbaikan, dapat digunakan kembali',
                 ];
                 checklistPerawatanMesin::create($dataChecklist);
             }
