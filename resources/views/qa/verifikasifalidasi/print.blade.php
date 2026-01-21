@@ -68,7 +68,7 @@
             </div>
             <div class="col-6 mt-4">
                 <div class="shapes">
-                    <p class="cop_judul">JADWAL UJI LAB</p>
+                    <p class="cop_judul">JADWAL VERIFIKASI</p>
 
                 </div>
             </div>
@@ -144,7 +144,18 @@
 
         </div>
         <div class="row">
-            <div class="col-8"></div>
+            <div class="col-8">
+                <table>
+                    <tr>
+                        <td class="bg-warning"></td>
+                        <td>Rencana Eksekusi</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-success"></td>
+                        <td>Batas Realisasi</td>
+                    </tr>
+                </table>
+            </div>
             <div class="col-4">
                 <table class="table table-bordered border-dark" style="font-size: 11px">
                     <thead>
