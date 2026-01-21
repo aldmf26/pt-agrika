@@ -147,11 +147,11 @@
             <div class="col-8">
                 <table>
                     <tr>
-                        <td class="bg-warning"></td>
+                        <td class="bg-warning" width="50%">&nbsp;</td>
                         <td>Rencana Eksekusi</td>
                     </tr>
                     <tr>
-                        <td class="bg-success"></td>
+                        <td class="bg-success" width="50%">&nbsp;</td>
                         <td>Batas Realisasi</td>
                     </tr>
                 </table>
