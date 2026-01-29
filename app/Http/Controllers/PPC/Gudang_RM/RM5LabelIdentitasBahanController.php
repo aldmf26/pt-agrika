@@ -58,7 +58,7 @@ class RM5LabelIdentitasBahanController extends Controller
                 'kode_grading' => '-',
                 'keterangan' => '-',
             ])->toArray(),
-            'lainnya' => $sbw->map(fn($s) => [
+            'sbw' => $sbw->map(fn($s) => [
                 'id' => $s->id,
                 'identitas' => 'sbw',
                 'nama_barang' => $s->grade,
