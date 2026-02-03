@@ -11,12 +11,15 @@
             @csrf
             <div class="mb-3">
                 <label for="excelFile" class="form-label">Pilih File atau Drag & Drop</label>
-                <div id="dropZone" class="border-2 border-dashed rounded p-4 text-center bg-light" style="cursor: pointer; transition: all 0.3s;">
+                <div id="dropZone" class="border-2 border-dashed rounded p-4 text-center bg-light"
+                    style="cursor: pointer; transition: all 0.3s;">
                     <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #6c757d;"></i>
                     <p class="mt-2 mb-0">Drag & drop file di sini atau klik untuk memilih</p>
-                    <small class="text-muted">Maksimal 10MB per file. Format: xlsx, xls, doc, docx, pdf, jpg, jpeg, png, webp</small>
+                    <small class="text-muted">Maksimal 10MB per file. Format: xlsx, xls, doc, docx, pdf, jpg, jpeg, png,
+                        webp</small>
                 </div>
-                <input type="file" multiple class="form-control d-none" id="excelFile" name="excel_file[]" accept=".xlsx,.xls,.doc,.docx,.pdf,.jpg,.jpeg,.png,.webp">
+                <input type="file" multiple class="form-control d-none" id="excelFile" name="excel_file[]"
+                    accept=".xlsx,.xls,.doc,.docx,.pdf,.jpg,.jpeg,.png,.webp">
                 <input type="hidden" name="kategori" value="{{ $kategori }}">
             </div>
 
@@ -27,11 +30,6 @@
                 <div id="noFiles" class="alert alert-info small mb-0">Belum ada file yang dipilih</div>
             </div>
 
-            <!-- Modal Footer -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
-                <button type="submit" id="submitBtn" class="btn btn-sm btn-primary" disabled>Upload Files</button>
-            </div>
         </x-modal>
     </form>
     {{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
@@ -128,7 +126,7 @@
                         'border-color': '#dee2e6',
                         'background-color': '#f8f9fa'
                     });
-                    
+
                     let files = e.originalEvent.dataTransfer.files;
                     fileInput[0].files = files;
                     updateFilesList();
@@ -157,7 +155,7 @@
                         let file = files[i];
                         let size = (file.size / 1024 / 1024).toFixed(2);
                         let icon = getFileIcon(file.type);
-                        
+
                         let fileItem = `
                             <div class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center gap-2">
@@ -231,7 +229,8 @@
                                 alertToast('sukses', response.message || 'Upload berhasil!');
                                 window.location.reload();
                             } else {
-                                alertToast('error', 'Upload gagal: ' + (response.message || 'Coba lagi.'));
+                                alertToast('error', 'Upload gagal: ' + (response.message ||
+                                    'Coba lagi.'));
                             }
                         },
                         error: function(xhr) {
