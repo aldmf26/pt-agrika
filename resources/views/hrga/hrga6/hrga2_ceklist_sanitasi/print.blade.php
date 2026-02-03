@@ -4,7 +4,7 @@
             <table width="100%" style="font-size: 11px">
                 <tr>
                     <td>Bulan</td>
-                    <td>: {{ $nm_bulan }} {{ $tahun }}</td>
+                    <td>: </td>
                 </tr>
                 <tr>
                     <td>Area</td>
@@ -41,9 +41,9 @@
                                         $hariKe = date('w', strtotime($tgl)); // 0 = Minggu, 6 = Sabtu
                                     @endphp
 
-                                    @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
+                                    {{-- @if ($tgl <= date('Y-m-d') && $hariKe != 0 && $hariKe != 6)
                                         ✓
-                                    @endif
+                                    @endif --}}
                                 </td>
                             @endforeach
 
@@ -51,7 +51,9 @@
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="100" style="height: 5px"></td>
+                        <td colspan="100" style="height: 5px">
+
+                        </td>
                     </tr>
                     <tr>
                         <td>Paraf Petugas</td>
@@ -78,6 +80,8 @@
 
     <div class="row">
         <div class="col-lg-4">
+            <p> Ket : Benda tajam / barang mudah pecah juga dilihat kondisinya apakah ada retak, pecah atau
+                tidak.</p>
         </div>
         <div class="col-lg-4"></div>
         <div class="col-lg-4">

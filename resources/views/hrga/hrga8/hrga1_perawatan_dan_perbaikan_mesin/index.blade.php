@@ -8,8 +8,6 @@
             <div class="w-25">
                 <label for="">Tahun</label>
                 <select name="tahun" id="tahun" class="form-select">
-
-
                     @foreach ($tahun_pilih as $t)
                         {{-- Menggunakan request('tahun') agar saat disubmit, pilihan tidak mereset --}}
                         <option value="{{ $t }}" {{ request('tahun') == $t ? 'selected' : '' }}>
