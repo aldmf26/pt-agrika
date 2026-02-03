@@ -77,4 +77,26 @@ class TindakanPerbaikanDanPencegahanController extends Controller
         }
         return redirect()->back()->with('error', 'File tidak ditemukan.');
     }
-}
+
+    public function bulkDestroy(Request $request)
+    {
+        $ids = $request->input('ids', []);
+
+        if (empty($ids)) {
+            return response()->json(['success' => false, 'message' => 'Tidak ada file yang dipilih']);
+        }
+
+        $files = DB::table('excel_files')->whereIn('id', $ids)->get();
+        $deletedCount = 0;
+
+        foreach ($files as $file) {
+            Storage::delete('public/excel/' . $file->nama_file);
+            DB::table('excel_files')->where('id', $file->id)->delete();
+            $deletedCount++;
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => "$deletedCount file(s) berhasil dihapus"
+        ]);
+    }

@@ -1,5 +1,11 @@
 <x-app-layout :title="$title">
-    <div class="d-flex justify-content-end gap-2 mb-3">
+    <!-- Action Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <button class="btn btn-danger btn-sm" id="bulkDeleteBtn" style="display: none;">
+                <i class="fas fa-trash"></i> Hapus <span id="selectedCount">0</span> File
+            </button>
+        </div>
         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadModal">
             <i class="fas fa-upload"></i> Upload File
         </button>
@@ -67,6 +73,9 @@
     <table id="example" class="table table-bordered table-striped">
         <thead>
             <tr>
+                <th style="width: 40px;">
+                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input">
+                </th>
                 <th>#</th>
                 <th>Nama File</th>
                 <th>Tanggal Upload</th>
@@ -76,6 +85,9 @@
         <tbody>
             @foreach ($files as $d)
                 <tr>
+                    <td>
+                        <input type="checkbox" class="form-check-input file-checkbox" value="{{ $d->id }}">
+                    </td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $d->nama_file }}</td>
                     <td>{{ tanggal(\Carbon\Carbon::parse($d->created_at)->format('Y-m-d')) }} oleh {{ $d->admin }}
@@ -103,7 +115,11 @@
                 const filesList = $('#filesList');
                 const noFilesMsg = $('#noFiles');
                 const submitBtn = $('#submitBtn');
+                const selectAllCheckbox = $('#selectAllCheckbox');
+                const fileCheckboxes = $('.file-checkbox');
+                const bulkDeleteBtn = $('#bulkDeleteBtn');
 
+                // ===== UPLOAD FUNCTIONALITY =====
                 // Click to select files
                 dropZone.on('click', function() {
                     fileInput.click();
@@ -249,6 +265,92 @@
                         },
                         complete: function() {
                             submitBtn.prop('disabled', false).text('Upload Files');
+                        }
+                    });
+                });
+
+                // ===== BULK DELETE FUNCTIONALITY =====
+                // Select All checkbox
+                selectAllCheckbox.on('change', function() {
+                    let isChecked = $(this).is(':checked');
+                    fileCheckboxes.prop('checked', isChecked);
+                    updateBulkDeleteBtn();
+                });
+
+                // Individual checkboxes
+                fileCheckboxes.on('change', function() {
+                    let totalCheckboxes = fileCheckboxes.length;
+                    let checkedCheckboxes = $('.file-checkbox:checked').length;
+
+                    // Update Select All checkbox state
+                    if (checkedCheckboxes === totalCheckboxes && totalCheckboxes > 0) {
+                        selectAllCheckbox.prop('checked', true);
+                    } else {
+                        selectAllCheckbox.prop('checked', false);
+                    }
+
+                    updateBulkDeleteBtn();
+                });
+
+                // Update bulk delete button visibility and count
+                function updateBulkDeleteBtn() {
+                    let checkedCount = $('.file-checkbox:checked').length;
+                    $('#selectedCount').text(checkedCount);
+
+                    if (checkedCount > 0) {
+                        bulkDeleteBtn.show();
+                    } else {
+                        bulkDeleteBtn.hide();
+                    }
+                }
+
+                // Bulk delete
+                bulkDeleteBtn.on('click', function() {
+                    let selectedIds = [];
+                    $('.file-checkbox:checked').each(function() {
+                        selectedIds.push($(this).val());
+                    });
+
+                    if (selectedIds.length === 0) {
+                        alertToast('warning', 'Pilih file yang ingin dihapus');
+                        return;
+                    }
+
+                    if (!confirm(`Yakin ingin menghapus ${selectedIds.length} file?`)) {
+                        return;
+                    }
+
+                    bulkDeleteBtn.prop('disabled', true).html(
+                        '<i class="fas fa-spinner fa-spin"></i> Deleting...');
+
+                    $.ajax({
+                        url: "{{ route('qa.capa.1.bulkDestroy') }}",
+                        type: 'POST',
+                        data: {
+                            ids: selectedIds,
+                            _token: $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                alertToast('sukses', response.message || 'File berhasil dihapus!');
+                                window.location.reload();
+                            } else {
+                                alertToast('error', response.message || 'Gagal menghapus file');
+                            }
+                        },
+                        error: function(xhr) {
+                            let msg = 'Terjadi kesalahan: ';
+                            if (xhr.responseJSON && xhr.responseJSON.message) {
+                                msg += xhr.responseJSON.message;
+                            } else {
+                                msg += 'Server error.';
+                            }
+                            alertToast('error', msg);
+                        },
+                        complete: function() {
+                            bulkDeleteBtn.prop('disabled', false).html(
+                                '<i class="fas fa-trash"></i> Hapus <span id="selectedCount">0</span> File'
+                                );
                         }
                     });
                 });

@@ -503,6 +503,7 @@ Route::controller(TindakanPerbaikanDanPencegahanController::class)
         Route::get('/', 'index')->name('index');
         Route::post('/', 'store')->name('store');
         Route::get('/destroy/{id}', 'destroy')->name('destroy');
+        Route::post('/bulk-destroy', 'bulkDestroy')->name('bulkDestroy');
         Route::get('/download/{id}', 'download')->name('download');
     });
 
