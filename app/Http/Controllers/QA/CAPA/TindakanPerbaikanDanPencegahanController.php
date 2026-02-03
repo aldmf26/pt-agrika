@@ -15,10 +15,10 @@ class TindakanPerbaikanDanPencegahanController extends Controller
         if ($r->kategori == 'capa') {
             $title = 'Tindakan Perbaikan dan Pencegahan';
         } else {
-            $title = ucwords($r->kategori);
+            $title = "File HACCP 2026 " . ucwords($r->kategori);
         }
         $data = [
-            'title' => $title,
+            'title' => $title ,
             'files' => $files,
             'kategori' => $r->kategori
         ];
