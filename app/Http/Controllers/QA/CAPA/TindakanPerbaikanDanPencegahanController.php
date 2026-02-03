@@ -36,7 +36,7 @@ class TindakanPerbaikanDanPencegahanController extends Controller
 
 
         $file = $request->file('excel_file');
-        $filename = time() . '_' . $file->getClientOriginalName();
+        $filename = $file->getClientOriginalName();
         $path = $file->storeAs('public/excel', $filename);
 
         // Simpan ke DB (opsional)
