@@ -7,7 +7,7 @@
 
     <!-- Modal Upload -->
     <form id="uploadForm" enctype="multipart/form-data">
-        <x-modal idModal="uploadModal" title="Upload File Excel" size="lg">
+        <x-modal btnSave="T" idModal="uploadModal" title="Upload File Excel" size="lg">
             @csrf
             <div class="mb-3">
                 <label for="excelFile" class="form-label">Pilih File atau Drag & Drop</label>
@@ -30,6 +30,11 @@
                 <div id="noFiles" class="alert alert-info small mb-0">Belum ada file yang dipilih</div>
             </div>
 
+            <!-- Modal Footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-md btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="submit" id="submitBtn" class="btn btn-md btn-primary" disabled>Upload Files</button>
+            </div>
         </x-modal>
     </form>
     {{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
