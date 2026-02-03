@@ -2,7 +2,7 @@
     <!-- Action Bar -->
     <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <button class="btn btn-danger btn-sm" id="bulkDeleteBtn" style="display: none;">
+            <button type="button" class="btn btn-danger btn-sm" id="bulkDeleteBtn" style="display: none;">
                 <i class="fas fa-trash"></i> Hapus <span id="selectedCount">0</span> File
             </button>
         </div>
@@ -11,13 +11,20 @@
         </button>
     </div>
 
+    <!-- Hidden Form untuk Bulk Delete -->
+    <form id="bulkDeleteForm" method="POST" style="display: none;">
+        @csrf
+        @method('POST')
+        <div id="idsContainer"></div>
+    </form>
+
     <!-- Modal Upload -->
     <form id="uploadForm" enctype="multipart/form-data">
-        <x-modal btnSave="T" idModal="uploadModal" title="Upload File Excel" size="lg">
+        <x-modal btnSave="T" idModal="uploadModal" title="Upload File Excel" size="modal-lg">
             @csrf
             <div class="mb-3">
                 <label for="excelFile" class="form-label">Pilih File atau Drag & Drop</label>
-                <div id="dropZone" class="border-2 border-dashed rounded p-4 text-center bg-light"
+                <div id="dropZone" class="border-2 border-dashed rounded p-4 text-center bg-warning"
                     style="cursor: pointer; transition: all 0.3s;">
                     <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #6c757d;"></i>
                     <p class="mt-2 mb-0">Drag & drop file di sini atau klik untuk memilih</p>
@@ -169,6 +176,18 @@
                         return;
                     }
 
+                    // Check max files limit
+                    if (files.length > 20) {
+                        alertToast('warning',
+                            `⚠️ Maksimal 20 file per upload. Anda memilih ${files.length} file. Silakan pilih ulang.`
+                        );
+                        fileInput.val('');
+                        filesList.empty();
+                        noFilesMsg.show();
+                        submitBtn.prop('disabled', true);
+                        return;
+                    }
+
                     noFilesMsg.hide();
                     submitBtn.prop('disabled', false);
 
@@ -180,6 +199,7 @@
                         let fileItem = `
                             <div class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="d-flex align-items-center gap-2">
+                                    <div class="fw-bold small">${i+1}. </div>
                                     <i class="fas ${icon}" style="font-size: 1.2rem;"></i>
                                     <div>
                                         <div class="fw-bold small">${file.name}</div>
@@ -226,7 +246,7 @@
                     updateFilesList();
                 }
 
-                // Handle Upload
+                // Handle Upload - Simple & Clean
                 $('#uploadForm').on('submit', function(e) {
                     e.preventDefault();
                     let formData = new FormData(this);
@@ -243,27 +263,36 @@
                         },
                         success: function(response) {
                             if (response.success) {
-                                $('#uploadModal').modal('hide');
-                                fileInput.val(''); // Reset input
-                                filesList.empty();
-                                noFilesMsg.show();
-                                alertToast('sukses', response.message || 'Upload berhasil!');
-                                window.location.reload();
+                                // Show success message
+                                if (response.partial) {
+                                    alertToast('warning', response.message);
+                                } else {
+                                    alertToast('sukses', response.message);
+                                }
+
+                                // Delay reload
+                                setTimeout(function() {
+                                    $('#uploadModal').modal('hide');
+                                    fileInput.val('');
+                                    filesList.empty();
+                                    noFilesMsg.show();
+                                    window.location.reload();
+                                }, 1500);
                             } else {
-                                alertToast('error', 'Upload gagal: ' + (response.message ||
-                                    'Coba lagi.'));
+                                alertToast('error', response.message || 'Upload gagal');
+                                submitBtn.prop('disabled', false).text('Upload Files');
                             }
                         },
                         error: function(xhr) {
                             let msg = 'Terjadi kesalahan: ';
                             if (xhr.responseJSON && xhr.responseJSON.message) {
-                                msg += xhr.responseJSON.message;
+                                msg = xhr.responseJSON.message;
+                            } else if (xhr.status === 422) {
+                                msg = 'Validasi gagal. Periksa format dan ukuran file.';
                             } else {
-                                msg += 'Server error.';
+                                msg += xhr.statusText || 'Server error';
                             }
                             alertToast('error', msg);
-                        },
-                        complete: function() {
                             submitBtn.prop('disabled', false).text('Upload Files');
                         }
                     });
@@ -320,39 +349,15 @@
                         return;
                     }
 
-                    bulkDeleteBtn.prop('disabled', true).html(
-                        '<i class="fas fa-spinner fa-spin"></i> Deleting...');
-
-                    $.ajax({
-                        url: "{{ route('qa.capa.1.bulkDestroy') }}",
-                        type: 'POST',
-                        data: {
-                            ids: selectedIds,
-                            _token: $('meta[name="csrf-token"]').attr('content')
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                alertToast('sukses', response.message || 'File berhasil dihapus!');
-                                window.location.reload();
-                            } else {
-                                alertToast('error', response.message || 'Gagal menghapus file');
-                            }
-                        },
-                        error: function(xhr) {
-                            let msg = 'Terjadi kesalahan: ';
-                            if (xhr.responseJSON && xhr.responseJSON.message) {
-                                msg += xhr.responseJSON.message;
-                            } else {
-                                msg += 'Server error.';
-                            }
-                            alertToast('error', msg);
-                        },
-                        complete: function() {
-                            bulkDeleteBtn.prop('disabled', false).html(
-                                '<i class="fas fa-trash"></i> Hapus <span id="selectedCount">0</span> File'
-                                );
-                        }
+                    // Populate hidden form with IDs
+                    let idsContainer = $('#idsContainer');
+                    idsContainer.empty();
+                    selectedIds.forEach(function(id) {
+                        idsContainer.append(`<input type="hidden" name="ids[]" value="${id}">`);
                     });
+
+                    // Submit form
+                    $('#bulkDeleteForm').attr('action', "{{ route('qa.capa.1.bulkDestroy') }}").submit();
                 });
             });
         </script>

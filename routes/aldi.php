@@ -496,16 +496,18 @@ Route::controller(PUR1EvaluasiSupplierController::class)
         Route::get('/destroy/{id}', 'destroy')->name('destroy');
     });
 
-Route::controller(TindakanPerbaikanDanPencegahanController::class)
-    ->prefix('qa/capa/tindakan-perbaikan-dan-pencegahan')
-    ->name('qa.capa.1.')
-    ->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-        Route::get('/destroy/{id}', 'destroy')->name('destroy');
-        Route::post('/bulk-destroy', 'bulkDestroy')->name('bulkDestroy');
-        Route::get('/download/{id}', 'download')->name('download');
-    });
+Route::middleware(['auth'])->group(function () {
+    Route::controller(TindakanPerbaikanDanPencegahanController::class)
+        ->prefix('qa/capa/tindakan-perbaikan-dan-pencegahan')
+        ->name('qa.capa.1.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::get('/destroy/{id}', 'destroy')->name('destroy');
+            Route::post('/bulk-destroy', 'bulkDestroy')->name('bulkDestroy');
+            Route::get('/download/{id}', 'download')->name('download');
+        });
+});
 
 Route::controller(QA1PenangananProdukController::class)
     ->prefix('qa/penanganan-barang-tidak-sesuai/penanganan-produk')
