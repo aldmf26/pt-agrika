@@ -31,25 +31,31 @@ class TindakanPerbaikanDanPencegahanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'excel_file' => 'required|file|mimes:xlsx,xls,doc,docx,pdf,jpg,jpeg,png,webp|max:10240'
+            'excel_file' => 'required|array',
+            'excel_file.*' => 'file|mimes:xlsx,xls,doc,docx,pdf,jpg,jpeg,png,webp|max:10240'
         ]);
 
+        $files = $request->file('excel_file');
+        $successCount = 0;
 
-        $file = $request->file('excel_file');
-        $filename = $file->getClientOriginalName();
-        $path = $file->storeAs('public/excel', $filename);
+        foreach ($files as $file) {
+            $filename = $file->getClientOriginalName();
+            $path = $file->storeAs('public/excel', $filename);
 
-        // Simpan ke DB (opsional)
-        DB::table('excel_files')->insert([
-            'menu' => 'tindakan_perbaikan_dan_pencegahan',
-            'nama_file' => $filename,
-            'path' => $path,
-            'admin' => auth()->user()->name,
-            'kategori' => $request->kategori,
-            'created_at' => now()
-        ]);
+            // Simpan ke DB
+            DB::table('excel_files')->insert([
+                'menu' => 'tindakan_perbaikan_dan_pencegahan',
+                'nama_file' => $filename,
+                'path' => $path,
+                'admin' => auth()->user()->name,
+                'kategori' => $request->kategori,
+                'created_at' => now()
+            ]);
 
-        return response()->json(['success' => true]);
+            $successCount++;
+        }
+
+        return response()->json(['success' => true, 'message' => "$successCount file(s) berhasil diupload"]);
     }
 
     public function download($id)

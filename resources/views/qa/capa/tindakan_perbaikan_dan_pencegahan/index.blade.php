@@ -11,7 +11,7 @@
             @csrf
             <div class="mb-3">
                 <label for="excelFile" class="form-label">Pilih File </label>
-                <input type="file" class="form-control" id="excelFile" name="excel_file" required>
+                <input type="file" multiple class="form-control" id="excelFile" name="excel_file[]" required>
                 <input type="hidden" name="kategori" value="{{ $kategori }}">
                 <div class="form-text">Ukuran maksimal 10MB.</div>
             </div>
