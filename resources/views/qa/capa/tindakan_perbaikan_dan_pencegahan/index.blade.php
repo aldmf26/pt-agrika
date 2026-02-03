@@ -1,11 +1,9 @@
 <x-app-layout :title="$title">
     <!-- Action Bar -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <div>
-            <button type="button" class="btn btn-danger btn-sm" id="bulkDeleteBtn" style="display: none;">
-                <i class="fas fa-trash"></i> Hapus <span id="selectedCount">0</span> File
-            </button>
-        </div>
+        <button type="button" class="btn btn-danger btn-sm" id="bulkDeleteBtn" style="display: none;">
+            <i class="fas fa-trash"></i> Hapus <span id="selectedCount">0</span>
+        </button>
         <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#uploadModal">
             <i class="fas fa-upload"></i> Upload File
         </button>
@@ -18,18 +16,27 @@
         <div id="idsContainer"></div>
     </form>
 
-    <!-- Modal Upload -->
+    <!-- Modal Upload (dengan folder management via Livewire) -->
     <form id="uploadForm" enctype="multipart/form-data">
-        <x-modal btnSave="T" idModal="uploadModal" title="Upload File Excel" size="modal-lg">
+        <x-modal btnSave="T" idModal="uploadModal" title="Upload File" size="modal-lg">
             @csrf
+
+            <!-- Folder Management (Livewire Component) -->
+            <livewire:folder-manager :kategori="$kategori" key="folder-{{ $kategori }}" />
+
+            <!-- Hidden input to capture selected folder from Livewire -->
+            <input type="hidden" name="folder" id="selectedFolder" value="">
+
+            <hr class="my-3">
+
+            <!-- File Selection -->
             <div class="mb-3">
                 <label for="excelFile" class="form-label">Pilih File atau Drag & Drop</label>
                 <div id="dropZone" class="border-2 border-dashed rounded p-4 text-center bg-warning"
                     style="cursor: pointer; transition: all 0.3s;">
                     <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: #6c757d;"></i>
                     <p class="mt-2 mb-0">Drag & drop file di sini atau klik untuk memilih</p>
-                    <small class="text-muted">Maksimal 10MB per file. Format: xlsx, xls, doc, docx, pdf, jpg, jpeg, png,
-                        webp</small>
+                    <small class="text-muted">Maksimal 10MB per file, maksimal 20 file sekaligus</small>
                 </div>
                 <input type="file" multiple class="form-control d-none" id="excelFile" name="excel_file[]"
                     accept=".xlsx,.xls,.doc,.docx,.pdf,.jpg,.jpeg,.png,.webp">
@@ -50,69 +57,18 @@
             </div>
         </x-modal>
     </form>
-    {{-- <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="uploadModalLabel">Upload File Excel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form id="uploadForm" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="excelFile" class="form-label">Pilih File Excel (.xlsx atau .xls)</label>
-                            <input type="file" class="form-control" id="excelFile" name="excel_file"
-                                accept=".xlsx,.xls" required>
-                            <div class="form-text">Ukuran maksimal 10MB. Hanya file Excel yang valid.</div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-sm btn-primary">Upload</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
 
-    <!-- Tabel Files -->
-    <table id="example" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th style="width: 40px;">
-                    <input type="checkbox" id="selectAllCheckbox" class="form-check-input">
-                </th>
-                <th>#</th>
-                <th>Nama File</th>
-                <th>Tanggal Upload</th>
-                <th class="text-center">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($files as $d)
-                <tr>
-                    <td>
-                        <input type="checkbox" class="form-check-input file-checkbox" value="{{ $d->id }}">
-                    </td>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $d->nama_file }}</td>
-                    <td>{{ tanggal(\Carbon\Carbon::parse($d->created_at)->format('Y-m-d')) }} oleh {{ $d->admin }}
-                    </td>
-                    <td align="right">
-                        <a href="{{ route('qa.capa.1.download', $d->id) }}" class="btn btn-sm btn-success"
-                            target="_blank">
-                            <i class="fas fa-download"></i> Download
-                        </a>
-                        <a onclick="return confirm('Yakin ingin menghapus data ini?')"
-                            href="{{ route('qa.capa.1.destroy', $d->id) }}" class="btn btn-sm btn-danger delete-btn">
-                            <i class="fas fa-trash"></i> Hapus
-                        </a>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <!-- Search Bar -->
+    <div class="mb-3">
+        <input type="text" class="form-control" id="searchInput" placeholder="🔍 Cari file atau folder...">
+    </div>
+
+    <!-- Files List -->
+    <div id="filesList" class="card">
+        <div id="filesTableBody">
+            <!-- Diisi oleh JavaScript -->
+        </div>
+    </div>
 
     @section('scripts')
         <script>
@@ -122,12 +78,186 @@
                 const filesList = $('#filesList');
                 const noFilesMsg = $('#noFiles');
                 const submitBtn = $('#submitBtn');
-                const selectAllCheckbox = $('#selectAllCheckbox');
-                const fileCheckboxes = $('.file-checkbox');
                 const bulkDeleteBtn = $('#bulkDeleteBtn');
+                const folderSelect = $('#folderSelect');
+                const filesTableBody = $('#filesTableBody');
+                const searchInput = $('#searchInput');
+                let allFiles = [];
+                let allFolders = [];
+                let filteredFiles = [];
+
+                // Load folders & files on page load
+                loadFoldersAndFiles();
+
+                // Edit folder inline
+                window.startEditFolder = function(folderName) {
+                    let folderId = folderName.replace(/\s+/g, '_');
+                    let input = $(`#editInput_${folderId}`);
+                    let btns = $(`#editBtns_${folderId}`);
+                    let label = $(`.folder-header[data-folder="${folderName}"]`).find('strong');
+
+                    input.val(folderName).show();
+                    btns.show();
+                    label.hide();
+                    input.focus();
+                };
+
+                // Cancel edit
+                $(document).on('click', '.cancelEdit', function() {
+                    let folderName = $(this).data('folder');
+                    let folderId = folderName.replace(/\s+/g, '_');
+                    $(`#editInput_${folderId}`).hide().val('');
+                    $(`#editBtns_${folderId}`).hide();
+                    $(`.folder-header[data-folder="${folderName}"]`).find('strong').show();
+                });
+
+                function loadFoldersAndFiles() {
+                    $.ajax({
+                        url: "{{ route('qa.capa.1.getFoldersAndFiles') }}",
+                        type: 'GET',
+                        data: {
+                            kategori: "{{ $kategori }}"
+                        },
+                        success: function(response) {
+                            allFolders = response.folders || [];
+                            allFiles = response.files || [];
+                            filteredFiles = [...allFiles];
+
+                            // Render files (Livewire handle folder dropdown)
+                            renderFilesTable();
+                        },
+                        error: function(xhr) {
+                            console.error('Error loading files:', xhr);
+                        }
+                    });
+                }
+
+                function renderFilesTable() {
+                    filesTableBody.empty();
+
+                    // Group filtered files by folder
+                    let grouped = {};
+                    filteredFiles.forEach(function(file) {
+                        let folder = file.folder || 'Root';
+                        if (!grouped[folder]) grouped[folder] = [];
+                        grouped[folder].push(file);
+                    });
+
+                    // If no results
+                    if (Object.keys(grouped).length === 0) {
+                        filesTableBody.html(`
+                            <div class="p-5 text-center text-muted">
+                                <i class="fas fa-folder-open" style="font-size: 3rem;"></i>
+                                <p class="mt-3">Belum ada file</p>
+                            </div>
+                        `);
+                        return;
+                    }
+
+                    // Render folders with files
+                    let html = '';
+                    Object.keys(grouped).sort().forEach(function(folder) {
+                        let files = grouped[folder];
+                        let isRoot = folder === 'Root';
+                        let folderId = folder.replace(/\s+/g, '_');
+
+                        // Folder header
+                        html += `
+                            <div class="border-bottom">
+                                <div class="d-flex align-items-center p-3 bg-light folder-header" data-folder="${folder}">
+                                    <i class="fas fa-chevron-down toggle-folder" style="cursor:pointer; width:20px;"></i>
+                                    <span class="flex-grow-1"><strong>📁 ${folder}</strong> <span class="badge bg-secondary">${files.length}</span></span>
+                                    ${!isRoot ? `
+                                                <form method="POST" action="{{ route('qa.capa.1.updateFolder') }}" style="display: inline;" id="editForm_${folder.replace(/\s+/g, '_')}">
+                                                    @csrf
+                                                    <input type="hidden" name="kategori" value="{{ $kategori }}">
+                                                    <input type="hidden" name="old_folder" value="${folder}">
+                                                    <input type="text" name="new_folder" style="display: none; width: 150px;" class="form-control form-control-sm" id="editInput_${folder.replace(/\s+/g, '_')}">
+                                                    <div style="display: none;" id="editBtns_${folder.replace(/\s+/g, '_')}">
+                                                        <button type="submit" class="btn btn-sm btn-success">Simpan</button>
+                                                        <button type="button" class="btn btn-sm btn-secondary cancelEdit" data-folder="${folder}">Batal</button>
+                                                    </div>
+                                                </form>
+                                                <button type="button" class="btn btn-sm btn-outline-primary edit-folder me-2" onclick="startEditFolder('${folder}')">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <form method="POST" action="{{ route('qa.capa.1.deleteFolder') }}" style="display: inline;" onsubmit="return confirm('Hapus folder dan semua file di dalamnya?');">
+                                                    @csrf
+                                                    <input type="hidden" name="folder" value="${folder}">
+                                                    <input type="hidden" name="kategori" value="{{ $kategori }}">
+                                                    <button type="submit" class="btn btn-sm btn-outline-danger delete-folder">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            ` : ''}
+                                </div>
+                                <div class="files-in-${folderId}">
+                        `;
+
+                        // Files in folder
+                        files.forEach(function(file) {
+                            html += `
+                                <div class="d-flex align-items-center p-3 border-bottom file-row">
+                                    <input type="checkbox" class="form-check-input file-checkbox me-3" value="${file.id}">
+                                    <i class="fas fa-file me-2"></i>
+                                    <div class="flex-grow-1">
+                                        <div><strong>${file.nama_file}</strong></div>
+                                        <small class="text-muted">${file.created_at}</small>
+                                    </div>
+                                    <a href="${file.download_url}" class="btn btn-sm btn-success me-2" target="_blank">
+                                        <i class="fas fa-download"></i>
+                                    </a>
+                                    <a href="${file.delete_url}" onclick="return confirm('Hapus file ini?')" class="btn btn-sm btn-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            `;
+                        });
+
+                        html += `</div></div>`;
+                    });
+
+                    filesTableBody.html(html);
+
+                    // Folder toggle
+                    $('.toggle-folder').off('click').on('click', function() {
+                        let header = $(this).closest('.folder-header');
+                        let folder = header.data('folder');
+                        let folderId = folder.replace(/\s+/g, '_');
+                        let filesDiv = filesTableBody.find(`.files-in-${folderId}`);
+                        filesDiv.slideToggle();
+                        $(this).toggleClass('fa-chevron-down fa-chevron-right');
+                    });
+
+                    // Reload after delete form submission
+                    $('form[action="{{ route('qa.capa.1.deleteFolder') }}"]').on('submit', function() {
+                        setTimeout(() => {
+                            loadFoldersAndFiles();
+                        }, 800);
+                    });
+
+                    // Attach checkbox events
+                    attachCheckboxEvents();
+                }
+
+                // Search functionality
+                searchInput.on('keyup', function() {
+                    let query = $(this).val().toLowerCase().trim();
+
+                    if (query.length === 0) {
+                        filteredFiles = [...allFiles];
+                    } else {
+                        filteredFiles = allFiles.filter(function(file) {
+                            return file.nama_file.toLowerCase().includes(query) ||
+                                (file.folder && file.folder.toLowerCase().includes(query));
+                        });
+                    }
+
+                    renderFilesTable();
+                });
+
 
                 // ===== UPLOAD FUNCTIONALITY =====
-                // Click to select files
                 dropZone.on('click', function() {
                     fileInput.click();
                 });
@@ -249,7 +379,9 @@
                 // Handle Upload - Simple & Clean
                 $('#uploadForm').on('submit', function(e) {
                     e.preventDefault();
+                    let folder = folderSelect.val() || null;
                     let formData = new FormData(this);
+                    formData.set('folder', folder);
                     submitBtn.prop('disabled', true).text('Uploading...');
 
                     $.ajax({
@@ -263,20 +395,18 @@
                         },
                         success: function(response) {
                             if (response.success) {
-                                // Show success message
                                 if (response.partial) {
                                     alertToast('warning', response.message);
                                 } else {
                                     alertToast('sukses', response.message);
                                 }
 
-                                // Delay reload
                                 setTimeout(function() {
                                     $('#uploadModal').modal('hide');
                                     fileInput.val('');
                                     filesList.empty();
                                     noFilesMsg.show();
-                                    window.location.reload();
+                                    loadFoldersAndFiles();
                                 }, 1500);
                             } else {
                                 alertToast('error', response.message || 'Upload gagal');
@@ -299,29 +429,14 @@
                 });
 
                 // ===== BULK DELETE FUNCTIONALITY =====
-                // Select All checkbox
-                selectAllCheckbox.on('change', function() {
-                    let isChecked = $(this).is(':checked');
-                    fileCheckboxes.prop('checked', isChecked);
-                    updateBulkDeleteBtn();
-                });
+                function attachCheckboxEvents() {
+                    let fileCheckboxes = $('.file-checkbox');
 
-                // Individual checkboxes
-                fileCheckboxes.on('change', function() {
-                    let totalCheckboxes = fileCheckboxes.length;
-                    let checkedCheckboxes = $('.file-checkbox:checked').length;
+                    fileCheckboxes.off('change').on('change', function() {
+                        updateBulkDeleteBtn();
+                    });
+                }
 
-                    // Update Select All checkbox state
-                    if (checkedCheckboxes === totalCheckboxes && totalCheckboxes > 0) {
-                        selectAllCheckbox.prop('checked', true);
-                    } else {
-                        selectAllCheckbox.prop('checked', false);
-                    }
-
-                    updateBulkDeleteBtn();
-                });
-
-                // Update bulk delete button visibility and count
                 function updateBulkDeleteBtn() {
                     let checkedCount = $('.file-checkbox:checked').length;
                     $('#selectedCount').text(checkedCount);
@@ -333,8 +448,7 @@
                     }
                 }
 
-                // Bulk delete
-                bulkDeleteBtn.on('click', function() {
+                bulkDeleteBtn.off('click').on('click', function() {
                     let selectedIds = [];
                     $('.file-checkbox:checked').each(function() {
                         selectedIds.push($(this).val());
@@ -349,14 +463,12 @@
                         return;
                     }
 
-                    // Populate hidden form with IDs
                     let idsContainer = $('#idsContainer');
                     idsContainer.empty();
                     selectedIds.forEach(function(id) {
                         idsContainer.append(`<input type="hidden" name="ids[]" value="${id}">`);
                     });
 
-                    // Submit form
                     $('#bulkDeleteForm').attr('action', "{{ route('qa.capa.1.bulkDestroy') }}").submit();
                 });
             });

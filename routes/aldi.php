@@ -506,6 +506,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/destroy/{id}', 'destroy')->name('destroy');
             Route::post('/bulk-destroy', 'bulkDestroy')->name('bulkDestroy');
             Route::get('/download/{id}', 'download')->name('download');
+            Route::get('/get-folders-files', 'getFoldersAndFiles')->name('getFoldersAndFiles');
+            Route::post('/create-folder', 'createFolder')->name('createFolder');
+            Route::post('/update-folder', 'updateFolder')->name('updateFolder');
+            Route::post('/delete-folder', 'deleteFolder')->name('deleteFolder');
         });
 });
 

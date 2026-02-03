@@ -11,9 +11,7 @@ class TindakanPerbaikanDanPencegahanController extends Controller
 {
     public function index(Request $r)
     {
-
-        // Contoh pakai DB, atau scan folder seperti sebelumnya
-        $files = DB::table('excel_files')->where('kategori', $r->kategori)->orderBy('created_at', 'desc')->get(['id', 'nama_file', 'path', 'created_at', 'admin']);
+        $files = DB::table('excel_files')->where('kategori', $r->kategori)->orderBy('created_at', 'desc')->get(['id', 'nama_file', 'path', 'folder', 'created_at', 'admin']);
         if ($r->kategori == 'capa') {
             $title = 'Tindakan Perbaikan dan Pencegahan';
         } else {
@@ -28,15 +26,121 @@ class TindakanPerbaikanDanPencegahanController extends Controller
         return view('qa.capa.tindakan_perbaikan_dan_pencegahan.index', $data);
     }
 
+    public function getFoldersAndFiles(Request $request)
+    {
+        $kategori = $request->query('kategori');
+
+        $files = DB::table('excel_files')
+            ->where('kategori', $kategori)
+            ->orderBy('folder')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $folders = $files->pluck('folder')->unique()->filter()->values()->toArray();
+
+        $filesList = $files->map(function ($file) {
+            return [
+                'id' => $file->id,
+                'nama_file' => $file->nama_file,
+                'folder' => $file->folder ?? 'Root',
+                'created_at' => \Carbon\Carbon::parse($file->created_at)->format('d/m/Y H:i'),
+                'download_url' => route('qa.capa.1.download', $file->id),
+                'delete_url' => route('qa.capa.1.destroy', $file->id),
+            ];
+        })->toArray();
+
+        return response()->json([
+            'folders' => $folders,
+            'files' => $filesList
+        ]);
+    }
+
+    public function createFolder(Request $request)
+    {
+        $request->validate([
+            'folder_name' => 'required|string',
+            'kategori' => 'required|string'
+        ]);
+
+        $folderName = $request->input('folder_name');
+        $kategori = $request->input('kategori');
+
+        // Check if folder already exists
+        $exists = DB::table('excel_files')
+            ->where('kategori', $kategori)
+            ->where('folder', $folderName)
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('error', 'Folder sudah ada');
+        }
+
+        return redirect()->back()->with('success', 'Folder berhasil dibuat');
+    }
+
+    public function deleteFolder(Request $request)
+    {
+        $folder = $request->input('folder');
+        $kategori = $request->input('kategori');
+
+        // Get all files in this folder
+        $files = DB::table('excel_files')
+            ->where('kategori', $kategori)
+            ->where('folder', $folder)
+            ->get();
+
+        // Delete files from storage and DB
+        foreach ($files as $file) {
+            Storage::delete('public/excel/' . $file->nama_file);
+            DB::table('excel_files')->where('id', $file->id)->delete();
+        }
+
+        return redirect()->back()->with('success', count($files) . ' file dihapus');
+    }
+
+    public function updateFolder(Request $request)
+    {
+        $request->validate([
+            'old_folder' => 'required|string',
+            'new_folder' => 'required|string',
+            'kategori' => 'required|string'
+        ]);
+
+        $oldFolder = $request->input('old_folder');
+        $newFolder = $request->input('new_folder');
+        $kategori = $request->input('kategori');
+
+        // Check if new folder name already exists
+        $exists = DB::table('excel_files')
+            ->where('kategori', $kategori)
+            ->where('folder', $newFolder)
+            ->where('folder', '!=', $oldFolder)
+            ->exists();
+
+        if ($exists) {
+            return redirect()->back()->with('error', 'Nama folder sudah ada');
+        }
+
+        // Update all files in this folder
+        DB::table('excel_files')
+            ->where('kategori', $kategori)
+            ->where('folder', $oldFolder)
+            ->update(['folder' => $newFolder]);
+
+        return redirect()->back()->with('success', 'Folder berhasil diubah');
+    }
+
     public function store(Request $request)
     {
         try {
             $request->validate([
                 'excel_file' => 'required|array|max:20',
-                'excel_file.*' => 'file|mimes:xlsx,xls,doc,docx,pdf,jpg,jpeg,png,webp|max:10240'
+                'excel_file.*' => 'file|mimes:xlsx,xls,doc,docx,pdf,jpg,jpeg,png,webp|max:10240',
+                'folder' => 'nullable|string'
             ]);
 
             $files = $request->file('excel_file');
+            $folder = $request->input('folder') ?: null; // Convert empty string to null
             $successCount = 0;
             $failedFiles = [];
             $duplicateFiles = [];
@@ -49,10 +153,11 @@ class TindakanPerbaikanDanPencegahanController extends Controller
                     }
 
                     $filename = $file->getClientOriginalName();
-                    
-                    // Check if file already exists in database with same category
+
+                    // Check if file already exists in the same folder
                     $existingFile = DB::table('excel_files')
                         ->where('nama_file', $filename)
+                        ->where('folder', $folder)
                         ->where('kategori', $request->kategori)
                         ->first();
 
@@ -67,6 +172,7 @@ class TindakanPerbaikanDanPencegahanController extends Controller
                         'menu' => 'tindakan_perbaikan_dan_pencegahan',
                         'nama_file' => $filename,
                         'path' => $path,
+                        'folder' => $folder,
                         'admin' => auth()->user()->name,
                         'kategori' => $request->kategori,
                         'created_at' => now()
@@ -82,12 +188,12 @@ class TindakanPerbaikanDanPencegahanController extends Controller
             if ($successCount === 0) {
                 $errorMsg = [];
                 if (!empty($duplicateFiles)) {
-                    $errorMsg[] = count($duplicateFiles) . " file duplikat: " . implode(', ', array_slice($duplicateFiles, 0, 2));
+                    $errorMsg[] = count($duplicateFiles) . " file duplikat";
                 }
                 if (!empty($failedFiles)) {
                     $errorMsg[] = count($failedFiles) . " file gagal";
                 }
-                
+
                 return response()->json([
                     'success' => false,
                     'message' => implode(', ', $errorMsg) ?: 'Semua file gagal diupload'
@@ -103,12 +209,12 @@ class TindakanPerbaikanDanPencegahanController extends Controller
                 if (!empty($failedFiles)) {
                     $warnings[] = count($failedFiles) . " file gagal";
                 }
-                
+
                 $message = "$successCount file berhasil diupload";
                 if (!empty($warnings)) {
                     $message .= ", tetapi " . implode(", ", $warnings);
                 }
-                
+
                 return response()->json([
                     'success' => true,
                     'partial' => true,
@@ -132,18 +238,18 @@ class TindakanPerbaikanDanPencegahanController extends Controller
             if (isset($errors['excel_file']) && in_array('The excel file field must not be greater than 20.', $errors['excel_file'])) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Maksimal 20 file per upload. Silakan kurangi jumlah file.'
+                    'message' => 'Maksimal 20 file per upload'
                 ], 422);
             }
-            
+
             return response()->json([
                 'success' => false,
-                'message' => 'Validasi gagal: ' . implode(', ', array_values($errors)[0] ?? ['Unknown error'])
+                'message' => 'Validasi gagal'
             ], 422);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Terjadi kesalahan server. Silakan coba lagi.'
+                'message' => 'Terjadi kesalahan server'
             ], 500);
         }
     }
