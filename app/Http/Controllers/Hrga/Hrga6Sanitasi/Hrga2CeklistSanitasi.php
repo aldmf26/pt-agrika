@@ -88,7 +88,7 @@ class Hrga2CeklistSanitasi extends Controller
         for ($i = 1; $i <= $jumlah_hari; $i++) {
             $hari[] = [
                 'tanggal' => $i,
-                'hari' => Carbon::create($r->tahun, $r->bulan, $i)->translatedFormat('l'), // Senin, Selasa, dst
+                'hari' => Carbon::create($r->tahun, $r->bulan, $i)->translatedFormat('l'),
             ];
         }
         $data = [
