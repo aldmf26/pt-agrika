@@ -247,10 +247,10 @@
                         <tr class="table-bawah">
                             <th style="border: none" colspan="8"></th>
                             <td colspan="3" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="pengawasTtd($pengawas)->karyawan_id_dari_api" />
+                                <x-ttd-barcode format="svg" :id_pegawai="pengawasTtd($pengawas)->karyawan_id_dari_api" />
                             </td>
                             <td colspan="2" style="height: 80px" class="text-center align-middle">
-                                <x-ttd-barcode :id_pegawai="whereTtd('KEPALA CETAK')" />
+                                <x-ttd-barcode format="svg" :id_pegawai="whereTtd('KEPALA CETAK')" />
                             </td>
                         </tr>
                         <tr class="table-bawah">
