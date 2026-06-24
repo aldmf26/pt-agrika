@@ -19,7 +19,7 @@ class Hrga4DataPegawai extends Controller
     {
         $data = [
             'title' => 'DATABASE KARYAWAN',
-            'dok' => 'Dok.No.: FRM.HRGA.01.03 Rev.00',
+            'dok' => 'Dok.No.: FRM.HRGA.01.04 Rev.00',
             'datas' => session('dataToPrint')
         ];
         return view('hrga.hrga1.hrga4_data_pegawai.print', $data);
