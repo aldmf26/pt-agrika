@@ -157,7 +157,7 @@ class PUR1DaftarSupplierController extends Controller
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
-            'dok' => 'Dok.No.: FRM.PURS.01.03, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.02.02, Rev.00',
             'kategori' => 'sbw',
             'seleksi' => $seleksi,
         ];
