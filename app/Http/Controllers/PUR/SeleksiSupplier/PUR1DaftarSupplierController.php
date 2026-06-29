@@ -419,7 +419,7 @@ class PUR1DaftarSupplierController extends Controller
         $supplier = RumahWalet::where('id', $rumah_walet_id)->first();
         $data = [
             'title' => 'EVALUASI SUPPLIER/OUTSOURCE',
-            'dok' => 'Dok.No.: FRM.PURS.01.05, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.03.01, Rev.00',
             'supplier' => $supplier,
             'evaluasi' => Evaluasi::where([['rumah_walet_id', $rumah_walet_id], ['semester', $semester]])->latest()->first(),
         ];
