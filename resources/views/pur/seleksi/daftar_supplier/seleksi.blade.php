@@ -1,4 +1,4 @@
-<x-hccp-print title="SELEKSI SUPPLIER MATERIAL" :kategori="$kategori" :dok="$dok">
+<x-hccp-print title="SELEKSI SUPPLIER " :kategori="$kategori" :dok="$dok">
     <div class="row">
         <div class="col-7">
             <table style="font-size: 11px">
