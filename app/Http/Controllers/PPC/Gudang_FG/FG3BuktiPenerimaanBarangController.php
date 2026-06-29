@@ -94,7 +94,7 @@ class FG3BuktiPenerimaanBarangController extends Controller
         $pengiriman_akhir = json_decode($pengiriman_akhir, TRUE);
         $data = [
             'title' => 'BUKTI PENERIMAAN BARANG',
-            'dok' => 'Dok.No.: FRM.WH.04.03, Rev.00',
+            'dok' => 'Dok.No.: FRM.WH.02.04, Rev.00',
             'datas' => $pengiriman_akhir['data'],
             'tgl' => $tgl
         ];

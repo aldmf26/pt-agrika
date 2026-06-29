@@ -109,7 +109,7 @@ class FG2CeklisKendaraanController extends Controller
         $kondisi = DB::table('master_kondisi')->get();
         $data = [
             'title' => 'CHECKLIST KENDARAAN UNTUK PENGIRIMAN FINISHED GOODS',
-            'dok' => 'Dok.No.: FRM.WH.03.04, Rev.00',
+            'dok' => 'Dok.No.: FRM.WH.02.03, Rev.00',
             'checklist' => $checklist['data'],
             'bulan' => $r->bulan,
             'tahun' => $r->tahun,
