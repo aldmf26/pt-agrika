@@ -146,8 +146,7 @@
                                     alt=""></th>
                             <th colspan="9"></th>
                             <th class="align-top text-end text-nowrap" colspan="2">
-                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">Dok.No.: FRM.WHS.03.01,
-                                    Rev 00</p>
+                                <p class="float-end me-2 fw-normal" style="font-size: 12px; ">{{$dok}}</p>
                             </th>
 
                         </tr>
