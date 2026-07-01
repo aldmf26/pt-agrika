@@ -32,12 +32,12 @@ class PUR1DaftarSupplierController extends Controller
     public function seleksi(Suplier $supplier)
     {
         $kode = [
-            'lainnya' => 'PURS.01.04',
-            'barang' => 'PURB.01.04',
-            'kemasan' => 'PURK.01.04',
-            'jasa' => 'PURJ.01.02',
+            'lainnya' => 'PURS.02.01',
+            'barang' => 'PURB.02.01',
+            'kemasan' => 'PURK.02.01',
+            'jasa' => 'PURJ.02.01',
         ];
-        $nomor = $kode[strtolower($supplier->kategori)] ?? 'PURS.01.04';
+        $nomor = $kode[strtolower($supplier->kategori)] ?? 'PURS.02.01';
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
@@ -157,7 +157,7 @@ class PUR1DaftarSupplierController extends Controller
         $data = [
             'title' => 'Seleksi Supplier',
             'supplier' => $supplier,
-            'dok' => 'Dok.No.: FRM.PURS.01.03, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.02.02, Rev.00',
             'kategori' => 'sbw',
             'seleksi' => $seleksi,
         ];
@@ -281,13 +281,13 @@ class PUR1DaftarSupplierController extends Controller
         $supplier = Suplier::where('id', $supplier_id)->first();
         $evaluasi = Evaluasi::where([['supplier_id', $supplier_id], ['semester', $semester]])->latest()->first();
         $kodes = [
-            'lainnya' => 'PURS.01.05',
-            'barang' => 'PURB.01.05',
-            'kemasan' => 'PURK.01.05',
-            'jasa' => 'PURJ.01.03',
+            'lainnya' => 'PURS.03.01',
+            'barang' => 'PURB.03.01',
+            'kemasan' => 'PURK.03.01',
+            'jasa' => 'PURJ.03.01',
         ];
 
-        $nomor = $kodes[strtolower($supplier->kategori)] ?? 'PURS.01.05';
+        $nomor = $kodes[strtolower($supplier->kategori)] ?? 'PURS.03.01';
 
         $data = [
             'title' => 'EVALUASI SUPPLIER',
@@ -419,7 +419,7 @@ class PUR1DaftarSupplierController extends Controller
         $supplier = RumahWalet::where('id', $rumah_walet_id)->first();
         $data = [
             'title' => 'EVALUASI SUPPLIER/OUTSOURCE',
-            'dok' => 'Dok.No.: FRM.PURS.01.05, Rev.00',
+            'dok' => 'Dok.No.: FRM.PURS.03.01, Rev.00',
             'supplier' => $supplier,
             'evaluasi' => Evaluasi::where([['rumah_walet_id', $rumah_walet_id], ['semester', $semester]])->latest()->first(),
         ];
@@ -541,12 +541,12 @@ class PUR1DaftarSupplierController extends Controller
         $datas = Suplier::with('barang', 'evaluasi')->where('kategori', $r->kategori)->latest()->get();
 
         $kode = [
-            'lainnya' => 'PURS.01.03',
-            'barang' => 'PURB.01.03',
-            'kemasan' => 'PURK.01.03',
-            'jasa' => 'PURJ.01.01',
+            'lainnya' => 'PURS.02.01',
+            'barang' => 'PURB.02.01',
+            'kemasan' => 'PURK.02.01',
+            'jasa' => 'PURJ.02.01',
         ];
-        $nomor = $kode[$r->kategori] ?? 'PURS.01.03';
+        $nomor = $kode[$r->kategori] ?? 'PURS.02.01';
 
         $data = [
             'title' => "DAFTAR SUPPLIER " . strtoupper($r->kategori == 'lainnya' ? 'MATERIAL SBW' : $r->kategori),
