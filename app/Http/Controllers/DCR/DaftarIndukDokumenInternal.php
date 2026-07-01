@@ -28,7 +28,7 @@ class DaftarIndukDokumenInternal extends Controller
         $data = [
             'title' => 'DAFTAR INDUK DOKUMEN INTERNAL',
             'dok' => 'Dok.No.: FRM.DCR.01.01, Rev.00',
-            'daftar' => DB::table('daftar_induk_dokumen_internal')->orderBy('no_dokumen', 'asc')->get()
+            'daftar' => DB::table('daftar_induk_dokumen_internal')->orderBy('id', 'asc')->get()
         ];
 
         return view('dcr.daftar_induk_dokumen_internal.print', $data);
